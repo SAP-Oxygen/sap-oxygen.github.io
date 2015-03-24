@@ -66,7 +66,7 @@
   });
 
   React.render(
-    React.createElement(BulletList, null),
-    $('#gadget-content')
+    React.createElement(BulletList, {data: {}, users: []}),
+    document.body
   );
 })(jQuery);

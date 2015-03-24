@@ -66,7 +66,7 @@
   });
 
   React.render(
-    <BulletList />,
-    $('#gadget-content')
+    <BulletList data={{}} users={[]}/>,
+    document.body
   );
 })(jQuery);
