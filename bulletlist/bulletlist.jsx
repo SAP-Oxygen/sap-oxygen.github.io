@@ -64,4 +64,9 @@
       });
     },
   });
+
+  React.render(
+    <BulletList />,
+    $('#gadget-content')
+  );
 })(jQuery);

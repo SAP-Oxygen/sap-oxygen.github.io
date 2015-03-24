@@ -64,4 +64,9 @@
       });
     },
   });
+
+  React.render(
+    React.createElement(BulletList, null),
+    $('#gadget-content')
+  );
 })(jQuery);
