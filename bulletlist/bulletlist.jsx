@@ -39,12 +39,10 @@
     },
     // Our own code
     onAddButtonClick: function() {
-      $('#add-button').click(function() {
-        var newItem = $.trim($('#item-to-add').val());
-        if (newItem.length > 0) {
-          this.addItem(newItem);
-        }
-      });
+      var newItem = $.trim($('#item-to-add').val());
+      if (newItem.length > 0) {
+        this.addItem(newItem);
+      }
     },
     addItem: function(newItem) {
       var newEntry = {};
