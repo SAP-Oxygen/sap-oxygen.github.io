@@ -2,6 +2,7 @@
   var BulletList = React.createClass({displayName: "BulletList",
     // Standard React API
     render: function() {
+      var self = this;
       return (
         React.createElement("div", null, 
           React.createElement("ul", null, 
@@ -12,7 +13,7 @@
           
           ), 
           React.createElement("input", {id: "item-to-add", type: "text"}), 
-          React.createElement("input", {id: "add-button", type: "button", onClick: this.onAddButtonClick})
+          React.createElement("input", {id: "add-button", type: "button", onClick: self.onAddButtonClick, value: "Add"})
         )
       );
     },

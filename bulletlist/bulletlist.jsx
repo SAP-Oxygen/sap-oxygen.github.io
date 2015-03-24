@@ -2,6 +2,7 @@
   var BulletList = React.createClass({
     // Standard React API
     render: function() {
+      var self = this;
       return (
         <div>
           <ul>
@@ -12,7 +13,7 @@
           }
           </ul>
           <input id="item-to-add" type="text"></input>
-          <input id="add-button" type="button" onClick={this.onAddButtonClick}></input>
+          <input id="add-button" type="button" onClick={self.onAddButtonClick} value="Add"></input>
         </div>
       );
     },
