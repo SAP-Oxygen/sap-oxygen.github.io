@@ -8,7 +8,7 @@
     <script src="http://fb.me/react-0.13.1.js"></script>
     <script src="http://fb.me/JSXTransformer-0.13.1.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
-    <script type="text/jsx" src="bulletlist.js"></script>
+    <script src="bulletlist.js"></script>
     ]]>
   </Content>
 </Module>
