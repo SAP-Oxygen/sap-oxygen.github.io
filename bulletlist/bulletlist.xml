@@ -1,6 +1,7 @@
 <Module>
   <ModulePrefs title="Bullet List">
     <Require feature="dynamic-height"/>
+    <Require feature="wave"/>
   </ModulePrefs>
   <Content type="html">
     <![CDATA[
