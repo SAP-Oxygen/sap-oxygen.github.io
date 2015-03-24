@@ -1,19 +1,19 @@
 (function($) {
-  var BulletList = React.createClass({displayName: "BulletList",
+  var BulletList = React.createClass({
     // Standard React API
     render: function() {
       return (
-        React.createElement("div", null, 
-          React.createElement("ul", null, 
-          
+        <div>
+          <ul>
+          {
             $.map(this.getAllItems(), function(pair, index) {
-              return React.createElement("li", null, pair.value.text)
+              return <li>{pair.value.text}</li>
             })
-          
-          ), 
-          React.createElement("input", {id: "item-to-add", type: "text"}), 
-          React.createElement("input", {id: "add-button", type: "button", onClick: this.onAddButtonClick})
-        )
+          }
+          </ul>
+          <input id="item-to-add" type="text"></input>
+          <input id="add-button" type="button" onClick={this.onAddButtonClick}></input>
+        </div>
       );
     },
     getInitialState: function() {
