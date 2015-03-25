@@ -39,10 +39,10 @@
       });
 
       // init sequence - JUMLY
-      updateDiagram();
+      this.updateDiagram();
     },
     componentDidUpdate: function() {
-      updateDiagram();
+      this.updateDiagram();
     },
     // Our own code
     updateDiagram: function() {
