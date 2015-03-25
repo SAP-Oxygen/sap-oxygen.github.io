@@ -8,7 +8,7 @@
           React.createElement("ul", null, 
           
             $.map(this.getAllItems(), function(pair, index) {
-              return React.createElement("li", null, pair.value.text)
+              return React.createElement("li", {key: pair.key}, pair.value.text)
             })
           
           ), 

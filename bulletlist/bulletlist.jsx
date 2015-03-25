@@ -8,7 +8,7 @@
           <ul>
           {
             $.map(this.getAllItems(), function(pair, index) {
-              return <li>{pair.value.text}</li>
+              return <li key={pair.key}>{pair.value.text}</li>
             })
           }
           </ul>
