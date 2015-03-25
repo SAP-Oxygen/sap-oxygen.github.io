@@ -51,7 +51,11 @@
       wave.getState().submitDelta(newEntry);
     },
     getSequenceDefinition: function() {
-      return this.state.data.seqDef.text
+      try {
+        return this.state.data.seqDef.text;
+      } catch (e) {
+        return "";
+      }
     },
   });
 
