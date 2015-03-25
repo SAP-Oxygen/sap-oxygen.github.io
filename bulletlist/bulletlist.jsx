@@ -54,8 +54,8 @@
       wave.getState().submitDelta(newEntry);
     },
     getAllItems: function() {
-      return $.map(this.state.data, function(value, key) {
-        return {key: key, value: value}
+      return $.map(this.state.data.getKeys(), function(key, index) {
+        return {key: key, value: this.state.data.get(key)}
       }).sort(function(a, b) {
         return a.value.timestamp - b.value.timestamp;
       });
