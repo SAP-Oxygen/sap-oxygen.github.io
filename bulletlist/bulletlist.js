@@ -28,7 +28,7 @@
         var newData = {};
         var waveState = wave.getState();
 
-        $.each(waveState.getKeys(), function(key, index) {
+        $.each(waveState.getKeys(), function(index, key) {
           newData[key] = waveState.get(key);
         });
 
