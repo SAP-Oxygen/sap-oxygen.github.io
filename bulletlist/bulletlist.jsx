@@ -17,6 +17,22 @@
         </div>
       );
     },
+    getInitialState: function() {
+      return {data: {}, users: []};
+    },
+    componentDidMount: function() {
+      // init sequence - Wave
+      var self = this;
+
+      function onWaveUpdate() {
+        self.setState({data: wave.getState(), users: wave.getParticipants()});
+      }
+
+      gadgets.util.registerOnLoadHandler(function() {
+        wave.setStateCallback(onWaveUpdate);
+        wave.setParticipantCallback(onWaveUpdate);
+      });
+    },
     // Our own code
     onAddButtonClick: function() {
       var inputBox = $('#item-to-add');
@@ -47,16 +63,9 @@
   });
 
   gadgets.util.registerOnLoadHandler(function() {
-    var root = React.render(
-      <BulletList data={wave.getState()} users={wave.getParticipants()}/>,
+    React.render(
+      <BulletList/>,
       document.body
     );
-
-    function onWaveUpdate() {
-      root.setState({data: wave.getState(), users: wave.getParticipants()});
-    }    
-
-    wave.setStateCallback(onWaveUpdate);
-    wave.setParticipantCallback(onWaveUpdate);
   });
 })(jQuery);
