@@ -8,7 +8,7 @@
           <script type="text/jumly+sequence">
           {this.getSequenceDefinition()}
           </script>
-          <input id="definition" type="textarea" onChange={self.onDefinitionChange}/>
+          <textarea rows="20" cols="100" id="definition" onChange={self.onDefinitionChange}/>
         </div>
       );
     },

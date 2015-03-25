@@ -8,7 +8,7 @@
           React.createElement("script", {type: "text/jumly+sequence"}, 
           this.getSequenceDefinition()
           ), 
-          React.createElement("input", {id: "definition", type: "textarea", onChange: self.onDefinitionChange})
+          React.createElement("textarea", {rows: "20", cols: "100", id: "definition", onChange: self.onDefinitionChange})
         )
       );
     },
