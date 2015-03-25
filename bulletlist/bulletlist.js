@@ -47,7 +47,10 @@
   });
 
   gadgets.util.registerOnLoadHandler(function() {
-    var root = React.createElement(BulletList, {data: wave.getState(), users: wave.getParticipants()});
+    var root = React.render(
+      React.createElement(BulletList, {data: wave.getState(), users: wave.getParticipants()}),
+      document.body
+    );
 
     function onWaveUpdate() {
       root.setState({data: wave.getState(), users: wave.getParticipants()});
@@ -55,7 +58,5 @@
 
     wave.setStateCallback(onWaveUpdate);
     wave.setParticipantCallback(onWaveUpdate);
-
-    React.render(root, document.body);
   });
 })(jQuery);
