@@ -13,7 +13,7 @@
       );
     },
     getInitialState: function() {
-      return {data: {text: ""}, users: []};
+      return {data: {seqDef: {text: ""}}, users: []};
     },
     componentDidMount: function() {
       // init sequence - Wave
