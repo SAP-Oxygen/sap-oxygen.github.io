@@ -5,10 +5,10 @@
       var self = this;
       return (
         <div>
-          <script type="text/jumly+sequence">
+          <div id="diagram"/>
+          <textarea rows="20" cols="100" id="definition" onChange={self.onDefinitionChange}>
           {this.getSequenceDefinition()}
-          </script>
-          <textarea rows="20" cols="100" id="definition" onChange={self.onDefinitionChange}/>
+          </textarea>
         </div>
       );
     },
@@ -37,8 +37,17 @@
         wave.setStateCallback(onWaveUpdate);
         wave.setParticipantCallback(onWaveUpdate);
       });
+
+      // init sequence - JUMLY
+      updateDiagram();
+    },
+    componentDidUpdate: function() {
+      updateDiagram();
     },
     // Our own code
+    updateDiagram: function() {
+      JUMLY.eval(this.getSequenceDefinition(), {into: $('#diagram')});
+    },
     onDefinitionChange: function() {
       var inputBox = $('#definition');
       var newDef = $.trim(inputBox.val());

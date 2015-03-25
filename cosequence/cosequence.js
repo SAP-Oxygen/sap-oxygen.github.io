@@ -5,10 +5,10 @@
       var self = this;
       return (
         React.createElement("div", null, 
-          React.createElement("script", {type: "text/jumly+sequence"}, 
+          React.createElement("div", {id: "diagram"}), 
+          React.createElement("textarea", {rows: "20", cols: "100", id: "definition", onChange: self.onDefinitionChange}, 
           this.getSequenceDefinition()
-          ), 
-          React.createElement("textarea", {rows: "20", cols: "100", id: "definition", onChange: self.onDefinitionChange})
+          )
         )
       );
     },
@@ -37,8 +37,17 @@
         wave.setStateCallback(onWaveUpdate);
         wave.setParticipantCallback(onWaveUpdate);
       });
+
+      // init sequence - JUMLY
+      updateDiagram();
+    },
+    componentDidUpdate: function() {
+      updateDiagram();
     },
     // Our own code
+    updateDiagram: function() {
+      JUMLY.eval(this.getSequenceDefinition(), {into: $('#diagram')});
+    },
     onDefinitionChange: function() {
       var inputBox = $('#definition');
       var newDef = $.trim(inputBox.val());
