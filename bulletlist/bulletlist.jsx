@@ -53,7 +53,7 @@
       // optimistic local update
       this.setState({data: $.extend(this.state.data, newEntry), users: this.state.users});
       // remote update
-      wave.submitDelta(newEntry);
+      wave.getState().submitDelta(newEntry);
     },
     getAllItems: function() {
       return $.map(this.state.data, function(value, key) {
