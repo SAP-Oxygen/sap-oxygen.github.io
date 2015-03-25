@@ -17,31 +17,13 @@
         )
       );
     },
-    getInitialState: function() {
-      return {data: {}, users: []};
-    },
-    componentDidMount: function() {
-      // init sequence - Wave
-      var self = this;
-
-      function onWaveUpdate() {
-        self.setState({data: wave.getState(), users: wave.getParticipants()});
-      }
-
-      function init() {
-        if (wave && wave.isInWaveContainer()) {
-          wave.setStateCallback(onWaveUpdate);
-          wave.setParticipantCallback(onWaveUpdate);
-        }
-      }
-
-      gadgets.util.registerOnLoadHandler(init);
-    },
     // Our own code
     onAddButtonClick: function() {
-      var newItem = $.trim($('#item-to-add').val());
+      var inputBox = $('#item-to-add');
+      var newItem = $.trim(inputBox.val());
       if (newItem.length > 0) {
         this.addItem(newItem);
+        inputBox.val('');
       }
     },
     addItem: function(newItem) {
@@ -64,8 +46,16 @@
     },
   });
 
-  React.render(
-    React.createElement(BulletList, {data: {}, users: []}),
-    document.body
-  );
+  gadgets.util.registerOnLoadHandler(function() {
+    var root = React.createElement(BulletList, {data: wave.getState(), users: wave.getParticipants()});
+
+    function onWaveUpdate() {
+      root.setState({data: wave.getState(), users: wave.getParticipants()});
+    }    
+
+    wave.setStateCallback(onWaveUpdate);
+    wave.setParticipantCallback(onWaveUpdate);
+
+    React.render(root, document.body);
+  });
 })(jQuery);
