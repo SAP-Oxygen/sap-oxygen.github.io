@@ -8,7 +8,7 @@
           <ul>
           {
             $.map(this.getAllItems(), function(pair, index) {
-              return <li key={pair.key}>{pair.value.text}</li>
+              return (<li key={pair.key}>{pair.value.text}</li>);
             })
           }
           </ul>
@@ -25,7 +25,14 @@
       var self = this;
 
       function onWaveUpdate() {
-        self.setState({data: wave.getState(), users: wave.getParticipants()});
+        var newData = {};
+        var waveState = wave.getState();
+
+        $.each(waveState.getKeys(), function(key, index) {
+          newData[key] = waveState.get(key);
+        });
+
+        self.setState({data: newData, users: wave.getParticipants()});
       }
 
       gadgets.util.registerOnLoadHandler(function() {
@@ -54,8 +61,8 @@
       wave.getState().submitDelta(newEntry);
     },
     getAllItems: function() {
-      return $.map(this.state.data.getKeys(), function(key, index) {
-        return {key: key, value: this.state.data.get(key)}
+      return $.map(this.state.data, function(value, key) {
+        return {key: key, value: value};
       }).sort(function(a, b) {
         return a.value.timestamp - b.value.timestamp;
       });
