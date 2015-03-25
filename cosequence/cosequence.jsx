@@ -22,6 +22,9 @@
       function onWaveUpdate() {
         var newData = {};
         var waveState = wave.getState();
+        if (waveState === null) {
+          return;
+        }
 
         $.each(waveState.getKeys(), function(index, key) {
           newData[key] = waveState.get(key);
