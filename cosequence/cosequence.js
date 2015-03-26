@@ -45,7 +45,9 @@
     },
     // Our own code
     updateDiagram: function() {
-      JUMLY.eval($('#diagram-def'), {into: '#holder'});
+      JUMLY.eval($('#diagram-def'), function(diagram, source) {
+        $('#holder').html(diagram);
+      });
     },
     onDefinitionChange: function() {
       var inputBox = $('#definition');
