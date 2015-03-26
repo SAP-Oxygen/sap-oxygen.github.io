@@ -5,7 +5,7 @@
       var self = this;
       return (
         <div>
-          <div id="diagram"/>
+          <div id="holder"/>
           <input id="diagram-def" type="hidden" value={this.getSequenceDefinition()}/>
           <textarea rows="20" cols="100" id="definition" onChange={self.onDefinitionChange} value={this.getSequenceDefinition()}/>
         </div>
@@ -45,7 +45,7 @@
     },
     // Our own code
     updateDiagram: function() {
-      JUMLY.eval($('#diagram-def'), {into: $('#diagram')});
+      JUMLY.eval($('#diagram-def'), {into: '#holder'});
     },
     onDefinitionChange: function() {
       var inputBox = $('#definition');
