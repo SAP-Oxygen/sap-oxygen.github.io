@@ -6,9 +6,8 @@
       return (
         React.createElement("div", null, 
           React.createElement("div", {id: "diagram"}), 
-          React.createElement("textarea", {rows: "20", cols: "100", id: "definition", onChange: self.onDefinitionChange}, 
-          this.getSequenceDefinition()
-          )
+          React.createElement("input", {id: "diagram-def", type: "hidden", value: this.getSequenceDefinition()}), 
+          React.createElement("textarea", {rows: "20", cols: "100", id: "definition", onChange: self.onDefinitionChange, value: this.getSequenceDefinition()})
         )
       );
     },
@@ -46,7 +45,7 @@
     },
     // Our own code
     updateDiagram: function() {
-      JUMLY.eval(this.getSequenceDefinition(), {into: $('#diagram')});
+      JUMLY.eval($('#diagram-def'), {into: $('#diagram')});
     },
     onDefinitionChange: function() {
       var inputBox = $('#definition');
