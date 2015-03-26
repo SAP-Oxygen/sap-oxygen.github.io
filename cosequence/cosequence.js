@@ -7,7 +7,8 @@
         React.createElement("div", null, 
           React.createElement("div", {id: "holder"}), 
           React.createElement("input", {id: "diagram-def", type: "hidden", value: this.getSequenceDefinition()}), 
-          React.createElement("textarea", {rows: "20", cols: "100", id: "definition", onChange: self.onDefinitionChange, value: this.getSequenceDefinition()})
+          React.createElement("textarea", {rows: "20", cols: "100", id: "definition", value: this.getSequenceDefinition()}), 
+          React.createElement("input", {id: "save-button", type: "button", onClick: self.onSaveButtonClick, value: "Save"})
         )
       );
     },
@@ -47,9 +48,10 @@
     updateDiagram: function() {
       JUMLY.eval($('#diagram-def'), function(diagram, source) {
         $('#holder').html(diagram);
+        gadgets.window.adjustHeight();
       });
     },
-    onDefinitionChange: function() {
+    onSaveButtonClick: function() {
       var inputBox = $('#definition');
       var newDef = $.trim(inputBox.val());
       this.setSequenceDefinition(newDef);
