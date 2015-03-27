@@ -1,0 +1,25 @@
+<Module>
+  <ModulePrefs title="__MSG_hello_world__" thumbnail="hello.png" author="Joseph Wong">
+    <Require feature="dynamic-height"/>
+    <Locale lang="all">
+      <msg name="hello_world">Hello World</msg> 
+    </Locale>
+    <Locale lang="es">
+      <msg name="hello_world">Hola Mundo</msg> 
+    </Locale>
+  </ModulePrefs>
+  <Content type="html">
+    <![CDATA[
+    <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+    <script>
+    gadgets.util.registerOnLoadHandler(function() {
+      jQuery('#hello').css('color', 'blue');
+      gadgets.window.adjustHeight();
+    });
+    </script>
+    <div>
+      <span id="hello">__MSG_hello_world__</span>
+    </div>
+    ]]>
+  </Content>
+</Module>
