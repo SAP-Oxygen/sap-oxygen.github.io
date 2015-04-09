@@ -13,7 +13,7 @@
           
           ), 
           React.createElement("input", {id: "item-to-add", type: "text"}), 
-          React.createElement("input", {id: "add-button", type: "button", onClick: self.onAddButtonClick, value: "Add"})
+          React.createElement("input", {id: "add-button", type: "button", onClick: self.onAddButtonClick, value: "Add Topic"})
         )
       );
     },
