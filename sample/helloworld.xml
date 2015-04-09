@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
     <script>
     gadgets.util.registerOnLoadHandler(function() {
-      jQuery('#hello').css('color', 'red');
+      jQuery('#hello').css('color', 'green');
       gadgets.window.adjustHeight();
     });
     </script>
