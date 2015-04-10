@@ -13,7 +13,7 @@
           }
           </ul>
           <input id="item-to-add" type="text"/>
-          <input id="add-button" type="button" onClick={self.onAddButtonClick} value="Add Topic"/>
+          <input id="add-button" type="button" onClick={self.onAddButtonClick} value="Add"/>
         </div>
       );
     },
