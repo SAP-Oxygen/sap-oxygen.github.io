@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Tutorial_08_Complete_Tutorial_Code_Example (XML, HTML, CSS, JavaScript) -->
+<Module>
+  <ModulePrefs title="Tutorial React" height="250">
+        <Require feature="wave"/>
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
+  <Content type="html">
+    <![CDATA[
+      <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="http://fb.me/react-0.13.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text.css" href="bootstrap_custom.css">
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+      </head>
+      <body style="padding-top: 70px;">
+        <div id="content"></div>
+        <script type="text/javascript" src="react_tutorial.js"></script>
+      </body>
+    ]]>
+  </Content>
+</Module >
