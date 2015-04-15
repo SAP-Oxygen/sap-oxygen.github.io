@@ -3,3 +3,23 @@
 .topic-align {padding-top: 4.5px;}
 .narrow-panel-heading {padding-top: 5px; padding-bottom: 5px;}
 .narrow-panel-body {padding-top: 6px; padding-bottom: 6px;}
+
+@font-face {
+    font-family: 'sapjam';
+    src:url('fonts/sapjam.eot');
+    src:url('fonts/sapjam.eot?#iefix') format('embedded-opentype'),
+        url('fonts/sapjam.ttf') format('truetype'),
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+    font-family: 'sapjam';
+    font-style: normal;
+    speak: none;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+            font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
