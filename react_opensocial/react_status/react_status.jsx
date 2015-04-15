@@ -4,6 +4,9 @@ var StatusBox = React.createClass({
       <div className="StatusBox">
         <div className="page-header">
           <h1>OpenSocial Status</h1>
+          <WaveStatus />
+          <AppdataStatus />
+          <PrefsStatus />
         </div>
       </div>
     )
