@@ -15,7 +15,10 @@ var VoteBox = React.createClass({displayName: "VoteBox",
       });
       //for consistency in the array
       console.log("data in onWaveUpdate: " + waveData);
-      self.setState({data: waveData});
+      var delay=1500;
+      setTimeout(function() {
+        self.setState({data: waveData});
+      },delay);
     }
 
     wave.setStateCallback(onWaveUpdate);
