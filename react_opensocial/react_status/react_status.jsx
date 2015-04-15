@@ -1,13 +1,16 @@
 var StatusBox = React.createClass({
+  componentDidUpdate: function() {
+    gadgets.window.adjustHeight();
+  },
   render: function() {
     return (
       <div className="StatusBox">
         <div className="page-header">
           <h1>OpenSocial Status</h1>
-          <WaveStatus />
-          <AppdataStatus />
-          <PrefsStatus />
         </div>
+        <WaveStatus />
+        <AppdataStatus />
+        <PrefsStatus />
       </div>
     )
   }

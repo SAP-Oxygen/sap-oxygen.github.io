@@ -1,13 +1,16 @@
 var StatusBox = React.createClass({displayName: "StatusBox",
+  componentDidUpdate: function() {
+    gadgets.window.adjustHeight();
+  },
   render: function() {
     return (
       React.createElement("div", {className: "StatusBox"}, 
         React.createElement("div", {className: "page-header"}, 
-          React.createElement("h1", null, "OpenSocial Status"), 
-          React.createElement(WaveStatus, null), 
-          React.createElement(AppdataStatus, null), 
-          React.createElement(PrefsStatus, null)
-        )
+          React.createElement("h1", null, "OpenSocial Status")
+        ), 
+        React.createElement(WaveStatus, null), 
+        React.createElement(AppdataStatus, null), 
+        React.createElement(PrefsStatus, null)
       )
     )
   }
