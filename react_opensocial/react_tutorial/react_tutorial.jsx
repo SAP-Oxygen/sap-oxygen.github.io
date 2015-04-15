@@ -15,10 +15,7 @@ var VoteBox = React.createClass({
       });
       //for consistency in the array
       console.log("data in onWaveUpdate: " + waveData);
-      var delay=1500;
-      setTimeout(function() {
-        self.setState({data: waveData});
-      },delay);
+      self.setState({data: waveData});
     }
 
     wave.setStateCallback(onWaveUpdate);
@@ -194,6 +191,7 @@ var VoteButton = React.createClass({
       <div className="btn-group btn-group-sm pull-right" role="group" arial-label="...">
         <button type="button" className="btn btn-default btn-sm btn-vote" onClick={this.handleVote}>
           Vote Up <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          <i className="icon-thumb"></i>
         </button>
         <button type="button" className="btn btn-default btn-sm btn-vote" onClick={this.handleUnVote}>
           Vote Down <span className="glyphicon glyphicon-minus" aria-hidden="true"></span>

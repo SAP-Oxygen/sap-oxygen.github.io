@@ -15,10 +15,7 @@ var VoteBox = React.createClass({displayName: "VoteBox",
       });
       //for consistency in the array
       console.log("data in onWaveUpdate: " + waveData);
-      var delay=3000;
-      setTimeout(function() {
-        self.setState({data: waveData});
-      },delay);
+      self.setState({data: waveData});
     }
 
     wave.setStateCallback(onWaveUpdate);
@@ -193,7 +190,8 @@ var VoteButton = React.createClass({displayName: "VoteButton",
     return (
       React.createElement("div", {className: "btn-group btn-group-sm pull-right", role: "group", "arial-label": "..."}, 
         React.createElement("button", {type: "button", className: "btn btn-default btn-sm btn-vote", onClick: this.handleVote}, 
-          "Vote Up ", React.createElement("span", {className: "glyphicon glyphicon-plus", "aria-hidden": "true"})
+          "Vote Up ", React.createElement("span", {className: "glyphicon glyphicon-plus", "aria-hidden": "true"}), 
+          React.createElement("i", {className: "icon-thumb"})
         ), 
         React.createElement("button", {type: "button", className: "btn btn-default btn-sm btn-vote", onClick: this.handleUnVote}, 
           "Vote Down ", React.createElement("span", {className: "glyphicon glyphicon-minus", "aria-hidden": "true"})
