@@ -190,7 +190,6 @@ var VoteButton = React.createClass({displayName: "VoteButton",
     return (
       React.createElement("div", {className: "btn-group btn-group-sm pull-right", role: "group", "arial-label": "..."}, 
         React.createElement("button", {type: "button", className: "btn btn-default btn-sm btn-vote", onClick: this.handleVote}, 
-          React.createElement("i", {className: "icon-thumb"}), 
           "Vote Up ", React.createElement("span", {className: "glyphicon glyphicon-plus", "aria-hidden": "true"})
         ), 
         React.createElement("button", {type: "button", className: "btn btn-default btn-sm btn-vote", onClick: this.handleUnVote}, 
