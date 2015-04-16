@@ -1,4 +1,7 @@
 var StatusBox = React.createClass({displayName: "StatusBox",
+  componentDidMount: function() {
+    gadgets.window.adjustHeight();
+  },
   componentDidUpdate: function() {
     gadgets.window.adjustHeight();
   },
@@ -18,11 +21,28 @@ var StatusBox = React.createClass({displayName: "StatusBox",
 
 var WaveStatus = React.createClass({displayName: "WaveStatus",
   render: function() {
+    var submitDeltaStatus;
+    if (1 === 1) {
+      submitDeltaStatus = true;
+    }
+    var statusDOM = function (submitDeltaStatus) {
+      if (submitDeltaStatus) {
+        return (
+          React.createElement("div", {className: "alert alert-success", role: "alert"}, 
+            React.createElement("b", null, "Wave Status:"), " GOOD"
+          )
+        )
+      } else {
+        return (
+          React.createElement("div", {className: "alert alert-danger", role: "alert"}, 
+            React.createElement("b", null, "Wave Status:"), " BAD"
+          )
+        )
+      }
+    }
     return (
       React.createElement("div", {className: "WaveStatus"}, 
-        React.createElement("div", {className: "alert alert-success", role: "alert"}, 
-          React.createElement("b", null, "Wave Status:"), " GOOD" 
-        )
+        statusDOM
       )
     )
   }

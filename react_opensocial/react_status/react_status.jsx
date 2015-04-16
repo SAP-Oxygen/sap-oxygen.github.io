@@ -1,4 +1,7 @@
 var StatusBox = React.createClass({
+  componentDidMount: function() {
+    gadgets.window.adjustHeight();
+  },
   componentDidUpdate: function() {
     gadgets.window.adjustHeight();
   },
@@ -18,11 +21,28 @@ var StatusBox = React.createClass({
 
 var WaveStatus = React.createClass({
   render: function() {
+    var submitDeltaStatus;
+    if (1 === 1) {
+      submitDeltaStatus = true;
+    }
+    var statusDOM = function (submitDeltaStatus) {
+      if (submitDeltaStatus) {
+        return (
+          <div className="alert alert-success" role="alert">
+            <b>Wave Status:</b> GOOD
+          </div>
+        )
+      } else {
+        return (
+          <div className="alert alert-danger" role="alert">
+            <b>Wave Status:</b> BAD
+          </div>
+        )
+      }
+    }
     return (
       <div className="WaveStatus">
-        <div className="alert alert-success" role="alert">
-          <b>Wave Status:</b> GOOD 
-        </div>
+        {statusDOM}
       </div>
     )
   }
