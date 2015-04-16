@@ -27,12 +27,14 @@ var WaveStatus = React.createClass({
     }
     var statusDOM = function (submitDeltaStatus) {
       if (submitDeltaStatus) {
+        console.log("statusDOM: success");
         return (
           <div className="alert alert-success" role="alert">
             <b>Wave Status:</b> GOOD
           </div>
         )
       } else {
+        console.log("statusDOM: danger");
         return (
           <div className="alert alert-danger" role="alert">
             <b>Wave Status:</b> BAD
