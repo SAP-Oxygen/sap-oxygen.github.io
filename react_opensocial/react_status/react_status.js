@@ -21,31 +21,33 @@ var StatusBox = React.createClass({displayName: "StatusBox",
 
 var WaveStatus = React.createClass({displayName: "WaveStatus",
   render: function() {
-    console.log("inWaveSatus");
-    var submitDeltaStatus;
-    if (1 === 1) {
-      submitDeltaStatus = true;
-    }
-    var statusDOM = function (submitDeltaStatus) {
-      if (submitDeltaStatus) {
-        console.log("statusDOM: success");
-        return (
-          React.createElement("div", {className: "alert alert-success", role: "alert"}, 
-            React.createElement("b", null, "Wave Status:"), " GOOD"
-          )
-        );
-      } else {
-        console.log("statusDOM: danger");
-        return (
-          React.createElement("div", {className: "alert alert-danger", role: "alert"}, 
-            React.createElement("b", null, "Wave Status:"), " BAD"
-          )
-        );
-      }
-    }
+    // console.log("inWaveSatus");
+    // var submitDeltaStatus;
+    // if (1 === 1) {
+    //   submitDeltaStatus = true;
+    // }
+    // var statusDOM = function (submitDeltaStatus) {
+    //   if (submitDeltaStatus) {
+    //     console.log("statusDOM: success");
+    //     return (
+    //       <div className="alert alert-{class_name}" role="alert">
+    //         <b>Wave Status:</b> {status}
+    //       </div>
+    //     );
+    //   } else {
+    //     console.log("statusDOM: danger");
+    //     return (
+    //       <div className="alert alert-danger" role="alert">
+    //         <b>Wave Status:</b> BAD
+    //       </div>
+    //     );
+    //   }
+    // }
     return (
       React.createElement("div", {className: "WaveStatus"}, 
-        statusDOM
+        React.createElement("div", {className: "alert alert-success", role: "alert"}, 
+          React.createElement("b", null, "Wave Status:")
+        )
       )
     );
   }
