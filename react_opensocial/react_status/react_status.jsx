@@ -21,32 +21,26 @@ var StatusBox = React.createClass({
 
 var WaveStatus = React.createClass({
   render: function() {
-    // console.log("inWaveSatus");
-    // var submitDeltaStatus;
-    // if (1 === 1) {
-    //   submitDeltaStatus = true;
-    // }
-    // var statusDOM = function (submitDeltaStatus) {
-    //   if (submitDeltaStatus) {
-    //     console.log("statusDOM: success");
-    //     return (
-    //       <div className="alert alert-{class_name}" role="alert">
-    //         <b>Wave Status:</b> {status}
-    //       </div>
-    //     );
-    //   } else {
-    //     console.log("statusDOM: danger");
-    //     return (
-    //       <div className="alert alert-danger" role="alert">
-    //         <b>Wave Status:</b> BAD
-    //       </div>
-    //     );
-    //   }
-    // }
+    console.log("inWaveSatus");
+    var color;
+    var status;
+    var submitDeltaStatus;
+    if (1 === 1) {
+      submitDeltaStatus = true;
+    }
+    if (submitDeltaStatus) {
+      console.log("statusDOM: success");
+      color = "success";
+      status = "GOOD";
+    } else {
+      console.log("statusDOM: danger");
+      color = "danger";
+      status = "BAD";
+    }
     return (
       <div className="WaveStatus">
-        <div className="alert alert-success" role="alert">
-          <b>Wave Status:</b>
+        <div className="alert alert-{color}" role="alert">
+          <b>Wave Status:</b> {status}
         </div>
       </div>
     );
