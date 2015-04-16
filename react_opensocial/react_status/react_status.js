@@ -30,16 +30,16 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
     }
     if (submitDeltaStatus) {
       console.log("statusDOM: success");
-      color = "success";
+      color = "alert alert-success";
       status = "GOOD";
     } else {
       console.log("statusDOM: danger");
-      color = "danger";
+      color = "alert alert-danger";
       status = "BAD";
     }
     return (
       React.createElement("div", {className: "WaveStatus"}, 
-        React.createElement("div", {className: "alert alert-{color}", role: "alert"}, 
+        React.createElement("div", {className: color, role: "alert"}, 
           React.createElement("b", null, "Wave Status:"), " ", status
         )
       )
