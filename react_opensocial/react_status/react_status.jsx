@@ -15,12 +15,13 @@ var StatusBox = React.createClass({
         <AppdataStatus />
         <PrefsStatus />
       </div>
-    )
+    );
   }
 });
 
 var WaveStatus = React.createClass({
   render: function() {
+    console.log("inWaveSatus");
     var submitDeltaStatus;
     if (1 === 1) {
       submitDeltaStatus = true;
@@ -32,21 +33,21 @@ var WaveStatus = React.createClass({
           <div className="alert alert-success" role="alert">
             <b>Wave Status:</b> GOOD
           </div>
-        )
+        );
       } else {
         console.log("statusDOM: danger");
         return (
           <div className="alert alert-danger" role="alert">
             <b>Wave Status:</b> BAD
           </div>
-        )
+        );
       }
     }
     return (
       <div className="WaveStatus">
         {statusDOM}
       </div>
-    )
+    );
   }
 });
 
@@ -58,7 +59,7 @@ var AppdataStatus = React.createClass({
           <b>Appdata Status:</b> GOOD
         </div>
       </div>
-    )
+    );
   }
 });
 
@@ -70,7 +71,7 @@ var PrefsStatus = React.createClass({
           <b>Prefs Status: </b> BAD
         </div>
       </div>
-    )
+    );
   }
 });
 
