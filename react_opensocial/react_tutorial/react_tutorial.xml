@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <!-- Tutorial_08_Complete_Tutorial_Code_Example (XML, HTML, CSS, JavaScript) -->
 <Module>
-  <ModulePrefs title="Tutorial React" height="250">
+  <ModulePrefs title="React Tutorial" height="250" author="Geon Young" author_email="geon.young.park@sap.com" description="SAP JAM Tutorial App Built with React" screenshot="http://sap-oxygen.github.io/react_opensocial/react_tutorial/react_tutorial_screenshot.png">
         <Require feature="wave"/>
         <Require feature="dynamic-height"/>
     </ModulePrefs>
