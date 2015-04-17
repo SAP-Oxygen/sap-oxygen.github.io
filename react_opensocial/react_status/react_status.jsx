@@ -21,39 +21,46 @@ var StatusBox = React.createClass({
 
 var WaveStatus = React.createClass({
   getInitialState: function() {
-    return {data: {waveStateStatus: true, submitDeltaStatus: true}};
+    console.log("inGetInitialState");
+    return {data: {}};
   },
   componentDidMount: function() {
-    console.log("inWaveSatus");
+    console.log("inComponentDidMount");
+  },
+  handleTest: function(e) {
+    e.preventDefault();
+
+    console.log("inHandleTest");
 
     var self = this;
     var loops = 5;
     var delay = 1500;
     var testData = {};
-    testData[test] = {test: "test"};
+    testData["test"] = {test: "test"};
     var color;
     var waveStateStatus;
 
     for (i = 0; i < loops; i++) {
-      setTimeout(function() {
-        if (wave.getState()) {
-          waveStateStatus = true;
-        } else {
-          waveStateStatus = false;
-        }
-      },delay);
+      if (wave.getState()) {
+        waveStateStatus = true;
+      } else {
+        waveStateStatus = false;
+      }
     }
     var localData = this.state.data;
     localData["waveStateStatus"] = waveStateStatus;
     self.setState(localData);
+    wave.getState().submitDelta(testData);
     
     function onWaveUpdate() {
+      var testData = {};
+      testData["test"] = {test: "test"};
       var waveData = {};
       var submitDeltaStatus;
       $.each(wave.getState().getKeys(), function(index, key) {
         waveData[key] = waveState.get(key);
       });
-      if (waveData.get("test") === testData[test]) {
+      if (waveData.get("test") === testData.get("test")) {
         submitDeltatStatus = true;
       } else {
         submitDeltaStatus = false;
@@ -64,24 +71,26 @@ var WaveStatus = React.createClass({
     }
 
     wave.setStateCallback(onWaveUpdate);
-    wave.submitDelta(testdata);
   },
   render: function() {
-    var data = this.state.data;
-    if (data.get("waveStateStatus") && data.get("submitDeltaStatus")) {
-      console.log("statusDOM: success");
-      color = "alert alert-success";
-      status = "GOOD";
-    } else {
-      console.log("statusDOM: danger");
-      color = "alert alert-danger";
-      status = "BAD";
-    }
+    // var data = this.state.data;
+    // if (data.get("waveStateStatus") && data.get("submitDeltaStatus")) {
+    //   console.log("statusDOM: success");
+    //   color = "alert alert-success";
+    //   status = "GOOD";
+    // } else {
+    //   console.log("statusDOM: danger");
+    //   color = "alert alert-danger";
+    //   status = "BAD";
+    // }
     return (
       <div className="WaveStatus">
-        <div className={color} role="alert">
-          <b>Wave Status:</b> {status}
+        <div className="alert alert-success" role="alert">
+          <b>Wave Status:</b>
         </div>
+        <button type="button" className="btn btn-default btn-sm" onClick={this.handleTest}>
+         Test
+        </button>
       </div>
     );
   }
