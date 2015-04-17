@@ -56,16 +56,17 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
       var testData = {};
       testData["test"] = {test: "test"};
       var waveData = {};
+      var waveState = wave.getState();
       var submitDeltaStatus;
-      $.each(wave.getState().getKeys(), function(index, key) {
+      $.each(waveState.getKeys(), function(index, key) {
         waveData[key] = waveState.get(key);
       });
-      if (waveData.get("test") === testData.get("test")) {
+      if (waveData["test"] === testData["test"]) {
         submitDeltatStatus = true;
       } else {
         submitDeltaStatus = false;
       }
-      var localData = this.state.data;
+      var localData = self.state.data;
       localData["submitDeltaStatus"] = submitDeltaStatus;
       self.setState(localData);
     }
@@ -73,16 +74,16 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
     wave.setStateCallback(onWaveUpdate);
   },
   render: function() {
-    // var data = this.state.data;
-    // if (data.get("waveStateStatus") && data.get("submitDeltaStatus")) {
-    //   console.log("statusDOM: success");
-    //   color = "alert alert-success";
-    //   status = "GOOD";
-    // } else {
-    //   console.log("statusDOM: danger");
-    //   color = "alert alert-danger";
-    //   status = "BAD";
-    // }
+    var data = this.state.data;
+    if (data["waveStateStatus"] && data["submitDeltaStatus"]) {
+      console.log("statusDOM: success");
+      color = "alert alert-success";
+      status = "GOOD";
+    } else {
+      console.log("statusDOM: danger");
+      color = "alert alert-danger";
+      status = "BAD";
+    }
     return (
       React.createElement("div", {className: "WaveStatus"}, 
         React.createElement("div", {className: "alert alert-success", role: "alert"}, 
