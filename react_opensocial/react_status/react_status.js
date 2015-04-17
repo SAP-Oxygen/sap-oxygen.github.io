@@ -20,15 +20,55 @@ var StatusBox = React.createClass({displayName: "StatusBox",
 });
 
 var WaveStatus = React.createClass({displayName: "WaveStatus",
-  render: function() {
+  getInitialState: function() {
+    return {data: {waveStateStatus: true, submitDeltaStatus: true}};
+  },
+  componentDidMount: function() {
     console.log("inWaveSatus");
+
+    var self = this;
+    var loops = 5;
+    var delay = 1500;
+    var testData = {};
+    testData[test] = {test: "test"};
     var color;
-    var status;
-    var submitDeltaStatus;
-    if (1 === 1) {
-      submitDeltaStatus = true;
+    var waveStateStatus;
+
+    for (i = 0; i < loops; i++) {
+      setTimeout(function() {
+        if (wave.getState()) {
+          waveStateStatus = true;
+        } else {
+          waveStateStatus = false;
+        }
+      },delay);
     }
-    if (submitDeltaStatus) {
+    var localData = this.state.data;
+    localData["waveStateStatus"] = waveStateStatus;
+    self.setState(localData);
+    
+    function onWaveUpdate() {
+      var waveData = {};
+      var submitDeltaStatus;
+      $.each(wave.getState().getKeys(), function(index, key) {
+        waveData[key] = waveState.get(key);
+      });
+      if (waveData.get("test") === testData[test]) {
+        submitDeltatStatus = true;
+      } else {
+        submitDeltaStatus = false;
+      }
+      var localData = this.state.data;
+      localData["submitDeltaStatus"] = submitDeltaStatus;
+      self.setState(localData);
+    }
+
+    wave.setStateCallback(onWaveUpdate);
+    wave.submitDelta(testdata);
+  },
+  render: function() {
+    var data = this.state.data;
+    if (data.get("waveStateStatus") && data.get("submitDeltaStatus")) {
       console.log("statusDOM: success");
       color = "alert alert-success";
       status = "GOOD";
