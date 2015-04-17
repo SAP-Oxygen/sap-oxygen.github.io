@@ -61,8 +61,9 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
       $.each(waveState.getKeys(), function(index, key) {
         waveData[key] = waveState.get(key);
       });
-      if (waveData["test"] === testData["test"]) {
-        submitDeltatStatus = true;
+      // JSON method
+      if (JSON.stringify(waveData["test"]) === JSON.stringify(testData["test"])) {
+        submitDeltaStatus = true;
       } else {
         submitDeltaStatus = false;
       }
@@ -86,8 +87,8 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
     }
     return (
       React.createElement("div", {className: "WaveStatus"}, 
-        React.createElement("div", {className: "alert alert-success", role: "alert"}, 
-          React.createElement("b", null, "Wave Status:")
+        React.createElement("div", {className: color, role: "alert"}, 
+          React.createElement("b", null, "Wave Status:"), " ", status
         ), 
         React.createElement("button", {type: "button", className: "btn btn-default btn-sm", onClick: this.handleTest}, 
          "Test"
