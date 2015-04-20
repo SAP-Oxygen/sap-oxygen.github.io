@@ -66,7 +66,7 @@
       }).sort(function(a, b) {
         return a.value.timestamp - b.value.timestamp;
       });
-    },
+    }
   });
 
   gadgets.util.registerOnLoadHandler(function() {
