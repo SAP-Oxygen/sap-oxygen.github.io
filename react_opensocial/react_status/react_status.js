@@ -109,7 +109,7 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
 
     var appdata_get = function() {
       osapi.appdata.get({userId: '@viewer', groupId: '@self', keys: ["test"]}).execute(function (userData) {
-        console.log("appdata_get: " + gadgets.json.stringify(data));
+        console.log("appdata_get: " + gadgets.json.stringify(userData));
         return data;
       });
     };
