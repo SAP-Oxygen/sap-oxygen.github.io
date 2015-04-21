@@ -108,9 +108,9 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
     e.preventDefault();
 
     var appdata_get = function() {
-      osapi.appdata.get({userId: '@viewer', groupId: '@self', keys: ["test"]}).execute(function (userData) {
-        console.log("appdata_get: " + gadgets.json.stringify(userData));
-        return data;
+      osapi.appdata.get({userId: '@viewer', groupId: '@self', keys: ['test']}).execute(function (userData) {
+        console.log("appdata_get: " + JSON.stringify(userData));
+        return userData;
       });
     };
 
@@ -120,13 +120,13 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
           console.log("appdata_update failed");
         }
         else {
+          appdata_get();
           console.log("appdata_update succeeded");
         }
       });
     };
 
     appdata_update("test");
-    appdata_get();
   },
   render: function() {
     return (
