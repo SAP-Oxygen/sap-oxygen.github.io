@@ -4,6 +4,7 @@
   <ModulePrefs title="React Status" height="350">
         <Require feature="wave"/>
         <Require feature="dynamic-height"/>
+        <Require feature="osapi"/>
     </ModulePrefs>
   <Content type="html">
     <![CDATA[
