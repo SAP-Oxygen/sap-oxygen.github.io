@@ -108,19 +108,27 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
     e.preventDefault();
 
     var appdata_get = function() {
-      osapi.appdata.get({userId: '@viewer', groupId: '@self', keys: ['test']}).execute(function (userData) {
+      osapi.appdata.get({userId: '@viewer', groupId: '@self', fields: ['test']}).execute(function (userData) {
+        console.log("appdata_get: " + JSON.stringify(userData));
+        return userData;
+      });
+    };
+
+    var appdata_get1 = function() {
+      osapi.appdata.get({userId: '@viewer', groupId: '@self'}).execute(function (userData) {
         console.log("appdata_get: " + JSON.stringify(userData));
         return userData;
       });
     };
 
     var appdata_update = function(input){
-      osapi.appdata.update({userId: '@viewer', groupId: '@self', data: {test: input}}).execute(function (userData) {
+      osapi.appdata.update({userId: '@viewer', groupId: '@self', data: {test: input, test1: input, test2: input}}).execute(function (userData) {
         if (userData.error) {
           console.log("appdata_update failed");
         }
         else {
           appdata_get();
+          appdata_get1();
           console.log("appdata_update succeeded");
         }
       });
