@@ -157,7 +157,7 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
       });
     };
 
-    appdata_getViewer();
+    appdataGetViewer();
   },
   render: function() {
     var localData = this.state.data;
