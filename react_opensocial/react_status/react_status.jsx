@@ -107,50 +107,73 @@ var AppdataStatus = React.createClass({
   handleTest: function(e) {
     e.preventDefault();
 
+    var self = this;
+
     var appdataGetViewer = function() {
       osapi.people.getViewer().execute(function (userData) {
         var localData = this.state.data;
         if (userData.error) {
-          localData["getViewerStatus"] = true;
+          localData["getViewerStatus"] = false;
         } else {
           localData["getViewerStatus"] = true;
           console.log("appdata_getViewer: " + JSON.stringify(userData));
         }
+        self.setState(localData);
+        appdataUpdate("test", userData["id"]);
       });
     };
 
     var appdataGet = function() {
       osapi.appdata.get({userId: '@viewer', groupId: '@self', fields: ['test']}).execute(function (userData) {
+        var localData = this.state.data;
         if (userData.error) {
-          getStatus = false;
+          localData["getStatus"] = false;
         } else {
-          getStatus = true;
+          localData["getStatus"] = true;
           console.log("appdata_get: " + JSON.stringify(userData));
         }
+        self.setState(localData);
         return userData;
       });
     };
 
-    var appdataUpdate = function(input){
-      osapi.appdata.update({userId: '@viewer', groupId: '@self', data: {test: input, test1: input, test2: input}}).execute(function (userData) {
+    var appdataUpdate = function(input, viewerId){
+      var testData = {test: input}
+      osapi.appdata.update({userId: '@viewer', groupId: '@self', data: testData}).execute(function (userData) {
+        var localData = this.state.data;
         if (userData.error) {
-          console.log("appdata_update failed");
+          localData["updateStatus"] = false;
         } else {
           var appdataData = appdataGet();
-
-          var localData = self.state.data;
-          console.log("appdata_update succeeded");
+          var receivedData = appdataData[viewerId];
+          if (JSON.stringify(testData) === JSON.stringify(testData)) {
+            localData["updateStatus"] = true;
+            console.log("appdata_update succeeded");
+          } else {
+            localData["updateStatus"] = false;
+          }
+          self.setState(localData);
         }
       });
     };
 
-    appdata_update("test");
+    appdata_getViewer();
   },
   render: function() {
+    var localData = this.state.data;
+    if (localData["getViewerStatus"] && localData["getStatus"] && localData["updateStatus"]) {
+      console.log("statusDOM: success");
+      color = "alert alert-success";
+      status = "GOOD";
+    } else {
+      console.log("statusDOM: danger");
+      color = "alert alert-danger";
+      status = "BAD";
+    }
     return (
       <div className="AppdataStatus">
-        <div className="alert alert-success" role="alert">
-          <b>Appdata Status:</b> GOOD
+        <div className={color} role="alert">
+          <b>Appdata Status:</b> {status}
         </div>
         <button type="button" className="btn btn-default btn-sm" onClick={this.handleTest}>
          Test

@@ -50,7 +50,7 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
     self.setState(localData);
     wave.getState().submitDelta(testData);
     
-    function onWaveUpdate() {
+    var onWaveUpdate = function() {
       var testData = {};
       testData["test"] = {test: "test"};
       var waveData = {};
@@ -68,7 +68,7 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
       var localData = self.state.data;
       localData["submitDeltaStatus"] = submitDeltaStatus;
       self.setState(localData);
-    }
+    };
 
     wave.setStateCallback(onWaveUpdate);
   },
@@ -107,40 +107,73 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
   handleTest: function(e) {
     e.preventDefault();
 
-    var appdata_get = function() {
-      osapi.appdata.get({userId: '@viewer', groupId: '@self', fields: ['test']}).execute(function (userData) {
-        console.log("appdata_get: " + JSON.stringify(userData));
-        return userData;
-      });
-    };
+    var self = this;
 
-    var appdata_get1 = function() {
-      osapi.appdata.get({userId: '@viewer', groupId: '@self'}).execute(function (userData) {
-        console.log("appdata_get: " + JSON.stringify(userData));
-        return userData;
-      });
-    };
-
-    var appdata_update = function(input){
-      osapi.appdata.update({userId: '@viewer', groupId: '@self', data: {test: input, test1: input, test2: input}}).execute(function (userData) {
+    var appdataGetViewer = function() {
+      osapi.people.getViewer().execute(function (userData) {
+        var localData = this.state.data;
         if (userData.error) {
-          console.log("appdata_update failed");
+          localData["getViewerStatus"] = false;
+        } else {
+          localData["getViewerStatus"] = true;
+          console.log("appdata_getViewer: " + JSON.stringify(userData));
         }
-        else {
-          appdata_get();
-          appdata_get1();
-          console.log("appdata_update succeeded");
+        self.setState(localData);
+        appdataUpdate("test", userData["id"]);
+      });
+    };
+
+    var appdataGet = function() {
+      osapi.appdata.get({userId: '@viewer', groupId: '@self', fields: ['test']}).execute(function (userData) {
+        var localData = this.state.data;
+        if (userData.error) {
+          localData["getStatus"] = false;
+        } else {
+          localData["getStatus"] = true;
+          console.log("appdata_get: " + JSON.stringify(userData));
+        }
+        self.setState(localData);
+        return userData;
+      });
+    };
+
+    var appdataUpdate = function(input, viewerId){
+      var testData = {test: input}
+      osapi.appdata.update({userId: '@viewer', groupId: '@self', data: testData}).execute(function (userData) {
+        var localData = this.state.data;
+        if (userData.error) {
+          localData["updateStatus"] = false;
+        } else {
+          var appdataData = appdataGet();
+          var receivedData = appdataData[viewerId];
+          if (JSON.stringify(testData) === JSON.stringify(testData)) {
+            localData["updateStatus"] = true;
+            console.log("appdata_update succeeded");
+          } else {
+            localData["updateStatus"] = false;
+          }
+          self.setState(localData);
         }
       });
     };
 
-    appdata_update("test");
+    appdata_getViewer();
   },
   render: function() {
+    var localData = this.state.data;
+    if (localData["getViewerStatus"] && localData["getStatus"] && localData["updateStatus"]) {
+      console.log("statusDOM: success");
+      color = "alert alert-success";
+      status = "GOOD";
+    } else {
+      console.log("statusDOM: danger");
+      color = "alert alert-danger";
+      status = "BAD";
+    }
     return (
       React.createElement("div", {className: "AppdataStatus"}, 
-        React.createElement("div", {className: "alert alert-success", role: "alert"}, 
-          React.createElement("b", null, "Appdata Status:"), " GOOD"
+        React.createElement("div", {className: color, role: "alert"}, 
+          React.createElement("b", null, "Appdata Status:"), " ", status
         ), 
         React.createElement("button", {type: "button", className: "btn btn-default btn-sm", onClick: this.handleTest}, 
          "Test"
