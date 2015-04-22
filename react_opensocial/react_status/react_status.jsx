@@ -50,7 +50,7 @@ var WaveStatus = React.createClass({
     self.setState(localData);
     wave.getState().submitDelta(testData);
     
-    function onWaveUpdate() {
+    var onWaveUpdate = function() {
       var testData = {};
       testData["test"] = {test: "test"};
       var waveData = {};
@@ -68,7 +68,7 @@ var WaveStatus = React.createClass({
       var localData = self.state.data;
       localData["submitDeltaStatus"] = submitDeltaStatus;
       self.setState(localData);
-    }
+    };
 
     wave.setStateCallback(onWaveUpdate);
   },
@@ -107,28 +107,38 @@ var AppdataStatus = React.createClass({
   handleTest: function(e) {
     e.preventDefault();
 
-    var appdata_get = function() {
+    var appdataGetViewer = function() {
+      osapi.people.getViewer().execute(function (userData) {
+        var localData = this.state.data;
+        if (userData.error) {
+          localData["getViewerStatus"] = true;
+        } else {
+          localData["getViewerStatus"] = true;
+          console.log("appdata_getViewer: " + JSON.stringify(userData));
+        }
+      });
+    };
+
+    var appdataGet = function() {
       osapi.appdata.get({userId: '@viewer', groupId: '@self', fields: ['test']}).execute(function (userData) {
-        console.log("appdata_get: " + JSON.stringify(userData));
+        if (userData.error) {
+          getStatus = false;
+        } else {
+          getStatus = true;
+          console.log("appdata_get: " + JSON.stringify(userData));
+        }
         return userData;
       });
     };
 
-    var appdata_get1 = function() {
-      osapi.appdata.get({userId: '@viewer', groupId: '@self'}).execute(function (userData) {
-        console.log("appdata_get: " + JSON.stringify(userData));
-        return userData;
-      });
-    };
-
-    var appdata_update = function(input){
+    var appdataUpdate = function(input){
       osapi.appdata.update({userId: '@viewer', groupId: '@self', data: {test: input, test1: input, test2: input}}).execute(function (userData) {
         if (userData.error) {
           console.log("appdata_update failed");
-        }
-        else {
-          appdata_get();
-          appdata_get1();
+        } else {
+          var appdataData = appdataGet();
+
+          var localData = self.state.data;
           console.log("appdata_update succeeded");
         }
       });
