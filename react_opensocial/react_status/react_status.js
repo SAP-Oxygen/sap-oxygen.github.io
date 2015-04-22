@@ -111,7 +111,7 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
 
     var appdataGetViewer = function() {
       osapi.people.getViewer().execute(function (userData) {
-        var localData = this.state.data;
+        var localData = self.state.data;
         if (userData.error) {
           localData["getViewerStatus"] = false;
         } else {
@@ -125,7 +125,7 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
 
     var appdataGet = function() {
       osapi.appdata.get({userId: '@viewer', groupId: '@self', fields: ['test']}).execute(function (userData) {
-        var localData = this.state.data;
+        var localData = self.state.data;
         if (userData.error) {
           localData["getStatus"] = false;
         } else {
@@ -140,7 +140,7 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
     var appdataUpdate = function(input, viewerId){
       var testData = {test: input}
       osapi.appdata.update({userId: '@viewer', groupId: '@self', data: testData}).execute(function (userData) {
-        var localData = this.state.data;
+        var localData = self.state.data;
         if (userData.error) {
           localData["updateStatus"] = false;
         } else {
