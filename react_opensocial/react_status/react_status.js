@@ -161,11 +161,30 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
 });
 
 var PrefsStatus = React.createClass({displayName: "PrefsStatus",
+  getInitialState: function() {
+    return {data:{}};
+  },
+  componentDidMount: function() {
+
+  },
+  handleTest: function() {
+    console.log("in handleTest");
+    var prefs = new gadgets.Prefs();
+    var mycolor = prefs.getString("mycolor");
+    console.log("mycolor: " + mycolor);
+
+    prefs.set("mycolor", "white");
+    var newMycolor = prefs.getString("mycolor");
+    console.log("newMycolor: " + newMycolor);
+  },
   render: function() {
     return (
       React.createElement("div", {className: "PrefsStatus"}, 
         React.createElement("div", {className: "alert alert-danger", role: "alert"}, 
-          React.createElement("b", null, "Prefs Status: "), " BAD"
+        "Prefs Status: ", React.createElement("strong", null, "BAD")
+        ), 
+        React.createElement("button", {type: "button", className: "btn btn-default btn-sm", onClick: this.handleTest}, 
+        "test"
         )
       )
     );

@@ -161,12 +161,31 @@ var AppdataStatus = React.createClass({
 });
 
 var PrefsStatus = React.createClass({
+  getInitialState: function() {
+    return {data:{}};
+  },
+  componentDidMount: function() {
+
+  },
+  handleTest: function() {
+    console.log("in handleTest");
+    var prefs = new gadgets.Prefs();
+    var mycolor = prefs.getString("mycolor");
+    console.log("mycolor: " + mycolor);
+
+    prefs.set("mycolor", "white");
+    var newMycolor = prefs.getString("mycolor");
+    console.log("newMycolor: " + newMycolor);
+  },
   render: function() {
     return (
       <div className="PrefsStatus">
         <div className="alert alert-danger" role="alert">
-          <b>Prefs Status: </b> BAD
+        Prefs Status: <strong>BAD</strong>
         </div>
+        <button type="button" className="btn btn-default btn-sm" onClick={this.handleTest}>
+        test
+        </button>
       </div>
     );
   }
