@@ -117,6 +117,7 @@ var AppdataStatus = React.createClass({
     e.preventDefault();
 
     var self = this;
+    var testData = {test: "test"};
 
     var appdataGetViewer = function() {
       osapi.people.getViewer().execute(function (userData) {
@@ -132,37 +133,34 @@ var AppdataStatus = React.createClass({
       });
     };
 
-    var appdataGet = function() {
+    var appdataGet = function(viewerId) {
       osapi.appdata.get({userId: '@viewer', groupId: '@self', fields: ['test']}).execute(function (userData) {
         var localData = self.state.data;
+        console.log("appdata_get: " + JSON.stringify(userData));
         if (userData.error) {
           localData["getStatus"] = false;
         } else {
-          localData["getStatus"] = true;
-          console.log("appdata_get: " + JSON.stringify(userData));
+          var receivedData = userData[viewerId];
+          if (JSON.stringify(testData) === JSON.stringify(receivedData)) {
+            localData["getStatus"] = true;
+          } else {
+            localData["getStatus"] = false;
+          }
         }
         self.setState(localData);
-        return userData;
       });
     };
 
-    var appdataUpdate = function(input, viewerId){
-      var testData = {test: input}
+    var appdataUpdate = function(viewerId){
       osapi.appdata.update({userId: '@viewer', groupId: '@self', data: testData}).execute(function (userData) {
         var localData = self.state.data;
         if (userData.error) {
           localData["updateStatus"] = false;
         } else {
-          var appdataData = appdataGet();
-          var receivedData = appdataData[viewerId];
-          if (JSON.stringify(testData) === JSON.stringify(testData)) {
-            localData["updateStatus"] = true;
-            console.log("appdata_update succeeded");
-          } else {
-            localData["updateStatus"] = false;
-          }
-          self.setState(localData);
+          localData["updateStatus"] = true;
+          var appdataData = appdataGet(viewerId);
         }
+        self.setState(localData);
       });
     };
 
