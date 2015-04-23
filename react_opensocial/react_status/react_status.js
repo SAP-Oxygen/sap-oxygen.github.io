@@ -26,14 +26,38 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
   },
   componentDidMount: function() {
     console.log("inComponentDidMount");
-    var call = function() {
-      console.log("called when null changed to not null");
+
+    var self = this;
+    var testData = {};
+    testData["test"] = {test: "test"};
+    wave.setStateCallback(onWaveInit);
+
+    var onWaveInit = function() {
+      var localData = this.state.data;
+      if (wave.getState()) {
+        localData["stateStatus"] = true;
+      } else {
+        localData["stateStatus"] = false;
+      }
+      self.setState(localData);
+      wave.setStateCallback(onWaveUpdate);
+      wave.getState().submitDelta(testData);
     };
-    var call1 = function() {
-      console.log("call1 called");
-    };
-    wave.setStateCallback(call);
-    wave.setStateCallback(call1);
+
+    var onWaveUpdate = function() {
+      var waveData = {};
+      var waveState = wave.getState();
+      var localData = self.state.data;
+      $.each(waveState.getKeys(), function(index, key) {
+        waveData[key] = waveState.get(key);
+      });
+      if (JSON.stringify(waveData["test"]) === JSON.stringify(testData["test"])) {
+        localData["onUpdateStatus"] = true;
+      } else {
+        localData["onUpdateStatus"] = false;
+      }
+      self.setState(localData);
+    }
   },
   handleTest: function(e) {
     e.preventDefault();
