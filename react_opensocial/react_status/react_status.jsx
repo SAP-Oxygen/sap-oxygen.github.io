@@ -80,7 +80,7 @@ var WaveStatus = React.createClass({
     return (
       <div className="WaveStatus">
         <div className={color} role="alert">
-          <b>Wave Status:</b> {status}
+        Wave Status: <strong>{status}</strong>
         </div>
       </div>
     );
@@ -162,7 +162,7 @@ var AppdataStatus = React.createClass({
     return (
       <div className="AppdataStatus">
         <div className={color} role="alert">
-          <b>Appdata Status:</b> {status}
+        Appdata Status: <strong>{status}</strong>
         </div>
         <button type="button" className="btn btn-default btn-sm" onClick={this.handleTest}>
          Test

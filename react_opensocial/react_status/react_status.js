@@ -80,7 +80,7 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
     return (
       React.createElement("div", {className: "WaveStatus"}, 
         React.createElement("div", {className: color, role: "alert"}, 
-          React.createElement("b", null, "Wave Status:"), " ", status
+        "Wave Status: ", React.createElement("strong", null, status)
         )
       )
     );
@@ -162,7 +162,7 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
     return (
       React.createElement("div", {className: "AppdataStatus"}, 
         React.createElement("div", {className: color, role: "alert"}, 
-          React.createElement("b", null, "Appdata Status:"), " ", status
+        "Appdata Status: ", React.createElement("strong", null, status)
         ), 
         React.createElement("button", {type: "button", className: "btn btn-default btn-sm", onClick: this.handleTest}, 
          "Test"
