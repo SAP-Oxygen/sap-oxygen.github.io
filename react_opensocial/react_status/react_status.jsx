@@ -30,22 +30,6 @@ var WaveStatus = React.createClass({
     var self = this;
     var testData = {};
     testData["test"] = {test: "test"};
-    wave.setStateCallback(onWaveInit);
-
-    var onWaveInit = function() {
-      console.log("onWaveInit");
-      var localData = this.state.data;
-      if (wave.getState()) {
-        console.log("wave is not null");
-        localData["stateStatus"] = true;
-      } else {
-        console.log("wave is null");
-        localData["stateStatus"] = false;
-      }
-      self.setState(localData);
-      wave.setStateCallback(onWaveUpdate);
-      wave.getState().submitDelta(testData);
-    };
 
     var onWaveUpdate = function() {
       console.log("onWaveUpdate");
@@ -63,7 +47,24 @@ var WaveStatus = React.createClass({
         localData["onUpdateStatus"] = false;
       }
       self.setState(localData);
-    }
+    };
+
+    var onWaveInit = function() {
+      console.log("onWaveInit");
+      var localData = self.state.data;
+      if (wave.getState()) {
+        console.log("wave is not null");
+        localData["stateStatus"] = true;
+      } else {
+        console.log("wave is null");
+        localData["stateStatus"] = false;
+      }
+      self.setState(localData);
+      wave.setStateCallback(onWaveUpdate);
+      wave.getState().submitDelta(testData);
+    };
+
+    wave.setStateCallback(onWaveInit);
   },
   handleTest: function(e) {
     e.preventDefault();
