@@ -129,7 +129,7 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
           console.log("appdata_getViewer: " + JSON.stringify(userData));
         }
         self.setState(localData);
-        appdataUpdate("test", userData["id"]);
+        appdataUpdate(userData["id"]);
       });
     };
 
