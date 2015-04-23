@@ -24,6 +24,8 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
     return {data: {}};
   },
   componentDidMount: function() {
+    console.log("WaveStatus-componentDidMount");
+
     var self = this;
     var testData = {};
     testData["test"] = {test: "test"};
@@ -50,7 +52,6 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
       console.log("onWaveInit");
       var localData = self.state.data;
       if (wave.getState()) {
-        console.log("wave is not null");
         localData["stateStatus"] = true;
       } else {
         console.log("wave is null");
@@ -66,11 +67,11 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
   render: function() {
     var data = this.state.data;
     if (data["onUpdateStatus"] && data["stateStatus"]) {
-      console.log("statusDOM: success");
+      console.log("WavesStatus-statusDOM: success");
       color = "alert alert-success";
       status = "GOOD";
     } else {
-      console.log("statusDOM: danger");
+      console.log("WaveStatus-statusDOM: danger");
       color = "alert alert-danger";
       status = "BAD";
     }
@@ -89,6 +90,8 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
     return {data: {}};
   },
   componentDidMount: function() {
+    console.log("AppdataStatus-componentDidMount");
+
     var self = this;
     var testData = {test: "test"};
 
@@ -142,11 +145,11 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
   render: function() {
     var localData = this.state.data;
     if (localData["getViewerStatus"] && localData["getStatus"] && localData["updateStatus"]) {
-      console.log("statusDOM: success");
+      console.log("AppdataStatus-status: success");
       color = "alert alert-success";
       status = "GOOD";
     } else {
-      console.log("statusDOM: danger");
+      console.log("AppdataStatus-status: danger");
       color = "alert alert-danger";
       status = "BAD";
     }
@@ -165,25 +168,10 @@ var PrefsStatus = React.createClass({displayName: "PrefsStatus",
     return {data:{}};
   },
   componentDidMount: function() {
-
-  },
-  handleTest: function() {
-    console.log("in handleTest");
+    console.log("PrefsStatus-componenetDidMount");
 
     var prefs = new gadgets.Prefs();
     var self = this;
-
-    // var get = function() {
-    //   var mycolor = prefs.getString("mycolor");
-    //   var localData = self.state.data;
-    //   if (mycolor === "black") {
-    //     localData["get"] = true;
-    //   } else {
-    //     localData["get"] = false;
-    //   }
-    //   self.setState(localData);
-    //   console.log("mycolor: " + mycolor);
-    // };
 
     var set = function() {
       prefs.set("mycolor", "white");
@@ -203,11 +191,11 @@ var PrefsStatus = React.createClass({displayName: "PrefsStatus",
   render: function() {
     var localData = this.state.data;
     if (localData["set"]) {
-      console.log("PrefsStatus-statusDOM: success");
+      console.log("PrefsStatus-status: success");
       color = "alert alert-success";
       status = "GOOD";
     } else {
-      console.log("PrefsStatus-statusDOM: danger");
+      console.log("PrefsStatus-status: danger");
       color = "alert alert-danger";
       status = "BAD";
     }
@@ -215,9 +203,6 @@ var PrefsStatus = React.createClass({displayName: "PrefsStatus",
       React.createElement("div", {className: "PrefsStatus"}, 
         React.createElement("div", {className: color, role: "alert"}, 
         "Prefs Status: ", React.createElement("strong", null, status)
-        ), 
-        React.createElement("button", {type: "button", className: "btn btn-default btn-sm", onClick: this.handleTest}, 
-        "test"
         )
       )
     );
