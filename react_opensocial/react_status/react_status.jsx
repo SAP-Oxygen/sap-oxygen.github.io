@@ -173,17 +173,17 @@ var PrefsStatus = React.createClass({
     var prefs = new gadgets.Prefs();
     var self = this;
 
-    var get = function() {
-      var mycolor = prefs.getString("mycolor");
-      var localData = self.state.data;
-      if (mycolor === "black") {
-        localData["get"] = true;
-      } else {
-        localData["get"] = false;
-      }
-      self.setState(localData);
-      console.log("mycolor: " + mycolor);
-    };
+    // var get = function() {
+    //   var mycolor = prefs.getString("mycolor");
+    //   var localData = self.state.data;
+    //   if (mycolor === "black") {
+    //     localData["get"] = true;
+    //   } else {
+    //     localData["get"] = false;
+    //   }
+    //   self.setState(localData);
+    //   console.log("mycolor: " + mycolor);
+    // };
 
     var set = function() {
       prefs.set("mycolor", "white");
@@ -198,17 +198,16 @@ var PrefsStatus = React.createClass({
       console.log("newMycolor: " + newMycolor);
     };
 
-    get();
     set();
   },
   render: function() {
     var localData = this.state.data;
-    if (localData["get"] && localData["set"]) {
-      console.log("statusDOM: success");
+    if (localData["set"]) {
+      console.log("PrefsStatus-statusDOM: success");
       color = "alert alert-success";
       status = "GOOD";
     } else {
-      console.log("statusDOM: danger");
+      console.log("PrefsStatus-statusDOM: danger");
       color = "alert alert-danger";
       status = "BAD";
     }
