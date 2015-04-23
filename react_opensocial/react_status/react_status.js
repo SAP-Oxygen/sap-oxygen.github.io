@@ -66,55 +66,9 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
 
     wave.setStateCallback(onWaveInit);
   },
-  handleTest: function(e) {
-    e.preventDefault();
-
-    console.log("inHandleTest");
-
-    var self = this;
-    var loops = 5;
-    var testData = {};
-    testData["test"] = {test: "test"};
-    var color;
-    var waveStateStatus;
-
-    for (i = 0; i < loops; i++) {
-      if (wave.getState()) {
-        waveStateStatus = true;
-      } else {
-        waveStateStatus = false;
-      }
-    }
-    var localData = this.state.data;
-    localData["waveStateStatus"] = waveStateStatus;
-    self.setState(localData);
-    wave.getState().submitDelta(testData);
-    
-    var onWaveUpdate = function() {
-      var testData = {};
-      testData["test"] = {test: "test"};
-      var waveData = {};
-      var waveState = wave.getState();
-      var submitDeltaStatus;
-      $.each(waveState.getKeys(), function(index, key) {
-        waveData[key] = waveState.get(key);
-      });
-      // JSON method
-      if (JSON.stringify(waveData["test"]) === JSON.stringify(testData["test"])) {
-        submitDeltaStatus = true;
-      } else {
-        submitDeltaStatus = false;
-      }
-      var localData = self.state.data;
-      localData["submitDeltaStatus"] = submitDeltaStatus;
-      self.setState(localData);
-    };
-
-    wave.setStateCallback(onWaveUpdate);
-  },
   render: function() {
     var data = this.state.data;
-    if (data["waveStateStatus"] && data["submitDeltaStatus"]) {
+    if (data["onUpdateStatus"] && data["stateStatus"]) {
       console.log("statusDOM: success");
       color = "alert alert-success";
       status = "GOOD";
@@ -127,9 +81,6 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
       React.createElement("div", {className: "WaveStatus"}, 
         React.createElement("div", {className: color, role: "alert"}, 
           React.createElement("b", null, "Wave Status:"), " ", status
-        ), 
-        React.createElement("button", {type: "button", className: "btn btn-default btn-sm", onClick: this.handleTest}, 
-         "Test"
         )
       )
     );
