@@ -169,19 +169,53 @@ var PrefsStatus = React.createClass({
   },
   handleTest: function() {
     console.log("in handleTest");
-    var prefs = new gadgets.Prefs();
-    var mycolor = prefs.getString("mycolor");
-    console.log("mycolor: " + mycolor);
 
-    prefs.set("mycolor", "white");
-    var newMycolor = prefs.getString("mycolor");
-    console.log("newMycolor: " + newMycolor);
+    var prefs = new gadgets.Prefs();
+    var self = this;
+
+    var get = function() {
+      var mycolor = prefs.getString("mycolor");
+      var localData = self.state.data;
+      if (mycolor === "black") {
+        localData["get"] = true;
+      } else {
+        localData["get"] = false;
+      }
+      self.setState(localData);
+      console.log("mycolor: " + mycolor);
+    };
+
+    var set = function() {
+      prefs.set("mycolor", "white");
+      var newMycolor = prefs.getString("mycolor");
+      var localData = self.state.data;
+      if (newMycolor === "white") {
+        localData["set"] = true;
+      } else {
+        localData["set"] = false;
+      }
+      self.setState(localData);
+      console.log("newMycolor: " + newMycolor);
+    };
+
+    get();
+    set();
   },
   render: function() {
+    var localData = this.state.data;
+    if (localData["get"] && localData["set"]) {
+      console.log("statusDOM: success");
+      color = "alert alert-success";
+      status = "GOOD";
+    } else {
+      console.log("statusDOM: danger");
+      color = "alert alert-danger";
+      status = "BAD";
+    }
     return (
       <div className="PrefsStatus">
-        <div className="alert alert-danger" role="alert">
-        Prefs Status: <strong>BAD</strong>
+        <div className={color} role="alert">
+        Prefs Status: <strong>{status}</strong>
         </div>
         <button type="button" className="btn btn-default btn-sm" onClick={this.handleTest}>
         test
