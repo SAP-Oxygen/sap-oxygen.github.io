@@ -33,10 +33,13 @@ var WaveStatus = React.createClass({
     wave.setStateCallback(onWaveInit);
 
     var onWaveInit = function() {
+      console.log("onWaveInit");
       var localData = this.state.data;
       if (wave.getState()) {
+        console.log("wave is not null");
         localData["stateStatus"] = true;
       } else {
+        console.log("wave is null");
         localData["stateStatus"] = false;
       }
       self.setState(localData);
@@ -45,6 +48,7 @@ var WaveStatus = React.createClass({
     };
 
     var onWaveUpdate = function() {
+      console.log("onWaveUpdate");
       var waveData = {};
       var waveState = wave.getState();
       var localData = self.state.data;
@@ -52,8 +56,10 @@ var WaveStatus = React.createClass({
         waveData[key] = waveState.get(key);
       });
       if (JSON.stringify(waveData["test"]) === JSON.stringify(testData["test"])) {
+        console.log("data matches");
         localData["onUpdateStatus"] = true;
       } else {
+        console.log("data does not match");
         localData["onUpdateStatus"] = false;
       }
       self.setState(localData);
