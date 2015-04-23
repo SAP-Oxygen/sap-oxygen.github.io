@@ -26,6 +26,14 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
   },
   componentDidMount: function() {
     console.log("inComponentDidMount");
+    var call = function() {
+      console.log("called when null changed to not null");
+    };
+    var call1 = function() {
+      console.log("call1 called");
+    };
+    wave.setStateCallback(call);
+    wave.setStateCallback(call1);
   },
   handleTest: function(e) {
     e.preventDefault();
@@ -33,6 +41,7 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
     console.log("inHandleTest");
 
     var self = this;
+    var loops = 5;
     var testData = {};
     testData["test"] = {test: "test"};
     var color;
@@ -196,6 +205,9 @@ var PrefsStatus = React.createClass({displayName: "PrefsStatus",
 });
 
 gadgets.util.registerOnLoadHandler(function() {
+  console.log(wave);
+  console.log(wave.getState());
+
   React.render(
     React.createElement(StatusBox),
     document.getElementById('content')
