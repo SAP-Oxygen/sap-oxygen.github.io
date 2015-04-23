@@ -21,12 +21,9 @@ var StatusBox = React.createClass({
 
 var WaveStatus = React.createClass({
   getInitialState: function() {
-    console.log("inGetInitialState");
     return {data: {}};
   },
   componentDidMount: function() {
-    console.log("inComponentDidMount");
-
     var self = this;
     var testData = {};
     testData["test"] = {test: "test"};
@@ -89,11 +86,58 @@ var WaveStatus = React.createClass({
 
 var AppdataStatus = React.createClass({
   getInitialState: function() {
-    console.log("inGetInitialState");
     return {data: {}};
   },
   componentDidMount: function() {
-    console.log("inComponentDidMount");
+    var self = this;
+    var testData = {test: "test"};
+
+    var appdataGetViewer = function() {
+      osapi.people.getViewer().execute(function (userData) {
+        var localData = self.state.data;
+        if (userData.error) {
+          localData["getViewerStatus"] = false;
+        } else {
+          localData["getViewerStatus"] = true;
+          console.log("appdata_getViewer: " + JSON.stringify(userData));
+        }
+        self.setState(localData);
+        appdataUpdate(userData["id"]);
+      });
+    };
+
+    var appdataGet = function(viewerId) {
+      osapi.appdata.get({userId: '@viewer', groupId: '@self', fields: ['test']}).execute(function (userData) {
+        var localData = self.state.data;
+        console.log("appdata_get: " + JSON.stringify(userData));
+        if (userData.error) {
+          localData["getStatus"] = false;
+        } else {
+          var receivedData = userData[viewerId];
+          if (JSON.stringify(testData) === JSON.stringify(receivedData)) {
+            localData["getStatus"] = true;
+          } else {
+            localData["getStatus"] = false;
+          }
+        }
+        self.setState(localData);
+      });
+    };
+
+    var appdataUpdate = function(viewerId){
+      osapi.appdata.update({userId: '@viewer', groupId: '@self', data: testData}).execute(function (userData) {
+        var localData = self.state.data;
+        if (userData.error) {
+          localData["updateStatus"] = false;
+        } else {
+          localData["updateStatus"] = true;
+          var appdataData = appdataGet(viewerId);
+        }
+        self.setState(localData);
+      });
+    };
+
+    appdataGetViewer();
   },
   handleTest: function(e) {
     e.preventDefault();
