@@ -51,10 +51,10 @@
       var voteData = localData[topic];
       // if votes array does not exist, then add a new one
       voteData.votes = voteData.votes || [];
-      if ($.inArray(viewerId, voteData.votes) == -1) {
+      var index = $.inArray(viewerId, voteData.votes);
+      if (index === -1) {
         // optimistic local update
         voteData.votes.push(viewerId);
-        localData[topic] = voteData;
         this.setState({data: localData});
         console.log("handleVoteSubmit-this.state.data: " + localData);
         updatedEntry[topic] = voteData;
@@ -74,7 +74,6 @@
       var index = $.inArray(viewerId, voteData.votes);
       if (index !== -1) {
         voteData.votes.splice(index, 1);
-        localData[topic] = voteData;
         this.setState({data: localData});
         console.log("handleUnVoteSubmit-this.state.data: " + localData);
         updatedEntry[topic] = voteData;
@@ -164,12 +163,12 @@
           var thumbnail = voter.getThumbnailUrl();
           var name = voter.getDisplayName();
           return (
-            React.createElement("img", {className: "img-rounded img-fixed", id: "thumbnail", title: name, src: thumbnail})
+            React.createElement("img", {className: "img-rounded img-fixed", title: name, src: thumbnail})
           );
         }, this);
       }
       return (
-        React.createElement("div", {className: "VoteThumbNail"}, 
+        React.createElement("div", {className: "VoteThumbnail"}, 
             thumbnails
         )
       );
@@ -209,7 +208,6 @@
       this.props.onTopicSubmit(topic);
 
       React.findDOMNode(this.refs.topic).value = '';
-      return;
     },
     render: function() {
       return (
