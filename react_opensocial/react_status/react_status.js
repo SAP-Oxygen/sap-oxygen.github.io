@@ -127,6 +127,7 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
     };
 
     var appdataGetViewer = function() {
+      console.log(osapi);
       osapi.people.getViewer().execute(function (userData) {
         var localData = self.state.data;
         if (userData.error) {
