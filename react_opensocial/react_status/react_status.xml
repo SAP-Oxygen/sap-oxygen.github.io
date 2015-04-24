@@ -7,7 +7,7 @@
     <Require feature="osapi"/>
     <Require feature="setprefs"/>
   </ModulePrefs>
-  <UserPref name="mycolor" default_value="Black" datatype="hidden" />
+  <UserPref name="mycolor" default_value="black" datatype="hidden" />
   <Content type="html">
     <![CDATA[
       <head>

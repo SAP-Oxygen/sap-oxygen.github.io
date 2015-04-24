@@ -127,7 +127,6 @@ var AppdataStatus = React.createClass({
     };
 
     var appdataGetViewer = function() {
-      console.log(osapi);
       osapi.people.getViewer().execute(function (userData) {
         var localData = self.state.data;
         if (userData.error) {
@@ -175,6 +174,8 @@ var PrefsStatus = React.createClass({
     var self = this;
 
     var set = function() {
+      var mycolor = prefs.getString("mycolor");
+      console.log("mycolor: (should be black) " + mycolor);
       prefs.set("mycolor", "white");
       var newMycolor = prefs.getString("mycolor");
       var localData = self.state.data;
@@ -184,7 +185,7 @@ var PrefsStatus = React.createClass({
         localData["set"] = false;
       }
       self.setState(localData);
-      console.log("newMycolor: " + newMycolor);
+      console.log("newMycolor: (should be white) " + newMycolor);
     };
 
     set();
