@@ -35,10 +35,8 @@
         self.setState({data: newData, users: wave.getParticipants()});
       }
 
-      gadgets.util.registerOnLoadHandler(function() {
-        wave.setStateCallback(onWaveUpdate);
-        wave.setParticipantCallback(onWaveUpdate);
-      });
+      wave.setStateCallback(onWaveUpdate);
+      wave.setParticipantCallback(onWaveUpdate);
     },
     // Our own code
     onAddButtonClick: function() {
