@@ -1,5 +1,5 @@
 <Module>
-  <ModulePrefs title="__MSG_hello_world__" thumbnail="hello.png" author="Joseph Wong">
+  <ModulePrefs title="${Msg.hello_world}" thumbnail="hello.png" author="Joseph Wong">
     <Require feature="dynamic-height"/>
     <Locale lang="all">
       <msg name="hello_world">Hello World</msg> 
@@ -18,7 +18,7 @@
     });
     </script>
     <div>
-      <span id="hello">__MSG_hello_world__</span>
+      <span id="hello">${Msg.hello_world}</span>
     </div>
     ]]>
   </Content>
