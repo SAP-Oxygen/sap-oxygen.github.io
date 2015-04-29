@@ -1,5 +1,6 @@
 <Module>
   <ModulePrefs title="__MSG_hello_world__" thumbnail="hello.png" author="Joseph Wong">
+    <Require feature="open-views"/>
     <Require feature="dynamic-height"/>
     <Locale lang="all">
       <msg name="hello_world">Hello World</msg> 
@@ -9,4 +10,5 @@
     </Locale>
   </ModulePrefs>
   <Content type="html" href="helloworld.html"/>
+  <Content type="html" href="dialog.html" view="hw_dialog"/>
 </Module>
