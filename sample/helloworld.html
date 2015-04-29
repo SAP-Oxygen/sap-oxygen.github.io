@@ -5,9 +5,7 @@ gadgets.util.registerOnLoadHandler(function() {
   jQuery('#hello').click(function() {
   	gadgets.views.openGadget(function(result) {}, function(site) {}, {
       view: 'hw_dialog',
-      viewTarget: 'MODALDIALOG',
-      height: 300,
-      width: 500
+      viewTarget: 'MODALDIALOG'
     });
   });
   gadgets.window.adjustHeight();
