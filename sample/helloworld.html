@@ -1,0 +1,10 @@
+<script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+<script>
+gadgets.util.registerOnLoadHandler(function() {
+  jQuery('#hello').css('color', 'red');
+  gadgets.window.adjustHeight();
+});
+</script>
+<div>
+  <span id="hello">${Msg.hello_world}</span>
+</div>
