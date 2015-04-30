@@ -41,10 +41,10 @@ var WaveStatus = React.createClass({
       });
       if (JSON.stringify(waveData["test"]) === JSON.stringify(testData["test"])) {
         console.log("WaveStatus-data matches");
-        localData["onUpdateStatus"] = true;
+        localData["onUpdate"] = true;
       } else {
         console.log("WaveStatus-data does not match");
-        localData["onUpdateStatus"] = false;
+        localData["onUpdate"] = false;
       }
       self.setState(localData);
     };
@@ -53,10 +53,10 @@ var WaveStatus = React.createClass({
       console.log("WaveStatus-onWaveInit");
       var localData = self.state.data;
       if (wave.getState()) {
-        localData["stateStatus"] = true;
+        localData["state"] = true;
       } else {
         console.log("wave is null");
-        localData["stateStatus"] = false;
+        localData["state"] = false;
       }
       self.setState(localData);
       wave.setStateCallback(onWaveUpdate);
@@ -67,7 +67,7 @@ var WaveStatus = React.createClass({
   },
   render: function() {
     var data = this.state.data;
-    if (data["onUpdateStatus"] && data["stateStatus"]) {
+    if (data["onUpdate"] && data["state"]) {
       console.log("WavesStatus-status: success");
       color = "alert alert-success";
       status = "GOOD";
@@ -187,13 +187,13 @@ var AppdataStatus = React.createClass({
         var localData = self.state.data;
         console.log("AppdataStatus-appdata_get: " + JSON.stringify(userData));
         if (userData.error) {
-          localData["getStatus"] = false;
+          localData["get"] = false;
         } else {
           var receivedData = userData[viewerId];
           if (JSON.stringify(testData) === JSON.stringify(receivedData)) {
-            localData["getStatus"] = true;
+            localData["get"] = true;
           } else {
-            localData["getStatus"] = false;
+            localData["get"] = false;
           }
         }
         appdataDelete(viewerId);
@@ -205,9 +205,9 @@ var AppdataStatus = React.createClass({
       osapi.appdata.update({userId: '@viewer', groupId: '@self', data: testData}).execute(function (userData) {
         var localData = self.state.data;
         if (userData.error) {
-          localData["updateStatus"] = false;
+          localData["update"] = false;
         } else {
-          localData["updateStatus"] = true;
+          localData["update"] = true;
         }
         appdataGet(viewerId);
         self.setState(localData);
@@ -218,14 +218,14 @@ var AppdataStatus = React.createClass({
       osapi.appdata.get({userId: '@viewer', grouId: '@self', fields: ['test']}).execute(function (userData) {
         var localData = self.state.data;
         if (userData.error) {
-          localData["getEmptyStatus"] = false;
+          localData["getEmpty"] = false;
         } else {
           var receivedData = userData[viewerId];
           if (JSON.stringify(receivedData) === JSON.stringify({})) {
-            localData["getEmptyStatus"] = true;
+            localData["getEmpty"] = true;
             console.log("AppdataStatus-appdata_getEmpty: " + JSON.stringify(userData));
           } else {
-            localData["getEmptyStauts"] = false;
+            localData["getEmpty"] = false;
           }
         }
         self.setState(localData);
@@ -236,9 +236,9 @@ var AppdataStatus = React.createClass({
       osapi.appdata.delete({userId: '@viewer', groupId: '@self', fields: ['test']}).execute(function (userData) {
         var localData = self.state.data;
         if (userData.error) {
-          localData["deleteStatus"] = false;
+          localData["delete"] = false;
         } else {
-          localData["deleteStatus"] = true;
+          localData["delete"] = true;
           console.log("AppdataStatus-appdata_delete: " + JSON.stringify(userData));
         }
         appdataGetEmpty(viewerId);
@@ -250,9 +250,9 @@ var AppdataStatus = React.createClass({
       osapi.people.getViewer().execute(function (userData) {
         var localData = self.state.data;
         if (userData.error) {
-          localData["getViewerStatus"] = false;
+          localData["getViewer"] = false;
         } else {
-          localData["getViewerStatus"] = true;
+          localData["getViewer"] = true;
           console.log("AppdataStatus-appdata_getViewer: " + JSON.stringify(userData));
         }
         self.setState(localData);
@@ -264,7 +264,7 @@ var AppdataStatus = React.createClass({
   },
   render: function() {
     var localData = this.state.data;
-    if (localData["getViewerStatus"] && localData["getStatus"] && localData["updateStatus"] && localData["appdataGetEmpty"] && localData["appdataDelete"]) {
+    if (localData["getViewer"] && localData["get"] && localData["update"] && localData["getEmpty"] && localData["delete"]) {
       console.log("AppdataStatus-status: success");
       color = "alert alert-success";
       status = "GOOD";
@@ -299,9 +299,9 @@ var PeopleStatus = React.createClass({
       osapi.people.getViewer().execute(function (userData) {
         var localData = self.state.data;
         if (userData.error) {
-          localData["getViewerStatus"] = false;
+          localData["getViewer"] = false;
         } else {
-          localData["getViewerStatus"] = true;
+          localData["getViewer"] = true;
           console.log("PeopleStatus-people_getViewer: " + JSON.stringify(userData));
         }
         self.setState(localData);
@@ -313,9 +313,9 @@ var PeopleStatus = React.createClass({
       osapi.people.getViewerFriends().execute(function(userData) {
         var localData = self.state.data;
         if (userData.error) {
-          localData["getViewerFriendsStatus"] = false;
+          localData["getViewerFriends"] = false;
         } else {
-          localData["getViewerFriendsStatus"] = true;
+          localData["getViewerFriends"] = true;
           console.log("PeopleStatus-people_getViewerFriends: " + JSON.stringify(userData));
         }
         self.setState(localData);
@@ -354,7 +354,7 @@ var PeopleStatus = React.createClass({
   },
   render: function() {
     var localData = this.state.data;
-    if (localData["getViewerStatus"] && localData["getViewerFriendsStatus"] && localData["getOwner"] && localData["getOwnerFriends"]) {
+    if (localData["getViewer"] && localData["getViewerFriends"] && localData["getOwner"] && localData["getOwnerFriends"]) {
       console.log("PeopleStatus-status: success");
       color = "alert alert-success";
       status = "GOOD";
