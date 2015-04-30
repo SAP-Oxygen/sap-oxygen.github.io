@@ -93,6 +93,92 @@ var AppdataStatus = React.createClass({
   componentDidMount: function() {
     console.log("AppdataStatus-componentDidMount");
 
+    // var self = this;
+    // var testData = {test: "test"};
+
+    // var appdataGet = function(viewerId) {
+    //   osapi.appdata.get({userId: '@viewer', groupId: '@self', fields: ['test']}).execute(function (userData) {
+    //     var localData = self.state.data;
+    //     console.log("AppdataStatus-appdata_get: " + JSON.stringify(userData));
+    //     if (userData.error) {
+    //       localData["getStatus"] = false;
+    //     } else {
+    //       var receivedData = userData[viewerId];
+    //       if (JSON.stringify(testData) === JSON.stringify(receivedData)) {
+    //         localData["getStatus"] = true;
+    //       } else {
+    //         localData["getStatus"] = false;
+    //       }
+    //     }
+    //     appdataDelete(viewerId);
+    //     self.setState(localData);
+    //   });
+    // };
+
+    // var appdataUpdate = function(viewerId) {
+    //   osapi.appdata.update({userId: '@viewer', groupId: '@self', data: testData}).execute(function (userData) {
+    //     var localData = self.state.data;
+    //     if (userData.error) {
+    //       localData["updateStatus"] = false;
+    //     } else {
+    //       localData["updateStatus"] = true;
+    //     }
+    //     appdataGet(viewerId);
+    //     self.setState(localData);
+    //   });
+    // };
+
+    // var appdataGetEmpty = function(viewerId) {
+    //   osapi.appdata.get({userId: '@viewer', grouId: '@self', fields: ['test']}).execute(function (userData) {
+    //     var localData = self.state.data;
+    //     if (userData.error) {
+    //       localData["getEmptyStatus"] = false;
+    //     } else {
+    //       var receivedData = userData[viewerId];
+    //       if (!receivedData) {
+    //         localData["getEmptyStatus"] = true;
+    //         console.log("AppdataStatus-appdata_getEmpty: " + JSON.stringify(userData));
+    //       } else {
+    //         localData["getEmptyStauts"] = false;
+    //       }
+    //     }
+    //     self.setState(localData);
+    //   });
+    // }
+
+    // var appdataDelete = function(viewerId) {
+    //   osapi.appdata.delete({userId: '@viewer', groupId: '@self', fields: ['test']}).execute(function (userData) {
+    //     var localData = self.state.data;
+    //     if (userData.error) {
+    //       localData["deleteStatus"] = false;
+    //     } else {
+    //       localData["deleteStatus"] = true;
+    //       console.log("AppdataStatus-appdata_delete: " + JSON.stringify(userData));
+    //     }
+    //     appdataGetEmpty(viewerId);
+    //     self.setState(localData);
+    //   })
+    // };
+
+    // var appdataGetViewer = function() {
+    //   osapi.people.getViewer().execute(function (userData) {
+    //     var localData = self.state.data;
+    //     if (userData.error) {
+    //       localData["getViewerStatus"] = false;
+    //     } else {
+    //       localData["getViewerStatus"] = true;
+    //       console.log("AppdataStatus-appdata_getViewer: " + JSON.stringify(userData));
+    //     }
+    //     self.setState(localData);
+    //     appdataUpdate(userData["id"]);
+    //   });
+    // };
+
+    // appdataGetViewer();
+  },
+  onButton: function(e) {
+    e.preventDefault();
+
     var self = this;
     var testData = {test: "test"};
 
@@ -154,8 +240,8 @@ var AppdataStatus = React.createClass({
         } else {
           localData["deleteStatus"] = true;
           console.log("AppdataStatus-appdata_delete: " + JSON.stringify(userData));
-          appdataGetEmpty(viewerId);
         }
+        appdataGetEmpty(viewerId);
         self.setState(localData);
       })
     };
@@ -192,6 +278,9 @@ var AppdataStatus = React.createClass({
         <div className={color} role="alert">
         Appdata Status: <strong>{status}</strong>
         </div>
+        <button type="button" className="btn btn-default btn-sm" onClick={this.onButton}>
+        test
+        </button> 
       </div>
     );
   }
