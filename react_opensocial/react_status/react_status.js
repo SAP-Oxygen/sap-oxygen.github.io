@@ -174,6 +174,8 @@ var PeopleStatus = React.createClass({displayName: "PeopleStatus",
   onButton: function(e) {
     e.preventDefault();
 
+    var self = this;
+
     var peopleGetViewer = function() {
       osapi.people.getViewer().execute(function (userData) {
         var localData = self.state.data;
@@ -234,8 +236,8 @@ var PrefsStatus = React.createClass({displayName: "PrefsStatus",
   componentDidMount: function() {
     console.log("PrefsStatus-componenetDidMount");
 
-    var prefs = new gadgets.Prefs();
     var self = this;
+    var prefs = new gadgets.Prefs();
 
     var set = function() {
       var mycolor = prefs.getString("mycolor");
