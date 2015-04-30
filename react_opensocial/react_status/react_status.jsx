@@ -202,12 +202,26 @@ var PeopleStatus = React.createClass({
       });
     };
 
+    var peopleGetOwner = function () {
+      osapi.people.getViewerFriends().execute(function(userData) {
+        var localData = self.state.data;
+        if (userData.error) {
+          localData["getOwner"] = false;
+        } else {
+          localData["getOwner"] = true;
+          console.log("PeopleStatus-people_getOwner: " + JSON.stringify(userData));
+        }
+        self.setState(localData);
+      });
+    };
+
     peopleGetViewer();
     peopleGetViewerFriends();
+    peopleGetOwner();
   },
   render: function() {
     var localData = this.state.data;
-    if (localData["getViewerStatus"] && localData["getViewerFriendsStatus"]) {
+    if (localData["getViewerStatus"] && localData["getViewerFriendsStatus"] && localData["getOwner"]) {
       console.log("PeopleStatus-status: success");
       color = "alert alert-success";
       status = "GOOD";
