@@ -215,13 +215,26 @@ var PeopleStatus = React.createClass({
       });
     };
 
+    var peopleGetOwnerFriends = function () {
+      osapi.people.getViewerFriends().execute(function(userData) {
+        var localData = self.state.data;
+        if (userData.error) {
+          localData["getOwnerFriends"] = false;
+        } else {
+          localData["getOwnerFriends"] = true;
+          console.log("PeopleStatus-people_getOwnerFriends: " + JSON.stringify(userData));
+        }
+        self.setState(localData);
+      });
+    };
+
     peopleGetViewer();
     peopleGetViewerFriends();
     peopleGetOwner();
   },
   render: function() {
     var localData = this.state.data;
-    if (localData["getViewerStatus"] && localData["getViewerFriendsStatus"] && localData["getOwner"]) {
+    if (localData["getViewerStatus"] && localData["getViewerFriendsStatus"] && localData["getOwner"] && localData["getOwnerFriends"]) {
       console.log("PeopleStatus-status: success");
       color = "alert alert-success";
       status = "GOOD";
