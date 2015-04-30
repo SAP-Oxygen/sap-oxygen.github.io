@@ -114,17 +114,47 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
       });
     };
 
-    var appdataUpdate = function(viewerId){
+    var appdataUpdate = function(viewerId) {
       osapi.appdata.update({userId: '@viewer', groupId: '@self', data: testData}).execute(function (userData) {
         var localData = self.state.data;
         if (userData.error) {
           localData["updateStatus"] = false;
         } else {
           localData["updateStatus"] = true;
-          var appdataData = appdataGet(viewerId);
+          appdataGet(viewerId);
         }
         self.setState(localData);
       });
+    };
+
+    var appdataGetEmpty = function(viewerId) {
+      osapi.appdata.get({userId: '@viewer', grouId: '@self', fields: ['test']}).execute(function (userData) {
+        var localData = self.state.data;
+        if (userData.error) {
+          localData["getEmptyStatus"] = false;
+        } else {
+          var receivedData = userData[viewerId];
+          if (!receivedData) {
+            localData["getEmptyStatus"] = true;
+          } else {
+            localData["getEmptyStauts"] = false;
+          }
+        }
+        self.setState(localData);
+      });
+    }
+
+    var appdataDelete = function(viewerId) {
+      osapi.appdata.delete({userId: '@viewer', groupId: '@self', fields: ['test']}).execute(function (userData) {
+        var localData = self.state.data;
+        if (userData.error) {
+          localData["deleteStatus"] = false;
+        } else {
+          localData["deleteStatus"] = true;
+          appdataGetEmpty(viewerId);
+        }
+        self.setState(localData);
+      })
     };
 
     var appdataGetViewer = function() {
@@ -227,7 +257,7 @@ var PeopleStatus = React.createClass({displayName: "PeopleStatus",
         self.setState(localData);
       });
     };
-    
+
     peopleGetViewer();
   },
   render: function() {
