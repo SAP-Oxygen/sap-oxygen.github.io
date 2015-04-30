@@ -170,9 +170,6 @@ var PeopleStatus = React.createClass({displayName: "PeopleStatus",
   },
   componentDidMount: function() {
     console.log("PeopleStatus-componenetDidMount");
-  },
-  onButton: function(e) {
-    e.preventDefault();
 
     var self = this;
 
@@ -231,6 +228,7 @@ var PeopleStatus = React.createClass({displayName: "PeopleStatus",
     peopleGetViewer();
     peopleGetViewerFriends();
     peopleGetOwner();
+    peopleGetOwnerFriends();
   },
   render: function() {
     var localData = this.state.data;
@@ -247,9 +245,6 @@ var PeopleStatus = React.createClass({displayName: "PeopleStatus",
       React.createElement("div", {className: "Osapi.AppdataStatus"}, 
         React.createElement("div", {className: color, role: "alert"}, 
         "People Status: ", React.createElement("strong", null, status)
-        ), 
-        React.createElement("button", {type: "button", className: "btn btn-default btn-sm", onClick: this.onButton}, 
-        "test"
         )
       )
     );

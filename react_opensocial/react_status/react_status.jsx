@@ -170,9 +170,6 @@ var PeopleStatus = React.createClass({
   },
   componentDidMount: function() {
     console.log("PeopleStatus-componenetDidMount");
-  },
-  onButton: function(e) {
-    e.preventDefault();
 
     var self = this;
 
@@ -231,6 +228,7 @@ var PeopleStatus = React.createClass({
     peopleGetViewer();
     peopleGetViewerFriends();
     peopleGetOwner();
+    peopleGetOwnerFriends();
   },
   render: function() {
     var localData = this.state.data;
@@ -248,9 +246,6 @@ var PeopleStatus = React.createClass({
         <div className={color} role="alert">
         People Status: <strong>{status}</strong>
         </div>
-        <button type="button" className="btn btn-default btn-sm" onClick={this.onButton}>
-        test
-        </button>
       </div>
     );
   }
