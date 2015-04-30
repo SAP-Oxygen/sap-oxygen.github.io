@@ -195,7 +195,7 @@ var PeopleStatus = React.createClass({displayName: "PeopleStatus",
         if (userData.error) {
           localData["getViewerFriendsStatus"] = false;
         } else {
-          localData["getviewerFriendsStatus"] = true;
+          localData["getViewerFriendsStatus"] = true;
           console.log("PeopleStatus-people_getViewerFriends: " + JSON.stringify(userData));
         }
         self.setState(localData);
