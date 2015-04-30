@@ -136,6 +136,7 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
           var receivedData = userData[viewerId];
           if (!receivedData) {
             localData["getEmptyStatus"] = true;
+            console.log("AppdataStatus-appdata_getEmpty: " + JSON.stringify(userData));
           } else {
             localData["getEmptyStauts"] = false;
           }
@@ -151,6 +152,7 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
           localData["deleteStatus"] = false;
         } else {
           localData["deleteStatus"] = true;
+          console.log("AppdataStatus-appdata_delete: " + JSON.stringify(userData));
           appdataGetEmpty(viewerId);
         }
         self.setState(localData);
@@ -175,7 +177,7 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
   },
   render: function() {
     var localData = this.state.data;
-    if (localData["getViewerStatus"] && localData["getStatus"] && localData["updateStatus"]) {
+    if (localData["getViewerStatus"] && localData["getStatus"] && localData["updateStatus"] && localData["appdataGetEmpty"] && localData["appdataDelete"]) {
       console.log("AppdataStatus-status: success");
       color = "alert alert-success";
       status = "GOOD";
