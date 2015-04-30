@@ -32,7 +32,7 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
     testData["test"] = {test: "test"};
 
     var onWaveUpdate = function() {
-      console.log("onWaveUpdate");
+      console.log("WaveStatus-onWaveUpdate");
       var waveData = {};
       var waveState = wave.getState();
       var localData = self.state.data;
@@ -40,17 +40,17 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
         waveData[key] = waveState.get(key);
       });
       if (JSON.stringify(waveData["test"]) === JSON.stringify(testData["test"])) {
-        console.log("data matches");
+        console.log("WaveStatus-data matches");
         localData["onUpdateStatus"] = true;
       } else {
-        console.log("data does not match");
+        console.log("WaveStatus-data does not match");
         localData["onUpdateStatus"] = false;
       }
       self.setState(localData);
     };
 
     var onWaveInit = function() {
-      console.log("onWaveInit");
+      console.log("WaveStatus-onWaveInit");
       var localData = self.state.data;
       if (wave.getState()) {
         localData["stateStatus"] = true;
@@ -68,11 +68,11 @@ var WaveStatus = React.createClass({displayName: "WaveStatus",
   render: function() {
     var data = this.state.data;
     if (data["onUpdateStatus"] && data["stateStatus"]) {
-      console.log("WavesStatus-statusDOM: success");
+      console.log("WavesStatus-status: success");
       color = "alert alert-success";
       status = "GOOD";
     } else {
-      console.log("WaveStatus-statusDOM: danger");
+      console.log("WaveStatus-status: danger");
       color = "alert alert-danger";
       status = "BAD";
     }
@@ -99,7 +99,7 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
     var appdataGet = function(viewerId) {
       osapi.appdata.get({userId: '@viewer', groupId: '@self', fields: ['test']}).execute(function (userData) {
         var localData = self.state.data;
-        console.log("appdata_get: " + JSON.stringify(userData));
+        console.log("AppdataStatus-appdata_get: " + JSON.stringify(userData));
         if (userData.error) {
           localData["getStatus"] = false;
         } else {
@@ -134,7 +134,7 @@ var AppdataStatus = React.createClass({displayName: "AppdataStatus",
           localData["getViewerStatus"] = false;
         } else {
           localData["getViewerStatus"] = true;
-          console.log("appdata_getViewer: " + JSON.stringify(userData));
+          console.log("AppdataStatus-appdata_getViewer: " + JSON.stringify(userData));
         }
         self.setState(localData);
         appdataUpdate(userData["id"]);
@@ -170,6 +170,9 @@ var PeopleStatus = React.createClass({displayName: "PeopleStatus",
   },
   componentDidMount: function() {
     consol.log("PeopleStatus-componenetDidMount");
+  },
+  onButton: function(e) {
+    e.preventDefault();
 
     var peopleGetViewer = function() {
       osapi.people.getViewer().execute(function (userData) {
@@ -178,7 +181,7 @@ var PeopleStatus = React.createClass({displayName: "PeopleStatus",
           localData["getViewerStatus"] = false;
         } else {
           localData["getViewerStatus"] = true;
-          console.log("people_getViewer: " + JSON.stringify(userData));
+          console.log("PeopleStatus-people_getViewer: " + JSON.stringify(userData));
         }
         self.setState(localData);
       });
@@ -191,27 +194,33 @@ var PeopleStatus = React.createClass({displayName: "PeopleStatus",
           localData["getViewerFriendsStatus"] = false;
         } else {
           localData["getviewerFriendsStatus"] = true;
-          console.log("people_getViewerFriends: " + JSON.stringify(userData));
+          console.log("PeopleStatus-people_getViewerFriends: " + JSON.stringify(userData));
         }
         self.setState(localData);
       });
     };
+
+    peopleGetViewer();
+    peopleGetViewerFriends();
   },
   render: function() {
     var localData = this.state.data;
     if (localData["getViewerStatus"] && localData["getViewerFriendsStatus"]) {
-      console.log("AppdataStatus-status: success");
+      console.log("PeopleStatus-status: success");
       color = "alert alert-success";
       status = "GOOD";
     } else {
-      console.log("AppdataStatus-status: danger");
+      console.log("PeopleStatus-status: danger");
       color = "alert alert-danger";
       status = "BAD";
     }
     return (
       React.createElement("div", {className: "Osapi.AppdataStatus"}, 
         React.createElement("div", {className: color, role: "alert"}, 
-        "Appdata Status: ", React.createElement("strong", null, status)
+        "People Status: ", React.createElement("strong", null, status)
+        ), 
+        React.createElement("button", {type: "button", className: "btn btn-default btn-sm", onClick: this.onButton}, 
+        "test"
         )
       )
     );
@@ -230,7 +239,7 @@ var PrefsStatus = React.createClass({displayName: "PrefsStatus",
 
     var set = function() {
       var mycolor = prefs.getString("mycolor");
-      console.log("mycolor: (should be black) " + mycolor);
+      console.log("PrefsStatus-mycolor: (should be black) " + mycolor);
       prefs.set("mycolor", "white");
       var newMycolor = prefs.getString("mycolor");
       var localData = self.state.data;
@@ -240,7 +249,7 @@ var PrefsStatus = React.createClass({displayName: "PrefsStatus",
         localData["set"] = false;
       }
       self.setState(localData);
-      console.log("newMycolor: (should be white) " + newMycolor);
+      console.log("PrefsStatus-newMycolor: (should be white) " + newMycolor);
     };
 
     set();
