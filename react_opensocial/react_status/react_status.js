@@ -13,6 +13,7 @@ var StatusBox = React.createClass({displayName: "StatusBox",
         ), 
         React.createElement(WaveStatus, null), 
         React.createElement(AppdataStatus, null), 
+        React.createElement(PeopleStatus, null), 
         React.createElement(PrefsStatus, null)
       )
     );

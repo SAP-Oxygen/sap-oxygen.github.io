@@ -13,6 +13,7 @@ var StatusBox = React.createClass({
         </div>
         <WaveStatus />
         <AppdataStatus />
+        <PeopleStatus />
         <PrefsStatus />
       </div>
     );
