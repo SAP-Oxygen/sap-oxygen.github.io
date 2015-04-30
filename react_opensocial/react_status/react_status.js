@@ -183,6 +183,7 @@ var PeopleStatus = React.createClass({displayName: "PeopleStatus",
           console.log("PeopleStatus-people_getViewer: " + JSON.stringify(userData));
         }
         self.setState(localData);
+        peopleGetViewerFriends();
       });
     };
 
@@ -196,6 +197,7 @@ var PeopleStatus = React.createClass({displayName: "PeopleStatus",
           console.log("PeopleStatus-people_getViewerFriends: " + JSON.stringify(userData));
         }
         self.setState(localData);
+        peopleGetOwner();
       });
     };
 
@@ -209,6 +211,7 @@ var PeopleStatus = React.createClass({displayName: "PeopleStatus",
           console.log("PeopleStatus-people_getOwner: " + JSON.stringify(userData));
         }
         self.setState(localData);
+        peopleGetOwnerFriends();
       });
     };
 
@@ -224,11 +227,8 @@ var PeopleStatus = React.createClass({displayName: "PeopleStatus",
         self.setState(localData);
       });
     };
-
+    
     peopleGetViewer();
-    peopleGetViewerFriends();
-    peopleGetOwner();
-    peopleGetOwnerFriends();
   },
   render: function() {
     var localData = this.state.data;
