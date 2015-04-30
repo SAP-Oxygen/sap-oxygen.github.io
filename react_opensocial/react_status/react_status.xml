@@ -10,22 +10,14 @@
   <UserPref name="mycolor" default_value="black" datatype="hidden" />
   <Content type="html">
     <![CDATA[
-      <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="http://fb.me/react-0.13.1.min.js"></script>
+      <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
 
-        <script src="http://fb.me/react-0.13.1.min.js"></script>
-        <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-      </head>
-      <body>
-        <div id="content"></div>
-        <script type="text/javascript" src="react_status.js"></script>
-      </body>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+      <div id="content"></div>
+      <script type="text/javascript" src="react_status.js"></script>
     ]]>
   </Content>
 </Module >
