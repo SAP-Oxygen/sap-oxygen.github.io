@@ -154,7 +154,61 @@ var AppdataStatus = React.createClass({
       status = "BAD";
     }
     return (
-      <div className="AppdataStatus">
+      <div className="Osapi.AppdataStatus">
+        <div className={color} role="alert">
+        Appdata Status: <strong>{status}</strong>
+        </div>
+      </div>
+    );
+  }
+});
+
+var PeopleStatus = React.createClass({
+  getInitialState: function() {
+    return {data:{}};
+  },
+  componentDidMount: function() {
+    consol.log("PeopleStatus-componenetDidMount");
+
+    var peopleGetViewer = function() {
+      osapi.people.getViewer().execute(function (userData) {
+        var localData = self.state.data;
+        if (userData.error) {
+          localData["getViewerStatus"] = false;
+        } else {
+          localData["getViewerStatus"] = true;
+          console.log("people_getViewer: " + JSON.stringify(userData));
+        }
+        self.setState(localData);
+      });
+    };
+
+    var peopleGetViewerFriends = function () {
+      osapi.people.getViewerFriends().execute(function(userData) {
+        var localData = self.state.data;
+        if (userData.error) {
+          localData["getViewerFriendsStatus"] = false;
+        } else {
+          localData["getviewerFriendsStatus"] = true;
+          console.log("people_getViewerFriends: " + JSON.stringify(userData));
+        }
+        self.setState(localData);
+      });
+    };
+  },
+  render: function() {
+    var localData = this.state.data;
+    if (localData["getViewerStatus"] && localData["getViewerFriendsStatus"]) {
+      console.log("AppdataStatus-status: success");
+      color = "alert alert-success";
+      status = "GOOD";
+    } else {
+      console.log("AppdataStatus-status: danger");
+      color = "alert alert-danger";
+      status = "BAD";
+    }
+    return (
+      <div className="Osapi.AppdataStatus">
         <div className={color} role="alert">
         Appdata Status: <strong>{status}</strong>
         </div>
