@@ -221,7 +221,7 @@ var AppdataStatus = React.createClass({
           localData["getEmptyStatus"] = false;
         } else {
           var receivedData = userData[viewerId];
-          if (!receivedData) {
+          if (JSON.stringify(receivedData) === JSON.stringify({})) {
             localData["getEmptyStatus"] = true;
             console.log("AppdataStatus-appdata_getEmpty: " + JSON.stringify(userData));
           } else {
