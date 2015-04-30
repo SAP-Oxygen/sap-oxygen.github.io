@@ -169,7 +169,7 @@ var PeopleStatus = React.createClass({displayName: "PeopleStatus",
     return {data:{}};
   },
   componentDidMount: function() {
-    consol.log("PeopleStatus-componenetDidMount");
+    console.log("PeopleStatus-componenetDidMount");
   },
   onButton: function(e) {
     e.preventDefault();
@@ -276,9 +276,6 @@ var PrefsStatus = React.createClass({displayName: "PrefsStatus",
 });
 
 gadgets.util.registerOnLoadHandler(function() {
-  console.log(wave);
-  console.log(wave.getState());
-
   React.render(
     React.createElement(StatusBox),
     document.getElementById('content')
