@@ -110,6 +110,7 @@ var AppdataStatus = React.createClass({
             localData["getStatus"] = false;
           }
         }
+        appdataDelete(viewerId);
         self.setState(localData);
       });
     };
@@ -121,8 +122,8 @@ var AppdataStatus = React.createClass({
           localData["updateStatus"] = false;
         } else {
           localData["updateStatus"] = true;
-          appdataGet(viewerId);
         }
+        appdataGet(viewerId);
         self.setState(localData);
       });
     };
