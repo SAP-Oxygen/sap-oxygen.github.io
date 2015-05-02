@@ -21,7 +21,7 @@
       return {data: {}, users: []};
     },
     componentDidMount: function() {
-      gadgets.views.adjustHeight();
+      gadgets.window.adjustHeight();
 
       // init sequence - Wave
       var self = this;
@@ -41,7 +41,7 @@
       wave.setParticipantCallback(onWaveUpdate);
     },
     componentDidUpdate: function(prevProps, prevState) {
-      gadgets.views.adjustHeight();
+      gadgets.window.adjustHeight();
     },
     // Our own code
     onAddButtonClick: function() {
