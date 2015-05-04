@@ -25,6 +25,7 @@
     },
     // invoked immediately after the component's updates are flushed to the DOM
     componentDidUpdate: function() {
+      console.log("componentDidUpdate is called");
       gadgets.window.adjustHeight();
     },
     handleTopicSubmit: function(topic) {
