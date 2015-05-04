@@ -6,6 +6,7 @@
     componentDidMount: function() {
       var self = this;
       function onWaveUpdate() {
+        gadgets.window.adjustHeight();
         if (!wave.getState()) {
           return;
         }
@@ -26,7 +27,7 @@
     // invoked immediately after the component's updates are flushed to the DOM
     componentDidUpdate: function() {
       console.log("componentDidUpdate is called");
-      gadgets.window.adjustHeight();
+      // gadgets.window.adjustHeight();
     },
     handleTopicSubmit: function(topic) {
       var newTopic = {};
