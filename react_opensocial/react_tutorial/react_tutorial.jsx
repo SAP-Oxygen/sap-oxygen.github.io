@@ -126,7 +126,7 @@
       var voteNodes = this.props.data.map(function (voteData) {
         return (
           // key value used for reconciliation
-          <VoteTopic key={voteData.topic} voteData={voteData} onHandleVoteSubmit={this.props.onHandleVoteSubmit} onHandleUnVoteSubmit={this.props.onHandleUnVoteSubmit}>
+          <VoteTopic voteData={voteData} onHandleVoteSubmit={this.props.onHandleVoteSubmit} onHandleUnVoteSubmit={this.props.onHandleUnVoteSubmit}>
             {voteData.topic}
           </VoteTopic>
         );
@@ -142,7 +142,7 @@
   var VoteTopic = React.createClass({
     render: function() {
       return (
-        <div className="VoteTopic">
+        <div className="VoteTopic" key={this.props.children}>
           <div className="panel panel-primary">
             <div className="panel-heading clearfix narrow-panel-heading">
               <h4 className="panel-title pull-left topic-align">{this.props.children}</h4>

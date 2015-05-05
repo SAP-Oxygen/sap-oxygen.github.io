@@ -126,7 +126,7 @@
       var voteNodes = this.props.data.map(function (voteData) {
         return (
           // key value used for reconciliation
-          React.createElement(VoteTopic, {key: voteData.topic, voteData: voteData, onHandleVoteSubmit: this.props.onHandleVoteSubmit, onHandleUnVoteSubmit: this.props.onHandleUnVoteSubmit}, 
+          React.createElement(VoteTopic, {voteData: voteData, onHandleVoteSubmit: this.props.onHandleVoteSubmit, onHandleUnVoteSubmit: this.props.onHandleUnVoteSubmit}, 
             voteData.topic
           )
         );
@@ -142,7 +142,7 @@
   var VoteTopic = React.createClass({displayName: "VoteTopic",
     render: function() {
       return (
-        React.createElement("div", {className: "VoteTopic"}, 
+        React.createElement("div", {className: "VoteTopic", key: this.props.children}, 
           React.createElement("div", {className: "panel panel-primary"}, 
             React.createElement("div", {className: "panel-heading clearfix narrow-panel-heading"}, 
               React.createElement("h4", {className: "panel-title pull-left topic-align"}, this.props.children), 
