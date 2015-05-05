@@ -3,7 +3,6 @@
 gadgets.util.registerOnLoadHandler(function() {
   osapi.people.getViewer().execute(function(viewer) {
     var params = {
-      userId: "@me", 
       activity: {
         actor: {
           id: viewer.id
@@ -12,7 +11,9 @@ gadgets.util.registerOnLoadHandler(function() {
       }
     };
     window.console && console.log(params);
-    osapi.activitystreams.create(params);
+    osapi.activitystreams.create(params).execute(function(activity) {
+      window.console && console.log(activity);
+    });
   });
 });
 </script>
