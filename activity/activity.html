@@ -11,6 +11,7 @@ gadgets.util.registerOnLoadHandler(function() {
         published: "2011-02-10T15:04:55Z"
       }
     };
+    window.console && console.log(params);
     osapi.activitystreams.create(params);
   });
 });
