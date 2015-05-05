@@ -6,9 +6,6 @@
     componentDidMount: function() {
       var self = this;
       function onWaveUpdate() {
-        if (!wave.getState()) {
-          return;
-        }
         var waveData = {};
         var waveState = wave.getState();
         $.each(waveState.getKeys(), function(index, key) {
@@ -42,16 +39,10 @@
       this.setState({data: localData});
       console.log("handleTopicSubmit-this.state.data: " + localData);
       var waveState = wave.getState();
-      if (!waveState) {
-        return;
-      }
       waveState.submitDelta(newTopic);
     },
     handleVoteSubmit: function(topic, viewerId) {
       var waveState = wave.getState();
-      if(!waveState) {
-        return;
-      }
       var updatedEntry = {};
       var localData = this.state.data;
       var voteData = localData[topic];
@@ -69,9 +60,6 @@
     },
     handleUnVoteSubmit: function(topic, viewerId) {
       var waveState = wave.getState();
-      if(!waveState) {
-        return;
-      }
       var updatedEntry = {};
       var localData = this.state.data;
       var voteData = localData[topic];
