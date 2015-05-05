@@ -6,7 +6,6 @@
     componentDidMount: function() {
       var self = this;
       function onWaveUpdate() {
-        gadgets.window.adjustHeight();
         if (!wave.getState()) {
           return;
         }
@@ -17,7 +16,10 @@
         });
         //for consistency in the array
         console.log("data in onWaveUpdate: " + waveData);
-        self.setState({data: waveData});
+        if (!$.isEmptyObject(waveData)) {
+          self.setState({data: waveData});
+          console.log("state changed in onWaveUpdate");
+        }
       }
 
       wave.setStateCallback(onWaveUpdate);
@@ -27,7 +29,7 @@
     // invoked immediately after the component's updates are flushed to the DOM
     componentDidUpdate: function() {
       console.log("componentDidUpdate is called");
-      // gadgets.window.adjustHeight();
+      gadgets.window.adjustHeight();
     },
     handleTopicSubmit: function(topic) {
       var newTopic = {};
