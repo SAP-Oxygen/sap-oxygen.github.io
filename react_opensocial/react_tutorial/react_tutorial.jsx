@@ -14,8 +14,10 @@
         $.each(waveState.getKeys(), function(index, key) {
           waveData[key] = waveState.get(key);
         });
-        //for consistency in the array
+        // for consistency in the array
         console.log("data in onWaveUpdate: " + waveData);
+        // do not update the state when there is no data
+        // prevents undesired height adjustment
         if (!$.isEmptyObject(waveData)) {
           self.setState({data: waveData});
           console.log("state changed in onWaveUpdate");
@@ -123,7 +125,8 @@
     render: function() {
       var voteNodes = this.props.data.map(function (voteData) {
         return (
-          <VoteTopic voteData={voteData} onHandleVoteSubmit={this.props.onHandleVoteSubmit} onHandleUnVoteSubmit={this.props.onHandleUnVoteSubmit}>
+          // key value used for reconciliation
+          <VoteTopic key={voteData.topic} voteData={voteData} onHandleVoteSubmit={this.props.onHandleVoteSubmit} onHandleUnVoteSubmit={this.props.onHandleUnVoteSubmit}>
             {voteData.topic}
           </VoteTopic>
         );
