@@ -62,6 +62,15 @@
       this.setState({data: $.extend(this.state.data, newEntry), users: this.state.users});
       // remote update
       wave.getState().submitDelta(newEntry);
+      // add a feed entry
+      osapi.activitystreams.create({
+        activity: {
+          title: "#{addItem}",
+          object: {
+            displayName: newItem
+          }
+        }
+      }).execute(function (result) {});
     },
     getAllItems: function() {
       return $.map(this.state.data, function(value, key) {

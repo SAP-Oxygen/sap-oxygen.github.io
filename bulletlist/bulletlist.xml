@@ -1,7 +1,14 @@
-<Module>
+<Module specificationVersion='2'>
   <ModulePrefs title="Bullet List">
     <Require feature="dynamic-height"/>
     <Require feature="wave"/>
+    <Require feature="osapi"/>
+    <Locale lang="all">
+      <msg name="addItem">${Actor} added the item '${Object}' to the bullet list ${Target}</msg> 
+    </Locale>
+    <Locale lang="zh-TW">
+      <msg name="addItem">${Actor} 把「${Object}」加入到 ${Target} 列表裡</msg> 
+    </Locale>
   </ModulePrefs>
   <Content type="html" href="bulletlist.html"/>
 </Module>
