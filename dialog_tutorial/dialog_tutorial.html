@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <script type="text/javascript" src="dialog_tutorial.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+  </head>
+  <style>
+  table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+  }
+  th, td {
+      padding: 5px;
+  }
+  </style>
+  <body>
+    <h2>Agenda</h2>
+    <table style="width:100%">
+      <tr>
+        <th>Done</th>
+        <th>ToDo</th>   
+        <th>Due</th>
+      </tr>
+      <tr>
+        <td><input type="checkbox" name="vehicle" value="Bike"></td>
+        <td>thing</td>
+        <td>5/20</td>
+      </tr>
+    </table>
+
+    <div id="item" style="display: none;">
+      <tr>
+        <td><input type="checkbox" name="vehicle" value="Bike"></td>
+        <td>thing</td>
+        <td>5/20</td>
+      </tr>
+    </div>
+
+  </body>
+</html>
