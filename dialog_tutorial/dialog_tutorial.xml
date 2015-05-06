@@ -6,4 +6,5 @@
         <Require feature="dynamic-height"/>
     </ModulePrefs>
   <Content type="html" href="dialog_tutorial.html" />
+  <Content type="html" view="dialog" href="dialog_box.html" />
 </Module>

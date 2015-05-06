@@ -11,4 +11,10 @@ $(document).ready(function() {
 
     $("#table").append(item);
   });
+
+  $("#open-dialog-btn").click(function() {
+    gadgets.views.openGadget(function(result){}, 
+      function(site){}, 
+      {view: "DIALOG",viewTarget: "dialog"});
+  });
 });
