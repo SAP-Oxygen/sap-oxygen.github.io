@@ -1,9 +1,11 @@
 $(document).ready(function() {
   $("#button").click(function() {
-    $("#table").append("<tr>
-                          <td><input type="checkbox" name="vehicle" value="Bike"></td>
-                          <td>thing</td>
-                          <td>5/20</td>
-                        </tr>");
+    var item = $('<tr></tr>');
+    var col1 = $('<td></td>').text('col1');
+    var col2 = $('<td></td>').text('col2');
+    var col3 = $('<td></td>').text('col3');
+    item.append(col1, col2, col3);
+
+    $("#table").append(item);
   });
 });
