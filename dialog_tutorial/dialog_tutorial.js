@@ -15,6 +15,6 @@ $(document).ready(function() {
   $("#open-dialog-btn").click(function() {
     gadgets.views.openGadget(function(result){}, 
       function(site){}, 
-      {view: "DIALOG",viewTarget: "dialog"});
+      {view: "dialog",viewTarget: "DIALOG"});
   });
 });
