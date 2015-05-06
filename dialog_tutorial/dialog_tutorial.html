@@ -14,7 +14,7 @@
   </style>
   <body>
     <h2>Agenda</h2>
-    <table style="width:100%">
+    <table id="table" style="width:100%">
       <tr>
         <th>Done</th>
         <th>ToDo</th>   
@@ -26,6 +26,10 @@
         <td>5/20</td>
       </tr>
     </table>
+
+    <div>
+      <button id="button" type="button" onclick="createDummy">Create a Dummy!</button>
+    </div>
 
     <div id="item" style="display: none;">
       <tr>
