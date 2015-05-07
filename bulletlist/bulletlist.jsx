@@ -68,7 +68,8 @@
           title: "#{addItem}",
           object: {
             displayName: newItem
-          }
+          },
+          content: "<b>${Object}</b>"
         }
       }).execute(function (result) {});
     },
