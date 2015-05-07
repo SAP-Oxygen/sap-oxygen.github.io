@@ -71,7 +71,9 @@
           },
           content: "<b>${Object}</b>"
         }
-      }).execute(function (result) {});
+      }).execute(function (result) {
+        window.console && console.log(result);
+      });
     },
     getAllItems: function() {
       return $.map(this.state.data, function(value, key) {
