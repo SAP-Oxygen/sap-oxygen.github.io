@@ -13,7 +13,7 @@ $(document).ready(function() {
   });
 });
 
-var addItem(task, due) {
+var addItem = function(task, due) {
   var item = $('<tr></tr>');
   var col1 = $('<td></td>').append($('<input>').attr({
     type: "checkbox",
@@ -25,7 +25,7 @@ var addItem(task, due) {
 
   $("#table").append(item);
   gadgets.window.adjustHeight();
-}
+};
 
 // var init = function() {
 
