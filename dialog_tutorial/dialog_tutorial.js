@@ -7,7 +7,7 @@ $(document).ready(function() {
     gadgets.views.openGadget(function(result){
       var waveEntry = {};
       waveEntry[result["task"]] = $.extend(result, {timestamp: new Date().getTime()});
-      wave.getState().submitDelta(result);
+      wave.getState().submitDelta(waveEntry);
       gadgets.window.adjustHeight();
     }, 
     function(site){}, 
