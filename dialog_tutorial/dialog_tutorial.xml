@@ -2,9 +2,9 @@
 <!-- Tutorial_08_Complete_Tutorial_Code_Example (XML, HTML, CSS, JavaScript) -->
 <Module>
   <ModulePrefs title="Dialog Tutorial" height="300" author="Geon Young" author_email="geon.young.park@sap.com" description="SAP JAM Dialog Tutorial">
-        <Require feature="wave"/>
         <Require feature="dynamic-height"/>
         <Require feature="open-views"/>
+        <Optional feature="wave"/>
     </ModulePrefs>
   <Content type="html" href="dialog_tutorial.html" />
   <Content type="html" view="dialog" href="dialog_box.html" />

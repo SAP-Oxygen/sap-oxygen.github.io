@@ -24,6 +24,7 @@ $(document).ready(function() {
       item.append(col1, col2, col3);
 
       $("#table").append(item);
+      gadgets.window.adjustHeight();
     }, 
     function(site){}, 
     {view: "dialog",viewTarget: "DIALOG"});
