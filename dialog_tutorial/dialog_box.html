@@ -7,15 +7,16 @@
   </style>
 
   <label id="message">Please enter the fields</label><br>
-  <form>
+  <form id="submit-form">
     Task:
     <input id="task" type="text" name="task">
     <br>
     Due:
     <input id="due" type="text" name="due">
-    <br>
-    <input id="submit-btn" type="submit" value="Submit"></button>
-    <br>
-    <button onclick="gadgets.views.close();">Close</button>
+    <input id="submit-btn" type="submit" value="submit"></button>
   </form>
+
+  <br>
+  <button type="submit" onclick="gadgets.views.close();">Close</button>
+
 </html>
