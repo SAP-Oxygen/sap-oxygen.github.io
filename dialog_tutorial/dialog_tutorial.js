@@ -5,7 +5,9 @@ $(document).ready(function() {
 
   $("#open-dialog-btn").click(function() {
     gadgets.views.openGadget(function(result){
-      addItem(result["task"], result["due"]);
+      var waveEntry = {};
+      waveEntry[result["task"]] = $.extend(result, {timestamp: new Date().getTime()});
+      wave.getState.submitDelta(result);
       gadgets.window.adjustHeight();
     }, 
     function(site){}, 
@@ -27,8 +29,22 @@ var addItem = function(task, due) {
   gadgets.window.adjustHeight();
 };
 
-// var init = function() {
+var render = function() {
+  var waveData = [];
+  var waveState = wave.getState();
+  $.each(waveState.getKeys(), function(index, key) {
+    waveData[index] = waveState.get(key);
+  });
+  waveData.sort(function(a, b) {
+    return a.timestamp - b.timestamp;
+  });
+  $.each(waveData, function(index, item){
+    addItem(item["task"], item["due"]);
+  });
+};
 
-// };
+var init = function() {
+  wave.setStateCallback(render);
+};
 
-// gadgets.util.registerOnLoadHandler(init)
+gadgets.util.registerOnLoadHandler(init)
