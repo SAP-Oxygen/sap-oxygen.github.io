@@ -16,16 +16,16 @@ $(document).ready(function() {
 });
 
 var createRow = function(item) {
-  var item = $('<tr></tr>');
+  var row = $('<tr></tr>');
   var col1 = $('<td></td>').append($('<input>').attr({
     type: "checkbox",
     name: "done"
   }));
   var col2 = $('<td></td>').text(item["task"]);
   var col3 = $('<td></td>').text(item["due"]);
-  item.append(col1, col2, col3);
+  row.append(col1, col2, col3);
 
-  return item;
+  return row;
 };
 
 var createList = function(items) {
