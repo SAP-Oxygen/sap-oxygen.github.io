@@ -41,6 +41,7 @@ var createList = function(items) {
     var row = createRow(item);
     table.append(row);
   })
+  console.log("created a list: " + table);
   $("#init-table").replaceWith(table);
   gadgets.window.adjustHeight();
 };
@@ -51,9 +52,11 @@ var render = function() {
   $.each(waveState.getKeys(), function(index, key) {
     waveData[index] = waveState.get(key);
   });
+  console.log("data from wave (not sorted): " + waveData);
   waveData.sort(function(a, b) {
     return a.timestamp - b.timestamp;
   });
+  console.log("data from wave (sorted): " + waveData);
   createList(waveData);
 };
 
