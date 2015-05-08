@@ -48,9 +48,7 @@ var render = function() {
   waveData.sort(function(a, b) {
     return a.timestamp - b.timestamp;
   });
-  $.each(waveData, function(index, item){
-    addItem(item["task"], item["due"]);
-  });
+  createList(waveData);
 };
 
 var init = function() {
