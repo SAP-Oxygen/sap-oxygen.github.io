@@ -69,7 +69,7 @@
           object: {
             displayName: newItem
           },
-          content: "<b>${Object}</b>"
+          content: "<span style='color: red'>${Object}</span>"
         }
       }).execute(function (result) {
         window.console && console.log(result);
