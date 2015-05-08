@@ -35,6 +35,7 @@ var createList = function(items) {
     var row = createRow(item);
     table.append(row);
   })
+  table.attr("id", "init-table");
   $("#init-table").replaceWith(table);
   gadgets.window.adjustHeight();
 };
