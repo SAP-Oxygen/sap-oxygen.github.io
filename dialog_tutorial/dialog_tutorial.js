@@ -15,17 +15,27 @@ $(document).ready(function() {
   });
 });
 
-var addItem = function(task, due) {
+var createRow = function(item) {
   var item = $('<tr></tr>');
   var col1 = $('<td></td>').append($('<input>').attr({
     type: "checkbox",
     name: "done"
   }));
-  var col2 = $('<td></td>').text(task);
-  var col3 = $('<td></td>').text(due);
+  var col2 = $('<td></td>').text(item["task"]);
+  var col3 = $('<td></td>').text(item["due"]);
   item.append(col1, col2, col3);
 
-  $("#table").append(item);
+  return item;
+};
+
+var createList = function(items) {
+  var tableDiv = $("#updated-div").attr("style", "display: block").clone();
+  var table = tableDiv.children();
+  $.each(items, function(index, item){
+    var row = createRow(item);
+    table.append(row);
+  })
+  $("#init-table").replaceWith(table);
   gadgets.window.adjustHeight();
 };
 

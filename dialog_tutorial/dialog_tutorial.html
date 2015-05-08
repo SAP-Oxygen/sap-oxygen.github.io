@@ -14,13 +14,25 @@
   </style>
   <body>
     <h2>Agenda</h2>
-    <table id="table" style="width:100%">
-      <tr>
-        <th>Done</th>
-        <th>ToDo</th>   
-        <th>Due</th>
-      </tr>
-    </table>
+    <div style="display: block;">
+      <table id="init-table" style="width:100%">
+        <tr>
+          <th>Done</th>
+          <th>ToDo</th>   
+          <th>Due</th>
+        </tr>
+      </table>
+    </div>
+
+    <div id="updated-table" style="display: none;">
+      <table style="width:100%">
+        <tr>
+          <th>Done</th>
+          <th>ToDo</th>   
+          <th>Due</th>
+        </tr>
+      </table>
+    </div>
 
     <div>
       <button id="button" type="button">Create a Dummy!</button>
