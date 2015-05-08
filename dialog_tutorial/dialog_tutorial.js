@@ -17,12 +17,12 @@ $(document).ready(function() {
 
 var createRow = function(item) {
   var row = $('<tr></tr>');
-  var col1 = $('<td></td>').append($('<input>').attr({
+  var col1 = $('<th></th>').append($('<input>').attr({
     type: "checkbox",
     name: "done"
   }));
-  var col2 = $('<td></td>').text(item["task"]);
-  var col3 = $('<td></td>').text(item["due"]);
+  var col2 = $('<th></th>').text(item["task"]);
+  var col3 = $('<th></th>').text(item["due"]);
   row.append(col1, col2, col3);
 
   return row;
