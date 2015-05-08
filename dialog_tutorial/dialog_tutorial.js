@@ -31,7 +31,7 @@ var createRow = function(item) {
 var createList = function(items) {
   var table = $('<table></table>').attr({
     id: "init-table",
-    style: "width: 100%");
+    style: "width: 100%"});
   var header = $('<tr></tr>');
   var col1 = $('<td></td>').text("Done");
   var col2 = $('<td></td>').text("Todo");
