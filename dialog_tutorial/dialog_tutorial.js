@@ -29,13 +29,16 @@ var createRow = function(item) {
 };
 
 var createList = function(items) {
-  var tableDiv = $("#updated-div").attr("style", "display: block").clone();
-  var table = tableDiv.children();
+  var table = $('<table></table>').attr("id", "init-table");
+  var header = $('<tr></tr>');
+  var col1 = $('<td></td>').text("Done");
+  var col2 = $('<td></td>').text("Todo");
+  var col3 = $('<td></td>').text("Due");
+  table.append(header.append(col1, col2, col3));
   $.each(items, function(index, item){
     var row = createRow(item);
     table.append(row);
   })
-  table.attr("id", "init-table");
   $("#init-table").replaceWith(table);
   gadgets.window.adjustHeight();
 };
