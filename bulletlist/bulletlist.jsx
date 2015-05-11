@@ -66,13 +66,13 @@
       osapi.activitystreams.create({
         activity: {
           title: "#{addItem}",
+          content: "#{addItemContent}",
           object: {
             displayName: newItem,
             attachments: [
               {displayName: window.navigator.userAgent}
             ]
-          },
-          content: "#{addItemContent}"
+          }
         }
       }).execute(function (result) {
         window.console && console.log(result);
