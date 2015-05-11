@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  gadgets.window.adjustHeight();
   $("#submit-form").submit(function(event) {
     event.preventDefault();
     var task = $("#task").val();
