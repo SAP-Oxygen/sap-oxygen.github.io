@@ -5,11 +5,29 @@
     <Require feature="osapi"/>
     <Locale lang="all">
       <msg name="addItem">${Actor} added &lt;b&gt;the item '${Object}'&lt;/b&gt; to the bullet list ${Target}</msg>
-      <msg name="addItemContent"><![CDATA[<div style='border: 1px solid #DDD; padding: 10px'><span class="sap-icon icon-example"></span> The item is: <span style='font-weight: bold'>${Object}</span></div>]]></msg> 
+      <msg name="addItemContent"><![CDATA[
+        <div style='border: 1px solid #DDD; padding: 10px'>
+          <div>
+            <span class="sap-icon icon-example"></span> The item is: <span style='font-weight: bold'>${Object}</span>
+          </div>
+          <div>
+            User Agent: ${Object.Attachments.1}
+          </div>
+        </div>
+      ]]></msg> 
     </Locale>
     <Locale lang="zh-TW">
       <msg name="addItem">${Actor} 把「${Object}」加入到 ${Target} 列表裡</msg>
-      <msg name="addItemContent"><![CDATA[<div style='border: 1px solid #DDD; padding: 10px'><span class="sap-icon icon-example"></span> 項目: <span style='font-weight: bold'>${Object}</span></div>]]></msg>  
+      <msg name="addItemContent"><![CDATA[
+        <div style='border: 1px solid #DDD; padding: 10px'>
+          <div>
+            <span class="sap-icon icon-example"></span> 項目: <span style='font-weight: bold'>${Object}</span>
+          </div>
+          <div>
+            瀏覽器: ${Object.Attachments.1}
+          </div>
+        </div>
+      ]]></msg>  
     </Locale>
   </ModulePrefs>
   <Content type="html" href="bulletlist.html"/>

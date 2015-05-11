@@ -67,7 +67,10 @@
         activity: {
           title: "#{addItem}",
           object: {
-            displayName: newItem
+            displayName: newItem,
+            attachments: [
+              {displayName: window.navigator.userAgent}
+            ]
           },
           content: "#{addItemContent}"
         }
