@@ -17,11 +17,11 @@
               <td valign='middle'>
                 <table>
                   <tr>
-                    <td style='white-space: nowrap'>The item is:</td>
+                    <td style='white-space: nowrap; padding-right: 10px' valign='top'>The item is:</td>
                     <td><span style='font-weight: bold'>${Object}</span></td>
                   </tr>
                   <tr>
-                    <td style='white-space: nowrap'>User Agent:</td>
+                    <td style='white-space: nowrap; padding-right: 10px' valign='top'>User Agent:</td>
                     <td>${Object.Attachments.1}</td>
                   </tr>
                 </table>
@@ -45,11 +45,11 @@
               <td valign='middle'>
                 <table>
                   <tr>
-                    <td style='white-space: nowrap'>項目:</td>
+                    <td style='white-space: nowrap; padding-right: 10px' valign='top'>項目:</td>
                     <td><span style='font-weight: bold'>${Object}</span></td>
                   </tr>
                   <tr>
-                    <td style='white-space: nowrap'>瀏覽器:</td>
+                    <td style='white-space: nowrap; padding-right: 10px' valign='top'>瀏覽器:</td>
                     <td>${Object.Attachments.1}</td>
                   </tr>
                 </table>
