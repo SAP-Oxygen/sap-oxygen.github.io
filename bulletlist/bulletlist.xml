@@ -7,11 +7,20 @@
       <msg name="addItem">${Actor} added &lt;b&gt;the item '${Object}'&lt;/b&gt; to the bullet list ${Target}</msg>
       <msg name="addItemContent"><![CDATA[
         <div style='border: 1px solid #DDD; padding: 10px'>
-          <div>
-            <span class="sap-icon icon-example"></span> The item is: <span style='font-weight: bold'>${Object}</span>
+          <div style='font-size: 40px; display: inline-block; vertical-align: middle'>
+            <span class="sap-icon icon-example"></span>
           </div>
-          <div>
-            User Agent: ${Object.Attachments.1}
+          <div style='display: inline-block; vertical-align: middle'>
+            <table>
+              <tr>
+                <td>The item is:</td>
+                <td><span style='font-weight: bold'>${Object}</span></td>
+              </tr>
+              <tr>
+                <td>User Agent:</td>
+                <td>${Object.Attachments.1}</td>
+              </tr>
+            </table>
           </div>
         </div>
       ]]></msg> 
@@ -20,11 +29,20 @@
       <msg name="addItem">${Actor} 把「${Object}」加入到 ${Target} 列表裡</msg>
       <msg name="addItemContent"><![CDATA[
         <div style='border: 1px solid #DDD; padding: 10px'>
-          <div>
-            <span class="sap-icon icon-example"></span> 項目: <span style='font-weight: bold'>${Object}</span>
+          <div style='font-size: 40px; display: inline-block; vertical-align: middle'>
+            <span class="sap-icon icon-example"></span>
           </div>
-          <div>
-            瀏覽器: ${Object.Attachments.1}
+          <div style='display: inline-block; vertical-align: middle'>
+            <table>
+              <tr>
+                <td>項目:</td>
+                <td><span style='font-weight: bold'>${Object}</span></td>
+              </tr>
+              <tr>
+                <td>瀏覽器:</td>
+                <td>${Object.Attachments.1}</td>
+              </tr>
+            </table>
           </div>
         </div>
       ]]></msg>  
