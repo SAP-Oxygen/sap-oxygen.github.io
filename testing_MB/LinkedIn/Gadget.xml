@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Hello World!" />
+  <Content type="html">
+    <![CDATA[
+		<script type="text/javascript">
+
+			function decodeMessage (form) {
+				  var input = form.inputbox.value; 
+				  document.getElementById('content_div').innerHTML = "<a href=\"" + input + "\"> <img src=\"http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.png\" width=\"160\" height=\"33\" border=\"0\">";
+			 }
+		</script>
+		<FORM NAME="myform" ACTION="" METHOD="GET">LinkedIn Profile: <BR>
+		   <INPUT TYPE="text" NAME="inputbox" VALUE=""><P>
+		   <INPUT TYPE="button" NAME="button" Value="Submit" onClick="decodeMessage(this.form)">
+		</FORM>
+		<div id="content_div" align="center" style="background-color:#f5f5f5"></div>
+    ]]>
+  </Content>
+</Module>
