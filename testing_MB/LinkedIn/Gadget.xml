@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Hello World!" />
+  <ModulePrefs title="LinkedIn Gadget" />
   <Content type="html">
     <![CDATA[
 		<script type="text/javascript">
