@@ -1,8 +1,4 @@
 $(document).ready(function() {
-  $("#button").click(function() {
-    addItem("task1", "due1");
-  });
-
   $("#open-dialog-btn").click(function() {
     gadgets.views.openGadget(function(result){
       var waveEntry = {};
@@ -24,7 +20,6 @@ var createRow = function(item) {
   var col2 = $('<td></td>').text(item["task"]);
   var col3 = $('<td></td>').text(item["due"]);
   row.append(col1, col2, col3);
-
   return row;
 };
 
@@ -42,8 +37,7 @@ var createList = function(items) {
     table.append(row);
   })
   console.log("created a list: " + table);
-  $("#init-table").replaceWith(table);
-  gadgets.window.adjustHeight();
+  return table;
 };
 
 var render = function() {
@@ -57,7 +51,9 @@ var render = function() {
     return a.timestamp - b.timestamp;
   });
   console.log("data from wave (sorted): " + waveData);
-  createList(waveData);
+  table = createList(waveData);
+  $("#init-table").replaceWith(table);
+  gadgets.window.adjustHeight();
 };
 
 var init = function() {
