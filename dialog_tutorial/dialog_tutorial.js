@@ -29,7 +29,7 @@ var createList = function(items) {
     style: "width: 100%"});
   var header = $('<tr></tr>');
   var col1 = $('<th></th>').text("Done");
-  var col2 = $('<th></th>').text("Todo");
+  var col2 = $('<th></th>').text("Task");
   var col3 = $('<th></th>').text("Due");
   table.append(header.append(col1, col2, col3));
   $.each(items, function(index, item){
