@@ -7,7 +7,7 @@ $(document).ready(function() {
       gadgets.window.adjustHeight();
     }, 
     function(site){}, 
-    {view: "dialog",viewTarget: "DIALOG"});
+    {view: "modaldialog",viewTarget: "DIALOG"});
   });
 });
 
