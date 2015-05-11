@@ -7,21 +7,27 @@
       <msg name="addItem">${Actor} added &lt;b&gt;the item '${Object}'&lt;/b&gt; to the bullet list ${Target}</msg>
       <msg name="addItemContent"><![CDATA[
         <div style='border: 1px solid #DDD; padding: 10px'>
-          <div style='font-size: 40px; display: inline-block; vertical-align: middle'>
-            <span class="sap-icon icon-example"></span>
-          </div>
-          <div style='display: inline-block; vertical-align: middle'>
-            <table>
-              <tr>
-                <td>The item is:</td>
-                <td><span style='font-weight: bold'>${Object}</span></td>
-              </tr>
-              <tr>
-                <td>User Agent:</td>
-                <td>${Object.Attachments.1}</td>
-              </tr>
-            </table>
-          </div>
+          <table>
+            <tr>
+              <td valign='middle'>
+                <div style='font-size: 30px'>
+                  <span class="sap-icon icon-example"></span>
+                </div>
+              </td>
+              <td valign='middle'>
+                <table>
+                  <tr>
+                    <td>The item is:</td>
+                    <td><span style='font-weight: bold'>${Object}</span></td>
+                  </tr>
+                  <tr>
+                    <td>User Agent:</td>
+                    <td>${Object.Attachments.1}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
         </div>
       ]]></msg> 
     </Locale>
@@ -29,21 +35,27 @@
       <msg name="addItem">${Actor} 把「${Object}」加入到 ${Target} 列表裡</msg>
       <msg name="addItemContent"><![CDATA[
         <div style='border: 1px solid #DDD; padding: 10px'>
-          <div style='font-size: 40px; display: inline-block; vertical-align: middle'>
-            <span class="sap-icon icon-example"></span>
-          </div>
-          <div style='display: inline-block; vertical-align: middle'>
-            <table>
-              <tr>
-                <td>項目:</td>
-                <td><span style='font-weight: bold'>${Object}</span></td>
-              </tr>
-              <tr>
-                <td>瀏覽器:</td>
-                <td>${Object.Attachments.1}</td>
-              </tr>
-            </table>
-          </div>
+          <table>
+            <tr>
+              <td valign='middle'>
+                <div style='font-size: 30px'>
+                  <span class="sap-icon icon-example"></span>
+                </div>
+              </td>
+              <td valign='middle'>
+                <table>
+                  <tr>
+                    <td>項目:</td>
+                    <td><span style='font-weight: bold'>${Object}</span></td>
+                  </tr>
+                  <tr>
+                    <td>瀏覽器:</td>
+                    <td>${Object.Attachments.1}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
         </div>
       ]]></msg>  
     </Locale>
