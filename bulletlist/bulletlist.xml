@@ -4,10 +4,12 @@
     <Require feature="wave"/>
     <Require feature="osapi"/>
     <Locale lang="all">
-      <msg name="addItem">${Actor} added &lt;b&gt;the item '${Object}'&lt;/b&gt; to the bullet list ${Target}</msg> 
+      <msg name="addItem">${Actor} added &lt;b&gt;the item '${Object}'&lt;/b&gt; to the bullet list ${Target}</msg>
+      <msg name="addItemContent"><![CDATA[<div style='border: 1px solid blue; padding: 10px; width: 100%'>The item is: <span style='color: red'>${Object}</span></div>]]></msg> 
     </Locale>
     <Locale lang="zh-TW">
-      <msg name="addItem">${Actor} 把「${Object}」加入到 ${Target} 列表裡</msg> 
+      <msg name="addItem">${Actor} 把「${Object}」加入到 ${Target} 列表裡</msg>
+      <msg name="addItemContent"><![CDATA[<div style='border: 1px solid blue; padding: 10px; width: 100%'>項目: <span style='color: red'>${Object}</span></div>]]></msg>  
     </Locale>
   </ModulePrefs>
   <Content type="html" href="bulletlist.html"/>
