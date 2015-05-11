@@ -69,7 +69,7 @@
           object: {
             displayName: newItem
           },
-          content: "＃{addItemContent}"
+          content: "#{addItemContent}"
         }
       }).execute(function (result) {
         window.console && console.log(result);
