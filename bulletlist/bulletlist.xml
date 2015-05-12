@@ -4,7 +4,7 @@
     <Require feature="wave"/>
     <Require feature="osapi"/>
     <Locale lang="all">
-      <msg name="addItem">${Actor} added &lt;b&gt;the item '${Object}'&lt;/b&gt; to the bullet list ${Target}</msg>
+      <msg name="addItem">#{obj:actor} added &lt;b&gt;the item '#{obj:object}'&lt;/b&gt; to the bullet list #{obj:target}</msg>
       <msg name="addItemContent"><![CDATA[
         <div style='border: 1px solid #DDD; padding: 10px'>
           <table>
@@ -18,11 +18,11 @@
                 <table>
                   <tr>
                     <td style='white-space: nowrap; padding-right: 10px' valign='top'>#{itemLabel}</td>
-                    <td><span style='font-weight: bold'>${Object}</span></td>
+                    <td><span style='font-weight: bold'>#{obj:object}</span></td>
                   </tr>
                   <tr>
                     <td style='white-space: nowrap; padding-right: 10px' valign='top'>#{userAgentLabel}</td>
-                    <td>${Object.Attachments.1}</td>
+                    <td>#{obj:object.attachments.1}</td>
                   </tr>
                 </table>
               </td>
@@ -34,7 +34,7 @@
       <msg name="userAgentLabel">User agent:</msg>
     </Locale>
     <Locale lang="zh-TW">
-      <msg name="addItem">${Actor} 把「${Object}」加入到 ${Target} 列表裡</msg>
+      <msg name="addItem">#{obj:actor} 把「#{obj:object}」加入到 #{obj:target} 列表裡</msg>
       <msg name="itemLabel">項目:</msg>
       <msg name="userAgentLabel">瀏覽器:</msg>
     </Locale>
