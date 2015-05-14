@@ -5,6 +5,7 @@
 if (!this.CSTAR) {
     this.CSTAR = {};
 }
+debugger;
 var widget = CSTAR.agenda.widget;
 var id = CSTAR.agenda.ctlId;
 var uuid = CSTAR.agenda.itemUuid;
