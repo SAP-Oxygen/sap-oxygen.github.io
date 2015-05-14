@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Tutorial_08_Complete_Tutorial_Code_Example (XML, HTML, CSS, JavaScript) -->
+<Module>
+  <ModulePrefs title="Agenda" height="350">
+    <Require feature="dynamic-height"/>
+    <Require feature="wave"/>
+    <Require feature="osapi"/>
+  </ModulePrefs>
+  <Content type="html">
+    <![CDATA[
+      <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+      <div id="agendaForm"></div>
+      <script type="text/javascript" src="cstar_pbe_agenda.js"></script>
+    ]]>
+  </Content>
+</Module >
