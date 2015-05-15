@@ -14,7 +14,7 @@ var read_only = CSTAR.agenda.readOnly;
 var init_data = CSTAR.agenda.initial_data;
 var military_time = CSTAR.agenda.militaryTime || false;
 
-(function (ns, $, CSTAR) {
+(function (ns, $) {
 
     var widgetRegistry = {};
     date_format_pattern = $.fullCalendar.TranslateDateFormat(
@@ -2838,7 +2838,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
     };
 
 
-}(CSTAR, jQuery, parent.CSTAR));
+}(CSTAR, jQuery));
 
     jQuery(document).ready(function($) {
             widget = CSTAR.agenda.makeWidget( {
