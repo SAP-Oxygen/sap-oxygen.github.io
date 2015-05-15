@@ -9,7 +9,7 @@
   <Content type="html">
     <![CDATA[
       <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
-<!--       <script type="text/javascript" src="underscore.js"></script> -->
+      <script type="text/javascript" src="underscore.js"></script>
       <script type="text/javascript" src="yahoo.js"></script>
       <script type="text/javascript" src="util.js"></script>
       <script type="text/javascript" src="cstar_utils.js"></script>
