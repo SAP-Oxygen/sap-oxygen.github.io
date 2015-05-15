@@ -2839,6 +2839,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
 
 }(CSTAR, jQuery));
 
+gadgets.util.registerOnLoadHandler(function() {
     jQuery(document).ready(function($) {
             widget = CSTAR.agenda.makeWidget( {
                 id : uuid,
@@ -2850,3 +2851,4 @@ var military_time = CSTAR.agenda.militaryTime || false;
             
             
     });
+});
