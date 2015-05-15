@@ -583,13 +583,21 @@
         },
 
         // true for IE version 10 or lower
-        ie10: $.browser.msie && (document.documentMode === undefined || document.documentMode <= 10),
+        // ie10: $.browser.msie && (document.documentMode === undefined || document.documentMode <= 10),
 
-        ie9: $.browser.msie && (document.documentMode === undefined || document.documentMode <= 9),
+        // ie9: $.browser.msie && (document.documentMode === undefined || document.documentMode <= 9),
         
-        ie8: $.browser.msie && (document.documentMode === undefined || document.documentMode <= 8),
+        // ie8: $.browser.msie && (document.documentMode === undefined || document.documentMode <= 8),
 
-        ie7: $.browser.msie && (document.documentMode === undefined || document.documentMode <= 7),
+        // ie7: $.browser.msie && (document.documentMode === undefined || document.documentMode <= 7),
+
+        ie10: true,
+
+        ie9: true,
+        
+        ie8: true,
+
+        ie7: true,
         
         mobile: navigator.userAgent.match(/(iPhone|iPod|Android|BlackBerry)/),
 
