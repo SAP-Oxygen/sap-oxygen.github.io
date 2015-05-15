@@ -17,10 +17,13 @@ var military_time = CSTAR.agenda.militaryTime || false;
 
     debugger;
     var widgetRegistry = {};
-    date_format_pattern = $.fullCalendar.TranslateDateFormat(
-        jamApp.t('date.formats.default'), jamApp.t('date.formats.default_date_delimiter'));
-    date_format_symbols = $.fullCalendar.TranslateDateFormat(
-        jamApp.t('date.formats.default'), jamApp.t('date.formats.default_date_delimiter'));
+    //// bypass jamApp function and add corresponding stubs
+    // date_format_pattern = $.fullCalendar.TranslateDateFormat(
+    //     jamApp.t('date.formats.default'), jamApp.t('date.formats.default_date_delimiter'));
+    // date_format_symbols = $.fullCalendar.TranslateDateFormat(
+    //     jamApp.t('date.formats.default'), jamApp.t('date.formats.default_date_delimiter'));
+    date_format_pattern = "";
+    date_format_symbols = "";
  
      function formatTime(time){
         if(!(time instanceof Date)){
