@@ -18,6 +18,7 @@
       <script type="text/javascript" src="methods_api.js"></script>
       <script type="text/javascript" src="cstar_module_loader.js"></script>
       <script type="text/javascript" src="cstar_pbe.js"></script>
+      <script type="text/javascript" src="sw-buttons.js"></script>
       <div id="agendaForm"></div>
       <script type="text/javascript" src="cstar_pbe_agenda.js"></script>
     ]]>
