@@ -1622,7 +1622,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
                 if (!_widget.pbe) {
                     return;
                 }
-                
+                debugger;
                 setTimeout(function() {
                     if (_widget.init_data) {
                         _widget.notifyUpdate(_widget.init_data);
