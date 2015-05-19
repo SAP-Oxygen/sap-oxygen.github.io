@@ -9,7 +9,8 @@
   <Content type="html">
     <![CDATA[
       <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
-      <scrpit type="text/javascript" src="jquery_uncompressed.js"></script>
+<!--       <scrpit type="text/javascript" src="jquery_uncompressed.js"></script> -->
+      <script type="text/javascript" src+"jquery.tablednd.js"></script>
       <script type="text/javascript" src="underscore.js"></script>
       <script type="text/javascript" src="yahoo.js"></script>
       <script type="text/javascript" src="util.js"></script>
