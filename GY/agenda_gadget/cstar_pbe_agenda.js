@@ -1044,6 +1044,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
             }
 
             function _getItemOwnerInnerHtml (item) {
+                debugger;
                 if(!item.owner)
                     return;
                 
