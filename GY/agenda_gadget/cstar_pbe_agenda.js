@@ -2844,16 +2844,15 @@ var military_time = CSTAR.agenda.militaryTime || false;
 
 }(CSTAR, jQuery));
 
-gadgets.util.registerOnLoadHandler(function() {
-    jQuery(document).ready(function($) {
-            widget = CSTAR.agenda.makeWidget( {
-                id : uuid,
-                uuid : uuid,
-                acURL: "",
-                read_only: read_only,
-                init_data: init_data
-            });
-            
-            
-    });
+
+jQuery(document).ready(function($) {
+        widget = CSTAR.agenda.makeWidget( {
+            id : uuid,
+            uuid : uuid,
+            acURL: "",
+            read_only: read_only,
+            init_data: init_data
+        });
+        
+        
 });
