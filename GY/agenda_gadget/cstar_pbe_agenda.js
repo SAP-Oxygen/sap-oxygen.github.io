@@ -642,7 +642,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
                             }
                         });
 
-                        var dpt = lipstick.createDatePicker("event_date_input", null, jamApp.t("common.select_a_date"));
+                        var dpt = lipstick.createDatePicker("event_date_input", null, "common.select_a_date");
                         var cal = dpt.oCalendar();
                         var panel = dpt.oPanel();
                         var panelC = $('#'+panel.id+'_c');
@@ -655,13 +655,13 @@ var military_time = CSTAR.agenda.militaryTime || false;
                         var setDateCallback = function(val) {
                             if (val !== '') {
                                 var date = lipstick.parseDate('mm/dd/yy', val);
-                                val = jamApp.ui.localizeDate(dueDate, jamApp.t('date.formats.default'));
+                                val = jamApp.ui.localizeDate(dueDate, 'date.formats.default');
                             }
                             $("event_date_input").val(val);
                         };
 
                         var getDateCallback = function() {
-                            return jamApp.ui.localizeDate(_startDate, jamApp.t('MM/dd/yyyy'));
+                            return jamApp.ui.localizeDate(_startDate, 'MM/dd/yyyy');
                         };
 
                         dpt.setDateFormatCallbacks(setDateCallback, getDateCallback);
@@ -770,13 +770,13 @@ var military_time = CSTAR.agenda.militaryTime || false;
                     sb.push('<div class="agenda-edit-form" style="height:130px">');
                     
                     sb.push('<div id="event_date">');
-                    sb.push('<div class="agenda_label">' + jamApp.t("agenda.date") + ':</div>');
-                    sb.push('<input id="event_date_input" type="text" size="32" name="event_date_input" class="blank" value="' + jamApp.t("agenda.enter_date") + '"/>');
+                    sb.push('<div class="agenda_label">' + "agenda.date" + ':</div>');
+                    sb.push('<input id="event_date_input" type="text" size="32" name="event_date_input" class="blank" value="' + "agenda.enter_date" + '"/>');
                     sb.push('<div id="calendar_icon_id" class="calendar_icon"></div>');
                     sb.push('</div>');         
                     
                     sb.push('<div id="event_start_time">');
-                    sb.push('<div class="agenda_label">' + jamApp.t("agenda.start_time") + ':</div>');
+                    sb.push('<div class="agenda_label">' + "agenda.start_time" + ':</div>');
                     if (military_time) {
                         sb.push('<select name="startHour" id="start-hour">' + get24HourHelper() + '</select>');
                         sb.push('<select name="startMinute" id="start-minute">' + getMinuteHelper() + '</select>');
@@ -822,7 +822,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
                 };
 
                 var getAmPmHelper = function() {
-                    return "<option value='AM'>" + jamApp.t("time.am") + "</option><option value='PM'>" + jamApp.t("time.pm") + "</option>";
+                    return "<option value='AM'>" + "time.am" + "</option><option value='PM'>" + "time.pm" + "</option>";
                 };
 
                 var _fieldValidator;
@@ -1268,7 +1268,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
             function _getItemInfoHtml(startTime, endTime){
                 var sb=[];
                 
-                sb.push('<span class="agenda-info-when"><span class="bold">' + jamApp.t("agenda.date") + ':</span> '+ lipstick.formatDate(date_format_pattern, new Date(startTime), date_format_symbols) +'</span>');
+                sb.push('<span class="agenda-info-when"><span class="bold">' + "agenda.date" + ':</span> '+ lipstick.formatDate(date_format_pattern, new Date(startTime), date_format_symbols) +'</span>');
 
                 sb.push('<span class="agenda-info-divider">|</span>');
 
@@ -1281,7 +1281,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
                     sb.push('<span class="agenda-info-duration"><span class="agenda-info-startTime">'+ startTimeString +'</span><span class="dash"> - </span><span class="agenda-info-endTime">'+ endTimeString +'</span></span>');    
                 }
                 if (!read_only) {
-                    sb.push("<a href='javascript:void(0);' class='agenda-edit-datetime' onclick='CSTAR.agenda.showEditStartTimeDialog(" + uuid + ");'>" + jamApp.t("infrastructure.edit") + "</a>");
+                    sb.push("<a href='javascript:void(0);' class='agenda-edit-datetime' onclick='CSTAR.agenda.showEditStartTimeDialog(" + uuid + ");'>" + "infrastructure.edit" + "</a>");
                 }
                 return sb.join('');
             }
@@ -1532,15 +1532,15 @@ var military_time = CSTAR.agenda.militaryTime || false;
 
                           if (_widget.items.length > 1) {
 
-                            var message = jamApp.t("trash.confirmation.body");
+                            var message = "trash.confirmation.body";
 
                             jamApp.ui.confirm(message,
                               function () {
                                 _removeItem(e, p);
                               },
                               {
-                                title: jamApp.t('trash.confirmation.title'),
-                                okLabel: jamApp.t('infrastructure.delete')
+                                title: 'trash.confirmation.title',
+                                okLabel: 'infrastructure.delete'
                               });
                           }
                           else {
