@@ -16,6 +16,7 @@
       <script type="text/javascript" src="util.js"></script>
       <script type="text/javascript" src="cstar_utils.js"></script>
       <script type="text/javascript" src="lipstick.js"></script>
+      <script type="text/javascript" src="jam_app.js"></script>
       <script type="text/javascript" src="cstar_agenda.js"></script>
       <script type="text/javascript" src="methods_api.js"></script>
       <script type="text/javascript" src="cstar_module_loader.js"></script>
