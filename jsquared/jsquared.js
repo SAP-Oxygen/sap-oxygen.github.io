@@ -30,14 +30,16 @@
     },
     // Our own code
     loadGroups: function() {
+      var self = this;
       gadgets.io.makeRequest("http://localhost:3000/api/v1/OData/Groups?$format=json",
         function(result) {
           console.log(result);
-          this.setState({data: result, users: this.state.users});
+          this.setState({data: result.data, users: self.state.users});
         },
         {
           AUTHORIZATION: 'OAUTH2',
-          OAUTH_SERVICE_NAME: 'g1'
+          OAUTH_SERVICE_NAME: 'g1',
+          CONTENT_TYPE: gadgets.io.ContentType.JSON
         });
     },
     getGroups: function() {
