@@ -10,7 +10,7 @@
           <div>{prefs.getMsg('title')}</div>
           <ul>
           {
-            $.map(this.getAllGroups(), function(group, index) {
+            $.map(this.getGroups(), function(group, index) {
               return (<li key={group.Id}>{group.Name}</li>);
             })
           }
