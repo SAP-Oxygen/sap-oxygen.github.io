@@ -1,5 +1,5 @@
 (function($) {
-  var GroupList = React.createClass({displayName: "GroupList",
+  window.GroupList = React.createClass({displayName: "GroupList",
     // Standard React API
     render: function() {
       var self = this;
@@ -47,7 +47,7 @@
 
   gadgets.util.registerOnLoadHandler(function() {
     React.render(
-      React.createElement(GroupList, null),
+      React.createElement(window.GroupList, null),
       document.body
     );
   });

@@ -1,5 +1,5 @@
 (function($) {
-  var GroupList = React.createClass({
+  window.GroupList = React.createClass({
     // Standard React API
     render: function() {
       var self = this;
