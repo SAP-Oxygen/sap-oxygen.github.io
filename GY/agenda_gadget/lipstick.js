@@ -193,19 +193,19 @@ var lipstick = {};
         var diff_in_seconds = (Math.abs(to - from)/1000);
         var diff_in_minutes = Math.floor(diff_in_seconds/60);
         if (diff_in_minutes === 0) {
-            return CSTAR.t("time.less_than_a_minute");
+            return "time.less_than_a_minute";
         } 
         if (diff_in_minutes === 1) {
-            return CSTAR.t("time.a_minute");
+            return "time.a_minute";
         } 
         if (diff_in_minutes < 45) {
             return CSTAR.t("time.x_minutes", {n: diff_in_minutes});
         } 
         if (diff_in_minutes < 90) {
             if (about) {
-                return CSTAR.t("time.about_1_hour");
+                return "time.about_1_hour";
             }
-            return CSTAR.t("time.1_hour");
+            return "time.1_hour";
         } 
         if (diff_in_minutes < 1440) {
             if (about) {
@@ -214,16 +214,16 @@ var lipstick = {};
             return CSTAR.t("time.x_hours", {n: Math.round(diff_in_minutes/60)});
         } 
         if (diff_in_minutes < 2880) {
-            return CSTAR.t("time.1_day");
+            return "time.1_day";
         } 
         if (diff_in_minutes < 43200) {
             return CSTAR.t("time.x_days", {n: Math.round(diff_in_minutes/1440)});
         } 
         if (diff_in_minutes < 86400) {
             if (about) {
-                return CSTAR.t("time.about_1_month");
+                return "time.about_1_month";
             } 
-            return CSTAR.t("time.1_month");
+            return "time.1_month";
         } 
         if (diff_in_minutes < 525960) {
             if (about) {                
@@ -233,9 +233,9 @@ var lipstick = {};
         } 
         if (diff_in_minutes < 1051920) {
             if (about) {
-                return CSTAR.t("time.about_1_year");
+                return "time.about_1_year";
             } 
-            return CSTAR.t("time.1_year");
+            return "time.1_year";
         } 
         return CSTAR.t("time.over_x_years", {n: Math.round(diff_in_minutes/525960)});
     };
@@ -507,7 +507,7 @@ var lipstick = {};
             options.showOk = false;
             options.showCancel = false;
             options.title = null;
-            dialog.append("<div class='dismiss-button' title='" + CSTAR.t('infrastructure.close') + "'></div>");
+            dialog.append("<div class='dismiss-button' title='" + 'infrastructure.close' + "'></div>");
         }
 
         if (options.scrollable) {
@@ -827,7 +827,7 @@ var lipstick = {};
     lipstick.alert = function(message, options) {
         options = options || {};
         var callback = options.callback;
-        var title = options.title || CSTAR.t("common.error");
+        var title = options.title || "common.error";
         var okLabel = options.okLabel;
 
         //Setting the id prevents identical dialogs being stacked on top of each other
@@ -869,7 +869,7 @@ var lipstick = {};
     lipstick.confirm = function(message, callback, options){
         var defaultOptions = {
             onOK: callback,
-            title: CSTAR.t("infrastructure.please_confirm")
+            title: "infrastructure.please_confirm"
         };
             //third parameter is an options hash
         _.extend(defaultOptions, options);
@@ -1013,9 +1013,9 @@ var lipstick = {};
 
         var dialog_default_options = {
             title: '',
-            okLabel: CSTAR.t("infrastructure.ok"),
-            cancelLabel: CSTAR.t("infrastructure.cancel"),
-            modifyLabel: CSTAR.t("lipstick.modify"),
+            okLabel: "infrastructure.ok",
+            cancelLabel: "infrastructure.cancel",
+            modifyLabel: "lipstick.modify",
             ok: null,
             cancel: null,
             modify: null,
@@ -1216,7 +1216,7 @@ var lipstick = {};
     lipstick.showTextProgress = function (target, editCallback) {
         // These options could be exposed if need be
         var options = {
-            errorMsg: CSTAR.t("application.save_text_error1") + "\n" + CSTAR.t("application.save_text_error2"),
+            errorMsg: "application.save_text_error1" + "\n" + "application.save_text_error2",
             delay: 5000 
         };
         var id = target.attr("id");
