@@ -19,9 +19,9 @@ var military_time = CSTAR.agenda.militaryTime || false;
     var widgetRegistry = {};
     //// bypass jamApp function and add corresponding stubs
     // date_format_pattern = $.fullCalendar.TranslateDateFormat(
-    //     jamApp.t('date.formats.default'), jamApp.t('date.formats.default_date_delimiter'));
+    //     'date.formats.default', 'date.formats.default_date_delimiter');
     // date_format_symbols = $.fullCalendar.TranslateDateFormat(
-    //     jamApp.t('date.formats.default'), jamApp.t('date.formats.default_date_delimiter'));
+    //     'date.formats.default', 'date.formats.default_date_delimiter');
     date_format_pattern = "";
     date_format_symbols = "";
  

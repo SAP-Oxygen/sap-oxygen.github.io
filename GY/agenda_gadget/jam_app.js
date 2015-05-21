@@ -699,8 +699,8 @@ if (jamApp.betas.cozy_feed_1505) {
 
     jamApp.genericError = function () {
       YAHOO.cubetree.widgets.errorDisplay.show({
-        header : jamApp.t('common.error'),
-        body   : jamApp.t('common.sorry_try_again')
+        header : 'common.error',
+        body   : 'common.sorry_try_again'
       });
     };
 
@@ -813,7 +813,7 @@ if (jamApp.betas.cozy_feed_1505) {
         jamApp.ui.confirm(confirm, function () { 
             submitAsPost();
           },
-          {okLabel: jamApp.t('infrastructure.delete')}
+          {okLabel: 'infrastructure.delete'}
         );
       }
       else {

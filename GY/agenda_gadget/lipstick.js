@@ -467,8 +467,8 @@ var lipstick = {};
      */
     function showDialog(content, dialog_options){
         var dialog_default_options = {
-            okLabel: jamApp.t("infrastructure.ok"),
-            cancelLabel: jamApp.t("infrastructure.cancel"),
+            okLabel: "infrastructure.ok",
+            cancelLabel: "infrastructure.cancel",
             okDisabled: false,
             title: null,
             showOk: true,
@@ -1366,23 +1366,23 @@ var lipstick = {};
 
         if(isMultiDate() && !allDay) {
             return jamApp.t("date.date_span_with_times", {
-                startDate: jamApp.ui.localizeDate(start, jamApp.t("date.formats.abbreviated_with_day")),
-                startTime: jamApp.ui.localizeDate(start, jamApp.t("time.formats.short_time_of_day")),
-                endDate: jamApp.ui.localizeDate(end, jamApp.t("date.formats.abbreviated_with_day")),
-                endTime: jamApp.ui.localizeDate(end, jamApp.t("time.formats.short_time_of_day"))
+                startDate: jamApp.ui.localizeDate(start, "date.formats.abbreviated_with_day"),
+                startTime: jamApp.ui.localizeDate(start, "time.formats.short_time_of_day"),
+                endDate: jamApp.ui.localizeDate(end, "date.formats.abbreviated_with_day"),
+                endTime: jamApp.ui.localizeDate(end, "time.formats.short_time_of_day")
             });
         } else if(isMultiDate()) {
             return jamApp.t("date.date_span", {
-                startDate: jamApp.ui.localizeDate(start, jamApp.t("date.formats.abbreviated_with_day")),
-                endDate: jamApp.ui.localizeDate(end, jamApp.t("date.formats.abbreviated_with_day"))
+                startDate: jamApp.ui.localizeDate(start, "date.formats.abbreviated_with_day"),
+                endDate: jamApp.ui.localizeDate(end, "date.formats.abbreviated_with_day")
             });
         } else if(allDay) {
-            return jamApp.ui.localizeDate(start, jamApp.t("date.formats.abbreviated_with_day"));
+            return jamApp.ui.localizeDate(start, "date.formats.abbreviated_with_day");
         } else {
             return jamApp.t("date.day_with_time_span", {
-                date: jamApp.ui.localizeDate(start, jamApp.t("date.formats.abbreviated_with_day")),
-                startTime: jamApp.ui.localizeDate(start, jamApp.t("time.formats.short_time_of_day")),
-                endTime: jamApp.ui.localizeDate(end, jamApp.t("time.formats.short_time_of_day"))
+                date: jamApp.ui.localizeDate(start, "date.formats.abbreviated_with_day"),
+                startTime: jamApp.ui.localizeDate(start, "time.formats.short_time_of_day"),
+                endTime: jamApp.ui.localizeDate(end, "time.formats.short_time_of_day")
             });
         }
     }

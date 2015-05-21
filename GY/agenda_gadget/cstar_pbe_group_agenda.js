@@ -17,9 +17,9 @@ var military_time = CSTAR.agenda.militaryTime || false;
 
     var widgetRegistry = {};
     date_format_pattern = $.fullCalendar.TranslateDateFormat(
-        jamApp.t('date.formats.default'), jamApp.t('date.formats.default_date_delimiter'));
+        'date.formats.default', 'date.formats.default_date_delimiter');
     date_format_symbols = $.fullCalendar.TranslateDateFormat(
-        jamApp.t('date.formats.default'), jamApp.t('date.formats.default_date_delimiter'));
+        'date.formats.default', 'date.formats.default_date_delimiter');
  
      function formatTime(time){
         if(!(time instanceof Date)){
@@ -651,7 +651,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
                         var setDateCallback = function(val) {
                             if (val !== '') {
                                 var date = lipstick.parseDate('mm/dd/yy', val);
-                                val = jamApp.ui.localizeDate(dueDate, jamApp.t('date.formats.default'));
+                                val = jamApp.ui.localizeDate(dueDate, 'date.formats.default');
                             }
                             $("event_date_input").val(val);
                         };
