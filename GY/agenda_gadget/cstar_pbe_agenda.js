@@ -291,11 +291,11 @@ var military_time = CSTAR.agenda.militaryTime || false;
                     sb.push('<input type="hidden" class="value"/>');
                     
                     sb.push('<div class="tbox_time">');
-                    sb.push('<span class="tbox_hour">' + CSTAR.t("agenda.hour") + ': <input id="hour_text" type="text" tabindex="3">');
+                    sb.push('<span class="tbox_hour">' + "agenda.hour" + ': <input id="hour_text" type="text" tabindex="3">');
                     sb.push('<ul id="hour_dropdown" class="agenda_dropdown" tabindex=0><li>--</li>' + getTimeHourHelper(1) + getTimeHourHelper(2) + getTimeHourHelper(3) + getTimeHourHelper(4) + getTimeHourHelper(5) + getTimeHourHelper(6) + '</ul>');
                     sb.push('</span>');
                     
-                    sb.push('<span class="tbox_minute">' + CSTAR.t("agenda.minute") + ': <input id="minute_text" type="text" tabindex="4">');
+                    sb.push('<span class="tbox_minute">' + "agenda.minute" + ': <input id="minute_text" type="text" tabindex="4">');
                     sb.push('<ul id="minute_dropdown" class="agenda_dropdown" tabindex=0><li>--</li>' + getTimeMinuteHelper(5) + getTimeMinuteHelper(10) + getTimeMinuteHelper(15) + getTimeMinuteHelper(20) + getTimeMinuteHelper(30) + getTimeMinuteHelper(60) + '</ul>');
                     sb.push('</span>');
                     sb.push('</div>');
@@ -320,24 +320,24 @@ var military_time = CSTAR.agenda.militaryTime || false;
                     sb.push('<div class="agenda-edit-form">');
                     
                     sb.push('<div id="agenda_topic">');
-                    sb.push('<div class="agenda_label">' + CSTAR.t("agenda.topic") + '<span class="required-label"> (' + CSTAR.t("common.required") + ')</span></div>');
-                    sb.push('<input type="text" class="topic blank" tabindex="1" value="' + CSTAR.t("agenda.enter_agenda_topic") + '"/>');
+                    sb.push('<div class="agenda_label">' + "agenda.topic" + '<span class="required-label"> (' + "common.required" + ')</span></div>');
+                    sb.push('<input type="text" class="topic blank" tabindex="1" value="' + "agenda.enter_agenda_topic" + '"/>');
                     sb.push('</div>');
                     
                     sb.push('<div id="agenda_owner">');
-                    sb.push('<div class="agenda_label">' + CSTAR.t("agenda.topic_presenter") + '</div>');
+                    sb.push('<div class="agenda_label">' + "agenda.topic_presenter" + '</div>');
                     sb.push('<div class="memberAutoComplete">')
                     sb.push('</div>');
                     sb.push('</div>');
                     
                     sb.push('<div id="agenda_duration">');
-                    sb.push('<div class="agenda_label">' + CSTAR.t("agenda.topic_duration") + '<span class="tbox_warning">' + CSTAR.t("agenda.duration_warning") + '</span></div>');
+                    sb.push('<div class="agenda_label">' + "agenda.topic_duration" + '<span class="tbox_warning">' + "agenda.duration_warning" + '</span></div>');
                     sb.push(_getTimeHtml());
                     sb.push('</div>');
                     
                     sb.push('<div id="agenda_details">');
-                    sb.push('<div class="agenda_label">' +  CSTAR.t("common.details") + '</div>');
-                    sb.push('<textarea class="descen blank" value="" tabindex="5">' + CSTAR.t("agenda.describe_this_topic") + '</textarea>');
+                    sb.push('<div class="agenda_label">' +  "common.details" + '</div>');
+                    sb.push('<textarea class="descen blank" value="" tabindex="5">' + "agenda.describe_this_topic" + '</textarea>');
                     sb.push('</div>');
                     
                     sb.push('</div>');
@@ -398,13 +398,13 @@ var military_time = CSTAR.agenda.militaryTime || false;
     
                         var saveLabel, title;
                         if (this.item && this.item.topic) {
-                            saveLabel = CSTAR.t("infrastructure.save");
-                            title = CSTAR.t("agenda.edit_agenda_topic"); 
+                            saveLabel = "infrastructure.save";
+                            title = "agenda.edit_agenda_topic"; 
                        } else {
-                            saveLabel = CSTAR.t("infrastructure.add");
-                            title = CSTAR.t("agenda.add_new_agenda_topic");
+                            saveLabel = "infrastructure.add";
+                            title = "agenda.add_new_agenda_topic";
                        }
-                       var btns = [{css:'c22-dialog-close cancel', label:CSTAR.t("infrastructure.cancel"), isCancel:true}, 
+                       var btns = [{css:'c22-dialog-close cancel', label:"infrastructure.cancel", isCancel:true}, 
                                    {css:'create', label:saveLabel, disabled:true}];
                        
                         
@@ -514,9 +514,9 @@ var military_time = CSTAR.agenda.militaryTime || false;
                               queryParam: 'query', 
                               minChars: 2, 
                               propertyToSearch: 'FullName',
-                              hintText: CSTAR.t('inbox.enter_name_of_presenter'),
-                              noResultsText: CSTAR.t('inbox.no_matching_members'),
-                              searchingText: CSTAR.t('inbox.searching'),
+                              hintText: 'inbox.enter_name_of_presenter',
+                              noResultsText: 'inbox.no_matching_members',
+                              searchingText: 'inbox.searching',
                               resultsLimit: 10,
                               theme: 'facebook',      
                               tokenDelimiter: ';',
@@ -605,12 +605,12 @@ var military_time = CSTAR.agenda.militaryTime || false;
                                 dialog.find('.token-input-list-facebook').find('.token-input-token-facebook').attr("tabindex",2);
                             }
                             else{
-                               dialog.find('#token-input-').setPlaceholder(CSTAR.t("agenda.type_name_and_email")); 
+                               dialog.find('#token-input-').setPlaceholder("agenda.type_name_and_email"); 
                                dialog.find('#token-input-').attr("tabindex",2); 
                             }   
                         } else {  // new agenda item
                             // init time field
-                            dialog.find('#token-input-').setPlaceholder(CSTAR.t("agenda.type_name_and_email"));
+                            dialog.find('#token-input-').setPlaceholder("agenda.type_name_and_email");
                             dialog.find('#token-input-').attr("tabindex",2);
                             this.timeCtl.setMinutes(15);
                             this.timeCtl.setHours(0);
@@ -877,13 +877,13 @@ var military_time = CSTAR.agenda.militaryTime || false;
                         var saveLabel, title;
                         
                         if (opts.startTime) {
-                            saveLabel = CSTAR.t("infrastructure.save");
-                            title = CSTAR.t("agenda.agenda_setup"); 
+                            saveLabel = "infrastructure.save";
+                            title = "agenda.agenda_setup"; 
                        } else {
-                            saveLabel = CSTAR.t("infrastructure.add");
-                            title = CSTAR.t("agenda.agenda_setup");
+                            saveLabel = "infrastructure.add";
+                            title = "agenda.agenda_setup";
                        }
-                        var btns = [{css:'c22-dialog-close cancel', label:CSTAR.t("infrastructure.cancel"), isCancel:true}, 
+                        var btns = [{css:'c22-dialog-close cancel', label:"infrastructure.cancel", isCancel:true}, 
                                    {css:'create', label:saveLabel, disabled:true}];
                        
                         
@@ -1098,7 +1098,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
                         sb.push('<div class="start">');
                         var startTime = new Date(widgetP.startTime + minuteOffset * 60 * 1000);
                         sb.push(formatTime(startTime));
-                        sb.push('</div><div class="to">' + CSTAR.t("agenda.to") + '</div><div class="end">');
+                        sb.push('</div><div class="to">' + "agenda.to" + '</div><div class="end">');
                         var endTime = new Date(startTime.getTime() + item.time * 60 * 1000);
                         sb.push(formatTime(endTime));
                         sb.push("</div>");
@@ -1111,7 +1111,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
                     }
                     sb.push('</div>');
                     if (item.time) {
-                        sb.push('<div class="unit">' + CSTAR.t("agenda.minutes") + '</div>');
+                        sb.push('<div class="unit">' + "agenda.minutes" + '</div>');
                     }
                     else {
                         sb.push('<div class="unit"></div>');
@@ -1145,7 +1145,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
                   sb.push('</td><td class="cell" style="border-left:0"></td><td class="cell col-3"></td><td class="cell trash-col"><td class="cell"></td></tr>');
                 }
                 else {
-                  sb.push('</td><td class="cell agenda-clickadd" style="border-left:0pt none;"></td><td class="cell agenda-clickadd col-3">' + CSTAR.t("agenda.click_add_new_agenda_topic") + '</td><td class="cell trash-col"><div class="agenda-trash"></div></td><td class="cell agenda-clickadd"></td></tr>');
+                  sb.push('</td><td class="cell agenda-clickadd" style="border-left:0pt none;"></td><td class="cell agenda-clickadd col-3">' + "agenda.click_add_new_agenda_topic" + '</td><td class="cell trash-col"><div class="agenda-trash"></div></td><td class="cell agenda-clickadd"></td></tr>');
                 } 
                 return sb.join('');
             }
@@ -1191,9 +1191,9 @@ var military_time = CSTAR.agenda.militaryTime || false;
                     _bindStartTimeForm();
                     sb.push('<div class="agenda-intro">');
                     sb.push('<p class="agenda_setup_hint" style="font-size:13px">');
-                    sb.push(CSTAR.t("agenda.agenda_setup_hint"));
+                    sb.push("agenda.agenda_setup_hint");
                     sb.push('</p>');
-                    sb.push(sap.sw.ui.button.createHtml(CSTAR.t("agenda.setup_the_agenda"), "setup_button green"));
+                    sb.push(sap.sw.ui.button.createHtml("agenda.setup_the_agenda", "setup_button green"));
                     sb.push('</div>');
                 }
                 else {
@@ -1233,10 +1233,10 @@ var military_time = CSTAR.agenda.militaryTime || false;
                     sb.push('>');
                     sb.push('<tr class="agenda-header nodrop nodrag">');
                     sb.push('<th class="col-1 left"></th>');
-                    sb.push('<th class="col-2"><span class="agenda-time">' + CSTAR.t("agenda.duration") + '</span></th>');
-                    sb.push('<th class="col-3"><span>' + CSTAR.t("agenda.TOPIC") + '</span></th>');
+                    sb.push('<th class="col-2"><span class="agenda-time">' + "agenda.duration" + '</span></th>');
+                    sb.push('<th class="col-3"><span>' + "agenda.TOPIC" + '</span></th>');
                     sb.push('<th class="trash-col">&nbsp;</th>');
-                    sb.push('<th class="col-4"><span>' + CSTAR.t("agenda.presenter") + '</span></th>');
+                    sb.push('<th class="col-4"><span>' + "agenda.presenter" + '</span></th>');
                     sb.push('</tr>');
                     
                     i = 0;
@@ -1255,7 +1255,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
                     sb.push('</div>');
                     
                     if (!widgetP.read_only) {
-                        sb.push('<div class="agenda-add" style="text-align:left;">' + sap.sw.ui.button.createHtml(CSTAR.t("agenda.add_new_agenda_topic"), "add_option_btn") + '</div>');
+                        sb.push('<div class="agenda-add" style="text-align:left;">' + sap.sw.ui.button.createHtml("agenda.add_new_agenda_topic", "add_option_btn") + '</div>');
                     }
                     sb.push('<div class="agenda-indicator" style="bottom:-6px"></div>');
                     
@@ -1674,7 +1674,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
                         _noticeQueue.length = 0;
                     }
                     _noticeQueue.push(msg);
-                    _widget.showIndicator(CSTAR.t("agenda.another_user_updated_contents"));
+                    _widget.showIndicator("agenda.another_user_updated_contents");
                 } else {
                     //if (this.pending_data.length > 0) alert('Data out of sync. please refresh now.');
                     _dispatchNotice(msg);
@@ -2240,7 +2240,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
                     this.render ();
                     
                     if(this.init_data) {
-                        this.showIndicator(CSTAR.t("common.loading"));
+                        this.showIndicator("common.loading");
                     }
                     
                     _inited = true;
@@ -2529,7 +2529,7 @@ var military_time = CSTAR.agenda.militaryTime || false;
                     }
                     
                     if(pos === 0 && this.items.length === 1){
-                        lipstick.alert(CSTAR.t("agenda.cannot_delete_agenda"));
+                        lipstick.alert("agenda.cannot_delete_agenda");
                         return;
                     }
                     
