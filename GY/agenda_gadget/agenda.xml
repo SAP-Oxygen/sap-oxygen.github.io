@@ -24,7 +24,7 @@
       <script type="text/javascript" src="cstar_pbe.js"></script>
       <script type="text/javascript" src="sw-buttons.js"></script>
 
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="cstar_agenda.css">
 
       <div id="agenda_1"></div>
       <script type="text/javascript" src="cstar_pbe_agenda.js"></script>
