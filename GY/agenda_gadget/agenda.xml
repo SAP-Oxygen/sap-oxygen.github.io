@@ -24,6 +24,7 @@
       <script type="text/javascript" src="cstar_pbe.js"></script>
       <script type="text/javascript" src="sw-buttons.js"></script>
 
+      <link rel="stylesheet" type="text/css" href="jam-ui.css">
       <link rel="stylesheet" type="text/css" href="robus-ui.css">
       <link rel="stylesheet" type="text/css" href="cstar_agenda.css">
 
