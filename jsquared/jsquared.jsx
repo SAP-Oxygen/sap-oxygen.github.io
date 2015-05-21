@@ -34,7 +34,7 @@
       gadgets.io.makeRequest("http://localhost:3000/api/v1/OData/Groups?$format=json",
         function(result) {
           console.log(result);
-          this.setState({data: result.data, users: self.state.users});
+          self.setState({data: result.data, users: self.state.users});
         },
         {
           AUTHORIZATION: 'OAUTH2',
