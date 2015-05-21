@@ -36,7 +36,7 @@
         },
         {
           AUTHORIZATION: 'OAUTH2',
-          OAUTH2_SERVICE_NAME: 'g1'
+          OAUTH_SERVICE_NAME: 'g1'
         });
     },
     getGroups: function() {
