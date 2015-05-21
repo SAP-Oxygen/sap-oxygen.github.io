@@ -1,5 +1,5 @@
 (function($) {
-  window.GroupList = React.createClass({displayName: "GroupList",
+  var GroupList = React.createClass({displayName: "GroupList",
     // Standard React API
     render: function() {
       var self = this;
@@ -41,13 +41,13 @@
         });
     },
     getGroups: function() {
-      this.state.data.d.results;
+      return this.state.data.d.results;
     }
   });
 
   gadgets.util.registerOnLoadHandler(function() {
     React.render(
-      React.createElement(window.GroupList, null),
+      React.createElement(GroupList, null),
       document.body
     );
   });

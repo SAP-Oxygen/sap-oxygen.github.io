@@ -1,5 +1,5 @@
 (function($) {
-  window.GroupList = React.createClass({
+  var GroupList = React.createClass({
     // Standard React API
     render: function() {
       var self = this;
@@ -41,7 +41,7 @@
         });
     },
     getGroups: function() {
-      this.state.data.d.results;
+      return this.state.data.d.results;
     }
   });
 
