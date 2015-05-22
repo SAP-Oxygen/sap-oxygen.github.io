@@ -32,4 +32,5 @@
       <script type="text/javascript" src="cstar_pbe_agenda.js"></script>
     ]]>
   </Content>
+  <Content type="html" view="dialog" href="agendaSetupDialog.html" />
 </Module >
