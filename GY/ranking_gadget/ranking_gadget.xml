@@ -30,7 +30,8 @@
             objectType: "CstarDefaultMethod"
           };
           streamwork.moduleLoader.start("core.ranking", options, "1432591581");
-          streamwork.initialize(3);
+          //temporarily disabled
+          //streamwork.initialize(3);
         }());
       </script>
 
