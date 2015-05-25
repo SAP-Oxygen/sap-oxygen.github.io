@@ -10,6 +10,7 @@
     <![CDATA[
 
       <div id="core_ranking_5" class="core_ranking cstar_item"></div>
+      <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
       <script type="text/javascript" src="cstar_module_loader.js"></script>
       <script type="text/javascript" src="ts_ranking.js"></script>
 
@@ -19,7 +20,7 @@
         (function () {
           var options = {
             itemId: 5,
-            readOnly: !jamApp.isEditable,
+            readOnly: false,
             elementId: "core_ranking_5",
             initialData: {"title":null,"options":[],"rankings":{},"frozen":false,"locked":false,"published":false},
             itemCreatorUuid: "1",
