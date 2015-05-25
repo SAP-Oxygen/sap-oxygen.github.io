@@ -10,8 +10,8 @@
     <![CDATA[
 
       <div id="core_ranking_5" class="core_ranking cstar_item"></div>
-      <script type="text/javascript" src="ts_ranking.js"></script>
       <script type="text/javascript" src="cstar_module_loader.js"></script>
+      <script type="text/javascript" src="ts_ranking.js"></script>
 
       <link rel="stylesheet" type="text/css" href="ts_ranking.css">
 
