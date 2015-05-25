@@ -15,21 +15,23 @@
 
       <link rel="stylesheet" type="text/css" href="ts_ranking.css">
 
-      (function () {
-        var options = {
-          itemId: 5,
-          readOnly: !jamApp.isEditable,
-          elementId: "core_ranking_5",
-          initialData: {"title":null,"options":[],"rankings":{},"frozen":false,"locked":false,"published":false},
-          itemCreatorUuid: "1",
-          itemUuid: "5",
-          itemRealUuid: "3zUC4DSM8ZTyQYfgLTvydW",
-          gadgetUrl: null,
-          objectType: "CstarDefaultMethod"
-        };
-        streamwork.moduleLoader.start("core.ranking", options, "1432591581");
-        streamwork.initialize(3);
-      }());
+      <script type="text/javascript">
+        (function () {
+          var options = {
+            itemId: 5,
+            readOnly: !jamApp.isEditable,
+            elementId: "core_ranking_5",
+            initialData: {"title":null,"options":[],"rankings":{},"frozen":false,"locked":false,"published":false},
+            itemCreatorUuid: "1",
+            itemUuid: "5",
+            itemRealUuid: "3zUC4DSM8ZTyQYfgLTvydW",
+            gadgetUrl: null,
+            objectType: "CstarDefaultMethod"
+          };
+          streamwork.moduleLoader.start("core.ranking", options, "1432591581");
+          streamwork.initialize(3);
+        }());
+      </script>
 
     ]]>
   </Content>
