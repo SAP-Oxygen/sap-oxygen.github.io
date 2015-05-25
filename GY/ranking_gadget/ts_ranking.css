@@ -1,0 +1,488 @@
+.core_ranking.cstar_item {
+    width: 449px;
+    margin-bottom: 10px;
+}
+
+.core_ranking .rank_option {
+    margin: 4px 0;  
+}
+
+.rank_status_bar {   
+    background: url("/bundles/core.ranking/images/ranking_sprites.png") no-repeat scroll 0 0 transparent;
+    height: 24px;   
+    display: block; 
+    line-height: 24px;
+    font-size: 13px;
+    color: #303030;   
+    cursor: default;
+}
+
+.build_ranking_status, .submit_ranking_status, .lock_ranking_status {
+    cursor: pointer;
+}
+
+.rank_status_bar .disabled_status {
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+    filter: alpha(opacity=30); zoom: 1; /* For IE */
+    opacity: 0.3;
+    cursor: default;
+}
+
+.rank_status_bar .rank_status_selected {
+    cursor: default;
+}
+
+.status_label{
+    font-weight: bold;  
+}
+
+.build_ranking_status, .submit_ranking_status, .lock_ranking_status{
+    float: left;
+}
+
+
+.build_ranking_status {
+    width: 145px;
+}
+
+.submit_ranking_status {
+    width: 160px;
+}
+
+.lock_ranking_status {
+    width: 108px;
+}
+
+.build_ranking_status .status_label {
+    margin-left: 5px;
+}
+
+.submit_ranking_status .status_label {
+    margin-left: 20px;
+}
+
+.lock_ranking_status .status_label {
+    margin-left: 10px;
+}
+
+.rank_status_bar {
+    background-position: 0 0;
+    width: 449px;
+    margin-top: 5px;    
+}
+
+.core_ranking .rank_edit {
+    padding: 0;
+    width: 100%;    
+    font-size: 13px;   
+}
+
+.core_ranking .rank_title_holder {    
+    font-weight: bold;
+    width: 449px;
+    padding-top: 10px;
+}
+
+.core_ranking .rank_title_background .rank_title_editable {
+    background-color: #E0F4FE;
+    border: 1px solid #D5D5D5;  
+}
+
+.core_ranking .rank_title_holder .rank_title_top {    
+    background: url("/bundles/core.ranking/images/ranking_sprites.png") no-repeat scroll 0 -72px transparent;
+    height:5px;
+}
+
+.rank_title_holder .rank_title_background {
+    border:1px solid #D6D6D6;
+    border-top:none;
+    background:#ECECEC; /* for non-css3 browsers */
+    background: -moz-linear-gradient(center top , #ECECEC, #F6F6F6);
+    background: -webkit-gradient(linear, left top, left bottom, from(#ECECEC), to(#F6F6F6));
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ECECEC', endColorstr='#F6F6F6' );
+    padding-bottom: 3px;
+}
+
+.core_ranking .rank_title {
+    margin-left:5px;
+    overflow:hidden;    
+    padding-bottom:2px;
+    padding-left:5px;
+    padding-top:3px;
+    border: 1px solid transparent;  
+}
+
+.rank_title input {
+    padding-left: 5px;
+    font-size: 13px;
+    color: #000000;
+}
+.rank_option_title .buttonInplaceEdit {
+    margin-top: -2px;
+}
+.core_ranking .rank_option_title .buttonInplaceEdit input {  
+    color: #000000;
+    font-weight: normal;
+    padding: 0px;
+    font-size: 13px;   
+}
+
+.core_ranking .rank_option_input_container {
+    overflow: hidden;
+}
+
+.core_ranking .rank_option_input_holder {
+    border-left: 1px solid #D5D5D5;
+    border-right: 1px solid #D5D5D5;
+    background: url("/bundles/core.ranking/images/ranking_sprites.png") no-repeat scroll 0 -105px transparent;
+    height: 30px;
+    padding: 3px 7px 2px 13px;    
+}
+
+.core_ranking .rank_option_input {
+    width: 97%;
+    height: 24px;
+    line-height: 23px;
+    border: 1px solid #D5D5D5;
+    background-color: #FFFFFF;
+    font-size: 13px;
+    margin-top: 3px;
+    padding:  0 3px;
+}
+
+.rank_option_input_default {
+    color: #A6A6A6 !important;
+    font-style: italic; 
+}
+
+.core_ranking .rank_options {   
+    overflow-y: auto;      
+    background-color: #FFFFFF;
+    border-left: 1px solid #D5D5D5;
+    border-right: 1px solid #D5D5D5;
+}
+
+.core_ranking .rank_edit .rank_option_holder {
+    position: relative;    
+    min-height: 20px;    
+    padding-left: 5px;
+    padding-top: 10px;  
+    color: #000000;  
+}
+
+.core_ranking .rank_edit .empty_option {
+    border: 1px solid #D5D5D5;
+    border-top: none;   
+}
+
+.rank_error_message {
+    color: red;
+    display: none;
+    margin-top: 8px;
+}
+
+.core_ranking .rank_holder {
+    color: #000000;
+    font-size: 13px;  
+}
+
+.core_ranking .rank_header {
+    padding: 0;  
+    min-height: 20px;    
+}
+
+.core_ranking .rank_option_holder {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #D5D5D5;        
+    min-height: 30px;
+    position: relative;
+}
+
+
+#sw_item_container .core_ranking .action_button {
+    line-height: 24px;
+    padding: 0 5px !important;
+    float: right;
+    margin-right: 3px;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px !important;
+}
+
+#sw_item_container .core_ranking .rank_view_back_btn {
+    float: left;
+}
+
+.core_ranking .rank_edit .add_option_btn {   
+    float: right;
+    margin: 3px 5px 0px 5px;
+}
+
+.core_ranking .lock_ranking_btn { 
+    float: right;
+}
+
+.core_ranking .rank_view_back_btn {
+    float: left;
+}
+
+.rank_submit_btn, .edit_my_ranking_btn {
+    margin-right: 7px;
+}
+
+.rank_unlock_btn {
+    float: left;
+}
+
+.core_ranking .rank_edit .rank_title { 
+    color: #3689c9;
+    overflow: hidden;       
+}
+
+.core_ranking .rank_title .buttonInplaceEdit input {    
+    color: #000000;
+    font-weight: normal;
+}
+
+.rank_option_buttons{  
+    display: none;
+}
+
+.core_ranking .rank_edit .rank_remove_option {
+    height: 18px;
+    width: 15px;
+    background: transparent url(/bundles/common/images/remove.png) repeat scroll 0 0;
+    cursor: pointer;    
+    position: absolute;
+    right: 2px;  
+}
+
+.core_ranking .rank_edit .rank_edit_option {
+    height: 18px;
+    width: 15px;
+    background: transparent url(/bundles/common/images/edit.png) repeat scroll 0 0;
+    cursor: pointer;    
+    position: absolute;
+    right: 22px;
+}
+
+.core_ranking .rank_holder .rank_title {
+    color: #000000;       
+}
+
+.core_ranking .rank_holder .rank_instruction {
+    position: relative;
+    line-height: 34px;
+    font-weight: bold;
+    border-left: 1px solid #D5D5D5;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.core_ranking .rank_holder .rank_sub_instruction {
+    color: #555555;
+    font-size: 10px;
+    font-style: italic;
+    line-height: 30px;
+}
+
+.core_ranking .rank_edit .rank_title_holder_background {
+    background-color: #EFEFEF;
+}
+
+.core_ranking .rank_draggable {
+    cursor: url(/bundles/common/images/hand_mouseHover.cur), move;
+    width: 100%;
+}
+
+.rank_draggable_mouse_down {
+    cursor: url(/bundles/common/images/hand_mouseDown.cur), move !important;
+}
+
+
+.rank_disabled .rank_draggable {
+    cursor: default !important;
+}
+
+.core_ranking .rank_drag_placeholder {
+    min-height: 25px !important;
+    background-color: #FAFAFA;
+    border: 1px solid #FAFAFA;
+    border-top: 0 none;
+    cursor: url(/bundles/common/images/hand_mouseDown.cur), move;
+}
+
+.rank_view_bottom {
+    height: 26px;       
+    padding: 2px 0;    
+    background: url("/bundles/core.ranking/images/ranking_sprites.png") no-repeat scroll 0 -140px transparent;
+}
+
+.rank_inner_holder {
+    margin-left: 19px;
+    position: relative;
+    padding-top: 8px;
+    overflow: hidden;
+    min-height: 22px; 
+    border-left: 1px solid #D5D5D5;   
+}
+
+.rank_result_list .rank_inner_holder {
+    font-weight: bold;   
+}
+
+.rank_inner_holder .rank_option_title {
+    margin-left: 5px;
+}
+
+.num_submissions {    
+    float: left; 
+    margin-top: 5px;
+    margin-left: 13px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.locked .rank_inner_holder {
+    margin-left: 0px;    
+}
+
+.locked .rank_option_ranking_value, .my_ranking_view .rank_option_ranking_value {       
+    float: left;
+    width: 20px;
+    text-align: center;
+    color: #3689C9;
+}
+
+.rank_list_header {   
+    height: 34px;     
+    border-left: 1px solid #D5D5D5;
+    border-right: 1px solid #D5D5D5;
+    background: url("/bundles/core.ranking/images/ranking_sprites.png") no-repeat scroll 0 -105px transparent;
+    padding-bottom:1px;
+}
+
+.locked .your_ranking, .my_ranking_view .your_ranking, .ranking_view .your_ranking {
+    width: 75px;
+    float: left;
+    min-height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+.rank_list_header > .your_ranking {
+    display: inline;
+    line-height: 34px;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 70px;
+    padding-left: 5px;
+}
+
+.rank_option_ranking_holder {
+    width: 20px;
+    line-height: 30px;
+    float: left;
+    text-align: center; 
+    font-weight: bold;
+}
+
+.rank_results_list {
+    padding-top: 1px;
+    font-weight: bold;
+    border-bottom: 1px solid #D5D5D5;
+}
+
+.rank_results_list > .rank_option_holder {
+    border-bottom: none;
+}
+
+.rank_list {
+    position: relative;
+    border-left: 1px solid #D5D5D5;
+    border-right: 1px solid #D5D5D5;
+}
+
+.rank_edit_holder > .rank_inner_holder {
+    padding: 0;
+}
+
+.collective_ranking {
+    position: relative;
+    line-height: 34px;
+    font-weight: bold;
+    border-left: 1px solid #D5D5D5;
+    float: left;  
+}
+
+.rank_options, .rank_option_input_bottom {
+    min-height: 30px;   
+}
+
+.rank_option_input_bottom {
+    background: url("/bundles/core.ranking/images/ranking_sprites.png") no-repeat scroll 0 -140px transparent;
+    height: 30px;   
+}
+
+
+.rank_view_back_btn_container {     
+    margin-top: 17px;
+    padding-top: 1px;
+    height: 30px;
+}
+
+.rank_dialog_info_div {
+    margin-bottom: 5px;
+}
+
+.start_ranking_hint {
+    font-weight: bold;
+    color: #555555;
+    float: left;
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.rank_tooltip_header {
+    font-weight: bold;
+    font-size: 13px;
+    margin: 5px 5px 0px 5px;
+    text-align: left;
+}
+
+.rank_tooltip_content {
+    font-size: 12px;
+    margin: 5px;
+    text-align: left;
+    max-width: 190px;
+}
+
+.rank_warning_icon {
+    background: transparent url(/bundles/common/images/warning_triangle.png);
+    width: 29px;
+    height: 24px;
+    margin-right: 17px;      
+}
+
+.rank_status_selected {
+    font-weight: bold;
+}
+
+.rank_warning_body {
+    width: 353px;
+    min-height: 50px;
+}
+
+.rank_warning_content_div {
+    font-size: 13px;
+    color: #000000;
+    margin-bottom: 5px;
+}

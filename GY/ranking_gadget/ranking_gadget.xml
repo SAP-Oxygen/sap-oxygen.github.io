@@ -9,8 +9,28 @@
   <Content type="html">
     <![CDATA[
 
-      <div></div>
+      <div id="core_ranking_5" class="core_ranking cstar_item"></div>
       <script type="text/javascript" src="ts_ranking.js"></script>
+      <script type="text/javascript" src="cstar_module_loader.js"></script>
+
+      <link rel="stylesheet" type="text/css" href="ts_ranking.css">
+
+      (function () {
+        var options = {
+          itemId: 5,
+          readOnly: !jamApp.isEditable,
+          elementId: "core_ranking_5",
+          initialData: {"title":null,"options":[],"rankings":{},"frozen":false,"locked":false,"published":false},
+          itemCreatorUuid: "1",
+          itemUuid: "5",
+          itemRealUuid: "3zUC4DSM8ZTyQYfgLTvydW",
+          gadgetUrl: null,
+          objectType: "CstarDefaultMethod"
+        };
+        streamwork.moduleLoader.start("core.ranking", options, "1432591581");
+        streamwork.initialize(3);
+      }());
+
     ]]>
   </Content>
 </Module >
