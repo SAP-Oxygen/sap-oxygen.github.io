@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Tutorial_08_Complete_Tutorial_Code_Example (XML, HTML, CSS, JavaScript) -->
+<Module>
+  <ModulePrefs title="Ranking" height="350">
+    <Require feature="dynamic-height"/>
+    <Require feature="wave"/>
+    <Require feature="osapi"/>
+  </ModulePrefs>
+  <Content type="html">
+    <![CDATA[
+
+      <div></div>
+      <script type="text/javascript" src="ts_ranking.js"></script>
+    ]]>
+  </Content>
+</Module >
