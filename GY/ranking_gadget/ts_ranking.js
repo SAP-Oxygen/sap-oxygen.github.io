@@ -21,6 +21,7 @@
     var $ = jQuery;
     
     ns.methodClient = function (elementId, initialData, options) {
+        debugger;
         var proxy, view, controller;
         var isReadOnly = options.readOnly;
 
