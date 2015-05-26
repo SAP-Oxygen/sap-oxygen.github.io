@@ -256,6 +256,7 @@ var streamwork = streamwork || {};
             var loader = this;
             $(document).ready(function() {
                 loader.load(moduleName, function() {
+                    debugger;
                     var module = ns.module(moduleName);
 
                     // try {
