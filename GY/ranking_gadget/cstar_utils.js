@@ -128,7 +128,7 @@
     };
 
     ns.utils = {
-        CONNECT_ERR_MSG: CSTAR.t("application.something_went_wrong") + " " + CSTAR.t("application.change_not_saved") + " " + CSTAR.t("application.connection_lost"),
+        CONNECT_ERR_MSG: "application.something_went_wrong" + " " + "application.change_not_saved" + " " + "application.connection_lost",
 
         /**
          * This function shows message bar
