@@ -9,11 +9,9 @@
   <Content type="html">
     <![CDATA[
 
-      <div id="core_ranking_5" class="core_ranking cstar_item"></div>
       <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
       <script type="text/javascript" src="cstar_module_loader.js"></script>
       <script type="text/javascript" src="methods_api.js"></script>
-      <script type="text/javascript" src="ts_ranking.js"></script>
 
       <link rel="stylesheet" type="text/css" href="ts_ranking.css">
 
@@ -36,10 +34,13 @@
         gadgets.util.registerOnLoadHandler(init)
 
         $(document).ready(function() {
-          console.log("document.ready called");
+          console.log("document.ready (outside) called");
         });
       </script>
 
+      <script type="text/javascript" src="ts_ranking.js"></script>
+      
+      <div id="core_ranking_5" class="core_ranking cstar_item"></div>
     ]]>
   </Content>
 </Module >
