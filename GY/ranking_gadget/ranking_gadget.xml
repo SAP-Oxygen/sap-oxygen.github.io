@@ -40,7 +40,8 @@
         CSTAR.current_user.uuid = "1";
         CSTAR.current_user.name = "Cee-Dub Wiegner";
         CSTAR.jeditable_type = "textarea";
-        jamApp.isEditable = true;
+        // GY: comment out for now
+        // jamApp.isEditable = true;
 
         jQuery(document).ready(function($) {
           // This has to run after a bunch of other javascript has run, so defer it.
