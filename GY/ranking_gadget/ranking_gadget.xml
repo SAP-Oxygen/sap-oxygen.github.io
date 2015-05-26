@@ -10,13 +10,14 @@
     <![CDATA[
 
       <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+      <script type="text/javascript" src="cstar_utils.js"></script>
       <script type="text/javascript" src="cstar_module_loader.js"></script>
       <script type="text/javascript" src="methods_api.js"></script>
 
       <link rel="stylesheet" type="text/css" href="ts_ranking.css">
 
       <script type="text/javascript">
-        var init = function () {
+        (function () {
           var options = {
             itemId: 5,
             readOnly: false,
@@ -30,16 +31,11 @@
           };
           streamwork.moduleLoader.start("core.ranking", options, "1432591581");
           streamwork.initialize(3);
-        }
-        gadgets.util.registerOnLoadHandler(init)
-
-        $(document).ready(function() {
-          console.log("document.ready (outside) called");
-        });
+        }());
       </script>
 
       <script type="text/javascript" src="ts_ranking.js"></script>
-      
+
       <div id="core_ranking_5" class="core_ranking cstar_item"></div>
     ]]>
   </Content>
