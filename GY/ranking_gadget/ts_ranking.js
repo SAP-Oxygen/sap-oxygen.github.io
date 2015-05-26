@@ -1,4 +1,5 @@
 (function () {
+    debugger;
     // module namespace
     var ts = streamwork;
     var ns = ts.module("core.ranking");
