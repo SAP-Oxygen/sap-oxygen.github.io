@@ -31,8 +31,7 @@
             objectType: "CstarDefaultMethod"
           };
           streamwork.moduleLoader.start("core.ranking", options, "1432591581");
-          //temporarily disabled
-          //streamwork.initialize(3);
+          streamwork.initialize(3);
         }
         gadgets.util.registerOnLoadHandler(init)
       </script>
