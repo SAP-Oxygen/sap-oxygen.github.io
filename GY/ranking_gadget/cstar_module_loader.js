@@ -257,6 +257,7 @@ var streamwork = streamwork || {};
             var loader = this;
             $(document).ready(function() {
                 console.log("document.ready (inside) called");
+                debugger;
                 loader.load(moduleName, function() {
                     debugger;
                     var module = ns.module(moduleName);
