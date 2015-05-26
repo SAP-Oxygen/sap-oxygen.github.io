@@ -3,6 +3,7 @@
     <Require feature="open-views"/>
     <Require feature="dynamic-height"/>
     <Require feature="dynamic-width"/>
+    <Require feature="osapi"/>
     <Locale lang="all">
       <msg name="hello_world">Hello World</msg> 
     </Locale>
