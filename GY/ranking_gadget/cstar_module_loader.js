@@ -252,6 +252,7 @@ var streamwork = streamwork || {};
         },
         
         start: function(moduleName, options, timestamp) {
+            console.log("start called");
             debugger;
             var loader = this;
             $(document).ready(function() {
