@@ -32,6 +32,21 @@
           streamwork.moduleLoader.start("core.ranking", options, "1432591581");
           streamwork.initialize(3);
         }());
+
+        if (!CSTAR.current_user) {
+          CSTAR.current_user = {};
+        }
+        CSTAR.current_user.uuid = "1";
+        CSTAR.current_user.name = "Cee-Dub Wiegner";
+        CSTAR.jeditable_type = "textarea";
+        jamApp.isEditable = true;
+
+        jQuery(document).ready(function($) {
+          // This has to run after a bunch of other javascript has run, so defer it.
+          _.defer(function() {
+            streamwork.moduleLoader.loadResources({"javascripts":["ts_ranking.js"],"stylesheets":["ts_ranking.css"],"moduleLocations":[["core.ranking",""]]}, "core.ranking")
+          });
+        });
       </script>
 
       <script type="text/javascript" src="ts_ranking.js"></script>
