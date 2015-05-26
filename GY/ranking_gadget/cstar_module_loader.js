@@ -256,6 +256,7 @@ var streamwork = streamwork || {};
             debugger;
             var loader = this;
             $(document).ready(function() {
+                console.log("document.ready (inside) called");
                 loader.load(moduleName, function() {
                     debugger;
                     var module = ns.module(moduleName);
@@ -274,6 +275,7 @@ var streamwork = streamwork || {};
                     // }
                 });
             });
+            console.log("start ended");
         }
     };
 }());
