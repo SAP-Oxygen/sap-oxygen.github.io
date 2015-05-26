@@ -17,7 +17,7 @@
       <link rel="stylesheet" type="text/css" href="ts_ranking.css">
 
       <script type="text/javascript">
-        (function () {
+        var init = function () {
           var options = {
             itemId: 5,
             readOnly: false,
@@ -32,7 +32,8 @@
           streamwork.moduleLoader.start("core.ranking", options, "1432591581");
           //temporarily disabled
           //streamwork.initialize(3);
-        }());
+        }
+        gadgets.util.registerOnLoadHandler(init)
       </script>
 
     ]]>
