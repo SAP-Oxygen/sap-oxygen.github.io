@@ -1,5 +1,5 @@
 .buttonInplaceEditSubmit, .buttonInplaceEditCancel {
-  background: url("/bundles/common/images/ok_cancel_btn_pic.png") no-repeat;
+  background: url("https://sap-oxygen.github.io/GY/ranking_gadget/images/ok_cancel_btn_pic.png") no-repeat;
   height: 16px;
   width: 16px;
   cursor: pointer;
