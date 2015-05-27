@@ -10,6 +10,7 @@
     <![CDATA[
 
       <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+      <script type="text/javascript" src="sw-buttons.js"></script>
       <script type="text/javascript" src="underscore.js"></script>
       <script type="text/javascript" src="bootstrap-tooltip.js"></script>
       <script type="text/javascript" src="cstar_utils.js"></script>
