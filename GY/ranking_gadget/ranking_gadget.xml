@@ -9,6 +9,7 @@
   <Content type="html">
     <![CDATA[
 
+      <link href="jam-ui.css" media="screen" rel="stylesheet" type="text/css" />
       <link href="sw-items.css" media="screen" rel="stylesheet" type="text/css" />
 
       <script type="text/javascript" src="jquery_uncompressed.js"></script>
