@@ -46,7 +46,7 @@
         jQuery(document).ready(function($) {
           // This has to run after a bunch of other javascript has run, so defer it.
           _.defer(function() {
-            streamwork.moduleLoader.loadResources({"javascripts":["http://sap-oxygen.github.io/GY/ranking_gadget/ts_ranking.js"],"stylesheets":["http://sap-oxygen.github.io/GY/ranking_gadget/ts_ranking.css"],"moduleLocations":[["core.ranking",""]]}, "core.ranking")
+            streamwork.moduleLoader.loadResources({"javascripts":["https://sap-oxygen.github.io/GY/ranking_gadget/ts_ranking.js"],"stylesheets":["https://sap-oxygen.github.io/GY/ranking_gadget/ts_ranking.css"],"moduleLocations":[["core.ranking",""]]}, "core.ranking")
           });
         });
       </script>
