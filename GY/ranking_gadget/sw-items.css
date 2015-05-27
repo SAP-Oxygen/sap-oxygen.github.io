@@ -1,0 +1,21 @@
+.buttonInplaceEditSubmit, .buttonInplaceEditCancel {
+  background: url("/bundles/common/images/ok_cancel_btn_pic.png") no-repeat;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.buttonInplaceEditSubmit {
+  background-position: 0px 0px;
+}
+
+.buttonInplaceEditCancel {
+  background-position: -16px 0px;
+}
+
+#sw_item_container {
+  margin-bottom: 15px;
+  width: 100%;
+}
