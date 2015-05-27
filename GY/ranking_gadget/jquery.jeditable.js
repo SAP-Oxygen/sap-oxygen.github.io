@@ -70,7 +70,8 @@
     if (!this.CSTAR) {
         this.CSTAR = {};
     }
-    CSTAR.t = YAHOO.cubetree.util.t;
+    // GY: disable CSTAR.t
+    // CSTAR.t = YAHOO.cubetree.util.t;
 
     $.fn.editable = function(target, options) {
     
@@ -84,15 +85,15 @@
             event      : 'click',
             //onblur     : 'cancel', // dbiollo - commented out
             loadtype   : 'GET',
-            loadtext   : CSTAR.t("group.loading"),
-            placeholder: CSTAR.t("common.click_to_edit"),
+            loadtext   : "group.loading",
+            placeholder: "common.click_to_edit",
             placeholderclass : '',
             loaddata   : {},
             submitdata : {},
             
             // dbiollo - Nov 27 - added for Constellation 
-            indicator : CSTAR.t("infrastructure.saving"),
-            tooltip   : CSTAR.t("common.click_to_edit"),
+            indicator : "infrastructure.saving",
+            tooltip   : "common.click_to_edit",
             onblur : 'ignore',
             submit : '<span class="buttonInplaceEditSubmit"></span>',
             cancel : '<span class="buttonInplaceEditCancel"></span>',
@@ -101,8 +102,8 @@
             unescapehtml : true,
       
             //george - Dec 2 - added tooltip for save and cancel icon
-            savetooltip: CSTAR.t("infrastructure.save"),
-            canceltooltip: CSTAR.t("infrastructure.cancel"),
+            savetooltip: "infrastructure.save",
+            canceltooltip: "infrastructure.cancel",
             buttonfloatright: "false",
             
             //george - Mar. 4 - pass it to TinyMCE init
@@ -666,7 +667,7 @@
                             }                
                              
                             if (empty_comment && ($(this).parents().hasClass('commentInput') || $(this).parents().hasClass('talk_block_comment_input'))) {
-                                lipstick.alert(CSTAR.t("feed.enter_comment"));
+                                lipstick.alert("feed.enter_comment");
                                 return;
                             }    
                         }
@@ -748,7 +749,7 @@
   }
     
     function createAddReferenceLink(addreference) {
-        var link = $("<div class='add_reference_link'><a href='#'>" + CSTAR.t("items.add_reference") + "</a></div>");
+        var link = $("<div class='add_reference_link'><a href='#'>" + "items.add_reference" + "</a></div>");
         var counter = addreference.container.data("counter");
         var key = addreference.key;
         if (addreference.comment_reference) {
