@@ -9,7 +9,7 @@
   <Content type="html">
     <![CDATA[
 
-      <link href="/stylesheets/sw_core_ui/sw-items.css?1420659100" media="screen" rel="stylesheet" type="text/css" />
+      <link href="/sw-items.css" media="screen" rel="stylesheet" type="text/css" />
 
       <script type="text/javascript" src="jquery_uncompressed.js"></script>
       <script type="text/javascript" src="jquery.jeditable.js"></script>
