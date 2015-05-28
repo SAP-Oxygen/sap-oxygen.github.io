@@ -1,9 +1,8 @@
 (function () {
-    debugger;
     // module namespace
     var ts = streamwork;
     var ns = ts.module("core.ranking");
-    // CSTARCOMMENT
+    // GY: comment out for now
     // if (!this.CSTAR) {
     //   this.CSTAR = {};
       
@@ -22,7 +21,6 @@
     var $ = jQuery;
     
     ns.methodClient = function (elementId, initialData, options) {
-        debugger;
         var proxy, view, controller;
         var isReadOnly = options.readOnly;
 
@@ -1381,6 +1379,7 @@
             },
             
             add_option: function(option, broadcast) {
+                debugger;
                 var options = view.div.data('options'),
                     exists = get_option_index(options, option.id) !== null;
                 
