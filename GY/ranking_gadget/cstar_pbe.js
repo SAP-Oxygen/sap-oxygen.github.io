@@ -32,7 +32,8 @@
             publish: function (msg) {
                 msg = _.extend({target: this.targetObject /*, clientId: comet.getClientId()*/}, msg);
                 if (msg["data"]) {
-                    msg["data"] = YAHOO.lang.JSON.stringify(msg["data"]);
+                    // GY: msg["data"] = YAHOO.lang.JSON.stringify(msg["data"]);
+                    msg["data"] = JSON.stringify(msg["data"]);
                 }
                 $.ajax({
                     type: "POST",
