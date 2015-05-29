@@ -30,7 +30,7 @@
                 console.log(waveData);
             },
             init: function() {
-                wave.setStateCallback(log);
+                wave.setStateCallback(waveCont.log);
                 var waveState = wave.getState();
                 waveState.submitDelta(initialData);
             }
