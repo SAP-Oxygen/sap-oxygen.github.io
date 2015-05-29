@@ -25,15 +25,14 @@
         var isReadOnly = options.readOnly;
 
         waveCont = {
+            doSomething: function() {
+                var waveData = wave.getState().state_;
+                console.log(waveData);
+            },
             init: function() {
                 wave.setStateCallback(doSomething);
                 var waveState = wave.getState();
                 waveState.submitDelta(initialData);
-            },
-
-            doSomething: function() {
-                var waveData = wave.getState().state_;
-                console.log(waveData);
             }
         };
 
