@@ -24,6 +24,19 @@
         var proxy, view, controller;
         var isReadOnly = options.readOnly;
 
+        waveCont = {
+            init: function() {
+                wave.setStateCallback(doSomething);
+                var waveState = wave.getState();
+                waveState.submitDelta(initialData);
+            },
+
+            doSomething: function() {
+                var waveData = wave.getState().state_;
+                console.log(waveData);
+            }
+        };
+
         proxy = {
             submit_rankings: function(value, has_ranked) {
                 var action_type = has_ranked?'rank2':'rank',
@@ -1221,6 +1234,8 @@
          * into the container div and initializes the view.
          */
             init: function() {
+                waveCont.init();
+
                 // persist the data on the container div
                 $.each(initialData, function(key, value) {
                     view.div.data(key, value);
