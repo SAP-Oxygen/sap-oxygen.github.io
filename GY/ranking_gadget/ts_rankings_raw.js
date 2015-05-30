@@ -1,48 +1,29 @@
 (function () {
+    debugger;
     // module namespace
     var ts = streamwork;
     var ns = ts.module("core.ranking");
-    // GY: comment out for now
-    // if (!this.CSTAR) {
-    //   this.CSTAR = {};
+    if (!this.CSTAR) {
+      this.CSTAR = {};
       
-    // }
-    // CSTAR.t = YAHOO.cubetree.util.t;
+    }
+    CSTAR.t = YAHOO.cubetree.util.t;
     
     var status_labels = {
-        prioritize: "ranking.prioritize_options",
-        options_changed: "ranking.options_changed",
-        ranking_submitted: "ranking.ranking_submitted",
-        order_changed: "ranking.order_changed",
-        finished: "ranking.finished_ranking"
+        prioritize: CSTAR.t("ranking.prioritize_options"),
+        options_changed: CSTAR.t("ranking.options_changed"),
+        ranking_submitted: CSTAR.t("ranking.ranking_submitted"),
+        order_changed: CSTAR.t("ranking.order_changed"),
+        finished: CSTAR.t("ranking.finished_ranking")
     };
     
     // module imports
     var $ = jQuery;
     
     ns.methodClient = function (elementId, initialData, options) {
+        debugger;
         var proxy, view, controller;
         var isReadOnly = options.readOnly;
-
-        // GY
-        waveCont = {
-            init: function() {
-                wave.setStateCallback(waveCont.log);
-                var waveState = wave.getState();
-                waveState.submitDelta(initialData);
-            },
-            log: function() {
-                var waveData = wave.getState().state_;
-                console.log(waveData);
-            },
-            add_option: function(option) {
-                var waveState = wave.getState();
-                var options = waveState.get("options");
-                options.push(option);
-                var waveData = {options: options};
-                waveState.submitDelta(waveData);
-            }
-        };
 
         proxy = {
             submit_rankings: function(value, has_ranked) {
@@ -129,12 +110,10 @@
                         return_msg: 'notify_add_option'
                     };
                 
-
-                // GY:
-                // controller.clientChannel.publish({
-                //     type: 'insert_array_item',
-                //     data: data
-                // });
+                controller.clientChannel.publish({
+                    type: 'insert_array_item',
+                    data: data
+                });
             },
             
             remove_option: function(option) {
@@ -212,16 +191,15 @@
                 });
             },
             
-            remove_my_ranking: function() {  
-              // CSTARCOMMENT              
-              // var action_data = {u:CSTAR.current_user.nickname},
-              //       data = {
-              //           path: ['rankings', ts.getViewerId()],
-              //           value: [],
-              //           touch_updated_at: "false",
-              //           event: {action: {type : 'remove' , data: action_data}},
-              //           return_msg: 'notify_remove_my_ranking'
-              //       };
+            remove_my_ranking: function() {                
+              var action_data = {u:CSTAR.current_user.nickname},
+                    data = {
+                        path: ['rankings', ts.getViewerId()],
+                        value: [],
+                        touch_updated_at: "false",
+                        event: {action: {type : 'remove' , data: action_data}},
+                        return_msg: 'notify_remove_my_ranking'
+                    };
                 
                 controller.clientChannel.publish({
                     type: 'set_data',
@@ -237,18 +215,18 @@
             edit_div_id: elementId + '_edit',
             
             rank_place_holder_html_string: '<div class="rank_placeholder_view"><div class="rank_status_bar">' + 
-                                           '<div class="build_ranking_status"><span class="status_label">1.</span><span class="status_content">&nbsp;' + "ranking.build_ranking_list" + '</span></div>' + 
-                                           '<div class="submit_ranking_status"><span class="status_label">2.</span><span class="status_content">&nbsp;' + "ranking.rank_items_submit_results" + '</span></div>' +
-                                           '<div class="lock_ranking_status"><span class="status_label">3.</span><span class="status_content">&nbsp;' + "ranking.freeze_ranking" + '</span></div></div></div>',
-            default_input_string: "ranking.add_to_ranking_list",
-            default_rank_statement: "ranking.type_statement_ranking",
-            start_ranking_hint: "ranking.two_items_required",
-            drag_and_drop_hint: "ranking.drag_n_drop_items",
+                                           '<div class="build_ranking_status"><span class="status_label">1.</span><span class="status_content">&nbsp;' + CSTAR.t("ranking.build_ranking_list") + '</span></div>' + 
+                                           '<div class="submit_ranking_status"><span class="status_label">2.</span><span class="status_content">&nbsp;' + CSTAR.t("ranking.rank_items_submit_results") + '</span></div>' +
+                                           '<div class="lock_ranking_status"><span class="status_label">3.</span><span class="status_content">&nbsp;' + CSTAR.t("ranking.freeze_ranking") + '</span></div></div></div>',
+            default_input_string: CSTAR.t("ranking.add_to_ranking_list"),
+            default_rank_statement: CSTAR.t("ranking.type_statement_ranking"),
+            start_ranking_hint: CSTAR.t("ranking.two_items_required"),
+            drag_and_drop_hint: CSTAR.t("ranking.drag_n_drop_items"),
            
             
 
             hookup_back_to_build_tooltip: function() {
-                var back_to_build_tooltip_content = "<div class='rank_tooltip_content'>" + "ranking.reset_and_return_to_build" + "</div>";
+                var back_to_build_tooltip_content = "<div class='rank_tooltip_content'>" + CSTAR.t("ranking.reset_and_return_to_build") + "</div>";
                 var rank_view_back_btn_dom = view.div.find('.rank_view_back_btn').get(0);
                 var back_to_build_options = {html: true, placement: "bottom", title: back_to_build_tooltip_content, delay: {show: 500, hide: 0}};
                 $(rank_view_back_btn_dom).tooltip(back_to_build_options);
@@ -260,11 +238,11 @@
             show_edit_view: function() {              
               var edit_div_string = '<div class="rank_edit">' + 
                                      '<div class="rank_title_holder"><div class="rank_title_top"></div><div class="rank_title_background"><div class="rank_title"></div></div></div>' + 
-                                     '<div class="rank_option_input_holder">' + sap.sw.ui.button.createHtml("infrastructure.add", "add_option_btn action_button", true) +
+                                     '<div class="rank_option_input_holder">' + sap.sw.ui.button.createHtml(CSTAR.t("infrastructure.add"), "add_option_btn action_button", true) +
                                        '<div class="rank_option_input_container"><input class="rank_option_input rank_option_input_default" value="' + view.default_input_string.escapeHTML() + '"/></div>' +
                                      '</div><div class="rank_options empty_option"></div><div class="rank_option_input_bottom"></div>' + 
                                      '</div><div class="rank_view_back_btn_container"><div class="start_ranking_hint">' + view.start_ranking_hint.escapeHTML() + '</div>' + 
-                                     sap.sw.ui.button.createHtml("ranking.start_ranking", "start_ranking action_button", true) +
+                                     sap.sw.ui.button.createHtml(CSTAR.t("ranking.start_ranking"), "start_ranking action_button", true) +
                                      '</div>';
 
               var edit_div = $(edit_div_string).attr('id', view.edit_div_id);                   
@@ -307,7 +285,7 @@
                     height: '15px',
                     width: '380px',
                     cssclass: 'buttonInplaceEdit',
-                    tooltip: 'common.click_to_edit',
+                    tooltip: CSTAR.t('common.click_to_edit'),
                     placeholder: view.default_rank_statement
                 });
                
@@ -393,7 +371,7 @@
                 });
                 
                 $('.start_ranking', view.div).hover(function(){
-                    var start_ranking_tooltip_content = "<div class='rank_tooltip_content'>" + "ranking.starting_ranking_allows" + "</div>";
+                    var start_ranking_tooltip_content = "<div class='rank_tooltip_content'>" + CSTAR.t("ranking.starting_ranking_allows") + "</div>";
                     var container_object = view.div ;
                     
                     var start_ranking_list_tooltip_target_dom = container_object.find('.start_ranking').get(0);      
@@ -410,15 +388,15 @@
                       var title_input = view.div.find('.rank_title'),
                           title = title_input.text();                     
                       if (title === '' || title === view.default_rank_statement){
-                            lipstick.alert("ranking.empty_rank_item_title");
+                            lipstick.alert(CSTAR.t("ranking.empty_rank_item_title"));
                             return;
                         }
                       
                         var labels = {
-                            title: "ranking.start_ranking",                            
-                            warning_msg1: "ranking.once_you_start_ranking",  
-                            warning_msg2: "ranking.starting_ranking_allows",
-                            question: "ranking.confirm_start_ranking"
+                            title: CSTAR.t("ranking.start_ranking"),                            
+                            warning_msg1: CSTAR.t("ranking.once_you_start_ranking"),  
+                            warning_msg2: CSTAR.t("ranking.starting_ranking_allows"),
+                            question: CSTAR.t("ranking.confirm_start_ranking")
                         };
 
                         var options = [];
@@ -454,14 +432,14 @@
               var rank_div_string = '<div class="rank_holder ranking_view">' + 
                                     '<div class="rank_title_holder"><div class="rank_title_top"></div><div class="rank_title_background"><div class="rank_title"></div></div></div>' +
                                     '<div class="rank_list_header">' +
-                                    '<div class="your_ranking">' + "ranking.rank" + '</div>' +
-                                    '<div class="rank_instruction">&nbsp;' + "items.items" + ' <span class="rank_sub_instruction" title="' + view.drag_and_drop_hint.escapeHTML() + '">(' + view.drag_and_drop_hint.escapeHTML() +')</span></div></div>' +
+                                    '<div class="your_ranking">' + CSTAR.t("ranking.rank") + '</div>' +
+                                    '<div class="rank_instruction">&nbsp;' + CSTAR.t("items.items") + ' <span class="rank_sub_instruction" title="' + view.drag_and_drop_hint.escapeHTML() + '">(' + view.drag_and_drop_hint.escapeHTML() +')</span></div></div>' +
                                     '<div class="rank_body">' +
                                     '<div class="rank_list"></div><div class="rank_view_bottom"><div class="num_submissions"></div>' +
-                                    sap.sw.ui.button.createHtml("ranking.submit_ranking", "rank_submit_btn action_button") + 
+                                    sap.sw.ui.button.createHtml(CSTAR.t("ranking.submit_ranking"), "rank_submit_btn action_button") + 
                                     '</div></div></div>' +   
                                     '<div class="rank_view_back_btn_container">' + 
-                                    sap.sw.ui.button.createHtml("ranking.edit_ranking_list", "rank_view_back_btn action_button") + 
+                                    sap.sw.ui.button.createHtml(CSTAR.t("ranking.edit_ranking_list"), "rank_view_back_btn action_button") + 
                                     '</div>';
               view.div.find('.rank_placeholder_view').append($(rank_div_string));
               view.div.find(".core_ranking").removeClass("locked");
@@ -571,13 +549,13 @@
                 controller.calculate_results();
         var rank_div_string = '<div class="rank_holder my_ranking_view">' + 
                                       '<div class="rank_title_holder"><div class="rank_title_top"></div><div class="rank_title_background"><div class="rank_title"></div></div></div>' +
-                                      '<div class="rank_body"><div class="rank_list_header"><div class="your_ranking">' + "ranking.your_rank" + '</div><div class="collective_ranking">&nbsp;' + "ranking.aggregate_ranking_results" + '</div></div>' +
+                                      '<div class="rank_body"><div class="rank_list_header"><div class="your_ranking">' + CSTAR.t("ranking.your_rank") + '</div><div class="collective_ranking">&nbsp;' + CSTAR.t("ranking.aggregate_ranking_results") + '</div></div>' +
                                       '<div class="rank_list rank_result_list"></div><div class="rank_view_bottom"><div class="num_submissions"></div>' +
-                                      sap.sw.ui.button.createHtml("ranking.re_rank", "edit_my_ranking_btn action_button") +
+                                      sap.sw.ui.button.createHtml(CSTAR.t("ranking.re_rank"), "edit_my_ranking_btn action_button") +
                                       '</div></div></div>' + 
                                       '<div class="rank_view_back_btn_container">' +
-                                      sap.sw.ui.button.createHtml("ranking.edit_ranking_list", "rank_view_back_btn action_button") +
-                                       sap.sw.ui.button.createHtml("ranking.freeze_ranking", "lock_ranking_btn action_button") +
+                                      sap.sw.ui.button.createHtml(CSTAR.t("ranking.edit_ranking_list"), "rank_view_back_btn action_button") +
+                                       sap.sw.ui.button.createHtml(CSTAR.t("ranking.freeze_ranking"), "lock_ranking_btn action_button") +
                                       '</div>';
                 view.div.find('.rank_placeholder_view').append($(rank_div_string));
                 view.div.find(".core_ranking").removeClass("locked");
@@ -597,17 +575,17 @@
                     controller.remove_my_ranking(true, ts.getViewerId());                                 
                 });                
                 
-                var lock_ranking_tooltip_content = "<div class='rank_tooltip_content'>" + "ranking.close_ranking" + "</div>";
+                var lock_ranking_tooltip_content = "<div class='rank_tooltip_content'>" + CSTAR.t("ranking.close_ranking") + "</div>";
                 var lock_ranking_list_tooltip_target_dom = view.div.find('.lock_ranking_btn').get(0);
                 var lock_ranking_options = {html: true, placement: "bottom", title: lock_ranking_tooltip_content, delay: {show: 500, hide: 0}};
                 $(lock_ranking_list_tooltip_target_dom).tooltip(lock_ranking_options);
 
                 view.div.find('.lock_ranking_btn').click(function() {                 
                     var labels = {
-                             title: "ranking.freeze_ranking",                            
-                             warning_msg1: "ranking.close_ranking",  
-                             warning_msg2: "ranking.no_more_submissions",
-                             question: "ranking.confirm_lock_ranking"
+                             title: CSTAR.t("ranking.freeze_ranking"),                            
+                             warning_msg1: CSTAR.t("ranking.close_ranking"),  
+                             warning_msg2: CSTAR.t("ranking.no_more_submissions"),
+                             question: CSTAR.t("ranking.confirm_lock_ranking")
                          };
                     
                     $('.tooltip').hide();
@@ -630,11 +608,11 @@
                 var unlock_btn_string = '';
                 
                 if (!read_only){
-                  unlock_btn_string = sap.sw.ui.button.createHtml("ranking.unfreeze_ranking", "rank_unlock_btn action_button");
+                  unlock_btn_string = sap.sw.ui.button.createHtml(CSTAR.t("ranking.unfreeze_ranking"), "rank_unlock_btn action_button");
                 }
                 var rank_result_div_string = '<div class="rank_holder locked">' + 
                                       '<div class="rank_title_holder"><div class="rank_title_top"></div><div class="rank_title_background"><div class="rank_title"></div></div></div>' +
-                                      '<div class="rank_body"><div class="rank_list_header"><div class="your_ranking">' + "ranking.your_rank" + '</div><div class="collective_ranking">&nbsp;' + "ranking.aggregate_ranking_results" + '</div></div>' +
+                                      '<div class="rank_body"><div class="rank_list_header"><div class="your_ranking">' + CSTAR.t("ranking.your_rank") + '</div><div class="collective_ranking">&nbsp;' + CSTAR.t("ranking.aggregate_ranking_results") + '</div></div>' +
                                       '<div class="rank_list rank_results_list"></div><div class="rank_view_bottom"><div class="num_submissions"></div>' +                
                                       '</div></div></div><div class="rank_view_back_btn_container">' + unlock_btn_string + 
                                       '</div>' ;
@@ -647,17 +625,17 @@
                 }
                 view.change_status_bar();               
                 
-                var unlock_ranking_tooltip_content = "<div class='rank_tooltip_content'>" + "ranking.open_ranking" + "</div>";
+                var unlock_ranking_tooltip_content = "<div class='rank_tooltip_content'>" + CSTAR.t("ranking.open_ranking") + "</div>";
                 var unlock_ranking_list_tooltip_target_dom = view.div.find('.rank_unlock_btn').get(0);
                 var unlock_ranking_options = {html: true, placement: "bottom", title: unlock_ranking_tooltip_content, delay: {show: 500, hide: 0}};
                 $(unlock_ranking_list_tooltip_target_dom).tooltip(unlock_ranking_options);
 
                 view.div.find('.rank_unlock_btn').click(function() {                  
                   var labels = {
-                            title: "ranking.unfreeze_ranking",                            
-                            warning_msg1: "ranking.open_ranking",  
+                            title: CSTAR.t("ranking.unfreeze_ranking"),                            
+                            warning_msg1: CSTAR.t("ranking.open_ranking"),  
                             warning_msg2: '',
-                            question: "ranking.confirm_unlock_ranking"
+                            question: CSTAR.t("ranking.confirm_unlock_ranking")
                         };
 
                     $('.tooltip').hide();
@@ -679,7 +657,7 @@
                 }
         
                 if (view.check_duplicate_option(new_option_title, null) === true) {
-                    lipstick.alert("items.no_duplicate_options", function(){view.div.find('.rank_option_input').focus();});                        
+                    lipstick.alert(CSTAR.t("items.no_duplicate_options"), function(){view.div.find('.rank_option_input').focus();});                        
                     return;
                 }                 
          
@@ -718,7 +696,7 @@
                     container = $('.rank_options', '#'+view.edit_div_id);
                 }
                 
-                var $option = $('<div class="rank_option_holder" style="display:none;"><div class="rank_option_buttons"><span class="rank_edit_option" title="' + "items.edit_this_option" + '"></span><span class="rank_remove_option" title="' + "items.remove_this_option" + '"></span></div><span class="rank_option_title"></span></div>')              
+                var $option = $('<div class="rank_option_holder" style="display:none;"><div class="rank_option_buttons"><span class="rank_edit_option" title="' + CSTAR.t("items.edit_this_option") + '"></span><span class="rank_remove_option" title="' + CSTAR.t("items.remove_this_option") + '"></span></div><span class="rank_option_title"></span></div>')              
                     .attr('id', 'rank_option_'+ option.id)
                     .find('.rank_option_title')
                     .attr('name', option.id)
@@ -780,7 +758,7 @@
                     }
           
                     if (view.check_duplicate_option(value, $(this).parent().attr('id')) === true) {
-                        lipstick.alert("items.no_duplicate_options");
+                        lipstick.alert(CSTAR.t("items.no_duplicate_options"));
                         $(this).text(this.revert);                        
                         return;
                     }  
@@ -870,14 +848,12 @@
                     var num_votes_str = this.rankings.length + (this.rankings.length == 1 ? ' vote' : ' votes');
                     option.find('.rank_option_ranking_value').text(ranking).attr('title', num_votes_str);
                     
-                    // CSTARCOMMENT
-                    // var current_user_ranking_list = view.div.data('user_rankings')[CSTAR.current_user.uuid];
+                    var current_user_ranking_list = view.div.data('user_rankings')[CSTAR.current_user.uuid];
                     // display the current user's ranking
                    if (current_user_ranking_list === undefined || current_user_ranking_list === '' ) {
                         option.find('.your_ranking').text("-");
                     } else {
-                        // CSTARCOMMENT
-                        // option.find('.your_ranking').text(view.div.data('user_rankings')[CSTAR.current_user.uuid][this.id]);
+                        option.find('.your_ranking').text(view.div.data('user_rankings')[CSTAR.current_user.uuid][this.id]);
                     }
                     
                 });
@@ -946,12 +922,11 @@
                 var num_submissions = parseInt(view.div.data('num_submissions'), 10);
                 var text;
                 if (num_submissions === 1) {
-                    text = "ranking.1_person_submitted_ranking";
+                    text = CSTAR.t("ranking.1_person_submitted_ranking");
                 } else if (num_submissions > 1) {
-                  // CSTARCOMMENT
-                  // text = CSTAR.t("ranking.n_people_submitted_ranking", {n: view.div.data('num_submissions')});  
+                  text = CSTAR.t("ranking.n_people_submitted_ranking", {n: view.div.data('num_submissions')});  
                 } else {
-                  text = "ranking.noone_submitted_ranking";
+                  text = CSTAR.t("ranking.noone_submitted_ranking");
                 }
                 $(view.div).find('.num_submissions').text(text).attr("title", text);
             }, 
@@ -1067,10 +1042,10 @@
             
             display_back_btn_warning_dialog: function(){
                 var labels = {
-                    title: "ranking.back_build_ranking_list",                             
-                    warning_msg1: "ranking.reset_ranking_submissions",  
+                    title: CSTAR.t("ranking.back_build_ranking_list"),                             
+                    warning_msg1: CSTAR.t("ranking.reset_ranking_submissions"),  
                     warning_msg2: '',
-                    question: "ranking.confirm_build_ranking_list"
+                    question: CSTAR.t("ranking.confirm_build_ranking_list")
                 };
                   
                 view.show_warning_dialog(labels, function() {
@@ -1100,8 +1075,8 @@
                      options = {
                          onOK: callback,
                          title: labels.title,
-                         okLabel: "infrastructure.ok",
-                         cancelLabel: "infrastructure.cancel"
+                         okLabel: CSTAR.t("infrastructure.ok"),
+                         cancelLabel: CSTAR.t("infrastructure.cancel")
                 };
                 
                 // set the messages
@@ -1116,12 +1091,12 @@
              * Find all jQuery objects in given object which contain predefined rank status classes and add hover call back to show tooltips for each status
              */
             hover_show_rank_status_tooltip: function(container_object){
-                var build_ranking_tooltip_content = "<div class='rank_tooltip_header'>" + "ranking.build_ranking_list" + "</div>" + 
-                                                    "<div class='rank_tooltip_content'>" + "ranking.build_edit_items" + "</div>";
-                var submit_ranking_tooltip_content = "<div class='rank_tooltip_header'>" + "ranking.rank_items_submit_results" + "</div>" + 
-                                                     "<div class='rank_tooltip_content'>" + "ranking.order_ranking_items" + "</div>";
-                var lock_ranking_tooltip_content = "<div class='rank_tooltip_header'>" + "ranking.freeze_ranking" + "</div>" + 
-                                                   "<div class='rank_tooltip_content'>" + "ranking.close_off_ranking" + "</div>";
+                var build_ranking_tooltip_content = "<div class='rank_tooltip_header'>" + CSTAR.t("ranking.build_ranking_list") + "</div>" + 
+                                                    "<div class='rank_tooltip_content'>" + CSTAR.t("ranking.build_edit_items") + "</div>";
+                var submit_ranking_tooltip_content = "<div class='rank_tooltip_header'>" + CSTAR.t("ranking.rank_items_submit_results") + "</div>" + 
+                                                     "<div class='rank_tooltip_content'>" + CSTAR.t("ranking.order_ranking_items") + "</div>";
+                var lock_ranking_tooltip_content = "<div class='rank_tooltip_header'>" + CSTAR.t("ranking.freeze_ranking") + "</div>" + 
+                                                   "<div class='rank_tooltip_content'>" + CSTAR.t("ranking.close_off_ranking") + "</div>";
             
                 var build_ranking_list_tooltip_target_dom = container_object.find('.build_ranking_status').get(0);    
                 var submit_ranking_list_tooltip_target_dom = container_object.find('.submit_ranking_status').get(0);  
@@ -1243,9 +1218,6 @@
          * into the container div and initializes the view.
          */
             init: function() {
-                // GY
-                waveCont.init();
-
                 // persist the data on the container div
                 $.each(initialData, function(key, value) {
                     view.div.data(key, value);
@@ -1277,17 +1249,16 @@
             
             check_current_user_ranking_status: function(){
               var rankings = view.div.data('rankings');
-              var is_current_user_ranked = false;
-              // CSTARCOMMENT             
-              // $.each(rankings, function(user_id, ranking){
-              //       if (user_id === CSTAR.current_user.uuid){               
-              //         if (ranking.length > 0){                        
-              //               is_current_user_ranked = true;
-              //               return is_current_user_ranked;
-              //           }
+              var is_current_user_ranked = false;             
+              $.each(rankings, function(user_id, ranking){
+                    if (user_id === CSTAR.current_user.uuid){               
+                      if (ranking.length > 0){                        
+                            is_current_user_ranked = true;
+                            return is_current_user_ranked;
+                        }
                         
-              //       }
-              // });
+                    }
+              });
               
               return is_current_user_ranked;
             },
@@ -1404,7 +1375,6 @@
             },
             
             add_option: function(option, broadcast) {
-                debugger;
                 var options = view.div.data('options'),
                     exists = get_option_index(options, option.id) !== null;
                 
