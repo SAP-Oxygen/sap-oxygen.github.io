@@ -52,6 +52,14 @@
       <msg name="ranking.order_ranking_items">Where you and others order the ranking items and submit your own ordered list.</msg>
       <msg name="ranking.results_will_be_shown">After submission the results will be shown.</msg>
       <msg name="ranking.close_off_ranking">Close off the ranking to anymore submissions.</msg>
+      <msg name="infrastructure.cancel">Cancel</msg>
+      <msg name="infrastructure.ok">OK</msg>
+      <msg name="items.no_duplicate_options">You cannot have duplicate options</msg>
+      <msg name="items.remove_this_option">Remove This Option</msg>
+      <msg name="items.edit_this_option">Edit This Option</msg>
+      <msg name="items.items">Items</msg>
+      <msg name="common.click_to_edit">Click to edit</msg>
+      <msg name="infrastructure.add">Add</msg>
     </Locale>
   </ModulePrefs>
   <Content type="html">
