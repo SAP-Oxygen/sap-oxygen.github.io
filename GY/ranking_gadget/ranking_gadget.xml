@@ -25,7 +25,7 @@
       <msg name="ranking.type_statement_ranking:">Click here to type in a statement for ranking</msg>
       <msg name="ranking.two_items_required:">A statement and 2 ranking items are required</msg>
       <msg name="ranking.drag_n_drop_items:">Drag and drop items to re-order</msg>
-      <msg name="ranking.empty_rank_item_title:">"Rank item title cannot be empty!"
+      <msg name="ranking.empty_rank_item_title:">Rank item title cannot be empty!</msg>
       <msg name="ranking.once_you_start_ranking:">Once you start ranking no one will be able to edit the ranking list items.</msg>
       <msg name="ranking.starting_ranking_allows:">Starting ranking allows everyone to rank the items and submit their own ranked list.</msg>
       <msg name="ranking.confirm_start_ranking:">Are you sure you want to start ranking now?</msg>
