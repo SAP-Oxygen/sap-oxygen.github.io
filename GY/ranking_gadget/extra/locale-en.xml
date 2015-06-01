@@ -1,4 +1,4 @@
-<Local lang="all">
+<Locale lang="all">
   <msg name="ranking.ranking:">Ranking</msg>
   <msg name="ranking.prioritize_options:">Prioritize options by re-ordering the list, then submit your ranking</msg>
   <msg name="ranking.options_changed:">Since you submitted this ranking the list has changed</msg>
@@ -35,7 +35,7 @@
   <msg name="ranking.confirm_unlock_ranking:">Are you sure you want to unlock this ranking?</msg>
   <msg name="ranking.empty_option:">Option cannot be empty</msg>
   <msg name="ranking.1_person_submitted_ranking:">1 person has submitted a ranking</msg>
-  <msg name="ranking.n_people_submitted_ranking:">"%{n} people have submitted a ranking"
+  <msg name="ranking.n_people_submitted_ranking:">%{n} people have submitted a ranking</msg>
   <msg name="ranking.noone_submitted_ranking:">No one has submitted a ranking</msg>
   <msg name="ranking.back_build_ranking_list:">Back to Build Ranking List</msg>
   <msg name="ranking.reset_ranking_submissions:">This will reset everyone's ranking submission.</msg>

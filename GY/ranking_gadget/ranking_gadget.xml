@@ -5,7 +5,7 @@
     <Require feature="dynamic-height"/>
     <Require feature="wave"/>
     <Require feature="osapi"/>
-    <Local lang="all">
+    <Locale lang="all">
       <msg name="ranking.ranking:">Ranking</msg>
       <msg name="ranking.prioritize_options:">Prioritize options by re-ordering the list, then submit your ranking</msg>
       <msg name="ranking.options_changed:">Since you submitted this ranking the list has changed</msg>
