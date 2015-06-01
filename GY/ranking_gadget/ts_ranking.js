@@ -7,6 +7,11 @@
       this.CSTAR = {};
       
     }
+    trans = {
+        t: function(str) {
+            return new gadgets.Prefs().getMsg(str);
+        }
+    };
     // GY: comment out for now
     // CSTAR.t = YAHOO.cubetree.util.t;
     
@@ -21,11 +26,6 @@
     // module imports
     var $ = jQuery;
 
-    trans = {
-        t: function(str) {
-            return new gadgets.Prefs().getMsg(str);
-        }
-    };
     
     ns.methodClient = function (elementId, initialData, options) {
         debugger;
