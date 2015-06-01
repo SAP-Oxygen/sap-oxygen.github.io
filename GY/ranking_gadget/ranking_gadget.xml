@@ -114,7 +114,10 @@
 
       <script type="text/javascript" src="ts_ranking.js"></script>
 
-      <div id="core_ranking_5" class="core_ranking cstar_item"></div>
+      <div id="sw_item_container">
+        <div id="core_ranking_5" class="core_ranking cstar_item">
+        </div>
+      </div>
     ]]>
   </Content>
 </Module >
