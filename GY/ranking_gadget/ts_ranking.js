@@ -46,7 +46,8 @@
                 var waveState = wave.getState();
                 var options = waveState.get("options") || [];
                 options.push(option);
-                var waveData = {options: options};
+                var waveData = {};
+                waveData[options] = options;
                 waveState.submitDelta(waveData);
             }
         };
