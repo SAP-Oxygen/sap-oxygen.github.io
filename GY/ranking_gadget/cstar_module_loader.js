@@ -253,13 +253,10 @@ var streamwork = streamwork || {};
         
         start: function(moduleName, options, timestamp) {
             console.log("start called");
-            debugger;
             var loader = this;
             $(document).ready(function() {
                 console.log("document.ready (inside) called");
-                debugger;
                 loader.load(moduleName, function() {
-                    debugger;
                     var module = ns.module(moduleName);
 
                     // try {

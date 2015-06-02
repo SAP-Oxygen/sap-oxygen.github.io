@@ -1,5 +1,4 @@
 (function () {
-    debugger;
     // module namespace
     var ts = streamwork;
     var ns = ts.module("core.ranking");
@@ -29,7 +28,6 @@
 
     
     ns.methodClient = function (elementId, initialData, options) {
-        debugger;
         var proxy, view, controller;
         var isReadOnly = options.readOnly;
 
@@ -44,6 +42,7 @@
                 console.log(waveData);
             },
             add_option: function(option) {
+                debugger;
                 var waveState = wave.getState();
                 var options = waveState.get("options") || [];
                 options.push(option);
