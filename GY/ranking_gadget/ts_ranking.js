@@ -48,6 +48,7 @@
                 options.push(option);
                 var waveData = {};
                 waveData["options"] = options;
+                debugger;
                 waveState.submitDelta(waveData);
             }
         };
