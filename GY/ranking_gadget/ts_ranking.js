@@ -47,7 +47,7 @@
                 var options = waveState.get("options") || [];
                 options.push(option);
                 var waveData = {};
-                waveData[options] = options;
+                waveData["options"] = options;
                 waveState.submitDelta(waveData);
             }
         };
