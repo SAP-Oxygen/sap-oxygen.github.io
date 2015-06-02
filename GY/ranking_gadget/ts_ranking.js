@@ -7,6 +7,7 @@
       this.CSTAR = {};
       
     }
+
     trans = {
         t: function(str) {
             return new gadgets.Prefs().getMsg(str);
@@ -135,11 +136,13 @@
                         event: {action: {type: action_type, data: action_data}},
                         return_msg: 'notify_add_option'
                     };
+
+                waveCont.add_option(option);
                 
-                controller.clientChannel.publish({
-                    type: 'insert_array_item',
-                    data: data
-                });
+                // controller.clientChannel.publish({
+                //     type: 'insert_array_item',
+                //     data: data
+                // });
             },
             
             remove_option: function(option) {
