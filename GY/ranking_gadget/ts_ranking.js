@@ -48,7 +48,7 @@
                 options.push(option);
                 var waveData = {};
                 waveData["options"] = options;
-                debugger;
+                debugger
                 waveState.submitDelta(waveData);
             }
         };
@@ -138,12 +138,12 @@
                         return_msg: 'notify_add_option'
                     };
 
-                waveCont.add_option(option);
+                // waveCont.add_option(option);
                 
-                // controller.clientChannel.publish({
-                //     type: 'insert_array_item',
-                //     data: data
-                // });
+                controller.clientChannel.publish({
+                    type: 'insert_array_item',
+                    data: data
+                });
             },
             
             remove_option: function(option) {
