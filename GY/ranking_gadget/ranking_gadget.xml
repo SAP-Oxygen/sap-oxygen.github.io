@@ -85,7 +85,7 @@
             itemId: 5,
             readOnly: false,
             elementId: "core_ranking_5",
-            initialData: {"title":undefined,"options":[],"rankings":{},"frozen":false,"locked":false,"published":false},
+            initialData: {"title":null,"options":[],"rankings":{},"frozen":false,"locked":false,"published":false},
             itemCreatorUuid: "1",
             itemUuid: "5",
             itemRealUuid: "3zUC4DSM8ZTyQYfgLTvydW",
