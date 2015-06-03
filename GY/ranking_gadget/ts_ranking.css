@@ -253,7 +253,7 @@
 .core_ranking .rank_edit .rank_remove_option {
     height: 18px;
     width: 15px;
-    background: transparent url(/bundles/common/images/remove.png) repeat scroll 0 0;
+    background: transparent url(/images/remove.png) repeat scroll 0 0;
     cursor: pointer;    
     position: absolute;
     right: 2px;  
@@ -262,7 +262,7 @@
 .core_ranking .rank_edit .rank_edit_option {
     height: 18px;
     width: 15px;
-    background: transparent url(/bundles/common/images/edit.png) repeat scroll 0 0;
+    background: transparent url(/images/edit.png) repeat scroll 0 0;
     cursor: pointer;    
     position: absolute;
     right: 22px;
