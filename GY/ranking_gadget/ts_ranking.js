@@ -1248,7 +1248,7 @@
          * into the container div and initializes the view.
          */
             init: function() {
-                waveCont.init();
+                // waveCont.init();
                 // persist the data on the container div
                 $.each(initialData, function(key, value) {
                     view.div.data(key, value);
