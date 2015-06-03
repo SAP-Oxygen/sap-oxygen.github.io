@@ -8,7 +8,7 @@
 }
 
 .rank_status_bar {   
-    background: url("GY/ranking_gadget/images/ranking_sprites.png") no-repeat scroll 0 0 transparent;
+    background: url(GY/ranking_gadget/images/ranking_sprites.png) no-repeat scroll 0 0 transparent;
     height: 24px;   
     display: block; 
     line-height: 24px;
@@ -89,7 +89,7 @@
 }
 
 .core_ranking .rank_title_holder .rank_title_top {    
-    background: url("GY/ranking_gadget/images/ranking_sprites.png") no-repeat scroll 0 -72px transparent;
+    background: url(GY/ranking_gadget/images/ranking_sprites.png) no-repeat scroll 0 -72px transparent;
     height:5px;
 }
 
@@ -134,7 +134,7 @@
 .core_ranking .rank_option_input_holder {
     border-left: 1px solid #D5D5D5;
     border-right: 1px solid #D5D5D5;
-    background: url("GY/ranking_gadget/images/ranking_sprites.png") no-repeat scroll 0 -105px transparent;
+    background: url(GY/ranking_gadget/images/ranking_sprites.png) no-repeat scroll 0 -105px transparent;
     height: 30px;
     padding: 3px 7px 2px 13px;    
 }
@@ -262,7 +262,7 @@
 .core_ranking .rank_edit .rank_edit_option {
     height: 18px;
     width: 15px;
-    background: transparent url(GY/raning_gadget/images/edit.png) repeat scroll 0 0;
+    background: transparent url(GY/ranking_gadget/images/edit.png) repeat scroll 0 0;
     cursor: pointer;    
     position: absolute;
     right: 22px;
@@ -318,7 +318,7 @@
 .rank_view_bottom {
     height: 26px;       
     padding: 2px 0;    
-    background: url("GY/ranking_gadget/images/ranking_sprites.png") no-repeat scroll 0 -140px transparent;
+    background: url(GY/ranking_gadget/images/ranking_sprites.png) no-repeat scroll 0 -140px transparent;
 }
 
 .rank_inner_holder {
@@ -363,7 +363,7 @@
     height: 34px;     
     border-left: 1px solid #D5D5D5;
     border-right: 1px solid #D5D5D5;
-    background: url("GY/ranking_gadget/images/ranking_sprites.png") no-repeat scroll 0 -105px transparent;
+    background: url(GY/ranking_gadget/images/ranking_sprites.png) no-repeat scroll 0 -105px transparent;
     padding-bottom:1px;
 }
 
@@ -428,7 +428,7 @@
 }
 
 .rank_option_input_bottom {
-    background: url("GY/ranking_gadget/images/ranking_sprites.png") no-repeat scroll 0 -140px transparent;
+    background: url(GY/ranking_gadget/images/ranking_sprites.png) no-repeat scroll 0 -140px transparent;
     height: 30px;   
 }
 
