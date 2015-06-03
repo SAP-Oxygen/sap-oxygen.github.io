@@ -1249,6 +1249,7 @@
          */
             init: function() {
                 // waveCont.init();
+                console.log(initialData);
                 // persist the data on the container div
                 $.each(initialData, function(key, value) {
                     view.div.data(key, value);
