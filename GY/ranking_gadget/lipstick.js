@@ -240,25 +240,25 @@ var lipstick = {};
     //     return CSTAR.t("time.over_x_years", {n: Math.round(diff_in_minutes/525960)});
     // };
     
-    // function getColor(elem, attr){
-    //     var color;
+    function getColor(elem, attr){
+        var color;
         
-    //     do {
-    //         if(elem.nodeType === 1) {
-    //             color = jQuery.curCSS(elem, attr);
-    //             // Keep going until we find an element that has color, or we hit the body
-    //             if ((color !== '' && color !== 'transparent' && color !== 'rgba(0, 0, 0, 0)') || jQuery.nodeName(elem, "body")) {
-    //                 break;
-    //             }
-    //         }
+        do {
+            if(elem.nodeType === 1) {
+                color = jQuery.curCSS(elem, attr);
+                // Keep going until we find an element that has color, or we hit the body
+                if ((color !== '' && color !== 'transparent' && color !== 'rgba(0, 0, 0, 0)') || jQuery.nodeName(elem, "body")) {
+                    break;
+                }
+            }
             
-    //         attr = "backgroundColor";
-    //         elem = elem.parentNode;
-    //     }
-    //     while (elem);
+            attr = "backgroundColor";
+            elem = elem.parentNode;
+        }
+        while (elem);
         
-    //     return color;
-    // }
+        return color;
+    }
     
     /**
      * Causes the current dom element to highlight.
