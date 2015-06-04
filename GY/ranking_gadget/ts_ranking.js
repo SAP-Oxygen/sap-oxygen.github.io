@@ -959,8 +959,9 @@
             },
             
             update_title: function() {
-                var title = view.div.data('title');               
-                lipstick.flutter(view.div.find('.rank_title').text(title));
+                var title = view.div.data('title');
+                // GY: comment out for now
+                // lipstick.flutter(view.div.find('.rank_title').text(title));
                 view.div.find('.rank_title').css('color','#333333');                
                 view.enable_start_ranking_button();
             },
