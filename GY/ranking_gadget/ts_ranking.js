@@ -44,13 +44,15 @@
             add_option: function(option) {
                 debugger;
                 var waveState = wave.getState();
-                // GY: going to use array later
-                // var options = waveState.get("options") || [];
-                // options.push(option);
-                var options = waveState.get("options") || {};
-                $.extend(options, option);
+                var options = waveState.get("options") || [];
+                // GY: need this for now because of the array turning into an object
+                var optionsArr = [];
+                $.each(options, function(name, value) {
+                    optionsArr.push({id: name, value: value});
+                });
+                optionsArr.push(option);
                 var waveData = {};
-                waveData["options"] = options;
+                waveData["options"] = optionsArr;
                 debugger
                 waveState.submitDelta(waveData);
             }
