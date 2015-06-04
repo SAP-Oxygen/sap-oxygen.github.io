@@ -967,7 +967,8 @@
             },
             
             flutter_option: function(option_id) {
-                lipstick.flutter(view.div.find('#rank_option_'+option_id));
+                // GY: comment out for now
+                // lipstick.flutter(view.div.find('#rank_option_'+option_id));
             },            
           
             update_submission_count: function() {
