@@ -46,15 +46,19 @@
                 var waveState = wave.getState();
                 var options = waveState.get("options") || [];
                 // GY: need this for now because of the array turning into an object
-                var optionsArr = [];
-                $.each(options, function(name, value) {
-                    optionsArr.push({id: name, value: value});
-                });
-                optionsArr.push(option);
+                var optionsArr = add_options_array(option, options);
                 var waveData = {};
                 waveData["options"] = optionsArr;
                 debugger
                 waveState.submitDelta(waveData);
+            },
+            add_option_array: function (newOption, options) {
+                var optionsArr = [];
+                $.each(options, function(name, value) {
+                    optionsArr.push({id: name, value: value});
+                });
+                optionsArr.push(newOption);
+                return optionsArr;
             }
         };
 
