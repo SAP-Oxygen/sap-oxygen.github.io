@@ -46,7 +46,7 @@
                 var waveState = wave.getState();
                 var options = waveState.get("options") || [];
                 // GY: need this for now because of the array turning into an object
-                var optionsArr = add_options_array(option, options);
+                var optionsArr = add_option_array(option, options);
                 var waveData = {};
                 waveData["options"] = optionsArr;
                 debugger;
