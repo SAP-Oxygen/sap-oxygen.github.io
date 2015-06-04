@@ -66,6 +66,14 @@
                 var waveData = {title: title};
                 waveState.submitDelta(waveData);
                 debugger;
+            },
+            publish: function(title, options, rankings, action) {
+                debugger;
+                var waveState = wave.getState();
+                var waveData = {title: title, options: options, rankings: rankings, action: action};
+                waveState.submitDelta(waveData);
+                debugger;
+                controller.notify_publish();
             }
         };
 
@@ -87,43 +95,49 @@
             },
             
             publish: function(title, options) {
-                var data = {
-                        actions: [ {
-                            action: 'set_data',
-                            params: {
-                                path:'published',
-                                value: true
-                            }
-                        },
-                        {
-                            action: 'set_data',
-                            params: {
-                                path: 'title',
-                                value: title
-                            }
-                        },
-                        {
-                            action: 'set_data',
-                            params: {
-                                path: 'options',
-                                value: options
-                            }
-                        },
-                        {
-                            action: 'set_data',
-                            params: {
-                                path: 'rankings',
-                                value: {}
-                            }
-                        } ],
-                        event: {action: {type: 'sh'}},
-                        return_msg: 'notify_publish'
-                    };
+                // GY: comment out for now
+                // var data = {
+                //         actions: [ {
+                //             action: 'set_data',
+                //             params: {
+                //                 path:'published',
+                //                 value: true
+                //             }
+                //         },
+                //         {
+                //             action: 'set_data',
+                //             params: {
+                //                 path: 'title',
+                //                 value: title
+                //             }
+                //         },
+                //         {
+                //             action: 'set_data',
+                //             params: {
+                //                 path: 'options',
+                //                 value: options
+                //             }
+                //         },
+                //         {
+                //             action: 'set_data',
+                //             params: {
+                //                 path: 'rankings',
+                //                 value: {}
+                //             }
+                //         } ],
+                //         event: {action: {type: 'sh'}},
+                //         return_msg: 'notify_publish'
+                //     };
                 
-                controller.clientChannel.publish({
-                    type: 'update_data_batch',
-                    data: data
-                });
+                var action = true;
+                var rankings = {};
+                waveCont.publish(title, options, rankings, action);
+
+                // GY: comment out for now
+                // controller.clientChannel.publish({
+                //     type: 'update_data_batch',
+                //     data: data
+                // });
             },
             
             edit_option: function(option, old_title) {
@@ -1615,22 +1629,32 @@
                 }
             },
             
-            notify_publish: function(data) {
-                var actions = data.actions;
+            // GY: replaced by new version
+            //     @param data: not needed as it is using waves
+            // notify_publish: function(data) {
+            //     var actions = data.actions;
                 
-                $.each(actions, function() {
-                    var action = this.action, 
-                        path = this.params.path,
-                        value = this.params.value;
+            //     $.each(actions, function() {
+            //         var action = this.action, 
+            //             path = this.params.path,
+            //             value = this.params.value;
                     
-                    if (action != 'set_data') {
-                        return; // sanity check
-                    }
+            //         if (action != 'set_data') {
+            //             return; // sanity check
+            //         }
                     
-                    // path will only be single property name
-                    view.div.data(path, value);
-                });
+            //         // path will only be single property name
+            //         view.div.data(path, value);
+            //     });
                 
+            //     view.div.find('.rank_holder').remove(); 
+            //     view.div.find('.rank_edit').remove();
+            //     view.div.find('.start_ranking').remove();
+            //     view.div.find('.rank_view_back_btn_container').remove(); 
+            //     view.show_ranking_view();
+            // },
+
+            notify_publish: function() {
                 view.div.find('.rank_holder').remove(); 
                 view.div.find('.rank_edit').remove();
                 view.div.find('.start_ranking').remove();
