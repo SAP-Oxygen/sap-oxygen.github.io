@@ -44,8 +44,11 @@
             add_option: function(option) {
                 debugger;
                 var waveState = wave.getState();
-                var options = waveState.get("options") || [];
-                options.push(option);
+                // GY: going to use array later
+                // var options = waveState.get("options") || [];
+                // options.push(option);
+                var options = waveState.get("options") || {};
+                $.extend(options, option);
                 var waveData = {};
                 waveData["options"] = options;
                 debugger
@@ -140,10 +143,10 @@
 
                 waveCont.add_option(option);
                 
-                controller.clientChannel.publish({
-                    type: 'insert_array_item',
-                    data: data
-                });
+                // controller.clientChannel.publish({
+                //     type: 'insert_array_item',
+                //     data: data
+                // });
             },
             
             remove_option: function(option) {
