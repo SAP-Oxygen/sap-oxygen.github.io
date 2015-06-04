@@ -49,7 +49,7 @@
                 var optionsArr = add_options_array(option, options);
                 var waveData = {};
                 waveData["options"] = optionsArr;
-                debugger
+                debugger;
                 waveState.submitDelta(waveData);
             },
             add_option_array: function (newOption, options) {
@@ -59,6 +59,13 @@
                 });
                 optionsArr.push(newOption);
                 return optionsArr;
+            },
+            update_title: function(title) {
+                debugger;
+                var waveState = wave.getState();
+                var waveData = {title: title};
+                waveState.submitDelta(waveData);
+                debugger;
             }
         };
 
@@ -137,18 +144,20 @@
             },
             
             add_option: function(option) {
-                var action_type = 'a',
-                    action_data = {op: option.value.title},
-                    data = {
-                        path: ['options'],
-                        id: option.id,
-                        value: option.value,
-                        event: {action: {type: action_type, data: action_data}},
-                        return_msg: 'notify_add_option'
-                    };
+                // GY: comment out for now
+                // var action_type = 'a',
+                //     action_data = {op: option.value.title},
+                //     data = {
+                //         path: ['options'],
+                //         id: option.id,
+                //         value: option.value,
+                //         event: {action: {type: action_type, data: action_data}},
+                //         return_msg: 'notify_add_option'
+                //     };
 
                 waveCont.add_option(option);
                 
+                // GY: comment out for now
                 // controller.clientChannel.publish({
                 //     type: 'insert_array_item',
                 //     data: data
@@ -188,19 +197,22 @@
             },
             
             update_title: function(title) {
-                var action_type = 'tt',
-                    action_data = {t:title},
-                    data = {
-                        path: 'title',
-                        value: title,
-                        event: {action: {type:action_type, data: action_data}},
-                        return_msg: 'notify_update_title'
-                    };
+                // var action_type = 'tt',
+                //     action_data = {t:title},
+                //     data = {
+                //         path: 'title',
+                //         value: title,
+                //         event: {action: {type:action_type, data: action_data}},
+                //         return_msg: 'notify_update_title'
+                //     };
                 
-                controller.clientChannel.publish({
-                    type: 'set_data',
-                    data: data
-                });
+                waveCont.update_title(title);
+
+                // GY: comment out for now
+                // controller.clientChannel.publish({
+                //     type: 'set_data',
+                //     data: data
+                // });
             },
             
            clear_users_rank_list: function() {
