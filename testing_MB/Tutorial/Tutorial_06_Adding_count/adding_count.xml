@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Tutorial_06_Adding_count (XML, HTML, CSS, JavaScript) -->
+<Module>
+	<!-- 
+	* STEP 1
+	* - Rename our application
+	-->
+	<ModulePrefs title="Tutorial_06_Adding_count" height="250">
+        <Require feature="wave"/>
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
+    <Content type="html" href="adding_count.html"/>
+</Module>
