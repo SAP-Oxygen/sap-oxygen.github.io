@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Search_Jam_Appdata">
+    <Require feature="osapi" />
+    <Link rel="mediumIcon" href="g38.png" />
+    <Link rel="icon" href="g20.png" />
+  </ModulePrefs>
+  <Content type="html" href="Search_Jam_Appdata.html"/>
+</Module>
