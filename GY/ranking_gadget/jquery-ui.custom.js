@@ -17,6 +17,9 @@ if ( $.ui.version ) {
     return;
 }
 
+// GY: ignore msie browser check for now
+$.browser.msie = false;
+
 $.extend( $.ui, {
     version: "1.8.16",
 
@@ -689,12 +692,10 @@ $.widget("ui.mouse", {
     },
 
     _mouseMove: function(event) {
-        // GY: comment out for now
-        //     ignore IE compat check
-        // // IE mouseup check - mouseup happened when mouse was out of window
-        // if ($.browser.msie && !(document.documentMode >= 9) && !event.button) {
-        //     return this._mouseUp(event);
-        // }
+        // IE mouseup check - mouseup happened when mouse was out of window
+        if ($.browser.msie && !(document.documentMode >= 9) && !event.button) {
+            return this._mouseUp(event);
+        }
 
         if (this._mouseStarted) {
             this._mouseDrag(event);
