@@ -72,6 +72,7 @@
       <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
       <script type="text/javascript" src="lipstick.js"></script>
       <script type="text/javascript" src="jquery.jeditable.js"></script>
+      <script type="text/javascript" src="jquery-ui.custom.js"></script>
       <script type="text/javascript" src="sw-button.js"></script>
       <script type="text/javascript" src="underscore.js"></script>
       <script type="text/javascript" src="bootstrap-tooltip.js"></script>
