@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Tutorial_02_UI_Setup (XML, HTML, CSS) -->
+<Module>
+	<!-- 
+	* STEP 1
+	* Let's rename our application and set a default height for the gadget to 250 in ModulePrefs
+	-->
+	<ModulePrefs title="Tutorial_02_UI_Setup" height="250">
+	</ModulePrefs>
+	<Content type="html" href="ui_setup.html"/>
+</Module>

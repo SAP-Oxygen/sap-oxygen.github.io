@@ -1,0 +1,19 @@
+<!doctype html>
+<script>
+gadgets.util.registerOnLoadHandler(function() {
+  osapi.people.getViewer().execute(function(viewer) {
+    var params = {
+      activity: {
+        actor: {
+          id: viewer.id
+        },
+        published: "2011-02-10T15:04:55Z"
+      }
+    };
+    window.console && console.log(params);
+    osapi.activitystreams.create(params).execute(function(activity) {
+      window.console && console.log(activity);
+    });
+  });
+});
+</script>
