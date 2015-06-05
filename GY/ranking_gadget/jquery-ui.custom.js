@@ -18,7 +18,7 @@ if ( $.ui.version ) {
 }
 
 // GY: ignore msie browser check for now
-$.browser.msie = false;
+var $.browser.msie = false;
 
 $.extend( $.ui, {
     version: "1.8.16",
