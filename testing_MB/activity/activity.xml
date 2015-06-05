@@ -1,0 +1,9 @@
+<Module>
+  <ModulePrefs title="__MSG_activity__" author="Joseph Wong">
+    <Require feature="osapi"/>
+    <Locale lang="all">
+      <msg name="activity">Activity Test</msg> 
+    </Locale>
+  </ModulePrefs>
+  <Content type="html" href="activity.html"/>
+</Module>
