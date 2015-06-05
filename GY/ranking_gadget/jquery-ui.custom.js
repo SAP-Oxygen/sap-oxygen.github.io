@@ -689,10 +689,12 @@ $.widget("ui.mouse", {
     },
 
     _mouseMove: function(event) {
-        // IE mouseup check - mouseup happened when mouse was out of window
-        if ($.browser.msie && !(document.documentMode >= 9) && !event.button) {
-            return this._mouseUp(event);
-        }
+        // GY: comment out for now
+        //     ignore IE compat check
+        // // IE mouseup check - mouseup happened when mouse was out of window
+        // if ($.browser.msie && !(document.documentMode >= 9) && !event.button) {
+        //     return this._mouseUp(event);
+        // }
 
         if (this._mouseStarted) {
             this._mouseDrag(event);
@@ -6509,3 +6511,4 @@ $.effects.transfer = function(o) {
 };
 
 })(jQuery);
+    
