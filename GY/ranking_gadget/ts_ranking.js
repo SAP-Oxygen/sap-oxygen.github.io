@@ -88,7 +88,8 @@
                 var value = [];
                 var rankings = waveState.get("rankings") || {};
                 rankings[viewerId] = value;
-                var waveData = {rankings: data};
+                var waveData = {rankings: rankings};
+                waveState.submitDelta(waveData);
                 debugger;
             }
         };
