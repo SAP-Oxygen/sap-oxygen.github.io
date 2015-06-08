@@ -42,14 +42,12 @@
                 console.log(waveData);
             },
             add_option: function(option) {
-                debugger;
                 var waveState = wave.getState();
                 var options = waveState.get("options") || [];
                 // GY: need this for now because of the array turning into an object
                 var optionsArr = waveCont.add_option_array(option, options);
                 var waveData = {};
                 waveData["options"] = optionsArr;
-                debugger;
                 waveState.submitDelta(waveData);
             },
             add_option_array: function (newOption, options) {
@@ -61,18 +59,14 @@
                 return optionsArr;
             },
             update_title: function(title) {
-                debugger;
                 var waveState = wave.getState();
                 var waveData = {title: title};
                 waveState.submitDelta(waveData);
-                debugger;
             },
             publish: function(title, options, rankings, action) {
-                debugger;
                 var waveState = wave.getState();
                 var waveData = {title: title, options: options, rankings: rankings, action: action, published: true};
                 waveState.submitDelta(waveData);
-                debugger;
                 controller.notify_publish();
             },
             submit_rankings: function(value, has_ranked) {
