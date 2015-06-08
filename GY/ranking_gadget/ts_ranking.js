@@ -70,7 +70,7 @@
             publish: function(title, options, rankings, action) {
                 debugger;
                 var waveState = wave.getState();
-                var waveData = {title: title, options: options, rankings: rankings, action: action};
+                var waveData = {title: title, options: options, rankings: rankings, action: action, published: true};
                 waveState.submitDelta(waveData);
                 debugger;
                 controller.notify_publish();
@@ -79,7 +79,8 @@
                 debugger;
                 var waveState = wave.getState();
                 var viewerId = ts.getViewerId();
-                var waveData = {viewerId: value}
+                var data = {viewerId: value};
+                var waveData = {rankings: data};
                 waveState.submitDelta(waveData);
                 debugger;
             }
