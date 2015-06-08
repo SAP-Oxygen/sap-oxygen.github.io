@@ -84,7 +84,7 @@
             remove_my_ranking: function() {
                 debugger;
                 var waveState = wave.getState();
-                var viwereId = tx.getViewerId();
+                var viewerId = ts.getViewerId();
                 var value = [];
                 var rankings = waveState.get("rankings") || {};
                 rankings[viewerId] = value;
