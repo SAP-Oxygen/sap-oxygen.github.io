@@ -81,8 +81,20 @@
                 var viewerId = ts.getViewerId();
                 var data = {};
                 data[viewerId] = value;
-                var waveData = {rankings: data};
+                var rankings = waveState.get("rankings") || {};
+                $.extends(rankings, data);
+                var waveData = {rankings: rankings};
                 waveState.submitDelta(waveData);
+                debugger;
+            },
+            remove_my_ranking: function() {
+                debugger;
+                var waveState = wave.getState();
+                var viwereId = tx.getViewerId();
+                var value = [];
+                var rankings = waveState.get("rankings") || {};
+                rankings[viewerId] = value;
+                var waveData = {rankings: data};
                 debugger;
             }
         };
@@ -272,7 +284,7 @@
                 });
             },
             
-            remove_my_ranking: function() {                
+            remove_my_ranking: function() {
                 var action_data = {u:CSTAR.current_user.nickname},
                     data = {
                         path: ['rankings', ts.getViewerId()],
@@ -281,11 +293,14 @@
                         event: {action: {type : 'remove' , data: action_data}},
                         return_msg: 'notify_remove_my_ranking'
                     };
+
+                waveCont.remove_my_ranking();
                 
-                controller.clientChannel.publish({
-                    type: 'set_data',
-                    data: data 
-                });
+                // GY: comment out for now
+                // controller.clientChannel.publish({
+                //     type: 'set_data',
+                //     data: data 
+                // });
             }           
             
         };
