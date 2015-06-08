@@ -79,7 +79,8 @@
                 debugger;
                 var waveState = wave.getState();
                 var viewerId = ts.getViewerId();
-                var data = {viewerId: value};
+                var data = {};
+                data[viewerId] = value;
                 var waveData = {rankings: data};
                 waveState.submitDelta(waveData);
                 debugger;
