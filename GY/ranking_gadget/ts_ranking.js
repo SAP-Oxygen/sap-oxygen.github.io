@@ -74,6 +74,14 @@
                 waveState.submitDelta(waveData);
                 debugger;
                 controller.notify_publish();
+            },
+            submit_rankings: function(value, has_ranked) {
+                debugger;
+                var waveState = wave.getState();
+                var viewerId = ts.getViewerId();
+                var waveData = {viewerId: value}
+                waveState.submitDelta(waveData);
+                debugger;
             }
         };
 
@@ -87,11 +95,17 @@
                         event: {action: {type : action_type}},
                         return_msg: 'notify_update_rankings'
                     };
+
+                waveCont.submit_rankings(value, has_ranked);
+
+                // called here due to data object
+                controller.notify_update_rankings(data);
                 
-                controller.clientChannel.publish({
-                    type: 'set_data',
-                    data: data
-                });
+                // GY: comment out for now
+                // controller.clientChannel.publish({
+                //     type: 'set_data',
+                //     data: data
+                // });
             },
             
             publish: function(title, options) {
