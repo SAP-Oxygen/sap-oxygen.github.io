@@ -82,7 +82,7 @@
                 var data = {};
                 data[viewerId] = value;
                 var rankings = waveState.get("rankings") || {};
-                $.extends(rankings, data);
+                $.extend(rankings, data);
                 var waveData = {rankings: rankings};
                 waveState.submitDelta(waveData);
                 debugger;
