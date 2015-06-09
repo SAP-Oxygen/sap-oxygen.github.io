@@ -52,7 +52,7 @@
             },
             add_option_array: function (newOption, options) {
                 var optionsArr = [];
-                $.each(options, function(name, value) {
+                $.each(options, function(index, value) {
                     optionsArr.push(value);
                 });
                 optionsArr.push(newOption);
@@ -89,6 +89,21 @@
                 var rankings = waveState.get("rankings") || {};
                 rankings[viewerId] = value;
                 var waveData = {rankings: rankings};
+                waveState.submitDelta(waveData);
+                debugger;
+            },
+            edit_option: function(option) {
+                debugger;
+                var waveState = wave.getState();
+                var options = waveState.get("options");
+                var optionId = option.id;
+                // this needs to be changed when the wave bug associated with data type is fixed
+                $.each(options, function(index, value) {
+                    if (value.id === option.id) {
+                        options.index = option;
+                    }
+                });
+                var waveData = {"options": options};
                 waveState.submitDelta(waveData);
                 debugger;
             }
@@ -173,11 +188,14 @@
                         event: {action: {type: action_type, data: action_data}},
                         return_msg: 'notify_edit_option'
                     };
+
+                waveCont.edit_option(option);
                 
-                controller.clientChannel.publish({
-                    type: 'update_array_item',
-                    data: data
-                });
+                // GY: comment out for now
+                // controller.clientChannel.publish({
+                //     type: 'update_array_item',
+                //     data: data
+                // });
             },
             
             add_option: function(option) {
