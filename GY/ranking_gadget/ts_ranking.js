@@ -100,7 +100,7 @@
                 // this needs to be changed when the wave bug associated with data type is fixed
                 $.each(options, function(index, value) {
                     if (value.id === option.id) {
-                        options.index = option;
+                        options[index] = option;
                     }
                 });
                 var waveData = {"options": options};
