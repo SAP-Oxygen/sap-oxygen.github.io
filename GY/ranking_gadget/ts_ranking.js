@@ -107,6 +107,22 @@
                 var waveData = {"options": options};
                 waveState.submitDelta(waveData);
                 debugger;
+            },
+            remove_option: function(option) {
+                debugger;
+                var waveState = wave.getState();
+                var options = waveState.get("options");
+                var optionId = option.id;
+                // this needs to be changed when the wave bug associated with data type is fixed
+                $.each(options, function(index, value) {
+                    if (value.id === option.id) {
+                        delete options[index];
+                        return false;
+                    }
+                });
+                var waveData = {"options": options};
+                waveState.submitDelta(waveData);
+                debugger;
             }
         };
 
@@ -231,11 +247,15 @@
                         event: {action: {type: action_type, data: action_data}},
                         return_msg: 'notify_remove_option'
                     };
+
+                waveCont.remove_option(option);
+                controller.notify_remove_option(data);
                 
-                controller.clientChannel.publish({
-                    type: 'update_array_item',
-                    data: data
-                });
+                // GY: comment out for now
+                // controller.clientChannel.publish({
+                //     type: 'update_array_item',
+                //     data: data
+                // });
             },            
            
             lock: function(locked) {
