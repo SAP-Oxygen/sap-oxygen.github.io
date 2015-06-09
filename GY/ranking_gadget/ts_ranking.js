@@ -101,6 +101,7 @@
                 $.each(options, function(index, value) {
                     if (value.id === option.id) {
                         options[index] = option;
+                        return false;
                     }
                 });
                 var waveData = {"options": options};
@@ -190,6 +191,7 @@
                     };
 
                 waveCont.edit_option(option);
+                controller.notify_edit_option(data);
                 
                 // GY: comment out for now
                 // controller.clientChannel.publish({
