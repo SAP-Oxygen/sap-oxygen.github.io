@@ -53,7 +53,7 @@
             add_option_array: function (newOption, options) {
                 var optionsArr = [];
                 $.each(options, function(name, value) {
-                    optionsArr.push({id: name, value: value});
+                    optionsArr.push(value);
                 });
                 optionsArr.push(newOption);
                 return optionsArr;
