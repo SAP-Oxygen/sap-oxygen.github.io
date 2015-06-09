@@ -123,6 +123,13 @@
                 var waveData = {"options": options};
                 waveState.submitDelta(waveData);
                 debugger;
+            },
+            lock: function(lock) {
+                debugger;
+                var waveState = wave.getState();
+                var waveData = {"locked": locked};
+                waveState.submitDelta(waveData);
+                debugger;
             }
         };
 
@@ -266,11 +273,15 @@
                         event: {action: {type: action_type}, importance: 1},
                         return_msg: 'notify_locked'
                     };
+
+                waveCont.lock(locked);
+                controller.notify_locked(data);
                 
-                controller.clientChannel.publish({
-                    type: 'set_data',
-                    data: data
-                });
+                // GY: comment out for now
+                // controller.clientChannel.publish({
+                //     type: 'set_data',
+                //     data: data
+                // });
             },
             
             update_title: function(title) {
