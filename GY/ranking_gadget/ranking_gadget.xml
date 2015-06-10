@@ -98,7 +98,7 @@
           streamwork.initialize(3);
         }());
 
-        initUser: function() {
+        var initUser = function() {
           if (!CSTAR.current_user) {
             CSTAR.current_user = {};
           }
