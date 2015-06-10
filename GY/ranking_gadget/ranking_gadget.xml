@@ -99,6 +99,7 @@
         }());
 
         var initUser = function() {
+          console.log("initUser begin");
           if (!CSTAR.current_user) {
             CSTAR.current_user = {};
           }
@@ -107,9 +108,12 @@
           CSTAR.jeditable_type = "textarea";
           // GY: comment out for now
           // jamApp.isEditable = true;        
+          console.log("initUser end");
         }
 
+        console.log("before setState");
         wave.setStateCallback(initUser);
+        console.log("after setState");
 
         jQuery(document).ready(function($) {
             // This has to run after a bunch of other javascript has run, so defer it.
