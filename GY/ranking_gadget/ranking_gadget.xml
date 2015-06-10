@@ -93,7 +93,7 @@
             itemRealUuid: "3zUC4DSM8ZTyQYfgLTvydW",
             gadgetUrl: null,
             objectType: "CstarDefaultMethod"
-          };
+          };display_back_btn_warning_dialog
           streamwork.moduleLoader.start("core.ranking", options, "1432591581");
           streamwork.initialize(3);
         }());
@@ -101,8 +101,8 @@
         if (!CSTAR.current_user) {
           CSTAR.current_user = {};
         }
-        CSTAR.current_user.uuid = "1";
-        CSTAR.current_user.name = "Cee-Dub Wiegner";
+        CSTAR.current_user.uuid = wave.getViewer().getId();
+        CSTAR.current_user.name = wave.getViewer().getDisplayName();
         CSTAR.jeditable_type = "textarea";
         // GY: comment out for now
         // jamApp.isEditable = true;
