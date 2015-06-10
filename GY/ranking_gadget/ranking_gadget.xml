@@ -101,6 +101,7 @@
         var initUser = function() {
           console.log("initUser begin");
           console.log("wave: " + wave.getState());
+          debugger;
           if (!CSTAR.current_user) {
             CSTAR.current_user = {};
           }
