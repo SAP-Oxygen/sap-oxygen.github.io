@@ -105,8 +105,10 @@
           if (!CSTAR.current_user) {
             CSTAR.current_user = {};
           }
-          CSTAR.current_user.uuid = wave.getViewer().getId();
-          CSTAR.current_user.name = wave.getViewer().getDisplayName();
+          osapi.people.getViewer().execute(function (data) {
+            CSTAR.current_user.uuid = data.id;
+            CSTAR.current_user.name = data.displayName;
+          });
           CSTAR.jeditable_type = "textarea";
           // GY: comment out for now
           // jamApp.isEditable = true;        
