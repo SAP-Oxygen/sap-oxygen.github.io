@@ -82,12 +82,24 @@
       <script type="text/javascript" src="cstar_pbe.js"></script>
 
       <script type="text/javascript">
-        (function () {
+        var getWaveState(waveState) {
+          return waveState.state_;
+        }
+
+        var init = function () {
+          var waveData = wave.getState();
+          var initialData;
+          if ($.isEmptyObject(initialData)) {
+            initialData = waveData;
+          } else {
+            initialData = {"title":"","options":[],"rankings":{},"frozen":false,"locked":false,"published":false};
+          }
+
           var options = {
             itemId: 5,
             readOnly: false,
             elementId: "core_ranking_5",
-            initialData: {"title":"","options":[],"rankings":{},"frozen":false,"locked":false,"published":false},
+            initialData: initialData,
             itemCreatorUuid: "1",
             itemUuid: "5",
             itemRealUuid: "3zUC4DSM8ZTyQYfgLTvydW",
@@ -96,11 +108,13 @@
           };
           streamwork.moduleLoader.start("core.ranking", options, "1432591581");
           streamwork.initialize(3);
-        }());
+
+          initUser();
+          load();
+        }
 
         var initUser = function() {
           console.log("initUser begin");
-          console.log("wave: " + wave.getState());
           debugger;
           if (!CSTAR.current_user) {
             CSTAR.current_user = {};
@@ -108,26 +122,25 @@
           osapi.people.getViewer().execute(function (data) {
             CSTAR.current_user.uuid = data.id;
             CSTAR.current_user.name = data.displayName;
+            console.log("user info: " + data.id + data.displayName);
           });
           CSTAR.jeditable_type = "textarea";
           // GY: comment out for now
           // jamApp.isEditable = true;        
           console.log("initUser end");
-          console.log("wave: " + wave.getState());
         }
 
-        console.log("before setState");
-        console.log("wave: " + wave.getState());
-        wave.setStateCallback(initUser);
-        console.log("after setState");
-        console.log("wave: " + wave.getState());
+        var load = function() {
+          jQuery(document).ready(function($) {
+              // This has to run after a bunch of other javascript has run, so defer it.
+              _.defer(function() {
+                streamwork.moduleLoader.loadResources({"javascripts":["https://sap-oxygen.github.io/GY/ranking_gadget/ts_ranking.js"],"stylesheets":["https://sap-oxygen.github.io/GY/ranking_gadget/ts_ranking.css"],"moduleLocations":[["core.ranking",""]]}, "core.ranking")
+              });
+          });
+        }
+        
+        wave.setStateCallback(init);
 
-        jQuery(document).ready(function($) {
-            // This has to run after a bunch of other javascript has run, so defer it.
-            _.defer(function() {
-              streamwork.moduleLoader.loadResources({"javascripts":["https://sap-oxygen.github.io/GY/ranking_gadget/ts_ranking.js"],"stylesheets":["https://sap-oxygen.github.io/GY/ranking_gadget/ts_ranking.css"],"moduleLocations":[["core.ranking",""]]}, "core.ranking")
-            });
-        });
       </script>
 
       <script type="text/javascript" src="ts_ranking.js"></script>
