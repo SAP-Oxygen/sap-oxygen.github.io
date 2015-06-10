@@ -98,14 +98,18 @@
           streamwork.initialize(3);
         }());
 
-        if (!CSTAR.current_user) {
-          CSTAR.current_user = {};
+        initUser: function() {
+          if (!CSTAR.current_user) {
+            CSTAR.current_user = {};
+          }
+          CSTAR.current_user.uuid = wave.getViewer().getId();
+          CSTAR.current_user.name = wave.getViewer().getDisplayName();
+          CSTAR.jeditable_type = "textarea";
+          // GY: comment out for now
+          // jamApp.isEditable = true;        
         }
-        CSTAR.current_user.uuid = wave.getViewer().getId();
-        CSTAR.current_user.name = wave.getViewer().getDisplayName();
-        CSTAR.jeditable_type = "textarea";
-        // GY: comment out for now
-        // jamApp.isEditable = true;
+
+        wave.setStateCallback(initUser);
 
         jQuery(document).ready(function($) {
             // This has to run after a bunch of other javascript has run, so defer it.
