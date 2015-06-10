@@ -28,9 +28,8 @@ streamwork.io = streamwork.io || {};
     
     // public interface
     // Returns the id of the current user
-    // GY: return a constant for now
     ns.getViewerId = function() {
-        return 1;
+        return CSTAR.current_user.uuid;
     };
     
     // GY: comment out unused part of this script
