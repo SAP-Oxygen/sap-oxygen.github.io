@@ -127,7 +127,7 @@
             lock: function(lock) {
                 debugger;
                 var waveState = wave.getState();
-                var waveData = {locked: locked};
+                var waveData = {locked: lock};
                 waveState.submitDelta(waveData);
                 debugger;
             }
