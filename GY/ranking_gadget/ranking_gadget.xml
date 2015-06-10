@@ -100,6 +100,7 @@
 
         var initUser = function() {
           console.log("initUser begin");
+          console.log("wave: " + wave.getState());
           if (!CSTAR.current_user) {
             CSTAR.current_user = {};
           }
@@ -109,11 +110,14 @@
           // GY: comment out for now
           // jamApp.isEditable = true;        
           console.log("initUser end");
+          console.log("wave: " + wave.getState());
         }
 
         console.log("before setState");
+        console.log("wave: " + wave.getState());
         wave.setStateCallback(initUser);
         console.log("after setState");
+        console.log("wave: " + wave.getState());
 
         jQuery(document).ready(function($) {
             // This has to run after a bunch of other javascript has run, so defer it.
