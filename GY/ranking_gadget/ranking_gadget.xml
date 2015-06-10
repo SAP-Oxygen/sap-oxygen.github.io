@@ -82,7 +82,7 @@
       <script type="text/javascript" src="cstar_pbe.js"></script>
 
       <script type="text/javascript">
-        var getWaveState(waveState) {
+        var getWaveState = function(waveState) {
           return waveState.state_;
         }
 
