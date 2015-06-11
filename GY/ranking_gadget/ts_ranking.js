@@ -1391,7 +1391,8 @@
                 data["options"] = optionsArr;
                 data["rankings"] = rankingsObj;
                 return data;
-            }
+            },
+            
             init: function() {
                 waveCont.init();
                 console.log(initialData);
