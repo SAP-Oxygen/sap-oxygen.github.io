@@ -27,7 +27,7 @@ var createList = function(items) {
   var table = $('<table></table>').attr({
     id: "init-table",
     class: "table table-striped"});
-  var header = $('<thead><tr></tr></thead>');
+  var header = $('<tr></tr>');
   var col1 = $('<th></th>').text("Done");
   var col2 = $('<th></th>').text("Task");
   var col3 = $('<th></th>').text("Due");
