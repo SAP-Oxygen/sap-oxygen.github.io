@@ -40,10 +40,8 @@
                 debugger;
             },
             log: function() {
-                debugger;
                 var waveData = wave.getState().state_;
                 console.log(waveData);
-                debugger;
             },
             add_option: function(option) {
                 var waveState = wave.getState();
@@ -1392,7 +1390,7 @@
                 data["rankings"] = rankingsObj;
                 return data;
             },
-            
+
             init: function() {
                 waveCont.init();
                 console.log(initialData);
