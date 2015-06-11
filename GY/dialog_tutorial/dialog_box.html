@@ -4,9 +4,6 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="dialog_box.js"></script>
@@ -16,15 +13,15 @@
 
   <label id="message">Please enter the fields</label><br>
   <form class="form-group" id="submit-form">
-    Task:
-    <input id="task" type="text" name="task">
+    <label for="exampleInputName2">Task</label>
+    <input class="form-control" id="task" type="text" name="task" placeholder="Text input">
     <br>
-    Due:
-    <input id="due" type="text" name="due">
+    <label for="exampleInputName2">Due</label>
+    <input class="form-control" id="due" type="text" name="due" placeholder="Text input">
     <br>
-    <input class="btn btn-sm" id="submit-btn" type="submit" value="submit"></button>
+    <input class="btn btn-default btn-sm" id="submit-btn" type="submit" value="submit"></button>
     <br>
-    <button class="btn btn-sm" type="button" onclick="gadgets.views.close();">Close</button>
+    <button class="btn btn-default btn-sm" type="button" onclick="gadgets.views.close();">Close</button>
   </form>
 
 </html>
