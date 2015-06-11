@@ -1393,10 +1393,12 @@
 
             init: function() {
                 waveCont.init();
-                console.log("raw initial data: " + initialData);
+                console.log("raw initial data: ");
+                console.log(initialData);
                 // persist the data on the container div
                 initialData = controller.convertData(initialData);
-                console.log("converted initial data: " + initialData);
+                console.log("converted initial data: ");
+                console.log(initialData);
 
                 $.each(initialData, function(key, value) {
                     view.div.data(key, value);
