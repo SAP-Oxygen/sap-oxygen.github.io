@@ -141,7 +141,7 @@
           });
         }
         
-        var initWave: function() {
+        var initWave = function() {
           wave.setStateCallback(init);
         }
 
