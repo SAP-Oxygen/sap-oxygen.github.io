@@ -1367,10 +1367,37 @@
          * Initialization method.  Copies the data from the initialData parameter
          * into the container div and initializes the view.
          */
+            // convert the data into compatible format for this gadget
+            // this is due to current bug in wave
+            convertData: function(data) {
+                var optionsArr = [];
+                var rankingsObj = {};
+                $.each(data, function (key, value) {
+                    if (key === "options") {
+                        $.each(value, function (key, value) {
+                            optionsArr.push(value);
+                        });
+                    }
+                    if (key === "rankings") {
+                        $.each(value, function (key, value) {
+                            var rankingsArr = [];
+                            $.each(value, function (key, value) {
+                                rankingsArr.push(value);
+                            });
+                            rankingsObj[key] = rankingsArr;
+                        });
+                    }
+                });
+                data["options"] = optionsArr;
+                data["rankings"] = rankingsObj;
+                return data;
+            }
             init: function() {
                 waveCont.init();
                 console.log(initialData);
                 // persist the data on the container div
+                initialData = controller.convertData(initialData);
+
                 $.each(initialData, function(key, value) {
                     view.div.data(key, value);
                 });
