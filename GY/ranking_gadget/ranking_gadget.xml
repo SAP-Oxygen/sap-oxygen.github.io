@@ -92,9 +92,9 @@
           var waveData = getWaveState(waveState);
           var initialData;
           if ($.isEmptyObject(initialData)) {
-            initialData = waveData;
-          } else {
             initialData = {"title":"","options":[],"rankings":{},"frozen":false,"locked":false,"published":false};
+          } else {
+            initialData = waveData;
           }
 
           var options = {
