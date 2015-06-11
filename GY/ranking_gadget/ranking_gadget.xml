@@ -87,6 +87,7 @@
         }
 
         var init = function () {
+          debugger;
           var waveData = wave.getState();
           var initialData;
           if ($.isEmptyObject(initialData)) {
