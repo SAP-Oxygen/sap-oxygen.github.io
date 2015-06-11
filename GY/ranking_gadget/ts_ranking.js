@@ -33,13 +33,17 @@
 
         waveCont = {
             init: function() {
+                debugger;
                 wave.setStateCallback(waveCont.log);
                 var waveState = wave.getState();
                 waveState.submitDelta(initialData);
+                debugger;
             },
             log: function() {
+                debugger;
                 var waveData = wave.getState().state_;
                 console.log(waveData);
+                debugger;
             },
             add_option: function(option) {
                 var waveState = wave.getState();
@@ -59,9 +63,11 @@
                 return optionsArr;
             },
             update_title: function(title) {
+                debugger;
                 var waveState = wave.getState();
                 var waveData = {title: title};
                 waveState.submitDelta(waveData);
+                debugger;
             },
             publish: function(title, options, rankings, action) {
                 var waveState = wave.getState();
