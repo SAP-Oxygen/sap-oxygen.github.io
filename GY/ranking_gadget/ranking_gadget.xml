@@ -141,7 +141,11 @@
           });
         }
         
-        wave.setStateCallback(init);
+        var initWave: function() {
+          wave.setStateCallback(init);
+        }
+
+        gadgets.util.registerOnLoadHandler(initWave);
 
       </script>
 
