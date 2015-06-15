@@ -9,7 +9,7 @@
         <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
         <script type="text/javascript" src="moment.js"></script>
         <script type="text/javascript" src="bootstrap.js"></script>
-        <script type="text/javascript" src="boostarp-datepicker.min.js"></script>
+        <script type="text/javascript" src="boostrap-datepicker.min.js"></script>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="bootstrap-datepicker.min.css" />
