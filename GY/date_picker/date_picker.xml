@@ -26,9 +26,54 @@
                         </div>
                     </div>
                 </div>
+                <div class='col-sm-6'>
+                  <button class="btn btn-default btn-sm" id="open-dialog-btn" type="button">Open a dialog</button>
+                </div>
                 <script type="text/javascript">
                     $(function () {
                         $('#datetimepicker1').datetimepicker();
+                    });
+                    $(document).ready(function() {
+                      $("#open-dialog-btn").click(function() {
+                        gadgets.views.openGadget(function(result){
+                        }, 
+                        function(site){}, 
+                        {view: "dialog",viewTarget: "MODALDIALOG"});
+                      });
+                    });
+                </script>
+            </div>
+        </div>
+    ]]>
+  </Content>
+  <Content type="html" view="dialog">
+    <![CDATA[
+        <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+        <script type="text/javascript" src="moment.js"></script>
+        <script type="text/javascript" src="bootstrap.js"></script>
+        <script type="text/javascript" src="bootstrap-datepicker.min.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="bootstrap-datepicker.min.css" />
+
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker2'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-sm-6'>
+                  <button class="btn btn-default btn-sm" type="button" onclick="gadgets.views.close()">Close</button>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker2').datetimepicker();
                     });
                 </script>
             </div>
