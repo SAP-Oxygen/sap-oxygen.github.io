@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Tutorial_08_Complete_Tutorial_Code_Example (XML, HTML, CSS, JavaScript) -->
+<Module>
+  <ModulePrefs title="Date Picker" height="400" author="Geon Young" author_email="geon.young.park@sap.com" description="Date Picker Test App">
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
+  <Content type="html">
+    <![CDATA[
+        <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+        <script src="http://momentjs.com/downloads/moment.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="datepicker.min.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="bootstrap-datepicker.min.css" />
+
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker1').datetimepicker();
+                    });
+                </script>
+            </div>
+        </div>
+    ]]>
+  </Content>
+</Module >
