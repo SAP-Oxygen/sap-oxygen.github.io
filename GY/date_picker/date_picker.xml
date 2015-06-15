@@ -3,6 +3,7 @@
 <Module>
   <ModulePrefs title="Date Picker" height="400" author="Geon Young" author_email="geon.young.park@sap.com" description="Date Picker Test App">
         <Require feature="dynamic-height"/>
+        <Require feature="open-views"/>
     </ModulePrefs>
   <Content type="html">
     <![CDATA[
