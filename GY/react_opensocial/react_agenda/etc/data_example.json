@@ -1,0 +1,70 @@
+// before drag and drop
+{
+    "items": [
+        {
+            "id": "1",
+            "topic": "topic 1",
+            "desc": "this is about topic 1",
+            "time": 15,
+            "owner": "1"
+        },
+        {
+            "id": "2",
+            "topic": "topic 2",
+            "desc": "this is about topic 2",
+            "time": 15,
+            "owner": "2"
+        },
+        {
+            "id": "3",
+            "topic": "topic 3",
+            "desc": "this is about topic 3",
+            "time": 15,
+            "owner": "1"
+        },
+        {
+            "id": "Jyr5zDe7JIc14dfe1b6bca1",
+            "topic": "topic 4",
+            "desc": "this is about topic 4",
+            "time": 15,
+            "owner": "2"
+        }
+    ],
+    "startTime": 1433923200000
+}
+
+// after drag and drop
+
+{
+    "items": [
+        {
+            "id": "1",
+            "topic": "topic 1",
+            "desc": "this is about topic 1",
+            "time": 15,
+            "owner": "1"
+        },
+        {
+            "id": "2",
+            "topic": "topic 2",
+            "desc": "this is about topic 2",
+            "time": 15,
+            "owner": "2"
+        },
+        {
+            "id": "Jyr5zDe7JIc14dfe1b6bca1",
+            "topic": "topic 4",
+            "desc": "this is about topic 4",
+            "time": 15,
+            "owner": "2"
+        },
+        {
+            "id": "3",
+            "topic": "topic 3",
+            "desc": "this is about topic 3",
+            "time": 15,
+            "owner": "1"
+        }
+    ],
+    "startTime": 1433923200000
+}

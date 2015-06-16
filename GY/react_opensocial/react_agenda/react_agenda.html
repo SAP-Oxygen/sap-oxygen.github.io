@@ -1,12 +1,116 @@
 <html>
   <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
     <script src="https://fb.me/react-0.13.3.min.js"></script>
-    <script type="text/javascript" src="lib/react-bootstrap.min.js"></script>
   </head>
 
-  <div>
-  </div>
+  <body>
+    <script type="text/javascript" src="lib/react-bootstrap.js"></script>
+    <script type="text/javascript">
+      var Table = ReactBootstrap.Table;
+      var ButtonToolbar = ReactBootstrap.ButtonToolbar;
+      var Button = ReactBootstrap.Button;
+      const tableInstance = (
+        React.createElement("div", null, 
+          React.createElement(Table, {striped: true, bordered: true, condensed: true, hover: true}, 
+            React.createElement("thead", null, 
+              React.createElement("tr", null, 
+                React.createElement("th", null, "#"), 
+                React.createElement("th", null, "First Name"), 
+                React.createElement("th", null, "Last Name"), 
+                React.createElement("th", null, "Username")
+              )
+            ), 
+            React.createElement("tbody", null, 
+              React.createElement("tr", null, 
+                React.createElement("td", null, "1"), 
+                React.createElement("td", null, "Mark"), 
+                React.createElement("td", null, "Otto"), 
+                React.createElement("td", null, "@mdo")
+              ), 
+              React.createElement("tr", null, 
+                React.createElement("td", null, "2"), 
+                React.createElement("td", null, "Jacob"), 
+                React.createElement("td", null, "Thornton"), 
+                React.createElement("td", null, "@fat")
+              ), 
+              React.createElement("tr", null, 
+                React.createElement("td", null, "3"), 
+                React.createElement("td", {colSpan: "2"}, "Larry the Bird"), 
+                React.createElement("td", null, "@twitter")
+              )
+            )
+          ), 
+          React.createElement(Table, {responsive: true}, 
+            React.createElement("thead", null, 
+              React.createElement("tr", null, 
+                React.createElement("th", null, "#"), 
+                React.createElement("th", null, "Table heading"), 
+                React.createElement("th", null, "Table heading"), 
+                React.createElement("th", null, "Table heading"), 
+                React.createElement("th", null, "Table heading"), 
+                React.createElement("th", null, "Table heading"), 
+                React.createElement("th", null, "Table heading")
+              )
+            ), 
+            React.createElement("tbody", null, 
+              React.createElement("tr", null, 
+                React.createElement("td", null, "1"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell")
+              ), 
+              React.createElement("tr", null, 
+                React.createElement("td", null, "2"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell")
+              ), 
+              React.createElement("tr", null, 
+                React.createElement("td", null, "3"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell"), 
+                React.createElement("td", null, "Table cell")
+              )
+            )
+          ), 
+          React.createElement(ButtonToolbar, null, 
+            /* Standard button */
+            React.createElement(Button, null, "Default"), 
 
-  <script type="text/javascript" src="react_agenda.js"></script>
+            /* Provides extra visual weight and identifies the primary action in a set of buttons */
+            React.createElement(Button, {bsStyle: "primary"}, "Primary"), 
+
+            /* Indicates a successful or positive action */
+            React.createElement(Button, {bsStyle: "success"}, "Success"), 
+
+            /* Contextual button for informational alert messages */
+            React.createElement(Button, {bsStyle: "info"}, "Info"), 
+
+            /* Indicates caution should be taken with this action */
+            React.createElement(Button, {bsStyle: "warning"}, "Warning"), 
+
+            /* Indicates a dangerous or potentially negative action */
+            React.createElement(Button, {bsStyle: "danger"}, "Danger"), 
+
+            /* Deemphasize a button by making it look like a link while maintaining button behavior */
+            React.createElement(Button, {bsStyle: "link"}, "Link")
+          )
+        )
+      );
+
+      React.render(tableInstance, document.body);
+    </script>
+  </body>
+  
 </html>
