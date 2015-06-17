@@ -1,10 +1,14 @@
 var Table = ReactBootstrap.Table;
 var Button = ReactBootstrap.Button;
+var Grid = ReactBootstrap.Grid;
+var Row = ReactBootstrap.Row;
+var Col = ReactBootstrap.Col;
 
 var Agenda = React.createClass({displayName: "Agenda",
   render: function() {
     return (
       React.createElement("div", null, 
+        React.createElement(DatePicker, null), 
         React.createElement(AgendaTable, {items: this.props.items.items}), 
         React.createElement(AddButton, null)
       )
@@ -54,6 +58,33 @@ var AddButton = React.createClass({displayName: "AddButton",
       React.createElement(Button, null, "Add an item")
     );
   }
+});
+
+var DatePicker = React.createClass({displayName: "DatePicker",
+  render: function() {
+    return (
+      React.createElement(Grid, null, 
+        React.createElement(Row, {className: "show-grid"}, 
+          React.createElement(Col, {sm: 12}, 
+            React.createElement("div", {className: "input-group date", id: "datetimepicker"}, 
+              React.createElement("input", {type: "text", className: "form-control"}), 
+              React.createElement("span", {className: "input-group-addon"}, 
+                React.createElement("span", {className: "glyphicon glyphicon-calendar"})
+              )
+            )
+          )
+        )
+      )
+    );
+  }
+});
+
+$(function () {
+    $('#datetimepicker').datetimepicker({
+      sideBySide: true,
+      showClose: true,
+      showTodayButton: true
+    });
 });
 
 var ITEMS = {
