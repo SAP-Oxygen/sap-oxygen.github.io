@@ -1,0 +1,1324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Pro/Con Table" title_url="http://sapstreamwork.com/"  height="450" author="Ashish Sinha" author_email="ashish.sinha@sap.com" thumbnail="http://procontable.googlecode.com/files/pro_con_icon.png">
+	<Require feature="wave" /> 
+  </ModulePrefs>
+  <Content type="html">
+  	<![CDATA[ 
+	<div id="content_div"></div>
+	<style type="text/css">
+		.PCTtable{
+	width:100%;
+	border-collapse:collapse;
+	font-family:Arial;
+}
+.PCTtableHeaderCorner{
+	height:35px;
+	width:5px;
+}
+.PCTtableHeaderLeftFreeze  {
+	background:url("http://procontable.googlecode.com/files/my_work_table_sprites.png") no-repeat scroll -5px -7px transparent;
+}
+.PCTtableHeaderLeftUnFreeze  {
+	background:url("http://procontable.googlecode.com/files/blue_LeftHeader.png") no-repeat scroll 0 0 transparent;
+}
+.PCTtableHeaderFillerFreeze {
+	background:url("http://procontable.googlecode.com/files/my_work_onepixel_fillers.png") repeat-x scroll 0 -38px transparent;
+	padding:5px 10px;
+}
+.PCTtableHeaderFillerUnFreeze {
+	background:url("http://procontable.googlecode.com/files/blue_Center.png") repeat-x scroll 0 0 transparent;
+	padding:5px 10px;
+}
+.PCTtableHeaderRightFreeze {
+	background:url("http://procontable.googlecode.com/files/my_work_table_sprites.png") no-repeat scroll -10px -7px transparent;
+}
+.PCTtableHeaderRightUnFreeze {
+	background:url("http://procontable.googlecode.com/files/blue_RightHeader.png") no-repeat scroll 0 0 transparent;
+}
+.PCTOption{
+	padding:5px 0 0 5px;
+	background-color:#4f81bd; 
+	height:27px; 
+	font-family:Arial;}
+.PCTOptionsInputController{
+	border:solid 1px #bfbfbf;
+	background-color:#ffffff;
+}
+.PCTOptionsInputController input[type="text"]{
+	height:15px;
+	width:85%;
+	border:0;
+	font-style:italic;
+	color:#a6a6a6;
+	padding:0 0 0 5px;}
+.PCTOptionsDoneController{
+	font-size:9pt;
+	font-family:Arial, Helvetica, sans-serif; 
+	text-align:center; 
+	vertical-align:middle;
+	background-color:#ffffff; 
+	font-weight:bold; 
+	cursor:pointer; 
+	height:19px;
+	padding-top:3px;}
+.PCTTableProConHead { 
+	border-right:solid 1px #d3d3d3; 
+	border-left:solid 1px #d3d3d3; 
+	background-color:#f5f6f6; 
+}
+.PCTHead{
+	padding:5px 0 5px 15px;
+	border-bottom:solid 1px #d3d3d3;
+	font-weight:bold;
+	height:22px;
+	color:#000000;
+	font-size: 10px;
+}
+.PCTOptionHead{
+	width:40%;
+}
+.PCTProConHead{
+	width:30%;
+	border-left:solid 1px #d3d3d3;
+}
+.PCTDataTable{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10pt;
+	width:100%;
+	border-right:solid 1px #d3d3d3;
+	border-bottom:solid 1px #d3d3d3;
+	border-left:solid 1px #d3d3d3;
+	border-spacing:1px;
+	border-collapse:collapse;
+	margin-top:-1px;
+}
+.AltRow{
+	background-color:#FAFAFA;
+}
+.OptionData{
+	padding:8px 0 5px 15px;
+	border-bottom:solid 1px #d3d3d3;
+	word-wrap:break-word;
+	width:40%;
+	height:30px;
+	color:#0D3A5A;
+	font-family:Arial;
+	font-size:10px;
+	font-weight:bold;
+	overflow:hidden;
+	vertical-align:top;
+}
+.ProConData {
+	padding:0 15px;
+	vertical-align:top;
+	border-bottom:solid 1px #d3d3d3;
+	border-left:solid 1px #d3d3d3;
+	word-wrap:break-word;
+	cursor:pointer;
+	width:30%;
+}
+.ProConIcon{
+	height:20px;
+	width:20px;
+	display:inline;
+	z-index:1000;
+	cursor:default;
+	padding: 5px 2px 5px 0;
+}
+.inputcontainer{
+	float:left;
+	width:90%;
+}
+.PCTOkCancelContainerVisible{
+	visibility:visible;
+	cursor:pointer;
+	float:right;
+	font-size:11pt;
+	width:35px;
+}
+.PCTOkCancelContainer{
+	cursor:pointer;
+	float:right;
+	font-size:11pt;
+	visibility:hidden;
+	width:35px;
+}
+.PCTOkButton{
+	background:url("http://procontable.googlecode.com/files/ok_enabled.png") no-repeat 0 0 transparent;
+	height:16px;
+	width:16px;
+	float:left;
+}
+.PCTCancelButton{
+	background:url("http://procontable.googlecode.com/files/ok_cancel_btn_pic.png") no-repeat -16px 0 transparent;
+	height:16px;
+	width:16px;
+	float:right;
+}
+.PCTOkDisabledButton{
+	background:url("http://procontable.googlecode.com/files/ok_disabled.png") no-repeat 0 0 transparent;
+	height:16px;
+	width:16px;
+	float:left;
+}
+.OptionEditContainerHidden{
+	float:right;
+	width:40px;
+	vertical-align:top;
+	visibility:hidden;
+}
+.OptionEditContainerVisible{
+	float:right;
+	width:40px;
+	vertical-align:top;
+	visibility:visible;
+	cursor:pointer;
+}
+.OptionEdit{
+	background:url("http://procontable.googlecode.com/files/Edit.png") no-repeat 0 0 transparent;
+	height:17px;
+	width:15px;
+	float:left;
+}
+.OptionDelete{
+	background:url("http://procontable.googlecode.com/files/Delete.png") no-repeat 0 0 transparent;
+	height:16px;
+	width:16px;
+	float:right;
+}
+.FullTextSummeryCover
+{
+	border-right:solid 1px #d3d3d3;
+	border-bottom:solid 1px #d3d3d3;
+	border-left:solid 1px #d3d3d3;
+	background-color:#f5f6f6;
+	height:22px;
+}
+.FullTextSummeryContainer{
+	margin:5px 15px;
+	width:130px; 
+	float:right;
+	font-size:11px;
+	cursor:pointer;
+}
+.fullText{
+	float:right;
+	color:#3589C9;
+	font-weight:bold;
+	padding: 0 0 0 10px;
+}
+.FullTextContainer{
+	padding: 5px 0 10px 0;
+}
+.FullTextProCon{
+	text-align:left;
+	font-size:11px;
+	width:*;
+	padding:0 8px 3px;
+	cursor:pointer;
+}
+.FullTextHover{
+	background-color:#eeece1;
+}
+.FullTextUser{
+	color:#7f7f7f;
+	font-size:8pt;
+}
+.FullTextSummeryContainer .Summary{
+	display:inline;
+	color:#7f7f7f;
+	padding: 0 0 0 10px;
+	font-weight:bold;
+	cursor:default;
+}
+.Layer{
+	background-color:#000000;
+	z-index:1002;
+	opacity:0.7;
+	filter:alpha(opacity=70);
+	position:fixed;
+	top:0;
+	left:0;
+}
+.ProConDialog{
+	width:320px;
+	z-index:1003;
+	position:fixed;
+	opacity:1;
+}
+.PCTDialogLeft{
+	background:url("http://procontable.googlecode.com/files/pct_left_head.png") no-repeat scroll 0 0 transparent;
+	float:left;
+	width:4px;
+	height:31px;
+}
+.PCTDialogRightHead{
+	background:url("http://procontable.googlecode.com/files/pct_right_head.png") no-repeat scroll 0 0 transparent;
+	float:right;
+	width:4px;
+	height:31px;
+}
+.PCTDialogCenterHead{
+	background:url("http://procontable.googlecode.com/files/pct_center_head.png") repeat scroll 0 0 transparent;
+	font-weight:bold;
+	line-height:31px;
+	font-family:Arial;
+	font-size:12pt;
+	padding:0 13px;
+}
+.ProConDialogCenter{
+	height:120px;
+	padding:17px;
+	border-left:solid 1px #e6e7e7;
+	border-right:solid 1px #e6e7e7;
+	background-color:#ffffff;
+}
+.PCTDialogLeftFoot{
+	background:url("http://procontable.googlecode.com/files/pct_left_foot.png") no-repeat scroll 0 0 transparent;
+	float:left;
+	width:4px;
+	height:37px;
+}
+.PCTDialogRightFoot{
+	background:url("http://procontable.googlecode.com/files/pct_right_foot.png") no-repeat scroll 0 0 transparent;
+	float:right;
+	width:4px;
+	height:37px;
+}
+.PCTDialogCenterFoot{
+	background:url("http://procontable.googlecode.com/files/pct_center_foot.png") repeat-x scroll 0 0 transparent;
+	font-weight:bold;
+	height:37px;
+	margin:0;
+	font-family:Arial;
+	font-size:12pt;
+	float :left;
+	min-width: 282px;
+	padding:8px 17px 0 13px;
+}
+.PCTDialogtextBox{
+	width: 284px;
+	height:120px;
+}
+.PCTDeleteBT{
+	width:60px;
+	float:left;
+	margin: 0pt 5px;
+	visibility:hidden;
+}
+.PCTSaveBT{
+	width:60px;
+	float:right;
+	margin: 0pt 5px;
+}
+.PCTLeftBt{
+	background:url("http://procontable.googlecode.com/files/pct_left_bt.png") no-repeat scroll 0 0 transparent;
+	float:left;
+	width:5px;
+	height:21px;
+}
+.PCTRightBt{
+	background:url("http://procontable.googlecode.com/files/pct_right_bt.png") no-repeat scroll 0 0 transparent;
+	float:right;
+	width:5px;
+	height:21px;
+}
+.PCTCenterBtDelete{
+	padding: 0pt 0pt 0pt 13px;
+}
+.PCTCenterBtSave{
+	padding: 0pt 0pt 0pt 19px;
+}
+.PCTCenterBt{
+	background:url("http://procontable.googlecode.com/files/pct_center_bt.png") repeat-x scroll 0 0 transparent;
+	font-weight:bold;
+	line-height:21px;
+	cursor:pointer;
+}
+.PCTCancel{
+	font-size:8pt;
+	float:right;
+	color:#a6c0df;
+	margin: 0;
+	line-height:21px;
+	cursor:pointer;
+	text-align: right;
+}
+.PCTCancel:hover{
+	text-decoration:underline;
+}
+.PCTDialogBTContainer{
+	width:180px;
+	float:right;
+	font-size: 8pt;
+	font-family:Arial;
+}
+.ProConHover{
+	width:308px;
+	position:fixed;
+	z-index:1001;
+	font-family:Arial;
+}
+.ProConHoverTop{
+	height:14px;
+	background:url("http://procontable.googlecode.com/files/pct_tool_top.png") no-repeat 0 0 transparent;
+}
+.ProConHoverMiddle{
+	height:55px;
+	font-size:9pt;
+	padding:5px 10px;
+	background:url("http://procontable.googlecode.com/files/pct_tool_center.png") repeat 0 0 transparent;
+}
+.ProConHoverBottom{
+	height:5px;
+	background:url("http://procontable.googlecode.com/files/pct_tool_foot.png") no-repeat 0 0 transparent;
+}
+.PCTUserImgContainer{
+	float:left;
+}
+.PCTToolImg{
+	height:50px;
+	width:50px;
+	border:0;
+}
+.PCTToolDetail{
+	float:right;
+	padding:0 0 0 5px;
+	width:230px;
+}
+.PCTToolUserName{
+	font-weight:bold;
+	font-size:11px;
+	color:#3589c9;
+	float:left;
+}
+.PCTToolUser{
+	border-bottom:solid 1px #d3d3d3;
+	padding:0 0 0 6px;
+}
+.PCTToolTime{
+	font-size:8pt;
+	color:#999999;
+	display: inline; 
+	line-height: 11pt; 
+	padding: 0 0 0 10px;
+}
+.PCTToolText
+{
+	font-size:11pt;
+	color:#555555;
+	text-align:left;
+	padding: 5px 0;
+}
+.PCTFreezeDiscribe
+{
+	font-style:italic;
+	color:#595959;
+	float:left;
+	font-size: 10px;
+	font-weight: bold;
+}
+.PCTFreezeOption{
+	font-weight:bold;
+	color:#3589C9;
+	float:right;
+	cursor:pointer;
+	font-size: 11px;
+	font-weight: bold;
+}
+	</style>
+	<script language="JavaScript" src="http://procontable.googlecode.com/files/js2.js"></script>
+	<script language="JavaScript" src="http://procontable.googlecode.com/files/jquery-1.4.2.min.js"></script>
+	<script language="JavaScript">
+    var lo_ControlArea = document.getElementById("content_div");
+	var Location = ((location.href).indexOf("wavesandbox.com" > 0)) ? "wave":"c*";
+	var elementId = "content_div";
+	var initialData;
+	var lo_InitialData;
+	var lb_freeze = false;
+	var DataTableID = null;
+	var rowCount = 0;
+	var lb_AddOption = false;
+	var lb_AddProOrCon = false;
+	var EventSourceID = null;
+	var lb_FullText = false;
+	var url = "http://procontable.googlecode.com/files/";
+	var isIE = navigator.appName == "Microsoft Internet Explorer" ? true:false;
+	var SCROLL_HEIGHT = 350;
+	var isEditorOn = false;
+	var isEditorUpdateable = false;
+	var isDeletedConfirmed = false;
+	var inputInitValue = "Click to create a new option. Press <Enter> to add the option.";
+	var Time = 
+	{ timeAgoInWords : function(from) {
+        function distance_of_time_in_words(to, from) {
+            if (to < from) {
+                to = from;
+            }
+            seconds_ago = ((to - from)/1000);
+            minutes_ago = Math.floor(seconds_ago/60);
+            if (minutes_ago === 0) {
+                return " less than a minute";
+            } else if (minutes_ago === 1) {
+                return " a minute";
+            } else if (minutes_ago < 45) {
+                return " " + minutes_ago + " minutes";
+            } else if (minutes_ago < 90) {
+                return " about 1 hour";
+            } else if (minutes_ago < 1440) {
+                return " about " + Math.round(minutes_ago/60) + " hours";
+            } else if (minutes_ago < 2880) {
+                return " 1 day";
+            } else if (minutes_ago < 43200) {
+                return " " + Math.round(minutes_ago/1440) + " days";
+            } else if (minutes_ago < 86400) {
+                return " about 1 month";
+            } else if (minutes_ago < 525960) {
+                return " " + Math.round(minutes_ago/43200) + " months";
+            } else if (minutes_ago < 1051920) {
+                return " about 1 year";
+            } else {
+                return " over " + Math.round(minutes_ago/525960) + " years";
+            }
+        }
+        return distance_of_time_in_words(new Date().getTime(), Date.parse(from));
+		}
+    };
+	var handlers =
+	{
+		NotifyOptionDeleted : function(id) {
+			if(lo_InitialData.length == 1){
+				var OptionData = {"OptionText": "", "ProList": [], "ConList": []};
+				lo_InitialData[0].value = OptionData;
+			}
+			else{
+				for(var i = 0; i < lo_InitialData.length; i++){
+					if(lo_InitialData[i].id == id){
+						for(var j = i; j < lo_InitialData.length -1; j++){
+							lo_InitialData[j] = lo_InitialData[j + 1];
+						}
+						break;
+					}
+				}
+				lo_InitialData.pop();
+			}
+			initialData.ProConTable = lo_InitialData;
+			wave.getState().submitDelta({'initialData': JSON.stringify(initialData)});
+		},
+		NotifyUpdateFreezeOption : function(isFreeze) {
+			initialData.freeze = isFreeze;
+			wave.getState().submitDelta({'initialData': JSON.stringify(initialData)});
+		},
+		NotifyDeletePro : function(OptionID, id, path) {
+			for(var i = 0; i < lo_InitialData.length; i++)
+			{
+				if(lo_InitialData[i].id == OptionID){
+					if(path == "ProList"){
+						for(var j = 0; j < lo_InitialData[i].value.ProList.length -1; j++){
+							if(lo_InitialData[i].value.ProList[j].id == id){
+								lo_InitialData[i].value.ProList[j] = lo_InitialData[i].value.ProList[j + 1];
+							}
+						}
+						lo_InitialData[i].value.ProList.pop();
+					}
+					else if(path == "ConList"){
+						for(var j = 0; j < lo_InitialData[i].value.ConList.length -1; j++){
+							if(lo_InitialData[i].value.ConList[j].id == id){
+								lo_InitialData[i].value.ConList[j] = lo_InitialData[i].value.ConList[j + 1];
+							}
+						}
+						lo_InitialData[i].value.ConList.pop();
+					}
+					break;
+				}
+			}
+			initialData.ProConTable = lo_InitialData;
+			wave.getState().submitDelta({'initialData': JSON.stringify(initialData)});
+		},
+		NotifyUpdatePro : function (OptionID, id, path, value)
+		{
+			for(var i = 0; i < lo_InitialData.length; i++){
+				if(lo_InitialData[i].id == OptionID){
+					if(path == "ProList"){
+						for(var j = 0; j < lo_InitialData[i].value.ProList.length; j++){
+							if(lo_InitialData[i].value.ProList[j].id == id){
+								lo_InitialData[i].value.ProList[j].value = value;
+								break;
+							}
+						}
+					}
+					else if(path == "ConList"){
+						for(var j = 0; j < lo_InitialData[i].value.ConList.length; j++){
+							if(lo_InitialData[i].value.ConList[j].id == data.id){
+								lo_InitialData[i].value.ConList[j].value = value;
+								break;
+							}
+						}
+					}
+					break;
+				}
+			}
+			initialData.ProConTable = lo_InitialData;
+			wave.getState().submitDelta({'initialData': JSON.stringify(initialData)});
+		},
+		NotifyAddPro : function(OptionID, path, id, value) {
+			var NewProCon = {"id":id,"value":value};
+			for(var i = 0; i < lo_InitialData.length; i++){
+				if(lo_InitialData[i].id == OptionID){
+					if(path == "ProList")
+						lo_InitialData[i].value.ProList.push(NewProCon);
+					else if(path == "ConList")
+						lo_InitialData[i].value.ConList.push(NewProCon);
+				}
+			}
+			initialData.ProConTable = lo_InitialData;
+			wave.getState().submitDelta({'initialData': JSON.stringify(initialData)});
+		},
+		NotifyUpdateProConOption: function(OptionID, value){
+			for(var i =0; i < lo_InitialData.length; i++){
+				if(lo_InitialData[i].id == OptionID)
+					lo_InitialData[i].value.OptionText = value;
+			}
+		    initialData.ProConTable = lo_InitialData;
+			wave.getState().submitDelta({'initialData': JSON.stringify(initialData)});
+		},
+		NotifyAddNewProConOption : function(id, value) {
+			var NewOption = {"id":id, "value":value};
+			lo_InitialData.push(NewOption);
+			initialData.ProConTable = lo_InitialData;
+			wave.getState().submitDelta({'initialData': JSON.stringify(initialData)});
+		}
+	};
+	var EventBubble =
+	{
+		StopEvent: function(e){
+			if (!e) 
+				var e = window.event;
+			e.cancelBubble = true;
+			if (e.stopPropagation) 
+				e.stopPropagation();
+		}
+	};
+	var AddOptions = 
+	{
+		GetOptionBody : function() {
+			var body = 	"<table cellpadding=\"0\" cellspacing=\"0\" class=\"PCTtable\"><tr><td class=\"PCTOptionsInputController\">"+
+									"<div class=\"PCTOkCancelContainer\" id=\"InputButtonContainer_" + elementId + "\">" +
+										"<div class=\"PCTCancelButton\" title=\"Cancel\" id=\"CancelButton_"+ elementId + "\"></div>"+
+										"<div class=\"PCTOkButton\" title=\"Add new option\" id=\"OkButton_"+ elementId + "\"></div>"+
+									"</div>" +
+									"<input type=\"text\" title=\"Create new option\" id=\"OptionsText_" + elementId + "\" value=\""+inputInitValue+"\" />"+
+								"</td>" +
+								"<td style=\"width: 60px; padding: 0 0 0 10px;\">" +
+									"<div id=\"DoneController_" + elementId + "\" title=\"Done adding options\" class=\"PCTSaveBT\" style=\"margin:0;\">"+
+										"<div class=\"PCTLeftBt\"></div>"+
+										"<div class=\"PCTRightBt\"></div>"+
+										"<div class=\"PCTCenterBt\"><center>Done</center></div>"+
+									"</div>"+
+								"</td>" +
+							"</tr>" +
+						"</table>";
+			return body;
+		},
+		GetFreezeBody : function() {
+			var body = 	"<div class=\"PCTFreezeDiscribe\">Click table cell to add a Pro or Con opinion</div>"+
+						"<div class=\"PCTFreezeOption\" id=\"FreezeOption_" + elementId + "\">Click to add an option</div>";
+			return body;
+		},
+		RegisterService : function (){
+			if(!(lb_freeze)){
+				var lo_OptionText = document.getElementById("OptionsText_" + elementId);
+				var lo_OkButton = document.getElementById("OkButton_"+ elementId);
+				var lo_InputButtonContainer = document.getElementById("InputButtonContainer_" + elementId);
+				var lo_DoneController = document.getElementById("DoneController_" + elementId);
+				lo_DoneController.onclick = function(e) {
+					handlers.NotifyUpdateFreezeOption(true);
+				};
+				lo_OptionText.onclick = function(e)
+				{
+					$(lo_InputButtonContainer).removeClass("PCTOkCancelContainer").addClass("PCTOkCancelContainerVisible");
+					$(this).addClass("PCTOptionsInput");
+					if(this.value == inputInitValue){
+						this.value = "";
+					}
+					if(lo_OptionText.value.length == 0){
+						$(lo_OkButton).removeClass("PCTOkButton").addClass("PCTOkDisabledButton");
+					}
+					else{
+						$(lo_OkButton).removeClass("PCTOkDisabledButton").addClass("PCTOkButton");
+					}
+				};
+				lo_OptionText.onblur = function(e)
+				{
+					if((this.value).length == 0 || (this.value.length == 1 && this.value == " "))
+					{
+						this.value = inputInitValue;
+						$(this).addClass("PCTOptionsInputBlank");
+						$(lo_InputButtonContainer).removeClass("PCTOkCancelContainerVisible").addClass("PCTOkCancelContainer");
+						lb_AddOption = false;
+					}
+					$(this).addClass("PCTOptionsInputBlank");
+				};
+				function CheckValueEmpty(value)
+				{
+					var returnValue = false;
+					var flag = 0;
+					for(var i = 0; i < value.length; i++){
+						if(value[i] == "" || value[i] == " ")
+							flag = 0;
+						else{
+							flag = 1;
+							break;
+						}
+					}
+					if (flag == 0)
+						returnValue = true;
+					else
+						returnValue = false;
+					return returnValue;
+				}
+				lo_OptionText.onkeyup = function(e)
+				{
+					var value = lo_OptionText.value;
+					if(value.length == 0 || (CheckValueEmpty(value))){
+						lb_AddOption = false;
+						$(lo_OkButton).removeClass("PCTOkButton").addClass("PCTOkDisabledButton");
+					}
+					else{
+						lb_AddOption = true;
+						$(lo_OkButton).removeClass("PCTOkDisabledButton").addClass("PCTOkButton");
+						if (!e)
+							var e = window.event;
+						if(e.keyCode == 13){
+							add();
+						}
+					}
+				};
+				lo_OkButton.onclick = function (e){
+					if(lb_AddOption){
+						if(lo_OptionText){
+							if(lo_OptionText.value.length > 0){
+								add();
+							}
+						}
+					}
+				};
+				function add(){
+					var cell = document.getElementById("opt_0_" + elementId);
+					var value = lo_OptionText.value;
+					if(cell && value != inputInitValue){
+						if((lo_InitialData[0].value.OptionText.length == 0) && (lo_InitialData.length == 1)){
+							handlers.NotifyUpdateProConOption(cell.parentNode.id, lo_OptionText.value);
+						}
+						else{
+							var OptionData = {"OptionText": lo_OptionText.value, "ProList": [], "ConList": []};
+							var id = "Option_" + Math.floor(Math.random()*1000000000);
+							handlers.NotifyAddNewProConOption(id, OptionData);
+						}
+					}
+					lo_OptionText.value = "";
+					lb_AddOption = false;
+					$(lo_OkButton).addClass("PCTOkDisabledButton");
+				}
+				var lo_CancelButton = document.getElementById("CancelButton_"+ elementId);
+				lo_CancelButton.onclick = function(e) {
+					lo_OptionText.value = inputInitValue;
+					$(lo_OptionText).addClass("PCTOptionsInputBlank");
+					lb_AddOption = false;
+					$(lo_InputButtonContainer).addClass("PCTOkCancelContainer");
+				};
+			}
+			else
+			{
+				var freeze  = document.getElementById("FreezeOption_" + elementId);
+				if(freeze){
+					freeze.onclick = function(e) {
+						lb_freeze = false;
+						handlers.NotifyUpdateFreezeOption(false);
+					};
+				}
+			}
+		}
+	};
+	var Layer = 
+	{
+		GetLayer : function() {
+			var layer = document.createElement("div");
+			layer.setAttribute("id", "Layer_" + elementId);
+			$(layer).addClass("Layer");
+			$(layer).css("height", $(document).height() + "px");
+			$(layer).css("width", $(document).width() + "px");
+			document.getElementById(elementId).parentNode.appendChild(layer);
+		}
+	};
+	var ProConDialog =
+	{
+		ShowDialog: function (e, id, parentID, isPro, isNew, value, CreaterID){
+			lb_AddProOrCon = false;
+			var ProOrCon1 = "";
+			if (isPro == 0 &&  (isNew == true))
+				ProOrCon1 = "Create New PRO Opinion";
+			else if(isPro == 1 &&  (isNew == true))
+				ProOrCon1 = "Create New CON Opinion";
+			else if(isPro == 0 &&  (isNew == false))
+				ProOrCon1 = "Edit PRO Opinion";
+			else if(isPro == 1 &&  (isNew == false))
+				ProOrCon1 = "Edit CON Opinion";
+			Layer.GetLayer();
+			var body = document.createElement("div");
+			body.setAttribute("id", "ProConDialog_" + elementId);
+			$(body).addClass("ProConDialog");
+			body.innerHTML =	"<div>"+
+									"<div class=\"PCTDialogLeft\"></div>"+
+									"<div class=\"PCTDialogRightHead\"></div>"+
+									"<div class=\"PCTDialogCenterHead\">" + ProOrCon1 + "</div>"+
+								"</div>"+
+								"<div class=\"ProConDialogCenter\">"+
+									"<textarea id=\"GetProOrCon_" + elementId + "\" class=\"PCTDialogtextBox\">" + value + "</textarea>"+
+								"</div>"+
+								"<div>"+
+									"<div class=\"PCTDialogLeftFoot\"></div>"+
+									"<div class=\"PCTDialogRightFoot\"></div>"+
+									"<div class=\"PCTDialogCenterFoot\">"+
+										 "<div class=\"PCTDialogBTContainer\">"+
+											"<div id=\"CancelProOrCon_" + elementId + "\" class=\"PCTCancel\">Cancel</div>"+
+											"<div style=\"float:left; width:140px;\">"+
+												"<div id=\"Delete_"+ elementId + "\" class=\"PCTDeleteBT\">"+
+													"<div class=\"PCTLeftBt\"></div>"+
+													"<div class=\"PCTRightBt\"></div>"+
+													"<div class=\"PCTCenterBt\"><center>Delete</center></div>"+
+												"</div>"+
+												"<div id=\"AddProOrCon_" + elementId + "\" class=\"PCTSaveBT\">"+
+													"<div class=\"PCTLeftBt\"></div>"+
+													"<div class=\"PCTRightBt\"></div>"+
+													"<div class=\"PCTCenterBt\"><center>" + (isNew? "Add": "Save") + "</center></div>"+
+												"</div>"+
+											"</div>"+
+										"</div>"+
+									"</div>"+
+								"</div>";
+			var activityActionBar = document.getElementById("ProConDataContainer_" + elementId);
+			$(body).css("left", (($(document).width() - 308)/2) + "px");
+			$(body).css("top", (activityActionBar.getClientRects()[0].top) + "px");
+			document.getElementById(elementId).appendChild(body);
+			document.getElementById("GetProOrCon_" + elementId).focus();
+			var path = (isPro == 0 ? "ProList":"ConList");
+			var text = document.getElementById("GetProOrCon_" + elementId);
+			var Add = document.getElementById("AddProOrCon_" + elementId);
+			var Cancel = document.getElementById("CancelProOrCon_" + elementId);
+			var Delete = document.getElementById("Delete_" + elementId);
+			if(!isNew)
+				$(Delete).css("visibility", "visible");
+			text.onkeyup = function(e) {
+				if(text.value.length > 0){
+					//Add.setAttribute("class", "ProConAddEnabledDialog");
+					lb_AddProOrCon = true;
+				}
+				else{
+					//Add.setAttribute("class", "ProConAddDisabledDialog");
+					lb_AddProOrCon = false;
+				}
+			};
+			Add.onclick = function(e) {
+				if(lb_AddProOrCon){
+					var ProCon_value = null;
+					if(isNew){
+						ProCon_value = {CreatorId: wave.getViewer().id_, CreatorName: wave.getViewer().displayName_, Location:Location, URL: wave.getViewer().thumbnailUrl_, CreatedDate: new Date() , value: text.value};
+						handlers.NotifyAddPro(parentID, path, ("AddProOrCon_" + Math.floor(Math.random()*1000000000)), ProCon_value);
+					}
+					else {
+						ProCon_value = {CreatorId: CreaterID, CreatorName: wave.getViewer().displayName_, Location:Location, URL: wave.getViewer().thumbnailUrl_, CreatedDate: new Date(), value: text.value};
+						handlers.NotifyUpdatePro(parentID, id, path, ProCon_value);
+					}
+					document.getElementById(elementId).removeChild(document.getElementById("ProConDialog_" + elementId));
+					document.getElementById(elementId).parentNode.removeChild(document.getElementById("Layer_" + elementId));
+				}
+			};
+			Cancel.onclick = function(e){
+				var obj = document.getElementById("ProConDialog_" + elementId);
+				if(obj)
+					document.getElementById(elementId).removeChild(obj);
+				document.getElementById(elementId).parentNode.removeChild(document.getElementById("Layer_" + elementId));
+			};
+			if(Delete){
+				Delete.onclick = function(e) {
+					handlers.NotifyDeletePro(parentID, id, (isPro == 0 ? "ProList":"ConList"));
+					document.getElementById(elementId).removeChild(document.getElementById("ProConDialog_" + elementId));
+					document.getElementById(elementId).parentNode.removeChild(document.getElementById("Layer_" + elementId));
+				};
+			}
+		}
+	};
+	var DateUtil = 
+	{
+		TimeAgo : function(cd)
+		{
+			var regexp = "([0-9]{4})(-([0-9]{2})(-([0-9]{2})" +
+	        "(T([0-9]{2}):([0-9]{2})(:([0-9]{2})(\.([0-9]+))?)?" +
+	        "(Z|(([-+])([0-9]{2}):([0-9]{2})))?)?)?)?";
+		    cd = cd.match(new RegExp(regexp));
+		    var offset = 0;
+		    var date = new Date(cd[1], 0, 1);
+		    if (cd[3]) { date.setMonth(cd[3] - 1); }
+		    if (cd[5]) { date.setDate(cd[5]); }
+		    if (cd[7]) { date.setHours(cd[7]); }
+		    if (cd[8]) { date.setMinutes(cd[8]); }
+		    if (cd[10]) { date.setSeconds(cd[10]); }
+		    if (cd[12]) { date.setMilliseconds(Number("0." + cd[12]) * 1000); }
+		    if (cd[14]) {
+		        offset = (Number(cd[16]) * 60) + Number(cd[17]);
+		        offset *= ((cd[15] == '-') ? 1 : -1);
+		    }
+		    offset -= date.getTimezoneOffset();
+		    var  time = (Number(date) + (offset * 60 * 1000));
+		    date.setTime(Number(time));
+			return date;
+		}
+	};
+	var ProCon =
+	{
+		NewProOrCon : function(type, obj, OptionID)
+		{
+			var lo_ProOrCon = null;
+			var isOwner = obj.value.CreatorId == wave.getViewer().id_ ? true:false;
+			if(!lb_FullText)
+			{
+				lo_ProOrCon = document.createElement("img");
+				lo_ProOrCon.setAttribute("id", obj.id);
+				var img = url + (type == 0 ?  "pro_con_+_icon.png" : "pro_con_x_icon.png");
+				lo_ProOrCon.setAttribute("src", img);
+				$(lo_ProOrCon).addClass("ProConIcon");
+				if(isOwner){
+					$(lo_ProOrCon).css("cursor", "pointer");
+					lo_ProOrCon.setAttribute("title", ("Edit " + (type == 0 ? "Pro" : "Con")));
+				}
+				else{
+					lo_ProOrCon.setAttribute("title", null);
+				}
+				lo_ProOrCon.setAttribute("alt", obj.value.value);
+				lo_ProOrCon.onmouseover = function(e){
+					EventBubble.StopEvent(e);
+					var Owner = wave.getParticipantById(obj.value.CreatorId);
+					var body = document.createElement("div");
+					var value = obj.value.value;
+					if(value.length > 50)
+						value = value.substring(0, 50) + " ...";
+					body.setAttribute("id", "ProConHover_" + elementId);
+					$(body).addClass("ProConHover");
+					body.innerHTML = "<div class=\"ProConHoverTop\"></div>"+
+									 "<div class=\"ProConHoverMiddle\">"+
+										"<div class=\"PCTUserImgContainer\">"+
+											"<img src=\""+ ((obj.value.Location != "wave") ? "https://sandbox.12sprints.com" : "") +obj.value.URL +"\" alt=\"\" class=\"PCTToolImg\" />"+
+										"</div>"+
+										"<div class=\"PCTToolDetail\">"+
+											"<div class=\"PCTToolUser\">"+
+												"<div class=\"PCTToolUserName\">"+ obj.value.CreatorName + "</div>"+
+												"<div class=\"PCTToolTime\">"+ Time.timeAgoInWords(DateUtil.TimeAgo(obj.value.CreatedDate)) +" ago.</div>"+
+											"</div>"+
+											"<div class=\"PCTToolText\">"+value+"</div>"+
+										"</div>"+
+									 "</div>"+
+									 "<div class=\"ProConHoverBottom\"></div>";
+					$(body).css("left", (this.getClientRects()[0].left - 50) + "px");
+					$(body).css("top", (this.getClientRects()[0].top + 30) + "px");
+					document.getElementById(elementId).appendChild(body);
+				};
+				lo_ProOrCon.onmouseout = function(e) {
+					var ProConHover = document.getElementById("ProConHover_" + elementId);
+					if(ProConHover)
+						document.getElementById(elementId).removeChild(ProConHover);
+				};
+				lo_ProOrCon.onclick = function(e) {
+					EventBubble.StopEvent(e);
+					if(isOwner)
+						ProConDialog.ShowDialog(e, this.id, OptionID, type, false, obj.value.value, obj.value.CreatorId);
+				};
+			}
+			else {
+				lo_ProOrCon = document.createElement("div");
+				$(lo_ProOrCon).addClass("FullTextContainer");
+				var img = url + (type == 0 ?  "pro_con_+_icon.png" : "pro_con_x_icon.png");
+				var body = "<table style=\"width:95%;\"><tr><td style=\"width:5%; vertical-align:top;\"><img src=\""+img+"\" /></td><td class=\"FullTextProCon\" id=\""+obj.id+"\">" + obj.value.value + "</td></tr><tr><td colspan=\"2\" class=\"FullTextUser\">" + obj.value.CreatorName +", " + Time.timeAgoInWords(DateUtil.TimeAgo(obj.value.CreatedDate)) +" ago.</td></tr></table>";
+				lo_ProOrCon.innerHTML = body;
+			}
+			return lo_ProOrCon;
+		}
+	};
+	var TextEditor = 
+	{
+		EditorUI : function(value){
+			var editUI = "<div id=\"EditorCover_"+elementId+"\" class=\"PCTOptionsInputController\" style=\"margin: 3px 15px 3px 0;\">" +
+							"<div class=\"PCTOkCancelContainerVisible\" id=\"EditorButtonContainer_" + elementId + "\">" +
+							 	"<div class=\"PCTCancelButton\" title=\"Cancel\" id=\"EditorCancelButton_"+ elementId + "\"></div>"+
+							 	"<div class=\"PCTOkButton\" title=\"Update this opinion\" id=\"EditorOkButton_"+ elementId + "\"></div>"+
+						 	"</div>" +
+						 	"<input style=\"width:75%;\" type=\"text\" id=\"EditorOptionsText_" + elementId + "\" value=\""+value+"\" />" +
+						 "</div>";
+			return editUI;
+		},
+		RegisterService : function(OptionID) {
+			var EditorButtonContainer = document.getElementById("EditorButtonContainer_" + elementId);
+			var cancel = document.getElementById("EditorCancelButton_"+ elementId);
+			var ok = document.getElementById("EditorOkButton_"+ elementId);
+			var text = document.getElementById("EditorOptionsText_" + elementId);
+			text.focus();
+			text.onkeyup = function(e){
+				if(text.value.length == 0){
+					isEditorUpdateable = false;
+					$(ok).addClass("PCTOkDisabledButton");
+				}
+				else{
+					$(ok).addClass("PCTOkButton");
+					if (!e)
+						var e = window.event;
+					if(e.keyCode == 13)
+						Update();
+					else
+						isEditorUpdateable = true;
+				}
+			};
+			ok.onclick = function(e){
+				if(isEditorUpdateable)
+					Update();
+			};
+			cancel.onclick = function(e){
+				Table.GenerateTable(0);
+			};
+			function Update(){
+				handlers.NotifyUpdateProConOption(OptionID, text.value);
+			}
+		}
+	};
+	var DataRow = 
+	{
+		GetNewRow: function (OptionID, OptionData, ProList, ConList) {
+			var lo_Row = document.createElement("tr");
+			lo_Row.setAttribute("id", OptionID);
+			var lo_OptionCell = document.createElement("td");
+			lo_OptionCell.setAttribute("id", "opt_" + rowCount + "_" + elementId);
+			//lo_OptionCell.setAttribute("class", "PCTDataTable OptionData");
+			lo_OptionCell.innerHTML = "<div id=\"EditOptions_"+ rowCount+ "_" + elementId + "\" class=\"OptionEditContainerHidden\"><div class=\"OptionDelete\" id=\"D_"+OptionID+"\" title=\"Delete this option\"></div><div class=\"OptionEdit\" id=\"E_"+OptionID+"\" title=\"Edit this option\"></div></div>" + OptionData;
+			var lo_ProCell = document.createElement("td");
+			//lo_ProCell.setAttribute("class", "PCTDataTable ProConData");
+			var lo_ConCell = document.createElement("td");
+			//lo_ConCell.setAttribute("class", "PCTDataTable ProConData");
+			if(ProList != null){
+				for(var i = 0; i < ProList.length; i++){
+					lo_ProCell.appendChild(ProCon.NewProOrCon(0, ProList[i], OptionID));
+				}
+			}
+			if(ConList != null){
+				for(var i = 0; i < ConList.length; i++){
+					lo_ConCell.appendChild(ProCon.NewProOrCon(1, ConList[i], OptionID));
+				}
+			}
+			if(rowCount % 2 != 0){
+				$(lo_OptionCell).addClass("OptionData AltRow");
+				$(lo_ProCell).addClass("ProConData AltRow");
+				$(lo_ConCell).addClass("ProConData AltRow");
+			}
+			lo_Row.appendChild(lo_OptionCell);
+			lo_Row.appendChild(lo_ProCell);
+			lo_Row.appendChild(lo_ConCell);
+			document.getElementById("ProConDataDiv_" + elementId).tBodies[0].appendChild(lo_Row);
+			$(("#"+lo_OptionCell.id)).addClass("OptionData");
+			$(lo_ProCell).addClass("ProConData");
+			$(lo_ConCell).addClass("ProConData");
+			rowCount++;
+			lo_OptionCell.onmouseover = function(e) {
+				var editContainer = this.getElementsByTagName("div")[0];
+				if(editContainer && (!isEditorOn) && (OptionData != null) && (OptionData != ""))
+				{
+					$(editContainer).addClass("OptionEditContainerVisible");
+					var deleteThis = editContainer.getElementsByTagName("div")[0];
+					var editThis = editContainer.getElementsByTagName("div")[1];
+					deleteThis.onclick = function(e) {
+						var layer = document.createElement("div");
+						layer.setAttribute("id", "Layer_" + elementId);
+						$(layer).addClass("Layer");
+						var height, width;
+						layer.style.left = 0;
+						layer.style.top = 0;
+						if(isIE){
+							height = window.screen.height;
+							width = window.screen.width;
+						}
+						else{
+							height = window.innerHeight;
+							width = window.innerWidth;
+						}
+						layer.style.height = (height + "px");
+						layer.style.width = (width + "px");
+						document.getElementById(elementId).parentNode.appendChild(layer);
+						var body = document.createElement("div");
+						body.setAttribute("id", "ProConDialog_" + elementId);
+						$(body).addClass("ProConDialog");
+						body.innerHTML =  "<div>"+
+											"<div class=\"PCTDialogLeft\"></div>"+
+											"<div class=\"PCTDialogRightHead\"></div>"+
+											"<div class=\"PCTDialogCenterHead\">Delete Option</div>"+
+										"</div>"+
+										"<div class=\"ProConDialogCenter\" style=\"height: auto;\">"+
+											"Delete the option <b>" +OptionData+ " </b>and any related opinions?"+
+										"</div>"+
+										"<div>"+
+											"<div class=\"PCTDialogLeftFoot\"></div>"+
+											"<div class=\"PCTDialogRightFoot\"></div>"+
+											"<div class=\"PCTDialogCenterFoot\">"+
+												 "<div class=\"PCTDialogBTContainer\">"+
+													"<div>"+
+														"<div  id=\"no_" + elementId +"\" class=\"PCTSaveBT\">"+
+															"<div class=\"PCTLeftBt\"></div>"+
+															"<div class=\"PCTRightBt\"></div>"+
+															"<div class=\"PCTCenterBt\"><center>No</center></div>"+
+														"</div>"+
+														"<div id=\"yes_" + elementId +"\" class=\"PCTSaveBT\">"+
+														"<div class=\"PCTLeftBt\"></div>"+
+														"<div class=\"PCTRightBt\"></div>"+
+														"<div class=\"PCTCenterBt\"><center>Yes</center></div>"+
+													"</div>"+
+													"</div>"+
+												"</div>"+
+											"</div>"+
+										"</div>";
+						var activityActionBar = document.getElementById("ProConDataContainer_" + elementId);
+						body.style.left = (((width - 308)/2) + "px");
+						body.style.top = ((activityActionBar.getClientRects()[0].top) + "px");
+						document.getElementById(elementId).appendChild(body);
+						var yes = document.getElementById("yes_" + elementId);
+						var no = document.getElementById("no_" + elementId);
+						yes.onclick = function(e){
+							if(lo_InitialData.length == 1){
+								OptionData = {"OptionText": "", "ProList": [], "ConList": []};
+								handlers.NotifyOptionDeleted(OptionID);
+							}
+							else{
+								handlers.NotifyOptionDeleted(OptionID);
+							}
+							document.getElementById(elementId).removeChild(document.getElementById("ProConDialog_" + elementId));
+							document.getElementById(elementId).parentNode.removeChild(document.getElementById("Layer_" + elementId));
+						};
+						no.onclick = function(e) {
+							document.getElementById(elementId).removeChild(document.getElementById("ProConDialog_" + elementId));
+							document.getElementById(elementId).parentNode.removeChild(document.getElementById("Layer_" + elementId));
+						};
+						
+						
+					};
+					editThis.onclick = function(e) {
+						isEditorOn = true;
+						lo_OptionCell.innerHTML = TextEditor.EditorUI(OptionData);
+						TextEditor.RegisterService(OptionID);
+					};
+				}
+			};
+			lo_OptionCell.onmouseout = function(e) {
+				var editContainer = this.getElementsByTagName("div")[0];
+				if(editContainer && (!isEditorOn))
+					$(editContainer).removeClass("OptionEditContainerVisible").addClass("OptionEditContainerHidden");
+			};
+			if(!lb_FullText){
+				lo_ProCell.onmouseover = function(e){
+					if((OptionData != null) && (OptionData != "")){
+						EventBubble.StopEvent(e);
+						this.setAttribute("title", "Create new Pro opinion");
+						var lo_ProHoverImage = document.createElement("img");
+						lo_ProHoverImage.setAttribute("id", "ProHoverImage_" + elementId);
+						lo_ProHoverImage.setAttribute("src", (url + "pro_con_+_add.png"));
+						$(lo_ProHoverImage).addClass("ProConIcon");
+						lo_ProHoverImage.setAttribute("title", "Create new Pro opinion");
+						lo_ProCell.appendChild(lo_ProHoverImage);
+					}
+					else
+						this.setAttribute("style", "cursor:default");
+				};
+				lo_ProCell.onmouseout = function(e){
+					EventBubble.StopEvent(e);
+					var obj = document.getElementById("ProHoverImage_" + elementId);
+					if(obj)
+						this.removeChild(obj);
+				};
+				lo_ProCell.onclick = function (e){
+					if((OptionData != null) && (OptionData != ""))
+						ProConDialog.ShowDialog(e, null, OptionID, 0, true, "", null);
+				};
+				lo_ConCell.onmouseover = function(e){
+					if((OptionData != null) && (OptionData != "")){
+						this.setAttribute("title", "Create new Con opinion");
+						EventBubble.StopEvent(e);
+						var lo_ConHoverImage = document.createElement("img");
+						lo_ConHoverImage.setAttribute("id", "ConHoverImage_" + elementId);
+						lo_ConHoverImage.setAttribute("src", (url + "pro_con_x_add.png"));
+						$(lo_ConHoverImage).addClass("ProConIcon");
+						lo_ConHoverImage.setAttribute("title", "Create new Con opinion");
+						lo_ConCell.appendChild(lo_ConHoverImage);
+					}
+					else
+						this.setAttribute("style", "cursor:default");
+				};
+				lo_ConCell.onmouseout = function(e){
+					var obj = document.getElementById("ConHoverImage_" + elementId);
+					if(obj)
+						this.removeChild(obj);
+				};
+				lo_ConCell.onclick = function (e){
+					if((OptionData != null) && (OptionData != ""))
+						ProConDialog.ShowDialog(e, null, OptionID, 1, true, "", null);
+				};
+			}
+			else {
+				lo_ProCell.setAttribute("style", "cursor:default;");
+				lo_ConCell.setAttribute("style", "cursor:default;");
+				for(var i = 0; i < ProList.length; i++)
+					this.FullText(ProList[i].id, 0, ProList[i].value.CreatorId, OptionID);
+				for(var i = 0; i < ConList.length; i++)
+					this.FullText(ConList[i].id, 1, ConList[i].value.CreatorId, OptionID);
+			}
+		},
+		FullText : function(id, isPro, CreaterID, OptionID) {
+			var obj = document.getElementById(id);
+			obj.onclick = function(e) {
+				EventBubble.StopEvent(e);
+				if(CreaterID == wave.getViewer().id_)
+					ProConDialog.ShowDialog(e, id, OptionID, isPro, false, obj.innerHTML, CreaterID);
+			};
+			obj.onmouseover = function (e) {
+				if(CreaterID == wave.getViewer().id_) {
+					obj.title = "Edit opinion";
+					$(obj).addClass("FullTextProCon FullTextHover");
+				}
+			};
+			obj.onmouseout = function (e)  {
+				$(obj).removeClass("FullTextProCon FullTextHover").addClass("FullTextProCon");
+			};
+		}
+	};
+	
+	var Table =
+	{
+		GenerateTable : function(InitValue){
+		
+			if(InitValue == 0){
+				rowCount = 0;
+				isEditorOn = false;
+				isEditorUpdateable = false;
+				var DataTable = document.getElementById("ProConDataDiv_" + elementId).tBodies[0];
+				for(var i = 0; i < DataTable.hasChildNodes();){
+					DataTable.removeChild(DataTable.childNodes[i]);
+				}
+				for(var i = 0; i < lo_InitialData.length; i++){
+					DataRow.GetNewRow(lo_InitialData[i].id, lo_InitialData[i].value.OptionText, lo_InitialData[i].value.ProList, lo_InitialData[i].value.ConList);
+				}
+			}
+		}
+	};
+	function RenderControl() {
+		
+		if(!wave.getState().get('initialData')) {
+        	initialData = {"ProConTable":[{"id":"AshishSinha", "value":{"OptionText":"","ProList":[],"ConList":[]}}], "freeze":false};
+      	}
+      	else {
+        	initialData = JSON.parse(wave.getState().get('initialData'));
+      	}
+		lo_InitialData = initialData.ProConTable;
+		lb_freeze = initialData.freeze;
+		var body = "<table cellpadding=\"0\" cellspacing=\"0\" class=\"PCTtable\">" +
+						"<tr>"+
+						"<td class=\"PCTtableHeaderCorner " + (lb_freeze ? "PCTtableHeaderLeftFreeze" : "PCTtableHeaderLeftUnFreeze" )+ "\"></td>" +
+						"<td class=\""+(lb_freeze? "PCTtableHeaderFillerFreeze" : "PCTtableHeaderFillerUnFreeze")+"\">" +
+							(lb_freeze ? AddOptions.GetFreezeBody() : AddOptions.GetOptionBody()) +
+							"</td>"+
+							"<td class=\"PCTtableHeaderCorner " + (lb_freeze ? "PCTtableHeaderRightFreeze" : "PCTtableHeaderRightUnFreeze" )+ "\"></td>" +
+						"</tr>"+
+					"</table>"+
+					"<table id=\"PCTTableHead_" +elementId+"\" class=\"PCTTableProConHead PCTtable\"><tr><td class=\"PCTHead PCTOptionHead\">Opinion</td><td class=\"PCTHead PCTProConHead\">Pro</td><td class=\"PCTHead PCTProConHead\">Con</td></tr></table>"+
+					"<div id=\"ProConDataContainer_" + elementId + "\">" +
+					"<table id=\"ProConDataDiv_" + elementId + "\" cellpadding=\"0\" cellspacing=\"0\" class=\"PCTDataTable\"><tbody></tbody></table>"+
+					"</div>"+
+					"<div class=\"FullTextSummeryCover\">"+
+		  			"<div class=\"FullTextSummeryContainer\">" +
+		  				"<div id=\"FullText_"+ elementId +"\" class=\"fullText\">Full Text</div>" +
+		  				"<div style=\"display:inline;\">" +
+		  					"<div style=\"float:right;\">|</div>" +
+		  					"<div id=\"Summary_"+ elementId +"\" class=\"Summary\">Summary</div>" +
+		  				"</div>" +
+		  			"</div>";
+		DataTableID = "ProConDataDiv_" + elementId;
+		document.getElementById(elementId).innerHTML = body;
+		AddOptions.RegisterService();
+		Table.GenerateTable(0);
+		var DataContainer = document.getElementById("ProConDataContainer_" + elementId);
+		var DataTable = document.getElementById(DataTableID);
+		var tableTDs = document.getElementById(DataTableID).getElementsByTagName("tr")[0].getElementsByTagName("td");
+		var dataTableHead = document.getElementById("PCTTableHead_" + elementId);
+		var headTD = dataTableHead.getElementsByTagName("tr")[0].getElementsByTagName("td");
+		var lo_FullText = document.getElementById("FullText_"+ elementId);
+		var lo_Summary = document.getElementById("Summary_"+ elementId);
+		function ScrollFullText() {
+			Table.GenerateTable(0);
+			var DataContainerRects = DataContainer.getClientRects()[0];
+			if((DataContainerRects.bottom - DataContainerRects.top)  > SCROLL_HEIGHT) {
+				$(DataContainer).css("height", SCROLL_HEIGHT + "px");
+				$(DataContainer).css("overflow", "auto");
+			if(!isIE || ((parseInt($.browser.version) == 8) && (isIE)) ? true:false)
+				{
+					var TDParent = DataTable.getClientRects()[0].right - DataTable.getClientRects()[0].left;
+					var HeadWidth = dataTableHead.getClientRects()[0].right - dataTableHead.getClientRects()[0].left;
+					var ScrollWidth = 18;
+					ScrollWidth = isIE ? 17 : 18;
+					var OptionWidth = TDParent*0.4;
+					OptionWidth = (isIE ? (TDParent + 1) : TDParent)*0.4;
+					var ProWidth = (TDParent)*0.30;
+					ProWidth = (isIE ? TDParent-1:TDParent)*0.3;
+					var ConWidth = TDParent*(0.30) + ScrollWidth;
+					$(headTD[0]).css("width", ((OptionWidth/HeadWidth)*100 + "%"));
+					$(headTD[1]).css("width", ((ProWidth/HeadWidth)*100 + "%"));
+					$(headTD[2]).css("width", (((ConWidth/HeadWidth)*100) + "%"));
+					$(".FullTextSummeryCover").css("border-top", "solid 1px #d3d3d3");
+				}
+			}
+			else{
+				DataContainer.removeAttribute("style");
+			}
+		}
+		if(lb_FullText) {
+			ScrollFullText();
+		}
+		lo_FullText.onclick = function(e) {
+			if(lb_FullText == false){
+				lb_FullText = true;
+				$(lo_FullText).css("color", "#666666");
+				$(lo_FullText).css("cursor", "default");
+				$(lo_Summary).css("color", "#3589C9");
+				$(lo_Summary).css("cursor", "pointer");
+				ScrollFullText();
+			}
+		};
+		lo_Summary.onclick = function(e) {
+			if(lb_FullText == true){
+				lb_FullText = false;
+				$(lo_FullText).css("color", "#3589C9");
+				$(lo_FullText).css("cursor", "pointer");
+				$(lo_Summary).css("color", "#666666");
+				$(lo_Summary).css("cursor", "default");
+				Table.GenerateTable(0);
+				DataContainer.removeAttribute("style");
+				DataContainer.removeAttribute("style");
+				$(headTD[0]).css("width", "40%");
+				$(headTD[1]).css("width", "30%");
+				$(headTD[2]).css("width", "30%");
+				$(".FullTextSummeryCover").removeAttr("style");
+			}
+		};
+	}
+	function init() {
+      if (wave && wave.isInWaveContainer()) {
+        wave.setStateCallback(RenderControl);
+      }
+    }
+	gadgets.util.registerOnLoadHandler(init);
+	</script>
+	]]>
+  </Content>
+</Module>
