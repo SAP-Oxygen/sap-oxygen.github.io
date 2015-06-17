@@ -7,11 +7,11 @@ var Col = ReactBootstrap.Col;
 var Agenda = React.createClass({
   render: function() {
     return (
-      <div>
+      <Grid>
         <DatePicker />
         <AgendaTable items={this.props.items.items} />
         <AddButton />
-      </div>
+      </Grid>
     );
   }
 });
@@ -24,7 +24,7 @@ var AgendaTable = React.createClass({
       )
     });
     return (
-      <Table striped bordered hover>
+      <Table striped bordered hover id="sortable">
         <thead>
           <tr>
             <th>Duration</th>
@@ -63,28 +63,43 @@ var AddButton = React.createClass({
 var DatePicker = React.createClass({
   render: function() {
     return (
-      <Grid>
-        <Row className='show-grid'>
-          <Col sm={12}>
-            <div className='input-group date' id='datetimepicker'>
-              <input type='text' className='form-control' />
-              <span className='input-group-addon'>
-                <span className='glyphicon glyphicon-calendar'></span>
-              </span>
-            </div>
-          </Col>
-        </Row>
-      </Grid>
+      <Row className='show-grid'>
+        <Col sm={12}>
+          <div className='input-group date' id='datetimepicker'>
+            <input type='text' className='form-control' />
+            <span className='input-group-addon'>
+              <span className='glyphicon glyphicon-calendar'></span>
+            </span>
+          </div>
+        </Col>
+      </Row>
     );
   }
 });
 
-$(function () {
-    $('#datetimepicker').datetimepicker({
-      sideBySide: true,
-      showClose: true,
-      showTodayButton: true
+$(document).ready(function() {
+  $(function () {
+      $('#datetimepicker').datetimepicker({
+        sideBySide: true,
+        showClose: true,
+        showTodayButton: true
+      });
+  });
+
+  // to keep the table row from collapsing when being sorted
+  var fixHelperModified = function(e, tr) {
+    var $originals = tr.children();
+    var $helper = tr.clone();
+    $helper.children().each(function(index) {
+      $(this).width($originals.eq(index).width())
     });
+    return $helper;
+  };
+
+  // make the table sortable
+  $('#sortable tbody').sortable({
+    helper: fixHelperModified
+  }).disableSelection();
 });
 
 var ITEMS = {

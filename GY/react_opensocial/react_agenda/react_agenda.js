@@ -7,7 +7,7 @@ var Col = ReactBootstrap.Col;
 var Agenda = React.createClass({displayName: "Agenda",
   render: function() {
     return (
-      React.createElement("div", null, 
+      React.createElement(Grid, null, 
         React.createElement(DatePicker, null), 
         React.createElement(AgendaTable, {items: this.props.items.items}), 
         React.createElement(AddButton, null)
@@ -24,7 +24,7 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
       )
     });
     return (
-      React.createElement(Table, {striped: true, bordered: true, hover: true}, 
+      React.createElement(Table, {striped: true, bordered: true, hover: true, id: "sortable"}, 
         React.createElement("thead", null, 
           React.createElement("tr", null, 
             React.createElement("th", null, "Duration"), 
@@ -63,14 +63,12 @@ var AddButton = React.createClass({displayName: "AddButton",
 var DatePicker = React.createClass({displayName: "DatePicker",
   render: function() {
     return (
-      React.createElement(Grid, null, 
-        React.createElement(Row, {className: "show-grid"}, 
-          React.createElement(Col, {sm: 12}, 
-            React.createElement("div", {className: "input-group date", id: "datetimepicker"}, 
-              React.createElement("input", {type: "text", className: "form-control"}), 
-              React.createElement("span", {className: "input-group-addon"}, 
-                React.createElement("span", {className: "glyphicon glyphicon-calendar"})
-              )
+      React.createElement(Row, {className: "show-grid"}, 
+        React.createElement(Col, {sm: 12}, 
+          React.createElement("div", {className: "input-group date", id: "datetimepicker"}, 
+            React.createElement("input", {type: "text", className: "form-control"}), 
+            React.createElement("span", {className: "input-group-addon"}, 
+              React.createElement("span", {className: "glyphicon glyphicon-calendar"})
             )
           )
         )
@@ -79,12 +77,29 @@ var DatePicker = React.createClass({displayName: "DatePicker",
   }
 });
 
-$(function () {
-    $('#datetimepicker').datetimepicker({
-      sideBySide: true,
-      showClose: true,
-      showTodayButton: true
+$(document).ready(function() {
+  $(function () {
+      $('#datetimepicker').datetimepicker({
+        sideBySide: true,
+        showClose: true,
+        showTodayButton: true
+      });
+  });
+
+  // to keep the table row from collapsing when being sorted
+  var fixHelperModified = function(e, tr) {
+    var $originals = tr.children();
+    var $helper = tr.clone();
+    $helper.children().each(function(index) {
+      $(this).width($originals.eq(index).width())
     });
+    return $helper;
+  };
+
+  // make the table sortable
+  $('#sortable tbody').sortable({
+    helper: fixHelperModified
+  }).disableSelection();
 });
 
 var ITEMS = {
