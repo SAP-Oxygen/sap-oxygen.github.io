@@ -5,11 +5,22 @@ var Row = ReactBootstrap.Row;
 var Col = ReactBootstrap.Col;
 
 var Agenda = React.createClass({displayName: "Agenda",
+  getInitialState: function() {
+    return {
+      createdTime: moment(),
+      startTime: moment()
+    } 
+  },
+  onDateTimeChange: function(dateTime) {
+    this.setState({
+      startTime: dateTime
+    });
+  },
   render: function() {
     return (
       React.createElement(Grid, null, 
-        React.createElement(DatePicker, null), 
-        React.createElement(AgendaTable, {items: this.props.items.items}), 
+        React.createElement(DatePicker, {handleDateTimeChange: this.onDateTimeChange}), 
+        React.createElement(AgendaTable, {items: this.props.items.items, startTime: this.state.startTime}), 
         React.createElement(AddButton, null)
       )
     );
@@ -17,18 +28,17 @@ var Agenda = React.createClass({displayName: "Agenda",
 });
 
 var AgendaTable = React.createClass({displayName: "AgendaTable",
-  getInitialState: function() {
-    console.log('current time: ' + moment());
-    return {
-      startTime: moment()
-    }
-  },
   render: function() {
-    var rows = this.props.items.map(function(item) {
-      return (
-        React.createElement(RowItem, {item: item})
-      )
-    });
+    var self = this;
+    var rowsArr = [];
+    var lastItemEndTime = null;
+    this.props.items.forEach(function(item, index) {
+      if (!lastItemEndTime) {
+        lastItemEndTime = self.props.startTime;
+      }
+      rowsArr.push(React.createElement(RowItem, {item: item, startTime: lastItemEndTime.clone()}))
+      lastItemEndTime.add(item.time, 'm');
+    })
     return (
       React.createElement(Table, {striped: true, bordered: true, hover: true, id: "sortable"}, 
         React.createElement("thead", null, 
@@ -39,7 +49,7 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
           )
         ), 
         React.createElement("tbody", null, 
-          rows
+          rowsArr
         )
       )
     );
@@ -50,7 +60,7 @@ var RowItem = React.createClass({displayName: "RowItem",
   render: function() {
     return (
       React.createElement("tr", null, 
-        React.createElement("td", null, this.props.item.time), 
+        React.createElement("td", null, this.props.startTime.format("h:mm A")), 
         React.createElement("td", null, this.props.item.topic), 
         React.createElement("td", null, this.props.item.owner)
       )
@@ -67,6 +77,24 @@ var AddButton = React.createClass({displayName: "AddButton",
 });
 
 var DatePicker = React.createClass({displayName: "DatePicker",
+  componentDidMount: function() {
+    var self = this;
+    // Datepicker
+    $(function () {
+        $('#datetimepicker').datetimepicker({
+          sideBySide: true,
+          showClose: true,
+          showTodayButton: true
+        });
+    });
+    $('#datetimepicker').on("dp.change", function (e) {
+      var dateTime = $('#datetimepicker').data("DateTimePicker").viewDate();
+      self.onDateTimeChange(dateTime);
+    });
+  },
+  onDateTimeChange: function(dateTime) {
+    this.props.handleDateTimeChange(dateTime);
+  },
   render: function() {
     return (
       React.createElement(Row, {className: "show-grid"}, 
@@ -84,13 +112,6 @@ var DatePicker = React.createClass({displayName: "DatePicker",
 });
 
 $(document).ready(function() {
-  $(function () {
-      $('#datetimepicker').datetimepicker({
-        sideBySide: true,
-        showClose: true,
-        showTodayButton: true
-      });
-  });
 
   // the following is borrowed from http://www.avtex.com/blog/2015/01/27/drag-and-drop-sorting-of-table-rows-in-priority-order/
   // to keep the table row from collapsing when being sorted
