@@ -4,6 +4,7 @@ var Grid = ReactBootstrap.Grid;
 var Row = ReactBootstrap.Row;
 var Col = ReactBootstrap.Col;
 var Glyphicon = ReactBootstrap.Glyphicon;
+var harsimran = "jfweieuwflkfj";
 
 var Agenda = React.createClass({
   getInitialState: function() {
@@ -106,7 +107,7 @@ var DatePicker = React.createClass({
   render: function() {
     return (
       <Row className='show-grid'>
-        <Col sm={12}>
+        <Col xs={4} xsOffset={8}>
           <div className='input-group date' id='datetimepicker'>
             <input type='text' className='form-control' />
             <span className='input-group-addon'>
