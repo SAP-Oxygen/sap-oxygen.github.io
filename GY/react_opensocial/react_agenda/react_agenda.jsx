@@ -17,12 +17,30 @@ var Agenda = React.createClass({
 });
 
 var AgendaTable = React.createClass({
+  getInitialState: function() {
+    var currentTime = moment();
+    console.log('current time: ' + );
+
+    return {
+      createdTime: moment(),
+      startTime: moment()
+    }
+  },
   render: function() {
     var rows = this.props.items.map(function(item) {
       return (
         <RowItem item={item} />
       )
     });
+    var rowsArr = [];
+    var lastItemEndTime = null;
+    this.props.items.forEach(function(item, index) {
+      if (!lastItemEndTime) {
+        lastItemEndTime = this.state.startTime;
+      }
+      rowsArr.push(<RowItem item={item} startTime={lastItemEndTime}/>)
+      lastItemEndTime.add(item.time, 'm')
+    })
     return (
       <Table striped bordered hover id="sortable">
         <thead>
@@ -86,6 +104,7 @@ $(document).ready(function() {
       });
   });
 
+  // the following is borrowed from http://www.avtex.com/blog/2015/01/27/drag-and-drop-sorting-of-table-rows-in-priority-order/
   // to keep the table row from collapsing when being sorted
   var fixHelperModified = function(e, tr) {
     var $originals = tr.children();
@@ -95,11 +114,12 @@ $(document).ready(function() {
     });
     return $helper;
   };
-
   // make the table sortable
   $('#sortable tbody').sortable({
     helper: fixHelperModified
   }).disableSelection();
+  // up to here
+  
 });
 
 var ITEMS = {

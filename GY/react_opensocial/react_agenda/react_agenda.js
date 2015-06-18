@@ -17,6 +17,12 @@ var Agenda = React.createClass({displayName: "Agenda",
 });
 
 var AgendaTable = React.createClass({displayName: "AgendaTable",
+  getInitialState: function() {
+    console.log('current time: ' + moment());
+    return {
+      startTime: moment()
+    }
+  },
   render: function() {
     var rows = this.props.items.map(function(item) {
       return (
@@ -86,6 +92,7 @@ $(document).ready(function() {
       });
   });
 
+  // the following is borrowed from http://www.avtex.com/blog/2015/01/27/drag-and-drop-sorting-of-table-rows-in-priority-order/
   // to keep the table row from collapsing when being sorted
   var fixHelperModified = function(e, tr) {
     var $originals = tr.children();
@@ -95,11 +102,12 @@ $(document).ready(function() {
     });
     return $helper;
   };
-
   // make the table sortable
   $('#sortable tbody').sortable({
     helper: fixHelperModified
   }).disableSelection();
+  // up to here
+  
 });
 
 var ITEMS = {
