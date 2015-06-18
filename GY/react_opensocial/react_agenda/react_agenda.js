@@ -3,6 +3,7 @@ var Button = ReactBootstrap.Button;
 var Grid = ReactBootstrap.Grid;
 var Row = ReactBootstrap.Row;
 var Col = ReactBootstrap.Col;
+var Glyphicon = ReactBootstrap.Glyphicon;
 
 var Agenda = React.createClass({displayName: "Agenda",
   getInitialState: function() {
@@ -19,7 +20,9 @@ var Agenda = React.createClass({displayName: "Agenda",
   render: function() {
     return (
       React.createElement(Grid, null, 
+        React.createElement("br", null), 
         React.createElement(DatePicker, {handleDateTimeChange: this.onDateTimeChange}), 
+        React.createElement("br", null), 
         React.createElement(AgendaTable, {items: this.props.items.items, startTime: this.state.startTime}), 
         React.createElement(AddButton, null)
       )
@@ -43,6 +46,7 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
       React.createElement(Table, {striped: true, bordered: true, hover: true, id: "sortable"}, 
         React.createElement("thead", null, 
           React.createElement("tr", null, 
+            React.createElement("th", null, "Start"), 
             React.createElement("th", null, "Duration"), 
             React.createElement("th", null, "Topic"), 
             React.createElement("th", null, "Presenter")
@@ -61,8 +65,12 @@ var RowItem = React.createClass({displayName: "RowItem",
     return (
       React.createElement("tr", null, 
         React.createElement("td", null, this.props.startTime.format("h:mm A")), 
+        React.createElement("td", null, this.props.item.time, " min"), 
         React.createElement("td", null, this.props.item.topic), 
-        React.createElement("td", null, this.props.item.owner)
+        React.createElement("td", null, 
+          this.props.item.owner, 
+          React.createElement(Glyphicon, {glyph: "edit", className: "pull-right"})
+        )
       )
     );
   }
@@ -135,31 +143,31 @@ var ITEMS = {
   "items": [
       {
           "id": "1",
-          "topic": "topic 1",
+          "topic": "Sales Demo",
           "desc": "this is about topic 1",
-          "time": 15,
-          "owner": "1"
+          "time": 5,
+          "owner": "Allen"
       },
       {
           "id": "2",
-          "topic": "topic 2",
+          "topic": "Jam on HANA",
           "desc": "this is about topic 2",
-          "time": 15,
-          "owner": "2"
+          "time": 10,
+          "owner": "Harsimran"
       },
       {
           "id": "3",
-          "topic": "topic 3",
+          "topic": "Open Social Gadgets",
           "desc": "this is about topic 3",
           "time": 15,
-          "owner": "1"
+          "owner": "GY"
       },
       {
           "id": "Jyr5zDe7JIc14dfe1b6bca1",
-          "topic": "topic 4",
+          "topic": "Workers",
           "desc": "this is about topic 4",
-          "time": 15,
-          "owner": "2"
+          "time": 20,
+          "owner": "Vivek"
       }
   ],
   "startTime": 1433923200000

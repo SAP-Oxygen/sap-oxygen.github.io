@@ -3,6 +3,7 @@ var Button = ReactBootstrap.Button;
 var Grid = ReactBootstrap.Grid;
 var Row = ReactBootstrap.Row;
 var Col = ReactBootstrap.Col;
+var Glyphicon = ReactBootstrap.Glyphicon;
 
 var Agenda = React.createClass({
   getInitialState: function() {
@@ -19,7 +20,9 @@ var Agenda = React.createClass({
   render: function() {
     return (
       <Grid>
+        <br />
         <DatePicker handleDateTimeChange={this.onDateTimeChange} />
+        <br />
         <AgendaTable items={this.props.items.items} startTime={this.state.startTime} />
         <AddButton />
       </Grid>
@@ -43,6 +46,7 @@ var AgendaTable = React.createClass({
       <Table striped bordered hover id="sortable">
         <thead>
           <tr>
+            <th>Start</th>
             <th>Duration</th>
             <th>Topic</th>
             <th>Presenter</th>
@@ -61,8 +65,12 @@ var RowItem = React.createClass({
     return (
       <tr>
         <td>{this.props.startTime.format("h:mm A")}</td>
+        <td>{this.props.item.time} min</td>
         <td>{this.props.item.topic}</td>
-        <td>{this.props.item.owner}</td>
+        <td>
+          {this.props.item.owner}
+          <Glyphicon glyph='edit' className="pull-right" />
+        </td>
       </tr>
     );
   }
@@ -135,31 +143,31 @@ var ITEMS = {
   "items": [
       {
           "id": "1",
-          "topic": "topic 1",
+          "topic": "Sales Demo",
           "desc": "this is about topic 1",
-          "time": 15,
-          "owner": "1"
+          "time": 5,
+          "owner": "Allen"
       },
       {
           "id": "2",
-          "topic": "topic 2",
+          "topic": "Jam on HANA",
           "desc": "this is about topic 2",
-          "time": 15,
-          "owner": "2"
+          "time": 10,
+          "owner": "Harsimran"
       },
       {
           "id": "3",
-          "topic": "topic 3",
+          "topic": "Open Social Gadgets",
           "desc": "this is about topic 3",
           "time": 15,
-          "owner": "1"
+          "owner": "GY"
       },
       {
           "id": "Jyr5zDe7JIc14dfe1b6bca1",
-          "topic": "topic 4",
+          "topic": "Workers",
           "desc": "this is about topic 4",
-          "time": 15,
-          "owner": "2"
+          "time": 20,
+          "owner": "Vivek"
       }
   ],
   "startTime": 1433923200000
