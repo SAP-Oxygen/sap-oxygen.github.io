@@ -154,7 +154,7 @@ var DatePicker = React.createClass({
   render: function() {
     return (
       <Row className='show-grid'>
-        <Col xs={4} xsOffset={8}>
+        <Col xs={4}>
           <div className='input-group date' id='datetimepicker'>
             <input type='text' className='form-control' />
             <span className='input-group-addon'>

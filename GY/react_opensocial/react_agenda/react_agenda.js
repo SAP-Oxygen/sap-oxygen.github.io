@@ -154,7 +154,7 @@ var DatePicker = React.createClass({displayName: "DatePicker",
   render: function() {
     return (
       React.createElement(Row, {className: "show-grid"}, 
-        React.createElement(Col, {xs: 4, xsOffset: 8}, 
+        React.createElement(Col, {xs: 4}, 
           React.createElement("div", {className: "input-group date", id: "datetimepicker"}, 
             React.createElement("input", {type: "text", className: "form-control"}), 
             React.createElement("span", {className: "input-group-addon"}, 
