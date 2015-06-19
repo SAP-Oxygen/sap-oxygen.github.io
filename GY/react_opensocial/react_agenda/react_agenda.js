@@ -13,7 +13,7 @@ var Agenda = React.createClass({displayName: "Agenda",
       startTime: moment()
     } 
   },
-  onDateTimeChange: function(dateTime) {
+  onTimeChange: function(dateTime) {
     this.setState({
       startTime: dateTime
     });
@@ -22,7 +22,8 @@ var Agenda = React.createClass({displayName: "Agenda",
     return (
       React.createElement(Grid, null, 
         React.createElement("br", null), 
-        React.createElement(DatePicker, {handleDateTimeChange: this.onDateTimeChange}), 
+        React.createElement(DatePicker, null), 
+        React.createElement(TimePicker, {handleDateTimeChange: this.onTimeChange}), 
         React.createElement("br", null), 
         React.createElement(AgendaTable, {items: this.props.items.items, startTime: this.state.startTime}), 
         React.createElement(AddButton, null)
@@ -137,30 +138,23 @@ var DatePicker = React.createClass({displayName: "DatePicker",
     var self = this;
     // Datepicker
     $(function () {
-        $('#datetimepicker').datetimepicker({
-          sideBySide: true,
+        $('#datepicker').datetimepicker({
+          format: 'll',
           showClose: true,
           showTodayButton: true,
+          allowInputToggle: true,
+          toolbarPlacement: 'bottom',
           debug: true
         });
     });
-    $('#datetimepicker').on("dp.change", function (e) {
-      var dateTime = $('#datetimepicker').data("DateTimePicker").viewDate();
-      self.onDateTimeChange(dateTime);
-    });
-  },
-  onDateTimeChange: function(dateTime) {
-    this.props.handleDateTimeChange(dateTime);
   },
   render: function() {
     return (
-      React.createElement(Row, {className: "show-grid"}, 
-        React.createElement(Col, {xs: 4}, 
-          React.createElement("div", {className: "input-group date", id: "datetimepicker"}, 
-            React.createElement("input", {type: "text", className: "form-control"}), 
-            React.createElement("span", {className: "input-group-addon"}, 
-              React.createElement("span", {className: "glyphicon glyphicon-calendar"})
-            )
+      React.createElement(Col, {xs: 3, id: "date"}, 
+        React.createElement("div", {className: "input-group date", id: "datepicker"}, 
+          React.createElement("input", {type: "text", className: "form-control"}), 
+          React.createElement("span", {className: "input-group-addon"}, 
+            React.createElement("span", {className: "glyphicon glyphicon-calendar"})
           )
         )
       )
@@ -168,8 +162,40 @@ var DatePicker = React.createClass({displayName: "DatePicker",
   }
 });
 
-$(document).ready(function() {
-
+var TimePicker = React.createClass({displayName: "TimePicker",
+  componentDidMount: function() {
+    var self = this;
+    // Datepicker
+    $(function () {
+        $('#timepicker').datetimepicker({
+          format: 'LT',
+          showClose: true,
+          showTodayButton: true,
+          allowInputToggle: true,
+          toolbarPlacement: 'bottom',
+          debug: true
+        });
+    });
+    $('#timepicker').on("dp.change", function (e) {
+      var dateTime = $('#timepicker').data("DateTimePicker").viewDate();
+      self.onTimeChange(dateTime);
+    });
+  },
+  onTimeChange: function(dateTime) {
+    this.props.handleDateTimeChange(dateTime);
+  },
+  render: function() {
+    return (
+      React.createElement(Col, {xs: 2, id: "time"}, 
+        React.createElement("div", {className: "input-group date", id: "timepicker"}, 
+          React.createElement("input", {type: "text", className: "form-control"}), 
+          React.createElement("span", {className: "input-group-addon"}, 
+            React.createElement("span", {className: "glyphicon glyphicon-calendar"})
+          )
+        )
+      )
+    );
+  }
 });
 
 var ITEMS = {

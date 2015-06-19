@@ -13,7 +13,7 @@ var Agenda = React.createClass({
       startTime: moment()
     } 
   },
-  onDateTimeChange: function(dateTime) {
+  onTimeChange: function(dateTime) {
     this.setState({
       startTime: dateTime
     });
@@ -22,7 +22,8 @@ var Agenda = React.createClass({
     return (
       <Grid>
         <br />
-        <DatePicker handleDateTimeChange={this.onDateTimeChange} />
+        <DatePicker />
+        <TimePicker handleDateTimeChange={this.onTimeChange} />
         <br />
         <AgendaTable items={this.props.items.items} startTime={this.state.startTime} />
         <AddButton />
@@ -137,39 +138,64 @@ var DatePicker = React.createClass({
     var self = this;
     // Datepicker
     $(function () {
-        $('#datetimepicker').datetimepicker({
-          sideBySide: true,
+        $('#datepicker').datetimepicker({
+          format: 'll',
           showClose: true,
           showTodayButton: true,
+          allowInputToggle: true,
+          toolbarPlacement: 'bottom',
           debug: true
         });
     });
-    $('#datetimepicker').on("dp.change", function (e) {
-      var dateTime = $('#datetimepicker').data("DateTimePicker").viewDate();
-      self.onDateTimeChange(dateTime);
-    });
-  },
-  onDateTimeChange: function(dateTime) {
-    this.props.handleDateTimeChange(dateTime);
   },
   render: function() {
     return (
-      <Row className='show-grid'>
-        <Col xs={4}>
-          <div className='input-group date' id='datetimepicker'>
-            <input type='text' className='form-control' />
-            <span className='input-group-addon'>
-              <span className='glyphicon glyphicon-calendar'></span>
-            </span>
-          </div>
-        </Col>
-      </Row>
+      <Col xs={3} id='date'>
+        <div className='input-group date' id='datepicker'>
+          <input type='text' className='form-control' />
+          <span className='input-group-addon'>
+            <span className='glyphicon glyphicon-calendar'></span>
+          </span>
+        </div>
+      </Col>
     );
   }
 });
 
-$(document).ready(function() {
-
+var TimePicker = React.createClass({
+  componentDidMount: function() {
+    var self = this;
+    // Datepicker
+    $(function () {
+        $('#timepicker').datetimepicker({
+          format: 'LT',
+          showClose: true,
+          showTodayButton: true,
+          allowInputToggle: true,
+          toolbarPlacement: 'bottom',
+          debug: true
+        });
+    });
+    $('#timepicker').on("dp.change", function (e) {
+      var dateTime = $('#timepicker').data("DateTimePicker").viewDate();
+      self.onTimeChange(dateTime);
+    });
+  },
+  onTimeChange: function(dateTime) {
+    this.props.handleDateTimeChange(dateTime);
+  },
+  render: function() {
+    return (
+      <Col xs={2} id='time'>
+        <div className='input-group date' id='timepicker'>
+          <input type='text' className='form-control' />
+          <span className='input-group-addon'>
+            <span className='glyphicon glyphicon-calendar'></span>
+          </span>
+        </div>
+      </Col>
+    );
+  }
 });
 
 var ITEMS = {
