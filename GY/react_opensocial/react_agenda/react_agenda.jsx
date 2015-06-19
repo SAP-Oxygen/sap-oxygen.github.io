@@ -22,8 +22,10 @@ var Agenda = React.createClass({
     return (
       <Grid>
         <br />
-        <DatePicker />
-        <TimePicker handleDateTimeChange={this.onTimeChange} />
+        <Row>
+          <DatePicker />
+          <TimePicker handleDateTimeChange={this.onTimeChange} />
+        </Row>
         <br />
         <AgendaTable items={this.props.items.items} startTime={this.state.startTime} />
         <AddButton />
@@ -92,7 +94,7 @@ var AgendaTable = React.createClass({
       lastItemEndTime.add(item.time, 'm');
     });
     return (
-      <Table striped bordered hover id="sortable">
+      <Table striped bordered hover responsive id="sortable">
         <thead>
           <tr>
             <th>Start</th>
@@ -147,10 +149,13 @@ var DatePicker = React.createClass({
           debug: true
         });
     });
+    $('#datepicker').on("dp.show", function (e) {
+      $('#timepicker').data("DateTimePicker").hide();
+    });
   },
   render: function() {
     return (
-      <Col xs={3} id='date'>
+      <Col xs={4} id='date'>
         <div className='input-group date' id='datepicker'>
           <input type='text' className='form-control' />
           <span className='input-group-addon'>
@@ -180,13 +185,16 @@ var TimePicker = React.createClass({
       var dateTime = $('#timepicker').data("DateTimePicker").viewDate();
       self.onTimeChange(dateTime);
     });
+    $('#timepicker').on("dp.show", function (e) {
+      $('#datepicker').data("DateTimePicker").hide();
+    });
   },
   onTimeChange: function(dateTime) {
     this.props.handleDateTimeChange(dateTime);
   },
   render: function() {
     return (
-      <Col xs={2} id='time'>
+      <Col xs={3} id='time'>
         <div className='input-group date' id='timepicker'>
           <input type='text' className='form-control' />
           <span className='input-group-addon'>
