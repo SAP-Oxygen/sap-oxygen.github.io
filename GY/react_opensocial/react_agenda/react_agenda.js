@@ -8,14 +8,18 @@ var harsimran = "jfweieuwflkfj";
 
 var Agenda = React.createClass({displayName: "Agenda",
   getInitialState: function() {
+    if (this.props.startTime) {
+      var startTime = this.props.startTime;
+    } else {
+      var startTime = moment();
+    }
     return {
-      createdTime: moment(),
-      startTime: moment()
+      startTime: startTime
     } 
   },
-  onTimeChange: function(dateTime) {
+  onTimeChange: function(newTime) {
     this.setState({
-      startTime: dateTime
+      startTime: newTime
     });
   },
   render: function() {
@@ -97,10 +101,12 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
       React.createElement(Table, {striped: true, bordered: true, hover: true, responsive: true, id: "sortable"}, 
         React.createElement("thead", null, 
           React.createElement("tr", null, 
-            React.createElement("th", null, "Start"), 
+            React.createElement("th", null, " "), 
+            React.createElement("th", null, "Start Time"), 
             React.createElement("th", null, "Duration"), 
             React.createElement("th", null, "Topic"), 
-            React.createElement("th", null, "Presenter")
+            React.createElement("th", null, "Presenter"), 
+            React.createElement("th", null, "Notes")
           )
         ), 
         React.createElement("tbody", null, 
@@ -115,13 +121,12 @@ var RowItem = React.createClass({displayName: "RowItem",
   render: function() {
     return (
       React.createElement("tr", {id: this.props.item.id}, 
-        React.createElement("td", null, this.props.startTime.format("h:mm A")), 
+        React.createElement("td", null, this.props.item.id), 
+        React.createElement("td", null, this.props.startTime.format('LT')), 
         React.createElement("td", null, this.props.item.time, " min"), 
         React.createElement("td", null, this.props.item.topic), 
-        React.createElement("td", null, 
-          this.props.item.owner, 
-          React.createElement(Glyphicon, {glyph: "edit", className: "pull-right"})
-        )
+        React.createElement("td", null, this.props.item.owner), 
+        React.createElement("td", null, this.props.item.desc)
       )
     );
   }
@@ -182,15 +187,15 @@ var TimePicker = React.createClass({displayName: "TimePicker",
         });
     });
     $('#timepicker').on("dp.change", function (e) {
-      var dateTime = $('#timepicker').data("DateTimePicker").viewDate();
-      self.onTimeChange(dateTime);
+      var newTime = $('#timepicker').data("DateTimePicker").viewDate();
+      self.onTimeChange(newTime);
     });
     $('#timepicker').on("dp.show", function (e) {
       $('#datepicker').data("DateTimePicker").hide();
     });
   },
-  onTimeChange: function(dateTime) {
-    this.props.handleDateTimeChange(dateTime);
+  onTimeChange: function(time) {
+    this.props.handleDateTimeChange(time);
   },
   render: function() {
     return (
@@ -211,14 +216,14 @@ var ITEMS = {
       {
           "id": "0",
           "topic": "Sales Demo",
-          "desc": "this is about topic 1",
+          "desc": "slaesales demosales demosales demosales demosales demosales demosales demosales demosales demosales demosales demo",
           "time": 5,
           "owner": "Allen"
       },
       {
           "id": "1",
           "topic": "Jam on HANA",
-          "desc": "this is about topic 2",
+          "desc": "HANA",
           "time": 10,
           "owner": "Harsimran"
       },

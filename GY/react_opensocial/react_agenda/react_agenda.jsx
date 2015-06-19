@@ -8,14 +8,18 @@ var harsimran = "jfweieuwflkfj";
 
 var Agenda = React.createClass({
   getInitialState: function() {
+    if (this.props.startTime) {
+      var startTime = this.props.startTime;
+    } else {
+      var startTime = moment();
+    }
     return {
-      createdTime: moment(),
-      startTime: moment()
+      startTime: startTime
     } 
   },
-  onTimeChange: function(dateTime) {
+  onTimeChange: function(newTime) {
     this.setState({
-      startTime: dateTime
+      startTime: newTime
     });
   },
   render: function() {
@@ -97,10 +101,12 @@ var AgendaTable = React.createClass({
       <Table striped bordered hover responsive id="sortable">
         <thead>
           <tr>
-            <th>Start</th>
+            <th> </th>
+            <th>Start Time</th>
             <th>Duration</th>
             <th>Topic</th>
             <th>Presenter</th>
+            <th>Notes</th>
           </tr>
         </thead>
         <tbody>
@@ -115,13 +121,12 @@ var RowItem = React.createClass({
   render: function() {
     return (
       <tr id={this.props.item.id}>
-        <td>{this.props.startTime.format("h:mm A")}</td>
+        <td>{this.props.item.id}</td>
+        <td>{this.props.startTime.format('LT')}</td>
         <td>{this.props.item.time} min</td>
         <td>{this.props.item.topic}</td>
-        <td>
-          {this.props.item.owner}
-          <Glyphicon glyph='edit' className="pull-right" />
-        </td>
+        <td>{this.props.item.owner}</td>
+        <td>{this.props.item.desc}</td>
       </tr>
     );
   }
@@ -182,15 +187,15 @@ var TimePicker = React.createClass({
         });
     });
     $('#timepicker').on("dp.change", function (e) {
-      var dateTime = $('#timepicker').data("DateTimePicker").viewDate();
-      self.onTimeChange(dateTime);
+      var newTime = $('#timepicker').data("DateTimePicker").viewDate();
+      self.onTimeChange(newTime);
     });
     $('#timepicker').on("dp.show", function (e) {
       $('#datepicker').data("DateTimePicker").hide();
     });
   },
-  onTimeChange: function(dateTime) {
-    this.props.handleDateTimeChange(dateTime);
+  onTimeChange: function(time) {
+    this.props.handleDateTimeChange(time);
   },
   render: function() {
     return (
@@ -211,14 +216,14 @@ var ITEMS = {
       {
           "id": "0",
           "topic": "Sales Demo",
-          "desc": "this is about topic 1",
+          "desc": "slaesales demosales demosales demosales demosales demosales demosales demosales demosales demosales demosales demo",
           "time": 5,
           "owner": "Allen"
       },
       {
           "id": "1",
           "topic": "Jam on HANA",
-          "desc": "this is about topic 2",
+          "desc": "HANA",
           "time": 10,
           "owner": "Harsimran"
       },
