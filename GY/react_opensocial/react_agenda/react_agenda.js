@@ -140,7 +140,8 @@ var DatePicker = React.createClass({displayName: "DatePicker",
         $('#datetimepicker').datetimepicker({
           sideBySide: true,
           showClose: true,
-          showTodayButton: true
+          showTodayButton: true,
+          debug: true
         });
     });
     $('#datetimepicker').on("dp.change", function (e) {
