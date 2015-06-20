@@ -14,6 +14,7 @@ var Agenda = React.createClass({displayName: "Agenda",
       var startTime = moment();
     }
     return {
+      items: this.props.items,
       startTime: startTime
     } 
   },
@@ -21,6 +22,11 @@ var Agenda = React.createClass({displayName: "Agenda",
     this.setState({
       startTime: newTime
     });
+  },
+  onAddTopic: function(topic) {
+    this.setState({
+      items: this.state.items.push(topic)
+    })
   },
   render: function() {
     return (
@@ -31,7 +37,7 @@ var Agenda = React.createClass({displayName: "Agenda",
           React.createElement(TimePicker, {handleDateTimeChange: this.onTimeChange})
         ), 
         React.createElement("br", null), 
-        React.createElement(AgendaTable, {items: this.props.items.items, startTime: this.state.startTime}), 
+        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime}), 
         React.createElement(AddButton, null)
       )
     );

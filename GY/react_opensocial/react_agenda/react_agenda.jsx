@@ -14,6 +14,7 @@ var Agenda = React.createClass({
       var startTime = moment();
     }
     return {
+      items: this.props.items,
       startTime: startTime
     } 
   },
@@ -21,6 +22,11 @@ var Agenda = React.createClass({
     this.setState({
       startTime: newTime
     });
+  },
+  onAddTopic: function(topic) {
+    this.setState({
+      items: this.state.items.push(topic)
+    })
   },
   render: function() {
     return (
@@ -31,7 +37,7 @@ var Agenda = React.createClass({
           <TimePicker handleDateTimeChange={this.onTimeChange} />
         </Row>
         <br />
-        <AgendaTable items={this.props.items.items} startTime={this.state.startTime} />
+        <AgendaTable items={this.state.items} startTime={this.state.startTime} />
         <AddButton />
       </Grid>
     );
