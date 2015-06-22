@@ -3,6 +3,8 @@
   <ModulePrefs title="Google OAuth 2.0 Sample">
     <OAuth2>
       <Service name="googleAPI" scope="https://www.googleapis.com/auth/plus.login">
+        <Authorization url="https://accounts.google.com/o/oauth2/auth"/>
+        <Token url="https://accounts.google.com/o/oauth2/token"/>
       </Service>
     </OAuth2>
     <Require feature="oauthpopup" />
