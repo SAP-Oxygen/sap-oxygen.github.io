@@ -1,10 +1,10 @@
+// variables for using React-Bootstrap
 var Table = ReactBootstrap.Table;
 var Button = ReactBootstrap.Button;
 var Grid = ReactBootstrap.Grid;
 var Row = ReactBootstrap.Row;
 var Col = ReactBootstrap.Col;
 var Glyphicon = ReactBootstrap.Glyphicon;
-var harsimran = "jfweieuwflkfj";
 
 var Agenda = React.createClass({displayName: "Agenda",
   getInitialState: function() {
@@ -84,6 +84,9 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
       // }
     }).disableSelection();
     // up to here
+  },
+  componentDidUpdate: function() {
+    gadgets.window.adjustHeight();
   },
   render: function() {
     var self = this;
