@@ -14,7 +14,8 @@ var Agenda = React.createClass({displayName: "Agenda",
       var startTime = moment();
     }
     return {
-      items: this.props.items,
+      items: this.props.items.items,
+      nextId: this.props.nextId,
       startTime: startTime
     } 
   },
@@ -23,10 +24,11 @@ var Agenda = React.createClass({displayName: "Agenda",
       startTime: newTime
     });
   },
-  onAddTopic: function(topic) {
+  onAddTopic: function() {
     this.setState({
-      items: this.state.items.push(topic)
-    })
+      items: this.state.items.push({id: this.state.nextId}),
+      nextId: this.setState.nextId++
+    });
   },
   render: function() {
     return (
@@ -38,7 +40,7 @@ var Agenda = React.createClass({displayName: "Agenda",
         ), 
         React.createElement("br", null), 
         React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime}), 
-        React.createElement(AddButton, null)
+        React.createElement(AddButton, {onAddTopic: this.onAddTopic})
       )
     );
   }
@@ -85,22 +87,29 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
     var rowsArr = [];
     var itemId = null;
     var lastItemEndTime = null;
-    var rowOrder = this.state.rowOrder;
-    var orderedItems = [];
-    if (rowOrder.length !== 0) {
-      rowOrder.forEach(function(element, index) {
-        orderedItems.push(self.props.items[element]); 
-      });
-    } else {
-      orderedItems = this.props.items;
-    }
-    orderedItems.forEach(function(item, index, items) {
-      if (!lastItemEndTime || !itemId) {
-        itemId = 0;
+    // var rowOrder = this.state.rowOrder;
+    // var orderedItems = [];
+    // if (rowOrder.length !== 0) {
+    //   rowOrder.forEach(function(element, index) {
+    //     orderedItems.push(self.props.items[element]); 
+    //   });
+    // } else {
+    //   orderedItems = this.props.items;
+    // }
+    // orderedItems.forEach(function(item, index, items) {
+    //   if (!lastItemEndTime || !itemId) {
+    //     itemId = 0;
+    //     lastItemEndTime = self.props.startTime.clone();
+    //   }
+    //   rowsArr.push(<RowItem item={item} itemId={itemId} startTime={lastItemEndTime.clone()} />);
+    //   itemId++;
+    //   lastItemEndTime.add(item.time, 'm');
+    // });
+    this.props.items.forEach(function(item, index, items) {
+      if (!lastItemEndTime) {
         lastItemEndTime = self.props.startTime.clone();
       }
-      rowsArr.push(React.createElement(RowItem, {item: item, itemId: itemId, startTime: lastItemEndTime.clone()}))
-      itemId++;
+      rowsArr.push(React.createElement(RowItem, {item: item, itemId: itemId, startTime: lastItemEndTime.clone()}));
       lastItemEndTime.add(item.time, 'm');
     });
     return (
@@ -139,9 +148,12 @@ var RowItem = React.createClass({displayName: "RowItem",
 });
 
 var AddButton = React.createClass({displayName: "AddButton",
+  handleAdd: function() {
+    this.props.onAddTopic();
+  },
   render: function() {
     return (
-      React.createElement(Button, null, "Add an item")
+      React.createElement(Button, {onClick: this.handleAdd}, "Add an item")
     );
   }
 });
@@ -248,7 +260,8 @@ var ITEMS = {
           "owner": "Vivek"
       }
   ],
-  "startTime": 1433923200000
+  "startTime": 1433923200000,
+  "nextId": 4
 }
 
 
