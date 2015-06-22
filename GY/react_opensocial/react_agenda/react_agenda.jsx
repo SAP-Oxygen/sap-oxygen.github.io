@@ -15,7 +15,7 @@ var Agenda = React.createClass({
     }
     return {
       items: this.props.items.items,
-      nextId: this.props.nextId,
+      nextId: this.props.items.nextId,
       startTime: startTime
     } 
   },
@@ -25,9 +25,12 @@ var Agenda = React.createClass({
     });
   },
   onAddTopic: function() {
+    var newList = this.state.items;
+    newList.push({id: this.state.nextId, topic: "", desc: "",time: 0, ownder: ""});
+    var nextId = this.state.nextId;
     this.setState({
-      items: this.state.items.push({id: this.state.nextId}),
-      nextId: this.setState.nextId++
+      items: newList,
+      nextId: ++nextId
     });
   },
   render: function() {
