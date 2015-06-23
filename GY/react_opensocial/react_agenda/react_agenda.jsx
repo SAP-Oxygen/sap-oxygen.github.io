@@ -33,6 +33,13 @@ var Agenda = React.createClass({
       nextId: ++nextId
     });
   },
+  onSort: function(newOrder) {
+    var self = this;
+    var newItems = newOrder.map(function(index) {
+      return self.state.items[index];
+    });
+    this.setState({items: newItems});
+  },
   render: function() {
     return (
       <Grid>
@@ -42,7 +49,7 @@ var Agenda = React.createClass({
           <TimePicker handleDateTimeChange={this.onTimeChange} />
         </Row>
         <br />
-        <AgendaTable items={this.state.items} startTime={this.state.startTime} />
+        <AgendaTable items={this.state.items} startTime={this.state.startTime} onSort={this.onSort} />
         <AddButton onAddTopic={this.onAddTopic} />
       </Grid>
     );
@@ -72,21 +79,22 @@ var AgendaTable = React.createClass({
       helper: fixHelperModified,
       update: function(event, ui) {
         console.log(ui);
-      }
-      // stop: function(event, ui) {
-      //   console.log(arguments);
-      //   console.log($('#sortable tbody').sortable('toArray'));
-      //   self.setState({
-      //     // get the order of id's after sorted
-      //     rowOrder: $('#sortable tbody').sortable('toArray')
-      //   })
-      //   self.forceUpdate();
-      // }
+      },
+      stop: this.handleDrop
     }).disableSelection();
     // up to here
   },
   componentDidUpdate: function() {
     gadgets.window.adjustHeight();
+  },
+  handleDrop: function() {
+    debugger;
+    var newOrder = $(this.getDOMNode()).children().get().map(function(child, i) {
+      var newIndex = child.dataset.reactSortablePos;
+      child.dataset.reactSortablePos = i;
+      return newIndex;
+    });
+    this.props.onSort(newOrder);
   },
   render: function() {
     var self = this;
@@ -114,8 +122,10 @@ var AgendaTable = React.createClass({
     this.props.items.forEach(function(item, index, items) {
       if (!lastItemEndTime) {
         lastItemEndTime = self.props.startTime.clone();
-      }
-      rowsArr.push(<RowItem item={item} itemId={itemId} startTime={lastItemEndTime.clone()} />);
+      }<RowItem item={item} itemId={itemId} startTime={lastItemEndTime.clone()} />
+      var node = <RowItem item={item} itemId={itemId} startTime={lastItemEndTime.clone()} />
+      $(node).dataset.reactSortablePos = index;
+      rowsArr.push(node);
       lastItemEndTime.add(item.time, 'm');
     });
     return (
