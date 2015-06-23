@@ -39,6 +39,7 @@ var Agenda = React.createClass({
       return self.state.items[index];
     });
     this.setState({items: newItems});
+    console.log(this.state.items);
   },
   render: function() {
     return (
@@ -61,40 +62,6 @@ var AgendaTable = React.createClass({
     return {
       rowOrder: []
     }
-  },
-  componentDidMount: function() {
-    var self = this;
-    // the following is borrowed from http://www.avtex.com/blog/2015/01/27/drag-and-drop-sorting-of-table-rows-in-priority-order/
-    // to keep the table row from collapsing when being sorted
-    var fixHelperModified = function(e, tr) {
-      var $originals = tr.children();
-      var $helper = tr.clone();
-      $helper.children().each(function(index) {
-        $(this).width($originals.eq(index).width())
-      });
-      return $helper;
-    };
-    // make the table sortable
-    $('#sortable tbody').sortable({
-      helper: fixHelperModified,
-      update: function(event, ui) {
-        console.log(ui);
-      },
-      stop: this.handleDrop
-    }).disableSelection();
-    // up to here
-  },
-  componentDidUpdate: function() {
-    gadgets.window.adjustHeight();
-  },
-  handleDrop: function() {
-    debugger;
-    var newOrder = $(this.getDOMNode()).children().get().map(function(child, i) {
-      var newIndex = child.dataset.reactSortablePos;
-      child.dataset.reactSortablePos = i;
-      return newIndex;
-    });
-    this.props.onSort(newOrder);
   },
   render: function() {
     var self = this;
@@ -119,20 +86,18 @@ var AgendaTable = React.createClass({
     //   itemId++;
     //   lastItemEndTime.add(item.time, 'm');
     // });
-    this.props.items.forEach(function(item, index, items) {
-      if (!lastItemEndTime) {
-        lastItemEndTime = self.props.startTime.clone();
-      }<RowItem item={item} itemId={itemId} startTime={lastItemEndTime.clone()} />
-      var node = <RowItem item={item} itemId={itemId} startTime={lastItemEndTime.clone()} />
-      $(node).dataset.reactSortablePos = index;
-      rowsArr.push(node);
-      lastItemEndTime.add(item.time, 'm');
-    });
+    // this.props.items.forEach(function(item, index, items) {
+    //   if (!lastItemEndTime) {
+    //     lastItemEndTime = self.props.startTime.clone();
+    //   }
+    //   rowsArr.push(<RowItem item={item} itemId={itemId} startTime={lastItemEndTime.clone()} />);
+    //   lastItemEndTime.add(item.time, 'm');
+    // });
     return (
-      <Table striped bordered hover responsive id="sortable">
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
-            <th> </th>
+            <th>#</th>
             <th>Start Time</th>
             <th>Duration</th>
             <th>Topic</th>
@@ -140,10 +105,63 @@ var AgendaTable = React.createClass({
             <th>Notes</th>
           </tr>
         </thead>
-        <tbody>
-          {rowsArr}
-        </tbody>
+        <TableBody items={this.props.items} startTime={this.props.startTime} onSort={this.props.onSort} />
       </Table>
+    );
+  }
+});
+
+var TableBody = React.createClass({
+  componentDidMount: function() {
+    var self = this;
+    // the following is borrowed from http://www.avtex.com/blog/2015/01/27/drag-and-drop-sorting-of-table-rows-in-priority-order/
+    // to keep the table row from collapsing when being sorted
+    var fixHelperModified = function(e, tr) {
+      var $originals = tr.children();
+      var $helper = tr.clone();
+      $helper.children().each(function(index) {
+        $(this).width($originals.eq(index).width())
+      });
+      return $helper;
+    };
+    // make the table sortable
+    $('#sortable').sortable({
+      helper: fixHelperModified,
+      update: function(event, ui) {
+        console.log(ui);
+      },
+      stop: function(event, ui) {
+        var newOrder = $('#sortable').sortable('toArray', {attribute: 'data-id'});
+        console.log(newOrder);
+        self.props.onSort(newOrder);
+        self.forceUpdate();
+      }
+    }).disableSelection();
+    // up to here
+  },
+  componentDidUpdate: function() {
+    // gadgets.window.adjustHeight();
+  },
+  handleDrop: function() {
+    this.props.onSort(newOrder);
+  },
+  render: function() {
+    var self = this;
+    var rowsArr = [];
+    var itemId = 0;
+    var lastItemEndTime = null;
+    this.props.items.forEach(function(item, index, items) {
+      if (!lastItemEndTime) {
+        lastItemEndTime = self.props.startTime.clone();
+      }
+      rowsArr.push(<tr data-id={itemId}><td>{itemId}</td><td>{lastItemEndTime.clone().format('LT')}</td><td>{item.time}</td><td>{item.topic}</td><td>{item.owner}</td><td>{item.desc}</td></tr>);
+      lastItemEndTime.add(item.time, 'm');
+      itemId++;
+    });
+    return(
+      <tbody id='sortable'>
+        {rowsArr}
+      </tbody>
     );
   }
 });
@@ -151,8 +169,8 @@ var AgendaTable = React.createClass({
 var RowItem = React.createClass({
   render: function() {
     return (
-      <tr id={this.props.item.id}>
-        <td>{this.props.item.id}</td>
+      <tr id={this.props.id}>
+        <td>{this.props.id}</td>
         <td>{this.props.startTime.format('LT')}</td>
         <td>{this.props.item.time} min</td>
         <td>{this.props.item.topic}</td>

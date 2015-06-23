@@ -39,6 +39,7 @@ var Agenda = React.createClass({displayName: "Agenda",
       return self.state.items[index];
     });
     this.setState({items: newItems});
+    console.log(this.state.items);
   },
   render: function() {
     return (
@@ -61,40 +62,6 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
     return {
       rowOrder: []
     }
-  },
-  componentDidMount: function() {
-    var self = this;
-    // the following is borrowed from http://www.avtex.com/blog/2015/01/27/drag-and-drop-sorting-of-table-rows-in-priority-order/
-    // to keep the table row from collapsing when being sorted
-    var fixHelperModified = function(e, tr) {
-      var $originals = tr.children();
-      var $helper = tr.clone();
-      $helper.children().each(function(index) {
-        $(this).width($originals.eq(index).width())
-      });
-      return $helper;
-    };
-    // make the table sortable
-    $('#sortable tbody').sortable({
-      helper: fixHelperModified,
-      update: function(event, ui) {
-        console.log(ui);
-      },
-      stop: this.handleDrop
-    }).disableSelection();
-    // up to here
-  },
-  componentDidUpdate: function() {
-    gadgets.window.adjustHeight();
-  },
-  handleDrop: function() {
-    debugger;
-    var newOrder = $(this.getDOMNode()).children().get().map(function(child, i) {
-      var newIndex = child.dataset.reactSortablePos;
-      child.dataset.reactSortablePos = i;
-      return newIndex;
-    });
-    this.props.onSort(newOrder);
   },
   render: function() {
     var self = this;
@@ -119,20 +86,18 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
     //   itemId++;
     //   lastItemEndTime.add(item.time, 'm');
     // });
-    this.props.items.forEach(function(item, index, items) {
-      if (!lastItemEndTime) {
-        lastItemEndTime = self.props.startTime.clone();
-      }React.createElement(RowItem, {item: item, itemId: itemId, startTime: lastItemEndTime.clone()})
-      var node = React.createElement(RowItem, {item: item, itemId: itemId, startTime: lastItemEndTime.clone()})
-      $(node).dataset.reactSortablePos = index;
-      rowsArr.push(node);
-      lastItemEndTime.add(item.time, 'm');
-    });
+    // this.props.items.forEach(function(item, index, items) {
+    //   if (!lastItemEndTime) {
+    //     lastItemEndTime = self.props.startTime.clone();
+    //   }
+    //   rowsArr.push(<RowItem item={item} itemId={itemId} startTime={lastItemEndTime.clone()} />);
+    //   lastItemEndTime.add(item.time, 'm');
+    // });
     return (
-      React.createElement(Table, {striped: true, bordered: true, hover: true, responsive: true, id: "sortable"}, 
+      React.createElement(Table, {striped: true, bordered: true, hover: true, responsive: true}, 
         React.createElement("thead", null, 
           React.createElement("tr", null, 
-            React.createElement("th", null, " "), 
+            React.createElement("th", null, "#"), 
             React.createElement("th", null, "Start Time"), 
             React.createElement("th", null, "Duration"), 
             React.createElement("th", null, "Topic"), 
@@ -140,9 +105,62 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
             React.createElement("th", null, "Notes")
           )
         ), 
-        React.createElement("tbody", null, 
-          rowsArr
-        )
+        React.createElement(TableBody, {items: this.props.items, startTime: this.props.startTime, onSort: this.props.onSort})
+      )
+    );
+  }
+});
+
+var TableBody = React.createClass({displayName: "TableBody",
+  componentDidMount: function() {
+    var self = this;
+    // the following is borrowed from http://www.avtex.com/blog/2015/01/27/drag-and-drop-sorting-of-table-rows-in-priority-order/
+    // to keep the table row from collapsing when being sorted
+    var fixHelperModified = function(e, tr) {
+      var $originals = tr.children();
+      var $helper = tr.clone();
+      $helper.children().each(function(index) {
+        $(this).width($originals.eq(index).width())
+      });
+      return $helper;
+    };
+    // make the table sortable
+    $('#sortable').sortable({
+      helper: fixHelperModified,
+      update: function(event, ui) {
+        console.log(ui);
+      },
+      stop: function(event, ui) {
+        var newOrder = $('#sortable').sortable('toArray', {attribute: 'data-id'});
+        console.log(newOrder);
+        self.props.onSort(newOrder);
+        self.forceUpdate();
+      }
+    }).disableSelection();
+    // up to here
+  },
+  componentDidUpdate: function() {
+    // gadgets.window.adjustHeight();
+  },
+  handleDrop: function() {
+    this.props.onSort(newOrder);
+  },
+  render: function() {
+    var self = this;
+    var rowsArr = [];
+    var itemId = 0;
+    var lastItemEndTime = null;
+    this.props.items.forEach(function(item, index, items) {
+      if (!lastItemEndTime) {
+        lastItemEndTime = self.props.startTime.clone();
+      }
+      rowsArr.push(React.createElement("tr", {"data-id": itemId}, React.createElement("td", null, itemId), React.createElement("td", null, lastItemEndTime.clone().format('LT')), React.createElement("td", null, item.time), React.createElement("td", null, item.topic), React.createElement("td", null, item.owner), React.createElement("td", null, item.desc)));
+      lastItemEndTime.add(item.time, 'm');
+      itemId++;
+    });
+    return(
+      React.createElement("tbody", {id: "sortable"}, 
+        rowsArr
       )
     );
   }
@@ -151,8 +169,8 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
 var RowItem = React.createClass({displayName: "RowItem",
   render: function() {
     return (
-      React.createElement("tr", {id: this.props.item.id}, 
-        React.createElement("td", null, this.props.item.id), 
+      React.createElement("tr", {id: this.props.id}, 
+        React.createElement("td", null, this.props.id), 
         React.createElement("td", null, this.props.startTime.format('LT')), 
         React.createElement("td", null, this.props.item.time, " min"), 
         React.createElement("td", null, this.props.item.topic), 
