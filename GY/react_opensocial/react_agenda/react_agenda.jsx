@@ -94,7 +94,7 @@ var AgendaTable = React.createClass({
     //   lastItemEndTime.add(item.time, 'm');
     // });
     return (
-      <Table striped bordered hover responsive>
+      <Table bordered hover responsive>
         <thead>
           <tr>
             <th>#</th>
@@ -112,6 +112,11 @@ var AgendaTable = React.createClass({
 });
 
 var TableBody = React.createClass({
+  getInitialState: function() {
+    return {
+      tempItems: []
+    }
+  },
   componentDidMount: function() {
     var self = this;
     // the following is borrowed from http://www.avtex.com/blog/2015/01/27/drag-and-drop-sorting-of-table-rows-in-priority-order/
@@ -131,7 +136,7 @@ var TableBody = React.createClass({
         console.log(ui);
       },
       stop: function(event, ui) {
-        var newOrder = $('#sortable').sortable('toArray', {attribute: 'data-id'});
+        var newOrder = $('#sortable').sortable('toArray', {attribute: 'id'});
         console.log(newOrder);
         self.props.onSort(newOrder);
         self.forceUpdate();
@@ -145,22 +150,36 @@ var TableBody = React.createClass({
   handleDrop: function() {
     this.props.onSort(newOrder);
   },
+  onSort: function(newOrder) {
+    var self = this;
+    var newItems = newOrder.map(function(index) {
+      return self.state.tempItems[index];
+    });
+    this.setState({items: newItems});
+    console.log(this.state.items);
+  },
   render: function() {
     var self = this;
     var rowsArr = [];
-    var itemId = 0;
+    var itemId = null;
     var lastItemEndTime = null;
-    this.props.items.forEach(function(item, index, items) {
+    // this.props.items.forEach(function(item, index, items) {
+    //   if (!lastItemEndTime) {
+    //     lastItemEndTime = self.props.startTime.clone();
+    //   }
+    //   rowsArr.push();
+    //   lastItemEndTime.add(item.time, 'm');
+    //   itemId++;
+    // });
+    var rows = this.props.items.map(function(item, index, arr) {
       if (!lastItemEndTime) {
         lastItemEndTime = self.props.startTime.clone();
       }
-      rowsArr.push(<tr data-id={itemId}><td>{itemId}</td><td>{lastItemEndTime.clone().format('LT')}</td><td>{item.time}</td><td>{item.topic}</td><td>{item.owner}</td><td>{item.desc}</td></tr>);
-      lastItemEndTime.add(item.time, 'm');
-      itemId++;
-    });
-    return(
+      return (<RowItem id={index} item={item} startTime={lastItemEndTime.clone()} />);
+    })
+    return (
       <tbody id='sortable'>
-        {rowsArr}
+        {rows}
       </tbody>
     );
   }
@@ -267,31 +286,31 @@ var ITEMS = {
   "items": [
       {
           "id": "0",
-          "topic": "Sales Demo",
-          "desc": "slaesales demosales demosales demosales demosales demosales demosales demosales demosales demosales demosales demo",
+          "topic": "A",
+          "desc": "A",
           "time": 5,
-          "owner": "Allen"
+          "owner": "A"
       },
       {
           "id": "1",
-          "topic": "Jam on HANA",
-          "desc": "HANA",
+          "topic": "B",
+          "desc": "B",
           "time": 10,
-          "owner": "Harsimran"
+          "owner": "B"
       },
       {
           "id": "2",
-          "topic": "Open Social Gadgets",
-          "desc": "this is about topic 3",
+          "topic": "C",
+          "desc": "C",
           "time": 15,
-          "owner": "GY"
+          "owner": "C"
       },
       {
           "id": "3",
-          "topic": "Workers",
-          "desc": "this is about topic 4",
+          "topic": "D",
+          "desc": "D",
           "time": 20,
-          "owner": "Vivek"
+          "owner": "D"
       }
   ],
   "startTime": 1433923200000,

@@ -50,7 +50,7 @@ var Agenda = React.createClass({displayName: "Agenda",
           React.createElement(TimePicker, {handleDateTimeChange: this.onTimeChange})
         ), 
         React.createElement("br", null), 
-        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, onSort: this.onSort}), 
+        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime}), 
         React.createElement(AddButton, {onAddTopic: this.onAddTopic})
       )
     );
@@ -114,7 +114,7 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
 var TableBody = React.createClass({displayName: "TableBody",
   getInitialState: function() {
     return {
-      tempItems: []
+      tempItems: this.props.items
     }
   },
   componentDidMount: function() {
@@ -132,19 +132,16 @@ var TableBody = React.createClass({displayName: "TableBody",
     // make the table sortable
     $('#sortable').sortable({
       helper: fixHelperModified,
-      update: function(event, ui) {
-        console.log(ui);
-      },
       stop: function(event, ui) {
-        var newOrder = $('#sortable').sortable('toArray', {attribute: 'id'});
+        var newOrder = $('#sortable').sortable('toArray', {attribute: 'data-id'});
         console.log(newOrder);
-        self.props.onSort(newOrder);
-        self.forceUpdate();
+        self.onSort(newOrder);
       }
     }).disableSelection();
     // up to here
   },
   componentDidUpdate: function() {
+    console.log("updated");
     // gadgets.window.adjustHeight();
   },
   handleDrop: function() {
@@ -155,27 +152,27 @@ var TableBody = React.createClass({displayName: "TableBody",
     var newItems = newOrder.map(function(index) {
       return self.state.tempItems[index];
     });
-    this.setState({items: newItems});
-    console.log(this.state.items);
+    this.setState({tempItems: newItems});
+    console.log(this.state.tempItems);
   },
   render: function() {
     var self = this;
     var rowsArr = [];
-    var itemId = null;
+    var itemId = 0;
     var lastItemEndTime = null;
-    // this.props.items.forEach(function(item, index, items) {
+    // this.state.tempItems.forEach(function(item, index, items) {
     //   if (!lastItemEndTime) {
     //     lastItemEndTime = self.props.startTime.clone();
     //   }
-    //   rowsArr.push();
+    //   rowsArr.push(<RowItem id={itemId} item={item} startTime={lastItemEndTime.clone()} />);
     //   lastItemEndTime.add(item.time, 'm');
     //   itemId++;
     // });
-    var rows = this.props.items.map(function(item, index, arr) {
+    var rows = this.state.tempItems.map(function(item, index, arr) {
       if (!lastItemEndTime) {
         lastItemEndTime = self.props.startTime.clone();
       }
-      return (React.createElement(RowItem, {id: index, item: item, startTime: lastItemEndTime.clone()}));
+      return (React.createElement(RowItem, {key: item.id, id: index, item: item, startTime: lastItemEndTime.clone()}));
     })
     return (
       React.createElement("tbody", {id: "sortable"}, 
@@ -188,7 +185,7 @@ var TableBody = React.createClass({displayName: "TableBody",
 var RowItem = React.createClass({displayName: "RowItem",
   render: function() {
     return (
-      React.createElement("tr", {id: this.props.id}, 
+      React.createElement("tr", {key: this.props.key, "data-id": this.props.id}, 
         React.createElement("td", null, this.props.id), 
         React.createElement("td", null, this.props.startTime.format('LT')), 
         React.createElement("td", null, this.props.item.time, " min"), 
