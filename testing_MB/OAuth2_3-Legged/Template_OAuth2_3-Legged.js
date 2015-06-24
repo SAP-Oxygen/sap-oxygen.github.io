@@ -23,7 +23,8 @@ function fetchData() {
   //$(edit_link).click(function(){ changeViewMode(myvar); });
   //gadgets.io.makeRequest(url, oDataProcessing(response), params);
   //gadgets.io.makeRequest(url, function (response)
-  gadgets.io.makeRequest(url, function(){ return oDataProcessing(response); }, params);
+  //gadgets.io.makeRequest(url, function(){ return oDataProcessing(response); }, params);
+  gadgets.io.makeRequest(url, oDataProcessing, params);
 }
 
 function oDataProcessing(response) {
