@@ -6,7 +6,7 @@ var Row = ReactBootstrap.Row;
 var Col = ReactBootstrap.Col;
 var Glyphicon = ReactBootstrap.Glyphicon;
 
-var Agenda = React.createClass({displayName: "Agenda",
+var Agenda = React.createClass({
   getInitialState: function() {
     if (this.props.startTime) {
       var startTime = this.props.startTime;
@@ -43,21 +43,21 @@ var Agenda = React.createClass({displayName: "Agenda",
   },
   render: function() {
     return (
-      React.createElement(Grid, null, 
-        React.createElement("br", null), 
-        React.createElement(Row, null, 
-          React.createElement(DatePicker, null), 
-          React.createElement(TimePicker, {handleDateTimeChange: this.onTimeChange})
-        ), 
-        React.createElement("br", null), 
-        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, onSort: this.onSort}), 
-        React.createElement(AddButton, {onAddTopic: this.onAddTopic})
-      )
+      <Grid>
+        <br />
+        <Row>
+          <DatePicker />
+          <TimePicker handleDateTimeChange={this.onTimeChange} />
+        </Row>
+        <br />
+        <AgendaTable items={this.state.items} startTime={this.state.startTime}  />
+        <AddButton onAddTopic={this.onAddTopic} />
+      </Grid>
     );
   }
 });
 
-var AgendaTable = React.createClass({displayName: "AgendaTable",
+var AgendaTable = React.createClass({
   getInitialState: function() {
     return {
       rowOrder: []
@@ -94,27 +94,27 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
     //   lastItemEndTime.add(item.time, 'm');
     // });
     return (
-      React.createElement(Table, {bordered: true, hover: true, responsive: true}, 
-        React.createElement("thead", null, 
-          React.createElement("tr", null, 
-            React.createElement("th", null, "#"), 
-            React.createElement("th", null, "Start Time"), 
-            React.createElement("th", null, "Duration"), 
-            React.createElement("th", null, "Topic"), 
-            React.createElement("th", null, "Presenter"), 
-            React.createElement("th", null, "Notes")
-          )
-        ), 
-        React.createElement(TableBody, {items: this.props.items, startTime: this.props.startTime, onSort: this.props.onSort})
-      )
+      <Table bordered hover responsive>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Start Time</th>
+            <th>Duration</th>
+            <th>Topic</th>
+            <th>Presenter</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <TableBody items={this.props.items} startTime={this.props.startTime} onSort={this.props.onSort} />
+      </Table>
     );
   }
 });
 
-var TableBody = React.createClass({displayName: "TableBody",
+var TableBody = React.createClass({
   getInitialState: function() {
     return {
-      tempItems: []
+      tempItems: this.props.items
     }
   },
   componentDidMount: function() {
@@ -132,19 +132,16 @@ var TableBody = React.createClass({displayName: "TableBody",
     // make the table sortable
     $('#sortable').sortable({
       helper: fixHelperModified,
-      update: function(event, ui) {
-        console.log(ui);
-      },
       stop: function(event, ui) {
-        var newOrder = $('#sortable').sortable('toArray', {attribute: 'id'});
+        var newOrder = $('#sortable').sortable('toArray', {attribute: 'data-id'});
         console.log(newOrder);
-        self.props.onSort(newOrder);
-        self.forceUpdate();
+        self.onSort(newOrder);
       }
     }).disableSelection();
     // up to here
   },
   componentDidUpdate: function() {
+    console.log("updated");
     // gadgets.window.adjustHeight();
   },
   handleDrop: function() {
@@ -155,63 +152,63 @@ var TableBody = React.createClass({displayName: "TableBody",
     var newItems = newOrder.map(function(index) {
       return self.state.tempItems[index];
     });
-    this.setState({items: newItems});
-    console.log(this.state.items);
+    this.setState({tempItems: newItems});
+    console.log(this.state.tempItems);
   },
   render: function() {
     var self = this;
     var rowsArr = [];
-    var itemId = null;
+    var itemId = 0;
     var lastItemEndTime = null;
-    // this.props.items.forEach(function(item, index, items) {
+    // this.state.tempItems.forEach(function(item, index, items) {
     //   if (!lastItemEndTime) {
     //     lastItemEndTime = self.props.startTime.clone();
     //   }
-    //   rowsArr.push();
+    //   rowsArr.push(<RowItem id={itemId} item={item} startTime={lastItemEndTime.clone()} />);
     //   lastItemEndTime.add(item.time, 'm');
     //   itemId++;
     // });
-    var rows = this.props.items.map(function(item, index, arr) {
+    var rows = this.state.tempItems.map(function(item, index, arr) {
       if (!lastItemEndTime) {
         lastItemEndTime = self.props.startTime.clone();
       }
-      return (React.createElement(RowItem, {id: index, item: item, startTime: lastItemEndTime.clone()}));
+      return (<RowItem key={item.id} id={index} item={item} startTime={lastItemEndTime.clone()} />);
     })
     return (
-      React.createElement("tbody", {id: "sortable"}, 
-        rows
-      )
+      <tbody id='sortable'>
+        {rows}
+      </tbody>
     );
   }
 });
 
-var RowItem = React.createClass({displayName: "RowItem",
+var RowItem = React.createClass({
   render: function() {
     return (
-      React.createElement("tr", {id: this.props.id}, 
-        React.createElement("td", null, this.props.id), 
-        React.createElement("td", null, this.props.startTime.format('LT')), 
-        React.createElement("td", null, this.props.item.time, " min"), 
-        React.createElement("td", null, this.props.item.topic), 
-        React.createElement("td", null, this.props.item.owner), 
-        React.createElement("td", null, this.props.item.desc)
-      )
+      <tr key={this.props.key} data-id={this.props.id}>
+        <td>{this.props.id}</td>
+        <td>{this.props.startTime.format('LT')}</td>
+        <td>{this.props.item.time} min</td>
+        <td>{this.props.item.topic}</td>
+        <td>{this.props.item.owner}</td>
+        <td>{this.props.item.desc}</td>
+      </tr>
     );
   }
 });
 
-var AddButton = React.createClass({displayName: "AddButton",
+var AddButton = React.createClass({
   handleAdd: function() {
     this.props.onAddTopic();
   },
   render: function() {
     return (
-      React.createElement(Button, {onClick: this.handleAdd}, "Add an item")
+      <Button onClick={this.handleAdd}>Add an item</Button>
     );
   }
 });
 
-var DatePicker = React.createClass({displayName: "DatePicker",
+var DatePicker = React.createClass({
   componentDidMount: function() {
     var self = this;
     // Datepicker
@@ -231,19 +228,19 @@ var DatePicker = React.createClass({displayName: "DatePicker",
   },
   render: function() {
     return (
-      React.createElement(Col, {xs: 4, id: "date"}, 
-        React.createElement("div", {className: "input-group date", id: "datepicker"}, 
-          React.createElement("input", {type: "text", className: "form-control"}), 
-          React.createElement("span", {className: "input-group-addon"}, 
-            React.createElement("span", {className: "glyphicon glyphicon-calendar"})
-          )
-        )
-      )
+      <Col xs={4} id='date'>
+        <div className='input-group date' id='datepicker'>
+          <input type='text' className='form-control' />
+          <span className='input-group-addon'>
+            <span className='glyphicon glyphicon-calendar'></span>
+          </span>
+        </div>
+      </Col>
     );
   }
 });
 
-var TimePicker = React.createClass({displayName: "TimePicker",
+var TimePicker = React.createClass({
   componentDidMount: function() {
     var self = this;
     // Datepicker
@@ -270,14 +267,14 @@ var TimePicker = React.createClass({displayName: "TimePicker",
   },
   render: function() {
     return (
-      React.createElement(Col, {xs: 3, id: "time"}, 
-        React.createElement("div", {className: "input-group date", id: "timepicker"}, 
-          React.createElement("input", {type: "text", className: "form-control"}), 
-          React.createElement("span", {className: "input-group-addon"}, 
-            React.createElement("span", {className: "glyphicon glyphicon-calendar"})
-          )
-        )
-      )
+      <Col xs={3} id='time'>
+        <div className='input-group date' id='timepicker'>
+          <input type='text' className='form-control' />
+          <span className='input-group-addon'>
+            <span className='glyphicon glyphicon-calendar'></span>
+          </span>
+        </div>
+      </Col>
     );
   }
 });
@@ -318,4 +315,4 @@ var ITEMS = {
 }
 
 
-React.render(React.createElement(Agenda, {items: ITEMS}), document.body);
+React.render(<Agenda items={ITEMS} />, document.body);
