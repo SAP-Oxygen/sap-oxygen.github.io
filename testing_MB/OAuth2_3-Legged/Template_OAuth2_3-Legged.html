@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<script type="text/javascript" src="Template_OAuth2_3-Legged.js"></script>
+
+<div id="step_01_seekApproval" style="display: none">
+  <p>This gadget uses OAuth 2.0: 3-Legged authorization with the API provider to interact with their API.</p>
+  <p>Click <a href="javascript:void(0)" id="personalize">here</a> to begin the authorization process.</p>
+</div>
+
+<div id="step_02_accessApproved" style="display: none">
+  Click <a href="#" id="approvaldone">Access Approved</a> once you have approved access to your data on the API provider.
+</div>
+
+<div id="step_03_result" style="display: none">
+<div id="image"></div>
+    <div>Name: <span id="name"></span></div>
+	<div>Occupation: <span id="occupation"></span></div>
+</div>
+
+<div id="error" style="display: none; title="An error occured processing the request">
+   <div id="error_code"><u>Code:</u></div>
+   <div id="error_uri"><u>URI:</u></div>
+   <div id="error_description"><u>Description:</u></div>
+   <div id="error_explanation"><u>Explanation:</u></div>
+   <div id="error_trace"><u>Trace:</u></div>
+</div>
