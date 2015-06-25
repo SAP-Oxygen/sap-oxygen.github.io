@@ -35,22 +35,22 @@ function fetchData() {
       fetchData();
     }
     var popup = new gadgets.oauth.Popup(response.oauthApprovalUrl, null, onOpen, onClose);
-    getElement('personalize').onclick = popup.createOpenerOnClick();
-    getElement('approvaldone').onclick = popup.createApprovedOnClick();
+    document.getElementById('personalize').onclick = popup.createOpenerOnClick();
+    document.getElementById('approvaldone').onclick = popup.createApprovedOnClick();
     showStep('step_01_seekApproval');
     }
     else if (response.data) {
-      getElement('name').innerHTML = response.data.displayName;
-      getElement('image').innerHTML = '<img style="height: 100px; width: 100px;" src="' + response.data.image.url + '"/>';
-      getElement('occupation').innerHTML = response.data.occupation;
+      document.getElementById('name').innerHTML = response.data.displayName;
+      document.getElementById('image').innerHTML = '<img style="height: 100px; width: 100px;" src="' + response.data.image.url + '"/>';
+      document.getElementById('occupation').innerHTML = response.data.occupation;
       showStep('step_03_result');
     }
     else {
-      getElement('error_code').appendChild(document.createTextNode(response.oauthError));
-      getElement('error_uri').appendChild(document.createTextNode(response.oauthErrorUri));
-      getElement('error_description').appendChild(document.createTextNode(response.oauthErrorText));
-      getElement('error_explanation').appendChild(document.createTextNode(response.oauthErrorExplanation));
-      getElement('error_trace').appendChild(document.createTextNode(response.oauthErrorTrace));
+      document.getElementById('error_code').appendChild(document.createTextNode(response.oauthError));
+      document.getElementById('error_uri').appendChild(document.createTextNode(response.oauthErrorUri));
+      document.getElementById('error_description').appendChild(document.createTextNode(response.oauthErrorText));
+      document.getElementById('error_explanation').appendChild(document.createTextNode(response.oauthErrorExplanation));
+      document.getElementById('error_trace').appendChild(document.createTextNode(response.oauthErrorTrace));
       showStep('error');
     }
   }, params);
@@ -65,22 +65,22 @@ function oDataProcessing(response) {
     fetchData();
   }
   var popup = new gadgets.oauth.Popup(response.oauthApprovalUrl, null, onOpen, onClose);
-  getElement('personalize').onclick = popup.createOpenerOnClick();
-  getElement('approvaldone').onclick = popup.createApprovedOnClick();
+  document.getElementById('personalize').onclick = popup.createOpenerOnClick();
+  document.getElementById('approvaldone').onclick = popup.createApprovedOnClick();
   showStep('step_01_seekApproval');
   }
   else if (response.data) {
-    getElement('name').innerHTML = response.data.displayName;
-    getElement('image').innerHTML = '<img style="height: 100px; width: 100px;" src="' + response.data.image.url + '"/>';
-    getElement('occupation').innerHTML = response.data.occupation;
+    document.getElementById('name').innerHTML = response.data.displayName;
+    document.getElementById('image').innerHTML = '<img style="height: 100px; width: 100px;" src="' + response.data.image.url + '"/>';
+    document.getElementById('occupation').innerHTML = response.data.occupation;
     showStep('step_03_result');
   }
   else {
-    getElement('error_code').appendChild(document.createTextNode(response.oauthError));
-    getElement('error_uri').appendChild(document.createTextNode(response.oauthErrorUri));
-    getElement('error_description').appendChild(document.createTextNode(response.oauthErrorText));
-    getElement('error_explanation').appendChild(document.createTextNode(response.oauthErrorExplanation));
-    getElement('error_trace').appendChild(document.createTextNode(response.oauthErrorTrace));
+    document.getElementById('error_code').appendChild(document.createTextNode(response.oauthError));
+    document.getElementById('error_uri').appendChild(document.createTextNode(response.oauthErrorUri));
+    document.getElementById('error_description').appendChild(document.createTextNode(response.oauthErrorText));
+    document.getElementById('error_explanation').appendChild(document.createTextNode(response.oauthErrorExplanation));
+    document.getElementById('error_trace').appendChild(document.createTextNode(response.oauthErrorTrace));
     showStep('error');
   }
 }
