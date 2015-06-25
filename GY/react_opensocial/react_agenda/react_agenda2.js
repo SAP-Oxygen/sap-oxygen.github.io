@@ -60,39 +60,24 @@ var Agenda = React.createClass({displayName: "Agenda",
 var AgendaTable = React.createClass({displayName: "AgendaTable",
   getInitialState: function() {
     return {
-      rowOrder: []
-    }
+      items: this.props.data.items, 
+      counter: this.props.data.items.length};
+  },
+  handleSort: function(newOrder) {
+    var newItems = newOrder.map(function(index) {
+      return this.state.items[index];
+    }.bind(this));
+    this.setState({items: newItems});
+    console.log(this.state.items);
   },
   render: function() {
     var self = this;
     var rowsArr = [];
     var itemId = null;
     var lastItemEndTime = null;
-    // var rowOrder = this.state.rowOrder;
-    // var orderedItems = [];
-    // if (rowOrder.length !== 0) {
-    //   rowOrder.forEach(function(element, index) {
-    //     orderedItems.push(self.props.items[element]); 
-    //   });
-    // } else {
-    //   orderedItems = this.props.items;
-    // }
-    // orderedItems.forEach(function(item, index, items) {
-    //   if (!lastItemEndTime || !itemId) {
-    //     itemId = 0;
-    //     lastItemEndTime = self.props.startTime.clone();
-    //   }
-    //   rowsArr.push(<RowItem item={item} itemId={itemId} startTime={lastItemEndTime.clone()} />);
-    //   itemId++;
-    //   lastItemEndTime.add(item.time, 'm');
-    // });
-    // this.props.items.forEach(function(item, index, items) {
-    //   if (!lastItemEndTime) {
-    //     lastItemEndTime = self.props.startTime.clone();
-    //   }
-    //   rowsArr.push(<RowItem item={item} itemId={itemId} startTime={lastItemEndTime.clone()} />);
-    //   lastItemEndTime.add(item.time, 'm');
-    // });
+    var items = this.state.items.map(function(item) {
+      return (React.createElement("tr", {key: item.id, item: item}));
+    })
     return (
       React.createElement(Table, {bordered: true, hover: true, responsive: true}, 
         React.createElement("thead", null, 
@@ -105,140 +90,129 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
             React.createElement("th", null, "Notes")
           )
         ), 
-        React.createElement(TableBody, {data: this.props.data, startTime: this.props.startTime, onSort: this.props.onSort})
+        React.createElement(TableBody, {onSort: this.handleSort}, 
+          items
+        )
       )
     );
   }
 });
 
 var TableBody = React.createClass({displayName: "TableBody",
-  getInitialState: function() {
-    return {
-      data: this.props.data
+  getDefaultProps: function() {
+    return {component: "tbody", childComponent: "tr"};
+  },
+  
+  render: function() {
+    var props = jQuery.extend({}, this.props);
+    delete props.children;
+    return (React.createElement(this.props.component, React.__spread({},  props)));
+  },
+  
+  componentDidMount: function() {
+    jQuery(this.getDOMNode()).sortable({stop: this.handleDrop});
+    this.getChildren().forEach(function(child, i) {
+      jQuery(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
+      var node = jQuery(this.getDOMNode()).children().last()[0];
+      node.dataset.reactSortablePos = i;
+      React.render(React.createElement(RowItem, {id: i, item: child.props.item}), node);
+    }.bind(this));
+  },
+  
+  componentDidUpdate: function() {
+    var childIndex = 0;
+    var nodeIndex = 0;
+    var children = this.getChildren();
+    var nodes = jQuery(this.getDOMNode()).children();
+    var numChildren = children.length;
+    var numNodes = nodes.length;
+  
+    while (childIndex < numChildren) {
+      if (nodeIndex >= numNodes) {
+        jQuery(this.getDOMNode()).append('<' + this.props.childComponent + '/>');
+        nodes.push(jQuery(this.getDOMNode()).children().last()[0]);
+        nodes[numNodes].dataset.reactSortablePos = numNodes;
+        numNodes++;
+      }
+      React.render(React.createElement(RowItem, {id: childIndex, item: children[childIndex].props.item}), nodes[nodeIndex]);
+      childIndex++;
+      nodeIndex++;
+    }
+  
+    while (nodeIndex < numNodes) {
+      React.unmountComponentAtNode(nodes[nodeIndex]);
+      jQuery(nodes[nodeIndex]).remove();
+      nodeIndex++;
     }
   },
-  componentDidMount: function() {
-    // var self = this;
-    // // the following is borrowed from http://www.avtex.com/blog/2015/01/27/drag-and-drop-sorting-of-table-rows-in-priority-order/
-    // // to keep the table row from collapsing when being sorted
-    // var fixHelperModified = function(e, tr) {
-    //   var $originals = tr.children();
-    //   var $helper = tr.clone();
-    //   $helper.children().each(function(index) {
-    //     $(this).width($originals.eq(index).width())
-    //   });
-    //   return $helper;
-    // };
-    // // make the table sortable
-    // $('#sortable').sortable({
-    //   helper: fixHelperModified,
-    //   stop: function(event, ui) {
-
-    //     var newOrder = $('#sortable').sortable('toArray', {attribute: 'data-id'});
-    //     console.log(newOrder);
-    //     self.onSort(newOrder);
-    //   }
-    // }).disableSelection();
-    // up to here
+  
+  componentWillUnmount: function() {
+    jQuery(this.getDOMNode()).children().get().forEach(function(node) {
+      React.unmountComponentAtNode(node);
+    });
   },
-  componentDidUpdate: function() {
-    // gadgets.window.adjustHeight();
+  
+  getChildren: function() {
+    // TODO: use mapChildren()
+    return this.props.children || [];
   },
-  // onSort: function(newOrder) {
-  //   var self = this;
-  //   var newItems = newOrder.map(function(index) {
-  //     return self.state.tempItems[index];
-  //   });
-  //   this.setState({tempItems: newItems});
-  //   console.log(this.state.tempItems);
-  // },
-  sort: function(items, dragging) {
-    var data = this.state.data;
-    data.items = items;
-    data.dragging = dragging;
-    this.setState({data: data});
-  },
-  dragEnd: function() {
-    this.sort(this.state.data.items, undefined);
-    console.log(this.state.data.items);
-  },
-  dragStart: function(e) {
-    this.dragged = Number(e.currentTarget.dataset.id);
-    e.dataTransfer.effectAllowed = 'move';
-
-    // Firefox requires calling dataTransfer.setData
-    // for the drag to properly work
-    e.dataTransfer.setData("text/html", null);
-  },
-  dragOver: function(e) {
-    e.preventDefault();
-
-    var over = e.currentTarget
-    var dragging = this.state.data.dragging;
-    var from = isFinite(dragging) ? dragging : this.dragged;
-    var to = Number(over.dataset.id);
-    if((e.clientY - over.offsetTop) > (over.offsetHeight / 2)) to++;
-    if(from < to) to--;
-
-    // Move from 'a' to 'b'
-    var items = this.state.data.items;
-    items.splice(to, 0, items.splice(from,1)[0]);
-    this.sort(items, to);
-  },
-  render: function() {
-    var self = this;
-    var rowsArr = [];
-    var itemId = 0;
-    var lastItemEndTime = null;
-    // this.state.tempItems.forEach(function(item, index, items) {
-    //   if (!lastItemEndTime) {
-    //     lastItemEndTime = self.props.startTime.clone();
-    //   }
-    //   rowsArr.push(<RowItem id={itemId} item={item} startTime={lastItemEndTime.clone()} />);
-    //   lastItemEndTime.add(item.time, 'm');
-    //   itemId++;
-    // });
-    var rows = this.state.data.items.map(function(item, i, arr) {
-      var dragging = (i == self.state.data.dragging) ? "dragging" : "";
-      if (!lastItemEndTime) {
-        lastItemEndTime = self.props.startTime.clone();
-      }
-      return (
-        React.createElement("tr", {"data-id": i, 
-          className: dragging, 
-          key: i, 
-          draggable: "true", 
-          onDragEnd: self.dragEnd, 
-          onDragOver: self.dragOver, 
-          onDragStart: self.dragStart}, 
-          React.createElement("td", null, i), 
-          React.createElement("td", null, lastItemEndTime.format('LT')), 
-          React.createElement("td", null, item.time, " min"), 
-          React.createElement("td", null, item.topic), 
-          React.createElement("td", null, item.owner), 
-          React.createElement("td", null, item.desc)
-        )
-      );
-    })
-    return (
-      React.createElement("tbody", null, 
-        rows
-      )
-    );
+  
+  handleDrop: function() {
+    var newOrder = jQuery(this.getDOMNode()).children().get().map(function(child, i) {
+      var rv = child.dataset.reactSortablePos;
+      child.dataset.reactSortablePos = i;
+      return rv;
+    });
+    this.props.onSort(newOrder);
   }
+  // render: function() {
+  //   var self = this;
+  //   var rowsArr = [];
+  //   var itemId = 0;
+  //   var lastItemEndTime = null;
+  //   // this.state.tempItems.forEach(function(item, index, items) {
+  //   //   if (!lastItemEndTime) {
+  //   //     lastItemEndTime = self.props.startTime.clone();
+  //   //   }
+  //   //   rowsArr.push(<RowItem id={itemId} item={item} startTime={lastItemEndTime.clone()} />);
+  //   //   lastItemEndTime.add(item.time, 'm');
+  //   //   itemId++;
+  //   // });
+  //   var rows = this.state.items.map(function(item, i, arr) {
+  //     var dragging = (i == self.state.data.dragging) ? "dragging" : "";
+  //     if (!lastItemEndTime) {
+  //       lastItemEndTime = self.props.startTime.clone();
+  //     }
+  //     return (
+  //       <tr>
+  //         <td>{i}</td>
+  //         <td>11:11</td>
+  //         <td>{item.time} min</td>
+  //         <td>{item.topic}</td>
+  //         <td>{item.owner}</td>
+  //         <td>{item.desc}</td>
+  //       </tr>
+  //     );
+  //   })
+  //   return (
+  //     <tbody>
+  //       {rows}
+  //     </tbody>
+  //   );
+  // }
 });
 
 var RowItem = React.createClass({displayName: "RowItem",
   render: function() {
-    return this.transferPropsTo(
-        React.createElement("tr", {className: this.isDragging() ? "dragging" : ""}, 
-          React.createElement("td", null, this.props.id), 
-          React.createElement("td", null, this.props.startTime.format('LT')), 
-          React.createElement("td", null, this.props.item.time, " min"), 
-          React.createElement("td", null, this.props.item.topic), 
-          React.createElement("td", null, this.props.item.owner), 
-          React.createElement("td", null, this.props.item.desc)
-        )
+    return (
+      React.createElement("tr", null, 
+        React.createElement("td", null, this.props.id), 
+        React.createElement("td", null, "11:11"), 
+        React.createElement("td", null, this.props.item.time, " min"), 
+        React.createElement("td", null, this.props.item.topic), 
+        React.createElement("td", null, this.props.item.owner), 
+        React.createElement("td", null, this.props.item.desc)
+      )
     );
   }
 });
