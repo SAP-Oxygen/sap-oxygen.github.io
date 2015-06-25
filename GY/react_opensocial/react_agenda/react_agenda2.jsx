@@ -113,9 +113,23 @@ var TableBody = React.createClass({
   },
   
   componentDidMount: function() {
+    // Helper function to keep table row from collapsing when being sorted
+    // got from http://www.avtex.com/blog/2015/01/27/drag-and-drop-sorting-of-table-rows-in-priority-order/
+    var fixHelperModified = function(e, tr) {
+      var $originals = tr.children();
+      var $helper = tr.clone();
+      $helper.children().each(function(index) {
+        $(this).width($originals.eq(index).width())
+      });
+      return $helper;
+    };
+
     var lastItemEndTime = null;
 
-    jQuery(this.getDOMNode()).sortable({stop: this.handleDrop});
+    jQuery(this.getDOMNode()).sortable({
+      helper: fixHelperModified,
+      stop: this.handleDrop
+    });
     this.getChildren().forEach(function(child, i) {
       if (!lastItemEndTime) {
         lastItemEndTime = this.props.startTime.clone();
