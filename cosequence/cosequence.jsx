@@ -6,8 +6,8 @@
       return (
         <div>
           <div id="holder"/>
-          <input id="diagram-def" type="hidden" value={this.getSequenceDefinition()}/>
-          <textarea rows="20" cols="100" id="definition" value={this.getSequenceDefinition()}/>
+          <div id="diagram-def">{this.getSequenceDefinition()}</div>
+          <textarea rows="20" cols="100" id="definition"/>
           <input id="save-button" type="button" onClick={self.onSaveButtonClick} value="Save"/>
         </div>
       );
