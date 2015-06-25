@@ -90,7 +90,7 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
             React.createElement("th", null, "Notes")
           )
         ), 
-        React.createElement(TableBody, {onSort: this.handleSort}, 
+        React.createElement(TableBody, {onSort: this.handleSort, startTime: this.props.startTime}, 
           items
         )
       )
@@ -110,12 +110,20 @@ var TableBody = React.createClass({displayName: "TableBody",
   },
   
   componentDidMount: function() {
+    var lastItemEndTime = null;
+
     jQuery(this.getDOMNode()).sortable({stop: this.handleDrop});
     this.getChildren().forEach(function(child, i) {
+      if (!lastItemEndTime) {
+        lastItemEndTime = this.props.startTime.clone();
+      }
+      var item = child.props.item;
+      jQuery.extend(item, {startTime: lastItemEndTime.clone()});
       jQuery(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
       var node = jQuery(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
       React.render(React.createElement(RowItem, {id: i, item: child.props.item}), node);
+      lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
   },
   
@@ -126,17 +134,25 @@ var TableBody = React.createClass({displayName: "TableBody",
     var nodes = jQuery(this.getDOMNode()).children();
     var numChildren = children.length;
     var numNodes = nodes.length;
+
+    var lastItemEndTime = null;
   
     while (childIndex < numChildren) {
+      if (!lastItemEndTime) {
+        lastItemEndTime = this.props.startTime.clone();
+      }
+      var item = children[childIndex].props.item;
+      jQuery.extend(item, {startTime: lastItemEndTime.clone()});
       if (nodeIndex >= numNodes) {
         jQuery(this.getDOMNode()).append('<' + this.props.childComponent + '/>');
         nodes.push(jQuery(this.getDOMNode()).children().last()[0]);
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
-      React.render(React.createElement(RowItem, {id: childIndex, item: children[childIndex].props.item}), nodes[nodeIndex]);
+      React.render(React.createElement(RowItem, {id: childIndex, item: item}), nodes[nodeIndex]);
       childIndex++;
       nodeIndex++;
+      lastItemEndTime.add(item.time, 'm');
     }
   
     while (nodeIndex < numNodes) {
@@ -165,41 +181,6 @@ var TableBody = React.createClass({displayName: "TableBody",
     });
     this.props.onSort(newOrder);
   }
-  // render: function() {
-  //   var self = this;
-  //   var rowsArr = [];
-  //   var itemId = 0;
-  //   var lastItemEndTime = null;
-  //   // this.state.tempItems.forEach(function(item, index, items) {
-  //   //   if (!lastItemEndTime) {
-  //   //     lastItemEndTime = self.props.startTime.clone();
-  //   //   }
-  //   //   rowsArr.push(<RowItem id={itemId} item={item} startTime={lastItemEndTime.clone()} />);
-  //   //   lastItemEndTime.add(item.time, 'm');
-  //   //   itemId++;
-  //   // });
-  //   var rows = this.state.items.map(function(item, i, arr) {
-  //     var dragging = (i == self.state.data.dragging) ? "dragging" : "";
-  //     if (!lastItemEndTime) {
-  //       lastItemEndTime = self.props.startTime.clone();
-  //     }
-  //     return (
-  //       <tr>
-  //         <td>{i}</td>
-  //         <td>11:11</td>
-  //         <td>{item.time} min</td>
-  //         <td>{item.topic}</td>
-  //         <td>{item.owner}</td>
-  //         <td>{item.desc}</td>
-  //       </tr>
-  //     );
-  //   })
-  //   return (
-  //     <tbody>
-  //       {rows}
-  //     </tbody>
-  //   );
-  // }
 });
 
 var RowItem = React.createClass({displayName: "RowItem",
@@ -207,7 +188,7 @@ var RowItem = React.createClass({displayName: "RowItem",
     return (
       React.createElement("tr", null, 
         React.createElement("td", null, this.props.id), 
-        React.createElement("td", null, "11:11"), 
+        React.createElement("td", null, this.props.item.startTime.format('LT')), 
         React.createElement("td", null, this.props.item.time, " min"), 
         React.createElement("td", null, this.props.item.topic), 
         React.createElement("td", null, this.props.item.owner), 
