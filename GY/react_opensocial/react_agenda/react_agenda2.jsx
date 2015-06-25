@@ -98,6 +98,9 @@ var AgendaTable = React.createClass({
   }
 });
 
+// the proxy rendering design pattern borrowed from the following link (gist)
+// https://gist.github.com/petehunt/7882164
+// https://gist.github.com/fversnel/4aed612b69d3ec196157
 var TableBody = React.createClass({
   getDefaultProps: function() {
     return {component: "tbody", childComponent: "tr"};
