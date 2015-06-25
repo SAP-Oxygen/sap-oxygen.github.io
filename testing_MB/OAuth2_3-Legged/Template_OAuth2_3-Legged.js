@@ -24,9 +24,9 @@ function fetchData() {
   //gadgets.io.makeRequest(url, oDataProcessing(response), params);
   //gadgets.io.makeRequest(url, function (response)
   //gadgets.io.makeRequest(url, function(){ return oDataProcessing(response); }, params);
-  //gadgets.io.makeRequest(url, oDataProcessing, params);
+  gadgets.io.makeRequest(url, oDataProcessing, params);
 
-  gadgets.io.makeRequest(url, function (response) {
+  /*gadgets.io.makeRequest(url, function (response) {
     if (response.oauthApprovalUrl) {
       var onOpen = function() {
         showStep('step_02_accessApproved');
@@ -53,7 +53,7 @@ function fetchData() {
       document.getElementById('error_trace').appendChild(document.createTextNode(response.oauthErrorTrace));
       showStep('error');
     }
-  }, params);
+  }, params);*/
 }
 
 function oDataProcessing(response) {
