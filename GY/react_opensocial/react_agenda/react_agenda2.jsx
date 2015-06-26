@@ -279,7 +279,7 @@ var TimePicker = React.createClass({
         <div className='input-group date' id='timepicker'>
           <input type='text' className='form-control' />
           <span className='input-group-addon'>
-            <span className='glyphicon glyphicon-calendar'></span>
+            <span className='glyphicon glyphicon-time'></span>
           </span>
         </div>
       </Col>
@@ -287,6 +287,7 @@ var TimePicker = React.createClass({
   }
 });
 
+// example data
 var DATA = {
   "items": [
       {
@@ -349,6 +350,5 @@ var DATA = {
   "startTime": 1433923200000,
   "nextId": 4
 }
-
 
 React.render(<Agenda data={DATA} />, document.body);
