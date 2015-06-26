@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+  <ModulePrefs title="IoT - SAP_Fiori - Incidents Worklist" height="600">
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
+    <Content type="html" href="https://hana32hcppm.us1.hana.ondemand.com/HCPMMSDemo/UI/IncidentWorklist/index.html"/>
+</Module>
