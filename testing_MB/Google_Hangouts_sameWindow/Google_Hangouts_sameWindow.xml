@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Tutorial_08_Complete_Tutorial_Code_Example (XML, HTML, CSS, JavaScript) -->
+<Module>
+  <ModulePrefs title="Google Hangouts Test - Same Window" height="600">
+        <Require feature="dynamic-height"/>
+    </ModulePrefs>
+    <Content type="html" href="Google_Hangouts_sameWindow.html"/>
+</Module>
