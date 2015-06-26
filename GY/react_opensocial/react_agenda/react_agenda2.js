@@ -25,21 +25,23 @@ var Agenda = React.createClass({displayName: "Agenda",
       startTime: newTime
     });
   },
-  // onAddTopic: function() {
-  //   var newList = this.state.items;
-  //   newList.push({id: this.state.nextId, topic: "", desc: "",time: 0, ownder: ""});
-  //   var nextId = this.state.nextId;
-  //   this.setState({
-  //     items: newList,
-  //     nextId: ++nextId
-  //   });
-  // },
   handleSort: function(newOrder) {
     var newItems = newOrder.map(function(index) {
       return this.state.items[index];
     }.bind(this));
     this.setState({items: newItems});
     console.log(this.state.items);
+  },
+  handleAdd: function() {
+    var newItems = this.state.items.concat([{id: this.state.nextId, topic: "", desc: "",time: 0, ownder: ""}]);
+    var newCounter = ++this.state.counter;
+    this.setState({
+      items: newItems,
+      counter: newCounter
+    })
+  },
+  handleRemove: function() {
+    // TODO
   },
   render: function() {
     return (
@@ -51,7 +53,7 @@ var Agenda = React.createClass({displayName: "Agenda",
         ), 
         React.createElement("br", null), 
         React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, onSort: this.handleSort}), 
-        React.createElement(AddButton, {onAddTopic: this.onAddTopic})
+        React.createElement(AddButton, {onAdd: this.handleAdd})
       )
     );
   }
@@ -93,7 +95,6 @@ var TableBody = React.createClass({displayName: "TableBody",
   getDefaultProps: function() {
     return {component: 'tbody', childComponent: 'tr'};
   },
-  
   render: function() {
     var props = jQuery.extend({}, this.props);
     delete props.children;
@@ -101,7 +102,6 @@ var TableBody = React.createClass({displayName: "TableBody",
       React.createElement(this.props.component, React.__spread({},  props))
     );
   },
-  
   componentDidMount: function() {
     // Helper function to keep table row from collapsing when being sorted
     // got from http://www.avtex.com/blog/2015/01/27/drag-and-drop-sorting-of-table-rows-in-priority-order/
@@ -132,10 +132,7 @@ var TableBody = React.createClass({displayName: "TableBody",
       React.render(React.createElement(RowItem, {id: i+1, item: child.props.item}), node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
-
-    gadget.window.adjustHeight();
   },
-  
   componentDidUpdate: function() {
     var childIndex = 0;
     var nodeIndex = 0;
@@ -170,18 +167,15 @@ var TableBody = React.createClass({displayName: "TableBody",
       nodeIndex++;
     }
   },
-  
   componentWillUnmount: function() {
     jQuery(this.getDOMNode()).children().get().forEach(function(node) {
       React.unmountComponentAtNode(node);
     });
   },
-  
   getChildren: function() {
     // TODO: use mapChildren()
     return this.props.children || [];
   },
-  
   handleDrop: function() {
     var newOrder = jQuery(this.getDOMNode()).children().get().map(function(child, i) {
       var rv = child.dataset.reactSortablePos;
@@ -209,11 +203,11 @@ var RowItem = React.createClass({displayName: "RowItem",
 
 var AddButton = React.createClass({displayName: "AddButton",
   handleAdd: function() {
-    this.props.onAddTopic();
+    this.props.onAdd();
   },
   render: function() {
     return (
-      React.createElement(Button, {onClick: this.handleAdd}, "Add an item")
+      React.createElement(Button, {onClick: this.handleAdd}, "Add a new Topic")
     );
   }
 });
