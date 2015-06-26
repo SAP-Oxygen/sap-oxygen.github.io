@@ -8,15 +8,16 @@ var Glyphicon = ReactBootstrap.Glyphicon;
 
 var Agenda = React.createClass({
   getInitialState: function() {
-    if (this.props.startTime) {
-      var startTime = this.props.startTime;
+    if (this.props.data.startTime) {
+      var startTime = moment(this.props.data.startTime);
     } else {
       var startTime = moment();
     }
     return {
-      items: this.props.items.items,
-      nextId: this.props.items.nextId,
-      startTime: startTime
+      items: this.props.data.items,
+      nextId: this.props.data.nextId,
+      startTime: startTime,
+      counter: this.props.data.items.length
     } 
   },
   onTimeChange: function(newTime) {
@@ -24,20 +25,19 @@ var Agenda = React.createClass({
       startTime: newTime
     });
   },
-  onAddTopic: function() {
-    var newList = this.state.items;
-    newList.push({id: this.state.nextId, topic: "", desc: "",time: 0, ownder: ""});
-    var nextId = this.state.nextId;
-    this.setState({
-      items: newList,
-      nextId: ++nextId
-    });
-  },
-  onSort: function(newOrder) {
-    var self = this;
+  // onAddTopic: function() {
+  //   var newList = this.state.items;
+  //   newList.push({id: this.state.nextId, topic: "", desc: "",time: 0, ownder: ""});
+  //   var nextId = this.state.nextId;
+  //   this.setState({
+  //     items: newList,
+  //     nextId: ++nextId
+  //   });
+  // },
+  handleSort: function(newOrder) {
     var newItems = newOrder.map(function(index) {
-      return self.state.items[index];
-    });
+      return this.state.items[index];
+    }.bind(this));
     this.setState({items: newItems});
     console.log(this.state.items);
   },
@@ -50,7 +50,7 @@ var Agenda = React.createClass({
           <TimePicker handleDateTimeChange={this.onTimeChange} />
         </Row>
         <br />
-        <AgendaTable data={this.props.items} startTime={this.state.startTime}  />
+        <AgendaTable items={this.state.items} startTime={this.state.startTime} onSort={this.handleSort} />
         <AddButton onAddTopic={this.onAddTopic} />
       </Grid>
     );
@@ -58,24 +58,12 @@ var Agenda = React.createClass({
 });
 
 var AgendaTable = React.createClass({
-  getInitialState: function() {
-    return {
-      items: this.props.data.items, 
-      counter: this.props.data.items.length};
-  },
-  handleSort: function(newOrder) {
-    var newItems = newOrder.map(function(index) {
-      return this.state.items[index];
-    }.bind(this));
-    this.setState({items: newItems});
-    console.log(this.state.items);
-  },
   render: function() {
     var self = this;
     var rowsArr = [];
     var itemId = null;
     var lastItemEndTime = null;
-    var items = this.state.items.map(function(item) {
+    var items = this.props.items.map(function(item) {
       return (<tr key={item.id} item={item}></tr>);
     })
     return (
@@ -90,7 +78,7 @@ var AgendaTable = React.createClass({
             <th>Notes</th>
           </tr>
         </thead>
-        <TableBody onSort={this.handleSort} startTime={this.props.startTime} >
+        <TableBody startTime={this.props.startTime} onSort={this.props.onSort} >
           {items}
         </TableBody>
       </Table>
@@ -103,13 +91,15 @@ var AgendaTable = React.createClass({
 // https://gist.github.com/fversnel/4aed612b69d3ec196157
 var TableBody = React.createClass({
   getDefaultProps: function() {
-    return {component: "tbody", childComponent: "tr"};
+    return {component: 'tbody', childComponent: 'tr'};
   },
   
   render: function() {
     var props = jQuery.extend({}, this.props);
     delete props.children;
-    return (<this.props.component {...props} />);
+    return (
+      <this.props.component {...props} />
+    );
   },
   
   componentDidMount: function() {
@@ -139,7 +129,7 @@ var TableBody = React.createClass({
       jQuery(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
       var node = jQuery(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
-      React.render(<RowItem id={i} item={child.props.item} />, node);
+      React.render(<RowItem id={i+1} item={child.props.item} />, node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
   },
@@ -166,7 +156,7 @@ var TableBody = React.createClass({
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
-      React.render(<RowItem id={childIndex} item={item} />, nodes[nodeIndex]);
+      React.render(<RowItem id={childIndex+1} item={item} />, nodes[nodeIndex]);
       childIndex++;
       nodeIndex++;
       lastItemEndTime.add(item.time, 'm');
@@ -297,7 +287,7 @@ var TimePicker = React.createClass({
   }
 });
 
-var ITEMS = {
+var DATA = {
   "items": [
       {
           "id": "0",
@@ -333,4 +323,4 @@ var ITEMS = {
 }
 
 
-React.render(<Agenda items={ITEMS} />, document.body);
+React.render(<Agenda data={DATA} />, document.body);

@@ -8,15 +8,16 @@ var Glyphicon = ReactBootstrap.Glyphicon;
 
 var Agenda = React.createClass({displayName: "Agenda",
   getInitialState: function() {
-    if (this.props.startTime) {
-      var startTime = this.props.startTime;
+    if (this.props.data.startTime) {
+      var startTime = moment(this.props.data.startTime);
     } else {
       var startTime = moment();
     }
     return {
-      items: this.props.items.items,
-      nextId: this.props.items.nextId,
-      startTime: startTime
+      items: this.props.data.items,
+      nextId: this.props.data.nextId,
+      startTime: startTime,
+      counter: this.props.data.items.length
     } 
   },
   onTimeChange: function(newTime) {
@@ -24,20 +25,19 @@ var Agenda = React.createClass({displayName: "Agenda",
       startTime: newTime
     });
   },
-  onAddTopic: function() {
-    var newList = this.state.items;
-    newList.push({id: this.state.nextId, topic: "", desc: "",time: 0, ownder: ""});
-    var nextId = this.state.nextId;
-    this.setState({
-      items: newList,
-      nextId: ++nextId
-    });
-  },
-  onSort: function(newOrder) {
-    var self = this;
+  // onAddTopic: function() {
+  //   var newList = this.state.items;
+  //   newList.push({id: this.state.nextId, topic: "", desc: "",time: 0, ownder: ""});
+  //   var nextId = this.state.nextId;
+  //   this.setState({
+  //     items: newList,
+  //     nextId: ++nextId
+  //   });
+  // },
+  handleSort: function(newOrder) {
     var newItems = newOrder.map(function(index) {
-      return self.state.items[index];
-    });
+      return this.state.items[index];
+    }.bind(this));
     this.setState({items: newItems});
     console.log(this.state.items);
   },
@@ -50,7 +50,7 @@ var Agenda = React.createClass({displayName: "Agenda",
           React.createElement(TimePicker, {handleDateTimeChange: this.onTimeChange})
         ), 
         React.createElement("br", null), 
-        React.createElement(AgendaTable, {data: this.props.items, startTime: this.state.startTime}), 
+        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, onSort: this.handleSort}), 
         React.createElement(AddButton, {onAddTopic: this.onAddTopic})
       )
     );
@@ -58,24 +58,12 @@ var Agenda = React.createClass({displayName: "Agenda",
 });
 
 var AgendaTable = React.createClass({displayName: "AgendaTable",
-  getInitialState: function() {
-    return {
-      items: this.props.data.items, 
-      counter: this.props.data.items.length};
-  },
-  handleSort: function(newOrder) {
-    var newItems = newOrder.map(function(index) {
-      return this.state.items[index];
-    }.bind(this));
-    this.setState({items: newItems});
-    console.log(this.state.items);
-  },
   render: function() {
     var self = this;
     var rowsArr = [];
     var itemId = null;
     var lastItemEndTime = null;
-    var items = this.state.items.map(function(item) {
+    var items = this.props.items.map(function(item) {
       return (React.createElement("tr", {key: item.id, item: item}));
     })
     return (
@@ -90,7 +78,7 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
             React.createElement("th", null, "Notes")
           )
         ), 
-        React.createElement(TableBody, {onSort: this.handleSort, startTime: this.props.startTime}, 
+        React.createElement(TableBody, {startTime: this.props.startTime, onSort: this.props.onSort}, 
           items
         )
       )
@@ -103,13 +91,15 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
 // https://gist.github.com/fversnel/4aed612b69d3ec196157
 var TableBody = React.createClass({displayName: "TableBody",
   getDefaultProps: function() {
-    return {component: "tbody", childComponent: "tr"};
+    return {component: 'tbody', childComponent: 'tr'};
   },
   
   render: function() {
     var props = jQuery.extend({}, this.props);
     delete props.children;
-    return (React.createElement(this.props.component, React.__spread({},  props)));
+    return (
+      React.createElement(this.props.component, React.__spread({},  props))
+    );
   },
   
   componentDidMount: function() {
@@ -139,7 +129,7 @@ var TableBody = React.createClass({displayName: "TableBody",
       jQuery(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
       var node = jQuery(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
-      React.render(React.createElement(RowItem, {id: i, item: child.props.item}), node);
+      React.render(React.createElement(RowItem, {id: i+1, item: child.props.item}), node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
   },
@@ -166,7 +156,7 @@ var TableBody = React.createClass({displayName: "TableBody",
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
-      React.render(React.createElement(RowItem, {id: childIndex, item: item}), nodes[nodeIndex]);
+      React.render(React.createElement(RowItem, {id: childIndex+1, item: item}), nodes[nodeIndex]);
       childIndex++;
       nodeIndex++;
       lastItemEndTime.add(item.time, 'm');
@@ -297,7 +287,7 @@ var TimePicker = React.createClass({displayName: "TimePicker",
   }
 });
 
-var ITEMS = {
+var DATA = {
   "items": [
       {
           "id": "0",
@@ -333,4 +323,4 @@ var ITEMS = {
 }
 
 
-React.render(React.createElement(Agenda, {items: ITEMS}), document.body);
+React.render(React.createElement(Agenda, {data: DATA}), document.body);
