@@ -290,32 +290,60 @@ var TimePicker = React.createClass({
 var DATA = {
   "items": [
       {
-          "id": "0",
-          "topic": "Adam",
+          "id": "1",
+          "topic": "A",
           "desc": "A",
           "time": 5,
-          "owner": "A"
-      },
-      {
-          "id": "1",
-          "topic": "Bob",
-          "desc": "B",
-          "time": 10,
-          "owner": "B"
+          "owner": "Android"
       },
       {
           "id": "2",
-          "topic": "Chalie",
-          "desc": "C",
-          "time": 15,
-          "owner": "C"
+          "topic": "B",
+          "desc": "B",
+          "time": 10,
+          "owner": "Bond"
       },
       {
           "id": "3",
-          "topic": "David",
+          "topic": "C",
+          "desc": "C",
+          "time": 15,
+          "owner": "Captain America"
+      },
+      {
+          "id": "4",
+          "topic": "D",
           "desc": "D",
           "time": 20,
-          "owner": "D"
+          "owner": "DB"
+      },
+      {
+          "id": "5",
+          "topic": "E",
+          "desc": "E",
+          "time": 60,
+          "owner": "EA"
+      },
+      {
+          "id": "6",
+          "topic": "F",
+          "desc": "F",
+          "time": 120,
+          "owner": "Function"
+      },
+      {
+          "id": "7",
+          "topic": "G",
+          "desc": "G",
+          "time": 1,
+          "owner": "Gnome"
+      },
+      {
+          "id": "8",
+          "topic": "H",
+          "desc": "H",
+          "time": 2,
+          "owner": "Hulk"
       }
   ],
   "startTime": 1433923200000,
