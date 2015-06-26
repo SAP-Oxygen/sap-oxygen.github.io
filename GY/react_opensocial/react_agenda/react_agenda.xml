@@ -5,5 +5,5 @@
         <Require feature="dynamic-height"/>
         <Require feature="open-views"/>
     </ModulePrefs>
-  <Content type="html" href="react_agenda.html" />
+  <Content type="html" href="react_agenda2.html" />
 </Module >
