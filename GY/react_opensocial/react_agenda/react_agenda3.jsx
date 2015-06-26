@@ -61,6 +61,9 @@ var Agenda = React.createClass({
 });
 
 var AgendaTable = React.createClass({
+  componentWillMount: function() {
+    $.fn.editable.defaults.mode = 'inline';
+  },
   componentDidMount: function() {
   },
   componentDidUpdate: function() {
@@ -131,15 +134,16 @@ var TableBody = React.createClass({
         lastItemEndTime = this.props.startTime.clone();
       }
       var item = child.props.item;
+      var id = item.id.toString();
       $.extend(item, {startTime: lastItemEndTime.clone()});
       $(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
       var node = $(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
-      React.render(<RowItem id={i+1} item={child.props.item} />, node);
+      React.render(<RowItem id={id} item={child.props.item} />, node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
 
-    gadgets.window.adjustHeight();
+    // gadgets.window.adjustHeight();
   },
   componentDidUpdate: function() {
     var childIndex = 0;
@@ -156,6 +160,7 @@ var TableBody = React.createClass({
         lastItemEndTime = this.props.startTime.clone();
       }
       var item = children[childIndex].props.item;
+      var id = item.id.toString();
       $.extend(item, {startTime: lastItemEndTime.clone()});
       if (nodeIndex >= numNodes) {
         $(this.getDOMNode()).append('<' + this.props.childComponent + '/>');
@@ -163,7 +168,7 @@ var TableBody = React.createClass({
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
-      React.render(<RowItem id={childIndex+1} item={item} />, nodes[nodeIndex]);
+      React.render(<RowItem id={id} item={item} />, nodes[nodeIndex]);
       childIndex++;
       nodeIndex++;
       lastItemEndTime.add(item.time, 'm');
@@ -175,7 +180,7 @@ var TableBody = React.createClass({
       nodeIndex++;
     }
 
-    gadgets.window.adjustHeight();
+    // gadgets.window.adjustHeight();
   },
   componentWillUnmount: function() {
     $(this.getDOMNode()).children().get().forEach(function(node) {
@@ -197,13 +202,25 @@ var TableBody = React.createClass({
 });
 
 var RowItem = React.createClass({
+  componentDidMount: function() {
+    var id = this.props.id;
+    var topicId = "topic-" + id;
+    var notesId = "notes-" + id;
+    $('#'+topicId).editable({
+      showbuttons: false
+    });
+    $('#'+notesId).editable({
+      showbuttons: false
+    });
+  },
   render: function() {
+    var topicId = "topic-" + this.props.id;
     return (
       <tr className='even' id={this.props.id}>
         <td className="index">{this.props.id}</td>
         <td>{this.props.item.startTime.format('LT')}</td>
         <td className="grey-text">{this.props.item.time} min</td>
-        <td className="topic">{this.props.item.topic}</td>
+        <td className="topic" id={topicId}>{this.props.item.topic}</td>
         <td className="link-text">{this.props.item.owner}</td>
         <td className="notes grey-text">{this.props.item.desc}</td>
       </tr>

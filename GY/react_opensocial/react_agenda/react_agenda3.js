@@ -61,6 +61,9 @@ var Agenda = React.createClass({displayName: "Agenda",
 });
 
 var AgendaTable = React.createClass({displayName: "AgendaTable",
+  componentWillMount: function() {
+    $.fn.editable.defaults.mode = 'inline';
+  },
   componentDidMount: function() {
   },
   componentDidUpdate: function() {
@@ -131,15 +134,16 @@ var TableBody = React.createClass({displayName: "TableBody",
         lastItemEndTime = this.props.startTime.clone();
       }
       var item = child.props.item;
+      var id = item.id.toString();
       $.extend(item, {startTime: lastItemEndTime.clone()});
       $(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
       var node = $(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
-      React.render(React.createElement(RowItem, {id: i+1, item: child.props.item}), node);
+      React.render(React.createElement(RowItem, {id: id, item: child.props.item}), node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
 
-    gadgets.window.adjustHeight();
+    // gadgets.window.adjustHeight();
   },
   componentDidUpdate: function() {
     var childIndex = 0;
@@ -156,6 +160,7 @@ var TableBody = React.createClass({displayName: "TableBody",
         lastItemEndTime = this.props.startTime.clone();
       }
       var item = children[childIndex].props.item;
+      var id = item.id.toString();
       $.extend(item, {startTime: lastItemEndTime.clone()});
       if (nodeIndex >= numNodes) {
         $(this.getDOMNode()).append('<' + this.props.childComponent + '/>');
@@ -163,7 +168,7 @@ var TableBody = React.createClass({displayName: "TableBody",
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
-      React.render(React.createElement(RowItem, {id: childIndex+1, item: item}), nodes[nodeIndex]);
+      React.render(React.createElement(RowItem, {id: id, item: item}), nodes[nodeIndex]);
       childIndex++;
       nodeIndex++;
       lastItemEndTime.add(item.time, 'm');
@@ -175,7 +180,7 @@ var TableBody = React.createClass({displayName: "TableBody",
       nodeIndex++;
     }
 
-    gadgets.window.adjustHeight();
+    // gadgets.window.adjustHeight();
   },
   componentWillUnmount: function() {
     $(this.getDOMNode()).children().get().forEach(function(node) {
@@ -197,13 +202,25 @@ var TableBody = React.createClass({displayName: "TableBody",
 });
 
 var RowItem = React.createClass({displayName: "RowItem",
+  componentDidMount: function() {
+    var id = this.props.id;
+    var topicId = "topic-" + id;
+    var notesId = "notes-" + id;
+    $('#'+topicId).editable({
+      showbuttons: false
+    });
+    $('#'+notesId).editable({
+      showbuttons: false
+    });
+  },
   render: function() {
+    var topicId = "topic-" + this.props.id;
     return (
       React.createElement("tr", {className: "even", id: this.props.id}, 
         React.createElement("td", {className: "index"}, this.props.id), 
         React.createElement("td", null, this.props.item.startTime.format('LT')), 
         React.createElement("td", {className: "grey-text"}, this.props.item.time, " min"), 
-        React.createElement("td", {className: "topic"}, this.props.item.topic), 
+        React.createElement("td", {className: "topic", id: topicId}, this.props.item.topic), 
         React.createElement("td", {className: "link-text"}, this.props.item.owner), 
         React.createElement("td", {className: "notes grey-text"}, this.props.item.desc)
       )
