@@ -20,7 +20,7 @@ var Agenda = React.createClass({
       counter: this.props.data.items.length
     } 
   },
-  onTimeChange: function(newTime) {
+  handleTimeChange: function(newTime) {
     this.setState({
       startTime: newTime
     });
@@ -48,8 +48,8 @@ var Agenda = React.createClass({
       <Grid>
         <br />
         <Row>
-          <DatePicker />
-          <TimePicker handleDateTimeChange={this.onTimeChange} />
+          <DatePicker startTime={this.state.startTime} />
+          <TimePicker startTime={this.state.startTime} onTimeChange={this.handleTimeChange} />
         </Row>
         <br />
         <AgendaTable items={this.state.items} startTime={this.state.startTime} onSort={this.handleSort} />
@@ -96,7 +96,7 @@ var TableBody = React.createClass({
     return {component: 'tbody', childComponent: 'tr'};
   },
   render: function() {
-    var props = jQuery.extend({}, this.props);
+    var props = $.extend({}, this.props);
     delete props.children;
     return (
       <this.props.component {...props} />
@@ -116,7 +116,7 @@ var TableBody = React.createClass({
 
     var lastItemEndTime = null;
 
-    jQuery(this.getDOMNode()).sortable({
+    $(this.getDOMNode()).sortable({
       helper: fixHelperModified,
       stop: this.handleDrop
     });
@@ -125,9 +125,9 @@ var TableBody = React.createClass({
         lastItemEndTime = this.props.startTime.clone();
       }
       var item = child.props.item;
-      jQuery.extend(item, {startTime: lastItemEndTime.clone()});
-      jQuery(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
-      var node = jQuery(this.getDOMNode()).children().last()[0];
+      $.extend(item, {startTime: lastItemEndTime.clone()});
+      $(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
+      var node = $(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
       React.render(<RowItem id={i+1} item={child.props.item} />, node);
       lastItemEndTime.add(child.props.item.time, 'm');
@@ -137,7 +137,7 @@ var TableBody = React.createClass({
     var childIndex = 0;
     var nodeIndex = 0;
     var children = this.getChildren();
-    var nodes = jQuery(this.getDOMNode()).children();
+    var nodes = $(this.getDOMNode()).children();
     var numChildren = children.length;
     var numNodes = nodes.length;
 
@@ -148,10 +148,10 @@ var TableBody = React.createClass({
         lastItemEndTime = this.props.startTime.clone();
       }
       var item = children[childIndex].props.item;
-      jQuery.extend(item, {startTime: lastItemEndTime.clone()});
+      $.extend(item, {startTime: lastItemEndTime.clone()});
       if (nodeIndex >= numNodes) {
-        jQuery(this.getDOMNode()).append('<' + this.props.childComponent + '/>');
-        nodes.push(jQuery(this.getDOMNode()).children().last()[0]);
+        $(this.getDOMNode()).append('<' + this.props.childComponent + '/>');
+        nodes.push($(this.getDOMNode()).children().last()[0]);
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
@@ -163,12 +163,12 @@ var TableBody = React.createClass({
   
     while (nodeIndex < numNodes) {
       React.unmountComponentAtNode(nodes[nodeIndex]);
-      jQuery(nodes[nodeIndex]).remove();
+      $(nodes[nodeIndex]).remove();
       nodeIndex++;
     }
   },
   componentWillUnmount: function() {
-    jQuery(this.getDOMNode()).children().get().forEach(function(node) {
+    $(this.getDOMNode()).children().get().forEach(function(node) {
       React.unmountComponentAtNode(node);
     });
   },
@@ -177,7 +177,7 @@ var TableBody = React.createClass({
     return this.props.children || [];
   },
   handleDrop: function() {
-    var newOrder = jQuery(this.getDOMNode()).children().get().map(function(child, i) {
+    var newOrder = $(this.getDOMNode()).children().get().map(function(child, i) {
       var rv = child.dataset.reactSortablePos;
       child.dataset.reactSortablePos = i;
       return rv;
@@ -223,6 +223,7 @@ var DatePicker = React.createClass({
           showTodayButton: true,
           allowInputToggle: true,
           toolbarPlacement: 'bottom',
+          defaultDate: self.props.startTime,
           debug: true
         });
     });
@@ -251,10 +252,12 @@ var TimePicker = React.createClass({
     $(function () {
         $('#timepicker').datetimepicker({
           format: 'LT',
+          extraFormats: ['LT'],
           showClose: true,
           showTodayButton: true,
           allowInputToggle: true,
           toolbarPlacement: 'bottom',
+          useCurrent: false,
           debug: true
         });
     });
@@ -265,9 +268,10 @@ var TimePicker = React.createClass({
     $('#timepicker').on("dp.show", function (e) {
       $('#datepicker').data("DateTimePicker").hide();
     });
+    $('#timepicker input').attr('placeholder', this.props.startTime.format('LT'));
   },
   onTimeChange: function(time) {
-    this.props.handleDateTimeChange(time);
+    this.props.onTimeChange(time);
   },
   render: function() {
     return (
