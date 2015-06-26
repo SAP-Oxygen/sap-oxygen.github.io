@@ -96,14 +96,14 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
       return (React.createElement("tr", {key: item.id, item: item}));
     })
     return (
-      React.createElement(Table, {bordered: true, hover: true, responsive: true}, 
+      React.createElement(Table, {responsive: true}, 
         React.createElement("thead", null, 
           React.createElement("tr", null, 
-            React.createElement("th", null, "#"), 
-            React.createElement("th", null, "Start Time"), 
-            React.createElement("th", null, "Duration"), 
-            React.createElement("th", null, "Topic"), 
-            React.createElement("th", null, "Presenter"), 
+            React.createElement("th", {className: "index"}, "#"), 
+            React.createElement("th", {className: "short"}, "Start Time"), 
+            React.createElement("th", {className: "short"}, "Duration"), 
+            React.createElement("th", {className: "med"}, "Topic"), 
+            React.createElement("th", {className: "short"}, "Presenter"), 
             React.createElement("th", null, "Notes")
           )
         ), 
@@ -216,13 +216,13 @@ var TableBody = React.createClass({displayName: "TableBody",
 var RowItem = React.createClass({displayName: "RowItem",
   render: function() {
     return (
-      React.createElement("tr", {id: this.props.id}, 
-        React.createElement("td", null, this.props.id), 
+      React.createElement("tr", {className: "even", id: this.props.id}, 
+        React.createElement("td", {className: "index"}, this.props.id), 
         React.createElement("td", null, this.props.item.startTime.format('LT')), 
-        React.createElement("td", null, this.props.item.time, " min"), 
-        React.createElement("td", null, this.props.item.topic), 
-        React.createElement("td", null, this.props.item.owner), 
-        React.createElement("td", null, this.props.item.desc)
+        React.createElement("td", {className: "grey-text"}, this.props.item.time, " min"), 
+        React.createElement("td", {className: "topic"}, this.props.item.topic), 
+        React.createElement("td", {className: "link-text"}, this.props.item.owner), 
+        React.createElement("td", {className: "notes grey-text"}, this.props.item.desc)
       )
     );
   }

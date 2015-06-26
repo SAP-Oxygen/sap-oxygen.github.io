@@ -1,3 +1,55 @@
-.ui-sortable tr {
-  cursor:pointer;
+body {
+    font-family: Arial;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 10pt;
+}
+
+th {
+    padding: 10px;
+    background-color: #F2F2F2;
+    text-align: left;
+}
+
+.short {
+    min-width: 80px;
+}
+
+.med {
+    min-width: 160px;
+}
+
+.index {
+    max-width: 10px;
+    padding-right: 8px;
+    font-weight: bold;
+    text-align: center;
+    color: #666;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px dotted #999;
+}
+
+.notes {
+    font-size: 9pt;
+}
+
+.grey-text {
+    color: #666;
+}
+
+tr:hover {
+    background-color: #F5FCFF;
+}
+
+.topic {
+    font-weight: bold;
+}
+
+.link-text {
+    color: #00679E;
 }

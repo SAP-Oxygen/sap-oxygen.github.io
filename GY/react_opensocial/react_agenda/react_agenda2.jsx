@@ -96,14 +96,14 @@ var AgendaTable = React.createClass({
       return (<tr key={item.id} item={item}></tr>);
     })
     return (
-      <Table bordered hover responsive>
+      <Table responsive>
         <thead>
           <tr>
-            <th>#</th>
-            <th>Start Time</th>
-            <th>Duration</th>
-            <th>Topic</th>
-            <th>Presenter</th>
+            <th className='index'>#</th>
+            <th className='short'>Start Time</th>
+            <th className='short'>Duration</th>
+            <th className='med'>Topic</th>
+            <th className='short'>Presenter</th>
             <th>Notes</th>
           </tr>
         </thead>
@@ -216,13 +216,13 @@ var TableBody = React.createClass({
 var RowItem = React.createClass({
   render: function() {
     return (
-      <tr id={this.props.id}>
-        <td>{this.props.id}</td>
+      <tr className='even' id={this.props.id}>
+        <td className="index">{this.props.id}</td>
         <td>{this.props.item.startTime.format('LT')}</td>
-        <td>{this.props.item.time} min</td>
-        <td>{this.props.item.topic}</td>
-        <td>{this.props.item.owner}</td>
-        <td>{this.props.item.desc}</td>
+        <td className="grey-text">{this.props.item.time} min</td>
+        <td className="topic">{this.props.item.topic}</td>
+        <td className="link-text">{this.props.item.owner}</td>
+        <td className="notes grey-text">{this.props.item.desc}</td>
       </tr>
     );
   }
