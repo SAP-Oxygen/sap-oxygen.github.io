@@ -1,13 +1,22 @@
-<!DOCTYPE html>
+<html>
+<head>
+    <title>Hangout button demo: Deferred execution with language code</title>
+    <link rel="canonical" href="http://www.example.com" />
+</head>
+<body>
+  <div id="placeholder-div"></div>
+  <script>
+    window.___gcfg = {
+      lang: 'zh-CN',
+      parsetags: 'onload'
+    };
 
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-
-<div id="placeholder-div"></div>
-
-<script>
-gapi.hangout.render('placeholder-div', { 'render': 'createhangout' });
-</script>
-
-
-<!-- <script type="text/javascript" src="Google_Hangouts_sameWindow.js"></script> -->
-
+    function renderButtons(){
+      gapi.hangout.render('placeholder-div', {
+          'render': 'createhangout',
+        });
+    }
+  </script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+</body>
+</html>
