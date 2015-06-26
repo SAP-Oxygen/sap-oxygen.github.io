@@ -24,6 +24,7 @@ var Agenda = React.createClass({
     this.setState({
       startTime: newTime
     });
+    console.log(this.state.startTime);
   },
   handleSort: function(newOrder) {
     var newItems = newOrder.map(function(index) {
@@ -48,7 +49,7 @@ var Agenda = React.createClass({
       <Grid>
         <br />
         <Row>
-          <DatePicker startTime={this.state.startTime} />
+          <DatePicker startTime={this.state.startTime} onTimeChange={this.handleTimeChange} />
           <TimePicker startTime={this.state.startTime} onTimeChange={this.handleTimeChange} />
         </Row>
         <br />
@@ -227,9 +228,16 @@ var DatePicker = React.createClass({
           debug: true
         });
     });
+    $('#timepicker').on("dp.change", function (e) {
+      var newTime = $('#timepicker').data("DateTimePicker").viewDate();
+      self.onTimeChange(newTime);
+    });
     $('#datepicker').on("dp.show", function (e) {
       $('#timepicker').data("DateTimePicker").hide();
     });
+  },
+  onTimeChange: function(time) {
+    this.props.onTimeChange(time);
   },
   render: function() {
     return (
