@@ -61,6 +61,32 @@ var Agenda = React.createClass({displayName: "Agenda",
 });
 
 var AgendaTable = React.createClass({displayName: "AgendaTable",
+  componentDidMount: function() {
+    $('table').Tabledit({
+      editButton: false,
+      columns: {
+        identifier: [0, 'id'],
+        editable: [[3, 'topic'], [4, 'presenter'], [5, 'notes']]
+      },
+      onAjax: function(action, serialize) {
+        return ;
+      }
+    });
+    console.log('editable done on mount');
+  },
+  componentDidUpdate: function() {
+    $('table').Tabledit({
+      editButton: false,
+      columns: {
+        identifier: [0, 'id'],
+        editable: [[3, 'topic'], [4, 'presenter'], [5, 'notes']]
+      },
+      onAjax: function(action, serialize) {
+        return false;
+      }
+    });
+    console.log('editable don on update');
+  },
   render: function() {
     var self = this;
     var rowsArr = [];
@@ -190,7 +216,7 @@ var TableBody = React.createClass({displayName: "TableBody",
 var RowItem = React.createClass({displayName: "RowItem",
   render: function() {
     return (
-      React.createElement("tr", null, 
+      React.createElement("tr", {id: this.props.id}, 
         React.createElement("td", null, this.props.id), 
         React.createElement("td", null, this.props.item.startTime.format('LT')), 
         React.createElement("td", null, this.props.item.time, " min"), 

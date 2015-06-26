@@ -61,6 +61,32 @@ var Agenda = React.createClass({
 });
 
 var AgendaTable = React.createClass({
+  componentDidMount: function() {
+    $('table').Tabledit({
+      editButton: false,
+      columns: {
+        identifier: [0, 'id'],
+        editable: [[3, 'topic'], [4, 'presenter'], [5, 'notes']]
+      },
+      onAjax: function(action, serialize) {
+        return ;
+      }
+    });
+    console.log('editable done on mount');
+  },
+  componentDidUpdate: function() {
+    $('table').Tabledit({
+      editButton: false,
+      columns: {
+        identifier: [0, 'id'],
+        editable: [[3, 'topic'], [4, 'presenter'], [5, 'notes']]
+      },
+      onAjax: function(action, serialize) {
+        return false;
+      }
+    });
+    console.log('editable don on update');
+  },
   render: function() {
     var self = this;
     var rowsArr = [];
@@ -190,7 +216,7 @@ var TableBody = React.createClass({
 var RowItem = React.createClass({
   render: function() {
     return (
-      <tr>
+      <tr id={this.props.id}>
         <td>{this.props.id}</td>
         <td>{this.props.item.startTime.format('LT')}</td>
         <td>{this.props.item.time} min</td>
