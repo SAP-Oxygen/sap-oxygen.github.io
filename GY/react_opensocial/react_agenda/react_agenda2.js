@@ -132,6 +132,8 @@ var TableBody = React.createClass({displayName: "TableBody",
       React.render(React.createElement(RowItem, {id: i+1, item: child.props.item}), node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
+
+    gadget.window.adjustHeight();
   },
   
   componentDidUpdate: function() {
