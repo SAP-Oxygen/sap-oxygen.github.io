@@ -30,7 +30,9 @@ var Agenda = React.createClass({
     var newItems = newOrder.map(function(index) {
       return this.state.items[index];
     }.bind(this));
-    this.setState({items: newItems});
+    this.setState({
+      items: newItems
+    });
     console.log(this.state.items);
   },
   handleAdd: function() {
@@ -44,6 +46,20 @@ var Agenda = React.createClass({
   handleRemove: function() {
     // TODO
   },
+  handleEdit: function(index, type, value) {
+    var newItems = this.state.items.slice();
+    newItem = newItems[index];
+    if (type === 'topic') {
+      newItem['topic'] = value;
+    } else if (type === 'desc') {
+      newItem['desc'] = value;
+    } else if (type === 'presenter') {
+      newItem['owner'] = value;
+    }
+      this.setState({
+      items: newItems
+    });
+  },
   render: function() {
     return (
       <Grid>
@@ -53,7 +69,7 @@ var Agenda = React.createClass({
           <TimePicker startTime={this.state.startTime} onTimeChange={this.handleTimeChange} />
         </Row>
         <br />
-        <AgendaTable items={this.state.items} startTime={this.state.startTime} onSort={this.handleSort} />
+        <AgendaTable items={this.state.items} startTime={this.state.startTime} onSort={this.handleSort} onEdit={this.handleEdit} />
         <AddButton onAdd={this.handleAdd} />
       </Grid>
     );
@@ -88,7 +104,7 @@ var AgendaTable = React.createClass({
             <th>Notes</th>
           </tr>
         </thead>
-        <TableBody startTime={this.props.startTime} onSort={this.props.onSort} >
+        <TableBody startTime={this.props.startTime} onSort={this.props.onSort} onEdit={this.props.onEdit} >
           {items}
         </TableBody>
       </Table>
@@ -130,6 +146,7 @@ var TableBody = React.createClass({
         });
         return ui;
     };
+    // helper end
 
     var lastItemEndTime = null;
 
@@ -144,12 +161,12 @@ var TableBody = React.createClass({
         lastItemEndTime = this.props.startTime.clone();
       }
       var item = child.props.item;
-      var id = (i + 1).toString();
+      var id = i + 1;
       $.extend(item, {startTime: lastItemEndTime.clone()});
       $(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
       var node = $(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
-      React.render(<RowItem id={id} item={child.props.item} />, node);
+      React.render(<RowItem id={id} item={child.props.item} onEdit={this.props.onEdit} />, node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
 
@@ -170,7 +187,7 @@ var TableBody = React.createClass({
         lastItemEndTime = this.props.startTime.clone();
       }
       var item = children[childIndex].props.item;
-      var id = (childIndex + 1).toString();
+      var id = childIndex + 1;
       $.extend(item, {startTime: lastItemEndTime.clone()});
       if (nodeIndex >= numNodes) {
         $(this.getDOMNode()).append('<' + this.props.childComponent + '/>');
@@ -178,7 +195,7 @@ var TableBody = React.createClass({
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
-      React.render(<RowItem id={id} item={item} />, nodes[nodeIndex]);
+      React.render(<RowItem id={id} item={item} onEdit={this.props.onEdit} />, nodes[nodeIndex]);
       childIndex++;
       nodeIndex++;
       lastItemEndTime.add(item.time, 'm');
@@ -213,16 +230,32 @@ var TableBody = React.createClass({
 
 var RowItem = React.createClass({
   componentDidMount: function() {
+    var self = this;
     var id = this.props.id;
     var topicId = "topic-" + id;
     var notesId = "notes-" + id;
     $('#'+topicId).editable({
+      url: function(params) {
+        var d = new $.Deferred;
+        var newTopic = params.value;
+        var index = id - 1;
+        self.props.onEdit(index, 'topic', newTopic);
+        d.resolve();
+        return d.promise();
+      },
       emptytext: 'new topic here',
       inputclass: null
     });
     $('#'+notesId).editable({
+      url: function(params) {
+        var d = new $.Deferred;
+        var newDesc = params.value;
+        var index = id - 1;
+        self.props.onEdit(index, 'desc', newDesc);
+        d.resolve();
+        return d.promise();
+      },
       emptytext: 'new notes here',
-      inputclass: null,
       escape: false,
       rows: 3
     });
