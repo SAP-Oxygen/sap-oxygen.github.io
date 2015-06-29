@@ -122,11 +122,21 @@ var TableBody = React.createClass({
       return $helper;
     };
 
+    // this helper function got from
+    // http://www.paulund.co.uk/fixed-width-sortable-tables
+    var fixWidthHelper = function(e, ui) {
+        ui.children().each(function() {
+            $(this).width($(this).width());
+        });
+        return ui;
+    };
+
     var lastItemEndTime = null;
 
     $(this.getDOMNode()).sortable({
       axis: 'y',
-      helper: fixHelperModified,
+      handle: '.draggable',
+      helper: fixWidthHelper,
       stop: this.handleDrop,
     }).disableSelection();
     this.getChildren().forEach(function(child, i) {
@@ -139,7 +149,7 @@ var TableBody = React.createClass({
       $(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
       var node = $(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
-      React.render(<RowItem id={id} item={child.props.item} />, node);
+      React.render(<RowItem id={i + 1} item={child.props.item} />, node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
 
@@ -168,7 +178,7 @@ var TableBody = React.createClass({
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
-      React.render(<RowItem id={id} item={item} />, nodes[nodeIndex]);
+      React.render(<RowItem id={childIndex + 1} item={item} />, nodes[nodeIndex]);
       childIndex++;
       nodeIndex++;
       lastItemEndTime.add(item.time, 'm');
@@ -219,7 +229,7 @@ var RowItem = React.createClass({
     var notesId = "notes-" + id;
     return (
       <tr className='even' id={this.props.id}>
-        <td className="index">{this.props.id}</td>
+        <td className="index draggable">{this.props.id}</td>
         <td>{this.props.item.startTime.format('LT')}</td>
         <td className="grey-text">{this.props.item.time} min</td>
         <td className="topic" id={topicId}>{this.props.item.topic}</td>
