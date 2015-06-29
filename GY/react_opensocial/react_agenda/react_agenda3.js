@@ -214,7 +214,9 @@ var RowItem = React.createClass({displayName: "RowItem",
     });
   },
   render: function() {
-    var topicId = "topic-" + this.props.id;
+    var id = this.props.id;
+    var topicId = "topic-" + id;
+    var notesId = "notes-" + id;
     return (
       React.createElement("tr", {className: "even", id: this.props.id}, 
         React.createElement("td", {className: "index"}, this.props.id), 
@@ -222,7 +224,7 @@ var RowItem = React.createClass({displayName: "RowItem",
         React.createElement("td", {className: "grey-text"}, this.props.item.time, " min"), 
         React.createElement("td", {className: "topic", id: topicId}, this.props.item.topic), 
         React.createElement("td", {className: "link-text"}, this.props.item.owner), 
-        React.createElement("td", {className: "notes grey-text"}, this.props.item.desc)
+        React.createElement("td", {className: "notes grey-text", id: notesId, "data-type": "textarea"}, this.props.item.desc)
       )
     );
   }

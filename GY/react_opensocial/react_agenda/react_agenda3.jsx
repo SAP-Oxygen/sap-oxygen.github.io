@@ -214,7 +214,9 @@ var RowItem = React.createClass({
     });
   },
   render: function() {
-    var topicId = "topic-" + this.props.id;
+    var id = this.props.id;
+    var topicId = "topic-" + id;
+    var notesId = "notes-" + id;
     return (
       <tr className='even' id={this.props.id}>
         <td className="index">{this.props.id}</td>
@@ -222,7 +224,7 @@ var RowItem = React.createClass({
         <td className="grey-text">{this.props.item.time} min</td>
         <td className="topic" id={topicId}>{this.props.item.topic}</td>
         <td className="link-text">{this.props.item.owner}</td>
-        <td className="notes grey-text">{this.props.item.desc}</td>
+        <td className="notes grey-text" id={notesId} data-type="textarea">{this.props.item.desc}</td>
       </tr>
     );
   }
