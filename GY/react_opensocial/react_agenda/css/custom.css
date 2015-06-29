@@ -61,6 +61,18 @@ tr:active {
     cursor: -moz-grabbing;
 }
 
+tr:hover .on-hover, tr:active .on-hover {
+    display: block;
+}
+
+tr:hover .off-hover, tr:active .off-hover {
+    display: none;
+}
+
+tr .editable {
+    cursor: text;
+}
+
 .topic {
     font-weight: bold;
 }
@@ -73,10 +85,3 @@ tr:active {
     display: none;
 }
 
-tr:hover .on-hover, tr:active .on-hover {
-    display: block;
-}
-
-tr:hover .off-hover, tr:active .off-hover {
-    display: none;
-}
