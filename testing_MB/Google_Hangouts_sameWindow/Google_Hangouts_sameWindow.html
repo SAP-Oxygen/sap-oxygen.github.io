@@ -1,20 +1,11 @@
 <html>
-<head>
-    <title>Hangout button demo: Deferred execution</title>
-</head>
-<body>
-  <div id="placeholder-div"></div>
-  <script>
-    window.___gcfg = {
-      parsetags: 'onload'
-    };
-
-    function renderButtons(){
-      gapi.hangout.render('placeholder-div', {
-          'render': 'createhangout',
-        });
-    }
-  </script>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-</body>
+  <head>
+    <title>Hangout button demo: Async load</title>
+    <link rel="canonical" href="http://www.example.com" />
+    <script src="https://apis.google.com/js/platform.js" async defer>
+    </script>
+  </head>
+  <body>
+    <div class="g-hangout" data-render="createhangout"></div>
+  </body>
 </html>
