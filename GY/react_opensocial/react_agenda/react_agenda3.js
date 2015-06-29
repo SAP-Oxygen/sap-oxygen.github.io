@@ -217,10 +217,14 @@ var RowItem = React.createClass({displayName: "RowItem",
     var topicId = "topic-" + id;
     var notesId = "notes-" + id;
     $('#'+topicId).editable({
-      emptytext: 'Click to enter a new topic'
+      emptytext: 'new topic here',
+      inputclass: null
     });
     $('#'+notesId).editable({
-      emptytext: 'Click to enter new descriptions'
+      emptytext: 'new notes here',
+      inputclass: null,
+      escape: false,
+      rows: 3
     });
   },
   render: function() {
