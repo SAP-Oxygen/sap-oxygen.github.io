@@ -42,11 +42,11 @@ td {
     color: #666;
 }
 
-tr{
+tbody tr{
     background-color: white;
 }
 
-tr:hover {
+tbody tr:hover {
     background-color: #F5FCFF;
     cursor: move;
     cursor: grab;
@@ -54,22 +54,22 @@ tr:hover {
     cursor: -moz-grab;
 }
 
-tr:active {
+tbody tr:active {
     background-color: #F5FCFF;
     cursor: grabbing;
     cursor: -webkit-grabbing; 
     cursor: -moz-grabbing;
 }
 
-tr:hover .on-hover, tr:active .on-hover {
+tbody tr:hover .on-hover, tr:active .on-hover {
     display: block;
 }
 
-tr:hover .off-hover, tr:active .off-hover {
+tbody tr:hover .off-hover, tr:active .off-hover {
     display: none;
 }
 
-tr .editable {
+tbody tr .editable {
     cursor: pointer;
 }
 
