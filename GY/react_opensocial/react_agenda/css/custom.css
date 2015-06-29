@@ -70,7 +70,7 @@ tr:hover .off-hover, tr:active .off-hover {
 }
 
 tr .editable {
-    cursor: text;
+    cursor: pointer;
 }
 
 .topic {
