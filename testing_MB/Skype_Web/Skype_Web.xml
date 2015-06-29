@@ -3,5 +3,5 @@
   <ModulePrefs title="Skype Web Client" height="600">
         <Require feature="dynamic-height"/>
     </ModulePrefs>
-    <Content type="url" href="https://login.skype.com/login?client_id=578134&redirect_uri=https%3A%2F%2Fweb.skype.com"/>
+    <Content type="url" href="https://web.skype.com"/>
 </Module>
