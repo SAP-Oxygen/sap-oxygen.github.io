@@ -1,0 +1,15 @@
+<Module specificationVersion='2'>
+  <ModulePrefs title="J Squared">
+    <Require feature="dynamic-height"/>
+    <Require feature="osapi"/>
+    <Locale lang="all">
+      <msg name="title">My Groups</msg>
+    </Locale>
+    <OAuth2>
+      <Service name="g1">
+        <Token url="https://stage.sapjam.com/api/v1/auth/token"/>
+      </Service>
+    </OAuth2>
+  </ModulePrefs>
+  <Content type="html" href="jsquared.html"/>
+</Module>
