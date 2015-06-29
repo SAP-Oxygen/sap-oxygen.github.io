@@ -217,8 +217,14 @@ var RowItem = React.createClass({displayName: "RowItem",
     var topicId = "topic-" + id;
     var notesId = "notes-" + id;
     $('#'+topicId).editable({
+      emptytext: 'new topic here',
+      inputclass: null
     });
     $('#'+notesId).editable({
+      emptytext: 'new notes here',
+      inputclass: null,
+      escape: false,
+      rows: 3
     });
   },
   render: function() {
@@ -227,7 +233,10 @@ var RowItem = React.createClass({displayName: "RowItem",
     var notesId = "notes-" + id;
     return (
       React.createElement("tr", {className: "even", id: this.props.id}, 
-        React.createElement("td", {className: "index draggable"}, this.props.id), 
+        React.createElement("td", {className: "index draggable"}, 
+          React.createElement("span", {className: "off-hover"}, this.props.id), 
+          React.createElement("span", {className: "glyphicon glyphicon-menu-hamburger on-hover"})
+        ), 
         React.createElement("td", null, this.props.item.startTime.format('LT')), 
         React.createElement("td", {className: "grey-text"}, this.props.item.time, " min"), 
         React.createElement("td", {className: "topic", id: topicId}, this.props.item.topic), 
