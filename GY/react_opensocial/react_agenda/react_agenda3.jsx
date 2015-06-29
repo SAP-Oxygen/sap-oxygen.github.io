@@ -144,12 +144,12 @@ var TableBody = React.createClass({
         lastItemEndTime = this.props.startTime.clone();
       }
       var item = child.props.item;
-      var id = item.id.toString();
+      var id = (i + 1).toString();
       $.extend(item, {startTime: lastItemEndTime.clone()});
       $(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
       var node = $(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
-      React.render(<RowItem id={i + 1} item={child.props.item} />, node);
+      React.render(<RowItem id={id} item={child.props.item} />, node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
 
@@ -170,7 +170,7 @@ var TableBody = React.createClass({
         lastItemEndTime = this.props.startTime.clone();
       }
       var item = children[childIndex].props.item;
-      var id = item.id.toString();
+      var id = (childIndex + 1).toString();
       $.extend(item, {startTime: lastItemEndTime.clone()});
       if (nodeIndex >= numNodes) {
         $(this.getDOMNode()).append('<' + this.props.childComponent + '/>');
@@ -178,7 +178,7 @@ var TableBody = React.createClass({
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
-      React.render(<RowItem id={childIndex + 1} item={item} />, nodes[nodeIndex]);
+      React.render(<RowItem id={id} item={item} />, nodes[nodeIndex]);
       childIndex++;
       nodeIndex++;
       lastItemEndTime.add(item.time, 'm');
@@ -217,10 +217,8 @@ var RowItem = React.createClass({
     var topicId = "topic-" + id;
     var notesId = "notes-" + id;
     $('#'+topicId).editable({
-      showbuttons: false
     });
     $('#'+notesId).editable({
-      showbuttons: false
     });
   },
   render: function() {
