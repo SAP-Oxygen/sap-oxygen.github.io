@@ -152,7 +152,6 @@ var TableBody = React.createClass({displayName: "TableBody",
 
     $(this.getDOMNode()).sortable({
       axis: 'y',
-      handle: '.draggable',
       helper: fixWidthHelper,
       stop: this.handleDrop,
     }).disableSelection();
@@ -266,7 +265,7 @@ var RowItem = React.createClass({displayName: "RowItem",
     var notesId = "notes-" + id;
     return (
       React.createElement("tr", {className: "even", id: this.props.id}, 
-        React.createElement("td", {className: "index draggable"}, 
+        React.createElement("td", {className: "index"}, 
           React.createElement("span", {className: "off-hover"}, this.props.id), 
           React.createElement("span", {className: "glyphicon glyphicon-menu-hamburger on-hover"})
         ), 

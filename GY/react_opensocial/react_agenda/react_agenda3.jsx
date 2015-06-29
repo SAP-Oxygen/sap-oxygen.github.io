@@ -152,7 +152,6 @@ var TableBody = React.createClass({
 
     $(this.getDOMNode()).sortable({
       axis: 'y',
-      handle: '.draggable',
       helper: fixWidthHelper,
       stop: this.handleDrop,
     }).disableSelection();
@@ -265,8 +264,8 @@ var RowItem = React.createClass({
     var topicId = "topic-" + id;
     var notesId = "notes-" + id;
     return (
-      <tr className='even' id={this.props.id}>
-        <td className="index draggable">
+      <tr className="even" id={this.props.id}>
+        <td className="index">
           <span className="off-hover">{this.props.id}</span>
           <span className="glyphicon glyphicon-menu-hamburger on-hover"></span>
         </td>

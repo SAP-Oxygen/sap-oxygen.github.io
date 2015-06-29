@@ -42,6 +42,10 @@ td {
     color: #666;
 }
 
+tr{
+    background-color: white;
+}
+
 tr:hover {
     background-color: #F5FCFF;
     cursor: move;
@@ -51,6 +55,7 @@ tr:hover {
 }
 
 tr:active {
+    background-color: #F5FCFF;
     cursor: grabbing;
     cursor: -webkit-grabbing; 
     cursor: -moz-grabbing;
@@ -68,10 +73,10 @@ tr:active {
     display: none;
 }
 
-tr:hover .on-hover {
+tr:hover .on-hover, tr:active .on-hover {
     display: block;
 }
 
-tr:hover .off-hover {
+tr:hover .off-hover, tr:active .off-hover {
     display: none;
 }
