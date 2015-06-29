@@ -220,6 +220,13 @@ var RowItem = React.createClass({displayName: "RowItem",
     });
     $('#'+notesId).editable({
     });
+    $('.even').hover(function() {
+            $(this).find('.on-hover').hide();
+            $(this).find('.off-hover').show();
+        }, function() {
+            $(this).find('.off-number').hide();
+            $(this).find('.on-hover').show();
+    });
   },
   render: function() {
     var id = this.props.id;
@@ -227,7 +234,10 @@ var RowItem = React.createClass({displayName: "RowItem",
     var notesId = "notes-" + id;
     return (
       React.createElement("tr", {className: "even", id: this.props.id}, 
-        React.createElement("td", {className: "index draggable"}, this.props.id), 
+        React.createElement("td", {className: "index draggable"}, 
+          React.createElement("span", {className: "off-hover"}, this.props.id), 
+          React.createElement("span", {className: "glyphicon glyphicon-menu-hamburger on-hover"})
+        ), 
         React.createElement("td", null, this.props.item.startTime.format('LT')), 
         React.createElement("td", {className: "grey-text"}, this.props.item.time, " min"), 
         React.createElement("td", {className: "topic", id: topicId}, this.props.item.topic), 

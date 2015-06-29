@@ -53,3 +53,16 @@ tr:hover {
 .link-text {
     color: #00679E;
 }
+
+.on-hover {
+    display: none;
+}
+
+tr:hover .on-hover {
+    display: block;
+    cursor: pointer;
+}
+
+tr:hover .off-hover {
+    display: none;
+}

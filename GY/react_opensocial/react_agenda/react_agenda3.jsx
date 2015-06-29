@@ -220,6 +220,13 @@ var RowItem = React.createClass({
     });
     $('#'+notesId).editable({
     });
+    $('.even').hover(function() {
+            $(this).find('.on-hover').hide();
+            $(this).find('.off-hover').show();
+        }, function() {
+            $(this).find('.off-number').hide();
+            $(this).find('.on-hover').show();
+    });
   },
   render: function() {
     var id = this.props.id;
@@ -227,7 +234,10 @@ var RowItem = React.createClass({
     var notesId = "notes-" + id;
     return (
       <tr className='even' id={this.props.id}>
-        <td className="index draggable">{this.props.id}</td>
+        <td className="index draggable">
+          <span className="off-hover">{this.props.id}</span>
+          <span className="glyphicon glyphicon-menu-hamburger on-hover"></span>
+        </td>
         <td>{this.props.item.startTime.format('LT')}</td>
         <td className="grey-text">{this.props.item.time} min</td>
         <td className="topic" id={topicId}>{this.props.item.topic}</td>
