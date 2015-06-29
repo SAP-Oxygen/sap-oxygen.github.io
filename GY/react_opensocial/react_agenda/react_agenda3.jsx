@@ -217,15 +217,10 @@ var RowItem = React.createClass({
     var topicId = "topic-" + id;
     var notesId = "notes-" + id;
     $('#'+topicId).editable({
+      emptytext: 'Click to enter a new topic'
     });
     $('#'+notesId).editable({
-    });
-    $('.even').hover(function() {
-            $(this).find('.on-hover').hide();
-            $(this).find('.off-hover').show();
-        }, function() {
-            $(this).find('.off-number').hide();
-            $(this).find('.on-hover').show();
+      emptytext: 'Click to enter new descriptions'
     });
   },
   render: function() {
