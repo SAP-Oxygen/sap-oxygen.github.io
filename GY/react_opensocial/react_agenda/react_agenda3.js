@@ -92,7 +92,7 @@ var Agenda = React.createClass({displayName: "Agenda",
         React.createElement("br", null), 
         React.createElement(Row, null, 
           React.createElement(DatePicker, {startTime: this.state.startTime, onTimeChange: this.handleTimeChange}), 
-          React.createElement(TimePicker, {startTime: this.state.startTime, onTimeChange: this.handleTimeChange})
+          "// ", React.createElement(TimePicker, {startTime: this.state.startTime, onTimeChange: this.handleTimeChange})
         ), 
         React.createElement("br", null), 
         React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, people: this.props.data.people, onSort: this.handleSort, onEdit: this.handleEdit}), 

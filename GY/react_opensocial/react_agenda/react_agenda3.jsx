@@ -92,7 +92,7 @@ var Agenda = React.createClass({
         <br />
         <Row>
           <DatePicker startTime={this.state.startTime} onTimeChange={this.handleTimeChange} />
-          <TimePicker startTime={this.state.startTime} onTimeChange={this.handleTimeChange} />
+          // <TimePicker startTime={this.state.startTime} onTimeChange={this.handleTimeChange} />
         </Row>
         <br />
         <AgendaTable items={this.state.items} startTime={this.state.startTime} people={this.props.data.people} onSort={this.handleSort} onEdit={this.handleEdit} />
