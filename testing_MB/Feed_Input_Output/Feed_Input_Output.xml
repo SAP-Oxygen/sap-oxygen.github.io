@@ -4,11 +4,11 @@
     <Require feature="wave"/>
     <Require feature="osapi"/>
     <Locale lang="all">
-      <msg name="addItem">#{obj:actor} added &lt;b&gt;the item '#{obj:object}'&lt;/b&gt; to the bullet list #{obj:target}</msg>
-      <msg name="addItemContent"><![CDATA[
+      <msg name="addItemContent">
+        <![CDATA[
           <p>#{obj:object}</p>
-      ]]></msg>
-      <msg name="itemLabel"></msg>
+        ]]>
+      </msg>
     </Locale>
   </ModulePrefs>
   <Content type="html" href="Feed_Input_Output.html"/>
