@@ -16,7 +16,7 @@ var Agenda = React.createClass({
     debugger;
     return {
       items: [{id: 0, topic: "", desc: "",time: 0, ownder: ""}],
-      startTime: moment(),
+      startTime: moment().clone(),
       counter: 1
     } 
   },
