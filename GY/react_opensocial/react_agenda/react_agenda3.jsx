@@ -8,17 +8,33 @@ var Glyphicon = ReactBootstrap.Glyphicon;
 
 var Agenda = React.createClass({
   getInitialState: function() {
-    if (this.props.data.startTime) {
-      var startTime = moment(this.props.data.startTime);
-    } else {
-      var startTime = moment();
-    }
+    // if (this.props.data.startTime) {
+    //   var startTime = moment(this.props.data.startTime);
+    // } else {
+    //   var startTime = moment();
+    // }
     return {
-      items: this.props.data.items,
-      nextId: this.props.data.nextId,
-      startTime: startTime,
-      counter: this.props.data.items.length
+      items: [],
+      startTime: null,
+      nextId: null,
+      counter: null
     } 
+  },
+  componentDidMount: function() {
+    var self = this;
+    var onWaveUpdate = function() {
+      var waveData = {};
+      var waveState = wave.getState();
+
+      self.setSTate({
+        items: waveData.items,
+        startTime: waveData.startTime,
+        nextId: waveData.nextId,
+        counter: waveData.items.length
+      });
+    }
+
+    wave.setStateCallback(onWaveUpdate);
   },
   handleTimeChange: function(newTime) {
     this.setState({
@@ -33,6 +49,7 @@ var Agenda = React.createClass({
     this.setState({
       items: newItems
     });
+
     console.log(this.state.items);
   },
   handleAdd: function() {
@@ -304,10 +321,10 @@ var RowItem = React.createClass({
           <span className="grey-text" id={timeId} data-inputclass="time-input input-sm" data-type="text">{this.props.item.time}</span> min
         </td>
         <td>
-          <a className="topic" id={topicId} data-inputclass="input-sm" data-type="text">{this.props.item.topic}</a>
+          <span className="topic" id={topicId} data-inputclass="input-sm" data-type="text">{this.props.item.topic}</span>
         </td>
         <td className="link-text">
-          <a className="owner" id={ownerId} data-type="select2" data-value="1"></a>
+          <span className="owner" id={ownerId} data-inputclass="input-owner" data-type="select2" data-value="1"></span>
         </td>
         <td className="notes">
           <span className="grey-text" id={notesId} data-inputclass="input-sm" data-type="textarea">{this.props.item.desc}</span>
@@ -391,7 +408,9 @@ var TimePicker = React.createClass({
     $('#timepicker').on("dp.show", function (e) {
       $('#datepicker').data("DateTimePicker").hide();
     });
-    $('#timepicker input').attr('placeholder', this.props.startTime.format('LT'));
+    if (this.props.startTime) {
+      $('#timepicker input').attr('placeholder', this.props.startTime.format('LT'));
+    }
   },
   onTimeChange: function(time) {
     this.props.onTimeChange(time);
@@ -471,7 +490,6 @@ var DATA = {
       }
   ],
   "startTime": 1433923200000,
-  "nextId": 4,
   "people": [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' },
   { id: 5, text: 'enhancement' }, { id: 6, text: 'bug' }, { id: 7, text: 'duplicate' }, { id: 8, text: 'invalid' }, { id: 9, text: 'wontfix' }]
 }
