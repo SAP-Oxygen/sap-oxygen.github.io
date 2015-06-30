@@ -20,10 +20,6 @@
                     <td style='white-space: nowrap; padding-right: 10px' valign='top'>#{itemLabel}</td>
                     <td><span style='font-weight: bold'>#{obj:object}</span></td>
                   </tr>
-                  <tr>
-                    <td style='white-space: nowrap; padding-right: 10px' valign='top'>#{userAgentLabel}</td>
-                    <td>#{obj:object.attachments.1}</td>
-                  </tr>
                 </table>
               </td>
             </tr>
@@ -31,12 +27,6 @@
         </div>
       ]]></msg>
       <msg name="itemLabel"></msg>
-      <msg name="userAgentLabel"></msg>
-    </Locale>
-    <Locale lang="zh-TW">
-      <msg name="addItem">#{obj:actor} 把「#{obj:object}」加入到 #{obj:target} 列表裡</msg>
-      <msg name="itemLabel">項目:</msg>
-      <msg name="userAgentLabel">瀏覽器:</msg>
     </Locale>
   </ModulePrefs>
   <Content type="html" href="Feed_Input_Output.html"/>
