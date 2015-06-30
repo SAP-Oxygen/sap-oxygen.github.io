@@ -81,6 +81,8 @@ var Agenda = React.createClass({
 var AgendaTable = React.createClass({
   componentWillMount: function() {
     $.fn.editable.defaults.mode = 'inline';
+    $.fn.editableform.buttons = '<button type="submit" class="btn btn-default btn-sm editable-submit">ok</button>' + 
+                                '<button type="button" class="btn btn-default btn-sm editable-cancel">cancel</button>';
   },
   componentDidMount: function() {
   },
