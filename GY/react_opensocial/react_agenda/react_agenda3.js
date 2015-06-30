@@ -160,12 +160,12 @@ var TableBody = React.createClass({displayName: "TableBody",
         lastItemEndTime = this.props.startTime.clone();
       }
       var item = child.props.item;
-      var id = i + 1;
+      var index = i;
       $.extend(item, {startTime: lastItemEndTime.clone()});
       $(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
       var node = $(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
-      React.render(React.createElement(RowItem, {id: id, item: child.props.item, onEdit: this.props.onEdit}), node);
+      React.render(React.createElement(RowItem, {index: index, item: child.props.item, onEdit: this.props.onEdit}), node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
 
@@ -186,7 +186,7 @@ var TableBody = React.createClass({displayName: "TableBody",
         lastItemEndTime = this.props.startTime.clone();
       }
       var item = children[childIndex].props.item;
-      var id = childIndex + 1;
+      var index = childIndex;
       $.extend(item, {startTime: lastItemEndTime.clone()});
       if (nodeIndex >= numNodes) {
         $(this.getDOMNode()).append('<' + this.props.childComponent + '/>');
@@ -194,7 +194,7 @@ var TableBody = React.createClass({displayName: "TableBody",
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
-      React.render(React.createElement(RowItem, {id: id, item: item, onEdit: this.props.onEdit}), nodes[nodeIndex]);
+      React.render(React.createElement(RowItem, {index: index, item: item, onEdit: this.props.onEdit}), nodes[nodeIndex]);
       childIndex++;
       nodeIndex++;
       lastItemEndTime.add(item.time, 'm');
@@ -230,15 +230,14 @@ var TableBody = React.createClass({displayName: "TableBody",
 var RowItem = React.createClass({displayName: "RowItem",
   componentDidMount: function() {
     var self = this;
-    var id = this.props.id;
-    var topicId = "topic-" + id;
-    var notesId = "notes-" + id;
-    var timeId = "time-" + id;
+    var index = this.props.index;
+    var topicId = "topic-" + index;
+    var notesId = "notes-" + index;
+    var timeId = "time-" + index;
     $('#'+topicId).editable({
       url: function(params) {
         var d = new $.Deferred;
         var newTopic = params.value;
-        var index = id - 1;
         self.props.onEdit(index, 'topic', newTopic);
         d.resolve();
         return d.promise();
@@ -247,21 +246,19 @@ var RowItem = React.createClass({displayName: "RowItem",
       showbuttons: false
     });
     $('#'+timeId).editable({
-      // url: function(params) {
-      //   var d = new $.Deferred;
-      //   var newTopic = params.value;
-      //   var index = id - 1;
-      //   self.props.onEdit(index, 'topic', newTopic);
-      //   d.resolve();
-      //   return d.promise();
-      // },
+      url: function(params) {
+        var d = new $.Deferred;
+        var newTopic = params.value;
+        self.props.onEdit(index, 'time', newTopic);
+        d.resolve();
+        return d.promise();
+      },
       showbuttons: false
     });
     $('#'+notesId).editable({
       url: function(params) {
         var d = new $.Deferred;
         var newDesc = params.value;
-        var index = id - 1;
         self.props.onEdit(index, 'desc', newDesc);
         d.resolve();
         return d.promise();
@@ -272,14 +269,15 @@ var RowItem = React.createClass({displayName: "RowItem",
     });
   },
   render: function() {
-    var id = this.props.id;
-    var topicId = "topic-" + id;
-    var notesId = "notes-" + id;
-    var timeId = "time-" + id;
+    var index = this.props.index;
+    var id = index + 1;
+    var topicId = "topic-" + index;
+    var notesId = "notes-" + index;
+    var timeId = "time-" + index;
     return (
-      React.createElement("tr", {className: "even", id: this.props.id}, 
+      React.createElement("tr", null, 
         React.createElement("td", {className: "index"}, 
-          React.createElement("span", {className: "off-hover"}, this.props.id), 
+          React.createElement("span", {className: "off-hover"}, id), 
           React.createElement("span", {className: "glyphicon glyphicon-menu-hamburger on-hover"})
         ), 
         React.createElement("td", null, this.props.item.startTime.format('LT')), 
