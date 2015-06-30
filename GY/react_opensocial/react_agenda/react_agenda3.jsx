@@ -169,7 +169,7 @@ var TableBody = React.createClass({
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
 
-    gadgets.window.adjustHeight();
+    // gadgets.window.adjustHeight();
   },
   componentDidUpdate: function() {
     var childIndex = 0;
@@ -206,7 +206,7 @@ var TableBody = React.createClass({
       nodeIndex++;
     }
 
-    gadgets.window.adjustHeight();
+    // gadgets.window.adjustHeight();
   },
   componentWillUnmount: function() {
     $(this.getDOMNode()).children().get().forEach(function(node) {
@@ -233,6 +233,7 @@ var RowItem = React.createClass({
     var id = this.props.id;
     var topicId = "topic-" + id;
     var notesId = "notes-" + id;
+    var timeId = "time-" + id;
     $('#'+topicId).editable({
       url: function(params) {
         var d = new $.Deferred;
@@ -243,7 +244,20 @@ var RowItem = React.createClass({
         return d.promise();
       },
       emptytext: 'new topic here',
-      inputclass: null
+      showbuttons: false,
+      inputclass: "input-sm"
+    });
+    $('#'+timeId).editable({
+      // url: function(params) {
+      //   var d = new $.Deferred;
+      //   var newTopic = params.value;
+      //   var index = id - 1;
+      //   self.props.onEdit(index, 'topic', newTopic);
+      //   d.resolve();
+      //   return d.promise();
+      // },
+      showbuttons: false,
+      inputclass: "input-sm"
     });
     $('#'+notesId).editable({
       url: function(params) {
@@ -256,13 +270,15 @@ var RowItem = React.createClass({
       },
       emptytext: 'new notes here',
       escape: false,
-      rows: 3
+      rows: 3,
+      inputclass: "input-sm"
     });
   },
   render: function() {
     var id = this.props.id;
     var topicId = "topic-" + id;
     var notesId = "notes-" + id;
+    var timeId = "time-" + id;
     return (
       <tr className="even" id={this.props.id}>
         <td className="index">
@@ -270,8 +286,10 @@ var RowItem = React.createClass({
           <span className="glyphicon glyphicon-menu-hamburger on-hover"></span>
         </td>
         <td>{this.props.item.startTime.format('LT')}</td>
-        <td className="grey-text">{this.props.item.time} min</td>
-        <td className="topic" id={topicId}>{this.props.item.topic}</td>
+        <td className="grey-text">
+          <span href="#" className="time" id={timeId} data-inputclass="time-input input-sm" data-type="text">{this.props.item.time}</span> min
+        </td>
+        <td className="topic" id={topicId} data-type="text">{this.props.item.topic}</td>
         <td className="link-text">{this.props.item.owner}</td>
         <td className="notes grey-text" id={notesId} data-type="textarea">{this.props.item.desc}</td>
       </tr>

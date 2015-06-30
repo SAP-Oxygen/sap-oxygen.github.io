@@ -85,3 +85,6 @@ tbody tr .editable {
     display: none;
 }
 
+.time-input {
+    width: 60px !important;
+}
