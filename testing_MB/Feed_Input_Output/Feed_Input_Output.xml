@@ -30,8 +30,8 @@
           </table>
         </div>
       ]]></msg>
-      <msg name="itemLabel">The item is:</msg>
-      <msg name="userAgentLabel">User agent:</msg>
+      <msg name="itemLabel"></msg>
+      <msg name="userAgentLabel"></msg>
     </Locale>
     <Locale lang="zh-TW">
       <msg name="addItem">#{obj:actor} 把「#{obj:object}」加入到 #{obj:target} 列表裡</msg>
