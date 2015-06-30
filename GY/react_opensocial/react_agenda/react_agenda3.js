@@ -45,7 +45,7 @@ var Agenda = React.createClass({displayName: "Agenda",
     console.log("changed startTime: ");
     console.log(this.state.startTime);
     var time = {};
-    time[startTime] = newTime;
+    time['startTime'] = newTime;
     wave.getState().submitDelta(newTime);
     console.log("sent startTime to wave");
   },
