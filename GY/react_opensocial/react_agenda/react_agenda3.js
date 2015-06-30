@@ -15,10 +15,9 @@ var Agenda = React.createClass({displayName: "Agenda",
     // }
     debugger;
     return {
-      items: [],
-      startTime: null,
-      nextId: null,
-      counter: null
+      items: [{id: this.state.nextId, topic: "", desc: "",time: 0, ownder: ""}],
+      startTime: moment(),
+      counter: 1
     } 
   },
   componentDidMount: function() {
@@ -28,11 +27,10 @@ var Agenda = React.createClass({displayName: "Agenda",
       var waveState = wave.getState();
       var waveData = waveState.state_;
 
-      if (!waveState) {
+      if (!$.isEmptyObject(waveData)) {
         self.setState({
           items: waveData.items,
           startTime: waveData.startTime,
-          nextId: waveData.nextId,
           counter: waveData.counter
         });
       }
@@ -62,7 +60,7 @@ var Agenda = React.createClass({displayName: "Agenda",
     console.log(this.state.items);
   },
   handleAdd: function() {
-    var newItems = this.state.items.concat([{id: this.state.nextId, topic: "", desc: "",time: 0, ownder: ""}]);
+    var newItems = this.state.items.concat([{id: this.state.counter, topic: "", desc: "",time: 0, ownder: ""}]);
     var newCounter = ++this.state.counter;
     this.setState({
       items: newItems,
