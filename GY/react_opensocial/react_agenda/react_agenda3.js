@@ -13,6 +13,7 @@ var Agenda = React.createClass({displayName: "Agenda",
     // } else {
     //   var startTime = moment();
     // }
+    debugger;
     return {
       items: [],
       startTime: null,
