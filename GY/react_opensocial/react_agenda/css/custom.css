@@ -44,6 +44,7 @@ td {
 
 tbody tr{
     background-color: white;
+    height: 62px;
 }
 
 tbody tr:hover {
@@ -85,3 +86,15 @@ tbody tr .editable {
     display: none;
 }
 
+.time-input {
+    width: 60px !important;
+}
+
+.notes {
+    width: 240px;
+    max-width: 240px;
+}
+
+.input-owner {
+    width: 150px;
+}

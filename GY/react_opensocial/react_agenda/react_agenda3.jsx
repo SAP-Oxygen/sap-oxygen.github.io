@@ -53,8 +53,10 @@ var Agenda = React.createClass({
       newItem['topic'] = value;
     } else if (type === 'desc') {
       newItem['desc'] = value;
-    } else if (type === 'presenter') {
+    } else if (type === 'owner') {
       newItem['owner'] = value;
+    } else if (type === 'time') {
+      newItem['time'] = value;
     }
       this.setState({
       items: newItems
@@ -69,7 +71,7 @@ var Agenda = React.createClass({
           <TimePicker startTime={this.state.startTime} onTimeChange={this.handleTimeChange} />
         </Row>
         <br />
-        <AgendaTable items={this.state.items} startTime={this.state.startTime} onSort={this.handleSort} onEdit={this.handleEdit} />
+        <AgendaTable items={this.state.items} startTime={this.state.startTime} people={this.props.data.people} onSort={this.handleSort} onEdit={this.handleEdit} />
         <AddButton onAdd={this.handleAdd} />
       </Grid>
     );
@@ -79,6 +81,8 @@ var Agenda = React.createClass({
 var AgendaTable = React.createClass({
   componentWillMount: function() {
     $.fn.editable.defaults.mode = 'inline';
+    $.fn.editableform.buttons = '<button type="submit" class="btn btn-default btn-sm editable-submit">ok</button>' + 
+                                '<button type="button" class="btn btn-default btn-sm editable-cancel">cancel</button>';
   },
   componentDidMount: function() {
   },
@@ -104,7 +108,7 @@ var AgendaTable = React.createClass({
             <th>Notes</th>
           </tr>
         </thead>
-        <TableBody startTime={this.props.startTime} onSort={this.props.onSort} onEdit={this.props.onEdit} >
+        <TableBody startTime={this.props.startTime} people={this.props.people} onSort={this.props.onSort} onEdit={this.props.onEdit} >
           {items}
         </TableBody>
       </Table>
@@ -160,16 +164,16 @@ var TableBody = React.createClass({
         lastItemEndTime = this.props.startTime.clone();
       }
       var item = child.props.item;
-      var id = i + 1;
+      var index = i;
       $.extend(item, {startTime: lastItemEndTime.clone()});
       $(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
       var node = $(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
-      React.render(<RowItem id={id} item={child.props.item} onEdit={this.props.onEdit} />, node);
+      React.render(<RowItem index={index} item={child.props.item} people={this.props.people} onEdit={this.props.onEdit} />, node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
 
-    gadgets.window.adjustHeight();
+    // gadgets.window.adjustHeight();
   },
   componentDidUpdate: function() {
     var childIndex = 0;
@@ -186,7 +190,7 @@ var TableBody = React.createClass({
         lastItemEndTime = this.props.startTime.clone();
       }
       var item = children[childIndex].props.item;
-      var id = childIndex + 1;
+      var index = childIndex;
       $.extend(item, {startTime: lastItemEndTime.clone()});
       if (nodeIndex >= numNodes) {
         $(this.getDOMNode()).append('<' + this.props.childComponent + '/>');
@@ -194,7 +198,7 @@ var TableBody = React.createClass({
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
-      React.render(<RowItem id={id} item={item} onEdit={this.props.onEdit} />, nodes[nodeIndex]);
+      React.render(<RowItem index={index} item={item} people={this.props.people} onEdit={this.props.onEdit} />, nodes[nodeIndex]);
       childIndex++;
       nodeIndex++;
       lastItemEndTime.add(item.time, 'm');
@@ -206,7 +210,7 @@ var TableBody = React.createClass({
       nodeIndex++;
     }
 
-    gadgets.window.adjustHeight();
+    // gadgets.window.adjustHeight();
   },
   componentWillUnmount: function() {
     $(this.getDOMNode()).children().get().forEach(function(node) {
@@ -230,50 +234,83 @@ var TableBody = React.createClass({
 var RowItem = React.createClass({
   componentDidMount: function() {
     var self = this;
-    var id = this.props.id;
-    var topicId = "topic-" + id;
-    var notesId = "notes-" + id;
+    var index = this.props.index;
+    var topicId = "topic-" + index;
+    var notesId = "notes-" + index;
+    var timeId = "time-" + index;
+    var ownerId = "owner-" + index;
     $('#'+topicId).editable({
       url: function(params) {
         var d = new $.Deferred;
         var newTopic = params.value;
-        var index = id - 1;
         self.props.onEdit(index, 'topic', newTopic);
         d.resolve();
         return d.promise();
       },
       emptytext: 'new topic here',
-      inputclass: null
+      showbuttons: false
+    });
+    $('#'+timeId).editable({
+      url: function(params) {
+        var d = new $.Deferred;
+        var newTopic = params.value;
+        self.props.onEdit(index, 'time', newTopic);
+        d.resolve();
+        return d.promise();
+      },
+      showbuttons: false
+    });
+    $('#'+ownerId).editable({
+      url: function(params) {
+        var d = new $.Deferred;
+        var newTopic = params.value;
+        self.props.onEdit(index, 'owner', newTopic);
+        d.resolve();
+        return d.promise();
+      },
+      source: self.props.people,
+      mode: 'popup',
+      showbuttons: false
     });
     $('#'+notesId).editable({
       url: function(params) {
         var d = new $.Deferred;
         var newDesc = params.value;
-        var index = id - 1;
         self.props.onEdit(index, 'desc', newDesc);
         d.resolve();
         return d.promise();
       },
       emptytext: 'new notes here',
       escape: false,
-      rows: 3
+      rows: 2
     });
   },
   render: function() {
-    var id = this.props.id;
-    var topicId = "topic-" + id;
-    var notesId = "notes-" + id;
+    var index = this.props.index;
+    var id = index + 1;
+    var topicId = "topic-" + index;
+    var notesId = "notes-" + index;
+    var timeId = "time-" + index;
+    var ownerId = "owner-" + index;
     return (
-      <tr className="even" id={this.props.id}>
+      <tr>
         <td className="index">
-          <span className="off-hover">{this.props.id}</span>
+          <span className="off-hover">{id}</span>
           <span className="glyphicon glyphicon-menu-hamburger on-hover"></span>
         </td>
         <td>{this.props.item.startTime.format('LT')}</td>
-        <td className="grey-text">{this.props.item.time} min</td>
-        <td className="topic" id={topicId}>{this.props.item.topic}</td>
-        <td className="link-text">{this.props.item.owner}</td>
-        <td className="notes grey-text" id={notesId} data-type="textarea">{this.props.item.desc}</td>
+        <td>
+          <span className="grey-text" id={timeId} data-inputclass="time-input input-sm" data-type="text">{this.props.item.time}</span> min
+        </td>
+        <td>
+          <span className="topic" id={topicId} data-inputclass="input-sm" data-type="text">{this.props.item.topic}</span>
+        </td>
+        <td className="link-text">
+          <span className="owner" id={ownerId} data-inputclass="input-owner" data-type="select2"></span>
+        </td>
+        <td className="notes">
+          <span className="grey-text" id={notesId} data-inputclass="input-sm" data-type="textarea">{this.props.item.desc}</span>
+        </td>
       </tr>
     );
   }
@@ -433,7 +470,9 @@ var DATA = {
       }
   ],
   "startTime": 1433923200000,
-  "nextId": 4
+  "nextId": 4,
+  "people": [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' },
+  { id: 5, text: 'enhancement' }, { id: 6, text: 'bug' }, { id: 7, text: 'duplicate' }, { id: 8, text: 'invalid' }, { id: 9, text: 'wontfix' }]
 }
 
 React.render(<Agenda data={DATA} />, document.body);
