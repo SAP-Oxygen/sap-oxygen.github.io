@@ -15,7 +15,7 @@ var Agenda = React.createClass({displayName: "Agenda",
     // }
     debugger;
     return {
-      items: [{id: this.state.nextId, topic: "", desc: "",time: 0, ownder: ""}],
+      items: [{id: 0, topic: "", desc: "",time: 0, ownder: ""}],
       startTime: moment(),
       counter: 1
     } 
