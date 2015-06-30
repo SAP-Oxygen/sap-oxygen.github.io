@@ -375,7 +375,9 @@ var DatePicker = React.createClass({
     //   $('#timepicker').data("DateTimePicker").hide();
     // });
     if (startTime) {
-      $('#datepicker').data("DateTimePicker").defaultDate(startTime);
+      $('#datepicker').datetimepicker({
+        defaultDate: startTime
+      });
     }
   },
   onTimeChange: function(time) {
