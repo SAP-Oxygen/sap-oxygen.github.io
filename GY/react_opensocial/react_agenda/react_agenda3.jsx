@@ -91,8 +91,6 @@ var Agenda = React.createClass({
       <Grid>
         <br />
         <Row>
-          <DatePicker startTime={this.state.startTime} onTimeChange={this.handleTimeChange} />
-          <TimePicker startTime={this.state.startTime} onTimeChange={this.handleTimeChange} />
         </Row>
         <br />
         <AgendaTable items={this.state.items} startTime={this.state.startTime} people={this.props.data.people} onSort={this.handleSort} onEdit={this.handleEdit} />
@@ -374,11 +372,11 @@ var DatePicker = React.createClass({
     // $('#datepicker').on("dp.show", function (e) {
     //   $('#timepicker').data("DateTimePicker").hide();
     // });
-    if (startTime) {
-      $('#datepicker').datetimepicker({
-        defaultDate: startTime
-      });
-    }
+    // if (startTime) {
+    //   $('#datepicker').datetimepicker({
+    //     defaultDate: startTime
+    //   });
+    // }
   },
   onTimeChange: function(time) {
     this.props.onTimeChange(time);

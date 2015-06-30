@@ -90,9 +90,7 @@ var Agenda = React.createClass({displayName: "Agenda",
     return (
       React.createElement(Grid, null, 
         React.createElement("br", null), 
-        React.createElement(Row, null, 
-          React.createElement(DatePicker, {startTime: this.state.startTime, onTimeChange: this.handleTimeChange}), 
-          React.createElement(TimePicker, {startTime: this.state.startTime, onTimeChange: this.handleTimeChange})
+        React.createElement(Row, null
         ), 
         React.createElement("br", null), 
         React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, people: this.props.data.people, onSort: this.handleSort, onEdit: this.handleEdit}), 
@@ -374,11 +372,11 @@ var DatePicker = React.createClass({displayName: "DatePicker",
     // $('#datepicker').on("dp.show", function (e) {
     //   $('#timepicker').data("DateTimePicker").hide();
     // });
-    if (startTime) {
-      $('#datepicker').datetimepicker({
-        defaultDate: startTime
-      });
-    }
+    // if (startTime) {
+    //   $('#datepicker').datetimepicker({
+    //     defaultDate: startTime
+    //   });
+    // }
   },
   onTimeChange: function(time) {
     this.props.onTimeChange(time);
