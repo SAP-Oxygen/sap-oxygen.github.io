@@ -24,8 +24,8 @@ var Agenda = React.createClass({
     var self = this;
     var onWaveUpdate = function() {
       console.log("onWaveUpdate");
-      var waveState = wave.getState();
-      var waveData = waveState.state_;
+      // var waveState = wave.getState();
+      // var waveData = waveState.state_;
 
       // if (!$.isEmptyObject(waveData)) {
       //   self.setState({
