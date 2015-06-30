@@ -244,8 +244,7 @@ var RowItem = React.createClass({
         return d.promise();
       },
       emptytext: 'new topic here',
-      showbuttons: false,
-      inputclass: "input-sm"
+      showbuttons: false
     });
     $('#'+timeId).editable({
       // url: function(params) {
@@ -256,8 +255,7 @@ var RowItem = React.createClass({
       //   d.resolve();
       //   return d.promise();
       // },
-      showbuttons: false,
-      inputclass: "input-sm"
+      showbuttons: false
     });
     $('#'+notesId).editable({
       url: function(params) {
@@ -270,8 +268,7 @@ var RowItem = React.createClass({
       },
       emptytext: 'new notes here',
       escape: false,
-      rows: 3,
-      inputclass: "input-sm"
+      rows: 3
     });
   },
   render: function() {
@@ -286,12 +283,16 @@ var RowItem = React.createClass({
           <span className="glyphicon glyphicon-menu-hamburger on-hover"></span>
         </td>
         <td>{this.props.item.startTime.format('LT')}</td>
-        <td className="grey-text">
-          <span href="#" className="time" id={timeId} data-inputclass="time-input input-sm" data-type="text">{this.props.item.time}</span> min
+        <td>
+          <span className="grey-text" id={timeId} data-inputclass="time-input input-sm" data-type="text">{this.props.item.time}</span> min
         </td>
-        <td className="topic" id={topicId} data-type="text">{this.props.item.topic}</td>
+        <td>
+          <span className="topic" id={topicId} data-inputclass="input-sm" data-type="text">{this.props.item.topic}</span>
+        </td>
         <td className="link-text">{this.props.item.owner}</td>
-        <td className="notes grey-text" id={notesId} data-type="textarea">{this.props.item.desc}</td>
+        <td>
+          <span className="notes grey-text" id={notesId} data-inputclass="input-sm" data-type="textarea">{this.props.item.desc}</span>
+        </td>
       </tr>
     );
   }

@@ -244,8 +244,7 @@ var RowItem = React.createClass({displayName: "RowItem",
         return d.promise();
       },
       emptytext: 'new topic here',
-      showbuttons: false,
-      inputclass: "input-sm"
+      showbuttons: false
     });
     $('#'+timeId).editable({
       // url: function(params) {
@@ -256,8 +255,7 @@ var RowItem = React.createClass({displayName: "RowItem",
       //   d.resolve();
       //   return d.promise();
       // },
-      showbuttons: false,
-      inputclass: "input-sm"
+      showbuttons: false
     });
     $('#'+notesId).editable({
       url: function(params) {
@@ -270,8 +268,7 @@ var RowItem = React.createClass({displayName: "RowItem",
       },
       emptytext: 'new notes here',
       escape: false,
-      rows: 3,
-      inputclass: "input-sm"
+      rows: 3
     });
   },
   render: function() {
@@ -286,12 +283,16 @@ var RowItem = React.createClass({displayName: "RowItem",
           React.createElement("span", {className: "glyphicon glyphicon-menu-hamburger on-hover"})
         ), 
         React.createElement("td", null, this.props.item.startTime.format('LT')), 
-        React.createElement("td", {className: "grey-text"}, 
-          React.createElement("span", {href: "#", className: "time", id: timeId, "data-inputclass": "time-input input-sm", "data-type": "text"}, this.props.item.time), " min"
+        React.createElement("td", null, 
+          React.createElement("span", {className: "grey-text", id: timeId, "data-inputclass": "time-input input-sm", "data-type": "text"}, this.props.item.time), " min"
         ), 
-        React.createElement("td", {className: "topic", id: topicId, "data-type": "text"}, this.props.item.topic), 
+        React.createElement("td", null, 
+          React.createElement("span", {className: "topic", id: topicId, "data-inputclass": "input-sm", "data-type": "text"}, this.props.item.topic)
+        ), 
         React.createElement("td", {className: "link-text"}, this.props.item.owner), 
-        React.createElement("td", {className: "notes grey-text", id: notesId, "data-type": "textarea"}, this.props.item.desc)
+        React.createElement("td", null, 
+          React.createElement("span", {className: "notes grey-text", id: notesId, "data-inputclass": "input-sm", "data-type": "textarea"}, this.props.item.desc)
+        )
       )
     );
   }
