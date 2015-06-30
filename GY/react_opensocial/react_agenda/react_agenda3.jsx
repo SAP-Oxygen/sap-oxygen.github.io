@@ -27,13 +27,13 @@ var Agenda = React.createClass({
       var waveState = wave.getState();
       var waveData = waveState.state_;
 
-      if (!$.isEmptyObject(waveData)) {
-        self.setState({
-          items: waveData.items,
-          startTime: waveData.startTime,
-          counter: waveData.counter
-        });
-      }
+      // if (!$.isEmptyObject(waveData)) {
+      //   self.setState({
+      //     items: waveData.items,
+      //     startTime: waveData.startTime,
+      //     counter: waveData.counter
+      //   });
+      // }
     };
 
     wave.setStateCallback(onWaveUpdate);
