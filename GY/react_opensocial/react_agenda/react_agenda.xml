@@ -2,8 +2,8 @@
 <!-- Tutorial_08_Complete_Tutorial_Code_Example (XML, HTML, CSS, JavaScript) -->
 <Module>
   <ModulePrefs title="React Agenda" height="400" author="Geon Young" author_email="geon.young.park@sap.com" description="SAP Jam Agenda tool rebuilt in React as an Open Social Gadget">
-        <Require feature="dynamic-height"/>
-        <Require feature="open-views"/>
+        <Require feature="dynamic-height" />
+        <Require feature="wave" />
     </ModulePrefs>
   <Content type="html" href="react_agenda3.html" />
 </Module >
