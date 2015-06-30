@@ -27,7 +27,7 @@ var Agenda = React.createClass({displayName: "Agenda",
       var waveData = {};
       var waveState = wave.getState();
 
-      self.setSTate({
+      self.setState({
         items: waveData.items,
         startTime: waveData.startTime,
         nextId: waveData.nextId,
