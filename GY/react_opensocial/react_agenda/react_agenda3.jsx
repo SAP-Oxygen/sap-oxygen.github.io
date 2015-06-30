@@ -417,7 +417,7 @@ var TimePicker = React.createClass({
     });
     // $('#timepicker').on("dp.show", function (e) {
     //   $('#datepicker').data("DateTimePicker").hide();
-    });
+    // });
     if (this.props.startTime) {
       $('#timepicker input').attr('placeholder', this.props.startTime.format('LT'));
     }
