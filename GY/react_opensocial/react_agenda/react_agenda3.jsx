@@ -268,7 +268,7 @@ var RowItem = React.createClass({
       },
       emptytext: 'new notes here',
       escape: false,
-      rows: 3
+      rows: 2
     });
   },
   render: function() {
@@ -290,8 +290,8 @@ var RowItem = React.createClass({
           <span className="topic" id={topicId} data-inputclass="input-sm" data-type="text">{this.props.item.topic}</span>
         </td>
         <td className="link-text">{this.props.item.owner}</td>
-        <td>
-          <span className="notes grey-text" id={notesId} data-inputclass="input-sm" data-type="textarea">{this.props.item.desc}</span>
+        <td className="notes">
+          <span className="grey-text" id={notesId} data-inputclass="input-sm" data-type="textarea">{this.props.item.desc}</span>
         </td>
       </tr>
     );
