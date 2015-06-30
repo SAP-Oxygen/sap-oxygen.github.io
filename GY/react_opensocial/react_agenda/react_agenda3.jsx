@@ -55,6 +55,8 @@ var Agenda = React.createClass({
       newItem['desc'] = value;
     } else if (type === 'presenter') {
       newItem['owner'] = value;
+    } else if (type === 'time') {
+      newItem['time'] = value;
     }
       this.setState({
       items: newItems
