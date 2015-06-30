@@ -65,7 +65,7 @@
       // add a feed entry
       osapi.activitystreams.create({
         activity: {
-          title: "#{addItem}",
+          title: "Gadget Output to SAP Jam Feed",
           content: "#{addItemContent}",
           object: {
             displayName: newItem,
