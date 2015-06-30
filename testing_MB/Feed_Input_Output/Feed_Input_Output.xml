@@ -1,5 +1,5 @@
 <Module specificationVersion='2'>
-  <ModulePrefs title="Feed_Input-Output">
+  <ModulePrefs title="Feed_Input_Output">
     <Require feature="dynamic-height"/>
     <Require feature="wave"/>
     <Require feature="osapi"/>
@@ -39,5 +39,5 @@
       <msg name="userAgentLabel">瀏覽器:</msg>
     </Locale>
   </ModulePrefs>
-  <Content type="html" href="Feed_Input-Output.html"/>
+  <Content type="html" href="Feed_Input_Output.html"/>
 </Module>
