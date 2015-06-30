@@ -53,7 +53,7 @@ var Agenda = React.createClass({
       newItem['topic'] = value;
     } else if (type === 'desc') {
       newItem['desc'] = value;
-    } else if (type === 'presenter') {
+    } else if (type === 'owner') {
       newItem['owner'] = value;
     } else if (type === 'time') {
       newItem['time'] = value;
@@ -71,7 +71,7 @@ var Agenda = React.createClass({
           <TimePicker startTime={this.state.startTime} onTimeChange={this.handleTimeChange} />
         </Row>
         <br />
-        <AgendaTable items={this.state.items} startTime={this.state.startTime} onSort={this.handleSort} onEdit={this.handleEdit} />
+        <AgendaTable items={this.state.items} startTime={this.state.startTime} people={this.props.data.people} onSort={this.handleSort} onEdit={this.handleEdit} />
         <AddButton onAdd={this.handleAdd} />
       </Grid>
     );
@@ -108,7 +108,7 @@ var AgendaTable = React.createClass({
             <th>Notes</th>
           </tr>
         </thead>
-        <TableBody startTime={this.props.startTime} onSort={this.props.onSort} onEdit={this.props.onEdit} >
+        <TableBody startTime={this.props.startTime} people={this.props.people} onSort={this.props.onSort} onEdit={this.props.onEdit} >
           {items}
         </TableBody>
       </Table>
@@ -169,7 +169,7 @@ var TableBody = React.createClass({
       $(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
       var node = $(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
-      React.render(<RowItem index={index} item={child.props.item} onEdit={this.props.onEdit} />, node);
+      React.render(<RowItem index={index} item={child.props.item} people={this.props.people} onEdit={this.props.onEdit} />, node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
 
@@ -198,7 +198,7 @@ var TableBody = React.createClass({
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
-      React.render(<RowItem index={index} item={item} onEdit={this.props.onEdit} />, nodes[nodeIndex]);
+      React.render(<RowItem index={index} item={item} people={this.props.people} onEdit={this.props.onEdit} />, nodes[nodeIndex]);
       childIndex++;
       nodeIndex++;
       lastItemEndTime.add(item.time, 'm');
@@ -238,6 +238,7 @@ var RowItem = React.createClass({
     var topicId = "topic-" + index;
     var notesId = "notes-" + index;
     var timeId = "time-" + index;
+    var ownerId = "owner-" + index;
     $('#'+topicId).editable({
       url: function(params) {
         var d = new $.Deferred;
@@ -259,6 +260,18 @@ var RowItem = React.createClass({
       },
       showbuttons: false
     });
+    $('#'+ownerId).editable({
+      url: function(params) {
+        var d = new $.Deferred;
+        var newTopic = params.value;
+        self.props.onEdit(index, 'owner', newTopic);
+        d.resolve();
+        return d.promise();
+      },
+      source: self.props.people,
+      mode: 'popup',
+      showbuttons: false
+    });
     $('#'+notesId).editable({
       url: function(params) {
         var d = new $.Deferred;
@@ -278,6 +291,7 @@ var RowItem = React.createClass({
     var topicId = "topic-" + index;
     var notesId = "notes-" + index;
     var timeId = "time-" + index;
+    var ownerId = "owner-" + index;
     return (
       <tr>
         <td className="index">
@@ -291,7 +305,9 @@ var RowItem = React.createClass({
         <td>
           <span className="topic" id={topicId} data-inputclass="input-sm" data-type="text">{this.props.item.topic}</span>
         </td>
-        <td className="link-text">{this.props.item.owner}</td>
+        <td className="link-text">
+          <span className="owner" id={ownerId} data-inputclass="input-owner" data-type="select2"></span>
+        </td>
         <td className="notes">
           <span className="grey-text" id={notesId} data-inputclass="input-sm" data-type="textarea">{this.props.item.desc}</span>
         </td>
@@ -454,7 +470,9 @@ var DATA = {
       }
   ],
   "startTime": 1433923200000,
-  "nextId": 4
+  "nextId": 4,
+  "people": [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' },
+  { id: 5, text: 'enhancement' }, { id: 6, text: 'bug' }, { id: 7, text: 'duplicate' }, { id: 8, text: 'invalid' }, { id: 9, text: 'wontfix' }]
 }
 
 React.render(<Agenda data={DATA} />, document.body);

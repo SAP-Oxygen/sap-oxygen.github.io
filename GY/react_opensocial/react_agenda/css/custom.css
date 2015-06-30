@@ -94,3 +94,7 @@ tbody tr .editable {
     width: 240px;
     max-width: 240px;
 }
+
+.input-owner {
+    width: 150px;
+}

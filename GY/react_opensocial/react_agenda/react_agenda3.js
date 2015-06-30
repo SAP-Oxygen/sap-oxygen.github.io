@@ -53,7 +53,7 @@ var Agenda = React.createClass({displayName: "Agenda",
       newItem['topic'] = value;
     } else if (type === 'desc') {
       newItem['desc'] = value;
-    } else if (type === 'presenter') {
+    } else if (type === 'owner') {
       newItem['owner'] = value;
     } else if (type === 'time') {
       newItem['time'] = value;
@@ -71,7 +71,7 @@ var Agenda = React.createClass({displayName: "Agenda",
           React.createElement(TimePicker, {startTime: this.state.startTime, onTimeChange: this.handleTimeChange})
         ), 
         React.createElement("br", null), 
-        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, onSort: this.handleSort, onEdit: this.handleEdit}), 
+        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, people: this.props.data.people, onSort: this.handleSort, onEdit: this.handleEdit}), 
         React.createElement(AddButton, {onAdd: this.handleAdd})
       )
     );
@@ -108,7 +108,7 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
             React.createElement("th", null, "Notes")
           )
         ), 
-        React.createElement(TableBody, {startTime: this.props.startTime, onSort: this.props.onSort, onEdit: this.props.onEdit}, 
+        React.createElement(TableBody, {startTime: this.props.startTime, people: this.props.people, onSort: this.props.onSort, onEdit: this.props.onEdit}, 
           items
         )
       )
@@ -169,7 +169,7 @@ var TableBody = React.createClass({displayName: "TableBody",
       $(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
       var node = $(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
-      React.render(React.createElement(RowItem, {index: index, item: child.props.item, onEdit: this.props.onEdit}), node);
+      React.render(React.createElement(RowItem, {index: index, item: child.props.item, people: this.props.people, onEdit: this.props.onEdit}), node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
 
@@ -198,7 +198,7 @@ var TableBody = React.createClass({displayName: "TableBody",
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
-      React.render(React.createElement(RowItem, {index: index, item: item, onEdit: this.props.onEdit}), nodes[nodeIndex]);
+      React.render(React.createElement(RowItem, {index: index, item: item, people: this.props.people, onEdit: this.props.onEdit}), nodes[nodeIndex]);
       childIndex++;
       nodeIndex++;
       lastItemEndTime.add(item.time, 'm');
@@ -238,6 +238,7 @@ var RowItem = React.createClass({displayName: "RowItem",
     var topicId = "topic-" + index;
     var notesId = "notes-" + index;
     var timeId = "time-" + index;
+    var ownerId = "owner-" + index;
     $('#'+topicId).editable({
       url: function(params) {
         var d = new $.Deferred;
@@ -259,6 +260,18 @@ var RowItem = React.createClass({displayName: "RowItem",
       },
       showbuttons: false
     });
+    $('#'+ownerId).editable({
+      url: function(params) {
+        var d = new $.Deferred;
+        var newTopic = params.value;
+        self.props.onEdit(index, 'owner', newTopic);
+        d.resolve();
+        return d.promise();
+      },
+      source: self.props.people,
+      mode: 'popup',
+      showbuttons: false
+    });
     $('#'+notesId).editable({
       url: function(params) {
         var d = new $.Deferred;
@@ -278,6 +291,7 @@ var RowItem = React.createClass({displayName: "RowItem",
     var topicId = "topic-" + index;
     var notesId = "notes-" + index;
     var timeId = "time-" + index;
+    var ownerId = "owner-" + index;
     return (
       React.createElement("tr", null, 
         React.createElement("td", {className: "index"}, 
@@ -291,7 +305,9 @@ var RowItem = React.createClass({displayName: "RowItem",
         React.createElement("td", null, 
           React.createElement("span", {className: "topic", id: topicId, "data-inputclass": "input-sm", "data-type": "text"}, this.props.item.topic)
         ), 
-        React.createElement("td", {className: "link-text"}, this.props.item.owner), 
+        React.createElement("td", {className: "link-text"}, 
+          React.createElement("span", {className: "owner", id: ownerId, "data-inputclass": "input-owner", "data-type": "select2"})
+        ), 
         React.createElement("td", {className: "notes"}, 
           React.createElement("span", {className: "grey-text", id: notesId, "data-inputclass": "input-sm", "data-type": "textarea"}, this.props.item.desc)
         )
@@ -454,7 +470,9 @@ var DATA = {
       }
   ],
   "startTime": 1433923200000,
-  "nextId": 4
+  "nextId": 4,
+  "people": [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' },
+  { id: 5, text: 'enhancement' }, { id: 6, text: 'bug' }, { id: 7, text: 'duplicate' }, { id: 8, text: 'invalid' }, { id: 9, text: 'wontfix' }]
 }
 
 React.render(React.createElement(Agenda, {data: DATA}), document.body);
