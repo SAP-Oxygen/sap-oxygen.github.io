@@ -31,7 +31,7 @@ var Agenda = React.createClass({displayName: "Agenda",
         items: waveData.items,
         startTime: waveData.startTime,
         nextId: waveData.nextId,
-        counter: waveData.items.length
+        counter: waveData.counter
       });
     }
 
