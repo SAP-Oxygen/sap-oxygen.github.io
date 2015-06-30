@@ -158,7 +158,7 @@ var TableBody = React.createClass({
       axis: 'y',
       helper: fixWidthHelper,
       stop: this.handleDrop,
-    }).disableSelection();
+    });
     this.getChildren().forEach(function(child, i) {
       if (!lastItemEndTime) {
         lastItemEndTime = this.props.startTime.clone();
@@ -269,7 +269,8 @@ var RowItem = React.createClass({
         return d.promise();
       },
       source: self.props.people,
-      mode: 'popup',
+      select2: {
+      },
       showbuttons: false
     });
     $('#'+notesId).editable({
@@ -303,10 +304,10 @@ var RowItem = React.createClass({
           <span className="grey-text" id={timeId} data-inputclass="time-input input-sm" data-type="text">{this.props.item.time}</span> min
         </td>
         <td>
-          <span className="topic" id={topicId} data-inputclass="input-sm" data-type="text">{this.props.item.topic}</span>
+          <a className="topic" id={topicId} data-inputclass="input-sm" data-type="text">{this.props.item.topic}</a>
         </td>
         <td className="link-text">
-          <span className="owner" id={ownerId} data-inputclass="input-owner" data-type="select2"></span>
+          <a className="owner" id={ownerId} data-type="select2" data-value="1"></a>
         </td>
         <td className="notes">
           <span className="grey-text" id={notesId} data-inputclass="input-sm" data-type="textarea">{this.props.item.desc}</span>

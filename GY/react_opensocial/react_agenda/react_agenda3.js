@@ -158,7 +158,7 @@ var TableBody = React.createClass({displayName: "TableBody",
       axis: 'y',
       helper: fixWidthHelper,
       stop: this.handleDrop,
-    }).disableSelection();
+    });
     this.getChildren().forEach(function(child, i) {
       if (!lastItemEndTime) {
         lastItemEndTime = this.props.startTime.clone();
@@ -269,7 +269,8 @@ var RowItem = React.createClass({displayName: "RowItem",
         return d.promise();
       },
       source: self.props.people,
-      mode: 'popup',
+      select2: {
+      },
       showbuttons: false
     });
     $('#'+notesId).editable({
@@ -303,10 +304,10 @@ var RowItem = React.createClass({displayName: "RowItem",
           React.createElement("span", {className: "grey-text", id: timeId, "data-inputclass": "time-input input-sm", "data-type": "text"}, this.props.item.time), " min"
         ), 
         React.createElement("td", null, 
-          React.createElement("span", {className: "topic", id: topicId, "data-inputclass": "input-sm", "data-type": "text"}, this.props.item.topic)
+          React.createElement("a", {className: "topic", id: topicId, "data-inputclass": "input-sm", "data-type": "text"}, this.props.item.topic)
         ), 
         React.createElement("td", {className: "link-text"}, 
-          React.createElement("span", {className: "owner", id: ownerId, "data-inputclass": "input-owner", "data-type": "select2"})
+          React.createElement("a", {className: "owner", id: ownerId, "data-type": "select2", "data-value": "1"})
         ), 
         React.createElement("td", {className: "notes"}, 
           React.createElement("span", {className: "grey-text", id: notesId, "data-inputclass": "input-sm", "data-type": "textarea"}, this.props.item.desc)
