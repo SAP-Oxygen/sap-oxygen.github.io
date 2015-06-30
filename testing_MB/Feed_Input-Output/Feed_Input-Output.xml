@@ -1,0 +1,43 @@
+<Module specificationVersion='2'>
+  <ModulePrefs title="Bullet List">
+    <Require feature="dynamic-height"/>
+    <Require feature="wave"/>
+    <Require feature="osapi"/>
+    <Locale lang="all">
+      <msg name="addItem">#{obj:actor} added &lt;b&gt;the item '#{obj:object}'&lt;/b&gt; to the bullet list #{obj:target}</msg>
+      <msg name="addItemContent"><![CDATA[
+        <div style='border: 1px solid #DDD; padding: 10px'>
+          <table>
+            <tr>
+              <td valign='middle'>
+                <div style='font-size: 30px; margin-right: 10px'>
+                  <span class="sap-icon icon-example"></span>
+                </div>
+              </td>
+              <td valign='middle'>
+                <table>
+                  <tr>
+                    <td style='white-space: nowrap; padding-right: 10px' valign='top'>#{itemLabel}</td>
+                    <td><span style='font-weight: bold'>#{obj:object}</span></td>
+                  </tr>
+                  <tr>
+                    <td style='white-space: nowrap; padding-right: 10px' valign='top'>#{userAgentLabel}</td>
+                    <td>#{obj:object.attachments.1}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+      ]]></msg>
+      <msg name="itemLabel">The item is:</msg>
+      <msg name="userAgentLabel">User agent:</msg>
+    </Locale>
+    <Locale lang="zh-TW">
+      <msg name="addItem">#{obj:actor} 把「#{obj:object}」加入到 #{obj:target} 列表裡</msg>
+      <msg name="itemLabel">項目:</msg>
+      <msg name="userAgentLabel">瀏覽器:</msg>
+    </Locale>
+  </ModulePrefs>
+  <Content type="html" href="Feed_Input-Output.html"/>
+</Module>
