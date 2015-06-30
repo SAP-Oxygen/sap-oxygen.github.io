@@ -23,6 +23,7 @@ var Agenda = React.createClass({
   componentDidMount: function() {
     var self = this;
     var onWaveUpdate = function() {
+      console.log("onWaveUpdate");
       var waveData = {};
       var waveState = wave.getState();
 
@@ -40,7 +41,12 @@ var Agenda = React.createClass({
     this.setState({
       startTime: newTime
     });
+    console.log("changed startTime: ");
     console.log(this.state.startTime);
+    var time = {};
+    time[startTime] = newTime;
+    wave.getState().submitDelta(newTime);
+    console.log("sent startTime to wave");
   },
   handleSort: function(newOrder) {
     var newItems = newOrder.map(function(index) {
