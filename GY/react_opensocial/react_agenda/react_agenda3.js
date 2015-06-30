@@ -25,16 +25,18 @@ var Agenda = React.createClass({displayName: "Agenda",
     var self = this;
     var onWaveUpdate = function() {
       console.log("onWaveUpdate");
-      var waveData = {};
       var waveState = wave.getState();
+      var waveData = waveState.state_;
 
-      self.setState({
-        items: waveData.items,
-        startTime: waveData.startTime,
-        nextId: waveData.nextId,
-        counter: waveData.counter
-      });
-    }
+      if (!waveState) {
+        self.setState({
+          items: waveData.items,
+          startTime: waveData.startTime,
+          nextId: waveData.nextId,
+          counter: waveData.counter
+        });
+      }
+    };
 
     wave.setStateCallback(onWaveUpdate);
   },
