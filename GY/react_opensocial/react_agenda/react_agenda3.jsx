@@ -367,8 +367,8 @@ var DatePicker = React.createClass({
           debug: true
         });
     });
-    $('#timepicker').on("dp.change", function (e) {
-      var newTime = $('#timepicker').data("DateTimePicker").viewDate();
+    $('#datepicker').on("dp.change", function (e) {
+      var newTime = $('#datepicker').data("DateTimePicker").viewDate();
       self.onTimeChange(newTime);
     });
     // $('#datepicker').on("dp.show", function (e) {
