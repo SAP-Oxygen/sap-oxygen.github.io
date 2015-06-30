@@ -1,5 +1,5 @@
 <Module specificationVersion='2'>
-  <ModulePrefs title="Bullet List">
+  <ModulePrefs title="Feed_Input-Output">
     <Require feature="dynamic-height"/>
     <Require feature="wave"/>
     <Require feature="osapi"/>
