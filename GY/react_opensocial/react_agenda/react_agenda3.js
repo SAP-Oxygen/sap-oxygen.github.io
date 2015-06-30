@@ -357,6 +357,7 @@ var AddButton = React.createClass({displayName: "AddButton",
 var DatePicker = React.createClass({displayName: "DatePicker",
   componentDidMount: function() {
     var self = this;
+    var startTime = this.props.startTime;
     // Datepicker
     $(function () {
         $('#datepicker').datetimepicker({
@@ -365,7 +366,6 @@ var DatePicker = React.createClass({displayName: "DatePicker",
           showTodayButton: true,
           allowInputToggle: true,
           toolbarPlacement: 'bottom',
-          defaultDate: self.props.startTime,
           debug: true
         });
     });
@@ -376,6 +376,9 @@ var DatePicker = React.createClass({displayName: "DatePicker",
     $('#datepicker').on("dp.show", function (e) {
       $('#timepicker').data("DateTimePicker").hide();
     });
+    if (startTime) {
+      $('#datepicker').data("DateTimePicker").defaultDate(startTime);
+    }
   },
   onTimeChange: function(time) {
     this.props.onTimeChange(time);
