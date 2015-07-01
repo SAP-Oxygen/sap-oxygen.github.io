@@ -15,7 +15,7 @@ var Agenda = React.createClass({displayName: "Agenda",
     // }
     debugger;
     return {
-      items: [{id: 0, topic: "", desc: "",time: 0, ownder: ""}],
+      items: [],
       startTime: moment().clone(),
       counter: 1
     } 
@@ -24,16 +24,18 @@ var Agenda = React.createClass({displayName: "Agenda",
     var self = this;
     var onWaveUpdate = function() {
       console.log("onWaveUpdate");
-      // var waveState = wave.getState();
-      // var waveData = waveState.state_;
+      var waveState = wave.getState();
+      var waveData = waveState.state_;
 
-      // if (!$.isEmptyObject(waveData)) {
-      //   self.setState({
-      //     items: waveData.items,
-      //     startTime: waveData.startTime,
-      //     counter: waveData.counter
-      //   });
-      // }
+      if ($.isEmptyObject(waveData)) {
+        this.handleAdd();
+      } else {
+        self.setState({
+          items: waveData.items,
+          startTime: waveData.startTime,
+          counter: waveData.counter
+        });
+      }
     };
 
     wave.setStateCallback(onWaveUpdate);
@@ -65,7 +67,13 @@ var Agenda = React.createClass({displayName: "Agenda",
     this.setState({
       items: newItems,
       counter: newCounter
-    })
+    });
+    console.log("added a topic");
+    console.log(newItems);
+    var waveData = {};
+    waveData['items'] = newItems;
+    wave.getState().submitDelta(newItems);
+    console.log("sent updated items to wave");
   },
   handleRemove: function() {
     // TODO
@@ -160,6 +168,7 @@ var TableBody = React.createClass({displayName: "TableBody",
       var $helper = tr.clone();
       $helper.children().each(function(index) {
         $(this).width($originals.eq(index).width())
+        $(this).height($originals.eq(index).height())
       });
       return $helper;
     };
