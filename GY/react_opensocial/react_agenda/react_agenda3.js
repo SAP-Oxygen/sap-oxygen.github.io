@@ -28,7 +28,7 @@ var Agenda = React.createClass({displayName: "Agenda",
       var waveData = waveState.state_;
 
       if ($.isEmptyObject(waveData)) {
-        this.handleAdd();
+        self.handleAdd();
       } else {
         self.setState({
           items: waveData.items,
