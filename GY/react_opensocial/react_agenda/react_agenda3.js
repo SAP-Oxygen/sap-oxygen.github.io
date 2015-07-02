@@ -81,8 +81,7 @@ var Agenda = React.createClass({displayName: "Agenda",
     });
     console.log("added a topic");
     console.log(newItems);
-    var waveData = {};
-    waveData['items'] = newItems;
+    var waveData = {items: newItems, counter: newCounter};
     wave.getState().submitDelta(waveData);
     console.log("sent updated items to wave");
   },
