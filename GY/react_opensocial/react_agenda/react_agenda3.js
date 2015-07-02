@@ -32,9 +32,11 @@ var Agenda = React.createClass({displayName: "Agenda",
 
       if (!$.isEmptyObject(waveData)) {
         if (waveData.items) {
+          // convert string moment representation to an moment object
+          var startTime = moment(waveData.startTime);
           self.setState({
             items: waveData.items,
-            startTime: waveData.startTime,
+            startTime: startTime,
             counter: waveData.counter
           }); 
         } else {
