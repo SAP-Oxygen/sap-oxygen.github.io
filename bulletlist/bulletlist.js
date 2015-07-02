@@ -4,7 +4,7 @@
     render: function() {
       var self = this;
       return (
-        React.createElement("div", null, 
+        React.createElement("div", {onClick: self.cancelHighlight}, 
           React.createElement("ul", null, 
           
             $.map(this.getAllItems(), function(pair, index) {
@@ -47,7 +47,7 @@
         
         gadgets.sapjam && gadgets.sapjam.navigation.registerObjectNavigationCallback(function(objectId) {
           window.console && console.log("Navigate to: " + objectId);
-          self.setState({highlight: objectId});
+          self.setState({viewState: {highlight: objectId}});
         });
       }, 0);
     },
@@ -91,12 +91,16 @@
       });
     },
     getAllItems: function() {
-      var self = this;
+      var viewState = this.state.viewState;
       return $.map(this.state.data, function(value, key) {
-        return {key: key, value: value, shouldHighlight: (self.state.highlight === key)};
+        return {key: key, value: value, shouldHighlight: (viewState && viewState.highlight === key)};
       }).sort(function(a, b) {
         return a.value.timestamp - b.value.timestamp;
       });
+    },
+    cancelHighlight: function() {
+      this.setState({viewState: {}});
+      gadgets.sapjam && gadgets.sapjam.navigation.clearObjectNavigation();
     }
   });
 
