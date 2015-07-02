@@ -8,7 +8,7 @@
           React.createElement("ul", null, 
           
             $.map(this.getAllItems(), function(pair, index) {
-              return (React.createElement("li", {key: pair.key}, pair.value.text));
+              return (React.createElement("li", {key: pair.key, style: pair.shouldHighlight ? {color: 'blue'} : {}}, pair.value.text));
             })
           
           ), 
@@ -30,6 +30,10 @@
         var newData = {};
         var waveState = wave.getState();
 
+        if (waveState === null) {
+          return;
+        }
+
         $.each(waveState.getKeys(), function(index, key) {
           newData[key] = waveState.get(key);
         });
@@ -37,8 +41,15 @@
         self.setState({data: newData, users: wave.getParticipants()});
       }
 
-      wave.setStateCallback(onWaveUpdate);
-      wave.setParticipantCallback(onWaveUpdate);
+      window.setTimeout(function() {
+        wave.setStateCallback(onWaveUpdate);
+        wave.setParticipantCallback(onWaveUpdate);
+        
+        gadgets.sapjam && gadgets.sapjam.navigation.registerObjectNavigationCallback(function(objectId) {
+          window.console && console.log("Navigate to: " + objectId);
+          self.setState({highlight: objectId});
+        });
+      }, 0);
     },
     componentDidUpdate: function(prevProps, prevState) {
       gadgets.window.adjustHeight();
@@ -69,6 +80,7 @@
           content: "#{addItemContent}",
           object: {
             displayName: newItem,
+            id: newId,
             attachments: [
               {displayName: window.navigator.userAgent}
             ]
@@ -79,8 +91,9 @@
       });
     },
     getAllItems: function() {
+      var self = this;
       return $.map(this.state.data, function(value, key) {
-        return {key: key, value: value};
+        return {key: key, value: value, shouldHighlight: (self.state.highlight === key)};
       }).sort(function(a, b) {
         return a.value.timestamp - b.value.timestamp;
       });
