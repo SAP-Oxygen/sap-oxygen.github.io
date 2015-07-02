@@ -45,7 +45,7 @@
         wave.setStateCallback(onWaveUpdate);
         wave.setParticipantCallback(onWaveUpdate);
         
-        gadgets.sapjam && gadgets.sapjam.navigation.registerNavigateObjectCallback(function(objectId) {
+        gadgets.sapjam && gadgets.sapjam.navigation.registerObjectNavigationCallback(function(objectId) {
           window.console && console.log("Navigate to: " + objectId);
           self.setState({highlight: objectId});
         });
