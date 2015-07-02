@@ -13,10 +13,11 @@ var Agenda = React.createClass({
     // } else {
     //   var startTime = moment();
     // }
+    var startTime = moment();
     debugger;
     return {
       items: [],
-      startTime: moment().clone(),
+      startTime: startTime,
       counter: 1
     } 
   },
