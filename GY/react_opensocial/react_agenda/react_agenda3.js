@@ -79,11 +79,11 @@ var Agenda = React.createClass({displayName: "Agenda",
       items: newItems,
       counter: newCounter
     });
-    console.log("added a topic");
+    console.log("added an item");
     console.log(newItems);
     var waveData = {items: newItems, counter: newCounter};
     wave.getState().submitDelta(waveData);
-    console.log("sent updated items to wave");
+    console.log("sent updated items to wave (add)");
   },
   handleRemove: function() {
     // TODO
@@ -103,6 +103,11 @@ var Agenda = React.createClass({displayName: "Agenda",
       this.setState({
       items: newItems
     });
+    console.log("edited an item");
+    console.log(newItems);
+    var waveData = {items: newItems};
+    wave.getState().submitDelta(waveData);
+    console.log("sent updated items to wave (edit)");
   },
   render: function() {
     return (
