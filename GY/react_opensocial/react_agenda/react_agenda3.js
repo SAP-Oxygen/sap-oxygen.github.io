@@ -24,24 +24,26 @@ var Agenda = React.createClass({displayName: "Agenda",
   },
   componentDidMount: function() {
     var self = this;
+    
     var onWaveUpdate = function() {
       console.log("onWaveUpdate");
       var waveState = wave.getState();
       var waveData = waveState.state_;
 
-      if ($.isEmptyObject(waveData)) {
+      if (!$.isEmptyObject(waveData)) {
+        if (!(waveData.items.length === 0)) {
+          self.setState({
+            items: waveData.items,
+            startTime: waveData.startTime,
+            counter: waveData.counter
+          }); 
+        } else {
+          self.handleAdd();
+        }
+      } else {
         // setup wave
         var newData = {items: self.state.items, startTime: self.state.startTime, counter: self.state.counter};
         waveState.submitDelta(newData);
-      } else if (waveData.items.length === 0) {
-        // add the first item by default
-        self.handleAdd();
-      } else {
-        self.setState({
-          items: waveData.items,
-          startTime: waveData.startTime,
-          counter: waveData.counter
-        });
       }
     };
 
