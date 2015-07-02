@@ -37,13 +37,15 @@
         self.setState({data: newData, users: wave.getParticipants()});
       }
 
-      wave.setStateCallback(onWaveUpdate);
-      wave.setParticipantCallback(onWaveUpdate);
-
-      gadgets.sapjam && gadgets.sapjam.navigation.registerNavigateObjectCallback(function(objectId) {
-        window.console && console.log("Navigate to: " + objectId);
-        self.setState({highlight: objectId});
-      });
+      window.setTimeout(function() {
+        wave.setStateCallback(onWaveUpdate);
+        wave.setParticipantCallback(onWaveUpdate);
+        
+        gadgets.sapjam && gadgets.sapjam.navigation.registerNavigateObjectCallback(function(objectId) {
+          window.console && console.log("Navigate to: " + objectId);
+          self.setState({highlight: objectId});
+        });
+      }, 0);
     },
     componentDidUpdate: function(prevProps, prevState) {
       gadgets.window.adjustHeight();
