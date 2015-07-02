@@ -31,7 +31,7 @@ var Agenda = React.createClass({
 
       if ($.isEmptyObject(waveData)) {
         // setup wave
-        var newData = {items: this.state.items, startTime: this.state.startTime, counter: this.state.counter};
+        var newData = {items: self.state.items, startTime: self.state.startTime, counter: self.state.counter};
         waveState.submitDelta(newData);
       } else if (waveData.items.length === 0) {
         // add the first item by default
