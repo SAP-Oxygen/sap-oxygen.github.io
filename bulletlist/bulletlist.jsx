@@ -85,7 +85,7 @@
     },
     getAllItems: function() {
       return $.map(this.state.data, function(value, key) {
-        return {key: key, value: value, shouldHighlight: (this.state.highlight === key)};
+        return {key: key, value: value, shouldHighlight: (this.state && this.state.highlight === key)};
       }).sort(function(a, b) {
         return a.value.timestamp - b.value.timestamp;
       });
