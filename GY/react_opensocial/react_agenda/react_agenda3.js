@@ -31,7 +31,7 @@ var Agenda = React.createClass({displayName: "Agenda",
       var waveData = waveState.state_;
 
       if (!$.isEmptyObject(waveData)) {
-        if (!waveData.items) {
+        if (waveData.items) {
           self.setState({
             items: waveData.items,
             startTime: waveData.startTime,
