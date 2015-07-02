@@ -8,7 +8,7 @@
           React.createElement("ul", null, 
           
             $.map(this.getAllItems(), function(pair, index) {
-              return (React.createElement("li", {key: pair.key, style: pair.shouldHighlight ? 'color: blue' : ''}, pair.value.text));
+              return (React.createElement("li", {key: pair.key, style: pair.shouldHighlight ? {color: 'blue'} : {}}, pair.value.text));
             })
           
           ), 

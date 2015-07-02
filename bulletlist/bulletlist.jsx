@@ -8,7 +8,7 @@
           <ul>
           {
             $.map(this.getAllItems(), function(pair, index) {
-              return (<li key={pair.key} style={pair.shouldHighlight ? 'color: blue' : ''}>{pair.value.text}</li>);
+              return (<li key={pair.key} style={pair.shouldHighlight ? {color: 'blue'} : {}}>{pair.value.text}</li>);
             })
           }
           </ul>
