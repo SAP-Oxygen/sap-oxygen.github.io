@@ -100,6 +100,7 @@
     },
     cancelHighlight: function() {
       this.setState({viewState: {}});
+      gadgets.sapjam && gadgets.sapjam.navigation.clearObjectNavigation();
     }
   });
 
