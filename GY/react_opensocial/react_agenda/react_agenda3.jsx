@@ -14,11 +14,12 @@ var Agenda = React.createClass({
     //   var startTime = moment();
     // }
     var startTime = moment();
+    var counter = 0;
     debugger;
     return {
       items: [],
       startTime: startTime,
-      counter: 1
+      counter: counter
     } 
   },
   componentDidMount: function() {
@@ -29,6 +30,10 @@ var Agenda = React.createClass({
       var waveData = waveState.state_;
 
       if ($.isEmptyObject(waveData)) {
+        // setup wave
+        var newData = {items: this.state.items, startTime: this.state.startTime, counter: this.state.counter};
+      } else if (waveData.items.length === 0) {
+        // add the first item by default
         self.handleAdd();
       } else {
         self.setState({
