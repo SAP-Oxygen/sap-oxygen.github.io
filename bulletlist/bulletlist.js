@@ -8,7 +8,7 @@
           React.createElement("ul", null, 
           
             $.map(this.getAllItems(), function(pair, index) {
-              return (React.createElement("li", {key: pair.key}, pair.value.text));
+              return (React.createElement("li", {key: pair.key, style: pair.shouldHighlight ? 'color: blue' : ''}, pair.value.text));
             })
           
           ), 
@@ -39,6 +39,10 @@
 
       wave.setStateCallback(onWaveUpdate);
       wave.setParticipantCallback(onWaveUpdate);
+
+      gadgets.sapjam && gadgets.sapjam.navigation.registerNavigateObjectCallback(function(objectId) {
+        self.setState({highlight: objectId});
+      });
     },
     componentDidUpdate: function(prevProps, prevState) {
       gadgets.window.adjustHeight();
@@ -69,6 +73,7 @@
           content: "#{addItemContent}",
           object: {
             displayName: newItem,
+            id: randomId,
             attachments: [
               {displayName: window.navigator.userAgent}
             ]
@@ -80,7 +85,7 @@
     },
     getAllItems: function() {
       return $.map(this.state.data, function(value, key) {
-        return {key: key, value: value};
+        return {key: key, value: value, shouldHighlight: (this.state.highlight === key)};
       }).sort(function(a, b) {
         return a.value.timestamp - b.value.timestamp;
       });
