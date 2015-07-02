@@ -62,8 +62,8 @@ var Agenda = React.createClass({
     console.log(this.state.items);
   },
   handleAdd: function() {
-    var newItems = this.state.items.concat([{id: this.state.counter, topic: "", desc: "",time: 0, ownder: ""}]);
-    var newCounter = ++this.state.counter;
+    var newItems = this.state.items.concat([{id: this.state.counter, topic: "", desc: "",time: 0, owner: ""}]);
+    var newCounter = this.state.counter + 1;
     this.setState({
       items: newItems,
       counter: newCounter
@@ -72,7 +72,7 @@ var Agenda = React.createClass({
     console.log(newItems);
     var waveData = {};
     waveData['items'] = newItems;
-    wave.getState().submitDelta(newItems);
+    wave.getState().submitDelta(waveData);
     console.log("sent updated items to wave");
   },
   handleRemove: function() {
