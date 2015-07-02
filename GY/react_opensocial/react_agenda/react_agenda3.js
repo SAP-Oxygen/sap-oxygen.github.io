@@ -24,14 +24,14 @@ var Agenda = React.createClass({displayName: "Agenda",
   },
   componentDidMount: function() {
     var self = this;
-    
+
     var onWaveUpdate = function() {
       console.log("onWaveUpdate");
       var waveState = wave.getState();
       var waveData = waveState.state_;
 
       if (!$.isEmptyObject(waveData)) {
-        if (!(waveData.items.length === 0)) {
+        if (!waveData.items) {
           self.setState({
             items: waveData.items,
             startTime: waveData.startTime,
