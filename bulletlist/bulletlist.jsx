@@ -80,7 +80,7 @@
           content: "#{addItemContent}",
           object: {
             displayName: newItem,
-            id: randomId,
+            id: newId,
             attachments: [
               {displayName: window.navigator.userAgent}
             ]
@@ -91,8 +91,9 @@
       });
     },
     getAllItems: function() {
+      var self = this;
       return $.map(this.state.data, function(value, key) {
-        return {key: key, value: value, shouldHighlight: (this.state && this.state.highlight === key)};
+        return {key: key, value: value, shouldHighlight: (self.state.highlight === key)};
       }).sort(function(a, b) {
         return a.value.timestamp - b.value.timestamp;
       });
