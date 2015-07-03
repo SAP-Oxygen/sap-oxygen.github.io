@@ -345,8 +345,9 @@ var RowItem = React.createClass({
         return d.promise();
       },
       source: self.props.people,
-      emptytext: 'select a presenter',
+      // emptytext: 'select a presenter',
       select2: {
+        placeholder: 'select a presenter'
       },
       showbuttons: false
     });
