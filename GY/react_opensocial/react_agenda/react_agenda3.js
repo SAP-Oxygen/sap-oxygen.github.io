@@ -68,7 +68,7 @@ var Agenda = React.createClass({displayName: "Agenda",
           people.push({id: val.id_, text: val.displayName_});
         });
         self.setState({
-          people: participants
+          people: people
         });
         console.log("updated people");
         console.log(participants);
