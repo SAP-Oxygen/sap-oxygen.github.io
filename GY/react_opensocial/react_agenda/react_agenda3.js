@@ -71,8 +71,8 @@ var Agenda = React.createClass({displayName: "Agenda",
         self.setState({
           people: participants
         });
-        concole.log("updated people");
-        concole.log(participants);
+        console.log("updated people");
+        console.log(participants);
       } else {
         return;
       }
