@@ -147,7 +147,7 @@ var Agenda = React.createClass({
         <Row>
         </Row>
         <br />
-        <AgendaTable items={this.state.items} startTime={this.state.startTime} people={this.state.people} onSort={this.handleSort} onEdit={this.handleEdit} />
+        <AgendaTable items={this.state.items} startTime={this.state.startTime} people={this.props.data.people} onSort={this.handleSort} onEdit={this.handleEdit} />
         <AddButton onAdd={this.handleAdd} />
       </Grid>
     );

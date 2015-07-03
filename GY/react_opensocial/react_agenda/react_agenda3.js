@@ -147,7 +147,7 @@ var Agenda = React.createClass({displayName: "Agenda",
         React.createElement(Row, null
         ), 
         React.createElement("br", null), 
-        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, people: this.state.people, onSort: this.handleSort, onEdit: this.handleEdit}), 
+        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, people: this.props.data.people, onSort: this.handleSort, onEdit: this.handleEdit}), 
         React.createElement(AddButton, {onAdd: this.handleAdd})
       )
     );
