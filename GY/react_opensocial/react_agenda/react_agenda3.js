@@ -345,6 +345,7 @@ var RowItem = React.createClass({displayName: "RowItem",
         return d.promise();
       },
       source: self.props.people,
+      placeholder: 'select a presenter',
       select2: {
       },
       showbuttons: false
@@ -383,7 +384,7 @@ var RowItem = React.createClass({displayName: "RowItem",
           React.createElement("span", {className: "topic", id: topicId, "data-inputclass": "input-sm", "data-type": "text"}, this.props.item.topic)
         ), 
         React.createElement("td", {className: "link-text"}, 
-          React.createElement("span", {className: "owner", id: ownerId, "data-inputclass": "input-owner", "data-type": "select2", "data-value": "1"})
+          React.createElement("span", {className: "owner", id: ownerId, "data-inputclass": "input-owner", "data-type": "select2"})
         ), 
         React.createElement("td", {className: "notes"}, 
           React.createElement("span", {className: "grey-text", id: notesId, "data-inputclass": "input-sm", "data-type": "textarea"}, this.props.item.desc)
