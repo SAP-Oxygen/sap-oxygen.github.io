@@ -49,7 +49,12 @@ var Agenda = React.createClass({
       }
     };
 
+    var onWaveParticipant = function() {
+      debugger;
+    };
+
     wave.setStateCallback(onWaveUpdate);
+    wave.setParticipantCallback(onWaveParticipant);
   },
   handleTimeChange: function(newTime) {
     this.setState({
