@@ -384,7 +384,7 @@ var RowItem = React.createClass({
           <span className="topic" id={topicId} data-inputclass="input-sm" data-type="text">{this.props.item.topic}</span>
         </td>
         <td className="link-text">
-          <span className="owner" id={ownerId} data-inputclass="input-owner" data-type="select2">{this.props.item.owner}</span>
+          <span className="owner" id={ownerId} data-inputclass="input-owner" data-value={this.props.item.owner} data-type="select2"></span>
         </td>
         <td className="notes">
           <span className="grey-text" id={notesId} data-inputclass="input-sm" data-type="textarea">{this.props.item.desc}</span>
