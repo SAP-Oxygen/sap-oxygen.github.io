@@ -388,10 +388,10 @@ var RowItem = React.createClass({displayName: "RowItem",
           React.createElement("span", {className: "grey-text", id: timeId, "data-inputclass": "time-input input-sm", "data-type": "text"}, this.props.item.time), " min"
         ), 
         React.createElement("td", null, 
-          thumbnail, React.createElement("span", {className: "topic", id: topicId, "data-inputclass": "input-sm", "data-type": "text"}, this.props.item.topic)
+          React.createElement("span", {className: "topic", id: topicId, "data-inputclass": "input-sm", "data-type": "text"}, this.props.item.topic)
         ), 
         React.createElement("td", {className: "link-text"}, 
-          React.createElement("span", {className: "owner", id: ownerId, "data-inputclass": "input-owner", "data-value": this.props.item.owner, "data-type": "select2"})
+          thumbnail, " ", React.createElement("span", {className: "owner", id: ownerId, "data-inputclass": "input-owner", "data-value": this.props.item.owner, "data-type": "select2"})
         ), 
         React.createElement("td", {className: "notes"}, 
           React.createElement("span", {className: "grey-text", id: notesId, "data-inputclass": "input-sm", "data-type": "textarea"}, this.props.item.desc)
