@@ -6,6 +6,16 @@ var Row = ReactBootstrap.Row;
 var Col = ReactBootstrap.Col;
 var Glyphicon = ReactBootstrap.Glyphicon;
 
+function rename(obj, oldName, newName) {
+    if(!obj.hasOwnProperty(oldName)) {
+        return false;
+    }
+
+    obj[newName] = obj[oldName];
+    delete obj[oldName];
+    return true;
+}
+
 var Agenda = React.createClass({displayName: "Agenda",
   getInitialState: function() {
     // if (this.props.data.startTime) {
@@ -18,7 +28,8 @@ var Agenda = React.createClass({displayName: "Agenda",
     return {
       items: [],
       startTime: startTime,
-      counter: counter
+      counter: counter,
+      people: []
     } 
   },
   componentDidMount: function() {
@@ -50,7 +61,21 @@ var Agenda = React.createClass({displayName: "Agenda",
     };
 
     var onWaveParticipant = function() {
-      debugger;
+      if (wave.getViewer()) {
+        var participants = wave.getParticipants();
+        participants.map(function(val, i, arr) {
+          val['text'] = val['displayName_'];
+          delete val['displayName_'];
+          return val;
+        });
+        self.setState({
+          people: participants
+        });
+        concole.log("updated people");
+        concole.log(participants);
+      } else {
+        return;
+      }
     };
 
     wave.setStateCallback(onWaveUpdate);
@@ -121,7 +146,7 @@ var Agenda = React.createClass({displayName: "Agenda",
         React.createElement(Row, null
         ), 
         React.createElement("br", null), 
-        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, people: this.props.data.people, onSort: this.handleSort, onEdit: this.handleEdit}), 
+        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, people: this.state.people, onSort: this.handleSort, onEdit: this.handleEdit}), 
         React.createElement(AddButton, {onAdd: this.handleAdd})
       )
     );
