@@ -62,14 +62,13 @@ var Agenda = React.createClass({
 
     var onWaveParticipant = function() {
       if (wave.getViewer()) {
+        var people = [];  
         var participants = wave.getParticipants();
-        participants.map(function(val, i, arr) {
-          val['text'] = val['displayName_'];
-          delete val['displayName_'];
-          return val;
+        participants.forEach(function(val, i, arr) {
+          people.push({id: val.id, text: val.displayName_});
         });
         self.setState({
-          people: participants
+          people: people
         });
         console.log("updated people");
         console.log(participants);
@@ -147,7 +146,7 @@ var Agenda = React.createClass({
         <Row>
         </Row>
         <br />
-        <AgendaTable items={this.state.items} startTime={this.state.startTime} people={this.props.data.people} onSort={this.handleSort} onEdit={this.handleEdit} />
+        <AgendaTable items={this.state.items} startTime={this.state.startTime} people={this.state.people} onSort={this.handleSort} onEdit={this.handleEdit} />
         <AddButton onAdd={this.handleAdd} />
       </Grid>
     );
@@ -346,11 +345,10 @@ var RowItem = React.createClass({
         return d.promise();
       },
       source: self.props.people,
-      // emptytext: 'select a presenter',
+      emptytext: 'select a presenter',
       select2: {
         multiple: true,
-        maximumSelectionLength: 1,
-        placeholder: 'select a presenter'
+        maximumSelectionSize: 1,
       },
       showbuttons: false
     });
