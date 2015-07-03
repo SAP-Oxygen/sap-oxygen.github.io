@@ -119,6 +119,7 @@ var Agenda = React.createClass({displayName: "Agenda",
     // TODO
   },
   handleEdit: function(index, type, value) {
+    debugger;
     var newItems = this.state.items.slice();
     newItem = newItems[index];
     if (type === 'topic') {
@@ -385,7 +386,7 @@ var RowItem = React.createClass({displayName: "RowItem",
           React.createElement("span", {className: "topic", id: topicId, "data-inputclass": "input-sm", "data-type": "text"}, this.props.item.topic)
         ), 
         React.createElement("td", {className: "link-text"}, 
-          React.createElement("span", {className: "owner", id: ownerId, "data-inputclass": "input-owner", "data-value": this.props.item.owner, "data-type": "select2"})
+          React.createElement("span", {className: "owner", id: ownerId, "data-inputclass": "input-owner", "data-value": this.props.people[0], "data-type": "select2"})
         ), 
         React.createElement("td", {className: "notes"}, 
           React.createElement("span", {className: "grey-text", id: notesId, "data-inputclass": "input-sm", "data-type": "textarea"}, this.props.item.desc)
