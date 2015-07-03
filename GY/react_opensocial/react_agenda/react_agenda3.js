@@ -65,10 +65,10 @@ var Agenda = React.createClass({displayName: "Agenda",
         var people = [];  
         var participants = wave.getParticipants();
         participants.forEach(function(val, i, arr) {
-          people.push({id: val.id, text: val.displayName_});
+          people.push({id: val.id_, text: val.displayName_});
         });
         self.setState({
-          people: people
+          people: participants
         });
         console.log("updated people");
         console.log(participants);
@@ -146,7 +146,7 @@ var Agenda = React.createClass({displayName: "Agenda",
         React.createElement(Row, null
         ), 
         React.createElement("br", null), 
-        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, people: this.state.people, onSort: this.handleSort, onEdit: this.handleEdit}), 
+        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, people: this.props.data.people, onSort: this.handleSort, onEdit: this.handleEdit}), 
         React.createElement(AddButton, {onAdd: this.handleAdd})
       )
     );
