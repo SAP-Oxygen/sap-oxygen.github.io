@@ -2,10 +2,10 @@
 <html>
 <body>
 
-<button onclick="blank_WINDOW()">Google Maps - _blank</button>
-<button onclick="myFunction()">Google Maps - _parent</button>
-<button onclick="myFunction()">Google Maps - _self</button>
-<button onclick="myFunction()">Google Maps - _top</button>
+<p><button onclick="blank_WINDOW()">Google Maps - _blank</button></p>
+<p><button onclick="parent_WINDOW()">Google Maps - _parent</button></p>
+<p><button onclick="self_WINDOW()">Google Maps - _self</button></p>
+<p><button onclick="top_WINDOW()">Google Maps - _top</button></p>
 
 
 
@@ -16,15 +16,15 @@ function blank_WINDOW() {
     window.open(theURL,"_blank");
 }
 
-function blank_WINDOW() {
+function parent_WINDOW() {
     window.open(theURL,"_parent");
 }
 
-function blank_WINDOW() {
+function self_WINDOW() {
     window.open(theURL,"_self");
 }
 
-function blank_WINDOW() {
+function top_WINDOW() {
     window.open(theURL,"_top");
 }
 
