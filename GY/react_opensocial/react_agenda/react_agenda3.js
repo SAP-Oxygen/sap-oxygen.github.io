@@ -372,6 +372,11 @@ var RowItem = React.createClass({displayName: "RowItem",
     var notesId = "notes-" + index;
     var timeId = "time-" + index;
     var ownerId = "owner-" + index;
+    var thumbnail;
+    if (this.props.item.owner) {
+      var imgUrl = wave.getParticipantById(this.props.item.owner).thumbnailUrl_;
+      thumbnail = React.createElement("img", {className: "img-circle", src: imgUrl});
+    }
     return (
       React.createElement("tr", null, 
         React.createElement("td", {className: "index"}, 
@@ -383,7 +388,7 @@ var RowItem = React.createClass({displayName: "RowItem",
           React.createElement("span", {className: "grey-text", id: timeId, "data-inputclass": "time-input input-sm", "data-type": "text"}, this.props.item.time), " min"
         ), 
         React.createElement("td", null, 
-          React.createElement("span", {className: "topic", id: topicId, "data-inputclass": "input-sm", "data-type": "text"}, this.props.item.topic)
+          thumbnail, React.createElement("span", {className: "topic", id: topicId, "data-inputclass": "input-sm", "data-type": "text"}, this.props.item.topic)
         ), 
         React.createElement("td", {className: "link-text"}, 
           React.createElement("span", {className: "owner", id: ownerId, "data-inputclass": "input-owner", "data-value": this.props.item.owner, "data-type": "select2"})
