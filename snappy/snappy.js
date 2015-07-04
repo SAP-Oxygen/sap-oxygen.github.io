@@ -1,12 +1,12 @@
 function initialize() {
-  var currentPosition = new google.maps.LatLng(42.345573, -71.098326);
+  var startPos = new google.maps.LatLng(42.345573, -71.098326);
   var mapOptions = {
-    center: currentPosition,
+    center: startPos,
     zoom: 14
   };
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   var panoramaOptions = {
-    position: currentPosition
+    position: startPos
   };
   var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
   map.setStreetView(panorama);
@@ -28,6 +28,43 @@ function initialize() {
   });
 
   gadgets.window.adjustHeight();
+
+  var geocoder = new google.maps.Geocoder();
+
+  $('#save-button').click(function() {
+    var comment = $.trim($('#save-comment').val());
+    var pos = map.getCenter();
+    var zoom = map.getZoom();
+    var pov = panorama.getPov();
+   
+    var mapImageURL = "https://maps.googleapis.com/maps/api/staticmap?size=400x200&center=" + pos.toUrlValue() + "&zoom=" + zoom;
+    var streetViewImageURL = "https://maps.googleapis.com/maps/api/streetview?size=400x200&fov=90&location=" + pos.toUrlValue() + "&header=" + pov.heading + "&pitch=" + pov.pitch;
+
+    geocoder.geocode({'latLng': pos}, function(results, status) {
+      var placeName;
+      if (status == google.maps.GeocoderStatus.OK && results[1]) {
+        placeName = results[1].formatted_address;
+      } else {
+        placeName = pos.toString();
+      }
+
+      osapi.activitystreams.create({
+        activity: {
+          title: "#{savePlace}",
+          content: "#{savePlaceContent}",
+          object: {
+            displayName: placeName,
+            id: pos.toString(),
+            attachments: [
+              {displayName: saveComment},
+              {displayName: mapImageURL},
+              {displayName: streetViewImageURL}
+            ]
+          }
+        }
+      }).execute(function (result) {});
+    });
+  });
 }
 
 gadgets.util.registerOnLoadHandler(initialize);

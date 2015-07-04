@@ -3,7 +3,14 @@
     <Require feature="dynamic-height"/>
     <Require feature="osapi"/>
     <Locale lang="all">
-      <msg name="searchHint">Enter a place or address</msg>
+      <msg name="savePlace">#{obj:actor} saved the place '#{obj:object}' from #{obj:target}</msg>
+      <msg name="savePlaceContent"><![CDATA[
+      	<div>
+      	<div>#{obj:object.attachments.1}</div>
+      	<div><img src="#{obj:object.attachments.2}"></div>
+      	<div><img src="#{obj:object.attachments.3}"></div>
+        </div>
+      ]]></msg>
     </Locale>
   </ModulePrefs>
   <Content type="html" href="snappy.html"/>
