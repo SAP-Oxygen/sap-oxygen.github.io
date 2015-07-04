@@ -27,7 +27,7 @@ function initialize() {
 
     var pos = places[0].geometry.location;
     map.setCenter(pos);
-    map.setStreetView(panorama);
+    panorama.setPosition(pos);
   });
 
   gadgets.window.adjustHeight();
