@@ -3,7 +3,7 @@
     <Require feature="dynamic-height"/>
     <Require feature="osapi"/>
     <Locale lang="all">
-      <msg name="savePlace">#{obj:actor} saved the place '#{obj:object}' from #{obj:target}</msg>
+      <msg name="savePlace">#{obj:actor} saved a place around #{obj:object} from #{obj:target}</msg>
       <msg name="savePlaceContent"><![CDATA[
       	<div>
       	<div>#{obj:object.attachments.1}</div>
