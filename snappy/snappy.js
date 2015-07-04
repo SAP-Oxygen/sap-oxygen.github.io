@@ -17,4 +17,4 @@ function initialize() {
   map.setStreetView(panorama);
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+gadgets.util.registerOnLoadHandler(initialize);
