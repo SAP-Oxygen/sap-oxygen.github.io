@@ -1,0 +1,9 @@
+<Module specificationVersion='2'>
+  <ModulePrefs title="Snappy">
+    <Require feature="dynamic-height"/>
+    <Require feature="osapi"/>
+    <Locale lang="all">
+    </Locale>
+  </ModulePrefs>
+  <Content type="html" href="snappy.html"/>
+</Module>
