@@ -56,7 +56,7 @@ function initialize() {
             displayName: placeName,
             id: pos.toString(),
             attachments: [
-              {displayName: saveComment},
+              {displayName: comment},
               {displayName: mapImageURL},
               {displayName: streetViewImageURL}
             ]
