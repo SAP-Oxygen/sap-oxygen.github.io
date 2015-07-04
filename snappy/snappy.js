@@ -29,6 +29,17 @@ function initialize() {
 
   gadgets.window.adjustHeight();
 
+  gadgets.sapjam && gadgets.sapjam.navigation.registerObjectNavigationHandler(function(objectId) {
+    window.console && console.log("Navigate to: " + objectId);
+    var info = gadgets.json.parse(objectId);
+
+    if (info && info.lat && info.lng && info.heading && info.pitch) {
+      map.setCenter(info);
+      panorama.setPosition(info);
+      panorama.setPov(info);
+    }
+  });
+
   var geocoder = new google.maps.Geocoder();
 
   $('#save-button').click(function() {
@@ -38,7 +49,7 @@ function initialize() {
     var pos = panorama.getPosition();
     var zoom = map.getZoom();
     var pov = panorama.getPov();
-   
+
     var mapImageURL = "https://maps.googleapis.com/maps/api/staticmap?size=400x200&markers=color:green|" + pos.toUrlValue() + "&center=" + pos.toUrlValue() + "&zoom=" + zoom;
     var streetViewImageURL = "https://maps.googleapis.com/maps/api/streetview?size=400x200&fov=90&location=" + pos.toUrlValue() + "&heading=" + pov.heading + "&pitch=" + pov.pitch;
 
@@ -50,13 +61,15 @@ function initialize() {
         placeName = pos.toString();
       }
 
+      var objectId = gadgets.json.stringify({lat: pos.lat(), lng: pos.lng(), heading: pov.heading, pitch: pov.pitch});
+
       osapi.activitystreams.create({
         activity: {
           title: "#{savePlace}",
           content: "#{savePlaceContent}",
           object: {
             displayName: placeName,
-            id: pos.toString(),
+            id: objectId,
             attachments: [
               {displayName: comment},
               {displayName: mapImageURL},
