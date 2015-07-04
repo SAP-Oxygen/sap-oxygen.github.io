@@ -38,7 +38,7 @@ function initialize() {
     var pov = panorama.getPov();
    
     var mapImageURL = "https://maps.googleapis.com/maps/api/staticmap?size=400x200&center=" + pos.toUrlValue() + "&zoom=" + zoom;
-    var streetViewImageURL = "https://maps.googleapis.com/maps/api/streetview?size=400x200&fov=90&location=" + pos.toUrlValue() + "&header=" + pov.heading + "&pitch=" + pov.pitch;
+    var streetViewImageURL = "https://maps.googleapis.com/maps/api/streetview?size=400x200&fov=90&location=" + pos.toUrlValue() + "&heading=" + pov.heading + "&pitch=" + pov.pitch;
 
     geocoder.geocode({'latLng': pos}, function(results, status) {
       var placeName;
