@@ -33,6 +33,8 @@ function initialize() {
 
   $('#save-button').click(function() {
     var comment = $.trim($('#save-comment').val());
+    $('#save-comment').val("");
+
     var pos = panorama.getPosition();
     var zoom = map.getZoom();
     var pov = panorama.getPov();
