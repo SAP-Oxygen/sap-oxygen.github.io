@@ -3,6 +3,7 @@
     <Require feature="dynamic-height"/>
     <Require feature="osapi"/>
     <Locale lang="all">
+      <msg name="searchHint">Enter a place or address</msg>
     </Locale>
   </ModulePrefs>
   <Content type="html" href="snappy.html"/>

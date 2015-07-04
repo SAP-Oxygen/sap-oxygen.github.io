@@ -16,6 +16,21 @@ function initialize() {
   var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
   map.setStreetView(panorama);
 
+  var searchBoxElement = document.getElementById('search-box');
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBoxElement);
+  var searchBox = new google.maps.places.SearchBox(searchBoxElement);
+
+  google.maps.event.addListener(searchBox, 'places_changed', function() {
+    var places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+        return;
+    }
+    
+    var pos = places[0].geometry.location;
+    map.setCenter(pos);
+  });
+
   gadgets.window.adjustHeight();
 }
 
