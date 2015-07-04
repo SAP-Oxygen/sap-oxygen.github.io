@@ -6,10 +6,7 @@ function initialize() {
   };
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
   var panoramaOptions = {
-    position: currentPosition,
-    pov: {
-      pitch: 10
-    }
+    position: currentPosition
   };
   var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
   map.setStreetView(panorama);
