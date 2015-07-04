@@ -15,6 +15,8 @@ function initialize() {
   };
   var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
   map.setStreetView(panorama);
+
+  gadgets.window.adjustHeight();
 }
 
 gadgets.util.registerOnLoadHandler(initialize);
