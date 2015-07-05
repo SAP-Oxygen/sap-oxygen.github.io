@@ -36,7 +36,7 @@ function initialize() {
     if (info && info.lat && info.lng && info.heading && info.pitch) {
       map.setCenter(info);
       panorama.setPosition(info);
-      panorama.setPov(info);
+      panorama.setPov({heading: info.heading, pitch: info.pitch});
     }
   });
 
