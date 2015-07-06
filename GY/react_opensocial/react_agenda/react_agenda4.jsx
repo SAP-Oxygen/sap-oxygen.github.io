@@ -51,11 +51,19 @@ var Agenda = React.createClass({
         // convert string moment representation to an moment object
         var startTime = moment(waveData.startTime);
 
-        self.setState({
-          items: items,
-          startTime: startTime,
-          counter: waveData.counter
-        }); 
+        // if the local update has already been made for the items, then do not update the items again
+        if (JSON.stringify(self.state.items) === JSON.stringify(items)) {
+          self.setState({
+            startTime: startTime
+          });
+        } else {
+          self.setState({
+            items: items,
+            startTime: startTime,
+            counter: waveData.counter
+          });      
+        }
+
       } else {
         // setup wave
         var newData = {items: self.state.items, startTime: self.state.startTime, counter: self.state.counter};
