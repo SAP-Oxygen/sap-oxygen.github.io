@@ -42,16 +42,23 @@ var Agenda = React.createClass({displayName: "Agenda",
 
       debugger;
       if (!$.isEmptyObject(waveData)) {
+        // when (items === null) it is supposed to be an empty array
+        if (waveData.items) {
+          var items = waveData.items;
+        } else {
+          var items = [];
+        }
         // convert string moment representation to an moment object
         var startTime = moment(waveData.startTime);
+
         self.setState({
-          items: waveData.items,
+          items: items,
           startTime: startTime,
           counter: waveData.counter
         }); 
       } else {
         // setup wave
-        var newData = {items: JSON.stringify(self.state.items), startTime: self.state.startTime, counter: self.state.counter};
+        var newData = {items: self.state.items, startTime: self.state.startTime, counter: self.state.counter};
         waveState.submitDelta(newData);
       }
     };
