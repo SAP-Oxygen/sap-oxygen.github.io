@@ -282,7 +282,7 @@ var TableBody = React.createClass({
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
-      React.render(<RowItem index={index} item={item} people={this.props.people} onEdit={this.props.onEdit} />, nodes[nodeIndex]);
+      React.render(<RowItem index={index} item={item} people={this.props.people} onEdit={this.props.onEdit} onRemove={this.props.onRemove} />, nodes[nodeIndex]);
       childIndex++;
       nodeIndex++;
       lastItemEndTime.add(item.time, 'm');
