@@ -133,7 +133,6 @@ var Agenda = React.createClass({displayName: "Agenda",
     console.log("sent updated items to wave (remove)");
   },
   handleEdit: function(index, type, value) {
-    debugger;
     var newItems = this.state.items.slice();
     newItem = newItems[index];
     if (type === 'topic') {
