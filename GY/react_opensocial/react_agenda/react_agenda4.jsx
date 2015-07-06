@@ -389,12 +389,11 @@ var RowItem = React.createClass({
         </td>
         <td>
           <span className="topic" id={topicId} data-inputclass="input-sm" data-type="text">{this.props.item.topic}</span>
+          <br />
+          <span className="notes grey-text" id={notesId} data-inputclass="input-sm" data-type="textarea">{this.props.item.desc}</span>
         </td>
         <td className="link-text">
           {thumbnail} <span className="owner" id={ownerId} data-inputclass="input-owner" data-value={this.props.item.owner} data-type="select2"></span>
-        </td>
-        <td className="notes">
-          <span className="grey-text" id={notesId} data-inputclass="input-sm" data-type="textarea">{this.props.item.desc}</span>
         </td>
       </tr>
     );
