@@ -410,7 +410,7 @@ var RowItem = React.createClass({
         </td>
         <td className="link-text">
           {thumbnail} <span className="owner" id={ownerId} data-inputclass="input-owner" data-value={this.props.item.owner} data-type="select2"></span>
-          <Glyphicon className="pull-right" glyph='trash' onClick={this.handleRemove} />
+          <Glyphicon className="pull-right on-hover editable" glyph='trash' onClick={this.handleRemove} />
         </td>
       </tr>
     );
