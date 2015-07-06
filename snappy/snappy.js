@@ -29,7 +29,7 @@ function initialize() {
 
   gadgets.window.adjustHeight();
 
-  windon.setTimeout(function() {
+  window.setTimeout(function() {
     gadgets.sapjam && gadgets.sapjam.navigation.registerObjectNavigationHandler(function(objectId) {
       window.console && console.log("Navigate to: " + objectId);
       var info = gadgets.json.parse(objectId);
