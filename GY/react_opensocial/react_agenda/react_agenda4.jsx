@@ -180,7 +180,6 @@ var AgendaTable = React.createClass({
             <th className='short'>Duration</th>
             <th className='med'>Topic</th>
             <th className='short'>Presenter</th>
-            <th>Notes</th>
           </tr>
         </thead>
         <TableBody startTime={this.props.startTime} people={this.props.people} onSort={this.props.onSort} onEdit={this.props.onEdit} >

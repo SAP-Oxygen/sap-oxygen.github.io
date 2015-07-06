@@ -179,8 +179,7 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
             React.createElement("th", {className: "short"}, "Start Time"), 
             React.createElement("th", {className: "short"}, "Duration"), 
             React.createElement("th", {className: "med"}, "Topic"), 
-            React.createElement("th", {className: "short"}, "Presenter"), 
-            React.createElement("th", null, "Notes")
+            React.createElement("th", {className: "short"}, "Presenter")
           )
         ), 
         React.createElement(TableBody, {startTime: this.props.startTime, people: this.props.people, onSort: this.props.onSort, onEdit: this.props.onEdit}, 
