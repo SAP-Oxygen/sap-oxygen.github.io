@@ -29,16 +29,18 @@ function initialize() {
 
   gadgets.window.adjustHeight();
 
-  gadgets.sapjam && gadgets.sapjam.navigation.registerObjectNavigationHandler(function(objectId) {
-    window.console && console.log("Navigate to: " + objectId);
-    var info = gadgets.json.parse(objectId);
+  windon.setTimeout(function() {
+    gadgets.sapjam && gadgets.sapjam.navigation.registerObjectNavigationHandler(function(objectId) {
+      window.console && console.log("Navigate to: " + objectId);
+      var info = gadgets.json.parse(objectId);
 
-    if (info && info.lat && info.lng && info.heading && info.pitch) {
-      map.setCenter(info);
-      panorama.setPosition(info);
-      panorama.setPov({heading: info.heading, pitch: info.pitch});
-    }
-  });
+      if (info && info.lat && info.lng && info.heading && info.pitch) {
+        map.setCenter(info);
+        panorama.setPosition(info);
+        panorama.setPov({heading: info.heading, pitch: info.pitch});
+      }
+    });
+  }, 1000);
 
   var geocoder = new google.maps.Geocoder();
 
