@@ -7,8 +7,8 @@
       <msg name="savePlaceContent"><![CDATA[
       	<div>
       	<div>#{obj:object.attachments.1}</div>
-      	<div><img src="#{obj:object.attachments.2}"></div>
-      	<div><img src="#{obj:object.attachments.3}"></div>
+      	<div><img style="max-width: 100%; height: auto" src="#{obj:object.attachments.2}"></div>
+      	<div><img style="max-width: 100%; height: auto" src="#{obj:object.attachments.3}"></div>
         </div>
       ]]></msg>
     </Locale>
