@@ -270,7 +270,7 @@ var TableBody = React.createClass({
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
 
-    // gadgets.window.adjustHeight();
+    gadgets.window.adjustHeight();
   },
   componentDidUpdate: function() {
     var childIndex = 0;
@@ -307,7 +307,7 @@ var TableBody = React.createClass({
       nodeIndex++;
     }
 
-    // gadgets.window.adjustHeight();
+    gadgets.window.adjustHeight();
   },
   componentWillUnmount: function() {
     $(this.getDOMNode()).children().get().forEach(function(node) {
