@@ -101,8 +101,11 @@ var Agenda = React.createClass({displayName: "Agenda",
     this.setState({
       items: newItems
     });
-
-    console.log(this.state.items);
+    console.log("sorted items");
+    console.log(newItems);
+    var waveData = {items: newItems};
+    wave.getState().submitDelta(waveData);
+    console.log("sent updated items to wave (sort)");
   },
   handleAdd: function() {
     var newItems = this.state.items.concat([{id: this.state.counter, topic: "", desc: "",time: 0, owner: ""}]);
