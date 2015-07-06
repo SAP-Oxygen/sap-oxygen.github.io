@@ -114,8 +114,17 @@ var Agenda = React.createClass({
     wave.getState().submitDelta(waveData);
     console.log("sent updated items to wave (add)");
   },
-  handleRemove: function() {
-    // TODO
+  handleRemove: function(index) {
+    var newItems = this.state.items
+    newItems.splice(index, 1);
+    this.setState({
+      items: newItems
+    });
+    console.log("removed an item");
+    console.log(newItems);
+    var waveData = {items: newItems};
+    wave.getState().submitDelta(waveData);
+    console.log("sent updated items to wave (remove)");
   },
   handleEdit: function(index, type, value) {
     debugger;
@@ -146,7 +155,7 @@ var Agenda = React.createClass({
         <Row>
         </Row>
         <br />
-        <AgendaTable items={this.state.items} startTime={this.state.startTime} people={this.state.people} onSort={this.handleSort} onEdit={this.handleEdit} />
+        <AgendaTable items={this.state.items} startTime={this.state.startTime} people={this.state.people} onSort={this.handleSort} onEdit={this.handleEdit} onRemove={this.handleRemove} />
         <AddButton onAdd={this.handleAdd} />
       </Grid>
     );
@@ -182,7 +191,7 @@ var AgendaTable = React.createClass({
             <th className='short'>Presenter</th>
           </tr>
         </thead>
-        <TableBody startTime={this.props.startTime} people={this.props.people} onSort={this.props.onSort} onEdit={this.props.onEdit} >
+        <TableBody startTime={this.props.startTime} people={this.props.people} onSort={this.props.onSort} onEdit={this.props.onEdit} onRemove={this.props.onRemove} >
           {items}
         </TableBody>
       </Table>
@@ -244,7 +253,7 @@ var TableBody = React.createClass({
       $(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
       var node = $(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
-      React.render(<RowItem index={index} item={child.props.item} people={this.props.people} onEdit={this.props.onEdit} />, node);
+      React.render(<RowItem index={index} item={child.props.item} people={this.props.people} onEdit={this.props.onEdit} onRemove={this.props.onRemove} />, node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
 
@@ -364,6 +373,9 @@ var RowItem = React.createClass({
       rows: 2
     });
   },
+  handleRemove: function() {
+    this.props.onRemove(this.props.index);
+  },
   render: function() {
     var index = this.props.index;
     var id = index + 1;
@@ -393,6 +405,7 @@ var RowItem = React.createClass({
         </td>
         <td className="link-text">
           {thumbnail} <span className="owner" id={ownerId} data-inputclass="input-owner" data-value={this.props.item.owner} data-type="select2"></span>
+          <Glyphicon className="pull-right" glyph='trash' onClick={this.handleRemove} />
         </td>
       </tr>
     );
