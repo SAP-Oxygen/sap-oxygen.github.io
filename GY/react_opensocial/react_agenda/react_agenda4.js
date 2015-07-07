@@ -8,8 +8,8 @@ var Glyphicon = ReactBootstrap.Glyphicon;
 var initHeight = 400;
 
 var adjustHeight = function() {
-  var dimensions = gadgets.window.getViewportDimensions();
-  if (dimensions.height > initHeight) {
+  var height = $("#grid").height();
+  if (height > initHeight) {
     gadgets.window.adjustHeight();
   }
 };
@@ -160,7 +160,7 @@ var Agenda = React.createClass({displayName: "Agenda",
   },
   render: function() {
     return (
-      React.createElement(Grid, null, 
+      React.createElement(Grid, {id: "grid"}, 
         React.createElement("br", null), 
         React.createElement(Row, null, 
           React.createElement(DateTimePicker, {onTimeChange: this.handleTimeChange})
