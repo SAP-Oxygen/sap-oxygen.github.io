@@ -47,7 +47,6 @@ var Agenda = React.createClass({
       var waveState = wave.getState();
       var waveData = waveState.state_;
 
-      debugger;
       if (!$.isEmptyObject(waveData)) {
         // when (items === null) it is supposed to be an empty array
         if (waveData.items) {
