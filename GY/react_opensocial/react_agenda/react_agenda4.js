@@ -72,8 +72,7 @@ var Agenda = React.createClass({displayName: "Agenda",
 
       } else {
         // setup wave
-        var newData = {items: self.state.items, startTime: self.state.startTime, counter: self.state.counter};
-        waveState.submitDelta(newData);
+        return;
       }
 
       unfreeze();
