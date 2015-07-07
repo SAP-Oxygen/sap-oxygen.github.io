@@ -87,9 +87,8 @@ var Agenda = React.createClass({displayName: "Agenda",
     });
     console.log("changed startTime: ");
     console.log(newTime);
-    var time = {};
-    time['startTime'] = newTime;
-    wave.getState().submitDelta(newTime);
+    var waveData = {startTime: newTime};
+    wave.getState().submitDelta(waveData);
     console.log("sent startTime to wave");
   },
   handleSort: function(newOrder) {
