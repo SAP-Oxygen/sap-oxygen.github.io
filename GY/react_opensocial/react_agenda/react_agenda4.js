@@ -15,12 +15,12 @@ var adjustHeight = function() {
 };
 
 var freeze = function() {
-  var freezed = $("<div id='freezed'></div>");
-  freezed.appendTo('body');
+  // var freezed = $("<div id='freezed'></div>");
+  // freezed.appendTo('body');
 };
 
 var unfreeze = function() {
-  $("#freezed").remove();
+  // $("#freezed").remove();
 };
 
 var Agenda = React.createClass({displayName: "Agenda",
