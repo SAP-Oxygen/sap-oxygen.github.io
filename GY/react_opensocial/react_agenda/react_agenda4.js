@@ -5,6 +5,14 @@ var Grid = ReactBootstrap.Grid;
 var Row = ReactBootstrap.Row;
 var Col = ReactBootstrap.Col;
 var Glyphicon = ReactBootstrap.Glyphicon;
+var initHeight = 400;
+
+var adjustHeight = function() {
+  var dimensions = gadgets.window.getViewportDimensions();
+  if (dimensions.height > initHeight) {
+    gadgets.window.adjustHeight();
+  }
+};
 
 var Agenda = React.createClass({displayName: "Agenda",
   getInitialState: function() {
@@ -260,7 +268,7 @@ var TableBody = React.createClass({displayName: "TableBody",
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
 
-    gadgets.window.adjustHeight();
+    adjustHeight();
   },
   componentDidUpdate: function() {
     var childIndex = 0;
@@ -297,7 +305,7 @@ var TableBody = React.createClass({displayName: "TableBody",
       nodeIndex++;
     }
 
-    gadgets.window.adjustHeight();
+    adjustHeight();
   },
   componentWillUnmount: function() {
     $(this.getDOMNode()).children().get().forEach(function(node) {
