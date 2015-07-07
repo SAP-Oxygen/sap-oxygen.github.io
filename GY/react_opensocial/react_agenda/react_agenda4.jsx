@@ -15,23 +15,12 @@ var adjustHeight = function() {
 };
 
 var freeze = function() {
-  $(document).click(function(e){
-    e.stopPropagation();
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    return false;
-  });
-  $(document).bind('rightclick', function(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    return false;
-  });
+  var freezed = $("<div id='freezed'></div>");
+  freezed.appendTo('body');
 };
 
 var unfreeze = function() {
-  $(document).unbind('click');
-  $(document).unbind('rightclick');
+  $("#freezed").remove();
 };
 
 var Agenda = React.createClass({
