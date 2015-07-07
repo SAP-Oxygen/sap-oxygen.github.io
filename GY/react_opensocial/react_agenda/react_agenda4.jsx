@@ -185,7 +185,7 @@ var AgendaTable = React.createClass({
       return (<tr key={item.id} item={item}></tr>);
     })
     return (
-      <Table responsive>
+      <Table className="agenda-table" responsive >
         <thead>
           <tr>
             <th className='index'>#</th>
@@ -442,7 +442,7 @@ var DateTimePicker = React.createClass({
         });
     });
     $('#datetimepicker').on("dp.change", function (e) {
-      var newTime = $('#datepicker').data("DateTimePicker").viewDate();
+      var newTime = $('#datetimepicker').data("DateTimePicker").viewDate();
       self.onTimeChange(newTime);
     });
     // $('#datepicker').on("dp.show", function (e) {

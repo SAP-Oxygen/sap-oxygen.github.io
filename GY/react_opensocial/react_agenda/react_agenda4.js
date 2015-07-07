@@ -185,7 +185,7 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
       return (React.createElement("tr", {key: item.id, item: item}));
     })
     return (
-      React.createElement(Table, {responsive: true}, 
+      React.createElement(Table, {className: "agenda-table", responsive: true}, 
         React.createElement("thead", null, 
           React.createElement("tr", null, 
             React.createElement("th", {className: "index"}, "#"), 
@@ -442,7 +442,7 @@ var DateTimePicker = React.createClass({displayName: "DateTimePicker",
         });
     });
     $('#datetimepicker').on("dp.change", function (e) {
-      var newTime = $('#datepicker').data("DateTimePicker").viewDate();
+      var newTime = $('#datetimepicker').data("DateTimePicker").viewDate();
       self.onTimeChange(newTime);
     });
     // $('#datepicker').on("dp.show", function (e) {
