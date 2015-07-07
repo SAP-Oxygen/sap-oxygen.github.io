@@ -3,7 +3,7 @@ body {
     overflow-y:hidden;
 }
 
-.freezed {
+#freezed {
     background-color: rgba(1, 1, 1, 0.7);
     bottom: 0;
     left: 0;
