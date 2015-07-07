@@ -19,11 +19,13 @@ var freeze = function() {
     e.stopPropagation();
     e.preventDefault();
     e.stopImmediatePropagation();
+    return false;
   });
   $(document).bind('rightclick', function(e) {
     e.stopPropagation();
     e.preventDefault();
     e.stopImmediatePropagation();
+    return false;
   });
 };
 
