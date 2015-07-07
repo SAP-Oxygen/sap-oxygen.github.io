@@ -6,16 +6,6 @@ var Row = ReactBootstrap.Row;
 var Col = ReactBootstrap.Col;
 var Glyphicon = ReactBootstrap.Glyphicon;
 
-function rename(obj, oldName, newName) {
-    if(!obj.hasOwnProperty(oldName)) {
-        return false;
-    }
-
-    obj[newName] = obj[oldName];
-    delete obj[oldName];
-    return true;
-}
-
 var Agenda = React.createClass({
   getInitialState: function() {
     // if (this.props.data.startTime) {
@@ -166,6 +156,7 @@ var Agenda = React.createClass({
       <Grid>
         <br />
         <Row>
+          <DateTimePicker onTimeChange={this.handleTimeChange} />
         </Row>
         <br />
         <AgendaTable items={this.state.items} startTime={this.state.startTime} people={this.state.people} onSort={this.handleSort} onEdit={this.handleEdit} onRemove={this.handleRemove} />
@@ -432,6 +423,50 @@ var AddButton = React.createClass({
   render: function() {
     return (
       <Button onClick={this.handleAdd}>Add a new Topic</Button>
+    );
+  }
+});
+
+var DateTimePicker = React.createClass({
+  componentDidMount: function() {
+    var self = this;
+    var startTime = this.props.startTime;
+    // Datepicker
+    $(function () {
+        $('#datetimepicker').datetimepicker({
+          showClose: true,
+          allowInputToggle: true,
+          toolbarPlacement: 'bottom',
+          defaultDate: startTime,
+          debug: true
+        });
+    });
+    $('#datetimepicker').on("dp.change", function (e) {
+      var newTime = $('#datepicker').data("DateTimePicker").viewDate();
+      self.onTimeChange(newTime);
+    });
+    // $('#datepicker').on("dp.show", function (e) {
+    //   $('#timepicker').data("DateTimePicker").hide();
+    // });
+    // if (startTime) {
+    //   $('#datepicker').datetimepicker({
+    //     defaultDate: startTime
+    //   });
+    // }
+  },
+  onTimeChange: function(time) {
+    this.props.onTimeChange(time);
+  },
+  render: function() {
+    return (
+      <Col xs={4} id='date'>
+        <div className='input-group date' id='datetimepicker'>
+          <input type='text' className='form-control' />
+          <span className='input-group-addon'>
+            <span className='glyphicon glyphicon-calendar'></span>
+          </span>
+        </div>
+      </Col>
     );
   }
 });
