@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <Module>
-  <ModulePrefs title="Google Maps URL Gadget" width="800" height="600">
+  <ModulePrefs title="Google Maps URL Gadget" width="800" height="640">
         <!--<Require feature="dynamic-height"/>-->
     </ModulePrefs>
     <Content type="html" href="GoogleMaps.html"/>
