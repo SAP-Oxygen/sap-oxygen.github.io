@@ -1,5 +1,7 @@
 <Module specificationVersion='2'>
-  <ModulePrefs title="TG">
+  <ModulePrefs title="TG" width="200">
+    <Require feature="dynamic-height"/>
+    <Require feature="dynamic-width"/>
   </ModulePrefs>
-  <Content type="url" href="https://web.telegram.org/#/im"/>
+  <Content type="html" href="tg.html"/>
 </Module>
