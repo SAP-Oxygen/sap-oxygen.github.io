@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+  <ModulePrefs title="Google Maps Test - Heat Map" width="800" height="600">
+        <!--<Require feature="dynamic-height"/>-->
+    </ModulePrefs>
+    <Content type="html" href="GoogleMapsTest.html"/>
+</Module>
