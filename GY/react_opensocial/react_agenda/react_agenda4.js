@@ -15,6 +15,7 @@ var adjustHeight = function() {
 };
 
 var freeze = function() {
+  // might not be needed if wave response is improved
   // var freezed = $("<div id='freezed'></div>");
   // freezed.appendTo('body');
 };

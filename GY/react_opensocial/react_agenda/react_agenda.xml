@@ -6,4 +6,5 @@
         <Require feature="wave" />
     </ModulePrefs>
   <Content type="html" href="react_agenda4.html" />
+  <Content type="html" href="react_agenda_dialog_box4.html" view="diatlog" />
 </Module >
