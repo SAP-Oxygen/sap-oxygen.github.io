@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+  <ModulePrefs title="SAP URL Gadget" width="800" height="640">
+        <!--<Require feature="dynamic-height"/>-->
+    </ModulePrefs>
+    <Content type="html" href="https://go.sap.com/index.html"/>
+</Module>
