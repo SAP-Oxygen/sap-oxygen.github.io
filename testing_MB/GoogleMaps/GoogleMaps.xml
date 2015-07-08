@@ -3,5 +3,5 @@
   <ModulePrefs title="Google Maps URL Gadget" width="800" height="640">
         <!--<Require feature="dynamic-height"/>-->
     </ModulePrefs>
-    <Content type="html" href="GoogleMaps.html"/>
+    <Content type="url" href="GoogleMaps.html"/>
 </Module>
