@@ -5,5 +5,6 @@
         <Require feature="dynamic-height" />
         <Require feature="wave" />
     </ModulePrefs>
-  <Content type="html" href="react_agenda4.html" />
+  <Content type="html" href="react_agenda5.html" />
+  <Content type="html" href="react_agenda_dialog_box5.html" view="diatlog" />
 </Module >

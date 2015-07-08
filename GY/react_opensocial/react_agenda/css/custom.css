@@ -1,13 +1,23 @@
 body {
     font-family: Arial;
+    overflow-y:hidden;
 }
 
-table {
+#freezed {
+    background-color: rgba(1, 1, 1, 0.7);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.agenda-table table {
     border-collapse: collapse;
     font-size: 10pt;
 }
 
-th {
+.agenda-table th {
     padding: 10px;
     background-color: #F2F2F2;
     text-align: left;
@@ -29,7 +39,7 @@ th {
     color: #666;
 }
 
-td {
+.agenda-table td {
     padding: 12px;
     border-bottom: 1px dotted #999;
 }
@@ -42,12 +52,12 @@ td {
     color: #666;
 }
 
-tbody tr{
+.agenda-table tbody tr{
     background-color: white;
     height: 62px;
 }
 
-tbody tr:hover {
+.agenda-table tbody tr:hover {
     background-color: #F5FCFF;
     cursor: move;
     cursor: grab;
@@ -55,22 +65,22 @@ tbody tr:hover {
     cursor: -moz-grab;
 }
 
-tbody tr:active {
+.agenda-table tbody tr:active {
     background-color: #F5FCFF;
     cursor: grabbing;
     cursor: -webkit-grabbing; 
     cursor: -moz-grabbing;
 }
 
-tbody tr:hover .on-hover, tr:active .on-hover {
+.agenda-table tbody tr:hover .on-hover, tr:active .on-hover {
     display: block;
 }
 
-tbody tr:hover .off-hover, tr:active .off-hover {
+.agenda-table tbody tr:hover .off-hover, tr:active .off-hover {
     display: none;
 }
 
-tbody tr .editable {
+.agenda-table tbody tr .editable {
     cursor: pointer;
 }
 
