@@ -1,4 +1,4 @@
-<Module>
+<Module specificationVersion='2'>
   <ModulePrefs title="__MSG_activity__" author="Joseph Wong">
     <Require feature="osapi"/>
     <Locale lang="all">
