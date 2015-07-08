@@ -14,16 +14,6 @@ var adjustHeight = function() {
   }
 };
 
-var freeze = function() {
-  // might not be needed if wave response is improved
-  // var freezed = $("<div id='freezed'></div>");
-  // freezed.appendTo('body');
-};
-
-var unfreeze = function() {
-  // $("#freezed").remove();
-};
-
 var Agenda = React.createClass({displayName: "Agenda",
   getInitialState: function() {
     // if (this.props.data.startTime) {
@@ -75,8 +65,6 @@ var Agenda = React.createClass({displayName: "Agenda",
         // setup wave
         return;
       }
-
-      unfreeze();
     };
 
     var onWaveParticipant = function() {
@@ -100,7 +88,6 @@ var Agenda = React.createClass({displayName: "Agenda",
     wave.setParticipantCallback(onWaveParticipant);
   },
   handleTimeChange: function(newTime) {
-    freeze();
     this.setState({
       startTime: newTime
     });
@@ -111,7 +98,6 @@ var Agenda = React.createClass({displayName: "Agenda",
     console.log("sent startTime to wave");
   },
   handleSort: function(newOrder) {
-    freeze();
     var newItems = newOrder.map(function(index) {
       return this.state.items[index];
     }.bind(this));
@@ -125,7 +111,6 @@ var Agenda = React.createClass({displayName: "Agenda",
     console.log("sent updated items to wave (sort)");
   },
   handleAdd: function() {
-    freeze();
     var newItems = this.state.items.concat([{id: this.state.counter, topic: "", desc: "",time: 0, owner: ""}]);
     var newCounter = this.state.counter + 1;
     this.setState({
@@ -139,7 +124,6 @@ var Agenda = React.createClass({displayName: "Agenda",
     console.log("sent updated items to wave (add)");
   },
   handleRemove: function(index) {
-    freeze();
     var newItems = this.state.items
     newItems.splice(index, 1);
     this.setState({
@@ -152,7 +136,6 @@ var Agenda = React.createClass({displayName: "Agenda",
     console.log("sent updated items to wave (remove)");
   },
   handleEdit: function(index, type, value) {
-    freeze();
     var newItems = this.state.items.slice();
     newItem = newItems[index];
     if (type === 'topic') {
