@@ -1,0 +1,5 @@
+<Module specificationVersion='2'>
+  <ModulePrefs title="Team Chat" width="300" height="400">
+  </ModulePrefs>
+  <Content type="url" href="https://tlk.io/sprint-demo"/>
+</Module>
