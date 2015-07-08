@@ -3,5 +3,5 @@
   <ModulePrefs title="Google Maps Test - Heat Map">
         <Require feature="dynamic-height"/>
     </ModulePrefs>
-    <Content type="html" href="test.html"/>
+    <Content type="html" href="GoogleMapsTest.html"/>
 </Module>
