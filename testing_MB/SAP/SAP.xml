@@ -3,5 +3,5 @@
   <ModulePrefs title="SAP URL Gadget" width="800" height="600">
         <Require feature="dynamic-height"/>
     </ModulePrefs>
-    <Content type="url" href="https://www.sap.com"/>
+    <Content type="url" href="https://www.google.com"/>
 </Module>
