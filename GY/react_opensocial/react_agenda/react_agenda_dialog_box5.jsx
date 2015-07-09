@@ -9,7 +9,7 @@ var DialogBox = React.createClass({
     e.preventDefault();
     var topic = React.findDOMNode(this.refs.topic).value.trim();
     var desc = React.findDOMNode(this.refs.desc).value.trim();
-    gadgets.views.setReturnValue({topic: topic, desc: desc});
+    gadgets.views.setReturnValue({topic: topic, desc: desc, owner: "", time: 0});
     gadgets.views.close();
   },
   render: function() {

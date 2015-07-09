@@ -156,6 +156,19 @@ var Agenda = React.createClass({
     wave.getState().submitDelta(waveData);
     console.log("sent updated items to wave (edit)");
   },
+  handleDialogSubmit: function(result) {
+    var newItems = this.state.items.concat([result]);
+    var newCounter = this.state.counter + 1;
+    this.setState({
+      items: newItems,
+      counter: newCounter
+    });
+    console.log("added an item");
+    console.log(newItems);
+    var waveData = {items: newItems, counter: newCounter};
+    wave.getState().submitDelta(waveData);
+    console.log("sent updated items to wave (dialog add)");
+  },
   render: function() {
     return (
       <Grid id="grid">
@@ -166,6 +179,7 @@ var Agenda = React.createClass({
         <br />
         <AgendaTable items={this.state.items} startTime={this.state.startTime} people={this.state.people} onSort={this.handleSort} onEdit={this.handleEdit} onRemove={this.handleRemove} />
         <AddButton onAdd={this.handleAdd} />
+        <DialogButton onDialogSubmit={this.handleDialogSubmit} />
       </Grid>
     );
   }
@@ -564,6 +578,19 @@ var TimePicker = React.createClass({
     );
   }
 });
+
+var DialogButton = React.createClass({
+  handleClick: function() {
+    gadgets.views.openGadget(function(result){
+      this.props.onDialogSubmit(result);
+    }, 
+    function(site){},
+    {view: "dialog",viewTarget: "MODALDIALOG"});
+  },
+  render: function() {
+    <Button onClick={this.handleClick}>Open a dialog</Button>
+  }
+})
 
 // example data
 var DATA = {

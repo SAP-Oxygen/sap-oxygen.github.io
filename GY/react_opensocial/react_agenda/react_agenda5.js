@@ -156,6 +156,19 @@ var Agenda = React.createClass({displayName: "Agenda",
     wave.getState().submitDelta(waveData);
     console.log("sent updated items to wave (edit)");
   },
+  handleDialogSubmit: function(result) {
+    var newItems = this.state.items.concat([result]);
+    var newCounter = this.state.counter + 1;
+    this.setState({
+      items: newItems,
+      counter: newCounter
+    });
+    console.log("added an item");
+    console.log(newItems);
+    var waveData = {items: newItems, counter: newCounter};
+    wave.getState().submitDelta(waveData);
+    console.log("sent updated items to wave (dialog add)");
+  },
   render: function() {
     return (
       React.createElement(Grid, {id: "grid"}, 
@@ -165,7 +178,8 @@ var Agenda = React.createClass({displayName: "Agenda",
         ), 
         React.createElement("br", null), 
         React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, people: this.state.people, onSort: this.handleSort, onEdit: this.handleEdit, onRemove: this.handleRemove}), 
-        React.createElement(AddButton, {onAdd: this.handleAdd})
+        React.createElement(AddButton, {onAdd: this.handleAdd}), 
+        React.createElement(DialogButton, {onDialogSubmit: this.handleDialogSubmit})
       )
     );
   }
@@ -564,6 +578,19 @@ var TimePicker = React.createClass({displayName: "TimePicker",
     );
   }
 });
+
+var DialogButton = React.createClass({displayName: "DialogButton",
+  handleClick: function() {
+    gadgets.views.openGadget(function(result){
+      this.props.onDialogSubmit(result);
+    }, 
+    function(site){},
+    {view: "dialog",viewTarget: "MODALDIALOG"});
+  },
+  render: function() {
+    React.createElement(Button, {onClick: this.handleClick}, "Open a dialog")
+  }
+})
 
 // example data
 var DATA = {
