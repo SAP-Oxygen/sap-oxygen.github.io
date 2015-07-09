@@ -656,6 +656,4 @@ var DATA = {
   { id: 5, text: 'enhancement' }, { id: 6, text: 'bug' }, { id: 7, text: 'duplicate' }, { id: 8, text: 'invalid' }, { id: 9, text: 'wontfix' }]
 }
 
-gadgets.util.registerOnLoadHandler(function() {
-  React.render(<Agenda data={DATA} />, document.body);
-});
+React.render(<Agenda data={DATA} />, document.body);
