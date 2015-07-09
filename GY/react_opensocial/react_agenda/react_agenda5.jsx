@@ -584,7 +584,9 @@ var DialogButton = React.createClass({
     var self = this;
     $("#dialog-btn").click(function() {
       gadgets.views.openGadget(function(result) {
-        self.props.onDialogSubmit(result);
+        if (result) {
+          self.props.onDialogSubmit(result);
+        }
       }, 
       function(site){},
       {view: "dialog", viewTarget: "MODALDIALOG"});

@@ -25,8 +25,11 @@ var DialogBox = React.createClass({
         Add New Agenda Topic
         </h3>
         <form onSubmit={this.handleSubmit}>
-          <Input type='text' label='Topic' ref='topic' placeholder='Enter Agenda Topic' />
-          <Input type='textarea' label='Details' ref='desc' placeholder='Describe This Topic' />
+          Topic
+          <input type='text' className="form-control" ref='topic' placeholder='Enter Agenda Topic' />
+          <br />
+          Description
+          <textarea className="form-control" rows="3" ref='desc' placeholder='Describe This Topic' />
           <ButtonInput type='submit' bsSize='small'>Submit</ButtonInput>
           <ButtonInput bsSize='small' onClick={this.handleClose}>Close</ButtonInput>
         </form>
