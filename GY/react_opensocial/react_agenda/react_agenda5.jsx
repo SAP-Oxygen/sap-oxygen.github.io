@@ -157,7 +157,7 @@ var Agenda = React.createClass({
     console.log("sent updated items to wave (edit)");
   },
   handleDialogSubmit: function(result) {
-    var newItems = this.state.items.concat([result]);
+    var newItems = this.state.items.concat([$.extend(result, {id: this.state.counter})]);
     var newCounter = this.state.counter + 1;
     this.setState({
       items: newItems,
