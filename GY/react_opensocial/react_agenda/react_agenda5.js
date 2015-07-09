@@ -580,15 +580,24 @@ var TimePicker = React.createClass({displayName: "TimePicker",
 });
 
 var DialogButton = React.createClass({displayName: "DialogButton",
-  handleClick: function() {
-    gadgets.views.openGadget(function(result){
-      this.props.onDialogSubmit(result);
-    }, 
-    function(site){},
-    {view: "dialog",viewTarget: "MODALDIALOG"});
+  componentDidMount: function() {
+    $("dialog-btn").click(function() {
+      gadgets.views.openGadget(function(result) {
+        this.props.onDialogSubmit(result);
+      }, 
+      function(site){},
+      {view: "dialog",viewTarget: "MODALDIALOG"});
+    });
   },
+  // handleClick: function() {
+  //   gadgets.views.openGadget(function(result) {
+  //     this.props.onDialogSubmit(result);
+  //   }, 
+  //   function(site){},
+  //   {view: "dialog",viewTarget: "MODALDIALOG"});
+  // },
   render: function() {
-    React.createElement(Button, {onClick: this.handleClick}, "Open a dialog")
+    React.createElement(Button, {id: "dialog-btn"}, "Open a dialog")
   }
 });
 
