@@ -598,7 +598,9 @@ var DialogButton = React.createClass({displayName: "DialogButton",
   //   {view: "dialog",viewTarget: "MODALDIALOG"});
   // },
   render: function() {
-    return(React.createElement(Button, {id: "dialog-btn"}, "Open a dialog"));
+    return(
+      React.createElement(Button, {id: "dialog-btn"}, "Open a dialog")
+    );
   }
 });
 
@@ -667,4 +669,6 @@ var DATA = {
   { id: 5, text: 'enhancement' }, { id: 6, text: 'bug' }, { id: 7, text: 'duplicate' }, { id: 8, text: 'invalid' }, { id: 9, text: 'wontfix' }]
 }
 
-React.render(React.createElement(Agenda, {data: DATA}), document.body);
+gadgets.util.registerOnLoadHandler(function() {
+  React.render(React.createElement(Agenda, {data: DATA}), document.body);
+});
