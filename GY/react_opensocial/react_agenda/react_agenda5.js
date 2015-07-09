@@ -178,7 +178,8 @@ var Agenda = React.createClass({displayName: "Agenda",
         ), 
         React.createElement("br", null), 
         React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, people: this.state.people, onSort: this.handleSort, onEdit: this.handleEdit, onRemove: this.handleRemove}), 
-        React.createElement(AddButton, {onAdd: this.handleAdd})
+        React.createElement(AddButton, {onAdd: this.handleAdd}), 
+        React.createElement(DialogButton, {onDialogSubmit: this.handleDialogSubmit})
       )
     );
   }
@@ -578,18 +579,18 @@ var TimePicker = React.createClass({displayName: "TimePicker",
   }
 });
 
-// var DialogButton = React.createClass({
-//   handleClick: function() {
-//     gadgets.views.openGadget(function(result){
-//       this.props.onDialogSubmit(result);
-//     }, 
-//     function(site){},
-//     {view: "dialog",viewTarget: "MODALDIALOG"});
-//   },
-//   render: function() {
-//     <Button onClick={this.handleClick}>Open a dialog</Button>
-//   }
-// });
+var DialogButton = React.createClass({displayName: "DialogButton",
+  handleClick: function() {
+    gadgets.views.openGadget(function(result){
+      this.props.onDialogSubmit(result);
+    }, 
+    function(site){},
+    {view: "dialog",viewTarget: "MODALDIALOG"});
+  },
+  render: function() {
+    React.createElement(Button, {onClick: this.handleClick}, "Open a dialog")
+  }
+});
 
 // example data
 var DATA = {
