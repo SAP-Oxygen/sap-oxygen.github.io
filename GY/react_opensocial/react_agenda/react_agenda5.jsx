@@ -179,7 +179,6 @@ var Agenda = React.createClass({
         <br />
         <AgendaTable items={this.state.items} startTime={this.state.startTime} people={this.state.people} onSort={this.handleSort} onEdit={this.handleEdit} onRemove={this.handleRemove} />
         <AddButton onAdd={this.handleAdd} />
-        <DialogButton onDialogSubmit={this.handleDialogSubmit} />
       </Grid>
     );
   }
@@ -579,18 +578,18 @@ var TimePicker = React.createClass({
   }
 });
 
-var DialogButton = React.createClass({
-  handleClick: function() {
-    gadgets.views.openGadget(function(result){
-      this.props.onDialogSubmit(result);
-    }, 
-    function(site){},
-    {view: "dialog",viewTarget: "MODALDIALOG"});
-  },
-  render: function() {
-    <Button onClick={this.handleClick}>Open a dialog</Button>
-  }
-})
+// var DialogButton = React.createClass({
+//   handleClick: function() {
+//     gadgets.views.openGadget(function(result){
+//       this.props.onDialogSubmit(result);
+//     }, 
+//     function(site){},
+//     {view: "dialog",viewTarget: "MODALDIALOG"});
+//   },
+//   render: function() {
+//     <Button onClick={this.handleClick}>Open a dialog</Button>
+//   }
+// });
 
 // example data
 var DATA = {
