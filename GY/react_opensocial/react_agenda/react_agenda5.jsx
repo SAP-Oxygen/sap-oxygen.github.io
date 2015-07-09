@@ -581,12 +581,13 @@ var TimePicker = React.createClass({
 
 var DialogButton = React.createClass({
   componentDidMount: function() {
+    var self = this;
     $("#dialog-btn").click(function() {
       gadgets.views.openGadget(function(result) {
-        this.props.onDialogSubmit(result);
+        self.props.onDialogSubmit(result);
       }, 
       function(site){},
-      {view: "dialog",viewTarget: "MODALDIALOG"});
+      {view: "dialog", viewTarget: "MODALDIALOG"});
     });
   },
   // handleClick: function() {
