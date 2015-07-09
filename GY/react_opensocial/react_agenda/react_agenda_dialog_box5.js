@@ -8,11 +8,14 @@ var DialogBox = React.createClass({displayName: "DialogBox",
   componentDidMount: function() {
     gadgets.window.adjustHeight();
   },
-  handleSubmit: function(e){
+  handleSubmit: function(e) {
     e.preventDefault();
     var topic = React.findDOMNode(this.refs.topic).value.trim();
     var desc = React.findDOMNode(this.refs.desc).value.trim();
     gadgets.views.setReturnValue({topic: topic, desc: desc, owner: "", time: 0});
+    gadgets.views.close();
+  },
+  handleClose: function() {
     gadgets.views.close();
   },
   render: function() {
@@ -21,11 +24,11 @@ var DialogBox = React.createClass({displayName: "DialogBox",
         React.createElement("h3", null, 
         "Add New Agenda Topic"
         ), 
-        React.createElement("form", {onSubmit: this.handlesubmit}, 
+        React.createElement("form", {onSubmit: this.handleSubmit}, 
           React.createElement(Input, {type: "text", label: "Topic", ref: "topic", placeholder: "Enter Agenda Topic"}), 
           React.createElement(Input, {type: "textarea", label: "Details", ref: "desc", placeholder: "Describe This Topic"}), 
           React.createElement(ButtonInput, {type: "submit", bsSize: "small"}, "Submit"), 
-          React.createElement(ButtonInput, {bsSize: "small"}, "Close")
+          React.createElement(ButtonInput, {bsSize: "small", onClick: this.handleClose}, "Close")
         )
       )
     );
