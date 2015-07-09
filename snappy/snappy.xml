@@ -1,5 +1,5 @@
 <Module specificationVersion='2'>
-  <ModulePrefs title="Snappy">
+  <ModulePrefs title="Places and Street View">
     <Require feature="dynamic-height"/>
     <Require feature="osapi"/>
     <Locale lang="all">
