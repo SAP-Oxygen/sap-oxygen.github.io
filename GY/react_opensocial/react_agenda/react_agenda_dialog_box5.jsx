@@ -5,6 +5,9 @@ var ButtonInput = ReactBootstrap.ButtonInput;
 var Button = ReactBootstrap.Button;
 
 var DialogBox = React.createClass({
+  componentDidMount: function() {
+    gadgets.window.adjustHeight();
+  },
   handleSubmit: function(e){
     e.preventDefault();
     var topic = React.findDOMNode(this.refs.topic).value.trim();
