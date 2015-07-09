@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module specificationVersion='2'>
-  <ModulePrefs title="OAuth 2.0 3-Legged Template Gadget">
+  <ModulePrefs title="OAuth 2.0 3-Legged Template Gadget" author="Marc Bell" description="Uses OAuth 2.0 3-Legged authentication to access and display data from Google+ in an OpenSocial HTML Gadget">
     <OAuth2>
-      <!-- <Service name="" scope="OAuth2 Service Login URL - e.g. https://www.googleapis.com/auth/plus.login"> -->
-        <!-- <Authorization url="OAuth2 Service Authorization URL - e.g. https://accounts.google.com/o/oauth2/auth"/> -->
-        <!-- <Token url="OAuth2 Service Token URL - e.g. https://accounts.google.com/o/oauth2/token"/> -->
-      <!-- </Service> -->
       <Service name="googleAPI" scope="https://www.googleapis.com/auth/plus.login">
         <Authorization url="https://accounts.google.com/o/oauth2/auth"/>
         <Token url="https://accounts.google.com/o/oauth2/token"/>
