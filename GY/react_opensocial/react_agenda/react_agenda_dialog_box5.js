@@ -7,6 +7,10 @@ var Button = ReactBootstrap.Button;
 var DialogBox = React.createClass({displayName: "DialogBox",
   handleSubmit: function(e){
     e.preventDefault();
+    var topic = React.findDOMNode(this.refs.topic).value.trim();
+    var desc = React.findDOMNode(this.refs.desc).value.trim();
+    gadgets.views.setReturnValue({topic: topic, desc: desc});
+    gadgets.views.close();
   },
   render: function() {
     return(
@@ -15,8 +19,8 @@ var DialogBox = React.createClass({displayName: "DialogBox",
         "Add New Agenda Topic"
         ), 
         React.createElement("form", {onSubmit: this.handlesubmit}, 
-          React.createElement(Input, {type: "text", label: "Topic", placeholder: "Enter Agenda Topic"}), 
-          React.createElement(Input, {type: "textarea", label: "Details", placeholder: "Describe This Topic"}), 
+          React.createElement(Input, {type: "text", label: "Topic", ref: "topic", placeholder: "Enter Agenda Topic"}), 
+          React.createElement(Input, {type: "textarea", label: "Details", ref: "desc", placeholder: "Describe This Topic"}), 
           React.createElement(ButtonInput, {type: "submit", bsSize: "small"}, "Submit"), 
           React.createElement(ButtonInput, {bsSize: "small"}, "Close")
         )
