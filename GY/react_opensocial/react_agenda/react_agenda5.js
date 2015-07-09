@@ -581,7 +581,7 @@ var TimePicker = React.createClass({displayName: "TimePicker",
 
 var DialogButton = React.createClass({displayName: "DialogButton",
   componentDidMount: function() {
-    $("dialog-btn").click(function() {
+    $("#dialog-btn").click(function() {
       gadgets.views.openGadget(function(result) {
         this.props.onDialogSubmit(result);
       }, 
