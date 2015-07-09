@@ -598,7 +598,7 @@ var DialogButton = React.createClass({displayName: "DialogButton",
   //   {view: "dialog",viewTarget: "MODALDIALOG"});
   // },
   render: function() {
-    React.createElement(Button, {id: "dialog-btn"}, "Open a dialog")
+    return(React.createElement(Button, {id: "dialog-btn"}, "Open a dialog"));
   }
 });
 
