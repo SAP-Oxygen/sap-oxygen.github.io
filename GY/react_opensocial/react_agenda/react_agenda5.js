@@ -156,6 +156,9 @@ var Agenda = React.createClass({displayName: "Agenda",
     wave.getState().submitDelta(waveData);
     console.log("sent updated items to wave (edit)");
   },
+  handleDialogEdit: function() {
+    //TODO
+  },
   handleDialogSubmit: function(result) {
     var newItems = this.state.items.concat([$.extend(result, {id: this.state.counter})]);
     var newCounter = this.state.counter + 1;
@@ -417,17 +420,20 @@ var RowItem = React.createClass({displayName: "RowItem",
           React.createElement("span", {className: "off-hover"}, id), 
           React.createElement("span", {className: "glyphicon glyphicon-menu-hamburger on-hover"})
         ), 
-        React.createElement("td", null, this.props.item.startTime.format('LT')), 
         React.createElement("td", null, 
-          React.createElement("span", {className: "grey-text", id: timeId, "data-inputclass": "time-input input-sm", "data-type": "text"}, this.props.item.time), " min"
+          React.createElement("span", null, this.props.item.startTime.format('LT'))
         ), 
         React.createElement("td", null, 
-          React.createElement("span", {className: "topic", id: topicId, "data-inputclass": "input-sm", "data-type": "text"}, this.props.item.topic), 
+          React.createElement("span", null, this.props.item.time, " min")
+        ), 
+        React.createElement("td", null, 
+          React.createElement("span", null, this.props.item.topic), 
           React.createElement("br", null), 
-          React.createElement("span", {className: "notes grey-text", id: notesId, "data-inputclass": "input-sm", "data-type": "textarea"}, this.props.item.desc)
+          React.createElement("span", null, this.props.item.desc)
         ), 
         React.createElement("td", {className: "link-text"}, 
           thumbnail, " ", React.createElement("span", {className: "owner", id: ownerId, "data-inputclass": "input-owner", "data-value": this.props.item.owner, "data-type": "select2"}), 
+          React.createElement(Glyphicon, {className: "pull-right on-hover editable", glyph: "edit"}), 
           React.createElement(Glyphicon, {className: "pull-right on-hover editable", glyph: "trash", onClick: this.handleRemove})
         )
       )
@@ -592,13 +598,6 @@ var DialogButton = React.createClass({displayName: "DialogButton",
       {view: "dialog", viewTarget: "MODALDIALOG"});
     });
   },
-  // handleClick: function() {
-  //   gadgets.views.openGadget(function(result) {
-  //     this.props.onDialogSubmit(result);
-  //   }, 
-  //   function(site){},
-  //   {view: "dialog",viewTarget: "MODALDIALOG"});
-  // },
   render: function() {
     return(
       React.createElement(Button, {id: "dialog-btn"}, "Open a dialog")

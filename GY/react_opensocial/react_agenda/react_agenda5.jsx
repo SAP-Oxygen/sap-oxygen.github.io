@@ -156,6 +156,9 @@ var Agenda = React.createClass({
     wave.getState().submitDelta(waveData);
     console.log("sent updated items to wave (edit)");
   },
+  handleDialogEdit: function() {
+    //TODO
+  },
   handleDialogSubmit: function(result) {
     var newItems = this.state.items.concat([$.extend(result, {id: this.state.counter})]);
     var newCounter = this.state.counter + 1;
@@ -417,17 +420,20 @@ var RowItem = React.createClass({
           <span className="off-hover">{id}</span>
           <span className="glyphicon glyphicon-menu-hamburger on-hover"></span>
         </td>
-        <td>{this.props.item.startTime.format('LT')}</td>
         <td>
-          <span className="grey-text" id={timeId} data-inputclass="time-input input-sm" data-type="text">{this.props.item.time}</span> min
+          <span>{this.props.item.startTime.format('LT')}</span>
         </td>
         <td>
-          <span className="topic" id={topicId} data-inputclass="input-sm" data-type="text">{this.props.item.topic}</span>
+          <span>{this.props.item.time} min</span>
+        </td>
+        <td>
+          <span>{this.props.item.topic}</span>
           <br />
-          <span className="notes grey-text" id={notesId} data-inputclass="input-sm" data-type="textarea">{this.props.item.desc}</span>
+          <span>{this.props.item.desc}</span>
         </td>
         <td className="link-text">
           {thumbnail} <span className="owner" id={ownerId} data-inputclass="input-owner" data-value={this.props.item.owner} data-type="select2"></span>
+          <Glyphicon className="pull-right on-hover editable" glyph='edit' />
           <Glyphicon className="pull-right on-hover editable" glyph='trash' onClick={this.handleRemove} />
         </td>
       </tr>
@@ -592,13 +598,6 @@ var DialogButton = React.createClass({
       {view: "dialog", viewTarget: "MODALDIALOG"});
     });
   },
-  // handleClick: function() {
-  //   gadgets.views.openGadget(function(result) {
-  //     this.props.onDialogSubmit(result);
-  //   }, 
-  //   function(site){},
-  //   {view: "dialog",viewTarget: "MODALDIALOG"});
-  // },
   render: function() {
     return(
       <Button id="dialog-btn">Open a dialog</Button>
