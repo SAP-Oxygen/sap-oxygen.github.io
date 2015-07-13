@@ -31,7 +31,7 @@ var DialogBox = React.createClass({
     var params = gadgets.views.getParams();
     console.log("params are ...");
     console.log(params);
-    var topic = "abc";
+    var topic = params.topic;
     var desc = params.desc;
     return(
       <div>
@@ -40,7 +40,7 @@ var DialogBox = React.createClass({
         </h3>
         <form onSubmit={this.handleSubmit}>
           Topic
-          <input type='text' className="form-control" ref='topic' placeholder='Enter Agenda Topic' value={topic} />
+          <input type='text' className="form-control" ref='topic' placeholder='Enter Agenda Topic' defaultValue={topic} />
           <br />
           Description
           <textarea className="form-control" rows="3" ref='desc' placeholder='Describe This Topic' value={desc} />
