@@ -17,7 +17,7 @@ var DialogBox = React.createClass({
     var returnValue;
     // if there is any param, it is edit mode so set returnValue with index 
     // else return without index
-    if ($.isEmptyObject(params)) {
+    if (!$.isEmptyObject(params)) {
       returnValue = {index: params.index, item: item};
     } else {
       returnValue = item;
