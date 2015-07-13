@@ -376,7 +376,7 @@ var RowItem = React.createClass({displayName: "RowItem",
         }
       }, 
       function(site){},
-      {view: "dialog", viewTarget: "MODALDIALOG", opt_params: editData});
+      {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
     });
   },
   handleRemove: function() {
