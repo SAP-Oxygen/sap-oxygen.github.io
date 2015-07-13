@@ -8,9 +8,15 @@ gadgets.util.registerOnLoadHandler(function() {
       viewTarget: 'MODALDIALOG'
     });
   });
+
+  gadgets.sapjam && gadgets.sapjam.context && gadgets.sapjam.context.get(function(context) {
+    jQuery('#context').html(gadgets.json.stringify(context));
+  });
+
   gadgets.window.adjustHeight();
 });
 </script>
 <div>
   <span id="hello">${Msg.hello_world}</span>
+  <div id="context"></div>
 </div>
