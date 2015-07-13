@@ -380,7 +380,7 @@ var RowItem = React.createClass({
     $('#' + editId).click(function() {
       gadgets.views.openGadget(function(result) {
         if (result) {
-          self.props.onDialogEdit(result);
+          self.props.onDialogEdit(result.index, result.item);
         }
       }, 
       function(site){},
