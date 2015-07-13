@@ -349,28 +349,10 @@ var RowItem = React.createClass({
     var notesId = "notes-" + index;
     var timeId = "time-" + index;
     var ownerId = "owner-" + index;
-    $('#'+topicId).editable({
-      url: function(params) {
-        var d = new $.Deferred;
-        var newTopic = params.value;
-        self.props.onEdit(index, 'topic', newTopic);
-        d.resolve();
-        return d.promise();
-      },
-      emptytext: 'new topic here',
-      showbuttons: false
-    });
-    $('#'+timeId).editable({
-      url: function(params) {
-        var d = new $.Deferred;
-        var newTopic = params.value;
-        self.props.onEdit(index, 'time', newTopic);
-        d.resolve();
-        return d.promise();
-      },
-      showbuttons: false
-    });
-    $('#'+ownerId).editable({
+    var editId = "edit-" + index;
+    var editData = {index: index, topic: this.props.item.topic, desc: this.props.item.desc};
+    // $('#' + editId).data({index: index, topic: this.props.item.topic, desc: this.props.item.desc});
+    $('#' + ownerId).editable({
       url: function(params) {
         var d = new $.Deferred;
         var newTopic = params.value;
@@ -386,17 +368,15 @@ var RowItem = React.createClass({
       },
       showbuttons: false
     });
-    $('#'+notesId).editable({
-      url: function(params) {
-        var d = new $.Deferred;
-        var newDesc = params.value;
-        self.props.onEdit(index, 'desc', newDesc);
-        d.resolve();
-        return d.promise();
-      },
-      emptytext: 'new notes here',
-      escape: false,
-      rows: 2
+    $("#edit").click(function() {
+      var editData = this.
+      gadgets.views.openGadget(function(result) {
+        if (result) {
+          self.props.onDialogSubmit(result);
+        }
+      }, 
+      function(site){},
+      {view: "dialog", viewTarget: "MODALDIALOG", opt_params: editData});
     });
   },
   handleRemove: function() {
@@ -409,6 +389,7 @@ var RowItem = React.createClass({
     var notesId = "notes-" + index;
     var timeId = "time-" + index;
     var ownerId = "owner-" + index;
+    var editId = "edit-" + index;
     var thumbnail;
     if (this.props.item.owner) {
       var imgUrl = wave.getParticipantById(this.props.item.owner).thumbnailUrl_;
@@ -434,7 +415,7 @@ var RowItem = React.createClass({
         <td className="link-text">
           {thumbnail} <span className="owner" id={ownerId} data-inputclass="input-owner" data-value={this.props.item.owner} data-type="select2"></span>
           <span className="pull-right on-hover">
-            <Glyphicon className="editable" glyph='edit' />
+            <Glyphicon className="editable" id="edit" glyph='edit' />
             <br/>
             <Glyphicon className="editable" glyph='trash' onClick={this.handleRemove} />
           </span>
