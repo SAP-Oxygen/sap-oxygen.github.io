@@ -23,6 +23,7 @@ var DialogBox = React.createClass({
     console.log("params are ...");
     console.log(params);
     var topic = params.topic;
+    var desc = params.desc;
     return(
       <div>
         <h3>
@@ -30,10 +31,10 @@ var DialogBox = React.createClass({
         </h3>
         <form onSubmit={this.handleSubmit}>
           Topic
-          <input type='text' className="form-control" ref='topic' placeholder='Enter Agenda Topic' />
+          <input type='text' className="form-control" ref='topic' placeholder='Enter Agenda Topic' value={topic} />
           <br />
           Description
-          <textarea className="form-control" rows="3" ref='desc' placeholder='Describe This Topic' />
+          <textarea className="form-control" rows="3" ref='desc' placeholder='Describe This Topic' value={desc} />
           <ButtonInput type='submit' bsSize='small'>Submit</ButtonInput>
           <ButtonInput bsSize='small' onClick={this.handleClose}>Close</ButtonInput>
         </form>

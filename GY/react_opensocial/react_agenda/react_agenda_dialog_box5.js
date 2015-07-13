@@ -23,6 +23,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
     console.log("params are ...");
     console.log(params);
     var topic = params.topic;
+    var desc = params.desc;
     return(
       React.createElement("div", null, 
         React.createElement("h3", null, 
@@ -30,10 +31,10 @@ var DialogBox = React.createClass({displayName: "DialogBox",
         ), 
         React.createElement("form", {onSubmit: this.handleSubmit}, 
           "Topic", 
-          React.createElement("input", {type: "text", className: "form-control", ref: "topic", placeholder: "Enter Agenda Topic"}), 
+          React.createElement("input", {type: "text", className: "form-control", ref: "topic", placeholder: "Enter Agenda Topic", value: topic}), 
           React.createElement("br", null), 
           "Description", 
-          React.createElement("textarea", {className: "form-control", rows: "3", ref: "desc", placeholder: "Describe This Topic"}), 
+          React.createElement("textarea", {className: "form-control", rows: "3", ref: "desc", placeholder: "Describe This Topic", value: desc}), 
           React.createElement(ButtonInput, {type: "submit", bsSize: "small"}, "Submit"), 
           React.createElement(ButtonInput, {bsSize: "small", onClick: this.handleClose}, "Close")
         )
