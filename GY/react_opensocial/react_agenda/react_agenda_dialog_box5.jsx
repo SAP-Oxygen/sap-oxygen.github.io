@@ -10,9 +10,18 @@ var DialogBox = React.createClass({
   },
   handleSubmit: function(e) {
     e.preventDefault();
+    var params = gadgets.views.getParams();
     var topic = React.findDOMNode(this.refs.topic).value.trim();
     var desc = React.findDOMNode(this.refs.desc).value.trim();
-    gadgets.views.setReturnValue({topic: topic, desc: desc, owner: "", time: 0});
+    var returnValue;
+    // if there is any param, it is edit mode so set returnValue with index 
+    // else return without index
+    if (params) {
+      returnValue = {index: params.index, topic: topic, desc: desc, owner: "", time: 0};
+    } else {
+      returnValue = {topic: topic, desc: desc, owner: "", time: 0};
+    }
+    gadgets.views.setReturnValue(returnValue);
     gadgets.views.close();
   },
   handleClose: function() {
@@ -22,7 +31,7 @@ var DialogBox = React.createClass({
     var params = gadgets.views.getParams();
     console.log("params are ...");
     console.log(params);
-    var topic = params.topic;
+    var topic = String(params.topic);
     var desc = params.desc;
     return(
       <div>
