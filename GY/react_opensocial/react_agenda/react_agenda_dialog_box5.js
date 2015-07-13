@@ -13,13 +13,14 @@ var DialogBox = React.createClass({displayName: "DialogBox",
     var params = gadgets.views.getParams();
     var topic = React.findDOMNode(this.refs.topic).value.trim();
     var desc = React.findDOMNode(this.refs.desc).value.trim();
+    var item = {topic: topic, desc: desc, owner: "", time: 0}
     var returnValue;
     // if there is any param, it is edit mode so set returnValue with index 
     // else return without index
     if (params) {
-      returnValue = {index: params.index, topic: topic, desc: desc, owner: "", time: 0};
+      returnValue = {index: params.index, item: item};
     } else {
-      returnValue = {topic: topic, desc: desc, owner: "", time: 0};
+      returnValue = item;
     }
     gadgets.views.setReturnValue(returnValue);
     gadgets.views.close();
@@ -43,7 +44,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
           React.createElement("input", {type: "text", className: "form-control", ref: "topic", placeholder: "Enter Agenda Topic", defaultValue: topic}), 
           React.createElement("br", null), 
           "Description", 
-          React.createElement("textarea", {className: "form-control", rows: "3", ref: "desc", placeholder: "Describe This Topic", value: desc}), 
+          React.createElement("textarea", {className: "form-control", rows: "3", ref: "desc", placeholder: "Describe This Topic", defaultValue: desc}), 
           React.createElement(ButtonInput, {type: "submit", bsSize: "small"}, "Submit"), 
           React.createElement(ButtonInput, {bsSize: "small", onClick: this.handleClose}, "Close")
         )
