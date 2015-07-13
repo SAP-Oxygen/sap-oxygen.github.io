@@ -147,7 +147,7 @@ var Agenda = React.createClass({displayName: "Agenda",
     } else if (type === 'time') {
       newItem['time'] = value;
     }
-      this.setState({
+    this.setState({
       items: newItems
     });
     console.log("edited an item");
@@ -156,8 +156,17 @@ var Agenda = React.createClass({displayName: "Agenda",
     wave.getState().submitDelta(waveData);
     console.log("sent updated items to wave (edit)");
   },
-  handleDialogEdit: function() {
-    //TODO
+  handleDialogEdit: function(index, item) {
+    var newItems = this.state.items.slice();
+    newItems[index] = item;
+    this.setState({
+      items: newItems
+    });
+    console.log("edited an item");
+    console.log(newItems);
+    var waveData = {items: newItems};
+    wave.getState().submitDelta(waveData);
+    console.log("sent updated items to wave (dialog edit)");
   },
   handleDialogSubmit: function(result) {
     var newItems = this.state.items.concat([$.extend(result, {id: this.state.counter})]);
@@ -180,7 +189,7 @@ var Agenda = React.createClass({displayName: "Agenda",
           React.createElement(DateTimePicker, {onTimeChange: this.handleTimeChange})
         ), 
         React.createElement("br", null), 
-        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, people: this.state.people, onSort: this.handleSort, onEdit: this.handleEdit, onRemove: this.handleRemove}), 
+        React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, people: this.state.people, onSort: this.handleSort, onEdit: this.handleEdit, onRemove: this.handleRemove, onDialogEdit: this.handleDialogSubmit}), 
         React.createElement(AddButton, {onAdd: this.handleAdd}), 
         React.createElement(DialogButton, {onDialogSubmit: this.handleDialogSubmit})
       )
@@ -217,7 +226,7 @@ var AgendaTable = React.createClass({displayName: "AgendaTable",
             React.createElement("th", {className: "short"}, "Presenter")
           )
         ), 
-        React.createElement(TableBody, {startTime: this.props.startTime, people: this.props.people, onSort: this.props.onSort, onEdit: this.props.onEdit, onRemove: this.props.onRemove}, 
+        React.createElement(TableBody, {startTime: this.props.startTime, people: this.props.people, onSort: this.props.onSort, onEdit: this.props.onEdit, onRemove: this.props.onRemove, onDialogEdit: this.props.onDialogEdit}, 
           items
         )
       )
@@ -279,7 +288,7 @@ var TableBody = React.createClass({displayName: "TableBody",
       $(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
       var node = $(this.getDOMNode()).children().last()[0];
       node.dataset.reactSortablePos = i;
-      React.render(React.createElement(RowItem, {index: index, item: child.props.item, people: this.props.people, onEdit: this.props.onEdit, onRemove: this.props.onRemove}), node);
+      React.render(React.createElement(RowItem, {index: index, item: child.props.item, people: this.props.people, onEdit: this.props.onEdit, onRemove: this.props.onRemove, onDialogEdit: this.props.onDialogEdit}), node);
       lastItemEndTime.add(child.props.item.time, 'm');
     }.bind(this));
 
@@ -308,7 +317,7 @@ var TableBody = React.createClass({displayName: "TableBody",
         nodes[numNodes].dataset.reactSortablePos = numNodes;
         numNodes++;
       }
-      React.render(React.createElement(RowItem, {index: index, item: item, people: this.props.people, onEdit: this.props.onEdit, onRemove: this.props.onRemove}), nodes[nodeIndex]);
+      React.render(React.createElement(RowItem, {index: index, item: item, people: this.props.people, onEdit: this.props.onEdit, onRemove: this.props.onRemove, onDialogEdit: this.props.onDialogEdit}), nodes[nodeIndex]);
       childIndex++;
       nodeIndex++;
       lastItemEndTime.add(item.time, 'm');
@@ -371,7 +380,7 @@ var RowItem = React.createClass({displayName: "RowItem",
     $('#' + editId).click(function() {
       gadgets.views.openGadget(function(result) {
         if (result) {
-          self.props.onDialogSubmit(result);
+          self.props.onDialogEdit(result);
         }
       }, 
       function(site){},
