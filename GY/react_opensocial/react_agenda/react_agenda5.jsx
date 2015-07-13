@@ -368,7 +368,7 @@ var RowItem = React.createClass({
       },
       showbuttons: false
     });
-    $("#edit").click(function() {
+    $('#' + editId).click(function() {
       gadgets.views.openGadget(function(result) {
         if (result) {
           self.props.onDialogSubmit(result);
@@ -414,7 +414,7 @@ var RowItem = React.createClass({
         <td className="link-text">
           {thumbnail} <span className="owner" id={ownerId} data-inputclass="input-owner" data-value={this.props.item.owner} data-type="select2"></span>
           <span className="pull-right on-hover">
-            <Glyphicon className="editable" id="edit" glyph='edit' />
+            <Glyphicon className="editable" id={editId} glyph='edit' />
             <br/>
             <Glyphicon className="editable" glyph='trash' onClick={this.handleRemove} />
           </span>
