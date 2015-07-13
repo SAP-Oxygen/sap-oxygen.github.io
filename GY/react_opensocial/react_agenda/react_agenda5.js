@@ -369,7 +369,6 @@ var RowItem = React.createClass({displayName: "RowItem",
       showbuttons: false
     });
     $("#edit").click(function() {
-      var editData = this.
       gadgets.views.openGadget(function(result) {
         if (result) {
           self.props.onDialogSubmit(result);
