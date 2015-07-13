@@ -22,7 +22,7 @@ var DialogBox = React.createClass({
     var params = gadgets.views.getParams();
     console.log("params are ...");
     console.log(params);
-    var topic = parms.topic;
+    var topic = params.topic;
     return(
       <div>
         <h3>
