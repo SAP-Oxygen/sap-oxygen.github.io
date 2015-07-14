@@ -14,10 +14,16 @@ gadgets.util.registerOnLoadHandler(function() {
     gadgets.window.adjustHeight();
   });
 
+  gadgets.sapjam && gadgets.sapjam.data && gadgets.sapjam.data.getInitializingData(function(initData) {
+    jQuery('#init-data').html(gadgets.json.stringify(initData));
+    gadgets.window.adjustHeight();
+  });
+
   gadgets.window.adjustHeight();
 });
 </script>
 <div>
   <span id="hello">${Msg.hello_world}</span>
   <div id="context"></div>
+  <div id="init-data"></div>
 </div>
