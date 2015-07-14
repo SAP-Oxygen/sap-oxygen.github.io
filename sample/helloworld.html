@@ -14,7 +14,7 @@ gadgets.util.registerOnLoadHandler(function() {
     gadgets.window.adjustHeight();
   });
 
-  gadges.sapjam && gadgets.sapjam.data && gadgets.sapjam.data.getInitializingData(function(initData) {
+  gadgets.sapjam && gadgets.sapjam.data && gadgets.sapjam.data.getInitializingData(function(initData) {
     jQuery('#init-data').html(gadgets.json.stringify(initData));
     gadgets.window.adjustHeight();
   });
