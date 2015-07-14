@@ -12,7 +12,8 @@
           waveData[key] = waveState.get(key);
         });
         // for consistency in the array
-        console.log("data in onWaveUpdate: " + waveData);
+        console.log("data in onWaveUpdate: ");
+        console.log(waveData);
         // do not update the state when there is no data
         // prevents undesired height adjustment
         if (!$.isEmptyObject(waveData)) {
