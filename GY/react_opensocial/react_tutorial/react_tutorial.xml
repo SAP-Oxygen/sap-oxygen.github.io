@@ -16,7 +16,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
       <body style="padding-top: 70px;">
         <div id="content"></div>
-        <script type="text/javascript" src="react_tutorial.js"></script>
+        <script type="text/javascript" src="react_tutorial1.js"></script>
       </body>
     ]]>
   </Content>
