@@ -6,7 +6,7 @@ var Button = ReactBootstrap.Button;
 
 var DialogBox = React.createClass({
   componentDidMount: function() {
-    gadgets.window.adjustHeight();
+    // gadgets.window.adjustHeight();
   },
   handleSubmit: function(e) {
     e.preventDefault();
@@ -29,24 +29,43 @@ var DialogBox = React.createClass({
     gadgets.views.close();
   },
   render: function() {
-    var params = gadgets.views.getParams();
+    // var params = gadgets.views.getParams();
+    var params = {};
     console.log("params are ...");
     console.log(params);
     var topic = params.topic;
     var desc = params.desc;
     return(
-      <div>
+      <div className="container-fluid">
         <h3>
-        Add New Agenda Topic
+        Edit Agenda Item
         </h3>
-        <form onSubmit={this.handleSubmit}>
-          Topic
-          <input type='text' className="form-control" ref='topic' placeholder='Enter Agenda Topic' defaultValue={topic} />
+        <form className="form-horizontal" onSubmit={this.handleSubmit}>
+          <input type="text" className="form-control" ref="topic" placeholder="Title" defaultValue={topic} />
           <br />
-          Description
-          <textarea className="form-control" rows="3" ref='desc' placeholder='Describe This Topic' defaultValue={desc} />
-          <ButtonInput type='submit' bsSize='small'>Submit</ButtonInput>
-          <ButtonInput bsSize='small' onClick={this.handleClose}>Close</ButtonInput>
+          <div className="container-fluid">
+            <div className="row">
+            <div className="col-xs-3 nopadding">
+              <input type="text" className="form-control" ref="min" defaultValue="10" />
+            </div>
+            <div className="col-xs-2 nopadding">minutes</div>
+            <div className="col-xs-5 nopadding pull-right">
+              <select className="form-control">
+                <option>White</option>
+                <option>Grey</option>
+                <option>Black</option>
+              </select>
+            </div>
+            </div>
+          </div>
+          <br />
+          <input type="text" className="form-control" ref="presenter" placeholder="Presenter" defaultValue={topic} />
+          <br />
+          <textarea className="form-control" rows="3" ref="desc" placeholder="Notes" defaultValue={desc} />
+          <br />
+          <div className="form-group pull-right">
+            <button type="submit" className="btn btn-primary">Submit</button> <button className="btn btn-default" onClick={this.handleClose}>Close</button>
+          </div>
         </form>
       </div>
     );

@@ -113,3 +113,8 @@ body {
     width: 48px;
     height: 48px;
 }
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
