@@ -191,7 +191,6 @@ var Agenda = React.createClass({
         <br />
         <AgendaTable items={this.state.items} startTime={this.state.startTime} people={this.state.people} onSort={this.handleSort} onEdit={this.handleEdit} onRemove={this.handleRemove} onDialogEdit={this.handleDialogEdit} />
         <AddButton onAdd={this.handleAdd} />
-        <DialogButton onDialogSubmit={this.handleDialogSubmit} />
       </Grid>
     );
   }

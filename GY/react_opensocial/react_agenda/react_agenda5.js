@@ -190,8 +190,7 @@ var Agenda = React.createClass({displayName: "Agenda",
         ), 
         React.createElement("br", null), 
         React.createElement(AgendaTable, {items: this.state.items, startTime: this.state.startTime, people: this.state.people, onSort: this.handleSort, onEdit: this.handleEdit, onRemove: this.handleRemove, onDialogEdit: this.handleDialogEdit}), 
-        React.createElement(AddButton, {onAdd: this.handleAdd}), 
-        React.createElement(DialogButton, {onDialogSubmit: this.handleDialogSubmit})
+        React.createElement(AddButton, {onAdd: this.handleAdd})
       )
     );
   }

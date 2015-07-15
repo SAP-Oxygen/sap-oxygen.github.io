@@ -13,15 +13,13 @@ var DialogBox = React.createClass({displayName: "DialogBox",
     var params = gadgets.views.getParams();
     var topic = React.findDOMNode(this.refs.topic).value.trim();
     var desc = React.findDOMNode(this.refs.desc).value.trim();
-    var item = {topic: topic, desc: desc, owner: "", time: 0}
+    var time = React.findDOMNode(this.refs.time).value.trim();
+    var item = {topic: topic, desc: desc, owner: "", time: time};
     var returnValue;
     // if there is any param, it is edit mode so set returnValue with index 
     // else return without index
-    if (!$.isEmptyObject(params)) {
-      returnValue = {index: params.index, item: item};
-    } else {
-      returnValue = item;
-    }
+    returnValue = {index: params.index, item: item};
+
     gadgets.views.setReturnValue(returnValue);
     gadgets.views.close();
   },
@@ -46,7 +44,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
           React.createElement("div", {className: "container-fluid"}, 
             React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "col-xs-3 nopadding"}, 
-              React.createElement("input", {type: "text", className: "form-control", ref: "min", defaultValue: "10"})
+              React.createElement("input", {type: "text", className: "form-control", ref: "time", defaultValue: "10"})
             ), 
             React.createElement("div", {className: "col-xs-2 nopadding"}, "minutes"), 
             React.createElement("div", {className: "col-xs-5 nopadding pull-right"}, 
