@@ -32,6 +32,10 @@ var DialogBox = React.createClass({displayName: "DialogBox",
     console.log(params);
     var topic = params.topic;
     var desc = params.desc;
+    var time = params.time;
+    if (time === 0) {
+      time = 10;
+    }
     return(
       React.createElement("div", {className: "container-fluid"}, 
         React.createElement("h3", null, 
@@ -43,7 +47,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
           React.createElement("div", {className: "container-fluid"}, 
             React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "col-xs-3 nopadding"}, 
-              React.createElement("input", {type: "text", className: "form-control", ref: "time", defaultValue: "10"})
+              React.createElement("input", {type: "text", className: "form-control", ref: "time", defaultValue: time})
             ), 
             React.createElement("div", {className: "col-xs-2 nopadding"}, "minutes"), 
             React.createElement("div", {className: "col-xs-5 nopadding pull-right"}, 

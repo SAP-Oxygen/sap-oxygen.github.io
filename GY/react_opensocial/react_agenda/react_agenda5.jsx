@@ -358,7 +358,7 @@ var RowItem = React.createClass({
     var timeId = "time-" + index;
     var ownerId = "owner-" + index;
     var editId = "edit-" + index;
-    var editData = {index: index, topic: this.props.item.topic, desc: this.props.item.desc};
+    var editData = {index: index, topic: this.props.item.topic, desc: this.props.item.desc, time: this.props.item.time};
     // $('#' + editId).data({index: index, topic: this.props.item.topic, desc: this.props.item.desc});
     $('#' + ownerId).editable({
       url: function(params) {

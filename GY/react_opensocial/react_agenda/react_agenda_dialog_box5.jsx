@@ -32,6 +32,10 @@ var DialogBox = React.createClass({
     console.log(params);
     var topic = params.topic;
     var desc = params.desc;
+    var time = params.time;
+    if (time === 0) {
+      time = 10;
+    }
     return(
       <div className="container-fluid">
         <h3>
@@ -43,7 +47,7 @@ var DialogBox = React.createClass({
           <div className="container-fluid">
             <div className="row">
             <div className="col-xs-3 nopadding">
-              <input type="text" className="form-control" ref="time" defaultValue="10" />
+              <input type="text" className="form-control" ref="time" defaultValue={time} />
             </div>
             <div className="col-xs-2 nopadding">minutes</div>
             <div className="col-xs-5 nopadding pull-right">
