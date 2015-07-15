@@ -6,7 +6,7 @@ var Button = ReactBootstrap.Button;
 
 var DialogBox = React.createClass({displayName: "DialogBox",
   componentDidMount: function() {
-    // gadgets.window.adjustHeight();
+    gadgets.window.adjustHeight();
   },
   handleSubmit: function(e) {
     e.preventDefault();
@@ -27,8 +27,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
     gadgets.views.close();
   },
   render: function() {
-    // var params = gadgets.views.getParams();
-    var params = {};
+    var params = gadgets.views.getParams();
     console.log("params are ...");
     console.log(params);
     var topic = params.topic;
