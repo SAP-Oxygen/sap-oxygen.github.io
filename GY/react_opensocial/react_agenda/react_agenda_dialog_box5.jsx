@@ -9,7 +9,7 @@ var DialogBox = React.createClass({
     gadgets.window.adjustHeight();
 
     var params = gadgets.views.getParams();
-    $(".people-picker").select2({
+    $("#people-picker").select2({
       data: params
     });
   },
@@ -65,7 +65,7 @@ var DialogBox = React.createClass({
             </div>
           </div>
           <br />
-          <select className="people-picker" ref="presenter" placeholder="Presenter"></select>
+          <input type="hidden" id="people-picker" ref="presenter" placeholder="Presenter"></select>
           <br />
           <textarea className="form-control" rows="3" ref="desc" placeholder="Notes" defaultValue={desc} />
           <br />
