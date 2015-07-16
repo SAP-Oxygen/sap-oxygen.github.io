@@ -366,22 +366,6 @@ var RowItem = React.createClass({
       owner: this.props.item.owner,
       people: this.props.people
     };
-    // $('#' + ownerId).editable({
-    //   url: function(params) {
-    //     var d = new $.Deferred;
-    //     var newTopic = params.value;
-    //     self.props.onEdit(index, 'owner', newTopic);
-    //     d.resolve();
-    //     return d.promise();
-    //   },
-    //   source: self.props.people,
-    //   emptytext: 'select a presenter',
-    //   select2: {
-    //     multiple: true,
-    //     maximumSelectionSize: 1,
-    //   },
-    //   showbuttons: false
-    // });
     $('#' + editId).click(function() {
       gadgets.views.openGadget(function(result) {
         if (result) {
@@ -391,6 +375,23 @@ var RowItem = React.createClass({
       function(site){},
       {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
     });
+  },
+  handleEdit: function() {
+    var editData = {
+      index: index, 
+      topic: this.props.item.topic, 
+      desc: this.props.item.desc, 
+      time: this.props.item.time, 
+      owner: this.props.item.owner,
+      people: this.props.people
+    };
+    gadgets.views.openGadget(function(result) {
+      if (result) {
+        self.props.onDialogEdit(result.index, result.item);
+      }
+    }, 
+    function(site){},
+    {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
   },
   handleRemove: function() {
     this.props.onRemove(this.props.index);
@@ -422,7 +423,7 @@ var RowItem = React.createClass({
         <td>
           <span>{this.props.item.time} min</span>
         </td>
-        <td>
+        <td onClick={this.handleEdit}>
           <span>{this.props.item.topic}</span>
           <br />
           <span>{this.props.item.desc}</span>
