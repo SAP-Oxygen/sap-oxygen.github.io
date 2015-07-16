@@ -72,7 +72,7 @@ var Agenda = React.createClass({
         var people = [];  
         var participants = wave.getParticipants();
         participants.forEach(function(val, i, arr) {
-          people.push({id: val.id_, text: val.displayName_});
+          people.push({id: val.id_, text: val.displayName_, thumbnailUrl: val.thumbnailUrl_});
         });
         self.setState({
           people: people
@@ -404,8 +404,7 @@ var RowItem = React.createClass({
     var editId = "edit-" + index;
     var thumbnail;
     if (this.props.item.owner) {
-      var imgUrl = wave.getParticipantById(this.props.item.owner).thumbnailUrl_;
-      thumbnail = <img className="img-circle" src={imgUrl} />;
+      thumbnail = <img className="img-circle" src={this.props.item.owner.thumbnailUrl} />;
     }
     return (
       <tr>
@@ -425,7 +424,7 @@ var RowItem = React.createClass({
           <span>{this.props.item.desc}</span>
         </td>
         <td className="link-text">
-          {thumbnail} <span className="owner">{this.props.item.owner}</span>
+          {thumbnail} <span className="owner">{this.props.item.owner.text}</span>
           <span className="pull-right on-hover">
             <Glyphicon className="editable" id={editId} glyph='edit' />
             <br/>

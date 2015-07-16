@@ -72,7 +72,7 @@ var Agenda = React.createClass({displayName: "Agenda",
         var people = [];  
         var participants = wave.getParticipants();
         participants.forEach(function(val, i, arr) {
-          people.push({id: val.id_, text: val.displayName_});
+          people.push({id: val.id_, text: val.displayName_, thumbnailUrl: val.thumbnailUrl_});
         });
         self.setState({
           people: people
@@ -404,8 +404,7 @@ var RowItem = React.createClass({displayName: "RowItem",
     var editId = "edit-" + index;
     var thumbnail;
     if (this.props.item.owner) {
-      var imgUrl = wave.getParticipantById(this.props.item.owner).thumbnailUrl_;
-      thumbnail = React.createElement("img", {className: "img-circle", src: imgUrl});
+      thumbnail = React.createElement("img", {className: "img-circle", src: this.props.item.owner.thumbnailUrl});
     }
     return (
       React.createElement("tr", null, 
@@ -425,7 +424,7 @@ var RowItem = React.createClass({displayName: "RowItem",
           React.createElement("span", null, this.props.item.desc)
         ), 
         React.createElement("td", {className: "link-text"}, 
-          thumbnail, " ", React.createElement("span", {className: "owner"}, this.props.item.owner), 
+          thumbnail, " ", React.createElement("span", {className: "owner"}, this.props.item.owner.text), 
           React.createElement("span", {className: "pull-right on-hover"}, 
             React.createElement(Glyphicon, {className: "editable", id: editId, glyph: "edit"}), 
             React.createElement("br", null), 
