@@ -66,7 +66,7 @@ var DialogBox = React.createClass({
             </div>
           </div>
           <br />
-          <input type="hidden" id="people-picker" ref="owner" placeholder="Presenter" />
+          <input type="hidden" id="people-picker" ref="owner" placeholder="Presenter" style="width: 100%" />
           <br />
           <textarea className="form-control" rows="3" ref="desc" placeholder="Notes" defaultValue={desc} />
           <br />
