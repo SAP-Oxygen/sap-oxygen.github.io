@@ -19,7 +19,8 @@ var DialogBox = React.createClass({
     var topic = React.findDOMNode(this.refs.topic).value.trim();
     var desc = React.findDOMNode(this.refs.desc).value.trim();
     var time = React.findDOMNode(this.refs.time).value.trim();
-    var item = {topic: topic, desc: desc, owner: "", time: time};
+    var owner = React.findDOMNode(this.refs.owner).value.trim();
+    var item = {topic: topic, desc: desc, owner: owner, time: time};
     var returnValue;
     // if there is any param, it is edit mode so set returnValue with index 
     // else return without index
@@ -65,7 +66,7 @@ var DialogBox = React.createClass({
             </div>
           </div>
           <br />
-          <input type="hidden" id="people-picker" ref="presenter" placeholder="Presenter" />
+          <input type="hidden" id="people-picker" ref="owner" placeholder="Presenter" />
           <br />
           <textarea className="form-control" rows="3" ref="desc" placeholder="Notes" defaultValue={desc} />
           <br />
