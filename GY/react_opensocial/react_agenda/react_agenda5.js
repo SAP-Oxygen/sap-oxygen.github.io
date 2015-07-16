@@ -385,7 +385,6 @@ var RowItem = React.createClass({displayName: "RowItem",
     var timeId = "time-" + index;
     // onwerId here is not the real id of owner
     var ownerId = "owner-" + index;
-    var editId = "edit-" + index;
     var thumbnail;
     var ownerName;
     if (this.props.item.owner) {
@@ -413,8 +412,6 @@ var RowItem = React.createClass({displayName: "RowItem",
         React.createElement("td", {className: "link-text cursor-pointer", id: ownerId}, 
           thumbnail, " ", React.createElement("span", {className: "owner"}, ownerName), 
           React.createElement("span", {className: "pull-right on-hover"}, 
-            React.createElement(Glyphicon, {className: "cursor-pointer", id: editId, glyph: "edit"}), 
-            React.createElement("br", null), 
             React.createElement(Glyphicon, {className: "cursor-pointer", glyph: "trash", onClick: this.handleRemove})
           )
         )
