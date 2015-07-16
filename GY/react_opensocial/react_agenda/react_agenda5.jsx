@@ -363,6 +363,7 @@ var RowItem = React.createClass({
       topic: this.props.item.topic, 
       desc: this.props.item.desc, 
       time: this.props.item.time, 
+      owner: this.props.item.owner,
       people: this.props.people
     };
     // $('#' + ownerId).editable({

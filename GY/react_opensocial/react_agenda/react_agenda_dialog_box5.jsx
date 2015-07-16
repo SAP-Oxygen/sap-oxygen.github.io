@@ -43,6 +43,7 @@ var DialogBox = React.createClass({
     if (time === 0) {
       time = 10;
     }
+    var owner = params.owner;
     return(
       <div className="container-fluid">
         <h3>
@@ -67,7 +68,7 @@ var DialogBox = React.createClass({
             </div>
           </div>
           <br />
-          <input type="hidden" id="people-picker" ref="owner" placeholder="Presenter" />
+          <input type="hidden" id="people-picker" ref="owner" placeholder="Presenter" defaultValue={owner} />
           <br />
           <textarea className="form-control" rows="3" ref="desc" placeholder="Notes" defaultValue={desc} />
           <br />
