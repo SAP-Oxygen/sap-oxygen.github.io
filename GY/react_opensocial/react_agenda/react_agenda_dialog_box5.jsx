@@ -7,6 +7,11 @@ var Button = ReactBootstrap.Button;
 var DialogBox = React.createClass({
   componentDidMount: function() {
     gadgets.window.adjustHeight();
+
+    var params = gadgets.views.getParams();
+    $(".people-picker").select2({
+      data: params
+    });
   },
   handleSubmit: function(e) {
     e.preventDefault();
@@ -60,7 +65,7 @@ var DialogBox = React.createClass({
             </div>
           </div>
           <br />
-          <input type="text" className="form-control" ref="presenter" placeholder="Presenter" defaultValue={topic} />
+          <select className="people-picker" ref="presenter" placeholder="Presenter"></select>
           <br />
           <textarea className="form-control" rows="3" ref="desc" placeholder="Notes" defaultValue={desc} />
           <br />

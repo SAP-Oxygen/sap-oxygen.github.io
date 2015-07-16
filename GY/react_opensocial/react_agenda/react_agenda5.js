@@ -358,24 +358,29 @@ var RowItem = React.createClass({displayName: "RowItem",
     var timeId = "time-" + index;
     var ownerId = "owner-" + index;
     var editId = "edit-" + index;
-    var editData = {index: index, topic: this.props.item.topic, desc: this.props.item.desc, time: this.props.item.time};
-    // $('#' + editId).data({index: index, topic: this.props.item.topic, desc: this.props.item.desc});
-    $('#' + ownerId).editable({
-      url: function(params) {
-        var d = new $.Deferred;
-        var newTopic = params.value;
-        self.props.onEdit(index, 'owner', newTopic);
-        d.resolve();
-        return d.promise();
-      },
-      source: self.props.people,
-      emptytext: 'select a presenter',
-      select2: {
-        multiple: true,
-        maximumSelectionSize: 1,
-      },
-      showbuttons: false
-    });
+    var editData = {
+      index: index, 
+      topic: this.props.item.topic, 
+      desc: this.props.item.desc, 
+      time: this.props.item.time, 
+      people: this.props.people
+    };
+    // $('#' + ownerId).editable({
+    //   url: function(params) {
+    //     var d = new $.Deferred;
+    //     var newTopic = params.value;
+    //     self.props.onEdit(index, 'owner', newTopic);
+    //     d.resolve();
+    //     return d.promise();
+    //   },
+    //   source: self.props.people,
+    //   emptytext: 'select a presenter',
+    //   select2: {
+    //     multiple: true,
+    //     maximumSelectionSize: 1,
+    //   },
+    //   showbuttons: false
+    // });
     $('#' + editId).click(function() {
       gadgets.views.openGadget(function(result) {
         if (result) {
@@ -420,7 +425,7 @@ var RowItem = React.createClass({displayName: "RowItem",
           React.createElement("span", null, this.props.item.desc)
         ), 
         React.createElement("td", {className: "link-text"}, 
-          thumbnail, " ", React.createElement("span", {className: "owner", id: ownerId, "data-inputclass": "input-owner", "data-value": this.props.item.owner, "data-type": "select2"}), 
+          thumbnail, " ", React.createElement("span", {className: "owner"}, this.props.item.owner), 
           React.createElement("span", {className: "pull-right on-hover"}, 
             React.createElement(Glyphicon, {className: "editable", id: editId, glyph: "edit"}), 
             React.createElement("br", null), 
