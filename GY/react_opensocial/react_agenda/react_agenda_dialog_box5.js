@@ -10,7 +10,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
 
     var params = gadgets.views.getParams();
     $("#people-picker").select2({
-      data: params
+      data: params.people
     });
   },
   handleSubmit: function(e) {
