@@ -403,8 +403,11 @@ var RowItem = React.createClass({
     var ownerId = "owner-" + index;
     var editId = "edit-" + index;
     var thumbnail;
+    var ownerName;
     if (this.props.item.owner) {
-      thumbnail = <img className="img-circle" src={this.props.item.owner.thumbnailUrl} />;
+      var thumbnailUrl = wave.getParticipantById(this.props.item.owner).thumbnailUrl_;
+      thumbnail = <img className="img-circle" src={thumbnailUrl} />;
+      ownerName = wave.getParticipantById(this.props.item.owner).displayName_;
     }
     return (
       <tr>
@@ -424,7 +427,7 @@ var RowItem = React.createClass({
           <span>{this.props.item.desc}</span>
         </td>
         <td className="link-text">
-          {thumbnail} <span className="owner">{this.props.item.owner.text}</span>
+          {thumbnail} <span className="owner">{ownerName}</span>
           <span className="pull-right on-hover">
             <Glyphicon className="editable" id={editId} glyph='edit' />
             <br/>

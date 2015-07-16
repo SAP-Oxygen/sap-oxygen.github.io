@@ -403,8 +403,11 @@ var RowItem = React.createClass({displayName: "RowItem",
     var ownerId = "owner-" + index;
     var editId = "edit-" + index;
     var thumbnail;
+    var ownerName;
     if (this.props.item.owner) {
-      thumbnail = React.createElement("img", {className: "img-circle", src: this.props.item.owner.thumbnailUrl});
+      var thumbnailUrl = wave.getParticipantById(this.props.item.owner).thumbnailUrl_;
+      thumbnail = React.createElement("img", {className: "img-circle", src: thumbnailUrl});
+      ownerName = wave.getParticipantById(this.props.item.owner).displayName_;
     }
     return (
       React.createElement("tr", null, 
@@ -424,7 +427,7 @@ var RowItem = React.createClass({displayName: "RowItem",
           React.createElement("span", null, this.props.item.desc)
         ), 
         React.createElement("td", {className: "link-text"}, 
-          thumbnail, " ", React.createElement("span", {className: "owner"}, this.props.item.owner.text), 
+          thumbnail, " ", React.createElement("span", {className: "owner"}, ownerName), 
           React.createElement("span", {className: "pull-right on-hover"}, 
             React.createElement(Glyphicon, {className: "editable", id: editId, glyph: "edit"}), 
             React.createElement("br", null), 
