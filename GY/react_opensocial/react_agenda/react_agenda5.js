@@ -402,20 +402,20 @@ var RowItem = React.createClass({displayName: "RowItem",
         React.createElement("td", null, 
           React.createElement("span", null, this.props.item.startTime.format('LT'))
         ), 
-        React.createElement("td", {id: timeId}, 
+        React.createElement("td", {className: "cursor-pointer", id: timeId}, 
           React.createElement("span", null, this.props.item.time, " min")
         ), 
-        React.createElement("td", {id: topicId}, 
+        React.createElement("td", {className: "cursor-pointer", id: topicId}, 
           React.createElement("span", null, this.props.item.topic), 
           React.createElement("br", null), 
           React.createElement("span", null, this.props.item.desc)
         ), 
-        React.createElement("td", {className: "link-text", id: ownerId}, 
+        React.createElement("td", {className: "link-text cursor-pointer", id: ownerId}, 
           thumbnail, " ", React.createElement("span", {className: "owner"}, ownerName), 
           React.createElement("span", {className: "pull-right on-hover"}, 
-            React.createElement(Glyphicon, {className: "editable", id: editId, glyph: "edit"}), 
+            React.createElement(Glyphicon, {className: "cursor-pointer", id: editId, glyph: "edit"}), 
             React.createElement("br", null), 
-            React.createElement(Glyphicon, {className: "editable", glyph: "trash", onClick: this.handleRemove})
+            React.createElement(Glyphicon, {className: "cursor-pointer", glyph: "trash", onClick: this.handleRemove})
           )
         )
       )

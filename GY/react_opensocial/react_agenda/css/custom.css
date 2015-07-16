@@ -80,7 +80,7 @@ body {
     display: none;
 }
 
-.agenda-table tbody tr .editable {
+.agenda-table tbody tr .cursor-pointer {
     cursor: pointer;
 }
 

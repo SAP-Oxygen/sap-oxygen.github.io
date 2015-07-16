@@ -402,20 +402,20 @@ var RowItem = React.createClass({
         <td>
           <span>{this.props.item.startTime.format('LT')}</span>
         </td>
-        <td id={timeId}>
+        <td className="cursor-pointer" id={timeId}>
           <span>{this.props.item.time} min</span>
         </td>
-        <td id={topicId}>
+        <td className="cursor-pointer" id={topicId}>
           <span>{this.props.item.topic}</span>
           <br />
           <span>{this.props.item.desc}</span>
         </td>
-        <td className="link-text" id={ownerId}>
+        <td className="link-text cursor-pointer" id={ownerId}>
           {thumbnail} <span className="owner">{ownerName}</span>
           <span className="pull-right on-hover">
-            <Glyphicon className="editable" id={editId} glyph='edit' />
+            <Glyphicon className="cursor-pointer" id={editId} glyph='edit' />
             <br/>
-            <Glyphicon className="editable" glyph='trash' onClick={this.handleRemove} />
+            <Glyphicon className="cursor-pointer" glyph='trash' onClick={this.handleRemove} />
           </span>
         </td>
       </tr>
