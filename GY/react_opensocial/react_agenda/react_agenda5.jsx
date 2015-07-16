@@ -423,7 +423,7 @@ var RowItem = React.createClass({
         <td>
           <span>{this.props.item.time} min</span>
         </td>
-        <td onClick={this.handleEdit}>
+        <td onclick={this.handleEdit}>
           <span>{this.props.item.topic}</span>
           <br />
           <span>{this.props.item.desc}</span>

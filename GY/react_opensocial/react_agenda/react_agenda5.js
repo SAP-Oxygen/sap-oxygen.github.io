@@ -423,7 +423,7 @@ var RowItem = React.createClass({displayName: "RowItem",
         React.createElement("td", null, 
           React.createElement("span", null, this.props.item.time, " min")
         ), 
-        React.createElement("td", {onClick: this.handleEdit}, 
+        React.createElement("td", {onclick: this.handleEdit}, 
           React.createElement("span", null, this.props.item.topic), 
           React.createElement("br", null), 
           React.createElement("span", null, this.props.item.desc)
