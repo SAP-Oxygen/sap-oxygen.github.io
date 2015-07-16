@@ -10,7 +10,8 @@ var DialogBox = React.createClass({displayName: "DialogBox",
 
     var params = gadgets.views.getParams();
     $("#people-picker").select2({
-      data: params.people
+      data: params.people,
+      width: "100%"
     });
   },
   handleSubmit: function(e) {
@@ -66,7 +67,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
             )
           ), 
           React.createElement("br", null), 
-          React.createElement("input", {type: "hidden", id: "people-picker", ref: "owner", placeholder: "Presenter", style: "width: 100%"}), 
+          React.createElement("input", {type: "hidden", id: "people-picker", ref: "owner", placeholder: "Presenter"}), 
           React.createElement("br", null), 
           React.createElement("textarea", {className: "form-control", rows: "3", ref: "desc", placeholder: "Notes", defaultValue: desc}), 
           React.createElement("br", null), 

@@ -10,7 +10,8 @@ var DialogBox = React.createClass({
 
     var params = gadgets.views.getParams();
     $("#people-picker").select2({
-      data: params.people
+      data: params.people,
+      width: "100%"
     });
   },
   handleSubmit: function(e) {
@@ -66,7 +67,7 @@ var DialogBox = React.createClass({
             </div>
           </div>
           <br />
-          <input type="hidden" id="people-picker" ref="owner" placeholder="Presenter" style="width: 100%" />
+          <input type="hidden" id="people-picker" ref="owner" placeholder="Presenter" />
           <br />
           <textarea className="form-control" rows="3" ref="desc" placeholder="Notes" defaultValue={desc} />
           <br />
