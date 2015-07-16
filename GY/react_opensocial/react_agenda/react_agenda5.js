@@ -355,6 +355,7 @@ var RowItem = React.createClass({displayName: "RowItem",
     var index = this.props.index;
     var topicId = "topic-" + index;
     var timeId = "time-" + index;
+    // onwerId here is not the real id of own
     var ownerId = "owner-" + index;
     var editId = "edit-" + index;
     var editData = {
@@ -385,6 +386,12 @@ var RowItem = React.createClass({displayName: "RowItem",
     var timeId = "time-" + index;
     // onwerId here is not the real id of owner
     var ownerId = "owner-" + index;
+    var topic;
+    if (this.props.item.topic === "") {
+      topic = "click to edti";
+    } else {
+      topic = this.props.item.topic;
+    }
     var thumbnail;
     var ownerName;
     if (this.props.item.owner) {
@@ -405,7 +412,7 @@ var RowItem = React.createClass({displayName: "RowItem",
           React.createElement("span", null, this.props.item.time, " min")
         ), 
         React.createElement("td", {className: "cursor-pointer", id: topicId}, 
-          React.createElement("span", null, this.props.item.topic), 
+          React.createElement("span", null, topic), 
           React.createElement("br", null), 
           React.createElement("span", null, this.props.item.desc)
         ), 
