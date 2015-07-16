@@ -388,7 +388,7 @@ var RowItem = React.createClass({displayName: "RowItem",
     var ownerId = "owner-" + index;
     var topic;
     if (this.props.item.topic === "") {
-      topic = "click to edti";
+      topic = "Click to edit";
     } else {
       topic = this.props.item.topic;
     }
