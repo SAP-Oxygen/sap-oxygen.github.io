@@ -354,7 +354,6 @@ var RowItem = React.createClass({
     var self = this;
     var index = this.props.index;
     var topicId = "topic-" + index;
-    var notesId = "notes-" + index;
     var timeId = "time-" + index;
     var ownerId = "owner-" + index;
     var editId = "edit-" + index;
@@ -366,7 +365,7 @@ var RowItem = React.createClass({
       owner: this.props.item.owner,
       people: this.props.people
     };
-    $('#' + editId).click(function() {
+    $("#" + editId + ", #" + topicId + ", #" + timeId + ", #" + ownerId).click(function() {
       gadgets.views.openGadget(function(result) {
         if (result) {
           self.props.onDialogEdit(result.index, result.item);
@@ -376,23 +375,6 @@ var RowItem = React.createClass({
       {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
     });
   },
-  handleEdit: function() {
-    var editData = {
-      index: index, 
-      topic: this.props.item.topic, 
-      desc: this.props.item.desc, 
-      time: this.props.item.time, 
-      owner: this.props.item.owner,
-      people: this.props.people
-    };
-    gadgets.views.openGadget(function(result) {
-      if (result) {
-        self.props.onDialogEdit(result.index, result.item);
-      }
-    }, 
-    function(site){},
-    {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
-  },
   handleRemove: function() {
     this.props.onRemove(this.props.index);
   },
@@ -400,8 +382,8 @@ var RowItem = React.createClass({
     var index = this.props.index;
     var id = index + 1;
     var topicId = "topic-" + index;
-    var notesId = "notes-" + index;
     var timeId = "time-" + index;
+    // onwerId here is not the real id of owner
     var ownerId = "owner-" + index;
     var editId = "edit-" + index;
     var thumbnail;
@@ -420,15 +402,15 @@ var RowItem = React.createClass({
         <td>
           <span>{this.props.item.startTime.format('LT')}</span>
         </td>
-        <td>
+        <td id={timeId}>
           <span>{this.props.item.time} min</span>
         </td>
-        <td onclick={this.handleEdit}>
+        <td id={topicId}>
           <span>{this.props.item.topic}</span>
           <br />
           <span>{this.props.item.desc}</span>
         </td>
-        <td className="link-text">
+        <td className="link-text" id={ownerId}>
           {thumbnail} <span className="owner">{ownerName}</span>
           <span className="pull-right on-hover">
             <Glyphicon className="editable" id={editId} glyph='edit' />

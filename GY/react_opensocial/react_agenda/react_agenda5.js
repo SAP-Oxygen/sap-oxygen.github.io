@@ -354,7 +354,6 @@ var RowItem = React.createClass({displayName: "RowItem",
     var self = this;
     var index = this.props.index;
     var topicId = "topic-" + index;
-    var notesId = "notes-" + index;
     var timeId = "time-" + index;
     var ownerId = "owner-" + index;
     var editId = "edit-" + index;
@@ -366,7 +365,7 @@ var RowItem = React.createClass({displayName: "RowItem",
       owner: this.props.item.owner,
       people: this.props.people
     };
-    $('#' + editId).click(function() {
+    $("#" + editId + ", #" + topicId + ", #" + timeId + ", #" + ownerId).click(function() {
       gadgets.views.openGadget(function(result) {
         if (result) {
           self.props.onDialogEdit(result.index, result.item);
@@ -376,23 +375,6 @@ var RowItem = React.createClass({displayName: "RowItem",
       {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
     });
   },
-  handleEdit: function() {
-    var editData = {
-      index: index, 
-      topic: this.props.item.topic, 
-      desc: this.props.item.desc, 
-      time: this.props.item.time, 
-      owner: this.props.item.owner,
-      people: this.props.people
-    };
-    gadgets.views.openGadget(function(result) {
-      if (result) {
-        self.props.onDialogEdit(result.index, result.item);
-      }
-    }, 
-    function(site){},
-    {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
-  },
   handleRemove: function() {
     this.props.onRemove(this.props.index);
   },
@@ -400,8 +382,8 @@ var RowItem = React.createClass({displayName: "RowItem",
     var index = this.props.index;
     var id = index + 1;
     var topicId = "topic-" + index;
-    var notesId = "notes-" + index;
     var timeId = "time-" + index;
+    // onwerId here is not the real id of owner
     var ownerId = "owner-" + index;
     var editId = "edit-" + index;
     var thumbnail;
@@ -420,15 +402,15 @@ var RowItem = React.createClass({displayName: "RowItem",
         React.createElement("td", null, 
           React.createElement("span", null, this.props.item.startTime.format('LT'))
         ), 
-        React.createElement("td", null, 
+        React.createElement("td", {id: timeId}, 
           React.createElement("span", null, this.props.item.time, " min")
         ), 
-        React.createElement("td", {onclick: this.handleEdit}, 
+        React.createElement("td", {id: topicId}, 
           React.createElement("span", null, this.props.item.topic), 
           React.createElement("br", null), 
           React.createElement("span", null, this.props.item.desc)
         ), 
-        React.createElement("td", {className: "link-text"}, 
+        React.createElement("td", {className: "link-text", id: ownerId}, 
           thumbnail, " ", React.createElement("span", {className: "owner"}, ownerName), 
           React.createElement("span", {className: "pull-right on-hover"}, 
             React.createElement(Glyphicon, {className: "editable", id: editId, glyph: "edit"}), 
