@@ -276,6 +276,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets) {
       );
     },
     componentDidMount: function() {
+      var self = this;
       // this helper function got from
       // http://www.paulund.co.uk/fixed-width-sortable-tables
       var fixWidthHelper = function (e, ui) {
@@ -287,14 +288,14 @@ var init = function(React, ReactBootstrap, $, moment, gadgets) {
       // helper end
 
       var onSortableStart = function() {
-        this.props.onDraggingStatus(true);
+        self.props.onDraggingStatus(true);
       };
 
       var onSortableStop = function() {
         // set draggingStatus to false so any updates from wave is applied first
         // and then apply the user's change
-        this.props.onDraggingStatus(false);
-        setTimeout(this.handleDrop, 0);
+        self.props.onDraggingStatus(false);
+        setTimeout(self.handleDrop, 0);
       };
 
       $(this.getDOMNode()).sortable({
