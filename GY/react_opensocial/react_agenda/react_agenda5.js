@@ -1,4 +1,4 @@
-"use strict"
+'use strict'
 
 var init = function(React, ReactBootstrap, $, moment, gadgets) {
 
@@ -45,7 +45,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets) {
         var waveData = waveState.state_;
         var lastWaveData = self.state.lastWaveData;
 
-        if (dragging) {
+        if (self.state.dragging) {
           self.setState({
             lastWaveData: waveData
           });
@@ -144,27 +144,28 @@ var init = function(React, ReactBootstrap, $, moment, gadgets) {
       wave.getState().submitDelta(waveData);
       console.log("sent updated items to wave (remove)");
     },
-    handleEdit: function(index, type, value) {
-      var newItems = this.state.items.slice();
-      newItem = newItems[index];
-      if (type === 'topic') {
-        newItem['topic'] = value;
-      } else if (type === 'desc') {
-        newItem['desc'] = value;
-      } else if (type === 'owner') {
-        newItem['owner'] = value;
-      } else if (type === 'time') {
-        newItem['time'] = value;
-      }
-      this.setState({
-        items: newItems
-      });
-      console.log("edited an item");
-      console.log(newItems);
-      var waveData = {items: newItems};
-      wave.getState().submitDelta(waveData);
-      console.log("sent updated items to wave (edit)");
-    },
+    // was used for inline editable
+    // handleEdit: function(index, type, value) {
+    //   var newItems = this.state.items.slice();
+    //   newItem = newItems[index];
+    //   if (type === 'topic') {
+    //     newItem['topic'] = value;
+    //   } else if (type === 'desc') {
+    //     newItem['desc'] = value;
+    //   } else if (type === 'owner') {
+    //     newItem['owner'] = value;
+    //   } else if (type === 'time') {
+    //     newItem['time'] = value;
+    //   }
+    //   this.setState({
+    //     items: newItems
+    //   });
+    //   console.log("edited an item");
+    //   console.log(newItems);
+    //   var waveData = {items: newItems};
+    //   wave.getState().submitDelta(waveData);
+    //   console.log("sent updated items to wave (edit)");
+    // },
     handleDialogEdit: function(index, item) {
       var newItems = this.state.items.slice();
       newItems[index] = item;
@@ -286,13 +287,13 @@ var init = function(React, ReactBootstrap, $, moment, gadgets) {
       // helper end
 
       var onSortableStart = function() {
-        this.onDraggingStatus(true);
+        this.props.onDraggingStatus(true);
       };
 
       var onSortableStop = function() {
         // set draggingStatus to false so any updates from wave is applied first
         // and then apply the user's change
-        this.onDraggingStatus(false);
+        this.props.onDraggingStatus(false);
         setTimeout(this.handleDrop, 0);
       };
 
