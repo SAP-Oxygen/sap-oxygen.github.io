@@ -1,6 +1,6 @@
 'use strict'
 
-var init = function(React, ReactBootstrap, $, moment, gadgets) {
+var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
 
   // variables for using React-Bootstrap
   var Table = ReactBootstrap.Table;
@@ -688,5 +688,5 @@ var init = function(React, ReactBootstrap, $, moment, gadgets) {
 };
 
 gadgets.util.registerOnLoadHandler(function() {
-  init(React, ReactBootstrap, jQuery, moment, gadgets);
+  init(React, ReactBootstrap, jQuery, moment, gadgets, wave);
 });
