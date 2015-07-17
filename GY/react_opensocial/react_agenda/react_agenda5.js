@@ -40,6 +40,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var self = this;
 
       var onWaveUpdate = function() {
+        // currently disabled writing startTime variable in wave
         console.log("onWaveUpdate has been called");
         var waveState = wave.getState();
         var waveData = waveState.state_;
@@ -62,16 +63,15 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             items = waveData.items;
           }
           // convert string moment representation to an moment object
-          var startTime = moment(waveData.startTime);
+          // var startTime = moment(waveData.startTime);
           // if the local update has already been made for the items, then do not update the items again
           if (JSON.stringify(self.state.items) === JSON.stringify(items)) {
-            self.setState({
-              startTime: startTime
-            });
+            // self.setState({
+            //   startTime: startTime
+            // });
           } else {
             self.setState({
               items: items,
-              startTime: startTime,
               counter: waveData.counter
             });
           }
@@ -178,7 +178,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         var lastWaveData = jQuery.extend(true, {}, this.state.lastWaveData);
         this.setState({
           items: lastWaveData.items,
-          startTime: lastWaveData.startTime,
           counter: lastWaveData.counter,
           lastWaveData: {}
         });
