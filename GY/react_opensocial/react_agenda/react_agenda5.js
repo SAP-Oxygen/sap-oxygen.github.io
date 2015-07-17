@@ -44,16 +44,16 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         var waveState = wave.getState();
         var waveData = waveState.state_;
         var lastWaveData = self.state.lastWaveData;
+        console.log("waveData: ");
+        console.log(waveData);
+        console.log("lastWaveData: ");
+        console.log(lastWaveData);
+        console.log("dragging: ");
+        console.log(dragging);
 
         if (self.state.dragging) {
           self.setState({
             lastWaveData: waveData
-          });
-        } else if (!$.isEmptyObject(lastWaveData)) {
-          self.setState({
-            items: lastWaveData.items,
-            startTime: lastWaveData.startTime,
-            counter: lastWaveData.counter
           });
         } else if (!$.isEmptyObject(waveData)) {
           // when (items === null) it is supposed to be an empty array
@@ -144,28 +144,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       wave.getState().submitDelta(waveData);
       console.log("sent updated items to wave (remove)");
     },
-    // was used for inline editable
-    // handleEdit: function(index, type, value) {
-    //   var newItems = this.state.items.slice();
-    //   newItem = newItems[index];
-    //   if (type === 'topic') {
-    //     newItem['topic'] = value;
-    //   } else if (type === 'desc') {
-    //     newItem['desc'] = value;
-    //   } else if (type === 'owner') {
-    //     newItem['owner'] = value;
-    //   } else if (type === 'time') {
-    //     newItem['time'] = value;
-    //   }
-    //   this.setState({
-    //     items: newItems
-    //   });
-    //   console.log("edited an item");
-    //   console.log(newItems);
-    //   var waveData = {items: newItems};
-    //   wave.getState().submitDelta(waveData);
-    //   console.log("sent updated items to wave (edit)");
-    // },
     handleDialogEdit: function(index, item) {
       var newItems = this.state.items.slice();
       newItems[index] = item;
@@ -192,6 +170,20 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       console.log("sent updated items to wave (dialog add)");
     },
     handleDraggingStatus: function(status) {
+      // when current dragging is true and the status passed to this function is false
+      // (an item has been dropped) set the state with data in lastWaveData
+      // and reset lastWaveData to an empty object
+      if (this.state.dragging && !status) {
+        // make a deep copy of lastWaveData to avoid reference problems
+        var lastWaveData = jQuery.extend(true, {}, this.state.lastWaveData);
+        this.setState({
+          items: lastWaveData.items,
+          startTime: lastWaveData.startTime,
+          counter: lastWaveData.counter,
+          lastWaveData: {}
+        });
+      }
+      // set dragging to the status passed to this function
       this.setState({
         dragging: status
       });
