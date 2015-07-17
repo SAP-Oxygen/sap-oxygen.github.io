@@ -173,7 +173,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       // when current dragging is true and the status passed to this function is false
       // (an item has been dropped) set the state with data in lastWaveData
       // and reset lastWaveData to an empty object
-      if (this.state.dragging && !status) {
+      if (this.state.dragging && !$.isEmptyObject(this.state.waveData) && !status) {
         // make a deep copy of lastWaveData to avoid reference problems
         var lastWaveData = jQuery.extend(true, {}, this.state.lastWaveData);
         this.setState({
