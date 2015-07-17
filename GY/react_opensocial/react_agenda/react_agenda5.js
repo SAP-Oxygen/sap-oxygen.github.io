@@ -49,7 +49,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         console.log("lastWaveData: ");
         console.log(lastWaveData);
         console.log("dragging: ");
-        console.log(dragging);
+        console.log(self.state.dragging);
 
         if (self.state.dragging) {
           self.setState({
