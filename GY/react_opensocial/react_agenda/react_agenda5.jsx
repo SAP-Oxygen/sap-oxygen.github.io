@@ -26,11 +26,9 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       //   var startTime = moment();
       // }
       var startTime = moment();
-      var counter = 0;
       return {
         items: [],
         startTime: startTime,
-        counter: counter,
         people: [],
         dragging: false,
         lastWaveData: {}
@@ -71,8 +69,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             // });
           } else {
             self.setState({
-              items: items,
-              counter: waveData.counter
+              items: items
             });
           }
         }
@@ -120,15 +117,39 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       console.log("sent updated items to wave (sort)");
     },
     handleAdd: function() {
-      var newItems = this.state.items.concat([{id: this.state.counter, topic: "", desc: "",time: 0, owner: ""}]);
-      var newCounter = this.state.counter + 1;
+      // var newItems = this.state.items.concat([{id: this.state.counter, topic: "", desc: "",time: 0, owner: ""}]);
+      // var newCounter = this.state.counter + 1;
+      // this.setState({
+      //   items: newItems,
+      //   counter: newCounter
+      // });
+      // console.log("added an item");
+      // console.log(newItems);
+      // var waveData = {items: newItems, counter: newCounter};
+      // wave.getState().submitDelta(waveData);
+      // console.log("sent updated items to wave (add)");
+
+      // generate a random number from 0 to 1000 for newItemId
+      var getRandomInt = function() {
+        return Math.floor(Math.random() * (1000 - 1));
+      };
+      // generate a timestamp for newItemId
+      var getCurrentTime = function() {
+        if (!Date.now) {
+          return new Date().getTime();
+        } else {
+          return Date.now(); 
+        }
+      };
+      var newItemId = "item-" + getCurrentTime() + "-" + getRandomInt();
+      var newItem = {topic: "", desc: "", time: 0, owner: ""};
+      var newItems = this.state.items.conact([newItem]);
       this.setState({
-        items: newItems,
-        counter: newCounter
+        items: newItems
       });
       console.log("added an item");
       console.log(newItems);
-      var waveData = {items: newItems, counter: newCounter};
+      var waveData = {newItemId: newItem};
       wave.getState().submitDelta(waveData);
       console.log("sent updated items to wave (add)");
     },
@@ -157,15 +178,13 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       console.log("sent updated items to wave (dialog edit)");
     },
     handleDialogSubmit: function(result) {
-      var newItems = this.state.items.concat([$.extend(result, {id: this.state.counter})]);
-      var newCounter = this.state.counter + 1;
+      var newItems = this.state.items.concat([result]);
       this.setState({
-        items: newItems,
-        counter: newCounter
+        items: newItems
       });
       console.log("added an item");
       console.log(newItems);
-      var waveData = {items: newItems, counter: newCounter};
+      var waveData = {items: newItems};
       wave.getState().submitDelta(waveData);
       console.log("sent updated items to wave (dialog add)");
     },
@@ -178,7 +197,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         var lastWaveData = jQuery.extend(true, {}, this.state.lastWaveData);
         this.setState({
           items: lastWaveData.items,
-          counter: lastWaveData.counter,
           lastWaveData: {}
         });
       }
