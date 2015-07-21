@@ -226,7 +226,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           ), 
           React.createElement("br", null), 
           React.createElement(Row, {className: "show-grid"}, 
-            React.createElement(Col, {xs: 1}
+            React.createElement(Col, {xs: 1}, 
+              React.createElement(DragBar, {order: this.state.order})
             ), 
             React.createElement(Col, {xs: 11}, 
               React.createElement(AgendaTable, {items: this.state.items, 
@@ -639,6 +640,23 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     render: function() {
       return(
         React.createElement(Button, {id: "dialog-btn"}, "Open a dialog")
+      );
+    }
+  });
+
+  var DragBar = React.createClass({displayName: "DragBar",
+    render: function() {
+      var bar = this.props.order.map(function(itemId) {
+        return(
+          React.createElement("button", {type: "button", className: "btn btn-default btn-lg", id: itemId}, 
+            React.createElement("span", {class: "glyphicon glyphicon-sort", "aria-hidden": "true"})
+          )
+        );
+      });
+      return(
+        React.createElement("div", {className: "btn-group-vertical", role: "group"}, 
+          bar
+        )
       );
     }
   });

@@ -227,6 +227,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           <br />
           <Row className="show-grid">
             <Col xs={1}>
+              <DragBar order={this.state.order} />
             </Col>
             <Col xs={11}>
               <AgendaTable items={this.state.items} 
@@ -639,6 +640,23 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     render: function() {
       return(
         <Button id="dialog-btn">Open a dialog</Button>
+      );
+    }
+  });
+
+  var DragBar = React.createClass({
+    render: function() {
+      var bar = this.props.order.map(function(itemId) {
+        return(
+          <button type="button" className="btn btn-default btn-lg" id={itemId}>
+            <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+          </button>
+        );
+      });
+      return(
+        <div className="btn-group-vertical" role="group">
+          {bar}
+        </div>
       );
     }
   });
