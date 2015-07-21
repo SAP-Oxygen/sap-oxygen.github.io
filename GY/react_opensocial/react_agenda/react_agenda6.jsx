@@ -647,7 +647,9 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   var DragBar = React.createClass({
     componentDidMount: function() {
       $("#sortable-buttons").sortable({
-        axis: 'y'
+        axis: 'y',
+        handle: 'button',
+        cancel: ''
       });
     },
     render: function() {
