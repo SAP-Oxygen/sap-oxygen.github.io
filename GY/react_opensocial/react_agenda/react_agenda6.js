@@ -219,7 +219,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        React.createElement(Grid, {id: "grid"}, 
+        React.createElement(Grid, {className: "container-fluid", id: "grid"}, 
           React.createElement("br", null), 
           React.createElement(Row, null, 
             React.createElement(DateTimePicker, {onTimeChange: this.handleTimeChange})

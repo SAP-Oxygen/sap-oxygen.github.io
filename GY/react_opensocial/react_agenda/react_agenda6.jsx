@@ -219,7 +219,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        <Grid id="grid">
+        <Grid className="container-fluid" id="grid">
           <br />
           <Row>
             <DateTimePicker onTimeChange={this.handleTimeChange} />
