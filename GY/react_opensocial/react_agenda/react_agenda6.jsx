@@ -645,6 +645,11 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   });
 
   var DragBar = React.createClass({
+    componentDidMount: function() {
+      $("#sortable-buttons").sortable({
+        axis: 'y'
+      });
+    },
     render: function() {
       var bar = this.props.order.map(function(itemId) {
         return(
@@ -654,7 +659,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         );
       });
       return(
-        <div className="btn-group-vertical" role="group">
+        <div className="btn-group-vertical" role="group" id="sortable-buttons">
           {bar}
         </div>
       );
