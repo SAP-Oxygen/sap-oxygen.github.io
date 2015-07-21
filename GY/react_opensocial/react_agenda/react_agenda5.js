@@ -157,7 +157,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
       console.log("added an item");
       console.log(newItems);
-      var waveData = {newItemId: newItem};
+      var waveData = {};
+      waveData[newItemId] = newItem;
       wave.getState().submitDelta(waveData);
       console.log("sent updated items to wave (add)");
     },
