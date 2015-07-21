@@ -154,7 +154,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var newItems = this.state.items.concat([newItem]);
       var newOrder = this.state.order.concat([newItemId]);
       this.setState({
-        items: newItems
+        items: newItems,
+        order: newOrder
       });
       console.log("added an item");
       console.log(newItems);
