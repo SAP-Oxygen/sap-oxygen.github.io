@@ -28,6 +28,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var startTime = moment();
       return {
         items: [],
+        order: [],
         startTime: startTime,
         people: [],
         dragging: false,
@@ -41,7 +42,10 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         // currently disabled writing startTime variable in wave
         console.log("onWaveUpdate has been called");
         var waveState = wave.getState();
-        var waveData = waveState.state_;
+        var waveData = {};
+        $.each(waveState.getKeys(), function(index, key) {
+          waveData[key] = waveState.get(key);
+        });
         var lastWaveData = self.state.lastWaveData;
         console.log("waveData: ");
         console.log(waveData);
@@ -50,6 +54,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         console.log("dragging: ");
         console.log(self.state.dragging);
 
+        // if dragging variable of the current state is true,
+        // then store the current waveData and do not update the state
         if (self.state.dragging) {
           self.setState({
             lastWaveData: waveData
@@ -57,21 +63,23 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         } else if (!$.isEmptyObject(waveData)) {
           // when (items === null) it is supposed to be an empty array
           var items = [];
-          if (waveData.items) {
-            items = waveData.items;
-          }
-          // convert string moment representation to an moment object
-          // var startTime = moment(waveData.startTime);
-          // if the local update has already been made for the items, then do not update the items again
-          if (JSON.stringify(self.state.items) === JSON.stringify(items)) {
-            // self.setState({
-            //   startTime: startTime
-            // });
-          } else {
-            self.setState({
-              items: items
-            });
-          }
+          var order = waveData["order"] || [];
+          var startTime = waveData["startTime"];
+          order.forEach(function(itemId, index) {
+            items.push(waveData[itemId]);
+          });
+          // }
+          // // convert string moment representation to an moment object
+          // // var startTime = moment(waveData.startTime);
+          // // if the local update has already been made for the items, then do not update the items again
+          // if (JSON.stringify(self.state.items) === JSON.stringify(items)) {
+          //   self.setState({
+          //     startTime: startTime
+          //   });
+          self.setState({
+            items: items,
+            order: order
+          });
         }
       };
 
@@ -142,7 +150,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         }
       };
       var newItemId = "item-" + getCurrentTime() + "-" + getRandomInt();
-      var newItem = {topic: "", desc: "", time: 0, owner: ""};
+      var newItem = {id: newItemId, topic: "", desc: "", time: 0, owner: ""};
       var newItems = this.state.items.conact([newItem]);
       this.setState({
         items: newItems
