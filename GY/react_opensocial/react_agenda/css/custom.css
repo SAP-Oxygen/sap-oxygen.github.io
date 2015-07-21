@@ -122,3 +122,7 @@ body {
 li {
     list-style-type: none;
 }
+
+ul {
+    padding: 0 !important;
+}
