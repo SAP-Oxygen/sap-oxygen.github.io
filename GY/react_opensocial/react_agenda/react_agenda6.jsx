@@ -663,9 +663,11 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         );
       });
       return(
-        <ul id="sortable-buttons">
-          {bar}
-        </ul>
+        <div>
+          <ul id="sortable-buttons">
+            {bar}
+          </ul>
+        </div>
       );
     }
   });

@@ -663,8 +663,10 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         );
       });
       return(
-        React.createElement("ul", {id: "sortable-buttons"}, 
-          bar
+        React.createElement("div", null, 
+          React.createElement("ul", {id: "sortable-buttons"}, 
+            bar
+          )
         )
       );
     }
