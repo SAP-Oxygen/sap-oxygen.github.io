@@ -649,7 +649,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var bar = this.props.order.map(function(itemId) {
         return(
           <button type="button" className="btn btn-default btn-lg" id={itemId}>
-            <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+            <span className="glyphicon glyphicon-sort" aria-hidden="true"></span>
           </button>
         );
       });
