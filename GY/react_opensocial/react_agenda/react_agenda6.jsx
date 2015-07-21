@@ -221,19 +221,25 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       return (
         <Grid className="container-fluid" id="grid">
           <br />
-          <Row>
+          <Row className="show-grid">
             <DateTimePicker onTimeChange={this.handleTimeChange} />
           </Row>
           <br />
-          <AgendaTable items={this.state.items} 
-            startTime={this.state.startTime} 
-            people={this.state.people} 
-            onSort={this.handleSort} 
-            onEdit={this.handleEdit} 
-            onRemove={this.handleRemove} 
-            onDialogEdit={this.handleDialogEdit} 
-            onDraggingStatus={this.handleDraggingStatus} />
-          <AddButton onAdd={this.handleAdd} />
+          <Row className="show-grid">
+            <Col xs={1}>
+            </Col>
+            <Col xs={11}>
+              <AgendaTable items={this.state.items} 
+                startTime={this.state.startTime} 
+                people={this.state.people} 
+                onSort={this.handleSort} 
+                onEdit={this.handleEdit} 
+                onRemove={this.handleRemove} 
+                onDialogEdit={this.handleDialogEdit} 
+                onDraggingStatus={this.handleDraggingStatus} />
+              <AddButton onAdd={this.handleAdd} />
+            </Col>
+          </Row>
         </Grid>
       );
     }
@@ -241,9 +247,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
 
   var AgendaTable = React.createClass({
     componentWillMount: function() {
-      $.fn.editable.defaults.mode = 'inline';
-      $.fn.editableform.buttons = '<button type="submit" class="btn btn-default btn-sm editable-submit">ok</button>' + 
-                                  '<button type="button" class="btn btn-default btn-sm editable-cancel">cancel</button>';
     },
     componentDidMount: function() {
     },

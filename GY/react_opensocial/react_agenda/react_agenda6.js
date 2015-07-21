@@ -221,19 +221,25 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       return (
         React.createElement(Grid, {className: "container-fluid", id: "grid"}, 
           React.createElement("br", null), 
-          React.createElement(Row, null, 
+          React.createElement(Row, {className: "show-grid"}, 
             React.createElement(DateTimePicker, {onTimeChange: this.handleTimeChange})
           ), 
           React.createElement("br", null), 
-          React.createElement(AgendaTable, {items: this.state.items, 
-            startTime: this.state.startTime, 
-            people: this.state.people, 
-            onSort: this.handleSort, 
-            onEdit: this.handleEdit, 
-            onRemove: this.handleRemove, 
-            onDialogEdit: this.handleDialogEdit, 
-            onDraggingStatus: this.handleDraggingStatus}), 
-          React.createElement(AddButton, {onAdd: this.handleAdd})
+          React.createElement(Row, {className: "show-grid"}, 
+            React.createElement(Col, {xs: 1}
+            ), 
+            React.createElement(Col, {xs: 11}, 
+              React.createElement(AgendaTable, {items: this.state.items, 
+                startTime: this.state.startTime, 
+                people: this.state.people, 
+                onSort: this.handleSort, 
+                onEdit: this.handleEdit, 
+                onRemove: this.handleRemove, 
+                onDialogEdit: this.handleDialogEdit, 
+                onDraggingStatus: this.handleDraggingStatus}), 
+              React.createElement(AddButton, {onAdd: this.handleAdd})
+            )
+          )
         )
       );
     }
@@ -241,9 +247,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
 
   var AgendaTable = React.createClass({displayName: "AgendaTable",
     componentWillMount: function() {
-      $.fn.editable.defaults.mode = 'inline';
-      $.fn.editableform.buttons = '<button type="submit" class="btn btn-default btn-sm editable-submit">ok</button>' + 
-                                  '<button type="button" class="btn btn-default btn-sm editable-cancel">cancel</button>';
     },
     componentDidMount: function() {
     },
