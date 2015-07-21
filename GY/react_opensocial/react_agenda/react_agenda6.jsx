@@ -663,9 +663,9 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         );
       });
       return(
-        <div className="btn-group-vertical" role="group" id="sortable-buttons">
+        <ul id="sortable-buttons">
           {bar}
-        </div>
+        </ul>
       );
     }
   });
