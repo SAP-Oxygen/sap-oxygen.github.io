@@ -6,6 +6,6 @@
         <Require feature="wave" />
         <Require feature="open-views" />
     </ModulePrefs>
-  <Content type="html" href="react_agenda5.html" />
-  <Content type="html" href="react_agenda_dialog_box5.html" view="dialog" />
+  <Content type="html" href="react_agenda6.html" />
+  <Content type="html" href="react_agenda_dialog_box6.html" view="dialog" />
 </Module >
