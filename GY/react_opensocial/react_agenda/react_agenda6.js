@@ -552,6 +552,12 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     componentDidMount: function() {
       var self = this;
 
+      this.props.order.forEach(function(itemId) {
+        $("<li><button type='button' class='btn btn-default btn-lg'><span class='glyphicon glyphicon-sort'></span></button></li>", {
+          id: itemId
+        }).appendTo($("sortable-buttons"));
+      });
+
       var onSortableStop = function(event, ui) {
         var sortedIds = $( "#sortable-buttons" ).sortable( "toArray" );
         self.props.onSort(sortedIds);
@@ -581,8 +587,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
               "P"
             )
           ), 
-          React.createElement("ul", {id: "sortable-buttons"}, 
-            bar
+          React.createElement("ul", {id: "sortable-buttons"}
           )
         )
       );
