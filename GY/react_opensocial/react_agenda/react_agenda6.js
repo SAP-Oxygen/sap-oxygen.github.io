@@ -197,15 +197,21 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       wave.getState().submitDelta(waveData);
       console.log("sent updated items to wave (remove)");
     },
-    handleDialogEdit: function(index, item) {
-      var newItems = this.state.items.slice();
-      newItems[index] = item;
+    handleDialogEdit: function(item) {
+      var newItems = [];
+      var newItemsMap = $.extend({}, this.state.itemsMap);
+      newItemsMap[item.id] = item;
+      this.state.order.forEach(function(itemId) {
+        newItems.push(newItemsMap[itemId]);
+      });
       this.setState({
-        items: newItems
+        items: newItems,
+        itemsMap: newItemsMap
       });
       console.log("edited an item");
       console.log(newItems);
-      var waveData = {items: newItems};
+      var waveData = {};
+      waveData[item.id] = item;
       wave.getState().submitDelta(waveData);
       console.log("sent updated items to wave (dialog edit)");
     },
@@ -334,17 +340,13 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var ownerId = "owner-" + index;
       var editId = "edit-" + index;
       var editData = {
-        index: index, 
-        topic: this.props.item.topic, 
-        desc: this.props.item.desc, 
-        time: this.props.item.time, 
-        owner: this.props.item.owner,
+        item: this.props.item,
         people: this.props.people
       };
       $("#" + editId + ", #" + topicId + ", #" + timeId + ", #" + ownerId).click(function() {
         gadgets.views.openGadget(function(result) {
           if (result) {
-            self.props.onDialogEdit(result.index, result.item);
+            self.props.onDialogEdit(result.item);
           }
         }, 
         function(site){},
