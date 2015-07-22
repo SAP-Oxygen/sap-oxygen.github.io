@@ -302,15 +302,16 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
 
   var TableBody = React.createClass({
     render: function() {
+      var self = this;
       var items = this.props.items.map(function(item, index, array) {
         return(
           <RowItem 
             index={index} 
             item={item} 
-            people={this.props.people} 
-            onEdit={this.props.onEdit} 
-            onRemove={this.props.onRemove} 
-            onDialogEdit={this.props.onDialogEdit} />
+            people={self.props.people} 
+            onEdit={self.props.onEdit} 
+            onRemove={self.props.onRemove} 
+            onDialogEdit={self.props.onDialogEdit} />
         );
       });
       return (
