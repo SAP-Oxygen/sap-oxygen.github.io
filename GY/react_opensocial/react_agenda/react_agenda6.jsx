@@ -169,7 +169,9 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var newItem = {id: newItemId, topic: "", desc: "", time: 0, owner: ""};
       var newItems = this.state.items.concat([newItem]);
       var newOrder = this.state.order.concat([newItemId]);
-      var newItemsMap = $.extend(this.state.itemsMap, newItem);
+      var newItemMap = {};
+      newItemMap[newItemId] = newItem;
+      var newItemsMap = $.extend(this.state.itemsMap, newItemMap);
       this.setState({
         items: newItems,
         order: newOrder,
