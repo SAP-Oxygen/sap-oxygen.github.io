@@ -553,7 +553,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       this.props.order.forEach(function(itemId) {
         $("<li><button type='button' class='btn btn-default btn-lg'><span class='glyphicon glyphicon-sort'></span></button></li>", {
           id: itemId
-        }).appendTo($("sortable-buttons"));
+        }).appendTo($("#sortable-buttons"));
       });
     },
     componentDidMount: function() {
@@ -562,7 +562,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       this.props.order.forEach(function(itemId) {
         $("<li><button type='button' class='btn btn-default btn-lg'><span class='glyphicon glyphicon-sort'></span></button></li>", {
           id: itemId
-        }).appendTo($("sortable-buttons"));
+        }).appendTo($("#sortable-buttons"));
       });
 
       var onSortableStop = function(event, ui) {
