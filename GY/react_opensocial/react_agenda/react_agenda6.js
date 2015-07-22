@@ -133,6 +133,12 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         items: newItems,
         order: newOrder
       });
+      console.log("sorted items");
+      console.log(newItems);
+      var waveData = {};
+      waveData["order"] = newOrder;
+      wave.getState().submitDelta(waveData);
+      console.log("sent updated items to wave (sort)");
     },
     handleAdd: function() {
       // var newItems = this.state.items.concat([{id: this.state.counter, topic: "", desc: "",time: 0, owner: ""}]);
