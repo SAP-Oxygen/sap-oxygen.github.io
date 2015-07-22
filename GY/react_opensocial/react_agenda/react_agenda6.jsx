@@ -546,26 +546,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     }
   });
 
-  var DialogButton = React.createClass({
-    componentDidMount: function() {
-      var self = this;
-      $("#dialog-btn").click(function() {
-        gadgets.views.openGadget(function(result) {
-          if (result) {
-            self.props.onDialogSubmit(result);
-          }
-        }, 
-        function(site){},
-        {view: "dialog", viewTarget: "MODALDIALOG"});
-      });
-    },
-    render: function() {
-      return(
-        <Button id="dialog-btn">Open a dialog</Button>
-      );
-    }
-  });
-
   var DragBar = React.createClass({
     componentDidMount: function() {
       var self = this;
@@ -594,6 +574,11 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
       return(
         <div>
+          <li>
+            <button type="button" classname="btn btn-default btn-lg">
+              P
+            </button>
+          </li>
           <ul id="sortable-buttons">
             {bar}
           </ul>

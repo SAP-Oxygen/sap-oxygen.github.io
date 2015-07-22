@@ -546,26 +546,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     }
   });
 
-  var DialogButton = React.createClass({displayName: "DialogButton",
-    componentDidMount: function() {
-      var self = this;
-      $("#dialog-btn").click(function() {
-        gadgets.views.openGadget(function(result) {
-          if (result) {
-            self.props.onDialogSubmit(result);
-          }
-        }, 
-        function(site){},
-        {view: "dialog", viewTarget: "MODALDIALOG"});
-      });
-    },
-    render: function() {
-      return(
-        React.createElement(Button, {id: "dialog-btn"}, "Open a dialog")
-      );
-    }
-  });
-
   var DragBar = React.createClass({displayName: "DragBar",
     componentDidMount: function() {
       var self = this;
@@ -594,6 +574,11 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
       return(
         React.createElement("div", null, 
+          React.createElement("li", null, 
+            React.createElement("button", {type: "button", classname: "btn btn-default btn-lg"}, 
+              "P"
+            )
+          ), 
           React.createElement("ul", {id: "sortable-buttons"}, 
             bar
           )
