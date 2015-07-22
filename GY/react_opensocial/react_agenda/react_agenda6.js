@@ -567,7 +567,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     render: function() {
       var bar = this.props.order.map(function(itemId) {
         return(
-          React.createElement("li", {id: itemId}, 
+          React.createElement("li", {id: itemId, key: itemId}, 
             React.createElement("button", {type: "button", className: "btn btn-default btn-lg"}, 
               React.createElement("span", {className: "glyphicon glyphicon-sort", "aria-hidden": "true"})
             )
