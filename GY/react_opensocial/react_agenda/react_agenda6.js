@@ -127,7 +127,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var newItems = [];
       var itemsMap = this.state.itemsMap;
       newOrder.forEach(function(itemId, index) {
-        items.push(itemsMap[itemId]);
+        newItems.push(itemsMap[itemId]);
       });
       this.setState({
         items: newItems,
