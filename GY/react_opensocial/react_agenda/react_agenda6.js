@@ -276,9 +276,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var rowsArr = [];
       var itemId = null;
       var lastItemEndTime = null;
-      var items = this.props.items.map(function(item) {
-        return (React.createElement("tr", {key: item.id, item: item}));
-      })
       return (
         React.createElement(Table, {className: "agenda-table", responsive: true}, 
           React.createElement("thead", null, 
@@ -290,134 +287,38 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
               React.createElement("th", {className: "short"}, "Presenter")
             )
           ), 
-          React.createElement(TableBody, {startTime: this.props.startTime, 
+          React.createElement(TableBody, {
+            items: this.props.items, 
+            startTime: this.props.startTime, 
             people: this.props.people, 
-            onSort: this.props.onSort, 
             onEdit: this.props.onEdit, 
             onRemove: this.props.onRemove, 
-            onDialogEdit: this.props.onDialogEdit, 
-            onDraggingStatus: this.props.onDraggingStatus}, 
-            items
+            onDialogEdit: this.props.onDialogEdit}
           )
         )
       );
     }
   });
 
-  // the proxy rendering design pattern borrowed from the following link (gist)
-  // https://gist.github.com/petehunt/7882164
-  // https://gist.github.com/fversnel/4aed612b69d3ec196157
   var TableBody = React.createClass({displayName: "TableBody",
-    getDefaultProps: function() {
-      return {component: 'tbody', childComponent: 'tr'};
-    },
     render: function() {
-      var props = $.extend({}, this.props);
-      delete props.children;
+      var items = this.props.items.map(function(item, index, array) {
+        return(
+          React.createElement(RowItem, {
+            index: index, 
+            item: item, 
+            people: this.props.people, 
+            onEdit: this.props.onEdit, 
+            onRemove: this.props.onRemove, 
+            onDialogEdit: this.props.onDialogEdit})
+        );
+      });
       return (
-        React.createElement(this.props.component, React.__spread({},  props))
+        React.createElement("tbody", null, 
+          items
+        )
       );
     },
-    componentDidMount: function() {
-      var self = this;
-      // this helper function got from
-      // http://www.paulund.co.uk/fixed-width-sortable-tables
-      var fixWidthHelper = function (e, ui) {
-          ui.children().each(function() {
-              $(this).width($(this).width());
-          });
-          return ui;
-      };
-      // helper end
-
-      var onSortableStart = function() {
-        self.props.onDraggingStatus(true);
-      };
-
-      var onSortableStop = function() {
-        // set draggingStatus to false so any updates from wave is applied first
-        // and then apply the user's change
-        self.props.onDraggingStatus(false);
-        setTimeout(self.handleDrop, 0);
-      };
-
-      $(this.getDOMNode()).sortable({
-        axis: 'y',
-        helper: fixWidthHelper,
-        start: onSortableStart,
-        stop: onSortableStop,
-      });
-      var lastItemEndTime = null;
-      this.getChildren().forEach(function(child, i) {
-        if (!lastItemEndTime) {
-          lastItemEndTime = this.props.startTime.clone();
-        }
-        var item = child.props.item;
-        var index = i;
-        $.extend(item, {startTime: lastItemEndTime.clone()});
-        $(this.getDOMNode()).append('<' + this.props.childComponent + ' />');
-        var node = $(this.getDOMNode()).children().last()[0];
-        node.dataset.reactSortablePos = i;
-        React.render(React.createElement(RowItem, {index: index, item: child.props.item, people: this.props.people, onEdit: this.props.onEdit, onRemove: this.props.onRemove, onDialogEdit: this.props.onDialogEdit}), node);
-        lastItemEndTime.add(child.props.item.time, 'm');
-      }.bind(this));
-
-      adjustHeight();
-    },
-    componentDidUpdate: function() {
-      var childIndex = 0;
-      var nodeIndex = 0;
-      var children = this.getChildren();
-      var nodes = $(this.getDOMNode()).children();
-      var numChildren = children.length;
-      var numNodes = nodes.length;
-
-      var lastItemEndTime = null;
-    
-      while (childIndex < numChildren) {
-        if (!lastItemEndTime) {
-          lastItemEndTime = this.props.startTime.clone();
-        }
-        var item = children[childIndex].props.item;
-        var index = childIndex;
-        $.extend(item, {startTime: lastItemEndTime.clone()});
-        if (nodeIndex >= numNodes) {
-          $(this.getDOMNode()).append('<' + this.props.childComponent + '/>');
-          nodes.push($(this.getDOMNode()).children().last()[0]);
-          nodes[numNodes].dataset.reactSortablePos = numNodes;
-          numNodes++;
-        }
-        React.render(React.createElement(RowItem, {index: index, item: item, people: this.props.people, onEdit: this.props.onEdit, onRemove: this.props.onRemove, onDialogEdit: this.props.onDialogEdit}), nodes[nodeIndex]);
-        childIndex++;
-        nodeIndex++;
-        lastItemEndTime.add(item.time, 'm');
-      }
-    
-      while (nodeIndex < numNodes) {
-        React.unmountComponentAtNode(nodes[nodeIndex]);
-        $(nodes[nodeIndex]).remove();
-        nodeIndex++;
-      }
-
-      adjustHeight();
-    },
-    componentWillUnmount: function() {
-      $(this.getDOMNode()).children().get().forEach(function(node) {
-        React.unmountComponentAtNode(node);
-      });
-    },
-    getChildren: function() {
-      // TODO: use mapChildren()
-      return this.props.children || [];
-    },
-    handleDrop: function() {
-      var newOrder = $(this.getDOMNode()).children().get().map(function(child, i) {
-        var rv = child.dataset.reactSortablePos;
-        child.dataset.reactSortablePos = i;
-        return rv;
-      });
-      this.props.onSort(newOrder);
-    }
   });
 
   var RowItem = React.createClass({displayName: "RowItem",
