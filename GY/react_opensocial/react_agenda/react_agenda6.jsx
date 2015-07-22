@@ -575,7 +575,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       return(
         <div>
           <li>
-            <button type="button" classname="btn btn-default btn-lg">
+            <button type="button" className="btn btn-default btn-lg">
               P
             </button>
           </li>
