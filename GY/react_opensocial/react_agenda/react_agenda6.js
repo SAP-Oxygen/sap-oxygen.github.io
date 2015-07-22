@@ -549,6 +549,13 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   });
 
   var DragBar = React.createClass({displayName: "DragBar",
+    shouldComponentUpdate: function() {
+      this.props.order.forEach(function(itemId) {
+        $("<li><button type='button' class='btn btn-default btn-lg'><span class='glyphicon glyphicon-sort'></span></button></li>", {
+          id: itemId
+        }).appendTo($("sortable-buttons"));
+      });
+    },
     componentDidMount: function() {
       var self = this;
 
