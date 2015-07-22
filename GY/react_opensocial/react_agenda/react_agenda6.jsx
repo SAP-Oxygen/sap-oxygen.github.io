@@ -668,7 +668,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
 
       var onSortableStop = function(event, ui) {
         var sortedIds = $( "#sortable-buttons" ).sortable( "toArray" );
-        self.props.onSorted(sortedIds);
+        self.props.onSort(sortedIds);
       };
 
       $("#sortable-buttons").sortable({
