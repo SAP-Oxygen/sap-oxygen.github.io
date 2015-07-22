@@ -29,6 +29,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       return {
         items: [],
         order: [],
+        itemsMap: {},
         startTime: startTime,
         people: [],
         dragging: false,
@@ -112,17 +113,26 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       console.log("sent startTime to wave");
     },
     handleSort: function(newOrder) {
-      var newItems = newOrder.map(function(index) {
-        return this.state.items[index];
-      }.bind(this));
-      this.setState({
-        items: newItems
+      // var newItems = newOrder.map(function(index) {
+      //   return this.state.items[index];
+      // }.bind(this));
+      // this.setState({
+      //   items: newItems
+      // });
+      // console.log("sorted items");
+      // console.log(newItems);
+      // var waveData = {items: newItems};
+      // wave.getState().submitDelta(waveData);
+      // console.log("sent updated items to wave (sort)");
+      var newItems = [];
+      var itemsMap = this.state.itemsMap;
+      newOrder.forEach(function(itemId, index) {
+        items.push(itemsMap[itemId]);
       });
-      console.log("sorted items");
-      console.log(newItems);
-      var waveData = {items: newItems};
-      wave.getState().submitDelta(waveData);
-      console.log("sent updated items to wave (sort)");
+      this.setState({
+        items: newItems,
+        order: newOrder
+      });
     },
     handleAdd: function() {
       // var newItems = this.state.items.concat([{id: this.state.counter, topic: "", desc: "",time: 0, owner: ""}]);
@@ -153,9 +163,11 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var newItem = {id: newItemId, topic: "", desc: "", time: 0, owner: ""};
       var newItems = this.state.items.concat([newItem]);
       var newOrder = this.state.order.concat([newItemId]);
+      var newItemsMap = $.extend(this.state.itemsMap, newItem);
       this.setState({
         items: newItems,
-        order: newOrder
+        order: newOrder,
+        itemsMap: newItemsMap
       });
       console.log("added an item");
       console.log(newItems);
@@ -227,7 +239,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           <br />
           <Row className="show-grid">
             <Col xs={1}>
-              <DragBar order={this.state.order} />
+              <DragBar order={this.state.order} onSort={this.handleSort} />
             </Col>
             <Col xs={11}>
               <AgendaTable items={this.state.items} 
@@ -646,10 +658,18 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
 
   var DragBar = React.createClass({
     componentDidMount: function() {
+      var self = this;
+
+      var onSortableStop = function(event, ui) {
+        var sortedIds = $( "#sortable-buttons" ).sortable( "toArray" );
+        self.props.onSorted(sortedIds);
+      };
+
       $("#sortable-buttons").sortable({
         axis: 'y',
         handle: 'button',
-        cancel: ''
+        cancel: '',
+        stop: onSortableStop
       });
     },
     render: function() {
