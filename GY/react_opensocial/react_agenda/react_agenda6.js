@@ -379,7 +379,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             React.createElement("span", {className: "glyphicon glyphicon-menu-hamburger on-hover"})
           ), 
           React.createElement("td", null, 
-            React.createElement("span", null, this.props.item.startTime.format('LT'))
+            React.createElement("span", null, "11:11PM")
           ), 
           React.createElement("td", {className: "cursor-pointer", id: timeId}, 
             React.createElement("span", null, this.props.item.time, " min")
