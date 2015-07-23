@@ -419,7 +419,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             <span className="glyphicon glyphicon-menu-hamburger on-hover"></span>
           </td>
           <td>
-            <span>11:11PM</span>
+            <span>{lastItemEndTime.format('LT')}</span>
           </td>
           <td className="cursor-pointer" id={timeId}>
             <span>{this.props.item.time} min</span>
