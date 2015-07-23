@@ -352,6 +352,13 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         function(site){},
         {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
       });
+
+      if ($("#" + self.item.id).length == 0) {
+        $("<li/>", {
+            id: self.item.id,
+            text: "[]"
+        }).appendTo("#sortable-list");
+      }
     },
     handleRemove: function() {
       this.props.onRemove(this.props.index);
@@ -549,28 +556,15 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   });
 
   var DragBar = React.createClass({displayName: "DragBar",
-    shouldComponentUpdate: function() {
-      this.props.order.forEach(function(itemId) {
-        $("<li><button type='button' class='btn btn-default btn-lg'><span class='glyphicon glyphicon-sort'></span></button></li>", {
-          id: itemId
-        }).appendTo($("#sortable-buttons"));
-      });
-    },
     componentDidMount: function() {
       var self = this;
 
-      this.props.order.forEach(function(itemId) {
-        $("<li><button type='button' class='btn btn-default btn-lg'><span class='glyphicon glyphicon-sort'></span></button></li>", {
-          id: itemId
-        }).appendTo($("#sortable-buttons"));
-      });
-
       var onSortableStop = function(event, ui) {
-        var sortedIds = $( "#sortable-buttons" ).sortable( "toArray" );
+        var sortedIds = $( "#sortable-list" ).sortable( "toArray" );
         self.props.onSort(sortedIds);
       };
 
-      $("#sortable-buttons").sortable({
+      $("#sortable-list").sortable({
         axis: 'y',
         handle: 'button',
         cancel: '',
@@ -594,7 +588,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
               "P"
             )
           ), 
-          React.createElement("ul", {id: "sortable-buttons"}
+          React.createElement("ul", {id: "sortable-list"}
           )
         )
       );
