@@ -339,7 +339,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       // onwerId here is not the real id of own
       var ownerId = "owner-" + index;
       var editId = "edit-" + index;
-      var editData = {;
+      var editData = {
         item: this.props.item,
         people: this.props.people
       };
@@ -363,7 +363,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       // onwerId here is not the real id of own
       var ownerId = "owner-" + index;
       var editId = "edit-" + index;
-      var editData = {;
+      var editData = {
         item: this.props.item,
         people: this.props.people
       };

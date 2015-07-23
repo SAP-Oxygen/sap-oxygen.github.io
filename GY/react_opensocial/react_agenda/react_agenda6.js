@@ -331,6 +331,28 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   });
 
   var RowItem = React.createClass({displayName: "RowItem",
+    componentDidUpdate: function() {
+      var self = this;
+      var index = this.props.index;
+      var topicId = "topic-" + index;
+      var timeId = "time-" + index;
+      // onwerId here is not the real id of own
+      var ownerId = "owner-" + index;
+      var editId = "edit-" + index;
+      var editData = {
+        item: this.props.item,
+        people: this.props.people
+      };
+      $("#" + editId + ", #" + topicId + ", #" + timeId + ", #" + ownerId).click(function() {
+        gadgets.views.openGadget(function(result) {
+          if (result) {
+            self.props.onDialogEdit(result.item);
+          }
+        }, 
+        function(site){},
+        {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
+      });
+    },
     componentDidMount: function() {
       adjustHeight();
 
