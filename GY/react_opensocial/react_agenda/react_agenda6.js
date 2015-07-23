@@ -353,9 +353,9 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
       });
 
-      if ($("#" + self.item.id).length == 0) {
+      if ($("#" + self.props.item.id).length == 0) {
         $("<li/>", {
-            id: self.item.id,
+            id: self.props.item.id,
             text: "[]"
         }).appendTo("#sortable-list");
       }
