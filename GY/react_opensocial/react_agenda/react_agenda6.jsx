@@ -566,8 +566,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
 
       $("#sortable-list").sortable({
         axis: 'y',
-        handle: 'button',
-        cancel: '',
         stop: onSortableStop
       });
     },
