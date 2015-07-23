@@ -61,20 +61,18 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           var items = [];
           var order = waveData["order"] || [];
           var startTime = waveData["startTime"];
+          delete waveData["order"];
+          delete waveData["startTime"];
           order.forEach(function(itemId, index) {
             items.push(waveData[itemId]);
           });
           // }
           // // convert string moment representation to an moment object
           // // var startTime = moment(waveData.startTime);
-          // // if the local update has already been made for the items, then do not update the items again
-          // if (JSON.stringify(self.state.items) === JSON.stringify(items)) {
-          //   self.setState({
-          //     startTime: startTime
-          //   });
           self.setState({
             items: items,
-            order: order
+            order: order,
+            itemsMap: waveData
           });
         }
       };
