@@ -20,11 +20,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
 
   var Agenda = React.createClass({displayName: "Agenda",
     getInitialState: function() {
-      // if (this.props.data.startTime) {
-      //   var startTime = moment(this.props.data.startTime);
-      // } else {
-      //   var startTime = moment();
-      // }
       var startTime = moment();
       return {
         items: [],
@@ -311,16 +306,23 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   var TableBody = React.createClass({displayName: "TableBody",
     render: function() {
       var self = this;
-      var items = this.props.items.map(function(item, index, array) {
-        return(
+      var items = [];
+      var lastItemEndTime = null;
+      this.props.items.forEach(function(item, index, array) {
+        if (!lastItemEndTime) {
+          lastItemEndTime = self.props.startTime.clone();
+        }
+        items.push(
           React.createElement(RowItem, {
             index: index, 
             item: item, 
+            startTime: lastItemEndTime, 
             people: self.props.people, 
             onEdit: self.props.onEdit, 
             onRemove: self.props.onRemove, 
             onDialogEdit: self.props.onDialogEdit})
         );
+        lastItemEndTime.add(item.time, 'm');
       });
       return (
         React.createElement("tbody", null, 
@@ -383,7 +385,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       if ($("#" + self.props.item.id).length == 0) {
         $("<li/>", {
             id: self.props.item.id,
-            text: "[]"
+            text: "[   ]"
         }).appendTo("#sortable-list");
       }
     },
