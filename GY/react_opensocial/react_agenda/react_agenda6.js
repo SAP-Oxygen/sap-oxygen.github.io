@@ -316,7 +316,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           React.createElement(RowItem, {
             index: index, 
             item: item, 
-            startTime: lastItemEndTime, 
+            startTime: lastItemEndTime.clone(), 
             people: self.props.people, 
             onEdit: self.props.onEdit, 
             onRemove: self.props.onRemove, 
