@@ -332,6 +332,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
 
   var RowItem = React.createClass({
     componentDidMount: function() {
+      adjustHeight();
+
       var self = this;
       var index = this.props.index;
       var topicId = "topic-" + index;
