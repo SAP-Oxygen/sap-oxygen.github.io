@@ -256,7 +256,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
                 onEdit={this.handleEdit} 
                 onRemove={this.handleRemove} 
                 onDialogEdit={this.handleDialogEdit} 
-                onDraggingStatus={this.handleDraggingStatus} />
+                onDraggingStatus={this.handleDraggingStatus}
+                order={this.state.order} />
               <AddButton onAdd={this.handleAdd} />
             </Col>
           </Row>
@@ -266,12 +267,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   });
 
   var AgendaTable = React.createClass({
-    componentWillMount: function() {
-    },
-    componentDidMount: function() {
-    },
-    componentDidUpdate: function() {
-    },
     render: function() {
       var self = this;
       var rowsArr = [];
@@ -294,7 +289,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             people={this.props.people} 
             onEdit={this.props.onEdit} 
             onRemove={this.props.onRemove} 
-            onDialogEdit={this.props.onDialogEdit}>
+            onDialogEdit={this.props.onDialogEdit}
+            order={this.props.order}>
           </TableBody>
         </Table>
       );
@@ -302,6 +298,19 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   });
 
   var TableBody = React.createClass({
+    componentDidUpdate: function() {
+      // remove all child nodes first, then populate child nodes
+      // according to the updated list
+      $("#sortable-list").empty();
+      this.props.order.forEach(function(itemId) {
+        if ($("#" + self.props.item.id).length == 0) {
+          $("<li/>", {
+              id: itemId,
+              text: "[   ]"
+          }).appendTo("#sortable-list");
+        }
+      });
+    },
     render: function() {
       var self = this;
       var items = [];
