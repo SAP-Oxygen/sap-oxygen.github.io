@@ -66,9 +66,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           order.forEach(function(itemId, index) {
             items.push(waveData[itemId]);
           });
-          // }
-          // // convert string moment representation to an moment object
-          // // var startTime = moment(waveData.startTime);
+          // convert string moment representation to an moment object
+          // var startTime = moment(waveData.startTime);
           self.setState({
             items: items,
             order: order,
@@ -106,17 +105,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       console.log("sent startTime to wave");
     },
     handleSort: function(newOrder) {
-      // var newItems = newOrder.map(function(index) {
-      //   return this.state.items[index];
-      // }.bind(this));
-      // this.setState({
-      //   items: newItems
-      // });
-      // console.log("sorted items");
-      // console.log(newItems);
-      // var waveData = {items: newItems};
-      // wave.getState().submitDelta(waveData);
-      // console.log("sent updated items to wave (sort)");
       var newItems = [];
       var itemsMap = this.state.itemsMap;
       newOrder.forEach(function(itemId, index) {
@@ -134,18 +122,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       console.log("sent updated items to wave (sort)");
     },
     handleAdd: function() {
-      // var newItems = this.state.items.concat([{id: this.state.counter, topic: "", desc: "",time: 0, owner: ""}]);
-      // var newCounter = this.state.counter + 1;
-      // this.setState({
-      //   items: newItems,
-      //   counter: newCounter
-      // });
-      // console.log("added an item");
-      // console.log(newItems);
-      // var waveData = {items: newItems, counter: newCounter};
-      // wave.getState().submitDelta(waveData);
-      // console.log("sent updated items to wave (add)");
-
       // generate a random number from 0 to 1000 for newItemId
       var getRandomInt = function() {
         return Math.floor(Math.random() * (1000 - 1));
@@ -498,95 +474,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             <input type='text' className='form-control' />
             <span className='input-group-addon'>
               <span className='glyphicon glyphicon-calendar'></span>
-            </span>
-          </div>
-        </Col>
-      );
-    }
-  });
-
-  var DatePicker = React.createClass({
-    componentDidMount: function() {
-      var self = this;
-      var startTime = this.props.startTime;
-      // Datepicker
-      $(function () {
-          $('#datepicker').datetimepicker({
-            format: 'll',
-            showClose: true,
-            showTodayButton: true,
-            allowInputToggle: true,
-            toolbarPlacement: 'bottom',
-            debug: true
-          });
-      });
-      $('#datepicker').on("dp.change", function (e) {
-        var newTime = $('#datepicker').data("DateTimePicker").viewDate();
-        self.onTimeChange(newTime);
-      });
-      // $('#datepicker').on("dp.show", function (e) {
-      //   $('#timepicker').data("DateTimePicker").hide();
-      // });
-      // if (startTime) {
-      //   $('#datepicker').datetimepicker({
-      //     defaultDate: startTime
-      //   });
-      // }
-    },
-    onTimeChange: function(time) {
-      this.props.onTimeChange(time);
-    },
-    render: function() {
-      return (
-        <Col xs={4} id='date'>
-          <div className='input-group date' id='datepicker'>
-            <input type='text' className='form-control' />
-            <span className='input-group-addon'>
-              <span className='glyphicon glyphicon-calendar'></span>
-            </span>
-          </div>
-        </Col>
-      );
-    }
-  });
-
-  var TimePicker = React.createClass({
-    componentDidMount: function() {
-      var self = this;
-      // Datepicker
-      $(function () {
-          $('#timepicker').datetimepicker({
-            format: 'LT',
-            extraFormats: ['LT'],
-            showClose: true,
-            showTodayButton: true,
-            allowInputToggle: true,
-            toolbarPlacement: 'bottom',
-            useCurrent: false,
-            debug: true
-          });
-      });
-      $('#timepicker').on("dp.change", function (e) {
-        var newTime = $('#timepicker').data("DateTimePicker").viewDate();
-        self.onTimeChange(newTime);
-      });
-      // $('#timepicker').on("dp.show", function (e) {
-      //   $('#datepicker').data("DateTimePicker").hide();
-      // });
-      if (this.props.startTime) {
-        $('#timepicker input').attr('placeholder', this.props.startTime.format('LT'));
-      }
-    },
-    onTimeChange: function(time) {
-      this.props.onTimeChange(time);
-    },
-    render: function() {
-      return (
-        <Col xs={3} id='time'>
-          <div className='input-group date' id='timepicker'>
-            <input type='text' className='form-control' />
-            <span className='input-group-addon'>
-              <span className='glyphicon glyphicon-time'></span>
             </span>
           </div>
         </Col>
