@@ -629,7 +629,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     }
   });
 
-  React.render(React.createElement(Agenda, {data: DATA}), document.body);
+  React.render(React.createElement(Agenda, null), document.body);
 };
 
 gadgets.util.registerOnLoadHandler(function() {
