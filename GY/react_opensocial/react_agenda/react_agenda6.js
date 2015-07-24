@@ -308,7 +308,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           $("<li/>", {
               id: itemId,
               text: "[   ]"
-          }).height($("#" + topicId).height()).appendTo("#sortable-list");
+          }).height($("#" + topicId).css("height")).appendTo("#sortable-list");
         }
       });
     },
