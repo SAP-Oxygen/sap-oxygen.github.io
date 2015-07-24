@@ -57,7 +57,7 @@ body {
     height: 62px;
 }
 
-.agenda-table tbody tr:hover {
+.agenda-table li:hover {
     background-color: #F5FCFF;
     cursor: move;
     cursor: grab;
@@ -65,7 +65,7 @@ body {
     cursor: -moz-grab;
 }
 
-.agenda-table tbody tr:active {
+.agenda-table li:active {
     background-color: #F5FCFF;
     cursor: grabbing;
     cursor: -webkit-grabbing; 
