@@ -160,7 +160,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       // do not change the itemsMap for now because it is not
       // possible to remove JSON objects from wave
       var order = this.state.order.slice();
-      var index = $.inArray(itemId, items);
+      var index = $.inArray(itemId, order);
       if (index > -1) {
         order.splice(index, 1);
       }
