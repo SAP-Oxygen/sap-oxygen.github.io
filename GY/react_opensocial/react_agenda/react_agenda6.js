@@ -618,11 +618,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
       return(
         React.createElement("div", null, 
-          React.createElement("li", null, 
-            React.createElement("button", {type: "button", className: "btn btn-default btn-lg"}, 
-              "P"
-            )
-          ), 
+          React.createElement("li", {className: "sortable-header"}, "[H]"), 
           React.createElement("ul", {id: "sortable-list"}
           )
         )

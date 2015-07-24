@@ -126,3 +126,7 @@ li {
 ul {
     padding: 0 !important;
 }
+
+.sortable-header {
+    height: 39px;
+}

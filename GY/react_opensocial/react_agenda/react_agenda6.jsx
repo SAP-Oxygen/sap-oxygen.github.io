@@ -618,11 +618,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
       return(
         <div>
-          <li>
-            <button type="button" className="btn btn-default btn-lg">
-              P
-            </button>
-          </li>
+          <li className="sortable-header">[H]</li>
           <ul id="sortable-list">
           </ul>
         </div>
