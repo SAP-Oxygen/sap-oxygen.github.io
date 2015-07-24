@@ -57,7 +57,7 @@ body {
     height: 62px;
 }
 
-.agenda-table li:hover {
+.sortable-element:hover {
     background-color: #F5FCFF;
     cursor: move;
     cursor: grab;
@@ -65,7 +65,7 @@ body {
     cursor: -moz-grab;
 }
 
-.agenda-table li:active {
+.sortable-element:active {
     background-color: #F5FCFF;
     cursor: grabbing;
     cursor: -webkit-grabbing; 

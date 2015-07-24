@@ -307,6 +307,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           var topicId = "topic-" + itemId;
           $("<li/>", {
               id: itemId,
+              class: "sortable-element",
               text: "[   ]"
           }).height($("#" + topicId).css("height")).appendTo("#sortable-list");
         }
@@ -392,6 +393,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       if ($("#" + self.props.item.id).length == 0) {
         $("<li/>", {
             id: self.props.item.id,
+            class: "sortable-element",
             text: "[   ]"
         }).height($("#" + topicId).height()).appendTo("#sortable-list");
       }
