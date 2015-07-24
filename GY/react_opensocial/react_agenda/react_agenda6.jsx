@@ -336,8 +336,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       };
       // unbind the previous click event first, then bind the new click event
       // with updated data
-      $("#" + editId + ", #" + topicId + ", #" + timeId + ", #" + ownerId).unbind();
-      $("#" + editId + ", #" + topicId + ", #" + timeId + ", #" + ownerId).click(function() {
+      $("#" + editId + ", #" + topicId + ", #" + timeId).unbind();
+      $("#" + editId + ", #" + topicId + ", #" + timeId).click(function() {
         gadgets.views.openGadget(function(result) {
           if (result) {
             self.props.onDialogEdit(result.item);
@@ -360,7 +360,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         item: this.props.item,
         people: this.props.people
       };
-      $("#" + editId + ", #" + topicId + ", #" + timeId + ", #" + ownerId).click(function() {
+      $("#" + editId + ", #" + topicId + ", #" + timeId).click(function() {
         gadgets.views.openGadget(function(result) {
           if (result) {
             self.props.onDialogEdit(result.item);
