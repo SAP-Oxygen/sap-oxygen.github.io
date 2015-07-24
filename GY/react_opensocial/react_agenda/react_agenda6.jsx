@@ -57,7 +57,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             lastWaveData: waveData
           });
         } else if (!$.isEmptyObject(waveData)) {
-          // when (items === null) it is supposed to be an empty array
           var items = [];
           var order = waveData["order"] || [];
           var startTime = waveData["startTime"];
@@ -66,13 +65,23 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           order.forEach(function(itemId, index) {
             items.push(waveData[itemId]);
           });
-          // convert string moment representation to an moment object
-          // var startTime = moment(waveData.startTime);
-          self.setState({
-            items: items,
-            order: order,
-            itemsMap: waveData
-          });
+          // if there is startTime stored in wave, set startTime of 
+          // Agenda's state to wave's startTime
+          if (startTime) {
+            var startTimeMoment = moment(startTime);
+            self.setState({
+              items: items,
+              order: order,
+              itemsMap: waveData,
+              startTime: startTimeMoment
+            });
+          } else {
+            self.setState({
+              items: items,
+              order: order,
+              itemsMap: waveData
+            });
+          }
         }
       };
 
@@ -100,7 +109,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
       console.log("changed startTime: ");
       console.log(newTime);
-      var waveData = {startTime: newTime};
+      var waveData = {};
+      waveData["startTime"] = newTime;
       wave.getState().submitDelta(waveData);
       console.log("sent startTime to wave");
     },
