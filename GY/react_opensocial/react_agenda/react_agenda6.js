@@ -303,7 +303,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       // according to the updated list
       $("#sortable-list").empty();
       this.props.order.forEach(function(itemId) {
-        if ($("#" + self.props.item.id).length == 0) {
+        if ($("#" + itemId).length == 0) {
           $("<li/>", {
               id: itemId,
               text: "[   ]"
