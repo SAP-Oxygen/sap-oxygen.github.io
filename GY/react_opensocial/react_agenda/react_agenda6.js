@@ -29,7 +29,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         people: [],
         dragging: false,
         lastWaveData: {}
-      } 
+      }
     },
     componentDidMount: function() {
       var self = this;
@@ -154,15 +154,29 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       wave.getState().submitDelta(waveData);
       console.log("sent updated items to wave (add)");
     },
-    handleRemove: function(index) {
-      var newItems = this.state.items;
-      newItems.splice(index, 1);
+    handleRemove: function(itemId) {
+      // remove the itemId from order array and create a new
+      // items array based on the updated order array
+      // do not change the itemsMap for now because it is not
+      // possible to remove JSON objects from wave
+      var order = this.state.order.slice();
+      var index = $.inArray(itemId, items);
+      if (index > -1) {
+        order.splice(index, 1);
+      }
+      var newItems = [];
+      var itemsMap = $.extend({}, this.state.itemsMap);
+      this.state.order.forEach(function(itemId) {
+        newItems.push(itemsMap[itemId]);
+      });
       this.setState({
-        items: newItems
+        items: newItems,
+        order: order
       });
       console.log("removed an item");
       console.log(newItems);
-      var waveData = {items: newItems};
+      var waveData = {};
+      waveData["order"] = order;
       wave.getState().submitDelta(waveData);
       console.log("sent updated items to wave (remove)");
     },
@@ -183,17 +197,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       waveData[item.id] = item;
       wave.getState().submitDelta(waveData);
       console.log("sent updated items to wave (dialog edit)");
-    },
-    handleDialogSubmit: function(result) {
-      var newItems = this.state.items.concat([result]);
-      this.setState({
-        items: newItems
-      });
-      console.log("added an item");
-      console.log(newItems);
-      var waveData = {items: newItems};
-      wave.getState().submitDelta(waveData);
-      console.log("sent updated items to wave (dialog add)");
     },
     handleDraggingStatus: function(status) {
       // when current dragging is true and the status passed to this function is false
@@ -225,7 +228,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
               React.createElement(DragBar, {order: this.state.order, onSort: this.handleSort})
             ), 
             React.createElement(Col, {xs: 11}, 
-              React.createElement(AgendaTable, {items: this.state.items, 
+              React.createElement(AgendaTable, {
+                items: this.state.items, 
                 startTime: this.state.startTime, 
                 people: this.state.people, 
                 onSort: this.handleSort, 
@@ -375,7 +379,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       }
     },
     handleRemove: function() {
-      this.props.onRemove(this.props.index);
+      this.props.onRemove(this.props.item.id);
     },
     render: function() {
       var index = this.props.index;
@@ -401,8 +405,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       return (
         React.createElement("tr", null, 
           React.createElement("td", {className: "index"}, 
-            React.createElement("span", {className: "off-hover"}, displayIndex), 
-            React.createElement("span", {className: "glyphicon glyphicon-menu-hamburger on-hover"})
+            React.createElement("span", null, displayIndex)
           ), 
           React.createElement("td", null, 
             React.createElement("span", null, this.props.startTime.format('LT'))
