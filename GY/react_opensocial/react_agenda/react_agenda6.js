@@ -304,10 +304,11 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       $("#sortable-list").empty();
       this.props.order.forEach(function(itemId) {
         if ($("#" + itemId).length == 0) {
+          var topicId = "topic-" + itemId;
           $("<li/>", {
               id: itemId,
               text: "[   ]"
-          }).appendTo("#sortable-list");
+          }).height($("#" + topicId).height()).appendTo("#sortable-list");
         }
       });
     },
@@ -342,12 +343,12 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   var RowItem = React.createClass({displayName: "RowItem",
     componentDidUpdate: function() {
       var self = this;
-      var index = this.props.index;
-      var topicId = "topic-" + index;
-      var timeId = "time-" + index;
-      // onwerId here is not the real id of own
-      var ownerId = "owner-" + index;
-      var editId = "edit-" + index;
+      var id = this.props.item.id;
+      var topicId = "topic-" + id;
+      var timeId = "time-" + id;
+      // onwerId here is not the real id of owner
+      var ownerId = "owner-" + id;
+      var editId = "edit-" + id;
       var editData = {
         item: this.props.item,
         people: this.props.people
@@ -367,14 +368,13 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     },
     componentDidMount: function() {
       adjustHeight();
-
       var self = this;
-      var index = this.props.index;
-      var topicId = "topic-" + index;
-      var timeId = "time-" + index;
-      // onwerId here is not the real id of own
-      var ownerId = "owner-" + index;
-      var editId = "edit-" + index;
+      var id = this.props.item.id;
+      var topicId = "topic-" + id;
+      var timeId = "time-" + id;
+      // onwerId here is not the real id of owner
+      var ownerId = "owner-" + id;
+      var editId = "edit-" + id;
       var editData = {
         item: this.props.item,
         people: this.props.people
@@ -393,7 +393,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         $("<li/>", {
             id: self.props.item.id,
             text: "[   ]"
-        }).appendTo("#sortable-list");
+        }).height($("#" + topicId).height()).appendTo("#sortable-list");
       }
     },
     handleRemove: function() {
@@ -401,11 +401,12 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     },
     render: function() {
       var index = this.props.index;
-      var id = index + 1;
-      var topicId = "topic-" + index;
-      var timeId = "time-" + index;
+      var displayIndex = index + 1;
+      var id = this.props.item.id;
+      var topicId = "topic-" + id;
+      var timeId = "time-" + id;
       // onwerId here is not the real id of owner
-      var ownerId = "owner-" + index;
+      var ownerId = "owner-" + id;
       var topic;
       if (this.props.item.topic === "") {
         topic = "Click to edit";
@@ -422,7 +423,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       return (
         React.createElement("tr", null, 
           React.createElement("td", {className: "index"}, 
-            React.createElement("span", {className: "off-hover"}, id), 
+            React.createElement("span", {className: "off-hover"}, displayIndex), 
             React.createElement("span", {className: "glyphicon glyphicon-menu-hamburger on-hover"})
           ), 
           React.createElement("td", null, 
