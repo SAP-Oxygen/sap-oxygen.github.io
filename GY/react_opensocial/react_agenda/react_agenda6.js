@@ -519,7 +519,10 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       $("#sortable-list").sortable({
         axis: 'y',
         stop: onSortableStop,
-        helper: sortableHelper
+        helper: sortableHelper,
+        start : function(event, ui) {
+            ui.helper.width($(this).width());
+        }
       });
     },
     render: function() {
