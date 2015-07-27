@@ -508,6 +508,9 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         var id = event.toElement.id;
         var domId = "row-" + id;
         var clonedDom = $("#" + domId).clone();
+        clonedDom.children().each(function() {
+            $(this).width($(this).width());
+        });
         return clonedDom;
       };
 
