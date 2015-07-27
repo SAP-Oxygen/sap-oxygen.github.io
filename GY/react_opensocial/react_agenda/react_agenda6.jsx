@@ -504,9 +504,16 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         self.props.onSort(sortedIds);
       };
 
+      var sortableHelper = function(event, ui) {
+        var id = event.toElement.id;
+        var domId = "row-" + id;
+        return $("#" + domId);
+      };
+
       $("#sortable-list").sortable({
         axis: 'y',
-        stop: onSortableStop
+        stop: onSortableStop,
+        helper: sortableHelper
       });
     },
     render: function() {
