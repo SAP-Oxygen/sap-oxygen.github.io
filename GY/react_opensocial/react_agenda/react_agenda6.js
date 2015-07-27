@@ -507,7 +507,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var sortableHelper = function(event, ui) {
         var id = event.toElement.id;
         var domId = "row-" + id;
-        return $("#" + domId);
+        var clonedDom = $("#" + domId).clone();
+        return clonedDom;
       };
 
       $("#sortable-list").sortable({
