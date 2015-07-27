@@ -511,7 +511,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         var clonedDom = originalDom.clone();
         clonedDom.children().each(function() {
           var className = $(this).attr("class");
-          $(this).width($(clonedDom).children("." + className).width());
+          $(this).width(originalDom.children("." + className).width());
         });
         return clonedDom;
       };
