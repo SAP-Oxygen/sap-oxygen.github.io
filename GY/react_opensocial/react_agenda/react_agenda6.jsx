@@ -418,18 +418,18 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           <td className="index">
             <span>{displayIndex}</span>
           </td>
-          <td>
+          <td className="startTime">
             <span>{this.props.startTime.format('LT')}</span>
           </td>
-          <td className="cursor-pointer" id={timeId}>
+          <td className="duration cursor-pointer" id={timeId}>
             <span>{this.props.item.time} min</span>
           </td>
-          <td className="cursor-pointer" id={topicId}>
+          <td className="topic cursor-pointer" id={topicId}>
             <span>{topic}</span>
             <br />
             <span>{this.props.item.desc}</span>
           </td>
-          <td className="link-text cursor-pointer" id={ownerId}>
+          <td className="owner link-text cursor-pointer" id={ownerId}>
             {thumbnail} <span className="owner">{ownerName}</span>
             <span className="pull-right on-hover">
               <Glyphicon className="cursor-pointer" glyph='trash' onClick={this.handleRemove} />
@@ -507,10 +507,12 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var sortableHelper = function(event, ui) {
         var id = event.toElement.id;
         var domId = "row-" + id;
-        var clonedDom = $("#" + domId).clone();
+        var originalDom = $("#" + domId);
+        var clonedDom = originalDom.clone();
         clonedDom.children().each(function() {
-            $(this).width($(this).width());
-        });
+          var className = $(this).attr("class");
+          $(this).width($(this).width());
+        }).bind(originalDom);
         return clonedDom;
       };
 

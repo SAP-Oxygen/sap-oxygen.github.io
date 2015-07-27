@@ -418,18 +418,18 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           React.createElement("td", {className: "index"}, 
             React.createElement("span", null, displayIndex)
           ), 
-          React.createElement("td", null, 
+          React.createElement("td", {className: "startTime"}, 
             React.createElement("span", null, this.props.startTime.format('LT'))
           ), 
-          React.createElement("td", {className: "cursor-pointer", id: timeId}, 
+          React.createElement("td", {className: "duration cursor-pointer", id: timeId}, 
             React.createElement("span", null, this.props.item.time, " min")
           ), 
-          React.createElement("td", {className: "cursor-pointer", id: topicId}, 
+          React.createElement("td", {className: "topic cursor-pointer", id: topicId}, 
             React.createElement("span", null, topic), 
             React.createElement("br", null), 
             React.createElement("span", null, this.props.item.desc)
           ), 
-          React.createElement("td", {className: "link-text cursor-pointer", id: ownerId}, 
+          React.createElement("td", {className: "owner link-text cursor-pointer", id: ownerId}, 
             thumbnail, " ", React.createElement("span", {className: "owner"}, ownerName), 
             React.createElement("span", {className: "pull-right on-hover"}, 
               React.createElement(Glyphicon, {className: "cursor-pointer", glyph: "trash", onClick: this.handleRemove})
@@ -507,10 +507,12 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var sortableHelper = function(event, ui) {
         var id = event.toElement.id;
         var domId = "row-" + id;
-        var clonedDom = $("#" + domId).clone();
+        var originalDom = $("#" + domId);
+        var clonedDom = originalDom.clone();
         clonedDom.children().each(function() {
-            $(this).width($(this).width());
-        });
+          var className = $(this).attr("class");
+          $(this).width($(this).width());
+        }).bind(originalDom);
         return clonedDom;
       };
 
