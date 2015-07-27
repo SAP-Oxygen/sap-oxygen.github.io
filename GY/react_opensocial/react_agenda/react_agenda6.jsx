@@ -395,6 +395,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var index = this.props.index;
       var displayIndex = index + 1;
       var id = this.props.item.id;
+      var domId = "row-" + id; 
       var topicId = "topic-" + id;
       var timeId = "time-" + id;
       // onwerId here is not the real id of owner
@@ -413,7 +414,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         ownerName = wave.getParticipantById(this.props.item.owner).displayName_;
       }
       return (
-        <tr>
+        <tr id={domId}>
           <td className="index">
             <span>{displayIndex}</span>
           </td>
