@@ -130,3 +130,15 @@ ul {
 .sortable-header {
     height: 39px;
 }
+
+.row-type-none {
+    background-color: white;
+}
+
+.row-type-grey {
+    background-color: #C0C0C0;
+}
+
+.row-type-blue {
+    background-color: #E7F1F7;
+}
