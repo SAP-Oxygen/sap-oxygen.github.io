@@ -225,6 +225,11 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         dragging: status
       });
     },
+    handleSort2: function(order) {
+      this.setState({
+        order: order
+      });
+    },
     render: function() {
       return (
         React.createElement(Grid, {className: "container-fluid", id: "grid"}, 
@@ -287,7 +292,13 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     }
   });
 
+  // drag and drop pattern referred from http://webcloud.se/truly-reactive-sortable-component/
   var TableBody = React.createClass({displayName: "TableBody",
+    getInitialState: function() {
+      return {
+        dragging: ""
+      }
+    },
     componentDidUpdate: function() {
       // remove all child nodes first, then populate child nodes
       // according to the updated list
@@ -303,11 +314,36 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         }
       });
     },
+    sort: function(order, dragging) {
+      this.setState({dragging: dragging});
+      this.props.onSort(order);
+    },
+    dragEnd: function() {
+      this.sort(this.props.order, undefined);
+    },
+    dragStart: function(e) {
+      this.dragged = Number(e.currentTarget.dataset.id);
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData("text/html", null)
+    },
+    dragOver: function(e) {
+      e.preventDefault();
+      var over = e.currentTarget;
+      var dragging = this.state.dragging;
+      var from = isFinite(dragging) ? dragging : this.dragged;
+      var to = Number(over.dataset.id);
+
+      // Move from 'a' to 'b'
+      var order = this.props.order;
+      order.splice(to, 0, order.splice(from,1)[0]);
+      this.sort(order, to);
+    },
     render: function() {
       var self = this;
       var items = [];
       var lastItemEndTime = null;
       this.props.items.forEach(function(item, index, array) {
+        var dragging = (i == self.state.dragging) ? "dragging" : "";
         if (!lastItemEndTime) {
           lastItemEndTime = self.props.startTime.clone();
         }
@@ -319,7 +355,14 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             people: self.props.people, 
             onEdit: self.props.onEdit, 
             onRemove: self.props.onRemove, 
-            onDialogEdit: self.props.onDialogEdit})
+            onDialogEdit: self.props.onDialogEdit, 
+            "data-id": index, 
+            className: dragging, 
+            key: index, 
+            draggable: "true", 
+            onDragEnd: self.dragEnd, 
+            onDragOver: self.dragOver, 
+            onDragStart: self.dragStart})
         );
         lastItemEndTime.add(item.time, 'm');
       });
