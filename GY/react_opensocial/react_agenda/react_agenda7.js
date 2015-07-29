@@ -247,12 +247,12 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
                 items: this.state.items, 
                 startTime: this.state.startTime, 
                 people: this.state.people, 
-                onSort: this.handleSort, 
                 onEdit: this.handleEdit, 
                 onRemove: this.handleRemove, 
                 onDialogEdit: this.handleDialogEdit, 
                 onDraggingStatus: this.handleDraggingStatus, 
-                order: this.state.order}), 
+                order: this.state.order, 
+                onSort: this.handleSort2}), 
               React.createElement(AddButton, {onAdd: this.handleAdd})
             )
           )
@@ -285,7 +285,9 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             onEdit: this.props.onEdit, 
             onRemove: this.props.onRemove, 
             onDialogEdit: this.props.onDialogEdit, 
-            order: this.props.order}
+            order: this.props.order, 
+            onSort: this.props.onSort
+            }
           )
         )
       );
@@ -461,9 +463,9 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           "data-id": this.props.index, 
           key: this.props.index, 
           draggable: this.props.draggable, 
-          onDragEnd: this.props.dragEnd, 
-          onDragOver: this.props.dragOver, 
-          onDragStart: this.props.dragStart}, 
+          onDragEnd: this.props.onDragEnd, 
+          onDragOver: this.props.onDragOver, 
+          onDragStart: this.props.onDragStart}, 
           React.createElement("td", {className: "index"}, 
             React.createElement("span", null, displayIndex)
           ), 
