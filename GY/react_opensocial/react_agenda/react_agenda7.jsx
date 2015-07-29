@@ -470,9 +470,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         var newTime = $('#datetimepicker').data("DateTimePicker").viewDate();
         self.onTimeChange(newTime);
       });
-      // $('#datepicker').on("dp.show", function (e) {
-      //   $('#timepicker').data("DateTimePicker").hide();
-      // });
       // if (startTime) {
       //   $('#datepicker').datetimepicker({
       //     defaultDate: startTime
