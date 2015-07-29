@@ -132,13 +132,13 @@ ul {
 }
 
 .row-type-none {
-    background-color: white;
+    background-color: white !important;
 }
 
 .row-type-grey {
-    background-color: #C0C0C0;
+    background-color: #C0C0C0 !important;
 }
 
 .row-type-blue {
-    background-color: #E7F1F7;
+    background-color: #E7F1F7 !important;
 }
