@@ -21,7 +21,7 @@ var DialogBox = React.createClass({
     var desc = React.findDOMNode(this.refs.desc).value.trim();
     var time = React.findDOMNode(this.refs.time).value.trim();
     var owner = React.findDOMNode(this.refs.owner).value.trim();
-    var color = React.findDOMNode(this.refs.color).value.trim();
+    var color = React.findDOMNode(this.refs.color).value.trim().toLowerCase();
     var item = {id: item.id, topic: topic, desc: desc, owner: owner, time: time, color: color};
     var returnValue = {item: item};
 
