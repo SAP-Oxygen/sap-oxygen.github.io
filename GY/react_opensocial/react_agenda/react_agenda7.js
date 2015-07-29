@@ -225,9 +225,15 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         dragging: status
       });
     },
-    handleSort2: function(order) {
+    handleSort2: function(newOrder) {
+      var newItems = [];
+      var itemsMap = this.state.itemsMap;
+      newOrder.forEach(function(itemId, index) {
+        newItems.push(itemsMap[itemId]);
+      });
       this.setState({
-        order: order
+        items: newItems,
+        order: newOrder
       });
     },
     render: function() {
@@ -334,6 +340,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var dragging = this.state.dragging;
       var from = isFinite(dragging) ? dragging : this.dragged;
       var to = Number(over.dataset.id);
+      console.log("from: " + from);
+      console.log("to: " + to);
 
       // Move from 'a' to 'b'
       var order = this.props.order;
