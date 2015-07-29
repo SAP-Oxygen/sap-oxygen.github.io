@@ -343,7 +343,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var items = [];
       var lastItemEndTime = null;
       this.props.items.forEach(function(item, index, array) {
-        var dragging = (i == self.state.dragging) ? "dragging" : "";
+        var dragging = (index == self.state.dragging) ? "dragging" : "";
         if (!lastItemEndTime) {
           lastItemEndTime = self.props.startTime.clone();
         }
