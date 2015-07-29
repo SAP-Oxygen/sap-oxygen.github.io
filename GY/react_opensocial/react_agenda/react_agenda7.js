@@ -356,9 +356,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             onEdit: self.props.onEdit, 
             onRemove: self.props.onRemove, 
             onDialogEdit: self.props.onDialogEdit, 
-            "data-id": index, 
-            className: dragging, 
-            key: index, 
             draggable: "true", 
             onDragEnd: self.dragEnd, 
             onDragOver: self.dragOver, 
@@ -458,7 +455,15 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       }
       var color = "row-type-" + this.props.item.color;
       return (
-        React.createElement("tr", {className: color, id: domId}, 
+        React.createElement("tr", {
+          className: color, 
+          id: domId, 
+          "data-id": this.props.index, 
+          key: this.props.index, 
+          draggable: this.props.draggable, 
+          onDragEnd: this.props.dragEnd, 
+          onDragOver: this.props.dragOver, 
+          onDragStart: this.props.dragStart}, 
           React.createElement("td", {className: "index"}, 
             React.createElement("span", null, displayIndex)
           ), 
