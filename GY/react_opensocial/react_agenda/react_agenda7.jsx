@@ -268,7 +268,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var itemId = null;
       var lastItemEndTime = null;
       return (
-        <div>
+        <div id="table">
           <ul>
             <TableHead />
           </ul>
