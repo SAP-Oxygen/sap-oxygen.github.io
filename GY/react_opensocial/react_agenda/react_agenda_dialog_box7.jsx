@@ -43,6 +43,7 @@ var DialogBox = React.createClass({
       time = 10;
     }
     var owner = params.owner;
+    var color = item.color;
     return(
       <div className="container-fluid">
         <h3>
@@ -58,10 +59,10 @@ var DialogBox = React.createClass({
             </div>
             <div className="col-xs-2 nopadding">minutes</div>
             <div className="col-xs-5 nopadding pull-right">
-              <select className="form-control" ref="color">
-                <option>None</option>
-                <option>Grey</option>
-                <option>Blue</option>
+              <select className="form-control" ref="color" defaultValue={color}>
+                <option value="none">None</option>
+                <option value="grey">Grey</option>
+                <option value="blue">Blue</option>
               </select>
             </div>
             </div>

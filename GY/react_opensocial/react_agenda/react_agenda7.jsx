@@ -145,7 +145,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         }
       };
       var newItemId = "item-" + getCurrentTime() + "-" + getRandomInt();
-      var newItem = {id: newItemId, topic: "", desc: "", time: 0, owner: "", color: ""};
+      var newItem = {id: newItemId, topic: "", desc: "", time: 0, owner: "", color: "none"};
       var newItems = this.state.items.concat([newItem]);
       var newOrder = this.state.order.concat([newItemId]);
       var newItemMap = {};
