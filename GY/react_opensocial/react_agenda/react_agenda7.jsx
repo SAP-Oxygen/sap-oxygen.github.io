@@ -389,6 +389,37 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   });
 
   var RowItem2 = React.createClass({
+    enableDialogBox: function() {
+      var self = this;
+      var id = this.props.item.id;
+      var topicId = "topic-" + id;
+      var timeId = "time-" + id;
+      // onwerId here is not the real id of owner
+      var ownerId = "owner-" + id;
+      var editId = "edit-" + id;
+      var editData = {
+        item: this.props.item,
+        people: this.props.people
+      };
+      // unbind the previous click event first, then bind the new click event
+      // with updated data
+      $("#" + editId + ", #" + topicId + ", #" + timeId).unbind();
+      $("#" + editId + ", #" + topicId + ", #" + timeId).click(function() {
+        gadgets.views.openGadget(function(result) {
+          if (result) {
+            self.props.onDialogEdit(result.item);
+          }
+        }, 
+        function(site){},
+        {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
+      });
+    },
+    componentDidMount: function() {
+      this.enableDialogBox();
+    },
+    componentDidUpdate: function() {
+      this.enableDialogBox();
+    },
     render: function() {
       var index = this.props.index;
       var displayIndex = index + 1;
