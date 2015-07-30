@@ -137,7 +137,6 @@ ul {
 
 .list-table-row {
     display: table-row;
-    border-bottom: 1px dotted #999;
 }
 
 .div-table-cell {
@@ -198,7 +197,7 @@ ul {
 }
 
 .list-table-row:hover {
-    background-color: #F5FCFF;
+    background-color: #F5FCFF !important;
     cursor: move;
     cursor: grab;
     cursor: -webkit-grab;
@@ -206,7 +205,7 @@ ul {
 }
 
 .list-table-row:active {
-    background-color: #F5FCFF;
+    background-color: #F5FCFF !important;
     cursor: grabbing;
     cursor: -webkit-grabbing; 
     cursor: -moz-grabbing;
