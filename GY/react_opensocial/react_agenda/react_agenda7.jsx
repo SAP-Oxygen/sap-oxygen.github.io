@@ -268,29 +268,31 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var itemId = null;
       var lastItemEndTime = null;
       return (
-        <TableHead />
-        <Table className="agenda-table" responsive >
-          <thead>
-            <tr>
-              <th className='index'>#</th>
-              <th className='short'>Start Time</th>
-              <th className='short'>Duration</th>
-              <th className='med'>Topic</th>
-              <th className='short'>Presenter</th>
-            </tr>
-          </thead>
-          <TableBody 
-            items = {this.props.items}
-            startTime={this.props.startTime} 
-            people={this.props.people} 
-            onEdit={this.props.onEdit} 
-            onRemove={this.props.onRemove} 
-            onDialogEdit={this.props.onDialogEdit}
-            order={this.props.order}
-            onSort={this.props.onSort}
-            >
-          </TableBody>
-        </Table>
+        <div>
+          <TableHead />
+          <Table className="agenda-table" responsive>
+            <thead>
+              <tr>
+                <th className='index'>#</th>
+                <th className='short'>Start Time</th>
+                <th className='short'>Duration</th>
+                <th className='med'>Topic</th>
+                <th className='short'>Presenter</th>
+              </tr>
+            </thead>
+            <TableBody 
+              items = {this.props.items}
+              startTime={this.props.startTime} 
+              people={this.props.people} 
+              onEdit={this.props.onEdit} 
+              onRemove={this.props.onRemove} 
+              onDialogEdit={this.props.onDialogEdit}
+              order={this.props.order}
+              onSort={this.props.onSort}
+              >
+            </TableBody>
+          </Table>
+        </div>
       );
     }
   });
@@ -307,7 +309,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         </li>
       );
     }
-  })
+  });
 
   // drag and drop pattern referred from http://webcloud.se/truly-reactive-sortable-component/
   var TableBody = React.createClass({

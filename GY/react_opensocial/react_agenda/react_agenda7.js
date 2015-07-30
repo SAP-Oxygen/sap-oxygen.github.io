@@ -268,27 +268,44 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var itemId = null;
       var lastItemEndTime = null;
       return (
-        React.createElement(Table, {className: "agenda-table", responsive: true}, 
-          React.createElement("thead", null, 
-            React.createElement("tr", null, 
-              React.createElement("th", {className: "index"}, "#"), 
-              React.createElement("th", {className: "short"}, "Start Time"), 
-              React.createElement("th", {className: "short"}, "Duration"), 
-              React.createElement("th", {className: "med"}, "Topic"), 
-              React.createElement("th", {className: "short"}, "Presenter")
+        React.createElement("div", null, 
+          React.createElement(TableHead, null), 
+          React.createElement(Table, {className: "agenda-table", responsive: true}, 
+            React.createElement("thead", null, 
+              React.createElement("tr", null, 
+                React.createElement("th", {className: "index"}, "#"), 
+                React.createElement("th", {className: "short"}, "Start Time"), 
+                React.createElement("th", {className: "short"}, "Duration"), 
+                React.createElement("th", {className: "med"}, "Topic"), 
+                React.createElement("th", {className: "short"}, "Presenter")
+              )
+            ), 
+            React.createElement(TableBody, {
+              items: this.props.items, 
+              startTime: this.props.startTime, 
+              people: this.props.people, 
+              onEdit: this.props.onEdit, 
+              onRemove: this.props.onRemove, 
+              onDialogEdit: this.props.onDialogEdit, 
+              order: this.props.order, 
+              onSort: this.props.onSort
+              }
             )
-          ), 
-          React.createElement(TableBody, {
-            items: this.props.items, 
-            startTime: this.props.startTime, 
-            people: this.props.people, 
-            onEdit: this.props.onEdit, 
-            onRemove: this.props.onRemove, 
-            onDialogEdit: this.props.onDialogEdit, 
-            order: this.props.order, 
-            onSort: this.props.onSort
-            }
           )
+        )
+      );
+    }
+  });
+
+  var TableHead = React.createClass({displayName: "TableHead",
+    render: function(){
+      return (
+        React.createElement("li", null, 
+          React.createElement("div", {className: "index"}, "#"), 
+          React.createElement("div", {className: "start-time"}, "Time"), 
+          React.createElement("div", {className: "duration"}, "Duration"), 
+          React.createElement("div", {className: "topic"}, "Topic"), 
+          React.createElement("div", {className: "presenter"}, "Presenter")
         )
       );
     }
