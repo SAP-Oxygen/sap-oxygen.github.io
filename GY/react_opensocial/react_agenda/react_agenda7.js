@@ -392,8 +392,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     enableDialogBox: function() {
       var self = this;
       var id = this.props.item.id;
-      var topicId = "topic-" + id;
-      var timeId = "time-" + id;
+      var mainId = "main-" + id;
+      var durationId = "duration-" + id;
       // onwerId here is not the real id of owner
       var ownerId = "owner-" + id;
       var editId = "edit-" + id;
@@ -403,8 +403,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       };
       // unbind the previous click event first, then bind the new click event
       // with updated data
-      $("#" + editId + ", #" + topicId + ", #" + timeId).unbind();
-      $("#" + editId + ", #" + topicId + ", #" + timeId).click(function() {
+      $("#" + editId + ", #" + mainId + ", #" + durationId).unbind();
+      $("#" + editId + ", #" + mainId + ", #" + durationId).click(function() {
         gadgets.views.openGadget(function(result) {
           if (result) {
             self.props.onDialogEdit(result.item);
@@ -425,8 +425,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var displayIndex = index + 1;
       var id = this.props.item.id;
       var domId = "row-" + id; 
-      var topicId = "topic-" + id;
-      var timeId = "time-" + id;
+      var mainId = "main-" + id;
+      var durationId = "duration-" + id;
       // onwerId here is not the real id of owner
       var ownerId = "owner-" + id;
       var topic;
@@ -457,12 +457,12 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           React.createElement("div", {className: "div-table-cell move-col"}, " + "), 
           React.createElement("div", {className: "div-table-cell index-col"}, displayIndex), 
           React.createElement("div", {className: "div-table-cell time-col"}, this.props.startTime.format('LT')), 
-          React.createElement("div", {className: "div-table-cell duration-col"}, this.props.item.time, " min"), 
-          React.createElement("div", {className: "div-table-cell main-col"}, 
+          React.createElement("div", {className: "div-table-cell duration-col", id: durationId}, this.props.item.time, " min"), 
+          React.createElement("div", {className: "div-table-cell main-col", id: mainId}, 
             React.createElement("div", {className: "topic-cell"}, topic), 
             React.createElement("div", {className: "desc-cell"}, this.props.item.desc)
           ), 
-          React.createElement("div", {className: "div-table-cell presenter-col"}, ownerName), 
+          React.createElement("div", {className: "div-table-cell presenter-col", id: ownerId}, ownerName), 
           React.createElement("div", {className: "div-table-cell trash-col"}, " - ")
         )
       );
@@ -539,8 +539,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     componentDidUpdate: function() {
       var self = this;
       var id = this.props.item.id;
-      var topicId = "topic-" + id;
-      var timeId = "time-" + id;
+      var mainId = "main-" + id;
+      var durationId = "duration-" + id;
       // onwerId here is not the real id of owner
       var ownerId = "owner-" + id;
       var editId = "edit-" + id;
@@ -550,8 +550,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       };
       // unbind the previous click event first, then bind the new click event
       // with updated data
-      $("#" + editId + ", #" + topicId + ", #" + timeId).unbind();
-      $("#" + editId + ", #" + topicId + ", #" + timeId).click(function() {
+      $("#" + editId + ", #" + mainId + ", #" + durationId).unbind();
+      $("#" + editId + ", #" + mainId + ", #" + durationId).click(function() {
         gadgets.views.openGadget(function(result) {
           if (result) {
             self.props.onDialogEdit(result.item);
@@ -565,8 +565,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       adjustHeight();
       var self = this;
       var id = this.props.item.id;
-      var topicId = "topic-" + id;
-      var timeId = "time-" + id;
+      var mainId = "main-" + id;
+      var durationId = "duration-" + id;
       // onwerId here is not the real id of owner
       var ownerId = "owner-" + id;
       var editId = "edit-" + id;
@@ -574,7 +574,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         item: this.props.item,
         people: this.props.people
       };
-      $("#" + editId + ", #" + topicId + ", #" + timeId).click(function() {
+      $("#" + editId + ", #" + mainId + ", #" + durationId).click(function() {
         gadgets.views.openGadget(function(result) {
           if (result) {
             self.props.onDialogEdit(result.item);
@@ -592,8 +592,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var displayIndex = index + 1;
       var id = this.props.item.id;
       var domId = "row-" + id; 
-      var topicId = "topic-" + id;
-      var timeId = "time-" + id;
+      var mainId = "main-" + id;
+      var durationId = "duration-" + id;
       // onwerId here is not the real id of owner
       var ownerId = "owner-" + id;
       var topic;
@@ -626,10 +626,10 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           React.createElement("td", {className: "startTime"}, 
             React.createElement("span", null, this.props.startTime.format('LT'))
           ), 
-          React.createElement("td", {className: "duration cursor-pointer", id: timeId}, 
+          React.createElement("td", {className: "duration cursor-pointer", id: durationId}, 
             React.createElement("span", null, this.props.item.time, " min")
           ), 
-          React.createElement("td", {className: "topic cursor-pointer", id: topicId}, 
+          React.createElement("td", {className: "topic cursor-pointer", id: mainId}, 
             React.createElement("span", null, topic), 
             React.createElement("br", null), 
             React.createElement("span", null, this.props.item.desc)
