@@ -226,6 +226,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
     },
     handleSort2: function(newOrder) {
+      // TODO: implement wave
       var newItems = [];
       var itemsMap = this.state.itemsMap;
       newOrder.forEach(function(itemId, index) {
@@ -267,6 +268,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var itemId = null;
       var lastItemEndTime = null;
       return (
+        <TableHead />
         <Table className="agenda-table" responsive >
           <thead>
             <tr>
@@ -292,6 +294,20 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       );
     }
   });
+
+  var TableHead = React.createClass({
+    render: function(){
+      return (
+        <li>
+          <div className="index">#</div>
+          <div className="start-time">Time</div>
+          <div className="duration">Duration</div>
+          <div className="topic">Topic</div>
+          <div className="presenter">Presenter</div>
+        </li>
+      );
+    }
+  })
 
   // drag and drop pattern referred from http://webcloud.se/truly-reactive-sortable-component/
   var TableBody = React.createClass({

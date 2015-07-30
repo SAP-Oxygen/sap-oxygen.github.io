@@ -226,6 +226,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
     },
     handleSort2: function(newOrder) {
+      // TODO: implement wave
       var newItems = [];
       var itemsMap = this.state.itemsMap;
       newOrder.forEach(function(itemId, index) {
