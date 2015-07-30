@@ -280,29 +280,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             onRemove: this.props.onRemove, 
             onDialogEdit: this.props.onDialogEdit, 
             order: this.props.order, 
-            onSort: this.props.onSort}), 
-          React.createElement(Table, {className: "agenda-table", responsive: true}, 
-            React.createElement("thead", null, 
-              React.createElement("tr", null, 
-                React.createElement("th", {className: "index"}, "#"), 
-                React.createElement("th", {className: "short"}, "Start Time"), 
-                React.createElement("th", {className: "short"}, "Duration"), 
-                React.createElement("th", {className: "med"}, "Topic"), 
-                React.createElement("th", {className: "short"}, "Presenter")
-              )
-            ), 
-            React.createElement(TableBody, {
-              items: this.props.items, 
-              startTime: this.props.startTime, 
-              people: this.props.people, 
-              onEdit: this.props.onEdit, 
-              onRemove: this.props.onRemove, 
-              onDialogEdit: this.props.onDialogEdit, 
-              order: this.props.order, 
-              onSort: this.props.onSort
-              }
-            )
-          )
+            onSort: this.props.onSort})
         )
       );
     }
@@ -311,14 +289,14 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   var TableHead = React.createClass({displayName: "TableHead",
     render: function(){
       return (
-        React.createElement("li", {className: "list-table-row"}, 
-          React.createElement("div", {className: "div-table-cell move-col"}, " + "), 
-          React.createElement("div", {className: "div-table-cell index-col"}, "#"), 
-          React.createElement("div", {className: "div-table-cell time-col"}, "Time"), 
-          React.createElement("div", {className: "div-table-cell duration-col"}, "Duration"), 
-          React.createElement("div", {className: "div-table-cell main-col"}, "Topic"), 
-          React.createElement("div", {className: "div-table-cell presenter-col"}, "Presenter"), 
-          React.createElement("div", {className: "div-table-cell trash-col"}, " - ")
+        React.createElement("li", {className: "list-table-row", id: "table-head"}, 
+          React.createElement("div", {className: "div-table-cell th move-col"}, " + "), 
+          React.createElement("div", {className: "div-table-cell th index-col"}, "#"), 
+          React.createElement("div", {className: "div-table-cell th time-col"}, "Time"), 
+          React.createElement("div", {className: "div-table-cell th duration-col"}, "Duration"), 
+          React.createElement("div", {className: "div-table-cell th main-col"}, "Topic"), 
+          React.createElement("div", {className: "div-table-cell th presenter-col"}, "Presenter"), 
+          React.createElement("div", {className: "div-table-cell th trash-col"}, " - ")
         )
       );
     }

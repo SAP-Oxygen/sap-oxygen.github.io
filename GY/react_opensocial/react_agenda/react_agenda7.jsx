@@ -281,28 +281,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             onDialogEdit={this.props.onDialogEdit}
             order={this.props.order}
             onSort={this.props.onSort} />
-          <Table className="agenda-table" responsive>
-            <thead>
-              <tr>
-                <th className='index'>#</th>
-                <th className='short'>Start Time</th>
-                <th className='short'>Duration</th>
-                <th className='med'>Topic</th>
-                <th className='short'>Presenter</th>
-              </tr>
-            </thead>
-            <TableBody 
-              items = {this.props.items}
-              startTime={this.props.startTime} 
-              people={this.props.people} 
-              onEdit={this.props.onEdit} 
-              onRemove={this.props.onRemove} 
-              onDialogEdit={this.props.onDialogEdit}
-              order={this.props.order}
-              onSort={this.props.onSort}
-              >
-            </TableBody>
-          </Table>
         </div>
       );
     }
@@ -311,14 +289,14 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   var TableHead = React.createClass({
     render: function(){
       return (
-        <li className="list-table-row">
-          <div className="div-table-cell move-col"> + </div>
-          <div className="div-table-cell index-col">#</div>
-          <div className="div-table-cell time-col">Time</div>
-          <div className="div-table-cell duration-col">Duration</div>
-          <div className="div-table-cell main-col">Topic</div>
-          <div className="div-table-cell presenter-col">Presenter</div>
-          <div className="div-table-cell trash-col"> - </div>
+        <li className="list-table-row" id="table-head">
+          <div className="div-table-cell th move-col"> + </div>
+          <div className="div-table-cell th index-col">#</div>
+          <div className="div-table-cell th time-col">Time</div>
+          <div className="div-table-cell th duration-col">Duration</div>
+          <div className="div-table-cell th main-col">Topic</div>
+          <div className="div-table-cell th presenter-col">Presenter</div>
+          <div className="div-table-cell th trash-col"> - </div>
         </li>
       );
     }
