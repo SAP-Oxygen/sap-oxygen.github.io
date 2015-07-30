@@ -272,6 +272,15 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           React.createElement("ul", null, 
             React.createElement(TableHead, null)
           ), 
+          React.createElement(TableBody2, {
+            items: this.props.items, 
+            startTime: this.props.startTime, 
+            people: this.props.people, 
+            onEdit: this.props.onEdit, 
+            onRemove: this.props.onRemove, 
+            onDialogEdit: this.props.onDialogEdit, 
+            order: this.props.order, 
+            onSort: this.props.onSort}), 
           React.createElement(Table, {className: "agenda-table", responsive: true}, 
             React.createElement("thead", null, 
               React.createElement("tr", null, 

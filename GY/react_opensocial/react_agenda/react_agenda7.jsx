@@ -272,6 +272,15 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           <ul>
             <TableHead />
           </ul>
+          <TableBody2 
+            items = {this.props.items}
+            startTime={this.props.startTime} 
+            people={this.props.people} 
+            onEdit={this.props.onEdit} 
+            onRemove={this.props.onRemove} 
+            onDialogEdit={this.props.onDialogEdit}
+            order={this.props.order}
+            onSort={this.props.onSort} />
           <Table className="agenda-table" responsive>
             <thead>
               <tr>
