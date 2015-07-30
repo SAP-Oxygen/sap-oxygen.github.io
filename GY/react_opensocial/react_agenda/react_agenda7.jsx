@@ -244,24 +244,17 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             <DateTimePicker onTimeChange={this.handleTimeChange} />
           </Row>
           <br />
-          <Row className="show-grid">
-            <Col xs={1}>
-              <DragBar order={this.state.order} onSort={this.handleSort} />
-            </Col>
-            <Col xs={11}>
-              <AgendaTable 
-                items={this.state.items} 
-                startTime={this.state.startTime} 
-                people={this.state.people} 
-                onEdit={this.handleEdit} 
-                onRemove={this.handleRemove} 
-                onDialogEdit={this.handleDialogEdit} 
-                onDraggingStatus={this.handleDraggingStatus}
-                order={this.state.order}
-                onSort={this.handleSort2} />
-              <AddButton onAdd={this.handleAdd} />
-            </Col>
-          </Row>
+          <AgendaTable 
+            items={this.state.items} 
+            startTime={this.state.startTime} 
+            people={this.state.people} 
+            onEdit={this.handleEdit} 
+            onRemove={this.handleRemove} 
+            onDialogEdit={this.handleDialogEdit} 
+            onDraggingStatus={this.handleDraggingStatus}
+            order={this.state.order}
+            onSort={this.handleSort2} />
+          <AddButton onAdd={this.handleAdd} />
         </Grid>
       );
     }
@@ -547,56 +540,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             </span>
           </div>
         </Col>
-      );
-    }
-  });
-
-  var DragBar = React.createClass({
-    componentDidMount: function() {
-      var self = this;
-
-      var onSortableStop = function(event, ui) {
-        var sortedIds = $( "#sortable-list" ).sortable( "toArray" );
-        self.props.onSort(sortedIds);
-      };
-
-      var sortableHelper = function(event, ui) {
-        var id = event.toElement.id;
-        var domId = "row-" + id;
-        var originalDom = $("#" + domId);
-        var clonedDom = originalDom.clone();
-        clonedDom.children().each(function() {
-          var className = $(this).attr("class");
-          $(this).width(originalDom.children("." + className).width());
-        });
-        return clonedDom;
-      };
-
-      $("#sortable-list").sortable({
-        axis: 'y',
-        stop: onSortableStop,
-        helper: sortableHelper,
-        start : function(event, ui) {
-            ui.helper.width($(this).width());
-        }
-      });
-    },
-    render: function() {
-      var bar = this.props.order.map(function(itemId) {
-        return(
-          <li id={itemId} key={itemId}>
-            <button type="button" className="btn btn-default btn-lg">
-              <span className="glyphicon glyphicon-sort" aria-hidden="true"></span>
-            </button>
-          </li>
-        );
-      });
-      return(
-        <div>
-          <li className="sortable-header">[H]</li>
-          <ul id="sortable-list">
-          </ul>
-        </div>
       );
     }
   });

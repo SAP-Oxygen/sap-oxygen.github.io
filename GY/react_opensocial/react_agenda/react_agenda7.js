@@ -244,24 +244,17 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             React.createElement(DateTimePicker, {onTimeChange: this.handleTimeChange})
           ), 
           React.createElement("br", null), 
-          React.createElement(Row, {className: "show-grid"}, 
-            React.createElement(Col, {xs: 1}, 
-              React.createElement(DragBar, {order: this.state.order, onSort: this.handleSort})
-            ), 
-            React.createElement(Col, {xs: 11}, 
-              React.createElement(AgendaTable, {
-                items: this.state.items, 
-                startTime: this.state.startTime, 
-                people: this.state.people, 
-                onEdit: this.handleEdit, 
-                onRemove: this.handleRemove, 
-                onDialogEdit: this.handleDialogEdit, 
-                onDraggingStatus: this.handleDraggingStatus, 
-                order: this.state.order, 
-                onSort: this.handleSort2}), 
-              React.createElement(AddButton, {onAdd: this.handleAdd})
-            )
-          )
+          React.createElement(AgendaTable, {
+            items: this.state.items, 
+            startTime: this.state.startTime, 
+            people: this.state.people, 
+            onEdit: this.handleEdit, 
+            onRemove: this.handleRemove, 
+            onDialogEdit: this.handleDialogEdit, 
+            onDraggingStatus: this.handleDraggingStatus, 
+            order: this.state.order, 
+            onSort: this.handleSort2}), 
+          React.createElement(AddButton, {onAdd: this.handleAdd})
         )
       );
     }
@@ -545,56 +538,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             React.createElement("span", {className: "input-group-addon"}, 
               React.createElement("span", {className: "glyphicon glyphicon-calendar"})
             )
-          )
-        )
-      );
-    }
-  });
-
-  var DragBar = React.createClass({displayName: "DragBar",
-    componentDidMount: function() {
-      var self = this;
-
-      var onSortableStop = function(event, ui) {
-        var sortedIds = $( "#sortable-list" ).sortable( "toArray" );
-        self.props.onSort(sortedIds);
-      };
-
-      var sortableHelper = function(event, ui) {
-        var id = event.toElement.id;
-        var domId = "row-" + id;
-        var originalDom = $("#" + domId);
-        var clonedDom = originalDom.clone();
-        clonedDom.children().each(function() {
-          var className = $(this).attr("class");
-          $(this).width(originalDom.children("." + className).width());
-        });
-        return clonedDom;
-      };
-
-      $("#sortable-list").sortable({
-        axis: 'y',
-        stop: onSortableStop,
-        helper: sortableHelper,
-        start : function(event, ui) {
-            ui.helper.width($(this).width());
-        }
-      });
-    },
-    render: function() {
-      var bar = this.props.order.map(function(itemId) {
-        return(
-          React.createElement("li", {id: itemId, key: itemId}, 
-            React.createElement("button", {type: "button", className: "btn btn-default btn-lg"}, 
-              React.createElement("span", {className: "glyphicon glyphicon-sort", "aria-hidden": "true"})
-            )
-          )
-        );
-      });
-      return(
-        React.createElement("div", null, 
-          React.createElement("li", {className: "sortable-header"}, "[H]"), 
-          React.createElement("ul", {id: "sortable-list"}
           )
         )
       );
