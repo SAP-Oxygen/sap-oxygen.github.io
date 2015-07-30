@@ -422,14 +422,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         function(site){},
         {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
       });
-
-      if ($("#" + self.props.item.id).length == 0) {
-        $("<li/>", {
-            id: self.props.item.id,
-            class: "sortable-element",
-            text: "[   ]"
-        }).height($("#" + topicId).height()).appendTo("#sortable-list");
-      }
     },
     handleRemove: function() {
       this.props.onRemove(this.props.item.id);
