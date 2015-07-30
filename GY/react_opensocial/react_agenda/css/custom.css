@@ -205,7 +205,6 @@ ul {
 }
 
 .list-table-row:active {
-    background-color: #F5FCFF !important;
     cursor: grabbing;
     cursor: -webkit-grabbing; 
     cursor: -moz-grabbing;
