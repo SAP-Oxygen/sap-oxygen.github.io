@@ -272,7 +272,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           <ul className="table-list">
             <TableHead />
           </ul>
-          <TableBody2 
+          <TableBody 
             items = {this.props.items}
             startTime={this.props.startTime} 
             people={this.props.people} 
@@ -302,152 +302,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     }
   });
 
-  var TableBody2 = React.createClass({
-    getInitialState: function() {
-      return {
-        dragging: ""
-      }
-    },
-    componentDidUpdate: function() {
-    },
-    sort: function(order, dragging) {
-      this.setState({dragging: dragging});
-      this.props.onSort(order);
-    },
-    dragEnd: function() {
-      this.sort(this.props.order, undefined);
-    },
-    dragStart: function(e) {
-      this.dragged = Number(e.currentTarget.dataset.id);
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData("text/html", null)
-    },
-    dragOver: function(e) {
-      e.preventDefault();
-      var over = e.currentTarget;
-      var dragging = this.state.dragging;
-      var from = isFinite(dragging) ? dragging : this.dragged;
-      var to = Number(over.dataset.id);
-
-      // Move from 'a' to 'b'
-      var order = this.props.order;
-      order.splice(to, 0, order.splice(from,1)[0]);
-      this.sort(order, to);
-    },
-    render: function() {
-      var self = this;
-      var items = [];
-      var lastItemEndTime = null;
-      this.props.items.forEach(function(item, index, array) {
-        var dragging = (index == self.state.dragging) ? "dragging" : "";
-        if (!lastItemEndTime) {
-          lastItemEndTime = self.props.startTime.clone();
-        }
-        items.push(
-          <RowItem2 
-            index={index} 
-            item={item} 
-            startTime={lastItemEndTime.clone()}
-            people={self.props.people} 
-            onEdit={self.props.onEdit} 
-            onRemove={self.props.onRemove} 
-            onDialogEdit={self.props.onDialogEdit}
-            onDragEnd={self.dragEnd}
-            onDragOver={self.dragOver}
-            onDragStart={self.dragStart} />
-        );
-        lastItemEndTime.add(item.time, 'm');
-      });
-      return (
-        <ul className="table-list">
-          {items}
-        </ul>
-      );
-    }
-  });
-
-  var RowItem2 = React.createClass({
-    enableDialogBox: function() {
-      var self = this;
-      var id = this.props.item.id;
-      var mainId = "main-" + id;
-      var durationId = "duration-" + id;
-      // onwerId here is not the real id of owner
-      var ownerId = "owner-" + id;
-      var editId = "edit-" + id;
-      var editData = {
-        item: this.props.item,
-        people: this.props.people
-      };
-      // unbind the previous click event first, then bind the new click event
-      // with updated data
-      $("#" + editId + ", #" + mainId + ", #" + durationId).unbind();
-      $("#" + editId + ", #" + mainId + ", #" + durationId).click(function() {
-        gadgets.views.openGadget(function(result) {
-          if (result) {
-            self.props.onDialogEdit(result.item);
-          }
-        }, 
-        function(site){},
-        {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
-      });
-    },
-    componentDidMount: function() {
-      adjustHeight();
-      this.enableDialogBox();
-    },
-    componentDidUpdate: function() {
-      this.enableDialogBox();
-    },
-    render: function() {
-      var index = this.props.index;
-      var displayIndex = index + 1;
-      var id = this.props.item.id;
-      var domId = "row-" + id; 
-      var mainId = "main-" + id;
-      var durationId = "duration-" + id;
-      // onwerId here is not the real id of owner
-      var ownerId = "owner-" + id;
-      var topic;
-      if (this.props.item.topic === "") {
-        topic = "Click to edit";
-      } else {
-        topic = this.props.item.topic;
-      }
-      var thumbnail;
-      var ownerName;
-      if (this.props.item.owner) {
-        var thumbnailUrl = wave.getParticipantById(this.props.item.owner).thumbnailUrl_;
-        thumbnail = <img className="img-circle" src={thumbnailUrl} />;
-        ownerName = wave.getParticipantById(this.props.item.owner).displayName_;
-      }
-      var color = "row-type-" + this.props.item.color;
-      var classString = "list-table-row " + color;
-      return (
-        <li 
-          className={classString} 
-          id={domId}
-          data-id={this.props.index}
-          key={this.props.index}
-          draggable="true"
-          onDragEnd={this.props.onDragEnd}
-          onDragOver={this.props.onDragOver}
-          onDragStart={this.props.onDragStart} >
-          <div className="div-table-cell move-col"> + </div>
-          <div className="div-table-cell index-col">{displayIndex}</div>
-          <div className="div-table-cell time-col">{this.props.startTime.format('LT')}</div>
-          <div className="div-table-cell duration-col" id={durationId}>{this.props.item.time} min</div>
-          <div className="div-table-cell main-col" id={mainId}>
-            <div className="topic-cell">{topic}</div>
-            <div className="desc-cell">{this.props.item.desc}</div>
-          </div>
-          <div className="div-table-cell presenter-col" id={ownerId}>{ownerName}</div>
-          <div className="div-table-cell trash-col"> - </div>
-        </li>
-      );
-    }
-  });
-
   // drag and drop pattern referred from http://webcloud.se/truly-reactive-sortable-component/
   var TableBody = React.createClass({
     getInitialState: function() {
@@ -456,6 +310,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       }
     },
     componentDidUpdate: function() {
+      adjustHeight();
     },
     sort: function(order, dragging) {
       this.setState({dragging: dragging});
@@ -499,7 +354,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             onEdit={self.props.onEdit} 
             onRemove={self.props.onRemove} 
             onDialogEdit={self.props.onDialogEdit}
-            draggable="true"
             onDragEnd={self.dragEnd}
             onDragOver={self.dragOver}
             onDragStart={self.dragStart} />
@@ -507,15 +361,15 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         lastItemEndTime.add(item.time, 'm');
       });
       return (
-        <tbody>
+        <ul className="table-list">
           {items}
-        </tbody>
+        </ul>
       );
     }
   });
 
   var RowItem = React.createClass({
-    componentDidUpdate: function() {
+    enableDialogBox: function() {
       var self = this;
       var id = this.props.item.id;
       var mainId = "main-" + id;
@@ -523,14 +377,15 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       // onwerId here is not the real id of owner
       var ownerId = "owner-" + id;
       var editId = "edit-" + id;
+      var trashId = "trash-" + id;
       var editData = {
         item: this.props.item,
         people: this.props.people
       };
       // unbind the previous click event first, then bind the new click event
       // with updated data
-      $("#" + editId + ", #" + mainId + ", #" + durationId).unbind();
-      $("#" + editId + ", #" + mainId + ", #" + durationId).click(function() {
+      $("#" + trashId).unbind();
+      $("#" + trashId).click(function() {
         gadgets.views.openGadget(function(result) {
           if (result) {
             self.props.onDialogEdit(result.item);
@@ -541,30 +396,10 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
     },
     componentDidMount: function() {
-      adjustHeight();
-      var self = this;
-      var id = this.props.item.id;
-      var mainId = "main-" + id;
-      var durationId = "duration-" + id;
-      // onwerId here is not the real id of owner
-      var ownerId = "owner-" + id;
-      var editId = "edit-" + id;
-      var editData = {
-        item: this.props.item,
-        people: this.props.people
-      };
-      $("#" + editId + ", #" + mainId + ", #" + durationId).click(function() {
-        gadgets.views.openGadget(function(result) {
-          if (result) {
-            self.props.onDialogEdit(result.item);
-          }
-        }, 
-        function(site){},
-        {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
-      });
+      this.enableDialogBox();
     },
-    handleRemove: function() {
-      this.props.onRemove(this.props.item.id);
+    componentDidUpdate: function() {
+      this.enableDialogBox();
     },
     render: function() {
       var index = this.props.index;
@@ -575,6 +410,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var durationId = "duration-" + id;
       // onwerId here is not the real id of owner
       var ownerId = "owner-" + id;
+      var trashId = "trash-" + id;
       var topic;
       if (this.props.item.topic === "") {
         topic = "Click to edit";
@@ -589,37 +425,30 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         ownerName = wave.getParticipantById(this.props.item.owner).displayName_;
       }
       var color = "row-type-" + this.props.item.color;
+      var classString = "list-table-row " + color;
       return (
-        <tr 
-          className={color} 
+        <li 
+          className={classString} 
           id={domId}
           data-id={this.props.index}
           key={this.props.index}
-          draggable={this.props.draggable}
+          draggable="true"
           onDragEnd={this.props.onDragEnd}
           onDragOver={this.props.onDragOver}
           onDragStart={this.props.onDragStart} >
-          <td className="index">
-            <span>{displayIndex}</span>
-          </td>
-          <td className="startTime">
-            <span>{this.props.startTime.format('LT')}</span>
-          </td>
-          <td className="duration cursor-pointer" id={durationId}>
-            <span>{this.props.item.time} min</span>
-          </td>
-          <td className="topic cursor-pointer" id={mainId}>
-            <span>{topic}</span>
-            <br />
-            <span>{this.props.item.desc}</span>
-          </td>
-          <td className="owner link-text cursor-pointer" id={ownerId}>
-            {thumbnail} <span className="owner">{ownerName}</span>
-            <span className="pull-right on-hover">
-              <Glyphicon className="cursor-pointer" glyph='trash' onClick={this.handleRemove} />
-            </span>
-          </td>
-        </tr>
+          <div className="div-table-cell move-col"> + </div>
+          <div className="div-table-cell index-col">{displayIndex}</div>
+          <div className="div-table-cell time-col">{this.props.startTime.format('LT')}</div>
+          <div className="div-table-cell duration-col" id={durationId}>{this.props.item.time} min</div>
+          <div className="div-table-cell main-col" id={mainId}>
+            <div className="topic-cell">{topic}</div>
+            <div className="desc-cell">{this.props.item.desc}</div>
+          </div>
+          <div className="div-table-cell presenter-col" id={ownerId}>{ownerName}</div>
+          <div className="div-table-cell trash-col">
+            <span className="glyphicon glyphicon-trash" id={trashId} aria-hidden="true"></span>
+          </div>
+        </li>
       );
     }
   });
