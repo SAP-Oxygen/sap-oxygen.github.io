@@ -301,19 +301,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       }
     },
     componentDidUpdate: function() {
-      // remove all child nodes first, then populate child nodes
-      // according to the updated list
-      $("#sortable-list").empty();
-      this.props.order.forEach(function(itemId) {
-        if ($("#" + itemId).length == 0) {
-          var topicId = "topic-" + itemId;
-          $("<li/>", {
-              id: itemId,
-              class: "sortable-element",
-              text: "[   ]"
-          }).height($("#" + topicId).css("height")).appendTo("#sortable-list");
-        }
-      });
     },
     sort: function(order, dragging) {
       this.setState({dragging: dragging});
@@ -333,8 +320,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var dragging = this.state.dragging;
       var from = isFinite(dragging) ? dragging : this.dragged;
       var to = Number(over.dataset.id);
-      console.log("from: " + from);
-      console.log("to: " + to);
 
       // Move from 'a' to 'b'
       var order = this.props.order;
