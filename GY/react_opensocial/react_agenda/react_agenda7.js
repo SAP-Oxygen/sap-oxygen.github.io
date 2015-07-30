@@ -393,6 +393,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
     },
     componentDidMount: function() {
+      adjustHeight();
       this.enableDialogBox();
     },
     componentDidUpdate: function() {
