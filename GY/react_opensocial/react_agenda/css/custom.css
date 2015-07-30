@@ -152,7 +152,7 @@ ul {
 }
 
 li div {
-    border: dashed;
+    border: 1px dotted;
 }
 
 .list-table-row {

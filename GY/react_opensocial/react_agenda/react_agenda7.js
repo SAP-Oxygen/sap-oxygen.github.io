@@ -315,6 +315,120 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     }
   });
 
+  var TableBody2 = React.createClass({displayName: "TableBody2",
+    getInitialState: function() {
+      return {
+        dragging: ""
+      }
+    },
+    componentDidUpdate: function() {
+    },
+    sort: function(order, dragging) {
+      this.setState({dragging: dragging});
+      this.props.onSort(order);
+    },
+    dragEnd: function() {
+      this.sort(this.props.order, undefined);
+    },
+    dragStart: function(e) {
+      this.dragged = Number(e.currentTarget.dataset.id);
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData("text/html", null)
+    },
+    dragOver: function(e) {
+      e.preventDefault();
+      var over = e.currentTarget;
+      var dragging = this.state.dragging;
+      var from = isFinite(dragging) ? dragging : this.dragged;
+      var to = Number(over.dataset.id);
+
+      // Move from 'a' to 'b'
+      var order = this.props.order;
+      order.splice(to, 0, order.splice(from,1)[0]);
+      this.sort(order, to);
+    },
+    render: function() {
+      var self = this;
+      var items = [];
+      var lastItemEndTime = null;
+      this.props.items.forEach(function(item, index, array) {
+        var dragging = (index == self.state.dragging) ? "dragging" : "";
+        if (!lastItemEndTime) {
+          lastItemEndTime = self.props.startTime.clone();
+        }
+        items.push(
+          React.createElement(RowItem2, {
+            index: index, 
+            item: item, 
+            startTime: lastItemEndTime.clone(), 
+            people: self.props.people, 
+            onEdit: self.props.onEdit, 
+            onRemove: self.props.onRemove, 
+            onDialogEdit: self.props.onDialogEdit, 
+            onDragEnd: self.dragEnd, 
+            onDragOver: self.dragOver, 
+            onDragStart: self.dragStart})
+        );
+        lastItemEndTime.add(item.time, 'm');
+      });
+      return (
+        React.createElement("ul", null, 
+          items
+        )
+      );
+    }
+  });
+
+  var RowItem2 = React.createClass({displayName: "RowItem2",
+    render: function() {
+      var index = this.props.index;
+      var displayIndex = index + 1;
+      var id = this.props.item.id;
+      var domId = "row-" + id; 
+      var topicId = "topic-" + id;
+      var timeId = "time-" + id;
+      // onwerId here is not the real id of owner
+      var ownerId = "owner-" + id;
+      var topic;
+      if (this.props.item.topic === "") {
+        topic = "Click to edit";
+      } else {
+        topic = this.props.item.topic;
+      }
+      var thumbnail;
+      var ownerName;
+      if (this.props.item.owner) {
+        var thumbnailUrl = wave.getParticipantById(this.props.item.owner).thumbnailUrl_;
+        thumbnail = React.createElement("img", {className: "img-circle", src: thumbnailUrl});
+        ownerName = wave.getParticipantById(this.props.item.owner).displayName_;
+      }
+      var color = "row-type-" + this.props.item.color;
+      var classString = "list-table-row " + color;
+      return (
+        React.createElement("li", {
+          className: classString, 
+          id: domId, 
+          "data-id": this.props.index, 
+          key: this.props.index, 
+          draggable: "true", 
+          onDragEnd: this.props.onDragEnd, 
+          onDragOver: this.props.onDragOver, 
+          onDragStart: this.props.onDragStart}, 
+          React.createElement("div", {className: "div-table-cell move-col"}, " + "), 
+          React.createElement("div", {className: "div-table-cell index-col"}, displayIndex), 
+          React.createElement("div", {className: "div-table-cell time-col"}, this.props.startTime.format('LT')), 
+          React.createElement("div", {className: "div-table-cell duration-col"}, this.props.item.time, " min"), 
+          React.createElement("div", {className: "div-table-cell main-col"}, 
+            React.createElement("div", {className: "topic-cell"}, topic), 
+            React.createElement("div", {className: "desc-cell"}, this.props.item.desc)
+          ), 
+          React.createElement("div", {className: "div-table-cell presenter-col"}, ownerName), 
+          React.createElement("div", {className: "div-table-cell trash-col"}, " - ")
+        )
+      );
+    }
+  });
+
   // drag and drop pattern referred from http://webcloud.se/truly-reactive-sortable-component/
   var TableBody = React.createClass({displayName: "TableBody",
     getInitialState: function() {
@@ -378,7 +492,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           items
         )
       );
-    },
+    }
   });
 
   var RowItem = React.createClass({displayName: "RowItem",
