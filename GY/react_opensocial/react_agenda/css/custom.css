@@ -196,20 +196,21 @@ ul {
     display: table-row;
 }
 
-.list-table-row:hover {
-    background-color: #F5FCFF !important;
-    cursor: move;
-    cursor: grab;
-    cursor: -webkit-grab;
-    cursor: -moz-grab;
-}
-
 .list-table-row:active {
     cursor: grabbing;
     cursor: -webkit-grabbing; 
     cursor: -moz-grabbing;
 }
 
-.list-table-row > div {
-    border-bottom: 1px dotted #999;
+.list-table-row .move-col:hover,
+.list-table-row .index-col:hover,
+.list-table-row .time-col:hover,
+.list-table-row .duration-col:hover,
+.list-table-row .main-col:hover,
+.list-table-row .presenter-col:hover, {
+    background-color: #F5FCFF !important;
+    cursor: move;
+    cursor: grab;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
 }

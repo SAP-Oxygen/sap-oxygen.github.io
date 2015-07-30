@@ -239,11 +239,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        <Grid className="container-fluid" id="grid">
-          <br />
-          <Row className="show-grid">
-            <DateTimePicker onTimeChange={this.handleTimeChange} />
-          </Row>
+        <div>
+          <DateTimePicker onTimeChange={this.handleTimeChange} />
           <br />
           <AgendaTable 
             items={this.state.items} 
@@ -256,7 +253,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             order={this.state.order}
             onSort={this.handleSort2} />
           <AddButton onAdd={this.handleAdd} />
-        </Grid>
+        </div>
       );
     }
   });
