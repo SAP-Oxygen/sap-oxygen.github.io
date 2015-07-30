@@ -269,7 +269,9 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var lastItemEndTime = null;
       return (
         React.createElement("div", null, 
-          React.createElement(TableHead, null), 
+          React.createElement("ul", null, 
+            React.createElement(TableHead, null)
+          ), 
           React.createElement(Table, {className: "agenda-table", responsive: true}, 
             React.createElement("thead", null, 
               React.createElement("tr", null, 
@@ -300,12 +302,14 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   var TableHead = React.createClass({displayName: "TableHead",
     render: function(){
       return (
-        React.createElement("li", null, 
-          React.createElement("div", {className: "index"}, "#"), 
-          React.createElement("div", {className: "start-time"}, "Time"), 
-          React.createElement("div", {className: "duration"}, "Duration"), 
-          React.createElement("div", {className: "topic"}, "Topic"), 
-          React.createElement("div", {className: "presenter"}, "Presenter")
+        React.createElement("li", {className: "list-table-row"}, 
+          React.createElement("div", {className: "div-table-cell move-col"}, " + "), 
+          React.createElement("div", {className: "div-table-cell index-col"}, "#"), 
+          React.createElement("div", {className: "div-table-cell time-col"}, "Time"), 
+          React.createElement("div", {className: "div-table-cell duration-col"}, "Duration"), 
+          React.createElement("div", {className: "div-table-cell main-col"}, "Topic"), 
+          React.createElement("div", {className: "div-table-cell presenter-col"}, "Presenter"), 
+          React.createElement("div", {className: "div-table-cell trash-col"}, " - ")
         )
       );
     }

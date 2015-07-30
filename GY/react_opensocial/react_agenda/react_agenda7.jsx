@@ -269,7 +269,9 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var lastItemEndTime = null;
       return (
         <div>
-          <TableHead />
+          <ul>
+            <TableHead />
+          </ul>
           <Table className="agenda-table" responsive>
             <thead>
               <tr>
@@ -300,12 +302,14 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   var TableHead = React.createClass({
     render: function(){
       return (
-        <li>
-          <div className="index">#</div>
-          <div className="start-time">Time</div>
-          <div className="duration">Duration</div>
-          <div className="topic">Topic</div>
-          <div className="presenter">Presenter</div>
+        <li className="list-table-row">
+          <div className="div-table-cell move-col"> + </div>
+          <div className="div-table-cell index-col">#</div>
+          <div className="div-table-cell time-col">Time</div>
+          <div className="div-table-cell duration-col">Duration</div>
+          <div className="div-table-cell main-col">Topic</div>
+          <div className="div-table-cell presenter-col">Presenter</div>
+          <div className="div-table-cell trash-col"> - </div>
         </li>
       );
     }
