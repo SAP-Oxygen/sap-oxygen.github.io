@@ -269,7 +269,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var lastItemEndTime = null;
       return (
         React.createElement("div", {id: "table"}, 
-          React.createElement("ul", null, 
+          React.createElement("ul", {className: "table-list"}, 
             React.createElement(TableHead, null)
           ), 
           React.createElement(TableBody2, {
@@ -289,7 +289,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   var TableHead = React.createClass({displayName: "TableHead",
     render: function(){
       return (
-        React.createElement("li", {className: "list-table-row", id: "table-head"}, 
+        React.createElement("li", {id: "table-head"}, 
           React.createElement("div", {className: "div-table-cell th move-col"}, " + "), 
           React.createElement("div", {className: "div-table-cell th index-col"}, "#"), 
           React.createElement("div", {className: "div-table-cell th time-col"}, "Time"), 

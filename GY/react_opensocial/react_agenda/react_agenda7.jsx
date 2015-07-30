@@ -269,7 +269,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var lastItemEndTime = null;
       return (
         <div id="table">
-          <ul>
+          <ul className="table-list">
             <TableHead />
           </ul>
           <TableBody2 
@@ -289,7 +289,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   var TableHead = React.createClass({
     render: function(){
       return (
-        <li className="list-table-row" id="table-head">
+        <li id="table-head">
           <div className="div-table-cell th move-col"> + </div>
           <div className="div-table-cell th index-col">#</div>
           <div className="div-table-cell th time-col">Time</div>
