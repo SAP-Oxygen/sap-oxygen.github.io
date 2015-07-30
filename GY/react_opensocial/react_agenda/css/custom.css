@@ -211,3 +211,7 @@ ul {
     cursor: -webkit-grabbing; 
     cursor: -moz-grabbing;
 }
+
+.list-table-row > div {
+    border-bottom: 1px dotted #999;
+}
