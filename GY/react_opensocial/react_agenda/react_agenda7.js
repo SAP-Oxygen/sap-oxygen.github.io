@@ -359,7 +359,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         lastItemEndTime.add(item.time, 'm');
       });
       return (
-        React.createElement("ul", null, 
+        React.createElement("ul", {className: "table-list"}, 
           items
         )
       );
