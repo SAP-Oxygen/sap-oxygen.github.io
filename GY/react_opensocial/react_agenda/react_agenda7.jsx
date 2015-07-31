@@ -249,31 +249,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     }
   });
 
-  var AgendaTable = React.createClass({
-    render: function() {
-      var self = this;
-      var rowsArr = [];
-      var itemId = null;
-      var lastItemEndTime = null;
-      return (
-        <div id="agenda-table">
-          <ul className="table-list">
-            <TableHead />
-          </ul>
-          <TableBody 
-            items = {this.props.items}
-            startTime={this.props.startTime} 
-            people={this.props.people} 
-            onEdit={this.props.onEdit} 
-            onRemove={this.props.onRemove} 
-            onDialogEdit={this.props.onDialogEdit}
-            order={this.props.order}
-            onSort={this.props.onSort} />
-        </div>
-      );
-    }
-  });
-
   var TableHead = React.createClass({
     render: function(){
       return (
@@ -291,7 +266,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   });
 
   // drag and drop pattern referred from http://webcloud.se/truly-reactive-sortable-component/
-  var TableBody = React.createClass({
+  var AgendaTable = React.createClass({
     getInitialState: function() {
       return {
         dragging: ""
@@ -445,12 +420,11 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
 
   var AddButton = React.createClass({
     handleAdd: function(e) {
-      e.preventDefault();
       this.props.onAdd();
     },
     render: function() {
       return (
-        <button type="button" className="btn btn-default btn-lg" onClick={this.handleAdd}>
+        <button type="button" className="btn btn-default" onClick={this.handleAdd}>
           <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Item
         </button>
       );

@@ -249,31 +249,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     }
   });
 
-  var AgendaTable = React.createClass({displayName: "AgendaTable",
-    render: function() {
-      var self = this;
-      var rowsArr = [];
-      var itemId = null;
-      var lastItemEndTime = null;
-      return (
-        React.createElement("div", {id: "agenda-table"}, 
-          React.createElement("ul", {className: "table-list"}, 
-            React.createElement(TableHead, null)
-          ), 
-          React.createElement(TableBody, {
-            items: this.props.items, 
-            startTime: this.props.startTime, 
-            people: this.props.people, 
-            onEdit: this.props.onEdit, 
-            onRemove: this.props.onRemove, 
-            onDialogEdit: this.props.onDialogEdit, 
-            order: this.props.order, 
-            onSort: this.props.onSort})
-        )
-      );
-    }
-  });
-
   var TableHead = React.createClass({displayName: "TableHead",
     render: function(){
       return (
@@ -291,7 +266,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   });
 
   // drag and drop pattern referred from http://webcloud.se/truly-reactive-sortable-component/
-  var TableBody = React.createClass({displayName: "TableBody",
+  var AgendaTable = React.createClass({displayName: "AgendaTable",
     getInitialState: function() {
       return {
         dragging: ""
@@ -445,12 +420,11 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
 
   var AddButton = React.createClass({displayName: "AddButton",
     handleAdd: function(e) {
-      e.preventDefault();
       this.props.onAdd();
     },
     render: function() {
       return (
-        React.createElement("button", {type: "button", className: "btn btn-default btn-lg", onClick: this.handleAdd}, 
+        React.createElement("button", {type: "button", className: "btn btn-default", onClick: this.handleAdd}, 
           React.createElement("span", {className: "glyphicon glyphicon-plus", "aria-hidden": "true"}), " Add Item"
         )
       );
