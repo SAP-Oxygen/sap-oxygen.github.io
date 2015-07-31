@@ -349,18 +349,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
       return (
         React.createElement("ul", {className: "table-list"}, 
-          React.createElement("li", {id: "table-head"}, 
-            React.createElement("div", {className: "div-table-cell th move-col"}, " + "), 
-            React.createElement("div", {className: "div-table-cell th index-col"}, "#"), 
-            React.createElement("div", {className: "div-table-cell th time-col"}, "Time"), 
-            React.createElement("div", {className: "div-table-cell th duration-col"}, "Duration"), 
-            React.createElement("div", {className: "div-table-cell th main-col"}, "Topic"), 
-            React.createElement("div", {className: "div-table-cell th presenter-col"}, "Presenter"), 
-            React.createElement("div", {className: "div-table-cell th edit-col"}, " - ")
-          ), 
-          React.createElement("div", null, 
+          React.createElement(TableHead, null), 
           items
-          )
         )
       );
     }

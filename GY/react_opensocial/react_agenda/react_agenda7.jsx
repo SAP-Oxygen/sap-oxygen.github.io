@@ -349,18 +349,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
       return (
         <ul className="table-list">
-          <li id="table-head">
-            <div className="div-table-cell th move-col"> + </div>
-            <div className="div-table-cell th index-col">#</div>
-            <div className="div-table-cell th time-col">Time</div>
-            <div className="div-table-cell th duration-col">Duration</div>
-            <div className="div-table-cell th main-col">Topic</div>
-            <div className="div-table-cell th presenter-col">Presenter</div>
-            <div className="div-table-cell th edit-col"> - </div>
-          </li>
-          <div>
+          <TableHead />
           {items}
-          </div>
         </ul>
       );
     }
