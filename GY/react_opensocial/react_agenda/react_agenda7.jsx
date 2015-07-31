@@ -1,17 +1,9 @@
 'use strict'
 
 var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
-
-  // variables for using React-Bootstrap
-  var Table = ReactBootstrap.Table;
-  var Button = ReactBootstrap.Button;
-  var Grid = ReactBootstrap.Grid;
-  var Row = ReactBootstrap.Row;
-  var Col = ReactBootstrap.Col;
-  var Glyphicon = ReactBootstrap.Glyphicon;
-  var initHeight = 400;
-
+  
   var adjustHeight = function() {
+    var initHeight = 400;
     var height = $("#grid").height();
     if (height > initHeight) {
       gadgets.window.adjustHeight();
@@ -357,6 +349,15 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
       return (
         <ul className="table-list">
+          <li id="table-head">
+            <div className="div-table-cell th move-col"> + </div>
+            <div className="div-table-cell th index-col">#</div>
+            <div className="div-table-cell th time-col">Time</div>
+            <div className="div-table-cell th duration-col">Duration</div>
+            <div className="div-table-cell th main-col">Topic</div>
+            <div className="div-table-cell th presenter-col">Presenter</div>
+            <div className="div-table-cell th edit-col"> - </div>
+          </li>
           {items}
         </ul>
       );

@@ -1,17 +1,9 @@
 'use strict'
 
 var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
-
-  // variables for using React-Bootstrap
-  var Table = ReactBootstrap.Table;
-  var Button = ReactBootstrap.Button;
-  var Grid = ReactBootstrap.Grid;
-  var Row = ReactBootstrap.Row;
-  var Col = ReactBootstrap.Col;
-  var Glyphicon = ReactBootstrap.Glyphicon;
-  var initHeight = 400;
-
+  
   var adjustHeight = function() {
+    var initHeight = 400;
     var height = $("#grid").height();
     if (height > initHeight) {
       gadgets.window.adjustHeight();
@@ -357,6 +349,15 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
       return (
         React.createElement("ul", {className: "table-list"}, 
+          React.createElement("li", {id: "table-head"}, 
+            React.createElement("div", {className: "div-table-cell th move-col"}, " + "), 
+            React.createElement("div", {className: "div-table-cell th index-col"}, "#"), 
+            React.createElement("div", {className: "div-table-cell th time-col"}, "Time"), 
+            React.createElement("div", {className: "div-table-cell th duration-col"}, "Duration"), 
+            React.createElement("div", {className: "div-table-cell th main-col"}, "Topic"), 
+            React.createElement("div", {className: "div-table-cell th presenter-col"}, "Presenter"), 
+            React.createElement("div", {className: "div-table-cell th edit-col"}, " - ")
+          ), 
           items
         )
       );
