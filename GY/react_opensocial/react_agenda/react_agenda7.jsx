@@ -264,7 +264,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var itemId = null;
       var lastItemEndTime = null;
       return (
-        <div id="table">
+        <div id="agenda-table">
           <ul className="table-list">
             <TableHead />
           </ul>
@@ -450,12 +450,15 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   });
 
   var AddButton = React.createClass({
-    handleAdd: function() {
+    handleAdd: function(e) {
+      e.preventDefault();
       this.props.onAdd();
     },
     render: function() {
       return (
-        <Button onClick={this.handleAdd}>Add a new Topic</Button>
+        <button type="button" className="btn btn-default btn-lg" onClick={this.handleAdd}>
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Item
+        </button>
       );
     }
   });
@@ -489,7 +492,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        <div>
+        <div className="col-xs-4">
           <div className='input-group date' id='datetimepicker'>
             <input type='text' className='form-control' />
             <span className='input-group-addon'>

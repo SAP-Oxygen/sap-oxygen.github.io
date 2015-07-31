@@ -169,6 +169,7 @@ ul {
     text-align: center;
     background-color: #fff;
     visibility: hidden;
+    cursor: pointer;
 }
 
 .topic-cell {
@@ -205,4 +206,8 @@ ul {
 
 .list-table-row:hover .edit-col {
     visibility: visible;
+}
+
+#agenda-table {
+    padding: 20px 0 20px 0;
 }

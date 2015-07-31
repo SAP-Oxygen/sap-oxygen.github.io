@@ -264,7 +264,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var itemId = null;
       var lastItemEndTime = null;
       return (
-        React.createElement("div", {id: "table"}, 
+        React.createElement("div", {id: "agenda-table"}, 
           React.createElement("ul", {className: "table-list"}, 
             React.createElement(TableHead, null)
           ), 
@@ -450,12 +450,15 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   });
 
   var AddButton = React.createClass({displayName: "AddButton",
-    handleAdd: function() {
+    handleAdd: function(e) {
+      e.preventDefault();
       this.props.onAdd();
     },
     render: function() {
       return (
-        React.createElement(Button, {onClick: this.handleAdd}, "Add a new Topic")
+        React.createElement("button", {type: "button", className: "btn btn-default btn-lg", onClick: this.handleAdd}, 
+          React.createElement("span", {class: "glyphicon glyphicon-plus", "aria-hidden": "true"}), " Add Item"
+        )
       );
     }
   });
@@ -489,7 +492,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        React.createElement("div", null, 
+        React.createElement("div", {className: "col-xs-4"}, 
           React.createElement("div", {className: "input-group date", id: "datetimepicker"}, 
             React.createElement("input", {type: "text", className: "form-control"}), 
             React.createElement("span", {className: "input-group-addon"}, 
