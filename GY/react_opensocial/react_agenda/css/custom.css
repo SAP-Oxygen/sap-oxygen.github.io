@@ -4,45 +4,12 @@ body {
     overflow-y: hidden;
 }
 
-#freezed {
-    background-color: rgba(1, 1, 1, 0.7);
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-}
-
-.agenda-table table {
-    border-collapse: collapse;
-    font-size: 10pt;
-}
-
-.agenda-table th {
-    padding: 10px;
-    background-color: #F2F2F2;
-    text-align: left;
-}
-
-.short {
-    min-width: 80px;
-}
-
-.med {
-    min-width: 160px;
-}
-
 .index {
     max-width: 10px;
     padding-right: 8px;
     font-weight: bold;
     text-align: center;
     color: #666;
-}
-
-.agenda-table td {
-    padding: 12px;
-    border-bottom: 1px dotted #999;
 }
 
 .notes {
@@ -62,16 +29,8 @@ body {
     cursor: pointer;
 }
 
-.topic {
-    font-weight: bold;
-}
-
 .link-text {
     color: #00679E;
-}
-
-.on-hover {
-    display: none;
 }
 
 .time-input {
@@ -188,6 +147,14 @@ ul {
 
 #table-head {
     display: table-row;
+}
+
+.list-table-row .index-col,
+.list-table-row .time-col,
+.list-table-row .duration-col,
+.list-table-row .main-col,
+.list-table-row .presetner-col {
+    border-bottom: 1px dotted #999;
 }
 
 .list-table-row:hover {
