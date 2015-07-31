@@ -306,7 +306,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       }
     },
     componentDidUpdate: function() {
-      adjustHeight();
     },
     sort: function(order, dragging) {
       this.setState({dragging: dragging});
@@ -392,9 +391,11 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       });
     },
     componentDidMount: function() {
+      adjustHeight();
       this.enableDialogBox();
     },
     componentDidUpdate: function() {
+      adjustHeight();
       this.enableDialogBox();
     },
     render: function() {
