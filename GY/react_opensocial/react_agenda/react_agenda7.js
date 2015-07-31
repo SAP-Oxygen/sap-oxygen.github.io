@@ -492,7 +492,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        React.createElement("div", null, 
+        React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-xs-4"}, 
             React.createElement("div", {className: "input-group date", id: "datetimepicker"}, 
               React.createElement("input", {type: "text", className: "form-control"}), 

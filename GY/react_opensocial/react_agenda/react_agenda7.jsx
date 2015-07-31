@@ -492,7 +492,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        <div>
+        <div className="row">
           <div className="col-xs-4">
             <div className='input-group date' id='datetimepicker'>
               <input type='text' className='form-control' />
