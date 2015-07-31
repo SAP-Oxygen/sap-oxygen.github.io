@@ -241,7 +241,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       return (
         <div>
           <DateTimePicker onTimeChange={this.handleTimeChange} />
-          <br />
           <AgendaTable 
             items={this.state.items} 
             startTime={this.state.startTime} 
@@ -293,7 +292,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           <div className="div-table-cell th duration-col">Duration</div>
           <div className="div-table-cell th main-col">Topic</div>
           <div className="div-table-cell th presenter-col">Presenter</div>
-          <div className="div-table-cell th trash-col"> - </div>
+          <div className="div-table-cell th edit-col"> - </div>
         </li>
       );
     }
@@ -374,15 +373,15 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       // onwerId here is not the real id of owner
       var ownerId = "owner-" + id;
       var editId = "edit-" + id;
-      var trashId = "trash-" + id;
+      var editId = "edit-" + id;
       var editData = {
         item: this.props.item,
         people: this.props.people
       };
       // unbind the previous click event first, then bind the new click event
       // with updated data
-      $("#" + trashId).unbind();
-      $("#" + trashId).click(function() {
+      $("#" + editId).unbind();
+      $("#" + editId).click(function() {
         gadgets.views.openGadget(function(result) {
           if (result) {
             self.props.onDialogEdit(result.item);
@@ -407,7 +406,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var durationId = "duration-" + id;
       // onwerId here is not the real id of owner
       var ownerId = "owner-" + id;
-      var trashId = "trash-" + id;
+      var editId = "edit-" + id;
       var topic;
       if (this.props.item.topic === "") {
         topic = "Click to edit";
@@ -442,8 +441,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             <div className="desc-cell">{this.props.item.desc}</div>
           </div>
           <div className="div-table-cell presenter-col" id={ownerId}>{ownerName}</div>
-          <div className="div-table-cell trash-col">
-            <span className="glyphicon glyphicon-trash" id={trashId} aria-hidden="true"></span>
+          <div className="div-table-cell edit-col">
+            <span className="glyphicon glyphicon-pencil" id={editId} aria-hidden="true"></span>
           </div>
         </li>
       );
@@ -490,14 +489,14 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        <Col xs={4} id='date'>
+        <div>
           <div className='input-group date' id='datetimepicker'>
             <input type='text' className='form-control' />
             <span className='input-group-addon'>
               <span className='glyphicon glyphicon-calendar'></span>
             </span>
           </div>
-        </Col>
+        </div>
       );
     }
   });

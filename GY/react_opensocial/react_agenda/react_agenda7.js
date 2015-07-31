@@ -241,7 +241,6 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       return (
         React.createElement("div", null, 
           React.createElement(DateTimePicker, {onTimeChange: this.handleTimeChange}), 
-          React.createElement("br", null), 
           React.createElement(AgendaTable, {
             items: this.state.items, 
             startTime: this.state.startTime, 
@@ -293,7 +292,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
           React.createElement("div", {className: "div-table-cell th duration-col"}, "Duration"), 
           React.createElement("div", {className: "div-table-cell th main-col"}, "Topic"), 
           React.createElement("div", {className: "div-table-cell th presenter-col"}, "Presenter"), 
-          React.createElement("div", {className: "div-table-cell th trash-col"}, " - ")
+          React.createElement("div", {className: "div-table-cell th edit-col"}, " - ")
         )
       );
     }
@@ -374,15 +373,15 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       // onwerId here is not the real id of owner
       var ownerId = "owner-" + id;
       var editId = "edit-" + id;
-      var trashId = "trash-" + id;
+      var editId = "edit-" + id;
       var editData = {
         item: this.props.item,
         people: this.props.people
       };
       // unbind the previous click event first, then bind the new click event
       // with updated data
-      $("#" + trashId).unbind();
-      $("#" + trashId).click(function() {
+      $("#" + editId).unbind();
+      $("#" + editId).click(function() {
         gadgets.views.openGadget(function(result) {
           if (result) {
             self.props.onDialogEdit(result.item);
@@ -407,7 +406,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
       var durationId = "duration-" + id;
       // onwerId here is not the real id of owner
       var ownerId = "owner-" + id;
-      var trashId = "trash-" + id;
+      var editId = "edit-" + id;
       var topic;
       if (this.props.item.topic === "") {
         topic = "Click to edit";
@@ -442,8 +441,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             React.createElement("div", {className: "desc-cell"}, this.props.item.desc)
           ), 
           React.createElement("div", {className: "div-table-cell presenter-col", id: ownerId}, ownerName), 
-          React.createElement("div", {className: "div-table-cell trash-col"}, 
-            React.createElement("span", {className: "glyphicon glyphicon-trash", id: trashId, "aria-hidden": "true"})
+          React.createElement("div", {className: "div-table-cell edit-col"}, 
+            React.createElement("span", {className: "glyphicon glyphicon-pencil", id: editId, "aria-hidden": "true"})
           )
         )
       );
@@ -490,7 +489,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        React.createElement(Col, {xs: 4, id: "date"}, 
+        React.createElement("div", null, 
           React.createElement("div", {className: "input-group date", id: "datetimepicker"}, 
             React.createElement("input", {type: "text", className: "form-control"}), 
             React.createElement("span", {className: "input-group-addon"}, 

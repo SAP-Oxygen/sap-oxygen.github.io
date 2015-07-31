@@ -58,16 +58,6 @@ body {
     height: 62px;
 }
 
-
-
-.agenda-table tbody tr:hover .on-hover, tr:active .on-hover {
-    display: block;
-}
-
-.agenda-table tbody tr:hover .off-hover, tr:active .off-hover {
-    display: none;
-}
-
 .agenda-table tbody tr .cursor-pointer {
     cursor: pointer;
 }
@@ -171,11 +161,14 @@ ul {
 .move-col {
     width: 2%;
     text-align: center;
+    background-color: #fff;
 }
 
-.trash-col {
+.edit-col {
     width: 2%;
     text-align: center;
+    background-color: #fff;
+    visibility: hidden;
 }
 
 .topic-cell {
@@ -196,21 +189,20 @@ ul {
     display: table-row;
 }
 
+.list-table-row:hover {
+    background-color: #F5FCFF !important;
+    cursor: move;
+    cursor: grab;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+}
+
 .list-table-row:active {
     cursor: grabbing;
     cursor: -webkit-grabbing; 
     cursor: -moz-grabbing;
 }
 
-.list-table-row .move-col:hover,
-.list-table-row .index-col:hover,
-.list-table-row .time-col:hover,
-.list-table-row .duration-col:hover,
-.list-table-row .main-col:hover,
-.list-table-row .presenter-col:hover, {
-    background-color: #F5FCFF !important;
-    cursor: move;
-    cursor: grab;
-    cursor: -webkit-grab;
-    cursor: -moz-grab;
+.list-table-row:hover .edit-col {
+    visibility: visible;
 }
