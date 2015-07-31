@@ -492,15 +492,17 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        <div className="col-xs-4">
-          <div className='input-group date' id='datetimepicker'>
-            <input type='text' className='form-control' />
-            <span className='input-group-addon'>
-              <span className='glyphicon glyphicon-calendar'></span>
-            </span>
+        <div>
+          <div className="col-xs-4">
+            <div className='input-group date' id='datetimepicker'>
+              <input type='text' className='form-control' />
+              <span className='input-group-addon'>
+                <span className='glyphicon glyphicon-calendar'></span>
+              </span>
+            </div>
           </div>
-        </div>
-        <div className="col-xs-8">
+          <div className="col-xs-8">
+          </div>
         </div>
       );
     }
