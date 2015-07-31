@@ -500,6 +500,8 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             </span>
           </div>
         </div>
+        <div className="col-xs-8">
+        </div>
       );
     }
   });
