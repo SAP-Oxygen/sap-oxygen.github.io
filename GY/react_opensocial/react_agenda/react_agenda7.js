@@ -457,7 +457,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     render: function() {
       return (
         React.createElement("button", {type: "button", className: "btn btn-default btn-lg", onClick: this.handleAdd}, 
-          React.createElement("span", {class: "glyphicon glyphicon-plus", "aria-hidden": "true"}), " Add Item"
+          React.createElement("span", {className: "glyphicon glyphicon-plus", "aria-hidden": "true"}), " Add Item"
         )
       );
     }

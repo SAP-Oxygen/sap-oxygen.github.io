@@ -457,7 +457,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
     render: function() {
       return (
         <button type="button" className="btn btn-default btn-lg" onClick={this.handleAdd}>
-          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Item
+          <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Item
         </button>
       );
     }
