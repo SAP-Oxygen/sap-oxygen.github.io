@@ -1,9 +1,3 @@
-var Input = ReactBootstrap.Input;
-var Row = ReactBootstrap.Row;
-var Col = ReactBootstrap.Col;
-var ButtonInput = ReactBootstrap.ButtonInput;
-var Button = ReactBootstrap.Button;
-
 var DialogBox = React.createClass({
   componentDidMount: function() {
     gadgets.window.adjustHeight();

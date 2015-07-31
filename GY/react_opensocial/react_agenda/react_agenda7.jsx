@@ -1,6 +1,6 @@
 'use strict'
 
-var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
+var init = function(React, $, moment, gadgets, wave) {
   
   var adjustHeight = function() {
     var initHeight = 400;
@@ -252,7 +252,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   var TableHead = React.createClass({
     render: function(){
       return (
-        <li id="table-head">
+        <li className="table-head">
           <div className="div-table-cell th move-col"> + </div>
           <div className="div-table-cell th index-col">#</div>
           <div className="div-table-cell th time-col">Time</div>
@@ -323,10 +323,12 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         lastItemEndTime.add(item.time, 'm');
       });
       return (
-        <ul className="table-list">
-          <TableHead />
-          {items}
-        </ul>
+        <div className="agenda-table">
+          <ul className="table-list">
+            <TableHead />
+            {items}
+          </ul>
+        </div>
       );
     }
   });
@@ -480,5 +482,5 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
 };
 
 gadgets.util.registerOnLoadHandler(function() {
-  init(React, ReactBootstrap, jQuery, moment, gadgets, wave);
+  init(React, jQuery, moment, gadgets, wave);
 });

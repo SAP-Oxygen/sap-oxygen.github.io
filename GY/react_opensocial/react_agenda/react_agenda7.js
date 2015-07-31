@@ -1,6 +1,6 @@
 'use strict'
 
-var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
+var init = function(React, $, moment, gadgets, wave) {
   
   var adjustHeight = function() {
     var initHeight = 400;
@@ -252,7 +252,7 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
   var TableHead = React.createClass({displayName: "TableHead",
     render: function(){
       return (
-        React.createElement("li", {id: "table-head"}, 
+        React.createElement("li", {className: "table-head"}, 
           React.createElement("div", {className: "div-table-cell th move-col"}, " + "), 
           React.createElement("div", {className: "div-table-cell th index-col"}, "#"), 
           React.createElement("div", {className: "div-table-cell th time-col"}, "Time"), 
@@ -323,9 +323,11 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
         lastItemEndTime.add(item.time, 'm');
       });
       return (
-        React.createElement("ul", {className: "table-list"}, 
-          React.createElement(TableHead, null), 
-          items
+        React.createElement("div", {className: "agenda-table"}, 
+          React.createElement("ul", {className: "table-list"}, 
+            React.createElement(TableHead, null), 
+            items
+          )
         )
       );
     }
@@ -480,5 +482,5 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
 };
 
 gadgets.util.registerOnLoadHandler(function() {
-  init(React, ReactBootstrap, jQuery, moment, gadgets, wave);
+  init(React, jQuery, moment, gadgets, wave);
 });
