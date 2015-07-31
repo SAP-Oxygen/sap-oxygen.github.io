@@ -358,7 +358,9 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             React.createElement("div", {className: "div-table-cell th presenter-col"}, "Presenter"), 
             React.createElement("div", {className: "div-table-cell th edit-col"}, " - ")
           ), 
+          React.createElement("div", null, 
           items
+          )
         )
       );
     }

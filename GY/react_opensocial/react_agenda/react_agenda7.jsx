@@ -358,7 +358,9 @@ var init = function(React, ReactBootstrap, $, moment, gadgets, wave) {
             <div className="div-table-cell th presenter-col">Presenter</div>
             <div className="div-table-cell th edit-col"> - </div>
           </li>
+          <div>
           {items}
+          </div>
         </ul>
       );
     }
