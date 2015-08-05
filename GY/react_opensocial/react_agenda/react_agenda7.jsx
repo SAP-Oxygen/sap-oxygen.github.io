@@ -4,7 +4,7 @@ var init = function(React, $, moment, gadgets, wave) {
   
   var adjustHeight = function() {
     var initHeight = 400;
-    var height = $("body").height();
+    var height = $("#container").height();
     if (height > initHeight) {
       gadgets.window.adjustHeight();
     }
@@ -231,7 +231,7 @@ var init = function(React, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        <div>
+        <div id="container">
           <DateTimePicker onTimeChange={this.handleTimeChange} />
           <AgendaTable 
             items={this.state.items} 
