@@ -49,27 +49,21 @@ var init = function(React, $, moment, gadgets, wave) {
             lastWaveData: waveData
           });
         } else if (!$.isEmptyObject(waveData)) {
-          var items = [];
           var order = waveData["order"] || [];
           var startTime = waveData["startTime"];
           delete waveData["order"];
           delete waveData["startTime"];
-          order.forEach(function(itemId, index) {
-            items.push(waveData[itemId]);
-          });
           // if there is startTime stored in wave, set startTime of 
           // Agenda's state to wave's startTime
           if (startTime) {
             var startTimeMoment = moment(startTime);
             self.setState({
-              items: items,
               order: order,
               itemsMap: waveData,
               startTime: startTimeMoment
             });
           } else {
             self.setState({
-              items: items,
               order: order,
               itemsMap: waveData
             });
@@ -106,23 +100,6 @@ var init = function(React, $, moment, gadgets, wave) {
       wave.getState().submitDelta(waveData);
       console.log("sent startTime to wave");
     },
-    handleSort: function(newOrder) {
-      var newItems = [];
-      var itemsMap = this.state.itemsMap;
-      newOrder.forEach(function(itemId, index) {
-        newItems.push(itemsMap[itemId]);
-      });
-      this.setState({
-        items: newItems,
-        order: newOrder
-      });
-      console.log("sorted items");
-      console.log(newItems);
-      var waveData = {};
-      waveData["order"] = newOrder;
-      wave.getState().submitDelta(waveData);
-      console.log("sent updated items to wave (sort)");
-    },
     handleAdd: function() {
       // generate a random number from 0 to 1000 for newItemId
       var getRandomInt = function() {
@@ -138,13 +115,11 @@ var init = function(React, $, moment, gadgets, wave) {
       };
       var newItemId = "item-" + getCurrentTime() + "-" + getRandomInt();
       var newItem = {id: newItemId, topic: "", desc: "", time: 0, owner: "", color: "none"};
-      var newItems = this.state.items.concat([newItem]);
       var newOrder = this.state.order.concat([newItemId]);
       var newItemMap = {};
       newItemMap[newItemId] = newItem;
       var newItemsMap = $.extend(this.state.itemsMap, newItemMap);
       this.setState({
-        items: newItems,
         order: newOrder,
         itemsMap: newItemsMap
       });
@@ -166,13 +141,7 @@ var init = function(React, $, moment, gadgets, wave) {
       if (index > -1) {
         order.splice(index, 1);
       }
-      var newItems = [];
-      var itemsMap = $.extend({}, this.state.itemsMap);
-      this.state.order.forEach(function(itemId) {
-        newItems.push(itemsMap[itemId]);
-      });
       this.setState({
-        items: newItems,
         order: order
       });
       console.log("removed an item");
@@ -183,14 +152,9 @@ var init = function(React, $, moment, gadgets, wave) {
       console.log("sent updated items to wave (remove)");
     },
     handleDialogEdit: function(item) {
-      var newItems = [];
       var newItemsMap = $.extend({}, this.state.itemsMap);
       newItemsMap[item.id] = item;
-      this.state.order.forEach(function(itemId) {
-        newItems.push(newItemsMap[itemId]);
-      });
       this.setState({
-        items: newItems,
         itemsMap: newItemsMap
       });
       console.log("edited an item");
@@ -219,22 +183,21 @@ var init = function(React, $, moment, gadgets, wave) {
     },
     handleSort2: function(newOrder) {
       // TODO: implement wave
-      var newItems = [];
-      var itemsMap = this.state.itemsMap;
-      newOrder.forEach(function(itemId, index) {
-        newItems.push(itemsMap[itemId]);
-      });
       this.setState({
-        items: newItems,
         order: newOrder
       });
     },
     render: function() {
+      var items = [];
+      var itemsMap = this.state.itemsMap;
+      this.state.order.forEach(function(itemId) {
+        items.push(newItemsMap[itemId]);
+      });
       return (
         <div id="container">
           <DateTimePicker onTimeChange={this.handleTimeChange} />
           <AgendaTable 
-            items={this.state.items} 
+            items={items} 
             startTime={this.state.startTime} 
             people={this.state.people} 
             onEdit={this.handleEdit} 
