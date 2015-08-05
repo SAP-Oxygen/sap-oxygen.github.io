@@ -188,7 +188,7 @@ var init = function(React, $, moment, gadgets, wave) {
       var items = [];
       var itemsMap = this.state.itemsMap;
       this.state.order.forEach(function(itemId) {
-        items.push(newItemsMap[itemId]);
+        items.push(itemsMap[itemId]);
       });
       return (
         React.createElement("div", {id: "container"}, 
