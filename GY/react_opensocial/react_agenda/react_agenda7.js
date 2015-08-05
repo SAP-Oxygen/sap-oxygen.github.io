@@ -4,7 +4,7 @@ var init = function(React, $, moment, gadgets, wave) {
   
   var adjustHeight = function() {
     var initHeight = 400;
-    var height = $("#grid").height();
+    var height = $("body").height();
     if (height > initHeight) {
       gadgets.window.adjustHeight();
     }
