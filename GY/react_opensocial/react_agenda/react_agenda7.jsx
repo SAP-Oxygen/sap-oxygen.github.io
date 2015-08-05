@@ -124,7 +124,6 @@ var init = function(React, $, moment, gadgets, wave) {
         itemsMap: newItemsMap
       });
       console.log("added an item");
-      console.log(newItems);
       var waveData = {};
       waveData[newItemId] = newItem;
       waveData["order"] = newOrder;
@@ -145,7 +144,6 @@ var init = function(React, $, moment, gadgets, wave) {
         order: order
       });
       console.log("removed an item");
-      console.log(newItems);
       var waveData = {};
       waveData["order"] = order;
       wave.getState().submitDelta(waveData);
@@ -158,7 +156,6 @@ var init = function(React, $, moment, gadgets, wave) {
         itemsMap: newItemsMap
       });
       console.log("edited an item");
-      console.log(newItems);
       var waveData = {};
       waveData[item.id] = item;
       wave.getState().submitDelta(waveData);
