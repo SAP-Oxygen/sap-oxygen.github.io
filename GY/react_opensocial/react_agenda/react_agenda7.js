@@ -240,7 +240,7 @@ var init = function(React, $, moment, gadgets, wave) {
       e.preventDefault();
       var over = e.currentTarget;
       var dragging = this.state.dragging;
-      var from = isFinite(dragging) ? dragging : this.dragged;
+      var from = (dragging) ? dragging : this.dragged;
       var to = Number(over.dataset.id);
 
       console.log("isFinite(dragging): " + isFinite(dragging));
