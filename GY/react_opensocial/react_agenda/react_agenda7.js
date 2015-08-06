@@ -28,19 +28,18 @@ var init = function(React, $, moment, gadgets, wave) {
 
       var onWaveUpdate = function() {
         // currently disabled writing startTime variable in wave
-        console.log("onWaveUpdate has been called");
         var waveState = wave.getState();
         var waveData = {};
         $.each(waveState.getKeys(), function(index, key) {
           waveData[key] = waveState.get(key);
         });
         var lastWaveData = self.state.lastWaveData;
-        console.log("waveData: ");
-        console.log(waveData);
-        console.log("lastWaveData: ");
-        console.log(lastWaveData);
-        console.log("dragging: ");
-        console.log(self.state.dragging);
+        // console.log("waveData: ");
+        // console.log(waveData);
+        // console.log("lastWaveData: ");
+        // console.log(lastWaveData);
+        // console.log("dragging: ");
+        // console.log(self.state.dragging);
 
         // if dragging variable of the current state is true,
         // then store the current waveData and do not update the state
@@ -81,8 +80,6 @@ var init = function(React, $, moment, gadgets, wave) {
           self.setState({
             people: people
           });
-          console.log("updated people");
-          console.log(participants);
         }
       };
 
@@ -93,12 +90,9 @@ var init = function(React, $, moment, gadgets, wave) {
       this.setState({
         startTime: newTime
       });
-      console.log("changed startTime: ");
-      console.log(newTime);
       var waveData = {};
       waveData["startTime"] = newTime;
       wave.getState().submitDelta(waveData);
-      console.log("sent startTime to wave");
     },
     handleAdd: function() {
       // generate a random number from 0 to 1000 for newItemId
@@ -123,12 +117,10 @@ var init = function(React, $, moment, gadgets, wave) {
         order: newOrder,
         itemsMap: newItemsMap
       });
-      console.log("added an item");
       var waveData = {};
       waveData[newItemId] = newItem;
       waveData["order"] = newOrder;
       wave.getState().submitDelta(waveData);
-      console.log("sent updated items to wave (add)");
     },
     handleRemove: function(itemId) {
       // remove the itemId from order array and create a new
@@ -143,11 +135,9 @@ var init = function(React, $, moment, gadgets, wave) {
       this.setState({
         order: order
       });
-      console.log("removed an item");
       var waveData = {};
       waveData["order"] = order;
       wave.getState().submitDelta(waveData);
-      console.log("sent updated items to wave (remove)");
     },
     handleDialogEdit: function(item) {
       var newItemsMap = $.extend({}, this.state.itemsMap);
@@ -155,11 +145,9 @@ var init = function(React, $, moment, gadgets, wave) {
       this.setState({
         itemsMap: newItemsMap
       });
-      console.log("edited an item");
       var waveData = {};
       waveData[item.id] = item;
       wave.getState().submitDelta(waveData);
-      console.log("sent updated items to wave (dialog edit)");
     },
     handleDraggingStatus: function(status) {
       // when current dragging is true and the status passed to this function is false
@@ -235,6 +223,7 @@ var init = function(React, $, moment, gadgets, wave) {
     componentDidUpdate: function() {
     },
     sort: function(order, dragging) {
+      console.log("dragging in sort: " + dragging);
       this.setState({dragging: dragging});
       this.props.onSort(order);
     },
@@ -242,9 +231,10 @@ var init = function(React, $, moment, gadgets, wave) {
       this.sort(this.props.order, undefined);
     },
     dragStart: function(e) {
+      console.log("this.dragged = " + Number(e.currentTarget.dataset.id));
       this.dragged = Number(e.currentTarget.dataset.id);
       e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData("text/html", null)
+      e.dataTransfer.setData("text/html", null);
     },
     dragOver: function(e) {
       e.preventDefault();
@@ -253,9 +243,16 @@ var init = function(React, $, moment, gadgets, wave) {
       var from = isFinite(dragging) ? dragging : this.dragged;
       var to = Number(over.dataset.id);
 
+      console.log("over: " + over);
+      console.log("dragging: " + dragging);
+      console.log("from: " + from);
+      console.log("to: " + to);
+
       // Move from 'a' to 'b'
       var order = this.props.order;
+      console.log("order before: " + order);
       order.splice(to, 0, order.splice(from,1)[0]);
+      console.log("order after: " + order);
       this.sort(order, to);
     },
     render: function() {
