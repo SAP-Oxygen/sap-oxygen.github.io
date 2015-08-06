@@ -217,7 +217,7 @@ var init = function(React, $, moment, gadgets, wave) {
   var AgendaTable = React.createClass({displayName: "AgendaTable",
     getInitialState: function() {
       return {
-        dragging: ""
+        dragging: null
       }
     },
     componentDidUpdate: function() {
