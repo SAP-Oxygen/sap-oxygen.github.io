@@ -440,4 +440,5 @@ var init = function(React, $, moment, gadgets, wave) {
 
 gadgets.util.registerOnLoadHandler(function() {
   init(React, jQuery, moment, gadgets, wave);
+  console.log("gadget initiated");
 });
