@@ -217,14 +217,16 @@ var init = function(React, $, moment, gadgets, wave) {
   var AgendaTable = React.createClass({
     getInitialState: function() {
       return {
-        dragging: null
+        data: {}
       }
     },
     componentDidUpdate: function() {
     },
     sort: function(order, dragging) {
       console.log("dragging in sort: " + dragging);
-      this.setState({dragging: dragging});
+      var data = this.state.data;
+      data.dragging = dragging;
+      this.setState({data: data});
       this.props.onSort(order);
     },
     dragEnd: function() {
@@ -239,9 +241,11 @@ var init = function(React, $, moment, gadgets, wave) {
     dragOver: function(e) {
       e.preventDefault();
       var over = e.currentTarget;
-      var dragging = this.state.dragging;
-      var from = (dragging === null) ? this.dragged : dragging;
+      var dragging = this.state.data.dragging;
+      var from = isFinite(dragging) ? dragging : this.dragged;
       var to = Number(over.dataset.id);
+      if((e.clientY - over.offsetTop) > (over.offsetHeight / 2)) to++;
+      if(from < to) to--;
 
       console.log("over: " + over);
       console.log("dragging: " + dragging);
