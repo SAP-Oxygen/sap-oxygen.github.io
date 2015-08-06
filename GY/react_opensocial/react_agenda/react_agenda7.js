@@ -217,12 +217,13 @@ var init = function(React, $, moment, gadgets, wave) {
   var AgendaTable = React.createClass({displayName: "AgendaTable",
     getInitialState: function() {
       return {
-        dragging: null
+        dragging: ""
       }
     },
     componentDidUpdate: function() {
     },
     sort: function(order, dragging) {
+      console.log("dragging in sort: " + dragging);
       this.setState({dragging: dragging});
       this.props.onSort(order);
     },
@@ -230,6 +231,7 @@ var init = function(React, $, moment, gadgets, wave) {
       this.sort(this.props.order, undefined);
     },
     dragStart: function(e) {
+      console.log("this.dragged = " + Number(e.currentTarget.dataset.id));
       this.dragged = Number(e.currentTarget.dataset.id);
       e.dataTransfer.effectAllowed = 'move';
       e.dataTransfer.setData("text/html", null);
@@ -238,12 +240,20 @@ var init = function(React, $, moment, gadgets, wave) {
       e.preventDefault();
       var over = e.currentTarget;
       var dragging = this.state.dragging;
-      var from = (dragging === null) ?  this.dragged : dragging ;
+      var from = isFinite(dragging) ? dragging : this.dragged;
       var to = Number(over.dataset.id);
+
+      console.log("isFinite(dragging): " + isFinite(dragging));
+      console.log("over: " + over);
+      console.log("dragging: " + dragging);
+      console.log("from: " + from);
+      console.log("to: " + to);
 
       // Move from 'a' to 'b'
       var order = this.props.order;
+      console.log("order before: " + order);
       order.splice(to, 0, order.splice(from,1)[0]);
+      console.log("order after: " + order);
       this.sort(order, to);
     },
     render: function() {
