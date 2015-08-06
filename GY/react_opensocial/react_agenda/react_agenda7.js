@@ -242,8 +242,6 @@ var init = function(React, $, moment, gadgets, wave) {
       var dragging = this.state.data.dragging;
       var from = isFinite(dragging) ? dragging : this.dragged;
       var to = Number(over.dataset.id);
-      if((e.clientY - over.offsetTop) > (over.offsetHeight / 2)) to++;
-      if(from < to) to--;
 
       // Move from 'a' to 'b'
       var order = this.props.order;
