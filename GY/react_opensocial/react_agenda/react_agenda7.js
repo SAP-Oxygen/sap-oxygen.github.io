@@ -167,10 +167,12 @@ var init = function(React, $, moment, gadgets, wave) {
       });
     },
     handleSort2: function(newOrder) {
-      // TODO: implement wave
       this.setState({
         order: newOrder
       });
+      var waveData = {};
+      waveData["order"] = order;
+      wave.getState().submitDelta(waveData);
     },
     render: function() {
       var items = [];
