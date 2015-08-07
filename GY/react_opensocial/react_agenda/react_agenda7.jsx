@@ -223,8 +223,10 @@ var init = function(React, $, moment, gadgets, wave) {
   var AgendaTable = React.createClass({
     getInitialState: function() {
       return {
-        dragging: undefined
+        dragging: ""
       }
+    },
+    componentDidUpdate: function() {
     },
     sort: function(order, dragging) {
       this.setState({dragging: dragging});
@@ -232,12 +234,11 @@ var init = function(React, $, moment, gadgets, wave) {
     },
     dragEnd: function() {
       this.sort(this.props.order, undefined);
-      this.props.onDragEnd(this.props.order);
     },
     dragStart: function(e) {
       this.dragged = Number(e.currentTarget.dataset.id);
       e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData("text/html", null);
+      e.dataTransfer.setData("text/html", null)
     },
     dragOver: function(e) {
       e.preventDefault();
