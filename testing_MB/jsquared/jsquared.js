@@ -37,7 +37,7 @@
           self.setState({data: result.data, users: self.state.users});
         },
         {
-          AUTHORIZATION: 'FORM',
+          AUTHORIZATION: 'SAML',
           OAUTH_SERVICE_NAME: 'testmb',
           CONTENT_TYPE: gadgets.io.ContentType.JSON
         });
