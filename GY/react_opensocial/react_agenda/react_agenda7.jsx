@@ -72,7 +72,7 @@ var init = function(React, $, moment, gadgets, wave) {
 
       var onWaveParticipant = function() {
         if (wave.getViewer()) {
-          var people = [];  
+          var people = [];
           var participants = wave.getParticipants();
           participants.forEach(function(value) {
             people.push({id: value.id_, text: value.displayName_, thumbnailUrl: value.thumbnailUrl_});
@@ -166,13 +166,16 @@ var init = function(React, $, moment, gadgets, wave) {
         dragging: status
       });
     },
-    handleSort2: function(newOrder) {
+    handleSort: function(newOrder) {
       this.setState({
         order: newOrder
       });
+    },
+    handleDragEnd: function(newOrder) {
+      var order = this.state.order.slice();
       var waveData = {};
-      waveData["order"] = newOrder;
-      wave.getState().submitDelta(waveData);
+      waveData["order"] = order;
+      wvae.getState().submitDelta(waveData);
     },
     render: function() {
       var items = [];
@@ -192,7 +195,8 @@ var init = function(React, $, moment, gadgets, wave) {
             onDialogEdit={this.handleDialogEdit} 
             onDraggingStatus={this.handleDraggingStatus}
             order={this.state.order}
-            onSort={this.handleSort2} />
+            onSort={this.handleSort}
+            onDragEnd={this.handleDragEnd} />
           <AddButton onAdd={this.handleAdd} />
         </div>
       );
@@ -231,6 +235,7 @@ var init = function(React, $, moment, gadgets, wave) {
     },
     dragEnd: function() {
       this.sort(this.props.order, undefined);
+      this.props.onDragEnd(this.props.order);
     },
     dragStart: function(e) {
       console.log("this.dragged = " + Number(e.currentTarget.dataset.id));
