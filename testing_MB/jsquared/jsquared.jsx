@@ -38,7 +38,7 @@
         },
         {
           AUTHORIZATION: 'OAUTH2',
-          OAUTH_SERVICE_NAME: 'testmb',
+          OAUTH_SERVICE_NAME: 'g1',
           CONTENT_TYPE: gadgets.io.ContentType.JSON
         });
     },
