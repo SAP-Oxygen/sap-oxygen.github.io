@@ -171,7 +171,7 @@ var init = function(React, $, moment, gadgets, wave) {
         order: newOrder
       });
       var waveData = {};
-      waveData["order"] = order;
+      waveData["order"] = newOrder;
       wave.getState().submitDelta(waveData);
     },
     render: function() {
