@@ -175,7 +175,7 @@ var init = function(React, $, moment, gadgets, wave) {
       var order = this.state.order.slice();
       var waveData = {};
       waveData["order"] = order;
-      wvae.getState().submitDelta(waveData);
+      wave.getState().submitDelta(waveData);
     },
     render: function() {
       var items = [];
