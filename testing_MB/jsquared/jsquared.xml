@@ -6,7 +6,7 @@
       <msg name="title">My Groups</msg>
     </Locale>
     <OAuth2>
-      <Service name="g1">
+      <Service name="testmb">
         <Token url="https://developer.sapjam.com/api/v1/auth/token"/>
       </Service>
     </OAuth2>
