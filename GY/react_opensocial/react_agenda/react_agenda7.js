@@ -255,12 +255,12 @@ var init = function(React, $, moment, gadgets, wave) {
     render: function() {
       var self = this;
       var items = [];
-      var lastItemEndTime = null;
+      var lastItemEndTime = self.props.startTime.clone();
       this.props.items.forEach(function(item, index, array) {
         var dragging = (index == self.state.dragging) ? "dragging" : "";
-        if (!lastItemEndTime) {
-          lastItemEndTime = self.props.startTime.clone();
-        }
+        // if (!lastItemEndTime) {
+        //   lastItemEndTime = self.props.startTime.clone();
+        // }
         items.push(
           React.createElement(RowItem, {
             index: index, 
@@ -274,7 +274,7 @@ var init = function(React, $, moment, gadgets, wave) {
             onDragOver: self.dragOver, 
             onDragStart: self.dragStart})
         );
-        lastItemEndTime.add(item.time, 'm');
+        // lastItemEndTime.add(item.time, 'm');
       });
       return (
         React.createElement("div", {className: "agenda-table"}, 
