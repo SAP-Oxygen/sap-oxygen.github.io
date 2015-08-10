@@ -10,6 +10,29 @@ var init = function(React, $, moment, gadgets, wave) {
     }
   };
 
+  var throttle = function(fn, threshhold, scope) {
+    threshhold || (threshhold = 250);
+    var last,
+        deferTimer;
+    return function () {
+      var context = scope || this;
+
+      var now = +new Date,
+          args = arguments;
+      if (last && now < last + threshhold) {
+        // hold on to it
+        clearTimeout(deferTimer);
+        deferTimer = setTimeout(function () {
+          last = now;
+          fn.apply(context, args);
+        }, threshhold);
+      } else {
+        last = now;
+        fn.apply(context, args);
+      }
+    };
+  };
+
   var Agenda = React.createClass({displayName: "Agenda",
     getInitialState: function() {
       var startTime = moment();
@@ -242,15 +265,18 @@ var init = function(React, $, moment, gadgets, wave) {
     },
     dragOver: function(e) {
       e.preventDefault();
-      var over = e.currentTarget;
-      var dragging = this.state.dragging;
-      var from = isFinite(dragging) ? dragging : this.dragged;
-      var to = Number(over.dataset.id);
+      var self = this;
+      throttle(function(e) {
+        var over = e.currentTarget;
+        var dragging = self.state.dragging;
+        var from = isFinite(dragging) ? dragging : self.dragged;
+        var to = Number(over.dataset.id);
 
-      // Move from 'a' to 'b'
-      var order = this.props.order;
-      order.splice(to, 0, order.splice(from,1)[0]);
-      this.sort(order, to);
+        // Move from 'a' to 'b'
+        var order = self.props.order;
+        order.splice(to, 0, order.splice(from,1)[0]);
+        self.sort(order, to);
+      }, 500);
     },
     render: function() {
       var self = this;
