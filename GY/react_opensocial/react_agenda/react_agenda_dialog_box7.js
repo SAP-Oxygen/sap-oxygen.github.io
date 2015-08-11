@@ -1,4 +1,7 @@
 var DialogBox = React.createClass({displayName: "DialogBox",
+  componentWillMount: function() {
+    gadgets.window.adjustWidth(400);
+  },
   componentDidMount: function() {
     gadgets.window.adjustHeight();
 
