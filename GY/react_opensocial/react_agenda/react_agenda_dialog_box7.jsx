@@ -53,7 +53,7 @@ var DialogBox = React.createClass({
             </div>
             <div className="col-xs-2 nopadding">minutes</div>
             <div className="col-xs-5 nopadding pull-right">
-              <select className="form-control" ref="color" defaultValue={color}>
+              <select className="form-control input-field" ref="color" defaultValue={color}>
                 <option value="none">None</option>
                 <option value="grey">Grey</option>
                 <option value="blue">Blue</option>
@@ -62,9 +62,9 @@ var DialogBox = React.createClass({
             </div>
           </div>
           <br />
-          <input type="hidden" id="people-picker" ref="owner" placeholder="Presenter" defaultValue={owner} />
+          <input type="hidden" className="input-field" id="people-picker" ref="owner" placeholder="Presenter" defaultValue={owner} />
           <br />
-          <textarea className="form-control input-field" rows="3" ref="desc" placeholder="Notes" defaultValue={desc} />
+          <textarea className="form-control input-field" rows="4" ref="desc" placeholder="Notes" defaultValue={desc} />
           <br />
           <div className="form-group pull-right">
             <button type="submit" className="btn btn-primary">Submit</button> <button className="btn btn-default" onClick={this.handleClose}>Close</button>

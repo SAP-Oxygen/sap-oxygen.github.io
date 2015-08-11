@@ -7,5 +7,5 @@
         <Require feature="open-views" />
     </ModulePrefs>
   <Content type="html" href="react_agenda7.html" />
-  <Content type="html" href="react_agenda_dialog_box7.html" view="dialog" />
+  <Content type="html" href="react_agenda_dialog_box7.html" view="dialog" preferred_width="400" />
 </Module >

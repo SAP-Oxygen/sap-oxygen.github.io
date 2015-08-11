@@ -188,3 +188,8 @@ ul {
     overflow: hidden; 
     text-overflow: ellipsis;
 }
+
+.text-area {
+    resize: none;
+    overflow-y: scroll;
+}
