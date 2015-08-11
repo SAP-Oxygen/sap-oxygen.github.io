@@ -419,7 +419,7 @@ var init = function(React, $, moment, gadgets, wave) {
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-xs-4"}, 
             React.createElement("div", {className: "input-group date", id: "datetimepicker"}, 
-              React.createElement("input", {type: "text", className: "form-control"}), 
+              React.createElement("input", {type: "text", className: "form-control input-field"}), 
               React.createElement("span", {className: "input-group-addon"}, 
                 React.createElement("span", {className: "glyphicon glyphicon-calendar"})
               )
