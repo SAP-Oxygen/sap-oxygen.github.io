@@ -61,11 +61,8 @@ var DialogBox = React.createClass({
             </div>
             </div>
           </div>
-          <br />
-          <input type="hidden" className="input-field" id="people-picker" ref="owner" placeholder="Presenter" defaultValue={owner} />
-          <br />
+          <input type="hidden" id="people-picker" ref="owner" placeholder="Presenter" defaultValue={owner} />
           <textarea className="form-control input-field" rows="4" ref="desc" placeholder="Notes" defaultValue={desc} />
-          <br />
           <div className="form-group pull-right">
             <button type="submit" className="btn btn-primary">Submit</button> <button className="btn btn-default" onClick={this.handleClose}>Close</button>
           </div>

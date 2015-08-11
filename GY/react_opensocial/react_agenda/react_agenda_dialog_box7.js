@@ -61,11 +61,8 @@ var DialogBox = React.createClass({displayName: "DialogBox",
             )
             )
           ), 
-          React.createElement("br", null), 
-          React.createElement("input", {type: "hidden", className: "input-field", id: "people-picker", ref: "owner", placeholder: "Presenter", defaultValue: owner}), 
-          React.createElement("br", null), 
+          React.createElement("input", {type: "hidden", id: "people-picker", ref: "owner", placeholder: "Presenter", defaultValue: owner}), 
           React.createElement("textarea", {className: "form-control input-field", rows: "4", ref: "desc", placeholder: "Notes", defaultValue: desc}), 
-          React.createElement("br", null), 
           React.createElement("div", {className: "form-group pull-right"}, 
             React.createElement("button", {type: "submit", className: "btn btn-primary"}, "Submit"), " ", React.createElement("button", {className: "btn btn-default", onClick: this.handleClose}, "Close")
           )
