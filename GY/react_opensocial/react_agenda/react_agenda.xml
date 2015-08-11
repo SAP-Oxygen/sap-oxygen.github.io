@@ -3,6 +3,7 @@
 <Module>
   <ModulePrefs title="React Agenda" height="400" author="Geon Young" author_email="geon.young.park@sap.com" description="SAP Jam Agenda tool rebuilt in React as an Open Social Gadget">
         <Require feature="dynamic-height" />
+        <Require feature="dynamic-width" />
         <Require feature="wave" />
         <Require feature="open-views" />
     </ModulePrefs>
