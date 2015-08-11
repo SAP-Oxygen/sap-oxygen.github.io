@@ -44,12 +44,12 @@ var DialogBox = React.createClass({displayName: "DialogBox",
         "Edit Agenda Item"
         ), 
         React.createElement("form", {className: "form-horizontal", onSubmit: this.handleSubmit}, 
-          React.createElement("input", {type: "text", className: "form-control", ref: "topic", placeholder: "Title", defaultValue: topic}), 
+          React.createElement("input", {type: "text", className: "form-control input-field", ref: "topic", placeholder: "Title", defaultValue: topic}), 
           React.createElement("br", null), 
           React.createElement("div", {className: "container-fluid"}, 
             React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "col-xs-3 nopadding"}, 
-              React.createElement("input", {type: "text", className: "form-control", ref: "time", defaultValue: time})
+              React.createElement("input", {type: "text", className: "form-control input-field", ref: "time", defaultValue: time})
             ), 
             React.createElement("div", {className: "col-xs-2 nopadding"}, "minutes"), 
             React.createElement("div", {className: "col-xs-5 nopadding pull-right"}, 
@@ -64,7 +64,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
           React.createElement("br", null), 
           React.createElement("input", {type: "hidden", id: "people-picker", ref: "owner", placeholder: "Presenter", defaultValue: owner}), 
           React.createElement("br", null), 
-          React.createElement("textarea", {className: "form-control", rows: "3", ref: "desc", placeholder: "Notes", defaultValue: desc}), 
+          React.createElement("textarea", {className: "form-control input-field", rows: "3", ref: "desc", placeholder: "Notes", defaultValue: desc}), 
           React.createElement("br", null), 
           React.createElement("div", {className: "form-group pull-right"}, 
             React.createElement("button", {type: "submit", className: "btn btn-primary"}, "Submit"), " ", React.createElement("button", {className: "btn btn-default", onClick: this.handleClose}, "Close")

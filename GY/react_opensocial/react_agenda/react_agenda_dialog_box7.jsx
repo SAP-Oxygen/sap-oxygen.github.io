@@ -44,12 +44,12 @@ var DialogBox = React.createClass({
         Edit Agenda Item
         </h3>
         <form className="form-horizontal" onSubmit={this.handleSubmit}>
-          <input type="text" className="form-control" ref="topic" placeholder="Title" defaultValue={topic} />
+          <input type="text" className="form-control input-field" ref="topic" placeholder="Title" defaultValue={topic} />
           <br />
           <div className="container-fluid">
             <div className="row">
             <div className="col-xs-3 nopadding">
-              <input type="text" className="form-control" ref="time" defaultValue={time} />
+              <input type="text" className="form-control input-field" ref="time" defaultValue={time} />
             </div>
             <div className="col-xs-2 nopadding">minutes</div>
             <div className="col-xs-5 nopadding pull-right">
@@ -64,7 +64,7 @@ var DialogBox = React.createClass({
           <br />
           <input type="hidden" id="people-picker" ref="owner" placeholder="Presenter" defaultValue={owner} />
           <br />
-          <textarea className="form-control" rows="3" ref="desc" placeholder="Notes" defaultValue={desc} />
+          <textarea className="form-control input-field" rows="3" ref="desc" placeholder="Notes" defaultValue={desc} />
           <br />
           <div className="form-group pull-right">
             <button type="submit" className="btn btn-primary">Submit</button> <button className="btn btn-default" onClick={this.handleClose}>Close</button>
