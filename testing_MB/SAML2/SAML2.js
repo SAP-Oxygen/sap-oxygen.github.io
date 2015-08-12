@@ -28,7 +28,7 @@
     componentDidUpdate: function(prevProps, prevState) {
       gadgets.window.adjustHeight();
     },
-    // Jam Instance A interacting with Jam Instance A -->
+    // Jam Instance A interacting with target servers -->
     // via OpenSocial OAuth 2.0 SAML 2.0 Bearer Assertion Flow -->
     loadGroups: function() {
       var self = this;

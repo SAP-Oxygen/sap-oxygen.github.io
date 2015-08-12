@@ -1,5 +1,5 @@
 <Module specificationVersion='2'>
-  <!-- Jam Instance A interacting with Jam Instance B -->
+  <!-- Jam interacting with target servers -->
   <!-- via OpenSocial OAuth 2.0 SAML 2.0 Bearer Assertion Flow -->
   <ModulePrefs title="Jam Instance A interacting with Jam Instance B via OpenSocial OAuth 2.0 SAML 2.0 Bearer Assertion Flow">
     <Require feature="dynamic-height"/>
