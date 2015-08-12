@@ -52,7 +52,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
           React.createElement("div", {className: "container-fluid"}, 
             React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "col-xs-3 nopadding"}, 
-              React.createElement("input", {type: "text", maxlength: "3", className: "form-control input-field", ref: "time", defaultValue: time})
+              React.createElement("input", {type: "text", maxLength: "3", className: "form-control input-field", ref: "time", defaultValue: time})
             ), 
             React.createElement("div", {className: "col-xs-2 nopadding"}, "minutes"), 
             React.createElement("div", {className: "col-xs-5 nopadding pull-right"}, 
