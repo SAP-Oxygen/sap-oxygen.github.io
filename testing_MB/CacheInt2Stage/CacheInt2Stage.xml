@@ -1,17 +1,17 @@
 <Module specificationVersion='2'>
   <!-- Jam interacting with target servers -->
   <!-- via OpenSocial OAuth 2.0 SAML 2.0 Bearer Assertion Flow -->
-  <ModulePrefs title="CacheInt3Stage">
+  <ModulePrefs title="CacheInt2Stage">
     <Require feature="dynamic-height"/>
     <Require feature="osapi"/>
     <Locale lang="all">
       <msg name="title">My Groups</msg>
     </Locale>
     <OAuth2>
-      <Service name="CacheInt3Stage">
+      <Service name="CacheInt2Stage">
         <Token url="https://stage.sapjam.com/api/v1/auth/token"/>
       </Service>
     </OAuth2>
   </ModulePrefs>
-  <Content type="html" href="CacheInt3Stage.html"/>
+  <Content type="html" href="CacheInt2Stage.html"/>
 </Module>

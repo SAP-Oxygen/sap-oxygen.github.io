@@ -39,7 +39,7 @@
         },
         {
           AUTHORIZATION: 'OAUTH2',
-          OAUTH_SERVICE_NAME: 'CacheInt3Stage',
+          OAUTH_SERVICE_NAME: 'CacheInt2Stage',
           CONTENT_TYPE: gadgets.io.ContentType.JSON
         });
     },
