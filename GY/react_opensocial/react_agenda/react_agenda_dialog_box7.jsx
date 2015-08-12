@@ -52,7 +52,7 @@ var DialogBox = React.createClass({
           <div className="container-fluid">
             <div className="row">
             <div className="col-xs-3 nopadding">
-              <input type="text" className="form-control input-field" ref="time" defaultValue={time} />
+              <input type="text" maxlength="3" className="form-control input-field" ref="time" defaultValue={time} />
             </div>
             <div className="col-xs-2 nopadding">minutes</div>
             <div className="col-xs-5 nopadding pull-right">
@@ -65,7 +65,7 @@ var DialogBox = React.createClass({
             </div>
           </div>
           <input type="hidden" id="people-picker" ref="owner" placeholder="Presenter" defaultValue={owner} />
-          <textarea className="form-control input-field" rows="4" ref="desc" placeholder="Notes" defaultValue={desc} />
+          <textarea className="form-control input-field text-area" rows="4" ref="desc" placeholder="Notes" defaultValue={desc} />
           <div className="form-group pull-right">
             <button type="submit" className="btn btn-primary">Submit</button> <button className="btn btn-default" onClick={this.handleClose}>Close</button>
           </div>
