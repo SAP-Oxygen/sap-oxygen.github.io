@@ -31,7 +31,6 @@
     // Our own code
     loadGroups: function() {
       var self = this;
-      //gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Groups?$format=json",
       gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Groups?$format=json",
         function(result) {
           console.log(result);
@@ -39,7 +38,7 @@
         },
         {
           AUTHORIZATION: 'OAUTH2',
-          OAUTH_SERVICE_NAME: 'Marc Testing',
+          OAUTH_SERVICE_NAME: 'JamAonJamA',
           CONTENT_TYPE: gadgets.io.ContentType.JSON
         });
     },

@@ -6,10 +6,10 @@
       <msg name="title">My Groups</msg>
     </Locale>
     <OAuth2>
-      <Service name="testmb">
+      <Service name="JamAonJamA">
         <Token url="https://developer.sapjam.com/api/v1/auth/token"/>
       </Service>
     </OAuth2>
   </ModulePrefs>
-  <Content type="html" href="jsquared.html"/>
+  <Content type="html" href="JamAonJamA.html"/>
 </Module>
