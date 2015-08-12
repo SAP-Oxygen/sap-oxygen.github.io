@@ -32,7 +32,7 @@
     // via OpenSocial OAuth 2.0 SAML 2.0 Bearer Assertion Flow -->
     loadGroups: function() {
       var self = this;
-      gadgets.io.makeRequest("https://stage.sapjam.com/api/v1/OData/Groups?$format=json",
+      gadgets.io.makeRequest("https://integration3.sapjam.com/api/v1/OData/Groups?$format=json",
         function(result) {
           console.log(result);
           self.setState({data: result.data, users: self.state.users});

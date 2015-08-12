@@ -9,7 +9,7 @@
     </Locale>
     <OAuth2>
       <Service name="CacheInt2Int3">
-        <Token url="https://stage.sapjam.com/api/v1/auth/token"/>
+        <Token url="https://integration3.sapjam.com/api/v1/auth/token"/>
       </Service>
     </OAuth2>
   </ModulePrefs>
