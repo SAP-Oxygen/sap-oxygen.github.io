@@ -1,5 +1,5 @@
 <Module specificationVersion='2'>
-  <ModulePrefs title="J Squared">
+  <ModulePrefs title="Jam A on Jam A">
     <Require feature="dynamic-height"/>
     <Require feature="osapi"/>
     <Locale lang="all">

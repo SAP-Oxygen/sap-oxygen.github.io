@@ -28,18 +28,18 @@
     componentDidUpdate: function(prevProps, prevState) {
       gadgets.window.adjustHeight();
     },
-    // Our own code
+    // Jam Instance A interacting with Jam Instance B -->
+    // via OpenSocial OAuth 2.0 SAML 2.0 Bearer Assertion Flow -->
     loadGroups: function() {
       var self = this;
-      //gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Groups?$format=json",
-      gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Groups?$format=json",
+      gadgets.io.makeRequest("https://stage.sapjam.com/api/v1/OData/Groups?$format=json",
         function(result) {
           console.log(result);
           self.setState({data: result.data, users: self.state.users});
         },
         {
           AUTHORIZATION: 'OAUTH2',
-          OAUTH_SERVICE_NAME: 'Marc Testing',
+          OAUTH_SERVICE_NAME: 'JamAonJamB',
           CONTENT_TYPE: gadgets.io.ContentType.JSON
         });
     },
