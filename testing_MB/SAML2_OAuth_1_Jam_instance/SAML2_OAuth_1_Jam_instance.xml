@@ -1,5 +1,7 @@
 <Module specificationVersion='2'>
-  <ModulePrefs title="Jam A on Jam A">
+  <!-- Jam Instance A interacting with Jam Instance A -->
+  <!-- via OpenSocial OAuth 2.0 SAML 2.0 Bearer Assertion Flow -->
+  <ModulePrefs title="Jam Instance A interacting with Jam Instance A via OpenSocial OAuth 2.0 SAML 2.0 Bearer Assertion Flow">
     <Require feature="dynamic-height"/>
     <Require feature="osapi"/>
     <Locale lang="all">
@@ -11,5 +13,5 @@
       </Service>
     </OAuth2>
   </ModulePrefs>
-  <Content type="html" href="JamAonJamA.html"/>
+  <Content type="html" href="SAML2_OAuth_1_Jam_instance.html"/>
 </Module>
