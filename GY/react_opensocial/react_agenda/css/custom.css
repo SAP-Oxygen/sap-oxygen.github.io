@@ -202,3 +202,14 @@ ul {
     text-overflow: ellipsis;
     white-space: nowrap !important; 
 }
+
+.select2-drop {
+    font-style: normal; 
+    font-weight: normal; 
+    border: 1px solid #bfbfbf !important;
+    border-radius: 0px !important;
+}
+
+.select2-chosen {
+    padding: 7px 12px;
+}
