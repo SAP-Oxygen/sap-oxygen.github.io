@@ -1,9 +1,9 @@
 var DialogBox = React.createClass({
   componentWillMount: function() {
-    // gadgets.window.adjustWidth(400);
+    gadgets.window.adjustWidth(400);
   },
   componentDidMount: function() {
-    // gadgets.window.adjustHeight();
+    gadgets.window.adjustHeight();
 
     var params = gadgets.views.getParams();
     $("#people-picker").select2({
