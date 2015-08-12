@@ -39,7 +39,7 @@
         },
         {
           AUTHORIZATION: 'OAUTH2',
-          OAUTH_SERVICE_NAME: 'testmb',
+          OAUTH_SERVICE_NAME: 'Marc Testing',
           CONTENT_TYPE: gadgets.io.ContentType.JSON
         });
     },
