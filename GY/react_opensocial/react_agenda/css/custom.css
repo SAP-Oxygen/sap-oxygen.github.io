@@ -197,8 +197,8 @@ ul {
 .select2-choice {
     font-style: normal; 
     font-weight: normal; 
-    border: 1px solid #bfbfbf;
-    border-radius: 0px;
+    border: 1px solid #bfbfbf !important;
+    border-radius: 0px !important;
     text-overflow: ellipsis;
-    white-space: nowrap; 
+    white-space: nowrap !important; 
 }
