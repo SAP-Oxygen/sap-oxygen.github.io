@@ -1,9 +1,9 @@
 var DialogBox = React.createClass({displayName: "DialogBox",
   componentWillMount: function() {
-    // gadgets.window.adjustWidth(400);
+    gadgets.window.adjustWidth(400);
   },
   componentDidMount: function() {
-    // gadgets.window.adjustHeight();
+    gadgets.window.adjustHeight();
 
     var params = gadgets.views.getParams();
     $("#people-picker").select2({
@@ -52,7 +52,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
           React.createElement("div", {className: "container-fluid"}, 
             React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "col-xs-3 nopadding"}, 
-              React.createElement("input", {type: "text", className: "form-control input-field", ref: "time", defaultValue: time})
+              React.createElement("input", {type: "text", maxLength: "3", className: "form-control input-field", ref: "time", defaultValue: time})
             ), 
             React.createElement("div", {className: "col-xs-2 nopadding"}, "minutes"), 
             React.createElement("div", {className: "col-xs-5 nopadding pull-right"}, 
@@ -65,7 +65,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
             )
           ), 
           React.createElement("input", {type: "hidden", id: "people-picker", ref: "owner", placeholder: "Presenter", defaultValue: owner}), 
-          React.createElement("textarea", {className: "form-control input-field", rows: "4", ref: "desc", placeholder: "Notes", defaultValue: desc}), 
+          React.createElement("textarea", {className: "form-control input-field text-area", rows: "4", ref: "desc", placeholder: "Notes", defaultValue: desc}), 
           React.createElement("div", {className: "form-group pull-right"}, 
             React.createElement("button", {type: "submit", className: "btn btn-primary"}, "Submit"), " ", React.createElement("button", {className: "btn btn-default", onClick: this.handleClose}, "Close")
           )
