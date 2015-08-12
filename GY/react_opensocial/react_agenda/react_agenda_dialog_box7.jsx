@@ -41,7 +41,7 @@ var DialogBox = React.createClass({
     var owner = params.owner;
     var color = item.color;
     return(
-      <div className="container-fluid">
+      <div>
         <h3>
         Edit Agenda Item
         </h3>
@@ -50,11 +50,11 @@ var DialogBox = React.createClass({
           <br />
           <div className="container-fluid">
             <div className="row">
-            <div className="col-xs-3 nopadding">
+            <div className="col-xs-3">
               <input type="text" maxLength="3" className="form-control input-field" ref="time" defaultValue={time} />
             </div>
-            <div className="col-xs-2 nopadding">minutes</div>
-            <div className="col-xs-5 nopadding pull-right">
+            <div className="col-xs-2">minutes</div>
+            <div className="col-xs-5 pull-right">
               <select className="form-control input-field" ref="color" defaultValue={color}>
                 <option value="none">None</option>
                 <option value="grey">Grey</option>

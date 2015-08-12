@@ -41,7 +41,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
     var owner = params.owner;
     var color = item.color;
     return(
-      React.createElement("div", {className: "container-fluid"}, 
+      React.createElement("div", null, 
         React.createElement("h3", null, 
         "Edit Agenda Item"
         ), 
@@ -50,11 +50,11 @@ var DialogBox = React.createClass({displayName: "DialogBox",
           React.createElement("br", null), 
           React.createElement("div", {className: "container-fluid"}, 
             React.createElement("div", {className: "row"}, 
-            React.createElement("div", {className: "col-xs-3 nopadding"}, 
+            React.createElement("div", {className: "col-xs-3"}, 
               React.createElement("input", {type: "text", maxLength: "3", className: "form-control input-field", ref: "time", defaultValue: time})
             ), 
-            React.createElement("div", {className: "col-xs-2 nopadding"}, "minutes"), 
-            React.createElement("div", {className: "col-xs-5 nopadding pull-right"}, 
+            React.createElement("div", {className: "col-xs-2"}, "minutes"), 
+            React.createElement("div", {className: "col-xs-5 pull-right"}, 
               React.createElement("select", {className: "form-control input-field", ref: "color", defaultValue: color}, 
                 React.createElement("option", {value: "none"}, "None"), 
                 React.createElement("option", {value: "grey"}, "Grey"), 
