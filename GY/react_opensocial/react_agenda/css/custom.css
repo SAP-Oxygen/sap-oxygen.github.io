@@ -179,7 +179,7 @@ ul {
 }
 
 .input-field {
-    font-style: italic; 
+    font-style: normal; 
     font-weight: normal; 
     border: 1px solid #bfbfbf;
     border-radius: 0px; 
@@ -192,4 +192,13 @@ ul {
 .text-area {
     resize: none;
     overflow-y: scroll;
+}
+
+.select2-choice {
+    font-style: normal; 
+    font-weight: normal; 
+    border: 1px solid #bfbfbf;
+    border-radius: 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
 }
