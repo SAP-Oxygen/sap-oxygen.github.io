@@ -13,5 +13,5 @@
       </Service>
     </OAuth2>
   </ModulePrefs>
-  <Content type="html" href="SAML2_OAuth_2_Jam_instances.html"/>
+  <Content type="html" href="SAML2.html"/>
 </Module>
