@@ -9,7 +9,7 @@
     </Locale>
     <OAuth2>
       <Service name="JamAonJamB">
-        <Token url="https://developer.sapjam.com/api/v1/auth/token"/>
+        <Token url="https://stage.sapjam.com/api/v1/auth/token"/>
       </Service>
     </OAuth2>
   </ModulePrefs>
