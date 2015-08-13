@@ -32,15 +32,15 @@
     // via OpenSocial OAuth 2.0 SAML 2.0 Bearer Assertion Flow -->
     loadGroups: function() {
       var self = this;
-      gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Groups?$format=json",
+      gadgets.io.makeRequest("https://helloworld-p1941586444trial.dispatcher.hanatrial.ondemand.com/",
         function(result) {
           console.log(result);
           self.setState({data: result.data, users: self.state.users});
         },
         {
           AUTHORIZATION: 'OAUTH2',
-          OAUTH_SERVICE_NAME: 'CacheDeveloper',
-          CONTENT_TYPE: gadgets.io.ContentType.JSON
+          OAUTH_SERVICE_NAME: 'CacheDeveloperHCPHTML5',
+          CONTENT_TYPE: gadgets.io.ContentType.TEXT
         });
     },
     getGroups: function() {
