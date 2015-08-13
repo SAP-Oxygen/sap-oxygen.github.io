@@ -255,7 +255,7 @@ var init = function(React, $, moment, gadgets, wave) {
     render: function() {
       var self = this;
       var items = [];
-      var lastItemEndTime = self.props.startTime.clone();
+      var lastItemEndTime = self.props.setTime.clone();
       this.props.items.forEach(function(item, index, array) {
         var dragging = (index == self.state.dragging) ? "dragging" : "";
         // if (!lastItemEndTime) {
