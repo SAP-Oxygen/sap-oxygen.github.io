@@ -361,6 +361,7 @@ var init = function(React, $, moment, gadgets, wave) {
           onDragStart={this.props.onDragStart} >
           <div className="div-table-cell move-col">
             <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            <span className="glyphicon glyphicon-pencil" id={editId} aria-hidden="true"></span>
           </div>
           <div className="div-table-cell index-col">{displayIndex}</div>
           <div className="div-table-cell time-col">{this.props.startTime.format('LT')}</div>
@@ -371,7 +372,6 @@ var init = function(React, $, moment, gadgets, wave) {
           </div>
           <div className="div-table-cell presenter-col" id={ownerId}>{ownerName}</div>
           <div className="div-table-cell edit-col">
-            <span className="glyphicon glyphicon-pencil" id={editId} aria-hidden="true"></span>
           </div>
         </li>
       );

@@ -360,7 +360,8 @@ var init = function(React, $, moment, gadgets, wave) {
           onDragOver: this.props.onDragOver, 
           onDragStart: this.props.onDragStart}, 
           React.createElement("div", {className: "div-table-cell move-col"}, 
-            React.createElement("span", {className: "glyphicon glyphicon-trash", "aria-hidden": "true"})
+            React.createElement("span", {className: "glyphicon glyphicon-trash", "aria-hidden": "true"}), 
+            React.createElement("span", {className: "glyphicon glyphicon-pencil", id: editId, "aria-hidden": "true"})
           ), 
           React.createElement("div", {className: "div-table-cell index-col"}, displayIndex), 
           React.createElement("div", {className: "div-table-cell time-col"}, this.props.startTime.format('LT')), 
@@ -370,8 +371,7 @@ var init = function(React, $, moment, gadgets, wave) {
             React.createElement("div", {className: "desc-cell"}, this.props.item.desc)
           ), 
           React.createElement("div", {className: "div-table-cell presenter-col", id: ownerId}, ownerName), 
-          React.createElement("div", {className: "div-table-cell edit-col"}, 
-            React.createElement("span", {className: "glyphicon glyphicon-pencil", id: editId, "aria-hidden": "true"})
+          React.createElement("div", {className: "div-table-cell edit-col"}
           )
         )
       );
