@@ -206,6 +206,10 @@ ul {
     white-space: nowrap !important;
 }
 
+.select2-container .select2-choice:focus {
+    border-color: #66afe9;
+}
+
 .select2-drop {
     font-style: normal;
     font-weight: normal;
