@@ -196,9 +196,10 @@ ul {
     margin: 10px 0px !important;
 }
 
-.select2-choice {
+.selec2-container .select2-choice {
     font-style: normal;
     font-weight: normal;
+    border: 1px solid #bfbfbf;
     border-radius: 0px !important;
     text-overflow: ellipsis;
     white-space: nowrap !important;
