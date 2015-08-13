@@ -1,7 +1,7 @@
 var DialogBox = React.createClass({displayName: "DialogBox",
   componentWillMount: function() {
     gadgets.window.adjustWidth(400);
-    gadgets.window.adjustHeight(350);
+    gadgets.window.adjustHeight(500);
   },
   componentDidMount: function() {
     var params = gadgets.views.getParams();
@@ -48,7 +48,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
         React.createElement("form", {className: "form-horizontal", onSubmit: this.handleSubmit}, 
           React.createElement("input", {type: "text", className: "form-control input-field", ref: "topic", placeholder: "Title", defaultValue: topic}), 
           React.createElement("br", null), 
-          React.createElement("div", {className: "container-fluid"}, 
+          React.createElement("div", {className: "container-fluid container-no-padding"}, 
             React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "col-xs-3"}, 
               React.createElement("input", {type: "text", maxLength: "3", className: "form-control input-field", ref: "time", defaultValue: time})

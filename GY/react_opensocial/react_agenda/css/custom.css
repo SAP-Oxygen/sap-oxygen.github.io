@@ -187,12 +187,13 @@ ul {
     white-space: nowrap; 
     overflow: hidden; 
     text-overflow: ellipsis;
-    margin: 15px 0px;
+    margin: 10px 0px 0px 0px;
 }
 
 .text-area {
     resize: none;
     overflow-y: scroll;
+    margin: 10px 0px !important;
 }
 
 .select2-choice {
@@ -208,7 +209,6 @@ ul {
 .select2-drop {
     font-style: normal; 
     font-weight: normal; 
-    border: 1px solid #bfbfbf !important;
     border-radius: 0px !important;
 }
 
