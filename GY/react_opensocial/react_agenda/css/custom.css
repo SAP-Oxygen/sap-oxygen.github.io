@@ -206,10 +206,6 @@ ul {
     white-space: nowrap !important;
 }
 
-.select2-container .select2-choice:focus {
-    border-color: #66afe9;
-}
-
 .select2-drop {
     font-style: normal;
     font-weight: normal;
@@ -227,4 +223,9 @@ ul {
 .time-input {
     display: inline;
     width: 50%;
+}
+
+.input-group-addon-custom {
+    border: 1px solid #bfbfbf;
+    border-radius: 0px;
 }
