@@ -207,7 +207,6 @@ var init = function(React, $, moment, gadgets, wave) {
     render: function(){
       return (
         React.createElement("li", {className: "table-head"}, 
-          React.createElement("div", {className: "div-table-cell th move-col"}, " + "), 
           React.createElement("div", {className: "div-table-cell th index-col"}, 
             React.createElement("span", {className: "glyphicon glyphicon-chevron-down", "aria-hidden": "true"})
           ), 
@@ -359,10 +358,6 @@ var init = function(React, $, moment, gadgets, wave) {
           onDragEnd: this.props.onDragEnd, 
           onDragOver: this.props.onDragOver, 
           onDragStart: this.props.onDragStart}, 
-          React.createElement("div", {className: "div-table-cell move-col"}, 
-            React.createElement("span", {className: "glyphicon glyphicon-trash", "aria-hidden": "true"}), 
-            React.createElement("span", {className: "glyphicon glyphicon-pencil", id: editId, "aria-hidden": "true"})
-          ), 
           React.createElement("div", {className: "div-table-cell index-col"}, displayIndex), 
           React.createElement("div", {className: "div-table-cell time-col"}, this.props.startTime.format('LT')), 
           React.createElement("div", {className: "div-table-cell duration-col", id: durationId}, this.props.item.time, " min"), 
@@ -371,7 +366,9 @@ var init = function(React, $, moment, gadgets, wave) {
             React.createElement("div", {className: "desc-cell"}, this.props.item.desc)
           ), 
           React.createElement("div", {className: "div-table-cell presenter-col", id: ownerId}, ownerName), 
-          React.createElement("div", {className: "div-table-cell edit-col"}
+          React.createElement("div", {className: "div-table-cell edit-col"}, 
+            React.createElement("span", {className: "glyphicon glyphicon-trash", "aria-hidden": "true"}), 
+            React.createElement("span", {className: "glyphicon glyphicon-pencil", id: editId, "aria-hidden": "true"})
           )
         )
       );
@@ -384,7 +381,7 @@ var init = function(React, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        React.createElement("button", {type: "button", className: "btn btn-default", onClick: this.handleAdd}, 
+        React.createElement("button", {type: "button", className: "btn btn-default pull-right", onClick: this.handleAdd}, 
           React.createElement("span", {className: "glyphicon glyphicon-plus", "aria-hidden": "true"}), " Add Item"
         )
       );

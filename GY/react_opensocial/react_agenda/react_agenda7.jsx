@@ -207,7 +207,6 @@ var init = function(React, $, moment, gadgets, wave) {
     render: function(){
       return (
         <li className="table-head">
-          <div className="div-table-cell th move-col"> + </div>
           <div className="div-table-cell th index-col">
             <span className="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
           </div>
@@ -359,10 +358,6 @@ var init = function(React, $, moment, gadgets, wave) {
           onDragEnd={this.props.onDragEnd}
           onDragOver={this.props.onDragOver}
           onDragStart={this.props.onDragStart} >
-          <div className="div-table-cell move-col">
-            <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
-            <span className="glyphicon glyphicon-pencil" id={editId} aria-hidden="true"></span>
-          </div>
           <div className="div-table-cell index-col">{displayIndex}</div>
           <div className="div-table-cell time-col">{this.props.startTime.format('LT')}</div>
           <div className="div-table-cell duration-col" id={durationId}>{this.props.item.time} min</div>
@@ -372,6 +367,8 @@ var init = function(React, $, moment, gadgets, wave) {
           </div>
           <div className="div-table-cell presenter-col" id={ownerId}>{ownerName}</div>
           <div className="div-table-cell edit-col">
+            <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            <span className="glyphicon glyphicon-pencil" id={editId} aria-hidden="true"></span>
           </div>
         </li>
       );
@@ -384,7 +381,7 @@ var init = function(React, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        <button type="button" className="btn btn-default" onClick={this.handleAdd}>
+        <button type="button" className="btn btn-default pull-right" onClick={this.handleAdd}>
           <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Item
         </button>
       );

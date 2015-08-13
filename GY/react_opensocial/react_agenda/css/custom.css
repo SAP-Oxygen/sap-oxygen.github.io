@@ -116,16 +116,9 @@ ul {
     width: 22%;
 }
 
-.move-col {
-    width: 4%;
-    text-align: center;
-    background-color: #fff;
-    visibility: hidden;
-    cursor: pointer;
-}
 
 .edit-col {
-    width: 4%;
+    width: 8%;
     text-align: center;
     background-color: #fff;
     visibility: hidden;
@@ -172,7 +165,7 @@ ul {
     cursor: -moz-grabbing;
 }
 */
-.list-table-row:hover .edit-col, .list-table-row:hover .move-col {
+.list-table-row:hover .edit-col {
     visibility: visible;
 }
 
