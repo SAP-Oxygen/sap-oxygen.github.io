@@ -199,7 +199,8 @@ ul {
 .select2-container .select2-choice {
     font-style: normal;
     font-weight: normal;
-    border: 1px solid #bfbfbf;
+    border: 1px solid;
+    border-color: #bfbfbf;
     border-radius: 0px !important;
     text-overflow: ellipsis;
     white-space: nowrap !important;
