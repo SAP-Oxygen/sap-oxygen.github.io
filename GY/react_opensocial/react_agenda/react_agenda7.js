@@ -12,12 +12,12 @@ var init = function(React, $, moment, gadgets, wave) {
 
   var Agenda = React.createClass({displayName: "Agenda",
     getInitialState: function() {
-      var startTime = moment();
+      var setTime = moment();
       return {
         items: [],
         order: [],
         itemsMap: {},
-        startTime: startTime,
+        setTime: setTime,
         people: [],
         dragging: false,
         lastWaveData: {}
@@ -27,7 +27,7 @@ var init = function(React, $, moment, gadgets, wave) {
       var self = this;
 
       var onWaveUpdate = function() {
-        // currently disabled writing startTime variable in wave
+        // currently disabled writing setTime variable in wave
         var waveState = wave.getState();
         var waveData = {};
         $.each(waveState.getKeys(), function(index, key) {
@@ -49,17 +49,17 @@ var init = function(React, $, moment, gadgets, wave) {
           });
         } else if (!$.isEmptyObject(waveData)) {
           var order = waveData["order"] || [];
-          var startTime = waveData["startTime"];
+          var setTime = waveData["setTime"];
           delete waveData["order"];
-          delete waveData["startTime"];
-          // if there is startTime stored in wave, set startTime of 
-          // Agenda's state to wave's startTime
-          if (startTime) {
-            var startTimeMoment = moment(startTime);
+          delete waveData["setTime"];
+          // if there is setTime stored in wave, set setTime of 
+          // Agenda's state to wave's setTime
+          if (setTime) {
+            var setTimeMoment = moment(setTime);
             self.setState({
               order: order,
               itemsMap: waveData,
-              startTime: startTimeMoment
+              setTime: setTimeMoment
             });
           } else {
             self.setState({
@@ -88,10 +88,10 @@ var init = function(React, $, moment, gadgets, wave) {
     },
     handleTimeChange: function(newTime) {
       this.setState({
-        startTime: newTime
+        setTime: newTime
       });
       var waveData = {};
-      waveData["startTime"] = newTime;
+      waveData["setTime"] = newTime;
       wave.getState().submitDelta(waveData);
     },
     handleAdd: function() {
@@ -188,7 +188,7 @@ var init = function(React, $, moment, gadgets, wave) {
           React.createElement(DateTimePicker, {onTimeChange: this.handleTimeChange}), 
           React.createElement(AgendaTable, {
             items: items, 
-            startTime: this.state.startTime, 
+            setTime: this.state.setTime, 
             people: this.state.people, 
             onEdit: this.handleEdit, 
             onRemove: this.handleRemove, 
@@ -390,14 +390,13 @@ var init = function(React, $, moment, gadgets, wave) {
   var DateTimePicker = React.createClass({displayName: "DateTimePicker",
     componentDidMount: function() {
       var self = this;
-      var startTime = this.props.startTime;
+      var setTime = this.props.setTime;
       // Datepicker
       $(function () {
           $('#datetimepicker').datetimepicker({
             showClose: true,
             allowInputToggle: true,
             toolbarPlacement: 'bottom',
-            defaultDate: startTime,
             debug: true
           });
       });
@@ -405,11 +404,9 @@ var init = function(React, $, moment, gadgets, wave) {
         var newTime = $('#datetimepicker').data("DateTimePicker").viewDate();
         self.onTimeChange(newTime);
       });
-      // if (startTime) {
-      //   $('#datepicker').datetimepicker({
-      //     defaultDate: startTime
-      //   });
-      // }
+      if (setTime) {
+        $('#datetimepicker').data("DateTimePicker").defaultDate(setTime);
+      }
     },
     onTimeChange: function(time) {
       this.props.onTimeChange(time);
@@ -419,7 +416,7 @@ var init = function(React, $, moment, gadgets, wave) {
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-xs-4"}, 
             React.createElement("div", {className: "input-group date", id: "datetimepicker"}, 
-              React.createElement("input", {type: "text", className: "form-control input-field", placeholder: "Click to edit the date"}), 
+              React.createElement("input", {type: "text", className: "form-control input-field", placeholder: "Click to choose the date"}), 
               React.createElement("span", {className: "input-group-addon input-group-addon-custom"}, 
                 React.createElement("span", {className: "glyphicon glyphicon-calendar"})
               )
