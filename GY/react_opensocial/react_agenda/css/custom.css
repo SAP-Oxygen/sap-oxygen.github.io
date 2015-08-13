@@ -166,7 +166,7 @@ ul {
 
 /*.list-table-row:active {
     cursor: grabbing;
-    cursor: -webkit-grabbing; 
+    cursor: -webkit-grabbing;
     cursor: -moz-grabbing;
 }
 */
@@ -179,13 +179,13 @@ ul {
 }
 
 .input-field {
-    font-style: normal; 
-    font-weight: normal; 
+    font-style: normal;
+    font-weight: normal;
     border: 1px solid #bfbfbf;
-    border-radius: 0px; 
-    padding: 7px 12px; 
-    white-space: nowrap; 
-    overflow: hidden; 
+    border-radius: 0px;
+    padding: 7px 12px;
+    white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
     margin: 0px 0px 10px 0px;
 }
@@ -197,17 +197,16 @@ ul {
 }
 
 .select2-choice {
-    font-style: normal; 
-    font-weight: normal; 
-    border: 1px solid #bfbfbf !important;
+    font-style: normal;
+    font-weight: normal;
     border-radius: 0px !important;
     text-overflow: ellipsis;
     white-space: nowrap !important;
 }
 
 .select2-drop {
-    font-style: normal; 
-    font-weight: normal; 
+    font-style: normal;
+    font-weight: normal;
     border-radius: 0px !important;
 }
 
@@ -217,4 +216,9 @@ ul {
 
 .container-no-padding {
     padding: 0px;
+}
+
+.time-input {
+    display: inline;
+    width: 50%;
 }

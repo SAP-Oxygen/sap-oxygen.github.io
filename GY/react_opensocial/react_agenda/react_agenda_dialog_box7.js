@@ -50,7 +50,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
           React.createElement("div", {className: "container-fluid container-no-padding"}, 
             React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "col-xs-6"}, 
-              React.createElement("input", {type: "text", maxLength: "3", className: "form-control input-field", ref: "time", defaultValue: time}), 
+              React.createElement("input", {type: "text", maxLength: "3", className: "form-control input-field time-input", ref: "time", defaultValue: time}), 
               React.createElement("span", null, "minutes")
             ), 
             React.createElement("div", {className: "col-xs-6"}, 
@@ -64,7 +64,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
           ), 
           React.createElement("input", {type: "hidden", id: "people-picker", ref: "owner", placeholder: "Presenter", defaultValue: owner}), 
           React.createElement("textarea", {className: "form-control input-field text-area", rows: "4", ref: "desc", placeholder: "Notes", defaultValue: desc}), 
-          React.createElement("div", {className: "form-group pull-right"}, 
+          React.createElement("div", {className: "pull-right"}, 
             React.createElement("button", {type: "submit", className: "btn btn-primary"}, "Submit"), " ", React.createElement("button", {className: "btn btn-default", onClick: this.handleClose}, "Close")
           )
         )
