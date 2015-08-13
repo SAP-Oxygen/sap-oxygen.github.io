@@ -1,0 +1,18 @@
+<Module specificationVersion='2'>
+  <!-- Jam interacting with target servers -->
+  <!-- via OpenSocial OAuth 2.0 SAML 2.0 Bearer Assertion Flow -->
+  <ModulePrefs title="CacheDeveloperHCPHTML5">
+    <Require feature="dynamic-height"/>
+    <Require feature="osapi"/>
+    <Locale lang="all">
+      <msg name="title">CacheDeveloperHCPHTML5 - Test IFrame in an Iframe</msg>
+    </Locale>
+    <!-- <OAuth2>
+      <Service name="CacheDeveloper">
+        <Token url="https://oauthasservices-p1941586444trial.hanatrial.ondemand.com/oauth2/api/v1/token"/> -->
+        <!-- <Token url="https://developer.sapjam.com/api/v1/auth/token"/> -->
+      <!-- </Service>
+    </OAuth2> -->
+  </ModulePrefs>
+  <Content type="html" href="CacheDeveloperHCPHTML5.html"/>
+</Module>
