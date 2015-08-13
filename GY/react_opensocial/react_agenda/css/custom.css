@@ -187,6 +187,7 @@ ul {
     white-space: nowrap; 
     overflow: hidden; 
     text-overflow: ellipsis;
+    margin: 15px 0px;
 }
 
 .text-area {
@@ -200,7 +201,8 @@ ul {
     border: 1px solid #bfbfbf !important;
     border-radius: 0px !important;
     text-overflow: ellipsis;
-    white-space: nowrap !important; 
+    white-space: nowrap !important;
+    margin: 15px 0px;
 }
 
 .select2-drop {
@@ -212,4 +214,8 @@ ul {
 
 .select2-chosen {
     padding: 7px 12px;
+}
+
+.container-no-padding {
+    padding: 0px;
 }
