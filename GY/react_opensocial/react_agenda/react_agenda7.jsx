@@ -208,7 +208,9 @@ var init = function(React, $, moment, gadgets, wave) {
       return (
         <li className="table-head">
           <div className="div-table-cell th move-col"> + </div>
-          <div className="div-table-cell th index-col">#</div>
+          <div className="div-table-cell th index-col">
+            <span className="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+          </div>
           <div className="div-table-cell th time-col">Time</div>
           <div className="div-table-cell th duration-col">Duration</div>
           <div className="div-table-cell th main-col">Topic</div>

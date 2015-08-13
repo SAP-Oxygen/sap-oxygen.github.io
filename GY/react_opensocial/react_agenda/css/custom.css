@@ -113,11 +113,11 @@ ul {
 }
 
 .presenter-col {
-    width: 26%;
+    width: 22%;
 }
 
 .move-col {
-    width: 2%;
+    width: 4%;
     text-align: center;
     background-color: #fff;
     visibility: hidden;
@@ -125,7 +125,7 @@ ul {
 }
 
 .edit-col {
-    width: 2%;
+    width: 4%;
     text-align: center;
     background-color: #fff;
     visibility: hidden;

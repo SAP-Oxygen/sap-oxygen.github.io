@@ -208,7 +208,9 @@ var init = function(React, $, moment, gadgets, wave) {
       return (
         React.createElement("li", {className: "table-head"}, 
           React.createElement("div", {className: "div-table-cell th move-col"}, " + "), 
-          React.createElement("div", {className: "div-table-cell th index-col"}, "#"), 
+          React.createElement("div", {className: "div-table-cell th index-col"}, 
+            React.createElement("span", {className: "glyphicon glyphicon-chevron-down", "aria-hidden": "true"})
+          ), 
           React.createElement("div", {className: "div-table-cell th time-col"}, "Time"), 
           React.createElement("div", {className: "div-table-cell th duration-col"}, "Duration"), 
           React.createElement("div", {className: "div-table-cell th main-col"}, "Topic"), 
