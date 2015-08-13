@@ -420,7 +420,7 @@ var init = function(React, $, moment, gadgets, wave) {
           <div className="col-xs-4">
             <div className='input-group date' id='datetimepicker'>
               <input type='text' className='form-control input-field' />
-              <span className='input-group-addon'>
+              <span className='input-group-addon input-group-addon-custom'>
                 <span className='glyphicon glyphicon-calendar'></span>
               </span>
             </div>
