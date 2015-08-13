@@ -357,7 +357,9 @@ var init = function(React, $, moment, gadgets, wave) {
           onDragEnd={this.props.onDragEnd}
           onDragOver={this.props.onDragOver}
           onDragStart={this.props.onDragStart} >
-          <div className="div-table-cell move-col"> + </div>
+          <div className="div-table-cell move-col">
+            <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          </div>
           <div className="div-table-cell index-col">{displayIndex}</div>
           <div className="div-table-cell time-col">{this.props.startTime.format('LT')}</div>
           <div className="div-table-cell duration-col" id={durationId}>{this.props.item.time} min</div>

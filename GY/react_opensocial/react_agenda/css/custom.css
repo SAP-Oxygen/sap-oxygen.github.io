@@ -120,6 +120,8 @@ ul {
     width: 2%;
     text-align: center;
     background-color: #fff;
+    visibility: hidden;
+    cursor: pointer;
 }
 
 .edit-col {
@@ -170,7 +172,7 @@ ul {
     cursor: -moz-grabbing;
 }
 */
-.list-table-row:hover .edit-col {
+.list-table-row:hover .edit-col, .list-table-row:hover .move-col {
     visibility: visible;
 }
 

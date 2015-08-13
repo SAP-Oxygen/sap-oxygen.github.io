@@ -357,7 +357,9 @@ var init = function(React, $, moment, gadgets, wave) {
           onDragEnd: this.props.onDragEnd, 
           onDragOver: this.props.onDragOver, 
           onDragStart: this.props.onDragStart}, 
-          React.createElement("div", {className: "div-table-cell move-col"}, " + "), 
+          React.createElement("div", {className: "div-table-cell move-col"}, 
+            React.createElement("span", {className: "glyphicon glyphicon-trash", "aria-hidden": "true"})
+          ), 
           React.createElement("div", {className: "div-table-cell index-col"}, displayIndex), 
           React.createElement("div", {className: "div-table-cell time-col"}, this.props.startTime.format('LT')), 
           React.createElement("div", {className: "div-table-cell duration-col", id: durationId}, this.props.item.time, " min"), 
