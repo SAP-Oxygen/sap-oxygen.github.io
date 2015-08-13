@@ -1,11 +1,11 @@
 <Module specificationVersion='2'>
   <!-- Jam interacting with target servers -->
   <!-- via OpenSocial OAuth 2.0 SAML 2.0 Bearer Assertion Flow -->
-  <ModulePrefs title="CacheDeveloper">
+  <ModulePrefs title="CacheDeveloperHCPHTML5">
     <Require feature="dynamic-height"/>
     <Require feature="osapi"/>
     <Locale lang="all">
-      <msg name="title">Test IFrame in an Iframe</msg>
+      <msg name="title">CacheDeveloperHCPHTML5 - Test IFrame in an Iframe</msg>
     </Locale>
     <!-- <OAuth2>
       <Service name="CacheDeveloper">
