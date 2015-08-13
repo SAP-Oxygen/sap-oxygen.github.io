@@ -1,7 +1,6 @@
 var DialogBox = React.createClass({
   componentWillMount: function() {
     gadgets.window.adjustWidth(400);
-    gadgets.window.adjustHeight(500);
   },
   componentDidMount: function() {
     var params = gadgets.views.getParams();
@@ -9,6 +8,7 @@ var DialogBox = React.createClass({
       data: params.people,
       width: "100%"
     });
+    gadgets.window.adjustHeight();
   },
   handleSubmit: function(e) {
     e.preventDefault();
@@ -47,14 +47,13 @@ var DialogBox = React.createClass({
         </h3>
         <form className="form-horizontal" onSubmit={this.handleSubmit}>
           <input type="text" className="form-control input-field" ref="topic" placeholder="Title" defaultValue={topic} />
-          <br />
           <div className="container-fluid container-no-padding">
             <div className="row">
-            <div className="col-xs-3">
+            <div className="col-xs-6">
               <input type="text" maxLength="3" className="form-control input-field" ref="time" defaultValue={time} />
+              <span>minutes</span>
             </div>
-            <div className="col-xs-2">minutes</div>
-            <div className="col-xs-5 pull-right">
+            <div className="col-xs-6">
               <select className="form-control input-field" ref="color" defaultValue={color}>
                 <option value="none">None</option>
                 <option value="grey">Grey</option>
