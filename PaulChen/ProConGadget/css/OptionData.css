@@ -1,0 +1,11 @@
+.OptionData {
+  padding: 8px 0 8px 15px;
+  border-bottom: solid 1px #d3d3d3;
+  word-wrap: break-word;
+  width: 40%;
+  color: #0D3A5A;
+  font-family: Arial;
+  font-size: 12px;
+  overflow: hidden;
+  vertical-align: top;
+}
