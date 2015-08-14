@@ -215,7 +215,7 @@ var init = function(React, $, moment, gadgets, wave) {
           React.createElement("div", {className: "div-table-cell th main-col"}, "Topic"), 
           React.createElement("div", {className: "div-table-cell th presenter-col"}, "Presenter"), 
           React.createElement("div", {className: "div-table-cell th edit-col"}, 
-            React.createElement("span", {className: "glyphicon glyphicon-pencil edit-glyphicon", id: editId, "aria-hidden": "true"}), 
+            React.createElement("span", {className: "glyphicon glyphicon-pencil edit-glyphicon", "aria-hidden": "true"}), 
             React.createElement("span", {className: "glyphicon glyphicon-trash delete-glyphicon", "aria-hidden": "true"})
           )
         )

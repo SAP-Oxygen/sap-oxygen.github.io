@@ -215,7 +215,7 @@ var init = function(React, $, moment, gadgets, wave) {
           <div className="div-table-cell th main-col">Topic</div>
           <div className="div-table-cell th presenter-col">Presenter</div>
           <div className="div-table-cell th edit-col">
-            <span className="glyphicon glyphicon-pencil edit-glyphicon" id={editId} aria-hidden="true"></span>
+            <span className="glyphicon glyphicon-pencil edit-glyphicon" aria-hidden="true"></span>
             <span className="glyphicon glyphicon-trash delete-glyphicon" aria-hidden="true"></span>
           </div>
         </li>
