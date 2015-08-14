@@ -50,7 +50,7 @@ var DialogBox = React.createClass({displayName: "DialogBox",
           React.createElement("div", {className: "container-fluid container-no-padding"}, 
             React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "col-xs-6"}, 
-              React.createElement("input", {type: "text", maxLength: "3", className: "form-control input-field time-input", ref: "time", defaultValue: time}), 
+              React.createElement("input", {type: "text", maxLength: "3", className: "form-control input-field input-time", ref: "time", defaultValue: time}), 
               React.createElement("span", null, "minutes")
             ), 
             React.createElement("div", {className: "col-xs-6"}, 

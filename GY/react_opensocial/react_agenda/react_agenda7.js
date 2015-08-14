@@ -208,7 +208,7 @@ var init = function(React, $, moment, gadgets, wave) {
       return (
         React.createElement("li", {className: "table-head"}, 
           React.createElement("div", {className: "div-table-cell th index-col"}, 
-            React.createElement("span", {className: "glyphicon glyphicon-chevron-down", "aria-hidden": "true"})
+            React.createElement("span", {className: "glyphicon glyphicon-chevron-down index-glyphicon", "aria-hidden": "true"})
           ), 
           React.createElement("div", {className: "div-table-cell th time-col"}, "Time"), 
           React.createElement("div", {className: "div-table-cell th duration-col"}, "Duration"), 
@@ -367,8 +367,8 @@ var init = function(React, $, moment, gadgets, wave) {
           ), 
           React.createElement("div", {className: "div-table-cell presenter-col", id: ownerId}, ownerName), 
           React.createElement("div", {className: "div-table-cell edit-col"}, 
-            React.createElement("span", {className: "glyphicon glyphicon-trash", "aria-hidden": "true"}), 
-            React.createElement("span", {className: "glyphicon glyphicon-pencil", id: editId, "aria-hidden": "true"})
+            React.createElement("span", {className: "glyphicon glyphicon-pencil edit-glyphicon", id: editId, "aria-hidden": "true"}), 
+            React.createElement("span", {className: "glyphicon glyphicon-trash delete-glyphicon", "aria-hidden": "true"})
           )
         )
       );
@@ -416,7 +416,7 @@ var init = function(React, $, moment, gadgets, wave) {
       return (
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-xs-4"}, 
-            React.createElement("div", {className: "input-group date", id: "datetimepicker"}, 
+            React.createElement("div", {className: "input-group date input-date", id: "datetimepicker"}, 
               React.createElement("input", {type: "text", className: "form-control input-field", placeholder: "Click to choose the date"}), 
               React.createElement("span", {className: "input-group-addon input-group-addon-custom"}, 
                 React.createElement("span", {className: "glyphicon glyphicon-calendar"})

@@ -50,7 +50,7 @@ var DialogBox = React.createClass({
           <div className="container-fluid container-no-padding">
             <div className="row">
             <div className="col-xs-6">
-              <input type="text" maxLength="3" className="form-control input-field time-input" ref="time" defaultValue={time} />
+              <input type="text" maxLength="3" className="form-control input-field input-time" ref="time" defaultValue={time} />
               <span>minutes</span>
             </div>
             <div className="col-xs-6">

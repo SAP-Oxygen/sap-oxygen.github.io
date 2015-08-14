@@ -170,7 +170,7 @@ ul {
 }
 
 .agenda-table {
-    padding: 20px 0 20px 0;
+    margin: 20px 0px 20px 0px;
 }
 
 .input-field {
@@ -215,7 +215,7 @@ ul {
     padding: 0px;
 }
 
-.time-input {
+.input-time {
     display: inline;
     width: 50%;
 }
@@ -223,4 +223,17 @@ ul {
 .input-group-addon-custom {
     border: 1px solid #bfbfbf;
     border-radius: 0px;
+}
+
+.input-date {
+    margin-top: 10px;
+}
+
+.index-glyphicon {
+    margin: 0px 5px 0px 5px;
+}
+
+.edit-glyphicon {
+    display: inline;
+    margin-right: 10px;
 }

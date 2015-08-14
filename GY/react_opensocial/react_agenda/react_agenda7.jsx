@@ -208,7 +208,7 @@ var init = function(React, $, moment, gadgets, wave) {
       return (
         <li className="table-head">
           <div className="div-table-cell th index-col">
-            <span className="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+            <span className="glyphicon glyphicon-chevron-down index-glyphicon" aria-hidden="true"></span>
           </div>
           <div className="div-table-cell th time-col">Time</div>
           <div className="div-table-cell th duration-col">Duration</div>
@@ -367,8 +367,8 @@ var init = function(React, $, moment, gadgets, wave) {
           </div>
           <div className="div-table-cell presenter-col" id={ownerId}>{ownerName}</div>
           <div className="div-table-cell edit-col">
-            <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
-            <span className="glyphicon glyphicon-pencil" id={editId} aria-hidden="true"></span>
+            <span className="glyphicon glyphicon-pencil edit-glyphicon" id={editId} aria-hidden="true"></span>
+            <span className="glyphicon glyphicon-trash delete-glyphicon" aria-hidden="true"></span>
           </div>
         </li>
       );
@@ -416,7 +416,7 @@ var init = function(React, $, moment, gadgets, wave) {
       return (
         <div className="row">
           <div className="col-xs-4">
-            <div className='input-group date' id='datetimepicker'>
+            <div className='input-group date input-date' id='datetimepicker'>
               <input type='text' className='form-control input-field' placeholder="Click to choose the date" />
               <span className='input-group-addon input-group-addon-custom'>
                 <span className='glyphicon glyphicon-calendar'></span>
