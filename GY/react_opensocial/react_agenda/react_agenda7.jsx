@@ -214,7 +214,10 @@ var init = function(React, $, moment, gadgets, wave) {
           <div className="div-table-cell th duration-col">Duration</div>
           <div className="div-table-cell th main-col">Topic</div>
           <div className="div-table-cell th presenter-col">Presenter</div>
-          <div className="div-table-cell th edit-col"> - </div>
+          <div className="div-table-cell th edit-col">
+            <span className="glyphicon glyphicon-pencil edit-glyphicon" id={editId} aria-hidden="true"></span>
+            <span className="glyphicon glyphicon-trash delete-glyphicon" aria-hidden="true"></span>
+          </div>
         </li>
       );
     }
@@ -381,7 +384,7 @@ var init = function(React, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        <button type="button" className="btn btn-default pull-right" onClick={this.handleAdd}>
+        <button type="button" className="btn btn-default pull-right btn-add" onClick={this.handleAdd}>
           <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Item
         </button>
       );
