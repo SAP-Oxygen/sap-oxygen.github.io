@@ -531,6 +531,7 @@ function init(ReactBootstrap, jQuery){
         return;
       }
       var topicInfos = this.state.topicInfos;
+      if (topicInfos == null) topicInfos = [];
       var topicInfo = this.createTopicData(newTopicContent);
       topicInfos.push(topicInfo);
       this.updateWaveData(topicInfos);

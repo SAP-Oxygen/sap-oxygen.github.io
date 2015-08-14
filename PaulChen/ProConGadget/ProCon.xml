@@ -1,5 +1,5 @@
 <Module specificationVersion='2'>
-  <ModulePrefs title="ProCon_1511" width="850" height="400">
+  <ModulePrefs title="ProCon_1511_local" width="850" height="400">
     <Require feature="wave" />
   </ModulePrefs>
   <Content type="html" href="ProCon.react.html"/>
