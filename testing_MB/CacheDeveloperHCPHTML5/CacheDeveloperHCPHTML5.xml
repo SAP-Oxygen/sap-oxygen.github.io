@@ -1,7 +1,7 @@
 <Module specificationVersion='2'>
   <!-- Jam interacting with target servers -->
   <!-- via OpenSocial OAuth 2.0 SAML 2.0 Bearer Assertion Flow -->
-  <ModulePrefs title="CacheDeveloperHCPHTML5">
+  <ModulePrefs title="CacheDeveloperHCPHTML5" height = 800>
     <Require feature="dynamic-height"/>
     <Require feature="osapi"/>
     <Locale lang="all">
