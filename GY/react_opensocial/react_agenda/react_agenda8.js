@@ -321,11 +321,11 @@ var init = function(React, $, moment, gadgets, wave) {
     },
     componentDidMount: function() {
       adjustHeight();
-      this.enableDialogBox();
+      // this.enableDialogBox();
     },
     componentDidUpdate: function() {
       adjustHeight();
-      this.enableDialogBox();
+      // this.enableDialogBox();
     },
     render: function() {
       var index = this.props.index;
