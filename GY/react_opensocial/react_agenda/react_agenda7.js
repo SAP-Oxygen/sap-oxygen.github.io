@@ -386,13 +386,13 @@ var init = function(React, $, moment, gadgets, wave) {
     render: function() {
       return (
         React.createElement("li", {className: "table-button"}, 
-          React.createElement("div", {className: "div-table-cell th index-col"}
+          React.createElement("div", {className: "div-table-cell index-col"}
           ), 
-          React.createElement("div", {className: "div-table-cell th time-col"}), 
-          React.createElement("div", {className: "div-table-cell th duration-col"}), 
-          React.createElement("div", {className: "div-table-cell th main-col"}), 
-          React.createElement("div", {className: "div-table-cell th presenter-col"}, 
-            React.createElement("button", {type: "button", className: "btn btn-default btn-add", onClick: this.handleAdd}, 
+          React.createElement("div", {className: "div-table-cell time-col"}), 
+          React.createElement("div", {className: "div-table-cell duration-col"}), 
+          React.createElement("div", {className: "div-table-cell main-col"}), 
+          React.createElement("div", {className: "div-table-cell presenter-col"}, 
+            React.createElement("button", {type: "button", className: "btn btn-default", onClick: this.handleAdd}, 
               React.createElement("span", {className: "glyphicon glyphicon-plus", "aria-hidden": "true"}), " Add Item"
             )
           ), 

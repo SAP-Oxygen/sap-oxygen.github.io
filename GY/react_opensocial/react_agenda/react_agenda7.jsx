@@ -386,13 +386,13 @@ var init = function(React, $, moment, gadgets, wave) {
     render: function() {
       return (
         <li className="table-button">
-          <div className="div-table-cell th index-col">
+          <div className="div-table-cell index-col">
           </div>
-          <div className="div-table-cell th time-col"></div>
-          <div className="div-table-cell th duration-col"></div>
-          <div className="div-table-cell th main-col"></div>
-          <div className="div-table-cell th presenter-col">
-            <button type="button" className="btn btn-default btn-add" onClick={this.handleAdd}>
+          <div className="div-table-cell time-col"></div>
+          <div className="div-table-cell duration-col"></div>
+          <div className="div-table-cell main-col"></div>
+          <div className="div-table-cell presenter-col">
+            <button type="button" className="btn btn-default" onClick={this.handleAdd}>
               <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Item
             </button>
           </div>
