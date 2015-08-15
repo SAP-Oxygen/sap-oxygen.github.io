@@ -4,8 +4,9 @@ var init = function(React, $, moment, gadgets, wave) {
   
   var adjustHeight = function() {
     var initHeight = 400;
-    var height = $("body").height();
-    if (height > initHeight) {
+    var height = $("#container").height();
+    // add height of 65
+    if (height + 65 > initHeight) {
       gadgets.window.adjustHeight();
     }
   };
@@ -384,8 +385,21 @@ var init = function(React, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        React.createElement("button", {type: "button", className: "btn btn-default pull-right btn-add", onClick: this.handleAdd}, 
-          React.createElement("span", {className: "glyphicon glyphicon-plus", "aria-hidden": "true"}), " Add Item"
+        React.createElement("li", {className: "table-head"}, 
+          React.createElement("div", {className: "div-table-cell th index-col"}
+          ), 
+          React.createElement("div", {className: "div-table-cell th time-col"}), 
+          React.createElement("div", {className: "div-table-cell th duration-col"}), 
+          React.createElement("div", {className: "div-table-cell th main-col"}), 
+          React.createElement("div", {className: "div-table-cell th presenter-col"}, 
+            React.createElement("button", {type: "button", className: "btn btn-default btn-add", onClick: this.handleAdd}, 
+              React.createElement("span", {className: "glyphicon glyphicon-plus", "aria-hidden": "true"}), " Add Item"
+            )
+          ), 
+          React.createElement("div", {className: "div-table-cell th edit-col"}, 
+            React.createElement("span", {className: "glyphicon glyphicon-pencil edit-glyphicon", "aria-hidden": "true"}), 
+            React.createElement("span", {className: "glyphicon glyphicon-trash delete-glyphicon", "aria-hidden": "true"})
+          )
         )
       );
     }

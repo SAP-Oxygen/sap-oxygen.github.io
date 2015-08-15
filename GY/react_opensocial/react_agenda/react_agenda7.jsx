@@ -4,8 +4,9 @@ var init = function(React, $, moment, gadgets, wave) {
   
   var adjustHeight = function() {
     var initHeight = 400;
-    var height = $("body").height();
-    if (height > initHeight) {
+    var height = $("#container").height();
+    // add height of 65
+    if (height + 65 > initHeight) {
       gadgets.window.adjustHeight();
     }
   };
@@ -384,9 +385,22 @@ var init = function(React, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        <button type="button" className="btn btn-default pull-right btn-add" onClick={this.handleAdd}>
-          <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Item
-        </button>
+        <li className="table-head">
+          <div className="div-table-cell th index-col">
+          </div>
+          <div className="div-table-cell th time-col"></div>
+          <div className="div-table-cell th duration-col"></div>
+          <div className="div-table-cell th main-col"></div>
+          <div className="div-table-cell th presenter-col">
+            <button type="button" className="btn btn-default btn-add" onClick={this.handleAdd}>
+              <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Item
+            </button>
+          </div>
+          <div className="div-table-cell th edit-col">
+            <span className="glyphicon glyphicon-pencil edit-glyphicon" aria-hidden="true"></span>
+            <span className="glyphicon glyphicon-trash delete-glyphicon" aria-hidden="true"></span>
+          </div>
+        </li>
       );
     }
   });
