@@ -385,7 +385,7 @@ var init = function(React, $, moment, gadgets, wave) {
     },
     render: function() {
       return (
-        <li className="table-head">
+        <li className="table-button">
           <div className="div-table-cell th index-col">
           </div>
           <div className="div-table-cell th time-col"></div>
