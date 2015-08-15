@@ -6,7 +6,7 @@ var init = function(React, $, moment, gadgets, wave) {
     var initHeight = 400;
     var height = $("#container").height();
     // add height of 65
-    if (height + 65 > initHeight) {
+    if (height > initHeight) {
       gadgets.window.adjustHeight();
     }
   };
