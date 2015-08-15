@@ -391,7 +391,7 @@ var init = function(React, $, moment, gadgets, wave) {
           <div className="div-table-cell time-col"></div>
           <div className="div-table-cell duration-col"></div>
           <div className="div-table-cell main-col"></div>
-          <div className="div-table-cell presenter-col">
+          <div className="div-table-cell presenter-col button-col">
             <button type="button" className="btn btn-default" onClick={this.handleAdd}>
               <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Item
             </button>

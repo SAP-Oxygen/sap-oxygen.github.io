@@ -242,3 +242,7 @@ ul {
     background-color: white !important;
     text-align: right;
 }
+
+.button-col {
+    padding: 0px !important;
+}
