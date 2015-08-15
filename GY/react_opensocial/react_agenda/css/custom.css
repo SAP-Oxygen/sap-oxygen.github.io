@@ -241,3 +241,8 @@ ul {
 .btn-add {
     margin-right: 58px;
 }
+
+.table-button {
+    background-color: white !important;
+    text-align: right;
+}
