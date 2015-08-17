@@ -37,6 +37,14 @@ function guid(){
   });
 }
 
+function adjustHeight(){
+  var initHeight = 400;
+  var height = $("#ProConGadget").height();
+  if (height > initHeight) {
+    gadgets.window.adjustHeight();
+  }
+}
+
 function getCreatorFullName(creatorId){
   var fullName = "PLACEHOLDER";
   if (typeof(wave) != "undefined" && wave && wave.getParticipantById(creatorId)) {
@@ -487,9 +495,15 @@ function init(ReactBootstrap, jQuery){
   });
 
   var TopicListContainer = React.createClass({displayName: "TopicListContainer",
+    componentDidMount: function() {
+      adjustHeight();
+    },
+    componentDidUpdate: function() {
+      adjustHeight();
+    },
     render: function(){
       return (
-        React.createElement("div", {style:  {height: "45px", width: "850px"} }, 
+        React.createElement("div", {style: {width: "850px"}}, 
           React.createElement("table", {className: "PCTDataTable"}, 
             React.createElement("thead", null, 
               React.createElement("tr", null, 
@@ -608,7 +622,7 @@ function init(ReactBootstrap, jQuery){
       var Button = ReactBootstrap.Button;
       var innerBtn = React.createElement(Button, {onClick: this.addTopicBtnClicked, disabled: this.isBtnDisable()}, "Add Topic");
       return(
-        React.createElement("div", {style: {height: "45px", width: "850px"}}, 
+        React.createElement("div", {style: {width: "850px"}, id: "ProConGadget"}, 
           React.createElement(Input, {type: "text", value: this.state.newTopicContent, onChange: this.titleInputChanged, bsStyle: this.validationState(), buttonAfter: innerBtn}), 
           React.createElement(TopicListContainer, {topicInfos: this.state.topicInfos, deleteTopicCB: this.deleteTopic, updateTopicInfoCB: this.updateTopicInfo})
         )
