@@ -392,7 +392,7 @@ var init = function(React, $, moment, gadgets, wave) {
           React.createElement("div", {className: "div-table-cell duration-col"}), 
           React.createElement("div", {className: "div-table-cell main-col"}), 
           React.createElement("div", {className: "div-table-cell presenter-col button-col"}, 
-            React.createElement("button", {type: "button", className: "btn btn-default", onClick: this.handleAdd}, 
+            React.createElement("button", {type: "button", className: "btn btn-default btn-normal", onClick: this.handleAdd}, 
               React.createElement("span", {className: "glyphicon glyphicon-plus", "aria-hidden": "true"}), " Add Item"
             )
           ), 
