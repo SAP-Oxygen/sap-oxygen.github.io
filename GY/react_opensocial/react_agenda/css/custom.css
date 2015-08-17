@@ -132,6 +132,7 @@ ul {
 
 .desc-cell {
     padding: 6px 0 0 8px;
+    white-space: pre;
 }
 
 .th {
