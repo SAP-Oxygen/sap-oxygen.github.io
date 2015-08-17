@@ -253,9 +253,23 @@ ul {
     border: 1px solid #bfbfbf;
     border-radius: 2px;
     color: #333333;
-    font: 14px;
+    font-size: 14px;
+    font-weight: normal;
 }
 
 .btn-normal:hover {
     background: #e5e5e5;
+}
+
+.btn-emphasized {
+    background: #009de0;
+    border: 1px solid #007cc0;
+    border-radius: 2px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.btn-emphasized:hover {
+    background: #0090D3;
 }

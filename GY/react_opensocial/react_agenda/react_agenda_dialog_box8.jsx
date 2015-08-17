@@ -65,7 +65,7 @@ var DialogBox = React.createClass({
           <input type="hidden" id="people-picker" ref="owner" placeholder="Presenter" defaultValue={owner} />
           <textarea className="form-control input-field text-area" rows="4" ref="desc" placeholder="Notes" defaultValue={desc} />
           <div className="pull-right">
-            <button type="submit" className="btn btn-primary">Submit</button> <button className="btn btn-default" onClick={this.handleClose}>Close</button>
+            <button type="submit" className="btn btn-emphasized">Submit</button> <button className="btn btn-normal" onClick={this.handleClose}>Close</button>
           </div>
         </form>
       </div>
