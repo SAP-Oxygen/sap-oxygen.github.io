@@ -1,12 +1,13 @@
-.PCTHead {
-  padding: 5px 0 5px 15px;
+.PCTFoot {
+  padding: 5px 5px 5px 5px;
   border-top: solid 1px #d3d3d3;
   border-bottom: solid 1px #d3d3d3;
   border-right: solid 1px #d3d3d3;
   font-weight: bold;
   height: 30px;
   width: 33%;
+  text-align: right;
   color: #000000;
-  font-size: 13px;
+  font-size: 10px;
   background-color: #f5f6f6;
 }

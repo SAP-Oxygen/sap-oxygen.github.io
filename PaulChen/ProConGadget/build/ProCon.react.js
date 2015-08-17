@@ -484,24 +484,55 @@ function init(ReactBootstrap, jQuery){
     render: function(){
       var deleteTopicCB = this.props.deleteTopicCB;
       var updateTopicInfoCB = this.props.updateTopicInfoCB;
+      var style = {height: "37px"};
+      if (this.props.topicInfos.length != 0){
+        style["display"] = "none";
+      }
+
       return (React.createElement("tbody", null, 
-              
-                this.props.topicInfos.map(function(topicInfo){
-                  return React.createElement(TopicRow, {key: topicInfo.id, topicInfo: topicInfo, deleteTopicCB: deleteTopicCB, updateTopicInfoCB: updateTopicInfoCB})
-                })
-              
+                React.createElement("tr", {style: style}, React.createElement("td", {className: "ProConDataNoCursor"}), React.createElement("td", {className: "ProConDataNoCursor"}), React.createElement("td", {className: "ProConDataNoCursor"})), 
+                
+                  this.props.topicInfos.map(function(topicInfo){
+                    return React.createElement(TopicRow, {key: topicInfo.id, topicInfo: topicInfo, deleteTopicCB: deleteTopicCB, updateTopicInfoCB: updateTopicInfoCB})
+                  })
+                
               ));
     }
   });
 
   var TopicListContainer = React.createClass({displayName: "TopicListContainer",
+    getInitialState: function() {
+      return {isFullText: true};
+    },
     componentDidMount: function() {
       adjustHeight();
     },
     componentDidUpdate: function() {
       adjustHeight();
     },
+    getFullTextBtnStyle: function() {
+      if (this.state.isFullText) {
+        return "primary";
+      } else {
+        return "default";
+      }
+    },
+    getSummaryBtnStyle: function() {
+      if (!this.state.isFullText) {
+        return "primary";
+      } else {
+        return "default";
+      }
+    },
+    summaryBtnClickHander: function() {
+      this.setState({isFullText: false});
+    },
+    fullTextBtnClickHander: function() {
+      this.setState({isFullText: true});
+    },
     render: function(){
+      var Button = ReactBootstrap.Button;
+      var ButtonGroup = ReactBootstrap.ButtonGroup;
       return (
         React.createElement("div", {style: {width: "850px"}}, 
           React.createElement("table", {className: "PCTDataTable"}, 
@@ -514,6 +545,16 @@ function init(ReactBootstrap, jQuery){
             ), 
             React.createElement("tbody", null, 
               React.createElement(TopicList, {topicInfos: this.props.topicInfos, deleteTopicCB: this.props.deleteTopicCB, updateTopicInfoCB: this.props.updateTopicInfoCB})
+            ), 
+            React.createElement("tfoot", null, 
+              React.createElement("tr", null, 
+                React.createElement("td", {className: "PCTFoot", colSpan: "3"}, 
+                  React.createElement(ButtonGroup, {bsSize: "xsmall"}, 
+                    React.createElement(Button, {bsStyle: this.getSummaryBtnStyle(), onClick: this.summaryBtnClickHander}, "Summary"), 
+                    React.createElement(Button, {bsStyle: this.getFullTextBtnStyle(), onClick: this.fullTextBtnClickHander}, "Full Text")
+                  )
+                )
+              )
             )
           )
         )

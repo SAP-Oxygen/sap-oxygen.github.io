@@ -484,24 +484,55 @@ function init(ReactBootstrap, jQuery){
     render: function(){
       var deleteTopicCB = this.props.deleteTopicCB;
       var updateTopicInfoCB = this.props.updateTopicInfoCB;
+      var style = {height: "37px"};
+      if (this.props.topicInfos.length != 0){
+        style["display"] = "none";
+      }
+
       return (<tbody>
-              {
-                this.props.topicInfos.map(function(topicInfo){
-                  return <TopicRow key={topicInfo.id} topicInfo={topicInfo} deleteTopicCB={deleteTopicCB} updateTopicInfoCB={updateTopicInfoCB}/>
-                })
-              }
+                <tr style={style}><td className="ProConDataNoCursor"/><td className="ProConDataNoCursor"/><td className="ProConDataNoCursor"/></tr>
+                {
+                  this.props.topicInfos.map(function(topicInfo){
+                    return <TopicRow key={topicInfo.id} topicInfo={topicInfo} deleteTopicCB={deleteTopicCB} updateTopicInfoCB={updateTopicInfoCB}/>
+                  })
+                }
               </tbody>);
     }
   });
 
   var TopicListContainer = React.createClass({
+    getInitialState: function() {
+      return {isFullText: true};
+    },
     componentDidMount: function() {
       adjustHeight();
     },
     componentDidUpdate: function() {
       adjustHeight();
     },
+    getFullTextBtnStyle: function() {
+      if (this.state.isFullText) {
+        return "primary";
+      } else {
+        return "default";
+      }
+    },
+    getSummaryBtnStyle: function() {
+      if (!this.state.isFullText) {
+        return "primary";
+      } else {
+        return "default";
+      }
+    },
+    summaryBtnClickHander: function() {
+      this.setState({isFullText: false});
+    },
+    fullTextBtnClickHander: function() {
+      this.setState({isFullText: true});
+    },
     render: function(){
+      var Button = ReactBootstrap.Button;
+      var ButtonGroup = ReactBootstrap.ButtonGroup;
       return (
         <div style={{width: "850px"}}>
           <table className="PCTDataTable">
@@ -515,6 +546,16 @@ function init(ReactBootstrap, jQuery){
             <tbody>
               <TopicList topicInfos={this.props.topicInfos} deleteTopicCB={this.props.deleteTopicCB} updateTopicInfoCB={this.props.updateTopicInfoCB}/>
             </tbody>
+            <tfoot>
+              <tr>
+                <td className="PCTFoot" colSpan="3">
+                  <ButtonGroup bsSize="xsmall">
+                    <Button bsStyle={this.getSummaryBtnStyle()} onClick={this.summaryBtnClickHander}>Summary</Button>
+                    <Button bsStyle={this.getFullTextBtnStyle()} onClick={this.fullTextBtnClickHander}>Full Text</Button>
+                  </ButtonGroup>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       );
