@@ -37,6 +37,14 @@ function guid(){
   });
 }
 
+function adjustHeight(){
+  var initHeight = 400;
+  var height = $("#ProConGadget").height();
+  if (height > initHeight) {
+    gadgets.window.adjustHeight();
+  }
+}
+
 function getCreatorFullName(creatorId){
   var fullName = "PLACEHOLDER";
   if (typeof(wave) != "undefined" && wave && wave.getParticipantById(creatorId)) {
@@ -476,20 +484,57 @@ function init(ReactBootstrap, jQuery){
     render: function(){
       var deleteTopicCB = this.props.deleteTopicCB;
       var updateTopicInfoCB = this.props.updateTopicInfoCB;
+      var style = {height: "37px"};
+      if (this.props.topicInfos.length != 0){
+        style["display"] = "none";
+      }
+
       return (React.createElement("tbody", null, 
-              
-                this.props.topicInfos.map(function(topicInfo){
-                  return React.createElement(TopicRow, {key: topicInfo.id, topicInfo: topicInfo, deleteTopicCB: deleteTopicCB, updateTopicInfoCB: updateTopicInfoCB})
-                })
-              
+                React.createElement("tr", {style: style}, React.createElement("td", {className: "ProConDataNoCursor"}), React.createElement("td", {className: "ProConDataNoCursor"}), React.createElement("td", {className: "ProConDataNoCursor"})), 
+                
+                  this.props.topicInfos.map(function(topicInfo){
+                    return React.createElement(TopicRow, {key: topicInfo.id, topicInfo: topicInfo, deleteTopicCB: deleteTopicCB, updateTopicInfoCB: updateTopicInfoCB})
+                  })
+                
               ));
     }
   });
 
   var TopicListContainer = React.createClass({displayName: "TopicListContainer",
+    getInitialState: function() {
+      return {isFullText: true};
+    },
+    componentDidMount: function() {
+      adjustHeight();
+    },
+    componentDidUpdate: function() {
+      adjustHeight();
+    },
+    getFullTextBtnStyle: function() {
+      if (this.state.isFullText) {
+        return "primary";
+      } else {
+        return "default";
+      }
+    },
+    getSummaryBtnStyle: function() {
+      if (!this.state.isFullText) {
+        return "primary";
+      } else {
+        return "default";
+      }
+    },
+    summaryBtnClickHander: function() {
+      this.setState({isFullText: false});
+    },
+    fullTextBtnClickHander: function() {
+      this.setState({isFullText: true});
+    },
     render: function(){
+      var Button = ReactBootstrap.Button;
+      var ButtonGroup = ReactBootstrap.ButtonGroup;
       return (
-        React.createElement("div", {style:  {height: "45px", width: "850px"} }, 
+        React.createElement("div", {style: {width: "850px"}}, 
           React.createElement("table", {className: "PCTDataTable"}, 
             React.createElement("thead", null, 
               React.createElement("tr", null, 
@@ -500,6 +545,16 @@ function init(ReactBootstrap, jQuery){
             ), 
             React.createElement("tbody", null, 
               React.createElement(TopicList, {topicInfos: this.props.topicInfos, deleteTopicCB: this.props.deleteTopicCB, updateTopicInfoCB: this.props.updateTopicInfoCB})
+            ), 
+            React.createElement("tfoot", null, 
+              React.createElement("tr", null, 
+                React.createElement("td", {className: "PCTFoot", colSpan: "3"}, 
+                  React.createElement(ButtonGroup, {bsSize: "xsmall"}, 
+                    React.createElement(Button, {bsStyle: this.getSummaryBtnStyle(), onClick: this.summaryBtnClickHander}, "Summary"), 
+                    React.createElement(Button, {bsStyle: this.getFullTextBtnStyle(), onClick: this.fullTextBtnClickHander}, "Full Text")
+                  )
+                )
+              )
             )
           )
         )
@@ -608,7 +663,7 @@ function init(ReactBootstrap, jQuery){
       var Button = ReactBootstrap.Button;
       var innerBtn = React.createElement(Button, {onClick: this.addTopicBtnClicked, disabled: this.isBtnDisable()}, "Add Topic");
       return(
-        React.createElement("div", {style: {height: "45px", width: "850px"}}, 
+        React.createElement("div", {style: {width: "850px"}, id: "ProConGadget"}, 
           React.createElement(Input, {type: "text", value: this.state.newTopicContent, onChange: this.titleInputChanged, bsStyle: this.validationState(), buttonAfter: innerBtn}), 
           React.createElement(TopicListContainer, {topicInfos: this.state.topicInfos, deleteTopicCB: this.deleteTopic, updateTopicInfoCB: this.updateTopicInfo})
         )

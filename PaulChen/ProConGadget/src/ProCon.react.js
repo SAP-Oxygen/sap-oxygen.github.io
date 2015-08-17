@@ -37,6 +37,14 @@ function guid(){
   });
 }
 
+function adjustHeight(){
+  var initHeight = 400;
+  var height = $("#ProConGadget").height();
+  if (height > initHeight) {
+    gadgets.window.adjustHeight();
+  }
+}
+
 function getCreatorFullName(creatorId){
   var fullName = "PLACEHOLDER";
   if (typeof(wave) != "undefined" && wave && wave.getParticipantById(creatorId)) {
@@ -476,20 +484,57 @@ function init(ReactBootstrap, jQuery){
     render: function(){
       var deleteTopicCB = this.props.deleteTopicCB;
       var updateTopicInfoCB = this.props.updateTopicInfoCB;
+      var style = {height: "37px"};
+      if (this.props.topicInfos.length != 0){
+        style["display"] = "none";
+      }
+
       return (<tbody>
-              {
-                this.props.topicInfos.map(function(topicInfo){
-                  return <TopicRow key={topicInfo.id} topicInfo={topicInfo} deleteTopicCB={deleteTopicCB} updateTopicInfoCB={updateTopicInfoCB}/>
-                })
-              }
+                <tr style={style}><td className="ProConDataNoCursor"/><td className="ProConDataNoCursor"/><td className="ProConDataNoCursor"/></tr>
+                {
+                  this.props.topicInfos.map(function(topicInfo){
+                    return <TopicRow key={topicInfo.id} topicInfo={topicInfo} deleteTopicCB={deleteTopicCB} updateTopicInfoCB={updateTopicInfoCB}/>
+                  })
+                }
               </tbody>);
     }
   });
 
   var TopicListContainer = React.createClass({
+    getInitialState: function() {
+      return {isFullText: true};
+    },
+    componentDidMount: function() {
+      adjustHeight();
+    },
+    componentDidUpdate: function() {
+      adjustHeight();
+    },
+    getFullTextBtnStyle: function() {
+      if (this.state.isFullText) {
+        return "primary";
+      } else {
+        return "default";
+      }
+    },
+    getSummaryBtnStyle: function() {
+      if (!this.state.isFullText) {
+        return "primary";
+      } else {
+        return "default";
+      }
+    },
+    summaryBtnClickHander: function() {
+      this.setState({isFullText: false});
+    },
+    fullTextBtnClickHander: function() {
+      this.setState({isFullText: true});
+    },
     render: function(){
+      var Button = ReactBootstrap.Button;
+      var ButtonGroup = ReactBootstrap.ButtonGroup;
       return (
-        <div style={ {height: "45px", width: "850px"} }>
+        <div style={{width: "850px"}}>
           <table className="PCTDataTable">
             <thead>
               <tr>
@@ -501,6 +546,16 @@ function init(ReactBootstrap, jQuery){
             <tbody>
               <TopicList topicInfos={this.props.topicInfos} deleteTopicCB={this.props.deleteTopicCB} updateTopicInfoCB={this.props.updateTopicInfoCB}/>
             </tbody>
+            <tfoot>
+              <tr>
+                <td className="PCTFoot" colSpan="3">
+                  <ButtonGroup bsSize="xsmall">
+                    <Button bsStyle={this.getSummaryBtnStyle()} onClick={this.summaryBtnClickHander}>Summary</Button>
+                    <Button bsStyle={this.getFullTextBtnStyle()} onClick={this.fullTextBtnClickHander}>Full Text</Button>
+                  </ButtonGroup>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       );
@@ -608,7 +663,7 @@ function init(ReactBootstrap, jQuery){
       var Button = ReactBootstrap.Button;
       var innerBtn = <Button onClick={this.addTopicBtnClicked} disabled={this.isBtnDisable()}>Add Topic</Button>;
       return(
-        <div style={{height: "45px", width: "850px"}}>
+        <div style={{width: "850px"}} id="ProConGadget">
           <Input type="text" value={this.state.newTopicContent} onChange={this.titleInputChanged} bsStyle={this.validationState()} buttonAfter={innerBtn}/>
           <TopicListContainer topicInfos={this.state.topicInfos} deleteTopicCB={this.deleteTopic} updateTopicInfoCB={this.updateTopicInfo}/>
         </div>
