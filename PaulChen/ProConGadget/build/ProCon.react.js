@@ -501,34 +501,11 @@ function init(ReactBootstrap, jQuery){
   });
 
   var TopicListContainer = React.createClass({displayName: "TopicListContainer",
-    getInitialState: function() {
-      return {isFullText: true};
-    },
     componentDidMount: function() {
       adjustHeight();
     },
     componentDidUpdate: function() {
       adjustHeight();
-    },
-    getFullTextBtnStyle: function() {
-      if (this.state.isFullText) {
-        return "primary";
-      } else {
-        return "default";
-      }
-    },
-    getSummaryBtnStyle: function() {
-      if (!this.state.isFullText) {
-        return "primary";
-      } else {
-        return "default";
-      }
-    },
-    summaryBtnClickHander: function() {
-      this.setState({isFullText: false});
-    },
-    fullTextBtnClickHander: function() {
-      this.setState({isFullText: true});
     },
     render: function(){
       return (
@@ -545,9 +522,7 @@ function init(ReactBootstrap, jQuery){
               React.createElement(TopicList, {topicInfos: this.props.topicInfos, deleteTopicCB: this.props.deleteTopicCB, updateTopicInfoCB: this.props.updateTopicInfoCB})
             ), 
             React.createElement("tfoot", null, 
-              React.createElement("tr", null, 
-                React.createElement("td", {className: "PCTFoot", colSpan: "3"})
-              )
+              React.createElement("tr", null, React.createElement("td", {className: "PCTFoot", colSpan: "3"}))
             )
           )
         )

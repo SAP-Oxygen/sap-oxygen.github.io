@@ -522,7 +522,7 @@ function init(ReactBootstrap, jQuery){
               <TopicList topicInfos={this.props.topicInfos} deleteTopicCB={this.props.deleteTopicCB} updateTopicInfoCB={this.props.updateTopicInfoCB}/>
             </tbody>
             <tfoot>
-              <tr><td className="PCTFoot" colSpan="3"></tr>
+              <tr><td className="PCTFoot" colSpan="3"/></tr>
             </tfoot>
           </table>
         </div>
