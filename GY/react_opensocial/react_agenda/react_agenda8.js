@@ -35,12 +35,12 @@ var init = function(React, $, moment, gadgets, wave) {
           waveData[key] = waveState.get(key);
         });
         var lastWaveData = self.state.lastWaveData;
-        // console.log("waveData: ");
-        // console.log(waveData);
-        // console.log("lastWaveData: ");
-        // console.log(lastWaveData);
-        // console.log("dragging: ");
-        // console.log(self.state.dragging);
+        console.log("waveData: ");
+        console.log(waveData);
+        console.log("lastWaveData: ");
+        console.log(lastWaveData);
+        console.log("dragging: ");
+        console.log(self.state.dragging);
 
         // if dragging variable of the current state is true,
         // then store the current waveData and do not update the state
