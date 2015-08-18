@@ -531,8 +531,6 @@ function init(ReactBootstrap, jQuery){
       this.setState({isFullText: true});
     },
     render: function(){
-      var Button = ReactBootstrap.Button;
-      var ButtonGroup = ReactBootstrap.ButtonGroup;
       return (
         React.createElement("div", {style: {width: "850px"}}, 
           React.createElement("table", {className: "PCTDataTable"}, 
@@ -548,12 +546,7 @@ function init(ReactBootstrap, jQuery){
             ), 
             React.createElement("tfoot", null, 
               React.createElement("tr", null, 
-                React.createElement("td", {className: "PCTFoot", colSpan: "3"}, 
-                  React.createElement(ButtonGroup, {bsSize: "xsmall"}, 
-                    React.createElement(Button, {bsStyle: this.getSummaryBtnStyle(), onClick: this.summaryBtnClickHander}, "Summary"), 
-                    React.createElement(Button, {bsStyle: this.getFullTextBtnStyle(), onClick: this.fullTextBtnClickHander}, "Full Text")
-                  )
-                )
+                React.createElement("td", {className: "PCTFoot", colSpan: "3"})
               )
             )
           )
