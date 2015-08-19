@@ -144,7 +144,7 @@ var AppdataStatus = React.createClass({
         }
         self.setState(localData);
       });
-    }
+    };
 
     var appdataDelete = function(viewerId) {
       osapi.appdata.delete({userId: '@viewer', groupId: '@self', fields: ['test']}).execute(function (userData) {
@@ -235,7 +235,7 @@ var PeopleStatus = React.createClass({
     };
 
     var peopleGetOwner = function () {
-      osapi.people.getViewerFriends().execute(function(userData) {
+      osapi.people.getOwner().execute(function(userData) {
         var localData = self.state.data;
         if (userData.error) {
           localData["getOwner"] = false;
@@ -249,7 +249,7 @@ var PeopleStatus = React.createClass({
     };
 
     var peopleGetOwnerFriends = function () {
-      osapi.people.getViewerFriends().execute(function(userData) {
+      osapi.people.getOwnerFriends().execute(function(userData) {
         var localData = self.state.data;
         if (userData.error) {
           localData["getOwnerFriends"] = false;
