@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <Module specificationVersion='2'>
+   <ModulePrefs title="simpleGadget" height="600">
+   </ModulePrefs>
+<Content type="url" href="simpleGadget.html"/>
+ </Module>
