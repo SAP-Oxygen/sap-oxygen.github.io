@@ -1,77 +1,90 @@
 (function($, React){
   var VoteBox = React.createClass({
+    // set the initial state with an empty value
+    // NOTE: it is important to keep VoteBox's state in sync with wave's state
+    //       in order to avoid any troubles with wave's live-updating state
     getInitialState: function() {
       return {data: {}};
     },
+    // define functions for wave here since componentDidMount is only called once
+    // after VoteBox is rendered
     componentDidMount: function() {
       var self = this;
+      // define callback function that is called when wave's state is changed
       function onWaveUpdate() {
         var waveData = {};
         var waveState = wave.getState();
+        // go through all the keys in wave's state and store the key-value pair in
+        // the waveData object to retrieve all the data from wave
         $.each(waveState.getKeys(), function(index, key) {
           waveData[key] = waveState.get(key);
         });
-        // for consistency in the array
-        console.log("data in onWaveUpdate: ");
-        console.log(waveData);
-        // do not update the state when there is no data
-        // prevents undesired height adjustment
+        // check if waveData object is empty (due to empty state of wave)
+        // if not, then update VoteBox's state with current waveData object
         if (!$.isEmptyObject(waveData)) {
           self.setState({data: waveData});
-          console.log("state changed in onWaveUpdate");
         }
       }
-
+      // set wave's callback on onWaveUpdate function
       wave.setStateCallback(onWaveUpdate);
-      wave.setParticipantCallback(onWaveUpdate);
-      console.log("setStateCallback + setParticipantCallback are called")
     },
     // invoked immediately after the component's updates are flushed to the DOM
     componentDidUpdate: function() {
-      console.log("componentDidUpdate is called");
+      // adjust the height whenever the view is rendered
       gadgets.window.adjustHeight();
     },
+    // function 
     handleTopicSubmit: function(topic) {
+      // create a new topic with the given topic name
       var newTopic = {};
       newTopic[topic] = {topic: topic, timestamp: new Date().getTime(), votes: []};
-      // optimistic local update
+      // optimistic local update (optional): update VoteBox's state first locally
+      //                                     so the view is rendered right away
+      //                                     even before wave's state is updated
       var localData = this.state.data;
+      // use jQuery's extend function to avoid changing the actual value in VoteBox's state
       $.extend(localData, newTopic);
       this.setState({data: localData});
-      console.log("handleTopicSubmit-this.state.data: " + localData);
       var waveState = wave.getState();
       waveState.submitDelta(newTopic);
     },
     handleVoteSubmit: function(topic, viewerId) {
-      var waveState = wave.getState();
       var updatedEntry = {};
+      // retrieve the data from VoteBox's current state
       var localData = this.state.data;
       var voteData = localData[topic];
-      // if votes array does not exist, then add a new one
+      // if votes array does not exist, then create a new one
       voteData.votes = voteData.votes || [];
+      // get the index of the viewerId in votes array
+      // if votes array does not have the current viewerId, then push the viewerId to the
+      // votes array
       var index = $.inArray(viewerId, voteData.votes);
       if (index === -1) {
-        // optimistic local update
         voteData.votes.push(viewerId);
+        // optimistic local update
         this.setState({data: localData});
-        console.log("handleVoteSubmit-this.state.data: " + localData);
         updatedEntry[topic] = voteData;
+        var waveState = wave.getState();
         waveState.submitDelta(updatedEntry);
       }
     },
     handleUnVoteSubmit: function(topic, viewerId) {
-      var waveState = wave.getState();
       var updatedEntry = {};
+      // retrieve the data from VoteBox's current state
       var localData = this.state.data;
       var voteData = localData[topic];
-      // if votes array does not exist, then add a new one
+      // if votes array does not exist, then create a new one
       voteData.votes = voteData.votes || [];
+      // get the index of the viewerId in votes array
+      // if votes array has the current viewerId, then remove the viewerId from the votes
+      // array
       var index = $.inArray(viewerId, voteData.votes);
       if (index !== -1) {
         voteData.votes.splice(index, 1);
+        // optimistic local update
         this.setState({data: localData});
-        console.log("handleUnVoteSubmit-this.state.data: " + localData);
         updatedEntry[topic] = voteData;
+        var waveState = wave.getState();
         waveState.submitDelta(updatedEntry);
       }
     },
@@ -79,13 +92,18 @@
       var localData = this.state.data;
       var data = [];
       var keys = Object.keys(this.state.data);
-      // pass data as an array sorted by timestamp
+      // recreate data as an array sorted by timestamp because data stored in wave's state
+      // is not fully consistent. One way to keep the data being rendered consistent is
+      // sorting items by their timestamps.
       $.each(keys, function(index, key) {
         data[index] = localData[key];
       });
       data.sort(function(a, b) {
         return a.timestamp - b.timestamp;
       });
+      // in the following HTML format, pass the sorted data to VoteList object as it is
+      // responsible for populating VoteTopic objects with contents of the sorted data.
+      // also pass down handler functions to appropriate React objects
       return (
         <div className="VoteBox">
           <nav className="navbar navbar-inverse navbar-fixed-top">
