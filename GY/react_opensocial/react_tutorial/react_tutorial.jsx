@@ -1,11 +1,15 @@
 (function($, React){
   var VoteBox = React.createClass({
+    // getInitialState function (supported by React) sets the very first state 
+    // of this React object
     // set the initial state with an empty value
     // NOTE: it is important to keep VoteBox's state in sync with wave's state
     //       in order to avoid any troubles with wave's live-updating state
     getInitialState: function() {
       return {data: {}};
     },
+    // componentDidMount function (supported by React) is called once, immediately
+    // after the first render of this React object
     // define functions for wave here since componentDidMount is only called once
     // after VoteBox is rendered
     componentDidMount: function() {
@@ -28,12 +32,13 @@
       // set wave's callback on onWaveUpdate function
       wave.setStateCallback(onWaveUpdate);
     },
-    // invoked immediately after the component's updates are flushed to the DOM
+    // componentDidUpdate function (supported by React) is "invoked immediately after 
+    // the component's updates are flushed to the DOM"
     componentDidUpdate: function() {
-      // adjust the height whenever the view is rendered
+      // adjust the height whenever the view is updated and re-rendered
       gadgets.window.adjustHeight();
     },
-    // function 
+    // handler function for adding a topic item
     handleTopicSubmit: function(topic) {
       // create a new topic with the given topic name
       var newTopic = {};
@@ -48,6 +53,7 @@
       var waveState = wave.getState();
       waveState.submitDelta(newTopic);
     },
+    // handler function for a user's voting up action
     handleVoteSubmit: function(topic, viewerId) {
       var updatedEntry = {};
       // retrieve the data from VoteBox's current state
@@ -68,6 +74,7 @@
         waveState.submitDelta(updatedEntry);
       }
     },
+    // handler function for a user's voting down action
     handleUnVoteSubmit: function(topic, viewerId) {
       var updatedEntry = {};
       // retrieve the data from VoteBox's current state
@@ -88,6 +95,9 @@
         waveState.submitDelta(updatedEntry);
       }
     },
+    // render function is where all the rendering logics happen. return HTML elements,
+    // including custom React elements, that are to be rendered in the browser
+    // NOTE: class attribute in HTML tag is replaced with className in jsx
     render: function() {
       var localData = this.state.data;
       var data = [];
@@ -130,6 +140,8 @@
 
   var VoteList = React.createClass({
     render: function() {
+      // this.props.* contains the references to functions/objects passed from the parent
+      // create a list of VoteTopic objects based on the data given from the parent
       var voteNodes = this.props.data.map(function (voteData) {
         return (
           // key value used for reconciliation
@@ -148,6 +160,7 @@
 
   var VoteTopic = React.createClass({
     render: function() {
+      // HTML elements defining VoteTopic object
       return (
         <div className="VoteTopic" key={this.props.children}>
           <div className="panel panel-primary">
@@ -169,8 +182,9 @@
       var thumbnails;
       if (this.props.votes) {
         var thumbnails = this.props.votes.map(function (viewerId) {
+          // use wave API to get voter's information, including the thumbnail url
+          // and the display name
           var voter = wave.getParticipantById(viewerId);
-          // skipping the rest due to a bug that returns null from the previous line
           if (!voter) {
             return;
           }
@@ -181,6 +195,7 @@
           );
         }, this);
       }
+      // HTML elements defining VoteThumbnail object
       return (
         <div className="VoteThumbnail">
             {thumbnails}
@@ -191,18 +206,23 @@
 
   var VoteButton = React.createClass({
     handleVote: function() {
+      // get the topic name and the viewer's ID, then call VoteBox's handleVoteSubmit
+      // function with those two parameters
       var topic = this.props.topic;
       var viewerId = wave.getViewer().getId();
       this.props.onHandleVoteSubmit(topic, viewerId);
     },
     handleUnVote: function() {
+      // get the topic name and the viewer's ID, then call VoteBox's handleUnVoteSubmit
+      // function with those two parameters
       var topic = this.props.topic;
       var viewerId = wave.getViewer().getId();
       this.props.onHandleUnVoteSubmit(topic, viewerId);
     },
     render: function() {
+      // HTML elements defining VoteButton object
       return (
-        <div className="btn-group btn-group-sm pull-right" role="group" arial-label="...">
+        <div className="btn-group btn-group-sm pull-right" role="group">
           <button type="button" className="btn btn-default btn-sm btn-vote" onClick={this.handleVote}>
             Vote Up <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
           </button>
@@ -217,13 +237,15 @@
   var VoteForm = React.createClass({
     handleSubmit: function(e) {
       e.preventDefault();
-
+      // retrieve the input value with reference to the ref value
       var topic = React.findDOMNode(this.refs.topic).value.trim();
+      // call VoteBox's handleTopicSubmit function
       this.props.onTopicSubmit(topic);
-
+      // reset the input value to an empty string
       React.findDOMNode(this.refs.topic).value = '';
     },
     render: function() {
+      // HTML elements defining VoteForm object
       return (
         <form className="VoteForm navbar-form navbar-left" role="search" onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -235,7 +257,9 @@
     }
   });
 
+  // executed when the gadget loads
   gadgets.util.registerOnLoadHandler(function() {
+    // render the topmost parent VoteBox under the DOM element with an ID, 'content'
     React.render(
       React.createElement(VoteBox),
       document.getElementById('content')
