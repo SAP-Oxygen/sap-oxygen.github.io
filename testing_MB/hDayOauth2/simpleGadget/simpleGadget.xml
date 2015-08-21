@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module specificationVersion='2'>
-	<ModulePrefs title="simpleGadget">
+	<ModulePrefs title="simpleGadget" height="600">
 		<Require feature="wave"/>
 		<Require feature="dynamic-height"/>
 	</ModulePrefs>
