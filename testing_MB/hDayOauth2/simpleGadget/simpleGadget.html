@@ -1,8 +1,17 @@
 <html>
+<head>
+	<script language="javascript" type="text/javascript">
+	  function resizeIframe(obj) {
+	    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+	  }
+	</script>
+</head>
 <body>
 	<iframe 
-	frameborder="0" scrolling="no" width="760" height="600" 
-	src="https://opensapunit3c5221352trial.hanatrial.ondemand.com/OpenSAP2015/getSingleUseToken.jsp">
+	frameborder="0" scrolling="no" id="iframe" onload='javascript:resizeIframe(this);' 
+	src="https://cloud.saplumira.com/open?key=5438FC205A4C1F73E10000000A4E4243&type=HANALYTIC">
 	</iframe>
+	<!-- <iframe name="Stack" src="http://stackoverflow.com/" frameborder="0" scrolling="no" id="iframe" onload='javascript:resizeIframe(this);' /> -->
 </body>
 </html>
+
