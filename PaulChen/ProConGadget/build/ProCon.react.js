@@ -1,3 +1,5 @@
+"use strict";
+
 function distance_of_time_in_words(from){
     var to = new Date().getTime();
     if (to < from){
@@ -485,14 +487,14 @@ function init(ReactBootstrap, jQuery){
       var deleteTopicCB = this.props.deleteTopicCB;
       var updateTopicInfoCB = this.props.updateTopicInfoCB;
       var style = {height: "37px"};
-      if (this.props.topicInfos.length != 0){
+      if (this.props.topicInfos != null && this.props.topicInfos.length != 0){
         style["display"] = "none";
       }
 
       return (React.createElement("tbody", null, 
                 React.createElement("tr", {style: style}, React.createElement("td", {className: "ProConDataNoCursor"}), React.createElement("td", {className: "ProConDataNoCursor"}), React.createElement("td", {className: "ProConDataNoCursor"})), 
                 
-                  this.props.topicInfos.map(function(topicInfo){
+                  this.props.topicInfos != null && this.props.topicInfos.map(function(topicInfo){
                     return React.createElement(TopicRow, {key: topicInfo.id, topicInfo: topicInfo, deleteTopicCB: deleteTopicCB, updateTopicInfoCB: updateTopicInfoCB})
                   })
                 
