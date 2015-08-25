@@ -123,7 +123,7 @@ var init = function(React, $, moment, gadgets, wave) {
       waveData["order"] = newOrder;
       wave.getState().submitDelta(waveData);
     },
-    handleRemove: function(itemId) {
+    handleDelete: function(itemId) {
       // remove the itemId from order array and create a new
       // items array based on the updated order array
       // do not change the itemsMap for now because it is not
@@ -192,7 +192,7 @@ var init = function(React, $, moment, gadgets, wave) {
             setTime: this.state.setTime, 
             people: this.state.people, 
             onEdit: this.handleEdit, 
-            onRemove: this.handleRemove, 
+            onDelete: this.handleDelete, 
             onDialogEdit: this.handleDialogEdit, 
             onDraggingStatus: this.handleDraggingStatus, 
             order: this.state.order, 
@@ -273,7 +273,7 @@ var init = function(React, $, moment, gadgets, wave) {
             startTime: lastItemEndTime.clone(), 
             people: self.props.people, 
             onEdit: self.props.onEdit, 
-            onRemove: self.props.onRemove, 
+            onDelete: self.props.onDelete, 
             onDialogEdit: self.props.onDialogEdit, 
             onDragEnd: self.dragEnd, 
             onDragOver: self.dragOver, 
@@ -319,6 +319,10 @@ var init = function(React, $, moment, gadgets, wave) {
         {view: "dialog", viewTarget: "MODALDIALOG", viewParams: editData});
       });
     },
+    handleDelete: function() {
+      var id = this.props.item.id;
+      this.props.onDelete(id);
+    },
     componentDidMount: function() {
       adjustHeight();
       this.enableDialogBox();
@@ -337,6 +341,7 @@ var init = function(React, $, moment, gadgets, wave) {
       // onwerId here is not the real id of owner
       var ownerId = "owner-" + id;
       var editId = "edit-" + id;
+      var deleteId = "delete-" + id;
       var topic;
       if (this.props.item.topic === "") {
         topic = "Click to edit";
@@ -372,7 +377,7 @@ var init = function(React, $, moment, gadgets, wave) {
           React.createElement("div", {className: "div-table-cell presenter-col", id: ownerId}, ownerName), 
           React.createElement("div", {className: "div-table-cell edit-col"}, 
             React.createElement("span", {className: "glyphicon glyphicon-pencil edit-glyphicon", id: editId, "aria-hidden": "true"}), 
-            React.createElement("span", {className: "glyphicon glyphicon-trash delete-glyphicon", "aria-hidden": "true"})
+            React.createElement("span", {className: "glyphicon glyphicon-trash delete-glyphicon", "aria-hidden": "true", onClick: this.handleDelete})
           )
         )
       );
