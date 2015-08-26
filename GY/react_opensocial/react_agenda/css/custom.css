@@ -275,12 +275,29 @@ ul {
     background: #0090D3;
 }
 
-@font-face{font-family:"SAP-icons";src:url(fonts/SAP-icons.eot)}
-@font-face{font-family:"SAP-icons";src:url(fonts/SAP-icons.ttf) format('truetype'),url(fonts/SAP-icons.woff) format('woff')}
-[data-icon]:before,.sap-icon-font:before,.log_item .feed-info .source_icon_legacy span.Mobile:before,.log_item .feed-info .source_icon_legacy span.iPhone:before,.log_item .feed-info .source_icon_legacy span.iPad:before,.log_item .feed-info .source_icon_legacy span.Android:before,.log_item .feedCommentInfo .source_icon_legacy span.Mobile:before,.log_item .feedCommentInfo .source_icon_legacy span.iPhone:before,.log_item .feedCommentInfo .source_icon_legacy span.iPad:before,.log_item .feedCommentInfo .source_icon_legacy span.Android:before{font-family:'SAP-icons';content:attr(data-icon);font-style:normal;font-weight:normal;speak:none;display:inline-block}
-.sap-icon>*{padding-left:10px}
-[class^="icon-"]:before,[class*=" icon-"]:before{font-family:'SAP-icons';font-style:normal;font-weight:normal;speak:none;display:inline-block}
-.icon-accidental-leave:before{content:"\e000"}
+@font-face {
+  font-family: "SAP-icons";
+  src: url("fonts/SAP-icons.eot");
+}
+@font-face {
+  font-family: "SAP-icons";
+  src: url(fonts/SAP-icons.ttf) format('truetype'), url(fonts/SAP-icons.woff) format('woff');
+}
+[data-icon]:before, .sap-icon-font:before {
+  font-family: 'SAP-icons';
+  content: attr(data-icon);
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+}.sap-icon>*{padding-left:10px}
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: 'SAP-icons';
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+}.icon-accidental-leave:before{content:"\e000"}
 .icon-account:before{content:"\e001"}
 .icon-wrench:before{content:"\e002"}
 .icon-windows-doors:before{content:"\e003"}
@@ -793,9 +810,22 @@ ul {
 .icon-arrow-down:before{content:"\e1fe"}
 .icon-blank2:before{content:"\e1ff"}
 .icon-collapse-group:before{content:"\e200"}
-@font-face{font-family:'SAP-Jam-icons';src:url(/fonts/SAP-Jam-icons.eot?1436890228);font-weight:normal;font-style:normal}
-@font-face{font-family:"SAP-Jam-icons";src:url(/fonts/SAP-Jam-icons.ttf?1436890228) format('truetype'),url(/fonts/SAP-Jam-icons.woff?1436890228) format('woff')}
-[class^="jam-icon"]:before,[class*=" jam-icon-"]:before{font-family:'SAP-Jam-icons';font-style:normal;speak:none;display:inline-block}
+@font-face {
+  font-family: 'SAP-Jam-icons';
+  src: url("/fonts/SAP-Jam-icons.eot");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SAP-Jam-icons";
+  src: url(/fonts/SAP-Jam-icons.ttf) format('truetype'), url(/fonts/SAP-Jam-icons.woff) format('woff');
+}
+[class^="jam-icon"]:before, [class*=" jam-icon-"]:before {
+  font-family: 'SAP-Jam-icons';
+  font-style: normal;
+  speak: none;
+  display: inline-block;
+}
 .jam-icon-like:before,.inbox-item .inbox-item-footer .type-icon.social>.icon-social.Like:before{content:"\e000"}
 .jam-icon-email:before{content:"\e001"}
 .jam-icon-feed-update:before{content:"\e002"}
