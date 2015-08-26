@@ -277,11 +277,11 @@ ul {
 
 @font-face {
   font-family: "SAP-icons";
-  src: url("fonts/SAP-icons.eot");
+  src: url("http://sap-oxygen.github.io/GY/react_opensocial/react_agenda/css/fonts/SAP-Jam-icons.eot");
 }
 @font-face {
   font-family: "SAP-icons";
-  src: url("fonts/SAP-icons.ttf") format('truetype'), url("fonts/SAP-icons.woff") format('woff');
+  src: url("http://sap-oxygen.github.io/GY/react_opensocial/react_agenda/css/fonts/SAP-icons.ttf") format('truetype'), url("http://sap-oxygen.github.io/GY/react_opensocial/react_agenda/css/fonts/SAP-icons.woff") format('woff');
 }
 [data-icon]:before, .sap-icon-font:before {
   font-family: 'SAP-icons';
@@ -813,13 +813,13 @@ ul {
 .icon-collapse-group:before{content:"\e200"}
 @font-face {
   font-family: 'SAP-Jam-icons';
-  src: url("fonts/SAP-Jam-icons.eot");
+  src: url("http://sap-oxygen.github.io/GY/react_opensocial/react_agenda/css/fonts/SAP-Jam-icons.eot");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "SAP-Jam-icons";
-  src: url("fonts/SAP-Jam-icons.ttf") format('truetype'), url("fonts/SAP-Jam-icons.woff") format('woff');
+  src: url("http://sap-oxygen.github.io/GY/react_opensocial/react_agenda/css/fonts/SAP-Jam-icons.ttf") format('truetype'), url("http://sap-oxygen.github.io/GY/react_opensocial/react_agenda/css/fonts/SAP-Jam-icons.woff") format('woff');
 }
 [class^="jam-icon"]:before, [class*=" jam-icon-"]:before {
   font-family: 'SAP-Jam-icons';
