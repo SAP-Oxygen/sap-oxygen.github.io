@@ -1,8 +1,6 @@
 .PCTDefaultRowMouseOver {
   padding: 5px 0 5px 15px;
-  border-top: solid 1px #000000;
-  border-bottom: solid 1px #000000;
-  border-right: solid 1px #000000;
+  border: solid 1px #000000;
   font-weight: bold;
   height: 30px;
   width: 33%;

@@ -1,8 +1,6 @@
 .OptionData {
   padding: 8px 0 8px 15px;
-  border-top: solid 1px #000000;
-  border-bottom: solid 1px #000000;
-  border-right: solid 1px #000000;
+  border: solid 1px #000000;
   word-wrap: break-word;
   width: 40%;
   color: #0D3A5A;

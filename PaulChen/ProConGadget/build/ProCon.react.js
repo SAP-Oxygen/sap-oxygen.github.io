@@ -723,7 +723,6 @@ function init(ReactBootstrap, jQuery){
     },
 
     render: function(){
-      var Input = ReactBootstrap.Input;
       return(
         React.createElement("div", {style: {width: "800px"}, id: "ProConGadget"}, 
           React.createElement(TopicListContainer, {topicInfos: this.state.topicInfos, deleteTopicCB: this.deleteTopic, updateTopicInfoCB: this.updateTopicInfo, addTopicCB: this.addTopic})
