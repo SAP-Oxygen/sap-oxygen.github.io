@@ -129,21 +129,38 @@ function init(ReactBootstrap, jQuery){
     render: function() {
       var Modal = ReactBootstrap.Modal;
       var Button = ReactBootstrap.Button;
-      return (
-        React.createElement(Modal, {bsSize: "small", show: this.props.show, onHide: this.cancel}, 
-          React.createElement(Modal.Header, null, 
-            React.createElement(Modal.Title, null, this.props.title)
-          ), 
-          React.createElement(Modal.Body, null, 
-            React.createElement("textarea", {style: {width: "100%", resize: "none", height: "100px"}, onChange: this.contentChanged, value: this.state.content})
-          ), 
-          React.createElement(Modal.Footer, null, 
-            React.createElement(Button, {onClick: this.deleteT}, "Delete"), 
-            React.createElement(Button, {onClick: this.save}, "Save"), 
-            React.createElement(Button, {onClick: this.cancel}, "Cancel")
+      if (this.props.showDelete) {
+        return (
+          React.createElement(Modal, {bsSize: "small", show: this.props.show, onHide: this.cancel}, 
+            React.createElement(Modal.Header, null, 
+              React.createElement(Modal.Title, null, this.props.title)
+            ), 
+            React.createElement(Modal.Body, null, 
+              React.createElement("textarea", {style: {width: "100%", resize: "none", height: "100px"}, onChange: this.contentChanged, value: this.state.content})
+            ), 
+            React.createElement(Modal.Footer, null, 
+              React.createElement(Button, {onClick: this.deleteT}, "Delete"), 
+              React.createElement(Button, {onClick: this.save}, "Save"), 
+              React.createElement(Button, {onClick: this.cancel}, "Cancel")
+            )
           )
-        )
-      );
+        );
+      } else {
+        return (
+          React.createElement(Modal, {bsSize: "small", show: this.props.show, onHide: this.cancel}, 
+            React.createElement(Modal.Header, null, 
+              React.createElement(Modal.Title, null, this.props.title)
+            ), 
+            React.createElement(Modal.Body, null, 
+              React.createElement("textarea", {style: {width: "100%", resize: "none", height: "100px"}, onChange: this.contentChanged, value: this.state.content})
+            ), 
+            React.createElement(Modal.Footer, null, 
+              React.createElement(Button, {onClick: this.save}, "Save"), 
+              React.createElement(Button, {onClick: this.cancel}, "Cancel")
+            )
+          )
+        );
+      }
     }
   });
 
@@ -167,9 +184,9 @@ function init(ReactBootstrap, jQuery){
 
     render : function(){
       return (
-        React.createElement("td", {className: "OptionData", style: {cursor: "pointer"}, onClick: this.clickHandler}, 
+        React.createElement("td", {className: "OptionData", onClick: this.clickHandler}, 
           React.createElement("span", null, this.props.title), 
-          React.createElement(NewItemModal, {title: "Edit Topic", content: this.props.title, show: this.state.show, saveCB: this.updateTopic, cancelCB: this.hideModal})
+          React.createElement(EditItemModal, {title: "Edit Topic", content: this.props.title, show: this.state.show, saveCB: this.updateTopic, cancelCB: this.hideModal, showDelete: false})
         )
       );
     }
@@ -215,9 +232,11 @@ function init(ReactBootstrap, jQuery){
           React.createElement("div", {className: "ProConOption", onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler, style: {opacity: this.state.opacity}}, 
             React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
               React.createElement("tr", null, 
-                React.createElement("td", {className: "FullTextProCon", title: "Create new Pro Option"}, 
-                  React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green"}}), 
-                  React.createElement("span", {style: {top: "10px", color: "#A6A6A6", fontSize: "13px", paddingLeft: "10px"}}, "Click to add a Pro opinion")
+                React.createElement("td", {title: "Create new Pro Option", style: {width: "35px"}}, 
+                  React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green"}})
+                ), 
+                React.createElement("td", {className: "FullTextProCon"}, 
+                  React.createElement("span", {style: {top: "10px", color: "#A6A6A6", fontSize: "13px"}}, "Click to add a Pro opinion")
                 )
               )
             ), 
@@ -268,24 +287,26 @@ function init(ReactBootstrap, jQuery){
                        ));
         return (
           React.createElement(OverlayTrigger, {trigger: "hover", placement: "bottom", overlay: popover}, 
-          React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green", width: "30px"}, onClick: this.showModal}, React.createElement(EditItemModal, {title: "Edit Pro Opinion", content: this.props.proInfo.content, show: this.state.show, saveCB: this.updatePro, cancelCB: this.hideModal, deleteCB: this.deletePro}))
+          React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green", width: "30px"}, onClick: this.showModal}, React.createElement(EditItemModal, {title: "Edit Pro Opinion", content: this.props.proInfo.content, show: this.state.show, saveCB: this.updatePro, cancelCB: this.hideModal, deleteCB: this.deletePro, showDelete: true}))
           )
         );
       } else {
         return (
-          React.createElement("div", {className: "ProConOption", onClick: this.showModal, onMouseOver: this.mouseOverHandler, onMouseLeave: this.mouseLeaveHandler}, 
+          React.createElement("div", {onClick: this.showModal, onMouseOver: this.mouseOverHandler, onMouseLeave: this.mouseLeaveHandler}, 
             React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
               React.createElement("tr", {style: this.state.style}, 
-                React.createElement("td", {className: "FullTextProCon", title: "Edit Option"}, 
-                  React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green"}}), 
-                  React.createElement("span", {style: {paddingLeft: "10px"}}, this.props.proInfo.content)
+                React.createElement("td", {title: "Edit Option", style: {width: "35px"}}, 
+                  React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green", width: "30px"}})
+                ), 
+                React.createElement("td", {className: "FullTextProCon"}, 
+                  React.createElement("span", null, this.props.proInfo.content)
                 )
               ), 
               React.createElement("tr", null, 
-                React.createElement("td", {className: "FullTextUser"}, getCreatorFullName(this.props.proInfo.creatorId), ", ", distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate)))
+                React.createElement("td", null), React.createElement("td", {className: "FullTextUser"}, getCreatorFullName(this.props.proInfo.creatorId), ", ", distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate)))
               )
             ), 
-            React.createElement(EditItemModal, {title: "Edit Pro Opinion", content: this.props.proInfo.content, show: this.state.show, saveCB: this.updatePro, cancelCB: this.hideModal, deleteCB: this.deletePro})
+            React.createElement(EditItemModal, {title: "Edit Pro Opinion", content: this.props.proInfo.content, show: this.state.show, saveCB: this.updatePro, cancelCB: this.hideModal, deleteCB: this.deletePro, showDelete: true})
           )
         );
       }
@@ -380,9 +401,11 @@ function init(ReactBootstrap, jQuery){
           React.createElement("div", {onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler, style: {opacity: this.state.opacity}}, 
             React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
               React.createElement("tr", null, 
-                React.createElement("td", {className: "FullTextProCon", title: "Create new Con Option"}, 
-                  React.createElement("i", {className: "fa fa-minus fa-2x", style: {color: "Brown"}}), 
-                  React.createElement("span", {style: {color: "#A6A6A6", fontSize: "13px", paddingLeft: "10px"}}, "Click to add a Con opinion")
+                React.createElement("td", {title: "Create new Con Option", style: {width: "35px"}}, 
+                  React.createElement("i", {className: "fa fa-minus fa-2x", style: {color: "Brown"}})
+                ), 
+                React.createElement("td", {className: "FullTextProCon"}, 
+                  React.createElement("span", {style: {color: "#A6A6A6", fontSize: "13px"}}, "Click to add a Con opinion")
                 )
               )
             ), 
@@ -429,10 +452,10 @@ function init(ReactBootstrap, jQuery){
       if (this.props.isSummaryMode){
         var Popover = ReactBootstrap.Popover;
         var OverlayTrigger = ReactBootstrap.OverlayTrigger;
-        var popover = (React.createElement(Popover, {bsSize: "xsmall"}, this.props.conInfo.content));
+        var popover = (React.createElement(Popover, {bsSize: "xsmall", title: getCreatorFullName(this.props.conInfo.creatorId) + "," + distance_of_time_in_words(Date.parse(this.props.conInfo.createdDate))}, this.props.conInfo.content));
         return (React.createElement(OverlayTrigger, {trigger: "hover", placement: "bottom", overlay: popover}, 
                   React.createElement("i", {className: "fa fa-minus fa-2x", style: {color: "Brown", width: "30px"}, onClick: this.showModal}, 
-                  React.createElement(EditItemModal, {title: "Edit Con Opinion", content: this.props.conInfo.content, show: this.state.show, saveCB: this.updateCon, cancelCB: this.hideModal, deleteCB: this.deleteCon})
+                  React.createElement(EditItemModal, {title: "Edit Con Opinion", content: this.props.conInfo.content, show: this.state.show, saveCB: this.updateCon, cancelCB: this.hideModal, deleteCB: this.deleteCon, showDelete: true})
                   )
                 ));
       } else {
@@ -440,16 +463,18 @@ function init(ReactBootstrap, jQuery){
           React.createElement("div", {className: "ProConOption", onClick: this.showModal, onMouseOver: this.mouseOverHandler, onMouseLeave: this.mouseLeaveHandler}, 
             React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
               React.createElement("tr", {style: this.state.style}, 
-                React.createElement("td", {className: "FullTextProCon", title: "Edit Option"}, 
-                  React.createElement("i", {className: "fa fa-minus fa-2x", style: {color: "Brown"}}), 
-                  React.createElement("span", {style: {top: "10px", paddingLeft: "10px"}}, this.props.conInfo.content)
+                React.createElement("td", {title: "Edit Option", style: {width: "35px"}}, 
+                  React.createElement("i", {className: "fa fa-minus fa-2x", style: {color: "Brown"}})
+                ), 
+                React.createElement("td", {className: "FullTextProCon"}, 
+                  React.createElement("span", {style: {top: "10px"}}, this.props.conInfo.content)
                 )
               ), 
               React.createElement("tr", null, 
-                React.createElement("td", {className: "FullTextUser"}, getCreatorFullName(this.props.conInfo.creatorId), ", ", distance_of_time_in_words(Date.parse(this.props.conInfo.createdDate)))
+                React.createElement("td", null), React.createElement("td", {className: "FullTextUser"}, getCreatorFullName(this.props.conInfo.creatorId), ", ", distance_of_time_in_words(Date.parse(this.props.conInfo.createdDate)))
               )
             ), 
-            React.createElement(EditItemModal, {title: "Edit Con Opinion", content: this.props.conInfo.content, show: this.state.show, saveCB: this.updateCon, cancelCB: this.hideModal, deleteCB: this.deleteCon})
+            React.createElement(EditItemModal, {title: "Edit Con Opinion", content: this.props.conInfo.content, show: this.state.show, saveCB: this.updateCon, cancelCB: this.hideModal, deleteCB: this.deleteCon, showDelete: true})
           )
         );
       }
@@ -506,7 +531,7 @@ function init(ReactBootstrap, jQuery){
 
   var TopicRow = React.createClass({displayName: "TopicRow",
     getInitialState: function() {
-      return {show: false, style: {display: "none"}};
+      return {show: false, style: {visibility: "hidden"}};
     },
     
     updateTitle: function(newTitle){
@@ -532,7 +557,7 @@ function init(ReactBootstrap, jQuery){
       this.setState({style: {}});
     },
     hideTrash: function(){
-      this.setState({style: {display: "none"}});
+      this.setState({style: {visibility: "hidden"}});
     },
     render: function(){
       var Glyphicon = ReactBootstrap.Glyphicon;
@@ -724,7 +749,7 @@ function init(ReactBootstrap, jQuery){
 
     render: function(){
       return(
-        React.createElement("div", {style: {width: "800px"}, id: "ProConGadget"}, 
+        React.createElement("div", {style: {width: "800px", horizontalAlignment: "center"}, id: "ProConGadget"}, 
           React.createElement(TopicListContainer, {topicInfos: this.state.topicInfos, deleteTopicCB: this.deleteTopic, updateTopicInfoCB: this.updateTopicInfo, addTopicCB: this.addTopic})
         )
       );

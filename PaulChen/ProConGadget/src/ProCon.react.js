@@ -129,21 +129,38 @@ function init(ReactBootstrap, jQuery){
     render: function() {
       var Modal = ReactBootstrap.Modal;
       var Button = ReactBootstrap.Button;
-      return (
-        <Modal bsSize="small" show={this.props.show} onHide={this.cancel}>
-          <Modal.Header>
-            <Modal.Title>{this.props.title}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <textarea style={{width: "100%", resize: "none", height: "100px"}} onChange={this.contentChanged} value={this.state.content}/>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.deleteT}>Delete</Button>
-            <Button onClick={this.save}>Save</Button>
-            <Button onClick={this.cancel}>Cancel</Button>
-          </Modal.Footer>
-        </Modal>
-      );
+      if (this.props.showDelete) {
+        return (
+          <Modal bsSize="small" show={this.props.show} onHide={this.cancel}>
+            <Modal.Header>
+              <Modal.Title>{this.props.title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <textarea style={{width: "100%", resize: "none", height: "100px"}} onChange={this.contentChanged} value={this.state.content}/>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.deleteT}>Delete</Button>
+              <Button onClick={this.save}>Save</Button>
+              <Button onClick={this.cancel}>Cancel</Button>
+            </Modal.Footer>
+          </Modal>
+        );
+      } else {
+        return (
+          <Modal bsSize="small" show={this.props.show} onHide={this.cancel}>
+            <Modal.Header>
+              <Modal.Title>{this.props.title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <textarea style={{width: "100%", resize: "none", height: "100px"}} onChange={this.contentChanged} value={this.state.content}/>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.save}>Save</Button>
+              <Button onClick={this.cancel}>Cancel</Button>
+            </Modal.Footer>
+          </Modal>
+        );
+      }
     }
   });
 
@@ -167,9 +184,9 @@ function init(ReactBootstrap, jQuery){
 
     render : function(){
       return (
-        <td className="OptionData" style={{cursor: "pointer"}} onClick={this.clickHandler}>
+        <td className="OptionData" onClick={this.clickHandler}>
           <span>{this.props.title}</span>
-          <NewItemModal title="Edit Topic" content={this.props.title} show={this.state.show} saveCB={this.updateTopic} cancelCB={this.hideModal}/>
+          <EditItemModal title="Edit Topic" content={this.props.title} show={this.state.show} saveCB={this.updateTopic} cancelCB={this.hideModal} showDelete={false}/>
         </td>
       );
     }
@@ -215,9 +232,11 @@ function init(ReactBootstrap, jQuery){
           <div className="ProConOption" onMouseOver={this.showBtn} onMouseLeave={this.hideBtn} onClick={this.clickHandler} style={{opacity: this.state.opacity}}>
             <table  style={{width: "100%", tableLayout: "fixed"}}>
               <tr>
-                <td className="FullTextProCon" title="Create new Pro Option">
+                <td title="Create new Pro Option" style={{width: "35px"}}>
                   <i className="fa fa-plus fa-2x" style={{color: "Green"}}></i>
-                  <span style={{top: "10px", color: "#A6A6A6", fontSize: "13px", paddingLeft: "10px"}}>Click to add a Pro opinion</span>
+                </td>
+                <td className="FullTextProCon">
+                  <span style={{top: "10px", color: "#A6A6A6", fontSize: "13px"}}>Click to add a Pro opinion</span>
                 </td>
               </tr>
             </table>
@@ -268,24 +287,26 @@ function init(ReactBootstrap, jQuery){
                        </Popover>);
         return (
           <OverlayTrigger trigger='hover' placement='bottom' overlay={popover}>
-          <i className="fa fa-plus fa-2x" style={{color: "Green", width: "30px"}} onClick={this.showModal}><EditItemModal title="Edit Pro Opinion" content={this.props.proInfo.content} show={this.state.show} saveCB={this.updatePro} cancelCB={this.hideModal} deleteCB={this.deletePro}/></i>
+          <i className="fa fa-plus fa-2x" style={{color: "Green", width: "30px"}} onClick={this.showModal}><EditItemModal title="Edit Pro Opinion" content={this.props.proInfo.content} show={this.state.show} saveCB={this.updatePro} cancelCB={this.hideModal} deleteCB={this.deletePro} showDelete={true}/></i>
           </OverlayTrigger>
         );
       } else {
         return (
-          <div className="ProConOption" onClick={this.showModal} onMouseOver={this.mouseOverHandler} onMouseLeave={this.mouseLeaveHandler}>
+          <div onClick={this.showModal} onMouseOver={this.mouseOverHandler} onMouseLeave={this.mouseLeaveHandler}>
             <table  style={{width: "100%", tableLayout: "fixed"}}>
               <tr style={this.state.style}>
-                <td className='FullTextProCon' title='Edit Option'>
-                  <i className="fa fa-plus fa-2x" style={{color: "Green"}}></i>
-                  <span style={{paddingLeft: "10px"}}>{this.props.proInfo.content}</span>
+                <td title='Edit Option' style={{width: "35px"}}>
+                  <i className="fa fa-plus fa-2x" style={{color: "Green", width: "30px"}}></i>
+                </td>
+                <td className='FullTextProCon'>
+                  <span>{this.props.proInfo.content}</span>
                 </td>
               </tr>
               <tr>
-                <td className='FullTextUser'>{getCreatorFullName(this.props.proInfo.creatorId)}, {distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate))}</td>
+                <td/><td className='FullTextUser'>{getCreatorFullName(this.props.proInfo.creatorId)}, {distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate))}</td>
               </tr>
             </table>
-            <EditItemModal title="Edit Pro Opinion" content={this.props.proInfo.content} show={this.state.show} saveCB={this.updatePro} cancelCB={this.hideModal} deleteCB={this.deletePro}/>
+            <EditItemModal title="Edit Pro Opinion" content={this.props.proInfo.content} show={this.state.show} saveCB={this.updatePro} cancelCB={this.hideModal} deleteCB={this.deletePro} showDelete={true}/>
           </div>
         );
       }
@@ -380,9 +401,11 @@ function init(ReactBootstrap, jQuery){
           <div onMouseOver={this.showBtn} onMouseLeave={this.hideBtn} onClick={this.clickHandler} style={{opacity: this.state.opacity}}>
             <table style={{width: "100%", tableLayout: "fixed"}}>
               <tr>
-                <td className="FullTextProCon" title="Create new Con Option">
+                <td title="Create new Con Option" style={{width: "35px"}}>
                   <i className="fa fa-minus fa-2x" style={{color: "Brown"}}></i>
-                  <span style={{color: "#A6A6A6", fontSize: "13px", paddingLeft: "10px"}}>Click to add a Con opinion</span>
+                </td>
+                <td className="FullTextProCon">
+                  <span style={{color: "#A6A6A6", fontSize: "13px"}}>Click to add a Con opinion</span>
                 </td>
               </tr>
             </table>
@@ -429,10 +452,10 @@ function init(ReactBootstrap, jQuery){
       if (this.props.isSummaryMode){
         var Popover = ReactBootstrap.Popover;
         var OverlayTrigger = ReactBootstrap.OverlayTrigger;
-        var popover = (<Popover bsSize="xsmall">{this.props.conInfo.content}</Popover>);
+        var popover = (<Popover bsSize="xsmall" title={getCreatorFullName(this.props.conInfo.creatorId) + "," + distance_of_time_in_words(Date.parse(this.props.conInfo.createdDate))}>{this.props.conInfo.content}</Popover>);
         return (<OverlayTrigger trigger='hover' placement='bottom' overlay={popover}>
                   <i className="fa fa-minus fa-2x" style={{color: "Brown", width: "30px"}} onClick={this.showModal}>
-                  <EditItemModal title="Edit Con Opinion" content={this.props.conInfo.content} show={this.state.show} saveCB={this.updateCon} cancelCB={this.hideModal} deleteCB={this.deleteCon}/>
+                  <EditItemModal title="Edit Con Opinion" content={this.props.conInfo.content} show={this.state.show} saveCB={this.updateCon} cancelCB={this.hideModal} deleteCB={this.deleteCon} showDelete={true}/>
                   </i>
                 </OverlayTrigger>);
       } else {
@@ -440,16 +463,18 @@ function init(ReactBootstrap, jQuery){
           <div className="ProConOption" onClick={this.showModal} onMouseOver={this.mouseOverHandler} onMouseLeave={this.mouseLeaveHandler}>
             <table  style={{width: "100%", tableLayout: "fixed"}}>
               <tr style={this.state.style}>
-                <td className='FullTextProCon' title='Edit Option'>
+                <td title='Edit Option' style={{width: "35px"}}>
                   <i className="fa fa-minus fa-2x" style={{color: "Brown"}}></i>
-                  <span style={{top: "10px", paddingLeft: "10px"}}>{this.props.conInfo.content}</span>
+                </td>
+                <td className='FullTextProCon'>
+                  <span style={{top: "10px"}}>{this.props.conInfo.content}</span>
                 </td>
               </tr>
               <tr>
-                <td className='FullTextUser'>{getCreatorFullName(this.props.conInfo.creatorId)}, {distance_of_time_in_words(Date.parse(this.props.conInfo.createdDate))}</td>
+                <td/><td className='FullTextUser'>{getCreatorFullName(this.props.conInfo.creatorId)}, {distance_of_time_in_words(Date.parse(this.props.conInfo.createdDate))}</td>
               </tr>
             </table>
-            <EditItemModal title="Edit Con Opinion" content={this.props.conInfo.content} show={this.state.show} saveCB={this.updateCon} cancelCB={this.hideModal} deleteCB={this.deleteCon}/>
+            <EditItemModal title="Edit Con Opinion" content={this.props.conInfo.content} show={this.state.show} saveCB={this.updateCon} cancelCB={this.hideModal} deleteCB={this.deleteCon} showDelete={true}/>
           </div>
         );
       }
@@ -506,7 +531,7 @@ function init(ReactBootstrap, jQuery){
 
   var TopicRow = React.createClass({
     getInitialState: function() {
-      return {show: false, style: {display: "none"}};
+      return {show: false, style: {visibility: "hidden"}};
     },
     
     updateTitle: function(newTitle){
@@ -532,7 +557,7 @@ function init(ReactBootstrap, jQuery){
       this.setState({style: {}});
     },
     hideTrash: function(){
-      this.setState({style: {display: "none"}});
+      this.setState({style: {visibility: "hidden"}});
     },
     render: function(){
       var Glyphicon = ReactBootstrap.Glyphicon;
@@ -724,7 +749,7 @@ function init(ReactBootstrap, jQuery){
 
     render: function(){
       return(
-        <div style={{width: "800px"}} id="ProConGadget">
+        <div style={{width: "800px", horizontalAlignment: "center"}} id="ProConGadget">
           <TopicListContainer topicInfos={this.state.topicInfos} deleteTopicCB={this.deleteTopic} updateTopicInfoCB={this.updateTopicInfo} addTopicCB={this.addTopic}/>
         </div>
       );
