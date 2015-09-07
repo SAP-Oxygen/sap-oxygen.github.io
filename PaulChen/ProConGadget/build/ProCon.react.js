@@ -1,12 +1,12 @@
-"use strict";
+
 
 function distance_of_time_in_words(from){
     var to = new Date().getTime();
     if (to < from){
         to = from;
     }
-    seconds_ago = ((to - from)/1000);
-    minutes_ago = Math.floor(seconds_ago/60);
+    var seconds_ago = ((to - from)/1000);
+    var minutes_ago = Math.floor(seconds_ago/60);
     if (minutes_ago === 0){
         return " less than a minute";
     } else if (minutes_ago === 1){
@@ -62,7 +62,7 @@ function createProConData(content, creatorId) {
 function init(ReactBootstrap, jQuery){
   var NewItemModal = React.createClass({displayName: "NewItemModal",
     getInitialState() {
-      return {content: ""};
+      return {content: this.props.content};
     },
 
     save: function() {
@@ -160,12 +160,6 @@ function init(ReactBootstrap, jQuery){
       this.setState({show: true});
     },
 
-    deleteTopic: function(){
-      var isOk = confirm("Are you sure you want to delete Test and the related pro/con opinions?");
-      if (isOk) this.props.deleteTopicCB(this.props.id);
-      this.hideModal();
-    },
-
     updateTopic: function(newTopicTitle){
       this.props.updateTitleCB(newTopicTitle.trim());
       this.hideModal();
@@ -175,7 +169,7 @@ function init(ReactBootstrap, jQuery){
       return (
         React.createElement("td", {className: "OptionData", style: {cursor: "pointer"}, onClick: this.clickHandler}, 
           React.createElement("span", null, this.props.title), 
-          React.createElement(EditItemModal, {title: "Edit Topic", content: this.props.title, show: this.state.show, saveCB: this.updateTopic, cancelCB: this.hideModal, deleteCB: this.deleteTopic})
+          React.createElement(NewItemModal, {title: "Edit Topic", content: this.props.title, show: this.state.show, saveCB: this.updateTopic, cancelCB: this.hideModal})
         )
       );
     }
@@ -212,25 +206,31 @@ function init(ReactBootstrap, jQuery){
     },
 
     render: function(){
-      return (
-        React.createElement("div", {className: "ProConOption", onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler, style: {opacity: this.state.opacity}}, 
-          React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
-            React.createElement("tr", null, 
-              React.createElement("td", {className: "FullTextProCon", title: "Create new Pro Option"}, 
-                React.createElement("img", {className: "ProConIcon", src: "http://localhost:8000/image/pro_con_plus_icon.png"}), 
-                React.createElement("span", {style: {position: "relative", top: "10px", color: "#A6A6A6", fontSize: "13px"}}, "Click to add a Pro opinion")
+      if (this.props.isSummaryMode) {
+        return (
+          React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green", opacity: this.state.opacity}, onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler}, React.createElement(NewItemModal, {title: "Create new Pro Opinion", show: this.state.show, saveCB: this.addPro, cancelCB: this.hideModal}))
+        );
+      } else {
+        return (
+          React.createElement("div", {className: "ProConOption", onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler, style: {opacity: this.state.opacity}}, 
+            React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
+              React.createElement("tr", null, 
+                React.createElement("td", {className: "FullTextProCon", title: "Create new Pro Option"}, 
+                  React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green"}}), 
+                  React.createElement("span", {style: {top: "10px", color: "#A6A6A6", fontSize: "13px", paddingLeft: "10px"}}, "Click to add a Pro opinion")
+                )
               )
-            )
-          ), 
-          React.createElement(NewItemModal, {title: "Create new Pro Opinion", show: this.state.show, saveCB: this.addPro, cancelCB: this.hideModal})
-        )
-      );
+            ), 
+            React.createElement(NewItemModal, {title: "Create new Pro Opinion", show: this.state.show, saveCB: this.addPro, cancelCB: this.hideModal})
+          )
+        );
+      }
     }
   });
 
   var ProOption = React.createClass({displayName: "ProOption",
     getInitialState: function(){
-      return {show: false};
+      return {show: false, style: {}};
     },
 
     showModal: function(){
@@ -251,24 +251,44 @@ function init(ReactBootstrap, jQuery){
       this.props.deleteProCB(this.props.proInfo.id);
       this.setState({show: false});
     },
-
+    
+    mouseOverHandler: function(){
+      this.setState({style: {backgroundColor: "#cccccc"}});
+    },
+    
+    mouseLeaveHandler: function(){
+      this.setState({style: {}});
+    },
     render: function(){
-      return (
-        React.createElement("div", {className: "ProConOption", onClick: this.showModal}, 
-          React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
-            React.createElement("tr", null, 
-              React.createElement("td", {className: "FullTextProCon", title: "Edit Option"}, 
-                React.createElement("img", {className: "ProConIcon", src: "http://localhost:8000/image/pro_con_plus_icon.png"}), 
-                React.createElement("span", {style: {position: "relative", top: "10px"}}, this.props.proInfo.content)
+      if (this.props.isSummaryMode){
+        var Popover = ReactBootstrap.Popover;
+        var OverlayTrigger = ReactBootstrap.OverlayTrigger;
+        var popover = (React.createElement(Popover, {bsSize: "xsmall", title: getCreatorFullName(this.props.proInfo.creatorId) + "," + distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate))}, 
+                         this.props.proInfo.content
+                       ));
+        return (
+          React.createElement(OverlayTrigger, {trigger: "hover", placement: "bottom", overlay: popover}, 
+          React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green", width: "30px"}, onClick: this.showModal}, React.createElement(EditItemModal, {title: "Edit Pro Opinion", content: this.props.proInfo.content, show: this.state.show, saveCB: this.updatePro, cancelCB: this.hideModal, deleteCB: this.deletePro}))
+          )
+        );
+      } else {
+        return (
+          React.createElement("div", {className: "ProConOption", onClick: this.showModal, onMouseOver: this.mouseOverHandler, onMouseLeave: this.mouseLeaveHandler}, 
+            React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
+              React.createElement("tr", {style: this.state.style}, 
+                React.createElement("td", {className: "FullTextProCon", title: "Edit Option"}, 
+                  React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green"}}), 
+                  React.createElement("span", {style: {paddingLeft: "10px"}}, this.props.proInfo.content)
+                )
+              ), 
+              React.createElement("tr", null, 
+                React.createElement("td", {className: "FullTextUser"}, getCreatorFullName(this.props.proInfo.creatorId), ", ", distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate)))
               )
             ), 
-            React.createElement("tr", null, 
-              React.createElement("td", {className: "FullTextUser"}, getCreatorFullName(this.props.proInfo.creatorId), ", ", distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate)))
-            )
-          ), 
-          React.createElement(EditItemModal, {title: "Edit Pro Opinion", content: this.props.proInfo.content, show: this.state.show, saveCB: this.updatePro, cancelCB: this.hideModal, deleteCB: this.deletePro})
-        )
-      );
+            React.createElement(EditItemModal, {title: "Edit Pro Opinion", content: this.props.proInfo.content, show: this.state.show, saveCB: this.updatePro, cancelCB: this.hideModal, deleteCB: this.deletePro})
+          )
+        );
+      }
     }
   });
 
@@ -305,14 +325,15 @@ function init(ReactBootstrap, jQuery){
     render: function(){
       var updateProCB = this.updatePro;
       var deleteProCB = this.deletePro;
+      var isSummaryMode  = this.props.isSummaryMode;
       return (
         React.createElement("td", {className: "ProConData"}, 
           
             this.props.proInfos.map(function(proInfo){
-              return React.createElement(ProOption, {key: proInfo.id, proInfo: proInfo, updateProCB: updateProCB, deleteProCB: deleteProCB})
+              return React.createElement(ProOption, {isSummaryMode: isSummaryMode, key: proInfo.id, proInfo: proInfo, updateProCB: updateProCB, deleteProCB: deleteProCB})
             }), 
           
-          React.createElement(AddProBtn, {addProCB: this.addPro})
+          React.createElement(AddProBtn, {isSummaryMode: isSummaryMode, addProCB: this.addPro})
         )
       );
     }
@@ -350,25 +371,31 @@ function init(ReactBootstrap, jQuery){
     },
 
     render: function(){
-      return (
-        React.createElement("div", {onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler, style: {opacity: this.state.opacity}}, 
-          React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
-            React.createElement("tr", null, 
-              React.createElement("td", {className: "FullTextProCon", title: "Create new Con Option"}, 
-                React.createElement("img", {className: "ProConIcon", src: "http://localhost:8000/image/pro_con_x_icon.png"}), 
-                React.createElement("span", {style: {position: "relative", top: "10px", color: "#A6A6A6", fontSize: "13px"}}, "Click to add a Con opinion")
+      if (this.props.isSummaryMode){
+        return (React.createElement("i", {className: "fa fa-minus fa-2x", style: {color: "Brown", opacity: this.state.opacity}, onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler}, 
+                  React.createElement(NewItemModal, {title: "Create new Con Opinion", show: this.state.show, saveCB: this.addCon, cancelCB: this.hideModal})
+                ));
+      } else {
+        return (
+          React.createElement("div", {onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler, style: {opacity: this.state.opacity}}, 
+            React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
+              React.createElement("tr", null, 
+                React.createElement("td", {className: "FullTextProCon", title: "Create new Con Option"}, 
+                  React.createElement("i", {className: "fa fa-minus fa-2x", style: {color: "Brown"}}), 
+                  React.createElement("span", {style: {color: "#A6A6A6", fontSize: "13px", paddingLeft: "10px"}}, "Click to add a Con opinion")
+                )
               )
-            )
-          ), 
-          React.createElement(NewItemModal, {title: "Create new Con Opinion", show: this.state.show, saveCB: this.addCon, cancelCB: this.hideModal})
-        )
-      );
+            ), 
+            React.createElement(NewItemModal, {title: "Create new Con Opinion", show: this.state.show, saveCB: this.addCon, cancelCB: this.hideModal})
+          )
+        );
+      }
     }
   });
 
   var ConOption = React.createClass({displayName: "ConOption",
     getInitialState: function(){
-      return {show: false};
+      return {show: false, style: {}};
     },
 
     showModal: function(){
@@ -389,24 +416,43 @@ function init(ReactBootstrap, jQuery){
       this.props.deleteConCB(this.props.conInfo.id);
       this.setState({show: false});
     },
+    
+    mouseOverHandler: function(){
+      this.setState({style: {backgroundColor: "#cccccc"}});
+    },
+    
+    mouseLeaveHandler: function(){
+      this.setState({style: {}});
+    },
 
     render: function(){
-      return (
-        React.createElement("div", {className: "ProConOption", onClick: this.showModal}, 
-          React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
-            React.createElement("tr", null, 
-              React.createElement("td", {className: "FullTextProCon", title: "Edit Option"}, 
-                React.createElement("img", {className: "ProConIcon", src: "http://localhost:8000/image/pro_con_x_icon.png"}), 
-                React.createElement("span", {style: {position: "relative", top: "10px"}}, this.props.conInfo.content)
+      if (this.props.isSummaryMode){
+        var Popover = ReactBootstrap.Popover;
+        var OverlayTrigger = ReactBootstrap.OverlayTrigger;
+        var popover = (React.createElement(Popover, {bsSize: "xsmall"}, this.props.conInfo.content));
+        return (React.createElement(OverlayTrigger, {trigger: "hover", placement: "bottom", overlay: popover}, 
+                  React.createElement("i", {className: "fa fa-minus fa-2x", style: {color: "Brown", width: "30px"}, onClick: this.showModal}, 
+                  React.createElement(EditItemModal, {title: "Edit Con Opinion", content: this.props.conInfo.content, show: this.state.show, saveCB: this.updateCon, cancelCB: this.hideModal, deleteCB: this.deleteCon})
+                  )
+                ));
+      } else {
+        return (
+          React.createElement("div", {className: "ProConOption", onClick: this.showModal, onMouseOver: this.mouseOverHandler, onMouseLeave: this.mouseLeaveHandler}, 
+            React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
+              React.createElement("tr", {style: this.state.style}, 
+                React.createElement("td", {className: "FullTextProCon", title: "Edit Option"}, 
+                  React.createElement("i", {className: "fa fa-minus fa-2x", style: {color: "Brown"}}), 
+                  React.createElement("span", {style: {top: "10px", paddingLeft: "10px"}}, this.props.conInfo.content)
+                )
+              ), 
+              React.createElement("tr", null, 
+                React.createElement("td", {className: "FullTextUser"}, getCreatorFullName(this.props.conInfo.creatorId), ", ", distance_of_time_in_words(Date.parse(this.props.conInfo.createdDate)))
               )
             ), 
-            React.createElement("tr", null, 
-              React.createElement("td", {className: "FullTextUser"}, getCreatorFullName(this.props.conInfo.creatorId), ", ", distance_of_time_in_words(Date.parse(this.props.conInfo.createdDate)))
-            )
-          ), 
-          React.createElement(EditItemModal, {title: "Edit Con Opinion", content: this.props.conInfo.content, show: this.state.show, saveCB: this.updateCon, cancelCB: this.hideModal, deleteCB: this.deleteCon})
-        )
-      );
+            React.createElement(EditItemModal, {title: "Edit Con Opinion", content: this.props.conInfo.content, show: this.state.show, saveCB: this.updateCon, cancelCB: this.hideModal, deleteCB: this.deleteCon})
+          )
+        );
+      }
     }
   });
 
@@ -444,24 +490,33 @@ function init(ReactBootstrap, jQuery){
     render: function(){
       var updateConCB = this.updateCon;
       var deleteConCB = this.deleteCon;
+      var isSummaryMode = this.props.isSummaryMode;
       return (
         React.createElement("td", {className: "ProConData"}, 
           
             this.props.conInfos.map(function(conInfo){
-              return React.createElement(ConOption, {key: conInfo.id, conInfo: conInfo, updateConCB: updateConCB, deleteConCB: deleteConCB})
+              return React.createElement(ConOption, {key: conInfo.id, isSummaryMode: isSummaryMode, conInfo: conInfo, updateConCB: updateConCB, deleteConCB: deleteConCB})
             }), 
           
-          React.createElement(AddConBtn, {addConCB: this.addCon})
+          React.createElement(AddConBtn, {isSummaryMode: isSummaryMode, addConCB: this.addCon})
         )
       );
     }
   });
 
   var TopicRow = React.createClass({displayName: "TopicRow",
+    getInitialState: function() {
+      return {show: false, style: {display: "none"}};
+    },
+    
     updateTitle: function(newTitle){
       var topicInfo = this.props.topicInfo;
       topicInfo.title = newTitle;
       this.props.updateTopicInfoCB(this.props.topicInfo.id, topicInfo);
+    },
+    deleteTopic: function(){
+      var isOk = confirm("Are you sure you want to delete this topic and related pro/con opinions?");
+      if (isOk) this.props.deleteTopicCB(this.props.topicInfo.id);
     },
     updatePros: function(proInfos){
       var topicInfo = this.props.topicInfo;
@@ -473,60 +528,127 @@ function init(ReactBootstrap, jQuery){
       topicInfo.conInfos = conInfos;
       this.props.updateTopicInfoCB(this.props.topicInfo.id, topicInfo);
     },
+    showTrash: function(){
+      this.setState({style: {}});
+    },
+    hideTrash: function(){
+      this.setState({style: {display: "none"}});
+    },
     render: function(){
-      return (React.createElement("tr", null, 
-                React.createElement(TitleColumn, {title: this.props.topicInfo.title, deleteTopicCB: this.props.deleteTopicCB, updateTitleCB: this.updateTitle, id: this.props.topicInfo.id}), 
-                React.createElement(ProColumn, {proInfos: this.props.topicInfo.proInfos, updateProsCB: this.updatePros}), 
-                React.createElement(ConColumn, {conInfos: this.props.topicInfo.conInfos, updateConsCB: this.updateCons})
-              ));
+      var Glyphicon = ReactBootstrap.Glyphicon;
+      return (
+        React.createElement("tr", {onMouseEnter: this.showTrash, onMouseLeave: this.hideTrash}, 
+          React.createElement(TitleColumn, {title: this.props.topicInfo.title, deleteTopicCB: this.props.deleteTopicCB, updateTitleCB: this.updateTitle, id: this.props.topicInfo.id}), 
+          React.createElement(ProColumn, {proInfos: this.props.topicInfo.proInfos, isSummaryMode: this.props.isSummaryMode, updateProsCB: this.updatePros}), 
+          React.createElement(ConColumn, {conInfos: this.props.topicInfo.conInfos, isSummaryMode: this.props.isSummaryMode, updateConsCB: this.updateCons}), 
+          React.createElement("td", {style: {border: "none", paddingLeft: "10px", cursor: "pointer"}, onClick: this.deleteTopic}, React.createElement(Glyphicon, {glyph: "trash", style: this.state.style}))
+        ));
     }
   });
 
   var TopicList = React.createClass({displayName: "TopicList",
+    getInitialState: function() {
+      return {defaultRowClass: "PCTDefaultRow"};
+    },
+    
+    darkens: function() {
+      this.setState({defaultRowClass: "PCTDefaultRowMouseOver"});
+    },
+    
+    un_darkens: function() {
+      this.setState({defaultRowClass: "PCTDefaultRow"});
+    },
+    
     render: function(){
       var deleteTopicCB = this.props.deleteTopicCB;
       var updateTopicInfoCB = this.props.updateTopicInfoCB;
-      var style = {height: "37px"};
+      var defaultRowStyle = {height: "37px"};
+      var isSummaryMode = this.props.isSummaryMode;
       if (this.props.topicInfos != null && this.props.topicInfos.length != 0){
-        style["display"] = "none";
+        defaultRowStyle["display"] = "none";
       }
 
       return (React.createElement("tbody", null, 
-                React.createElement("tr", {style: style}, React.createElement("td", {className: "ProConDataNoCursor"}), React.createElement("td", {className: "ProConDataNoCursor"}), React.createElement("td", {className: "ProConDataNoCursor"})), 
+                React.createElement("tr", {style: defaultRowStyle}, 
+                  React.createElement("td", {className: this.state.defaultRowClass, colSpan: "3", onMouseOver: this.darkens, onMouseLeave: this.un_darkens, onClick: this.props.addTopicCB}, "Click to add item"), 
+                  React.createElement("td", null)
+                ), 
                 
                   this.props.topicInfos != null && this.props.topicInfos.map(function(topicInfo){
-                    return React.createElement(TopicRow, {key: topicInfo.id, topicInfo: topicInfo, deleteTopicCB: deleteTopicCB, updateTopicInfoCB: updateTopicInfoCB})
+                    return React.createElement(TopicRow, {key: topicInfo.id, topicInfo: topicInfo, isSummaryMode: isSummaryMode, deleteTopicCB: deleteTopicCB, updateTopicInfoCB: updateTopicInfoCB})
                   })
                 
-              ));
+              )
+              );
     }
   });
 
   var TopicListContainer = React.createClass({displayName: "TopicListContainer",
+    getInitialState: function() {
+      return {show: false, isSummaryMode: false};
+    },
+    
+    getIconClass: function()
+    {
+      if (this.state.isSummaryMode) {
+        return "fa fa-lg fa-angle-double-right";
+      } else {
+        return "fa fa-lg fa-angle-double-down";
+      }
+    },
+    
+    changeMode: function(){
+      this.setState({isSummaryMode: !this.state.isSummaryMode});
+    },
+    
+    addTopic: function(content) {
+      this.props.addTopicCB(content);
+      this.setState({show: false});
+    },
+    
+    hideModal: function() {
+      this.setState({show: false});
+    },
+    showModal: function() {
+      this.setState({show: true});
+    },
+    
     componentDidMount: function() {
       adjustHeight();
     },
+    
     componentDidUpdate: function() {
       adjustHeight();
     },
+    
+    addTopicBtnStyle: function(){
+      if (this.props.topicInfos.length == 0){
+        return {display: "none"};
+      } else {
+        return {paddingTop: "10px"};
+      }
+    },
+    
     render: function(){
+      var Button = ReactBootstrap.Button;
+      var Glyphicon = ReactBootstrap.Glyphicon;
       return (
-        React.createElement("div", {style: {width: "850px"}}, 
+        React.createElement("div", {style: {width: "100%"}}, 
           React.createElement("table", {className: "PCTDataTable"}, 
             React.createElement("thead", null, 
               React.createElement("tr", null, 
-                React.createElement("td", {className: "PCTHead"}, "Topic"), 
-                React.createElement("td", {className: "PCTHead"}, "Pro"), 
-                React.createElement("td", {className: "PCTHead"}, "Con")
+                React.createElement("td", {className: "PCTHead", style: {width: "30%", paddingLeft: "5px"}}, React.createElement("i", {className: this.getIconClass(), style: {width: "20px", cursor: "Pointer"}, onClick: this.changeMode}), "Topic"), 
+                React.createElement("td", {className: "PCTHead", style: {width: "30%"}}, "Pro"), 
+                React.createElement("td", {className: "PCTHead", style: {width: "30%"}}, "Con"), 
+                React.createElement("td", {className: "PCTHead", style: {width: "10%", display: "none"}}, "PLACEHOLDER")
               )
             ), 
             React.createElement("tbody", null, 
-              React.createElement(TopicList, {topicInfos: this.props.topicInfos, deleteTopicCB: this.props.deleteTopicCB, updateTopicInfoCB: this.props.updateTopicInfoCB})
-            ), 
-            React.createElement("tfoot", null, 
-              React.createElement("tr", null, React.createElement("td", {className: "PCTFoot", colSpan: "3"}))
+              React.createElement(TopicList, {topicInfos: this.props.topicInfos, isSummaryMode: this.state.isSummaryMode, deleteTopicCB: this.props.deleteTopicCB, updateTopicInfoCB: this.props.updateTopicInfoCB, addTopicCB: this.showModal})
             )
-          )
+          ), 
+          React.createElement("div", {style: this.addTopicBtnStyle()}, React.createElement(Button, {type: "button", onClick: this.showModal}, React.createElement(Glyphicon, {glyph: "plus"}), "Add Topic")), 
+          React.createElement(NewItemModal, {title: "Add new Topic", show: this.state.show, saveCB: this.addTopic, cancelCB: this.hideModal})
         )
       );
     }
@@ -542,29 +664,19 @@ function init(ReactBootstrap, jQuery){
     },
 
     getInitialState: function() {
-      return {newTopicContent: "", topicInfos: []};
+      return {topicInfos: []};
     },
 
     createTopicData: function(title) {
       return {title: title, id: guid(), proInfos: [], conInfos: []};
     },
 
-    addTopicBtnClicked: function(){
-      var newTopicContent = this.state.newTopicContent.trim();
-      if (newTopicContent == ""){
-        this.setState({newTopicContent: ""});
-        return;
-      }
+    addTopic: function(content){
       var topicInfos = this.state.topicInfos;
       if (topicInfos == null) topicInfos = [];
-      var topicInfo = this.createTopicData(newTopicContent);
+      var topicInfo = this.createTopicData(content);
       topicInfos.push(topicInfo);
       this.updateWaveData(topicInfos);
-      this.setState({newTopicContent: ""});
-    },
-
-    titleInputChanged: function(e){
-      this.setState({newTopicContent: e.target.value});
     },
 
     deleteTopic: function(topicId){
@@ -610,32 +722,11 @@ function init(ReactBootstrap, jQuery){
       }
     },
 
-    validationState: function(){
-      var newTopicContent = this.state.newTopicContent.trim();
-      if (newTopicContent != "") {
-        return 'success';
-      } else {
-        return 'warning';
-      }
-    },
-
-    isBtnDisable: function(){
-      var newTopicContent = this.state.newTopicContent.trim();
-      if (newTopicContent != "") {
-        return false;
-      } else {
-        return true;
-      }
-    },
-
     render: function(){
       var Input = ReactBootstrap.Input;
-      var Button = ReactBootstrap.Button;
-      var innerBtn = React.createElement(Button, {onClick: this.addTopicBtnClicked, disabled: this.isBtnDisable()}, "Add Topic");
       return(
-        React.createElement("div", {style: {width: "850px"}, id: "ProConGadget"}, 
-          React.createElement(Input, {type: "text", value: this.state.newTopicContent, onChange: this.titleInputChanged, bsStyle: this.validationState(), buttonAfter: innerBtn}), 
-          React.createElement(TopicListContainer, {topicInfos: this.state.topicInfos, deleteTopicCB: this.deleteTopic, updateTopicInfoCB: this.updateTopicInfo})
+        React.createElement("div", {style: {width: "800px"}, id: "ProConGadget"}, 
+          React.createElement(TopicListContainer, {topicInfos: this.state.topicInfos, deleteTopicCB: this.deleteTopic, updateTopicInfoCB: this.updateTopicInfo, addTopicCB: this.addTopic})
         )
       );
     }

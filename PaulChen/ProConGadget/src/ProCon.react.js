@@ -1,12 +1,12 @@
-"use strict";
+
 
 function distance_of_time_in_words(from){
     var to = new Date().getTime();
     if (to < from){
         to = from;
     }
-    seconds_ago = ((to - from)/1000);
-    minutes_ago = Math.floor(seconds_ago/60);
+    var seconds_ago = ((to - from)/1000);
+    var minutes_ago = Math.floor(seconds_ago/60);
     if (minutes_ago === 0){
         return " less than a minute";
     } else if (minutes_ago === 1){
@@ -62,7 +62,7 @@ function createProConData(content, creatorId) {
 function init(ReactBootstrap, jQuery){
   var NewItemModal = React.createClass({
     getInitialState() {
-      return {content: ""};
+      return {content: this.props.content};
     },
 
     save: function() {
@@ -160,12 +160,6 @@ function init(ReactBootstrap, jQuery){
       this.setState({show: true});
     },
 
-    deleteTopic: function(){
-      var isOk = confirm("Are you sure you want to delete Test and the related pro/con opinions?");
-      if (isOk) this.props.deleteTopicCB(this.props.id);
-      this.hideModal();
-    },
-
     updateTopic: function(newTopicTitle){
       this.props.updateTitleCB(newTopicTitle.trim());
       this.hideModal();
@@ -175,7 +169,7 @@ function init(ReactBootstrap, jQuery){
       return (
         <td className="OptionData" style={{cursor: "pointer"}} onClick={this.clickHandler}>
           <span>{this.props.title}</span>
-          <EditItemModal title="Edit Topic" content={this.props.title} show={this.state.show} saveCB={this.updateTopic} cancelCB={this.hideModal} deleteCB={this.deleteTopic}/>
+          <NewItemModal title="Edit Topic" content={this.props.title} show={this.state.show} saveCB={this.updateTopic} cancelCB={this.hideModal}/>
         </td>
       );
     }
@@ -212,25 +206,31 @@ function init(ReactBootstrap, jQuery){
     },
 
     render: function(){
-      return (
-        <div className="ProConOption" onMouseOver={this.showBtn} onMouseLeave={this.hideBtn} onClick={this.clickHandler} style={{opacity: this.state.opacity}}>
-          <table  style={{width: "100%", tableLayout: "fixed"}}>
-            <tr>
-              <td className="FullTextProCon" title="Create new Pro Option">
-                <img className="ProConIcon" src="http://localhost:8000/image/pro_con_plus_icon.png" />
-                <span style={{position: "relative", top: "10px", color: "#A6A6A6", fontSize: "13px"}}>Click to add a Pro opinion</span>
-              </td>
-            </tr>
-          </table>
-          <NewItemModal title="Create new Pro Opinion" show={this.state.show} saveCB={this.addPro} cancelCB={this.hideModal}/>
-        </div>
-      );
+      if (this.props.isSummaryMode) {
+        return (
+          <i className="fa fa-plus fa-2x" style={{color: "Green", opacity: this.state.opacity}} onMouseOver={this.showBtn} onMouseLeave={this.hideBtn} onClick={this.clickHandler}><NewItemModal title="Create new Pro Opinion" show={this.state.show} saveCB={this.addPro} cancelCB={this.hideModal}/></i>
+        );
+      } else {
+        return (
+          <div className="ProConOption" onMouseOver={this.showBtn} onMouseLeave={this.hideBtn} onClick={this.clickHandler} style={{opacity: this.state.opacity}}>
+            <table  style={{width: "100%", tableLayout: "fixed"}}>
+              <tr>
+                <td className="FullTextProCon" title="Create new Pro Option">
+                  <i className="fa fa-plus fa-2x" style={{color: "Green"}}></i>
+                  <span style={{top: "10px", color: "#A6A6A6", fontSize: "13px", paddingLeft: "10px"}}>Click to add a Pro opinion</span>
+                </td>
+              </tr>
+            </table>
+            <NewItemModal title="Create new Pro Opinion" show={this.state.show} saveCB={this.addPro} cancelCB={this.hideModal}/>
+          </div>
+        );
+      }
     }
   });
 
   var ProOption = React.createClass({
     getInitialState: function(){
-      return {show: false};
+      return {show: false, style: {}};
     },
 
     showModal: function(){
@@ -251,24 +251,44 @@ function init(ReactBootstrap, jQuery){
       this.props.deleteProCB(this.props.proInfo.id);
       this.setState({show: false});
     },
-
+    
+    mouseOverHandler: function(){
+      this.setState({style: {backgroundColor: "#cccccc"}});
+    },
+    
+    mouseLeaveHandler: function(){
+      this.setState({style: {}});
+    },
     render: function(){
-      return (
-        <div className="ProConOption" onClick={this.showModal}>
-          <table  style={{width: "100%", tableLayout: "fixed"}}>
-            <tr>
-              <td className='FullTextProCon' title='Edit Option'>
-                <img className='ProConIcon' src="http://localhost:8000/image/pro_con_plus_icon.png"/>
-                <span style={{position: "relative", top: "10px"}}>{this.props.proInfo.content}</span>
-              </td>
-            </tr>
-            <tr>
-              <td className='FullTextUser'>{getCreatorFullName(this.props.proInfo.creatorId)}, {distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate))}</td>
-            </tr>
-          </table>
-          <EditItemModal title="Edit Pro Opinion" content={this.props.proInfo.content} show={this.state.show} saveCB={this.updatePro} cancelCB={this.hideModal} deleteCB={this.deletePro}/>
-        </div>
-      );
+      if (this.props.isSummaryMode){
+        var Popover = ReactBootstrap.Popover;
+        var OverlayTrigger = ReactBootstrap.OverlayTrigger;
+        var popover = (<Popover bsSize="xsmall" title={getCreatorFullName(this.props.proInfo.creatorId) + "," + distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate))}>
+                         {this.props.proInfo.content}
+                       </Popover>);
+        return (
+          <OverlayTrigger trigger='hover' placement='bottom' overlay={popover}>
+          <i className="fa fa-plus fa-2x" style={{color: "Green", width: "30px"}} onClick={this.showModal}><EditItemModal title="Edit Pro Opinion" content={this.props.proInfo.content} show={this.state.show} saveCB={this.updatePro} cancelCB={this.hideModal} deleteCB={this.deletePro}/></i>
+          </OverlayTrigger>
+        );
+      } else {
+        return (
+          <div className="ProConOption" onClick={this.showModal} onMouseOver={this.mouseOverHandler} onMouseLeave={this.mouseLeaveHandler}>
+            <table  style={{width: "100%", tableLayout: "fixed"}}>
+              <tr style={this.state.style}>
+                <td className='FullTextProCon' title='Edit Option'>
+                  <i className="fa fa-plus fa-2x" style={{color: "Green"}}></i>
+                  <span style={{paddingLeft: "10px"}}>{this.props.proInfo.content}</span>
+                </td>
+              </tr>
+              <tr>
+                <td className='FullTextUser'>{getCreatorFullName(this.props.proInfo.creatorId)}, {distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate))}</td>
+              </tr>
+            </table>
+            <EditItemModal title="Edit Pro Opinion" content={this.props.proInfo.content} show={this.state.show} saveCB={this.updatePro} cancelCB={this.hideModal} deleteCB={this.deletePro}/>
+          </div>
+        );
+      }
     }
   });
 
@@ -305,14 +325,15 @@ function init(ReactBootstrap, jQuery){
     render: function(){
       var updateProCB = this.updatePro;
       var deleteProCB = this.deletePro;
+      var isSummaryMode  = this.props.isSummaryMode;
       return (
         <td className="ProConData">
           {
             this.props.proInfos.map(function(proInfo){
-              return <ProOption key={proInfo.id} proInfo={proInfo} updateProCB={updateProCB} deleteProCB={deleteProCB}/>
+              return <ProOption isSummaryMode={isSummaryMode} key={proInfo.id} proInfo={proInfo} updateProCB={updateProCB} deleteProCB={deleteProCB}/>
             })
           }
-          <AddProBtn addProCB={this.addPro}/>
+          <AddProBtn  isSummaryMode={isSummaryMode} addProCB={this.addPro}/>
         </td>
       );
     }
@@ -350,25 +371,31 @@ function init(ReactBootstrap, jQuery){
     },
 
     render: function(){
-      return (
-        <div onMouseOver={this.showBtn} onMouseLeave={this.hideBtn} onClick={this.clickHandler} style={{opacity: this.state.opacity}}>
-          <table style={{width: "100%", tableLayout: "fixed"}}>
-            <tr>
-              <td className="FullTextProCon" title="Create new Con Option">
-                <img className="ProConIcon" src="http://localhost:8000/image/pro_con_x_icon.png" />
-                <span style={{position: "relative", top: "10px", color: "#A6A6A6", fontSize: "13px"}}>Click to add a Con opinion</span>
-              </td>
-            </tr>
-          </table>
-          <NewItemModal title="Create new Con Opinion" show={this.state.show} saveCB={this.addCon} cancelCB={this.hideModal}/>
-        </div>
-      );
+      if (this.props.isSummaryMode){
+        return (<i className="fa fa-minus fa-2x" style={{color: "Brown", opacity: this.state.opacity}} onMouseOver={this.showBtn} onMouseLeave={this.hideBtn} onClick={this.clickHandler}>
+                  <NewItemModal title="Create new Con Opinion" show={this.state.show} saveCB={this.addCon} cancelCB={this.hideModal}/>
+                </i>);
+      } else {
+        return (
+          <div onMouseOver={this.showBtn} onMouseLeave={this.hideBtn} onClick={this.clickHandler} style={{opacity: this.state.opacity}}>
+            <table style={{width: "100%", tableLayout: "fixed"}}>
+              <tr>
+                <td className="FullTextProCon" title="Create new Con Option">
+                  <i className="fa fa-minus fa-2x" style={{color: "Brown"}}></i>
+                  <span style={{color: "#A6A6A6", fontSize: "13px", paddingLeft: "10px"}}>Click to add a Con opinion</span>
+                </td>
+              </tr>
+            </table>
+            <NewItemModal title="Create new Con Opinion" show={this.state.show} saveCB={this.addCon} cancelCB={this.hideModal}/>
+          </div>
+        );
+      }
     }
   });
 
   var ConOption = React.createClass({
     getInitialState: function(){
-      return {show: false};
+      return {show: false, style: {}};
     },
 
     showModal: function(){
@@ -389,24 +416,43 @@ function init(ReactBootstrap, jQuery){
       this.props.deleteConCB(this.props.conInfo.id);
       this.setState({show: false});
     },
+    
+    mouseOverHandler: function(){
+      this.setState({style: {backgroundColor: "#cccccc"}});
+    },
+    
+    mouseLeaveHandler: function(){
+      this.setState({style: {}});
+    },
 
     render: function(){
-      return (
-        <div className="ProConOption" onClick={this.showModal}>
-          <table  style={{width: "100%", tableLayout: "fixed"}}>
-            <tr>
-              <td className='FullTextProCon' title='Edit Option'>
-                <img className='ProConIcon' src="http://localhost:8000/image/pro_con_x_icon.png"/>
-                <span style={{position: "relative", top: "10px"}}>{this.props.conInfo.content}</span>
-              </td>
-            </tr>
-            <tr>
-              <td className='FullTextUser'>{getCreatorFullName(this.props.conInfo.creatorId)}, {distance_of_time_in_words(Date.parse(this.props.conInfo.createdDate))}</td>
-            </tr>
-          </table>
-          <EditItemModal title="Edit Con Opinion" content={this.props.conInfo.content} show={this.state.show} saveCB={this.updateCon} cancelCB={this.hideModal} deleteCB={this.deleteCon}/>
-        </div>
-      );
+      if (this.props.isSummaryMode){
+        var Popover = ReactBootstrap.Popover;
+        var OverlayTrigger = ReactBootstrap.OverlayTrigger;
+        var popover = (<Popover bsSize="xsmall">{this.props.conInfo.content}</Popover>);
+        return (<OverlayTrigger trigger='hover' placement='bottom' overlay={popover}>
+                  <i className="fa fa-minus fa-2x" style={{color: "Brown", width: "30px"}} onClick={this.showModal}>
+                  <EditItemModal title="Edit Con Opinion" content={this.props.conInfo.content} show={this.state.show} saveCB={this.updateCon} cancelCB={this.hideModal} deleteCB={this.deleteCon}/>
+                  </i>
+                </OverlayTrigger>);
+      } else {
+        return (
+          <div className="ProConOption" onClick={this.showModal} onMouseOver={this.mouseOverHandler} onMouseLeave={this.mouseLeaveHandler}>
+            <table  style={{width: "100%", tableLayout: "fixed"}}>
+              <tr style={this.state.style}>
+                <td className='FullTextProCon' title='Edit Option'>
+                  <i className="fa fa-minus fa-2x" style={{color: "Brown"}}></i>
+                  <span style={{top: "10px", paddingLeft: "10px"}}>{this.props.conInfo.content}</span>
+                </td>
+              </tr>
+              <tr>
+                <td className='FullTextUser'>{getCreatorFullName(this.props.conInfo.creatorId)}, {distance_of_time_in_words(Date.parse(this.props.conInfo.createdDate))}</td>
+              </tr>
+            </table>
+            <EditItemModal title="Edit Con Opinion" content={this.props.conInfo.content} show={this.state.show} saveCB={this.updateCon} cancelCB={this.hideModal} deleteCB={this.deleteCon}/>
+          </div>
+        );
+      }
     }
   });
 
@@ -444,24 +490,33 @@ function init(ReactBootstrap, jQuery){
     render: function(){
       var updateConCB = this.updateCon;
       var deleteConCB = this.deleteCon;
+      var isSummaryMode = this.props.isSummaryMode;
       return (
         <td className="ProConData">
           {
             this.props.conInfos.map(function(conInfo){
-              return <ConOption key={conInfo.id} conInfo={conInfo} updateConCB={updateConCB} deleteConCB={deleteConCB}/>
+              return <ConOption key={conInfo.id} isSummaryMode={isSummaryMode} conInfo={conInfo} updateConCB={updateConCB} deleteConCB={deleteConCB}/>
             })
           }
-          <AddConBtn addConCB={this.addCon}/>
+          <AddConBtn isSummaryMode={isSummaryMode} addConCB={this.addCon}/>
         </td>
       );
     }
   });
 
   var TopicRow = React.createClass({
+    getInitialState: function() {
+      return {show: false, style: {display: "none"}};
+    },
+    
     updateTitle: function(newTitle){
       var topicInfo = this.props.topicInfo;
       topicInfo.title = newTitle;
       this.props.updateTopicInfoCB(this.props.topicInfo.id, topicInfo);
+    },
+    deleteTopic: function(){
+      var isOk = confirm("Are you sure you want to delete this topic and related pro/con opinions?");
+      if (isOk) this.props.deleteTopicCB(this.props.topicInfo.id);
     },
     updatePros: function(proInfos){
       var topicInfo = this.props.topicInfo;
@@ -473,60 +528,127 @@ function init(ReactBootstrap, jQuery){
       topicInfo.conInfos = conInfos;
       this.props.updateTopicInfoCB(this.props.topicInfo.id, topicInfo);
     },
+    showTrash: function(){
+      this.setState({style: {}});
+    },
+    hideTrash: function(){
+      this.setState({style: {display: "none"}});
+    },
     render: function(){
-      return (<tr>
-                <TitleColumn title={this.props.topicInfo.title} deleteTopicCB={this.props.deleteTopicCB} updateTitleCB={this.updateTitle} id={this.props.topicInfo.id}/>
-                <ProColumn proInfos={this.props.topicInfo.proInfos} updateProsCB={this.updatePros} />
-                <ConColumn conInfos={this.props.topicInfo.conInfos} updateConsCB={this.updateCons}/>
-              </tr>);
+      var Glyphicon = ReactBootstrap.Glyphicon;
+      return (
+        <tr onMouseEnter={this.showTrash} onMouseLeave={this.hideTrash}>
+          <TitleColumn title={this.props.topicInfo.title} deleteTopicCB={this.props.deleteTopicCB} updateTitleCB={this.updateTitle} id={this.props.topicInfo.id} />
+          <ProColumn proInfos={this.props.topicInfo.proInfos} isSummaryMode={this.props.isSummaryMode} updateProsCB={this.updatePros} />
+          <ConColumn conInfos={this.props.topicInfo.conInfos} isSummaryMode={this.props.isSummaryMode} updateConsCB={this.updateCons} />
+          <td style={{border: "none", paddingLeft: "10px", cursor: "pointer"}} onClick={this.deleteTopic}><Glyphicon glyph='trash' style={this.state.style}/></td>
+        </tr>);
     }
   });
 
   var TopicList = React.createClass({
+    getInitialState: function() {
+      return {defaultRowClass: "PCTDefaultRow"};
+    },
+    
+    darkens: function() {
+      this.setState({defaultRowClass: "PCTDefaultRowMouseOver"});
+    },
+    
+    un_darkens: function() {
+      this.setState({defaultRowClass: "PCTDefaultRow"});
+    },
+    
     render: function(){
       var deleteTopicCB = this.props.deleteTopicCB;
       var updateTopicInfoCB = this.props.updateTopicInfoCB;
-      var style = {height: "37px"};
+      var defaultRowStyle = {height: "37px"};
+      var isSummaryMode = this.props.isSummaryMode;
       if (this.props.topicInfos != null && this.props.topicInfos.length != 0){
-        style["display"] = "none";
+        defaultRowStyle["display"] = "none";
       }
 
       return (<tbody>
-                <tr style={style}><td className="ProConDataNoCursor"/><td className="ProConDataNoCursor"/><td className="ProConDataNoCursor"/></tr>
+                <tr style={defaultRowStyle}>
+                  <td className={this.state.defaultRowClass} colSpan="3" onMouseOver={this.darkens} onMouseLeave={this.un_darkens} onClick={this.props.addTopicCB}>Click to add item</td>
+                  <td></td>
+                </tr>
                 {
                   this.props.topicInfos != null && this.props.topicInfos.map(function(topicInfo){
-                    return <TopicRow key={topicInfo.id} topicInfo={topicInfo} deleteTopicCB={deleteTopicCB} updateTopicInfoCB={updateTopicInfoCB}/>
+                    return <TopicRow key={topicInfo.id} topicInfo={topicInfo} isSummaryMode={isSummaryMode} deleteTopicCB={deleteTopicCB} updateTopicInfoCB={updateTopicInfoCB}/>
                   })
                 }
-              </tbody>);
+              </tbody>
+              );
     }
   });
 
   var TopicListContainer = React.createClass({
+    getInitialState: function() {
+      return {show: false, isSummaryMode: false};
+    },
+    
+    getIconClass: function()
+    {
+      if (this.state.isSummaryMode) {
+        return "fa fa-lg fa-angle-double-right";
+      } else {
+        return "fa fa-lg fa-angle-double-down";
+      }
+    },
+    
+    changeMode: function(){
+      this.setState({isSummaryMode: !this.state.isSummaryMode});
+    },
+    
+    addTopic: function(content) {
+      this.props.addTopicCB(content);
+      this.setState({show: false});
+    },
+    
+    hideModal: function() {
+      this.setState({show: false});
+    },
+    showModal: function() {
+      this.setState({show: true});
+    },
+    
     componentDidMount: function() {
       adjustHeight();
     },
+    
     componentDidUpdate: function() {
       adjustHeight();
     },
+    
+    addTopicBtnStyle: function(){
+      if (this.props.topicInfos.length == 0){
+        return {display: "none"};
+      } else {
+        return {paddingTop: "10px"};
+      }
+    },
+    
     render: function(){
+      var Button = ReactBootstrap.Button;
+      var Glyphicon = ReactBootstrap.Glyphicon;
       return (
-        <div style={{width: "850px"}}>
+        <div style={{width: "100%"}}>
           <table className="PCTDataTable">
             <thead>
               <tr>
-                <td className="PCTHead">Topic</td>
-                <td className="PCTHead">Pro</td>
-                <td className="PCTHead">Con</td>
+                <td className="PCTHead" style={{width: "30%", paddingLeft: "5px"}}><i className={this.getIconClass()} style={{width: "20px", cursor: "Pointer"}} onClick={this.changeMode}></i>Topic</td>
+                <td className="PCTHead" style={{width: "30%"}}>Pro</td>
+                <td className="PCTHead" style={{width: "30%"}}>Con</td>
+                <td className="PCTHead" style={{width: "10%", display: "none"}}>PLACEHOLDER</td>
               </tr>
             </thead>
             <tbody>
-              <TopicList topicInfos={this.props.topicInfos} deleteTopicCB={this.props.deleteTopicCB} updateTopicInfoCB={this.props.updateTopicInfoCB}/>
+              <TopicList topicInfos={this.props.topicInfos} isSummaryMode={this.state.isSummaryMode} deleteTopicCB={this.props.deleteTopicCB} updateTopicInfoCB={this.props.updateTopicInfoCB} addTopicCB={this.showModal}/>
             </tbody>
-            <tfoot>
-              <tr><td className="PCTFoot" colSpan="3"/></tr>
-            </tfoot>
           </table>
+          <div style={this.addTopicBtnStyle()}><Button type="button" onClick={this.showModal}><Glyphicon glyph='plus'/>Add Topic</Button></div>
+          <NewItemModal title="Add new Topic" show={this.state.show} saveCB={this.addTopic} cancelCB={this.hideModal}/>
         </div>
       );
     }
@@ -542,29 +664,19 @@ function init(ReactBootstrap, jQuery){
     },
 
     getInitialState: function() {
-      return {newTopicContent: "", topicInfos: []};
+      return {topicInfos: []};
     },
 
     createTopicData: function(title) {
       return {title: title, id: guid(), proInfos: [], conInfos: []};
     },
 
-    addTopicBtnClicked: function(){
-      var newTopicContent = this.state.newTopicContent.trim();
-      if (newTopicContent == ""){
-        this.setState({newTopicContent: ""});
-        return;
-      }
+    addTopic: function(content){
       var topicInfos = this.state.topicInfos;
       if (topicInfos == null) topicInfos = [];
-      var topicInfo = this.createTopicData(newTopicContent);
+      var topicInfo = this.createTopicData(content);
       topicInfos.push(topicInfo);
       this.updateWaveData(topicInfos);
-      this.setState({newTopicContent: ""});
-    },
-
-    titleInputChanged: function(e){
-      this.setState({newTopicContent: e.target.value});
     },
 
     deleteTopic: function(topicId){
@@ -610,32 +722,11 @@ function init(ReactBootstrap, jQuery){
       }
     },
 
-    validationState: function(){
-      var newTopicContent = this.state.newTopicContent.trim();
-      if (newTopicContent != "") {
-        return 'success';
-      } else {
-        return 'warning';
-      }
-    },
-
-    isBtnDisable: function(){
-      var newTopicContent = this.state.newTopicContent.trim();
-      if (newTopicContent != "") {
-        return false;
-      } else {
-        return true;
-      }
-    },
-
     render: function(){
       var Input = ReactBootstrap.Input;
-      var Button = ReactBootstrap.Button;
-      var innerBtn = <Button onClick={this.addTopicBtnClicked} disabled={this.isBtnDisable()}>Add Topic</Button>;
       return(
-        <div style={{width: "850px"}} id="ProConGadget">
-          <Input type="text" value={this.state.newTopicContent} onChange={this.titleInputChanged} bsStyle={this.validationState()} buttonAfter={innerBtn}/>
-          <TopicListContainer topicInfos={this.state.topicInfos} deleteTopicCB={this.deleteTopic} updateTopicInfoCB={this.updateTopicInfo}/>
+        <div style={{width: "800px"}} id="ProConGadget">
+          <TopicListContainer topicInfos={this.state.topicInfos} deleteTopicCB={this.deleteTopic} updateTopicInfoCB={this.updateTopicInfo} addTopicCB={this.addTopic}/>
         </div>
       );
     }
