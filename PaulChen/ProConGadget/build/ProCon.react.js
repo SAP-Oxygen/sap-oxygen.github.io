@@ -60,6 +60,24 @@ function createProConData(content, creatorId) {
 }
 
 function init(ReactBootstrap, jQuery){
+  var ConfirmModal = React.createClass({displayName: "ConfirmModal",
+    render: function() {
+      var Modal = ReactBootstrap.Modal;
+      var Button = ReactBootstrap.Button;
+      return (
+        React.createElement(Modal, {bsSize: "small", show: this.props.show, onHide: this.props.cancel}, 
+          React.createElement(Modal.Body, null, 
+            React.createElement("h4", null, this.props.content)
+          ), 
+          React.createElement(Modal.Footer, null, 
+            React.createElement(Button, {onClick: this.props.cancel}, "Cancel"), 
+            React.createElement(Button, {onClick: this.props.ok}, "OK")
+          )
+        )
+      );
+    }
+  });
+  
   var NewItemModal = React.createClass({displayName: "NewItemModal",
     getInitialState() {
       return {content: this.props.content};
@@ -539,9 +557,15 @@ function init(ReactBootstrap, jQuery){
       topicInfo.title = newTitle;
       this.props.updateTopicInfoCB(this.props.topicInfo.id, topicInfo);
     },
+    showModal: function() {
+      this.setState({show: true});
+    },
+    hideModal: function() {
+      this.setState({show: false});
+    },
     deleteTopic: function(){
-      var isOk = confirm("Are you sure you want to delete this topic and related pro/con opinions?");
-      if (isOk) this.props.deleteTopicCB(this.props.topicInfo.id);
+      this.setState({show: false});
+      this.props.deleteTopicCB(this.props.topicInfo.id);
     },
     updatePros: function(proInfos){
       var topicInfo = this.props.topicInfo;
@@ -566,7 +590,9 @@ function init(ReactBootstrap, jQuery){
           React.createElement(TitleColumn, {title: this.props.topicInfo.title, deleteTopicCB: this.props.deleteTopicCB, updateTitleCB: this.updateTitle, id: this.props.topicInfo.id}), 
           React.createElement(ProColumn, {proInfos: this.props.topicInfo.proInfos, isSummaryMode: this.props.isSummaryMode, updateProsCB: this.updatePros}), 
           React.createElement(ConColumn, {conInfos: this.props.topicInfo.conInfos, isSummaryMode: this.props.isSummaryMode, updateConsCB: this.updateCons}), 
-          React.createElement("td", {style: {border: "none", paddingLeft: "10px", cursor: "pointer"}, onClick: this.deleteTopic}, React.createElement(Glyphicon, {glyph: "trash", style: this.state.style}))
+          React.createElement("td", {style: {border: "none", paddingLeft: "10px", cursor: "pointer", width: "30px"}, onClick: this.showModal}, React.createElement(Glyphicon, {glyph: "trash", style: this.state.style}), 
+            React.createElement(ConfirmModal, {content: "Are you sure you want to delete this topic and related pro/con opinions?", show: this.state.show, ok: this.deleteTopic, cancel: this.hideModal})
+          )
         ));
     }
   });
@@ -662,10 +688,10 @@ function init(ReactBootstrap, jQuery){
           React.createElement("table", {className: "PCTDataTable"}, 
             React.createElement("thead", null, 
               React.createElement("tr", null, 
-                React.createElement("td", {className: "PCTHead", style: {width: "30%", paddingLeft: "5px"}}, React.createElement("i", {className: this.getIconClass(), style: {width: "20px", cursor: "Pointer"}, onClick: this.changeMode}), "Topic"), 
-                React.createElement("td", {className: "PCTHead", style: {width: "30%"}}, "Pro"), 
-                React.createElement("td", {className: "PCTHead", style: {width: "30%"}}, "Con"), 
-                React.createElement("td", {className: "PCTHead", style: {width: "10%", display: "none"}}, "PLACEHOLDER")
+                React.createElement("td", {className: "PCTHead", style: {width: "auto", paddingLeft: "5px"}}, React.createElement("i", {className: this.getIconClass(), style: {width: "20px", cursor: "Pointer"}, onClick: this.changeMode}), "Topic"), 
+                React.createElement("td", {className: "PCTHead", style: {width: "33%"}}, "Pro"), 
+                React.createElement("td", {className: "PCTHead", style: {width: "33%"}}, "Con"), 
+                React.createElement("td", {style: {width: "30px", visibility: "hidden"}})
               )
             ), 
             React.createElement("tbody", null, 
@@ -749,7 +775,7 @@ function init(ReactBootstrap, jQuery){
 
     render: function(){
       return(
-        React.createElement("div", {style: {width: "800px", horizontalAlignment: "center"}, id: "ProConGadget"}, 
+        React.createElement("div", {style: {width: "800px", margin: "auto"}, id: "ProConGadget"}, 
           React.createElement(TopicListContainer, {topicInfos: this.state.topicInfos, deleteTopicCB: this.deleteTopic, updateTopicInfoCB: this.updateTopicInfo, addTopicCB: this.addTopic})
         )
       );
