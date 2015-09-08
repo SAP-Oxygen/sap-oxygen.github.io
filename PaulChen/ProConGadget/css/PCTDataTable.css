@@ -1,12 +1,6 @@
 .PCTDataTable {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 10pt;
   width: 100%;
-  border-right: solid 1px #d3d3d3;
-  border-bottom: solid 1px #d3d3d3;
-  border-left: solid 1px #d3d3d3;
-  border-spacing: 1px;
+  border-left: solid 1px #000000;
   border-collapse: collapse;
-  margin-top: -1px;
-  table-layout: fixed;
 }
