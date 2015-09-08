@@ -1,0 +1,14 @@
+{
+    "Name": "GroupJune28_1948",
+    "PrimaryGadgetObject": {
+        "GroupGadget": {
+            "InitializingDataJSON": "{\"hello\": {\"a\": 1, \"b\": \"world\"}}",
+            "__metadata": {
+                "uri": "GroupGadgets('RO3djeQkKFbmqepYD5z1n8')"
+            }
+        },
+        "__metadata": {
+            "uri": "Groups('0')/PrimaryGadgetObject"
+        }
+    }
+}

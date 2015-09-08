@@ -1,0 +1,19 @@
+{
+    "Name": "GroupJune29_912",
+    "PrimaryGadgetObject": {
+        "GroupGadget": {
+            "InitializingDataJSON": "{\"hello\": {\"a\": 1, \"b\": \"world\"}}",
+            "__metadata": {
+                "uri": "GroupGadgets('RO3djeQkKFbmqepYD5z1n8')"
+            }
+        },
+        "__metadata": {
+            "uri": "Groups('0')/PrimaryGadgetObject"
+        }
+    },
+    "Template": {
+        "__metadata": {
+            "uri": "GroupTemplates(Id='rnifM08a3C3nJ4lFONPnGI',GroupTemplateType='custom')"
+        }
+    }
+}
