@@ -2,6 +2,7 @@
   <ModulePrefs title="React ProCon table" author="Paul Chen" author_email="paul.chen03@sap.com" description="SAP Jam ProCon table rebuilt in React as an Open Social Gadget" width="850" height="400">
     <Require feature="wave" />
     <Require feature="dynamic-height" />
+    <Require feature="osapi" />
   </ModulePrefs>
   <Content type="html" href="ProCon.react.html"/>
 </Module>

@@ -55,6 +55,14 @@ function getCreatorFullName(creatorId){
   return fullName;
 }
 
+function getCurrentUserFullName() {
+  if (typeof(wave) != "undefined" && wave && wave.getViewer()) {
+    return getCreatorFullName(wave.getViewer().id_);
+  }
+  
+  return "";
+}
+
 function createProConData(content, creatorId) {
   return {id: guid(), creatorId: creatorId, createdDate: new Date(), content: content};
 }
@@ -336,17 +344,36 @@ function init(ReactBootstrap, jQuery){
       var proInfos = this.props.proInfos;
       proInfos.push(newProInfo);
       this.props.updateProsCB(proInfos);
+      
+      typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
+        activity: {
+          title: "add a pro item",
+          content: getCurrentUserFullName() + " add a pro item \"" + newProInfo.content + "\" in topic \"" + this.props.topicTitle + "\""
+        }
+      }).execute(function(result){});
     },
 
     updatePro: function(proId, newProContent){
       var newProInfos = [];
       if (this.props.proInfos != null) {
+        var proToBeUpdated = this.props.proInfos.filter(function(proInfo){
+          return proInfo.id == proId;
+        })[0];
+        var oldContent = proToBeUpdated.content;
+        
         newProInfos = this.props.proInfos.map(function(proInfo){
           if (proInfo.id == proId) {
             proInfo.content = newProContent;
           }
           return proInfo;
         });
+        
+        typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
+          activity: {
+            title: "update a con item",
+            content: getCurrentUserFullName() + " update con item \"" + oldContent + "\"" + " to \"" + newProContent + "\"" + " in topic \"" + this.props.topicTitle + "\""
+          }
+        }).execute(function(result){});
       }
       this.props.updateProsCB(newProInfos);
     },
@@ -357,6 +384,16 @@ function init(ReactBootstrap, jQuery){
         newProInfos = this.props.proInfos.filter(function(proInfo){
           return proInfo.id != proId;
         });
+        var proToBeDeleted = this.props.proInfos.filter(function(proInfo){
+          return proInfo.id == proId;
+        })[0];
+        
+        typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
+          activity: {
+            title: "delete a pro item",
+            content: getCurrentUserFullName() + " delete pro item \"" + proToBeDeleted.content + "\" in topic \"" + this.props.topicTitle + "\""
+          }
+        }).execute(function(result){});
       }
       this.props.updateProsCB(newProInfos);
     },
@@ -504,11 +541,23 @@ function init(ReactBootstrap, jQuery){
       var conInfos = this.props.conInfos;
       conInfos.push(newConInfo);
       this.props.updateConsCB(conInfos);
+      
+      typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
+        activity: {
+          title: "add a con item",
+          content: getCurrentUserFullName() + " add a con item \"" + newConInfo.content + "\" in topic \"" + this.props.topicTitle + "\""
+        }
+      }).execute(function(result){});
     },
 
     updateCon: function(conId, newConContent){
       var newConInfos = [];
       if (this.props.conInfos != null) {
+        var conToBeUpdated = this.props.conInfos.filter(function(conInfo){
+          return conInfo.id == conId;
+        })[0];
+        var oldContent = conToBeUpdated.content;
+        
         newConInfos = this.props.conInfos.map(function(conInfo){
           if (conInfo.id == conId)
           {
@@ -516,6 +565,13 @@ function init(ReactBootstrap, jQuery){
           }
           return conInfo;
         });
+        
+        typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
+          activity: {
+            title: "update a con item",
+            content: getCurrentUserFullName() + " update con item \"" + oldContent + "\"" + " to \"" + newConContent + "\"" + " in topic \"" + this.props.topicTitle + "\""
+          }
+        }).execute(function(result){});
       }
       this.props.updateConsCB(newConInfos);
     },
@@ -526,6 +582,17 @@ function init(ReactBootstrap, jQuery){
         newConInfos = this.props.conInfos.filter(function(conInfo){
           return conInfo.id != conId;
         });
+        
+        var conToBeDeleted = this.props.conInfos.filter(function(conInfo){
+          return conInfo.id == conId;
+        })[0];
+        
+        typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
+          activity: {
+            title: "delete a con item",
+            content: getCurrentUserFullName() + " delete con item \"" + conToBeDeleted.content + "\" in topic \"" + this.props.topicTitle + "\""
+          }
+        }).execute(function(result){});
       }
       this.props.updateConsCB(newConInfos);
     },
@@ -554,8 +621,16 @@ function init(ReactBootstrap, jQuery){
     
     updateTitle: function(newTitle){
       var topicInfo = this.props.topicInfo;
+      var oldTopicInfo = topicInfo.title;
       topicInfo.title = newTitle;
       this.props.updateTopicInfoCB(this.props.topicInfo.id, topicInfo);
+      
+      typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
+        activity: {
+          title: "update the title of a topic",
+          content: getCurrentUserFullName() + " update the title of topic \"" + oldTopicInfo + "\"" + " to " + "\"" + newTitle + "\""
+        }
+      }).execute(function(result){});
     },
     showModal: function() {
       this.setState({show: true});
@@ -588,8 +663,8 @@ function init(ReactBootstrap, jQuery){
       return (
         React.createElement("tr", {onMouseEnter: this.showTrash, onMouseLeave: this.hideTrash}, 
           React.createElement(TitleColumn, {title: this.props.topicInfo.title, deleteTopicCB: this.props.deleteTopicCB, updateTitleCB: this.updateTitle, id: this.props.topicInfo.id}), 
-          React.createElement(ProColumn, {proInfos: this.props.topicInfo.proInfos, isSummaryMode: this.props.isSummaryMode, updateProsCB: this.updatePros}), 
-          React.createElement(ConColumn, {conInfos: this.props.topicInfo.conInfos, isSummaryMode: this.props.isSummaryMode, updateConsCB: this.updateCons}), 
+          React.createElement(ProColumn, {topicTitle: this.props.topicInfo.title, proInfos: this.props.topicInfo.proInfos, isSummaryMode: this.props.isSummaryMode, updateProsCB: this.updatePros}), 
+          React.createElement(ConColumn, {topicTitle: this.props.topicInfo.title, conInfos: this.props.topicInfo.conInfos, isSummaryMode: this.props.isSummaryMode, updateConsCB: this.updateCons}), 
           React.createElement("td", {style: {border: "none", paddingLeft: "10px", cursor: "pointer", width: "30px"}, onClick: this.showModal}, React.createElement(Glyphicon, {glyph: "trash", style: this.state.style}), 
             React.createElement(ConfirmModal, {content: "Are you sure you want to delete this topic and related pro/con opinions?", show: this.state.show, ok: this.deleteTopic, cancel: this.hideModal})
           )
@@ -728,14 +803,31 @@ function init(ReactBootstrap, jQuery){
       var topicInfo = this.createTopicData(content);
       topicInfos.push(topicInfo);
       this.updateWaveData(topicInfos);
+      
+      typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
+        activity: {
+          title: "add a new topic",
+          content: getCurrentUserFullName() + " add topic " + "\"" + content + "\""
+        }
+      }).execute(function(result){});
     },
 
     deleteTopic: function(topicId){
       var topicInfos = this.state.topicInfos;
+      var topicInfoToBeDeleted = topicInfos.filter(function(topicInfo){
+        return topicInfo.id == topicId;
+      });
       var newTopicInfos = topicInfos.filter(function(topicInfo){
         return topicInfo.id != topicId;
       });
       this.updateWaveData(newTopicInfos);
+      
+      typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
+        activity: {
+          title: "delete a topic",
+          content: getCurrentUserFullName() + " delete topic \"" + topicInfoToBeDeleted[0].title + "\""
+        }
+      }).execute(function(result){});
     },
 
     updateTopicInfo: function(topicId, newTopicInfo){
