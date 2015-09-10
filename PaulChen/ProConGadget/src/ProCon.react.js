@@ -748,7 +748,7 @@ function init(ReactBootstrap, jQuery){
     },
     
     addTopicBtnStyle: function(){
-      if (this.props.topicInfos.length == 0){
+      if (this.props.topicInfos == null || this.props.topicInfos.length == 0){
         return {display: "none"};
       } else {
         return {paddingTop: "10px"};
