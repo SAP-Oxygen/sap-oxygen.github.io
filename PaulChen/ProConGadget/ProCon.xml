@@ -1,8 +1,21 @@
 <Module specificationVersion='2'>
   <ModulePrefs title="React ProCon table" author="Paul Chen" author_email="paul.chen03@sap.com" description="SAP Jam ProCon table rebuilt in React as an Open Social Gadget" width="850" height="400">
-    <Require feature="wave" />
-    <Require feature="dynamic-height" />
-    <Require feature="osapi" />
+    <Require feature="wave"/>
+    <Require feature="dynamic-height"/>
+    <Require feature="osapi"/>
+    <Locale lang="all">
+      <msg name="addTopicFeed">#{obj:actor} added a new topic "#{obj:object}" to the Pro/Con table #{obj:target}</msg>
+      <msg name="deleteTopicFeed">#{obj:actor} deleted topic "#{obj:object}" from the Pro/Con table #{obj:target}</msg>
+      <msg name="updateTopicFeed">#{obj:actor} updated topic "#{obj:object}" to "#{obj:object.attachments.1}" in the Pro/Con table #{obj:target}</msg>
+      <msg name="addProFeed">#{obj:actor} added a new pro item "#{obj:object}" to topic "#{obj:object.attachments.1}" in the Pro/Con table #{obj:target}</msg>
+      <msg name="deleteProFeed">#{obj:actor} deleted pro item "#{obj:object}" from topic "#{obj:object.attachments.1}" in the Pro/Con table #{obj:target}</msg>
+      <msg name="updateProFeedTitle">updated pro item in the Pro/Con table #{obj:target}</msg>
+      <msg name="updateProFeedContent">updated pro item "#{obj:object}" to "#{obj:object.attachments.1}" in topic "#{obj:object.attachments.2}"</msg>
+      <msg name="addConFeed">#{obj:actor} added a new con item "#{obj:object}" to topic "#{obj:object.attachments.1}" in the Pro/Con table #{obj:target}</msg>
+      <msg name="deleteConFeed">#{obj:actor} deleted con item "#{obj:object}" from topic "#{obj:object.attachments.1}" in the Pro/Con table #{obj:target}</msg>
+      <msg name="updateConFeedTitle">updated con item in the Pro/Con table #{obj:target}</msg>
+      <msg name="updateConFeedContent">updated con item "#{obj:object}" to "#{obj:object.attachments.1}" in topic "#{obj:object.attachments.2}"</msg>
+    </Locale>
   </ModulePrefs>
   <Content type="html" href="ProCon.react.html"/>
 </Module>

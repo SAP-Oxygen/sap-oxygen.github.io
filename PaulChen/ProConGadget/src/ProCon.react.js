@@ -347,8 +347,11 @@ function init(ReactBootstrap, jQuery){
       
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
-          title: "add a pro item",
-          content: getCurrentUserFullName() + " add a pro item \"" + newProInfo.content + "\" in topic \"" + this.props.topicTitle + "\""
+          title: "#{addProFeed}",
+          object: {
+            displayName: newProInfo.content,
+            attachments: [{ displayName: this.props.topicTitle }]
+          }
         }
       }).execute(function(result){});
     },
@@ -370,8 +373,12 @@ function init(ReactBootstrap, jQuery){
         
         typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
           activity: {
-            title: "update a con item",
-            content: getCurrentUserFullName() + " update con item \"" + oldContent + "\"" + " to \"" + newProContent + "\"" + " in topic \"" + this.props.topicTitle + "\""
+            title: "#{updateProFeedTitle}",
+            content: "#{updateProFeedContent}",
+            object: {
+              displayName: oldContent,
+              attachments: [{displayName: newProContent}, {displayName: this.props.topicTitle}]
+            }
           }
         }).execute(function(result){});
       }
@@ -390,8 +397,11 @@ function init(ReactBootstrap, jQuery){
         
         typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
           activity: {
-            title: "delete a pro item",
-            content: getCurrentUserFullName() + " delete pro item \"" + proToBeDeleted.content + "\" in topic \"" + this.props.topicTitle + "\""
+            title: "#{deleteProFeed}",
+            object: {
+              displayName: proToBeDeleted.content,
+              attachments: [{ displayName: this.props.topicTitle }]
+            }
           }
         }).execute(function(result){});
       }
@@ -544,8 +554,11 @@ function init(ReactBootstrap, jQuery){
       
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
-          title: "add a con item",
-          content: getCurrentUserFullName() + " add a con item \"" + newConInfo.content + "\" in topic \"" + this.props.topicTitle + "\""
+          title: "#{addConFeed}",
+          object: {
+            displayName: newConInfo.content,
+            attachments: [{ displayName: this.props.topicTitle }]
+          }
         }
       }).execute(function(result){});
     },
@@ -568,8 +581,12 @@ function init(ReactBootstrap, jQuery){
         
         typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
           activity: {
-            title: "update a con item",
-            content: getCurrentUserFullName() + " update con item \"" + oldContent + "\"" + " to \"" + newConContent + "\"" + " in topic \"" + this.props.topicTitle + "\""
+            title: "#{updateConFeedTitle}",
+            content: "#{updateConFeedContent}",
+            object: {
+              displayName: oldContent,
+              attachments: [{displayName: newConContent}, {displayName: this.props.topicTitle}]
+            }
           }
         }).execute(function(result){});
       }
@@ -589,8 +606,11 @@ function init(ReactBootstrap, jQuery){
         
         typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
           activity: {
-            title: "delete a con item",
-            content: getCurrentUserFullName() + " delete con item \"" + conToBeDeleted.content + "\" in topic \"" + this.props.topicTitle + "\""
+            title: "#{deleteConFeed}",
+            object: {
+              displayName: conToBeDeleted.content,
+              attachments: [{ displayName: this.props.topicTitle }]
+            }
           }
         }).execute(function(result){});
       }
@@ -621,14 +641,17 @@ function init(ReactBootstrap, jQuery){
     
     updateTitle: function(newTitle){
       var topicInfo = this.props.topicInfo;
-      var oldTopicInfo = topicInfo.title;
+      var oldTopicTitle = topicInfo.title;
       topicInfo.title = newTitle;
       this.props.updateTopicInfoCB(this.props.topicInfo.id, topicInfo);
       
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
-          title: "update the title of a topic",
-          content: getCurrentUserFullName() + " update the title of topic \"" + oldTopicInfo + "\"" + " to " + "\"" + newTitle + "\""
+          title: "#{updateTopicFeed}",
+          object: {
+            displayName: oldTopicTitle,
+            attachments: [{ displayName: newTitle }]
+          }
         }
       }).execute(function(result){});
     },
@@ -806,8 +829,8 @@ function init(ReactBootstrap, jQuery){
       
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
-          title: "add a new topic",
-          content: getCurrentUserFullName() + " add topic " + "\"" + content + "\""
+          title: "#{addTopicFeed}",
+          object: {displayName: content}
         }
       }).execute(function(result){});
     },
@@ -824,8 +847,8 @@ function init(ReactBootstrap, jQuery){
       
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
-          title: "delete a topic",
-          content: getCurrentUserFullName() + " delete topic \"" + topicInfoToBeDeleted[0].title + "\""
+          title: "#{deleteTopicFeed}",
+          object: {displayName: topicInfoToBeDeleted[0].title}
         }
       }).execute(function(result){});
     },
