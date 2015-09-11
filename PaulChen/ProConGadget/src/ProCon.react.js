@@ -1,4 +1,11 @@
-
+function getLocale(msg){
+  if (typeof(gadgets) != "undefined" && gadgets) {
+    var prefs = new gadgets.Prefs();
+    return prefs.getMsg(msg);
+  } else {
+    return msg;
+  }
+}
 
 function distance_of_time_in_words(from){
     var to = new Date().getTime();
@@ -59,7 +66,7 @@ function getCurrentUserFullName() {
   if (typeof(wave) != "undefined" && wave && wave.getViewer()) {
     return getCreatorFullName(wave.getViewer().id_);
   }
-  
+
   return "";
 }
 
@@ -78,14 +85,14 @@ function init(ReactBootstrap, jQuery){
             <h4>{this.props.content}</h4>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.props.cancel}>Cancel</Button>
-            <Button onClick={this.props.ok}>OK</Button>
+            <Button onClick={this.props.cancel}>{getLocale("Cancel")}</Button>
+            <Button onClick={this.props.ok}>{getLocale("Ok")}</Button>
           </Modal.Footer>
         </Modal>
       );
     }
   });
-  
+
   var NewItemModal = React.createClass({
     getInitialState() {
       return {content: this.props.content};
@@ -120,8 +127,8 @@ function init(ReactBootstrap, jQuery){
             <textarea style={{width: "100%", resize: "none", height: "100px"}} onChange={this.contentChanged} value={this.state.content}/>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.save}>Save</Button>
-            <Button onClick={this.cancel}>Cancel</Button>
+            <Button onClick={this.save}>{getLocale("Save")}</Button>
+            <Button onClick={this.cancel}>{getLocale("Cancel")}</Button>
           </Modal.Footer>
         </Modal>
       );
@@ -165,9 +172,9 @@ function init(ReactBootstrap, jQuery){
               <textarea style={{width: "100%", resize: "none", height: "100px"}} onChange={this.contentChanged} value={this.state.content}/>
             </Modal.Body>
             <Modal.Footer>
-              <Button onClick={this.deleteT}>Delete</Button>
-              <Button onClick={this.save}>Save</Button>
-              <Button onClick={this.cancel}>Cancel</Button>
+              <Button onClick={this.deleteT}>{getLocale("Delete")}</Button>
+              <Button onClick={this.save}>{getLocale("Save")}</Button>
+              <Button onClick={this.cancel}>{getLocale("Cancel")}</Button>
             </Modal.Footer>
           </Modal>
         );
@@ -181,8 +188,8 @@ function init(ReactBootstrap, jQuery){
               <textarea style={{width: "100%", resize: "none", height: "100px"}} onChange={this.contentChanged} value={this.state.content}/>
             </Modal.Body>
             <Modal.Footer>
-              <Button onClick={this.save}>Save</Button>
-              <Button onClick={this.cancel}>Cancel</Button>
+              <Button onClick={this.save}>{getLocale("Save")}</Button>
+              <Button onClick={this.cancel}>{getLocale("Cancel")}</Button>
             </Modal.Footer>
           </Modal>
         );
@@ -212,7 +219,7 @@ function init(ReactBootstrap, jQuery){
       return (
         <td className="OptionData" onClick={this.clickHandler}>
           <span>{this.props.title}</span>
-          <EditItemModal title="Edit Topic" content={this.props.title} show={this.state.show} saveCB={this.updateTopic} cancelCB={this.hideModal} showDelete={false}/>
+          <EditItemModal title={getLocale("EditTopic")} content={this.props.title} show={this.state.show} saveCB={this.updateTopic} cancelCB={this.hideModal} showDelete={false}/>
         </td>
       );
     }
@@ -251,22 +258,22 @@ function init(ReactBootstrap, jQuery){
     render: function(){
       if (this.props.isSummaryMode) {
         return (
-          <i className="fa fa-plus fa-2x" style={{color: "Green", opacity: this.state.opacity}} onMouseOver={this.showBtn} onMouseLeave={this.hideBtn} onClick={this.clickHandler}><NewItemModal title="Create new Pro Opinion" show={this.state.show} saveCB={this.addPro} cancelCB={this.hideModal}/></i>
+          <i className="fa fa-plus fa-2x" style={{color: "Green", opacity: this.state.opacity}} onMouseOver={this.showBtn} onMouseLeave={this.hideBtn} onClick={this.clickHandler}><NewItemModal title={getLocale("CreateNewProOpinion")} show={this.state.show} saveCB={this.addPro} cancelCB={this.hideModal}/></i>
         );
       } else {
         return (
           <div className="ProConOption" onMouseOver={this.showBtn} onMouseLeave={this.hideBtn} onClick={this.clickHandler} style={{opacity: this.state.opacity}}>
             <table  style={{width: "100%", tableLayout: "fixed"}}>
               <tr>
-                <td title="Create new Pro Option" style={{width: "35px"}}>
+                <td title={getLocale("CreateNewProOpinion")} style={{width: "35px"}}>
                   <i className="fa fa-plus fa-2x" style={{color: "Green"}}></i>
                 </td>
                 <td className="FullTextProCon">
-                  <span style={{top: "10px", color: "#A6A6A6", fontSize: "13px"}}>Click to add a Pro opinion</span>
+                  <span style={{top: "10px", color: "#A6A6A6", fontSize: "13px"}}>{getLocale("ClickToAddProOpinion")}</span>
                 </td>
               </tr>
             </table>
-            <NewItemModal title="Create new Pro Opinion" show={this.state.show} saveCB={this.addPro} cancelCB={this.hideModal}/>
+            <NewItemModal title={getLocale("CreateNewProOpinion")} show={this.state.show} saveCB={this.addPro} cancelCB={this.hideModal}/>
           </div>
         );
       }
@@ -296,11 +303,11 @@ function init(ReactBootstrap, jQuery){
       this.props.deleteProCB(this.props.proInfo.id);
       this.setState({show: false});
     },
-    
+
     mouseOverHandler: function(){
       this.setState({style: {backgroundColor: "#cccccc"}});
     },
-    
+
     mouseLeaveHandler: function(){
       this.setState({style: {}});
     },
@@ -313,7 +320,7 @@ function init(ReactBootstrap, jQuery){
                        </Popover>);
         return (
           <OverlayTrigger trigger='hover' placement='bottom' overlay={popover}>
-          <i className="fa fa-plus fa-2x" style={{color: "Green", width: "30px"}} onClick={this.showModal}><EditItemModal title="Edit Pro Opinion" content={this.props.proInfo.content} show={this.state.show} saveCB={this.updatePro} cancelCB={this.hideModal} deleteCB={this.deletePro} showDelete={true}/></i>
+          <i className="fa fa-plus fa-2x" style={{color: "Green", width: "30px"}} onClick={this.showModal}><EditItemModal title={getLocale("EditProOpinion")} content={this.props.proInfo.content} show={this.state.show} saveCB={this.updatePro} cancelCB={this.hideModal} deleteCB={this.deletePro} showDelete={true}/></i>
           </OverlayTrigger>
         );
       } else {
@@ -321,7 +328,7 @@ function init(ReactBootstrap, jQuery){
           <div onClick={this.showModal} onMouseOver={this.mouseOverHandler} onMouseLeave={this.mouseLeaveHandler}>
             <table  style={{width: "100%", tableLayout: "fixed"}}>
               <tr style={this.state.style}>
-                <td title='Edit Option' style={{width: "35px"}}>
+                <td title={getLocale("EditOpinion")} style={{width: "35px"}}>
                   <i className="fa fa-plus fa-2x" style={{color: "Green", width: "30px"}}></i>
                 </td>
                 <td className='FullTextProCon'>
@@ -332,7 +339,7 @@ function init(ReactBootstrap, jQuery){
                 <td/><td className='FullTextUser'>{getCreatorFullName(this.props.proInfo.creatorId)}, {distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate))}</td>
               </tr>
             </table>
-            <EditItemModal title="Edit Pro Opinion" content={this.props.proInfo.content} show={this.state.show} saveCB={this.updatePro} cancelCB={this.hideModal} deleteCB={this.deletePro} showDelete={true}/>
+            <EditItemModal title={getLocale("EditProOpinion")} content={this.props.proInfo.content} show={this.state.show} saveCB={this.updatePro} cancelCB={this.hideModal} deleteCB={this.deletePro} showDelete={true}/>
           </div>
         );
       }
@@ -344,7 +351,7 @@ function init(ReactBootstrap, jQuery){
       var proInfos = this.props.proInfos;
       proInfos.push(newProInfo);
       this.props.updateProsCB(proInfos);
-      
+
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
           title: "#{addProFeed}",
@@ -363,14 +370,14 @@ function init(ReactBootstrap, jQuery){
           return proInfo.id == proId;
         })[0];
         var oldContent = proToBeUpdated.content;
-        
+
         newProInfos = this.props.proInfos.map(function(proInfo){
           if (proInfo.id == proId) {
             proInfo.content = newProContent;
           }
           return proInfo;
         });
-        
+
         typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
           activity: {
             title: "#{updateProFeedTitle}",
@@ -394,7 +401,7 @@ function init(ReactBootstrap, jQuery){
         var proToBeDeleted = this.props.proInfos.filter(function(proInfo){
           return proInfo.id == proId;
         })[0];
-        
+
         typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
           activity: {
             title: "#{deleteProFeed}",
@@ -459,22 +466,22 @@ function init(ReactBootstrap, jQuery){
     render: function(){
       if (this.props.isSummaryMode){
         return (<i className="fa fa-minus fa-2x" style={{color: "Brown", opacity: this.state.opacity}} onMouseOver={this.showBtn} onMouseLeave={this.hideBtn} onClick={this.clickHandler}>
-                  <NewItemModal title="Create new Con Opinion" show={this.state.show} saveCB={this.addCon} cancelCB={this.hideModal}/>
+                  <NewItemModal title={getLocale("CreateNewConOpinion")} show={this.state.show} saveCB={this.addCon} cancelCB={this.hideModal}/>
                 </i>);
       } else {
         return (
           <div onMouseOver={this.showBtn} onMouseLeave={this.hideBtn} onClick={this.clickHandler} style={{opacity: this.state.opacity}}>
             <table style={{width: "100%", tableLayout: "fixed"}}>
               <tr>
-                <td title="Create new Con Option" style={{width: "35px"}}>
+                <td title={getLocale("CreateNewConOpinion")} style={{width: "35px"}}>
                   <i className="fa fa-minus fa-2x" style={{color: "Brown"}}></i>
                 </td>
                 <td className="FullTextProCon">
-                  <span style={{color: "#A6A6A6", fontSize: "13px"}}>Click to add a Con opinion</span>
+                  <span style={{color: "#A6A6A6", fontSize: "13px"}}>{getLocale("ClickToAddConOpinion")}</span>
                 </td>
               </tr>
             </table>
-            <NewItemModal title="Create new Con Opinion" show={this.state.show} saveCB={this.addCon} cancelCB={this.hideModal}/>
+            <NewItemModal title={getLocale("CreateNewConOpinion")} show={this.state.show} saveCB={this.addCon} cancelCB={this.hideModal}/>
           </div>
         );
       }
@@ -504,11 +511,11 @@ function init(ReactBootstrap, jQuery){
       this.props.deleteConCB(this.props.conInfo.id);
       this.setState({show: false});
     },
-    
+
     mouseOverHandler: function(){
       this.setState({style: {backgroundColor: "#cccccc"}});
     },
-    
+
     mouseLeaveHandler: function(){
       this.setState({style: {}});
     },
@@ -551,7 +558,7 @@ function init(ReactBootstrap, jQuery){
       var conInfos = this.props.conInfos;
       conInfos.push(newConInfo);
       this.props.updateConsCB(conInfos);
-      
+
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
           title: "#{addConFeed}",
@@ -570,7 +577,7 @@ function init(ReactBootstrap, jQuery){
           return conInfo.id == conId;
         })[0];
         var oldContent = conToBeUpdated.content;
-        
+
         newConInfos = this.props.conInfos.map(function(conInfo){
           if (conInfo.id == conId)
           {
@@ -578,7 +585,7 @@ function init(ReactBootstrap, jQuery){
           }
           return conInfo;
         });
-        
+
         typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
           activity: {
             title: "#{updateConFeedTitle}",
@@ -599,11 +606,11 @@ function init(ReactBootstrap, jQuery){
         newConInfos = this.props.conInfos.filter(function(conInfo){
           return conInfo.id != conId;
         });
-        
+
         var conToBeDeleted = this.props.conInfos.filter(function(conInfo){
           return conInfo.id == conId;
         })[0];
-        
+
         typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
           activity: {
             title: "#{deleteConFeed}",
@@ -638,13 +645,12 @@ function init(ReactBootstrap, jQuery){
     getInitialState: function() {
       return {show: false, style: {visibility: "hidden"}};
     },
-    
     updateTitle: function(newTitle){
       var topicInfo = this.props.topicInfo;
       var oldTopicTitle = topicInfo.title;
       topicInfo.title = newTitle;
       this.props.updateTopicInfoCB(this.props.topicInfo.id, topicInfo);
-      
+
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
           title: "#{updateTopicFeed}",
@@ -699,15 +705,15 @@ function init(ReactBootstrap, jQuery){
     getInitialState: function() {
       return {defaultRowClass: "PCTDefaultRow"};
     },
-    
+
     darkens: function() {
       this.setState({defaultRowClass: "PCTDefaultRowMouseOver"});
     },
-    
+
     un_darkens: function() {
       this.setState({defaultRowClass: "PCTDefaultRow"});
     },
-    
+
     render: function(){
       var deleteTopicCB = this.props.deleteTopicCB;
       var updateTopicInfoCB = this.props.updateTopicInfoCB;
@@ -719,7 +725,7 @@ function init(ReactBootstrap, jQuery){
 
       return (<tbody>
                 <tr style={defaultRowStyle}>
-                  <td className={this.state.defaultRowClass} colSpan="3" onMouseOver={this.darkens} onMouseLeave={this.un_darkens} onClick={this.props.addTopicCB}>Click to add item</td>
+                  <td className={this.state.defaultRowClass} colSpan="3" onMouseOver={this.darkens} onMouseLeave={this.un_darkens} onClick={this.props.addTopicCB}>{getLocale("ClickToAddItem")}</td>
                   <td></td>
                 </tr>
                 {
@@ -736,7 +742,7 @@ function init(ReactBootstrap, jQuery){
     getInitialState: function() {
       return {show: false, isSummaryMode: false};
     },
-    
+
     getIconClass: function()
     {
       if (this.state.isSummaryMode) {
@@ -745,31 +751,31 @@ function init(ReactBootstrap, jQuery){
         return "fa fa-lg fa-angle-double-down";
       }
     },
-    
+
     changeMode: function(){
       this.setState({isSummaryMode: !this.state.isSummaryMode});
     },
-    
+
     addTopic: function(content) {
       this.props.addTopicCB(content);
       this.setState({show: false});
     },
-    
+
     hideModal: function() {
       this.setState({show: false});
     },
     showModal: function() {
       this.setState({show: true});
     },
-    
+
     componentDidMount: function() {
       adjustHeight();
     },
-    
+
     componentDidUpdate: function() {
       adjustHeight();
     },
-    
+
     addTopicBtnStyle: function(){
       if (this.props.topicInfos == null || this.props.topicInfos.length == 0){
         return {display: "none"};
@@ -777,7 +783,7 @@ function init(ReactBootstrap, jQuery){
         return {paddingTop: "10px"};
       }
     },
-    
+
     render: function(){
       var Button = ReactBootstrap.Button;
       var Glyphicon = ReactBootstrap.Glyphicon;
@@ -786,9 +792,11 @@ function init(ReactBootstrap, jQuery){
           <table className="PCTDataTable">
             <thead>
               <tr>
-                <td className="PCTHead" style={{width: "auto", paddingLeft: "5px"}}><i className={this.getIconClass()} style={{width: "20px", cursor: "Pointer"}} onClick={this.changeMode}></i>Topic</td>
-                <td className="PCTHead" style={{width: "33%"}}>Pro</td>
-                <td className="PCTHead" style={{width: "33%"}}>Con</td>
+                <td className="PCTHead" style={{width: "auto", paddingLeft: "5px"}}>
+                  <i className={this.getIconClass()} style={{width: "20px", cursor: "Pointer"}} onClick={this.changeMode}></i>{getLocale("Topic")}
+                </td>
+                <td className="PCTHead" style={{width: "33%"}}>{getLocale("Pro")}</td>
+                <td className="PCTHead" style={{width: "33%"}}>{getLocale("Con")}</td>
                 <td style={{width: "30px", visibility: "hidden"}}></td>
               </tr>
             </thead>
@@ -796,8 +804,8 @@ function init(ReactBootstrap, jQuery){
               <TopicList topicInfos={this.props.topicInfos} isSummaryMode={this.state.isSummaryMode} deleteTopicCB={this.props.deleteTopicCB} updateTopicInfoCB={this.props.updateTopicInfoCB} addTopicCB={this.showModal}/>
             </tbody>
           </table>
-          <div style={this.addTopicBtnStyle()}><Button type="button" onClick={this.showModal}><Glyphicon glyph='plus'/>Add Topic</Button></div>
-          <NewItemModal title="Add new Topic" show={this.state.show} saveCB={this.addTopic} cancelCB={this.hideModal}/>
+          <div style={this.addTopicBtnStyle()}><Button type="button" onClick={this.showModal}><Glyphicon glyph='plus'/>{getLocale("AddTopic")}</Button></div>
+          <NewItemModal title={getLocale("AddNewTopic")} show={this.state.show} saveCB={this.addTopic} cancelCB={this.hideModal}/>
         </div>
       );
     }
@@ -826,7 +834,7 @@ function init(ReactBootstrap, jQuery){
       var topicInfo = this.createTopicData(content);
       topicInfos.push(topicInfo);
       this.updateWaveData(topicInfos);
-      
+
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
           title: "#{addTopicFeed}",
@@ -844,7 +852,7 @@ function init(ReactBootstrap, jQuery){
         return topicInfo.id != topicId;
       });
       this.updateWaveData(newTopicInfos);
-      
+
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
           title: "#{deleteTopicFeed}",

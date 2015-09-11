@@ -15,6 +15,24 @@
       <msg name="deleteConFeed">#{obj:actor} deleted con item "#{obj:object}" from topic "#{obj:object.attachments.1}" in the Pro/Con table #{obj:target}</msg>
       <msg name="updateConFeedTitle">updated con item in the Pro/Con table #{obj:target}</msg>
       <msg name="updateConFeedContent">updated con item "#{obj:object}" to "#{obj:object.attachments.1}" in topic "#{obj:object.attachments.2}"</msg>
+      <msg name="Topic">Topic</msg>
+      <msg name="AddTopic">Add Topic</msg>
+      <msg name="EditTopic">Edit Topic</msg>
+      <msg name="EditOpinion">Edit Opinion</msg>
+      <msg name="EditProOpinion">Edit Pro Opinion</msg>
+      <msg name="EditConOpinion">Edit Con Opinion</msg>
+      <msg name="Pro">Pro</msg>
+      <msg name="Con">Con</msg>
+      <msg name="ClickToAddItem">Click to add item</msg>
+      <msg name="AddNewTopic">Add new topic</msg>
+      <msg name="Save">Save</msg>
+      <msg name="Cancel">Cancel</msg>
+      <msg name="Delete">Delete</msg>
+      <msg name="Ok">OK</msg>
+      <msg name="CreateNewProOpinion">Create new Pro Opinion</msg>
+      <msg name="ClickToAddProOpinion">Click to add a Pro opinion</msg>
+      <msg name="CreateNewConOpinion">Create new Con Opinion</msg>
+      <msg name="ClickToAddConOpinion">Click to add a Con opinion</msg>
     </Locale>
   </ModulePrefs>
   <Content type="html" href="ProCon.react.html"/>

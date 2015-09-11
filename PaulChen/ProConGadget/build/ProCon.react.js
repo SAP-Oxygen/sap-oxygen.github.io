@@ -1,4 +1,11 @@
-
+function getLocale(msg){
+  if (typeof(gadgets) != "undefined" && gadgets) {
+    var prefs = new gadgets.Prefs();
+    return prefs.getMsg(msg);
+  } else {
+    return msg;
+  }
+}
 
 function distance_of_time_in_words(from){
     var to = new Date().getTime();
@@ -59,7 +66,7 @@ function getCurrentUserFullName() {
   if (typeof(wave) != "undefined" && wave && wave.getViewer()) {
     return getCreatorFullName(wave.getViewer().id_);
   }
-  
+
   return "";
 }
 
@@ -78,14 +85,14 @@ function init(ReactBootstrap, jQuery){
             React.createElement("h4", null, this.props.content)
           ), 
           React.createElement(Modal.Footer, null, 
-            React.createElement(Button, {onClick: this.props.cancel}, "Cancel"), 
-            React.createElement(Button, {onClick: this.props.ok}, "OK")
+            React.createElement(Button, {onClick: this.props.cancel}, getLocale("Cancel")), 
+            React.createElement(Button, {onClick: this.props.ok}, getLocale("Ok"))
           )
         )
       );
     }
   });
-  
+
   var NewItemModal = React.createClass({displayName: "NewItemModal",
     getInitialState() {
       return {content: this.props.content};
@@ -120,8 +127,8 @@ function init(ReactBootstrap, jQuery){
             React.createElement("textarea", {style: {width: "100%", resize: "none", height: "100px"}, onChange: this.contentChanged, value: this.state.content})
           ), 
           React.createElement(Modal.Footer, null, 
-            React.createElement(Button, {onClick: this.save}, "Save"), 
-            React.createElement(Button, {onClick: this.cancel}, "Cancel")
+            React.createElement(Button, {onClick: this.save}, getLocale("Save")), 
+            React.createElement(Button, {onClick: this.cancel}, getLocale("Cancel"))
           )
         )
       );
@@ -165,9 +172,9 @@ function init(ReactBootstrap, jQuery){
               React.createElement("textarea", {style: {width: "100%", resize: "none", height: "100px"}, onChange: this.contentChanged, value: this.state.content})
             ), 
             React.createElement(Modal.Footer, null, 
-              React.createElement(Button, {onClick: this.deleteT}, "Delete"), 
-              React.createElement(Button, {onClick: this.save}, "Save"), 
-              React.createElement(Button, {onClick: this.cancel}, "Cancel")
+              React.createElement(Button, {onClick: this.deleteT}, getLocale("Delete")), 
+              React.createElement(Button, {onClick: this.save}, getLocale("Save")), 
+              React.createElement(Button, {onClick: this.cancel}, getLocale("Cancel"))
             )
           )
         );
@@ -181,8 +188,8 @@ function init(ReactBootstrap, jQuery){
               React.createElement("textarea", {style: {width: "100%", resize: "none", height: "100px"}, onChange: this.contentChanged, value: this.state.content})
             ), 
             React.createElement(Modal.Footer, null, 
-              React.createElement(Button, {onClick: this.save}, "Save"), 
-              React.createElement(Button, {onClick: this.cancel}, "Cancel")
+              React.createElement(Button, {onClick: this.save}, getLocale("Save")), 
+              React.createElement(Button, {onClick: this.cancel}, getLocale("Cancel"))
             )
           )
         );
@@ -212,7 +219,7 @@ function init(ReactBootstrap, jQuery){
       return (
         React.createElement("td", {className: "OptionData", onClick: this.clickHandler}, 
           React.createElement("span", null, this.props.title), 
-          React.createElement(EditItemModal, {title: "Edit Topic", content: this.props.title, show: this.state.show, saveCB: this.updateTopic, cancelCB: this.hideModal, showDelete: false})
+          React.createElement(EditItemModal, {title: getLocale("EditTopic"), content: this.props.title, show: this.state.show, saveCB: this.updateTopic, cancelCB: this.hideModal, showDelete: false})
         )
       );
     }
@@ -251,22 +258,22 @@ function init(ReactBootstrap, jQuery){
     render: function(){
       if (this.props.isSummaryMode) {
         return (
-          React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green", opacity: this.state.opacity}, onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler}, React.createElement(NewItemModal, {title: "Create new Pro Opinion", show: this.state.show, saveCB: this.addPro, cancelCB: this.hideModal}))
+          React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green", opacity: this.state.opacity}, onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler}, React.createElement(NewItemModal, {title: getLocale("CreateNewProOpinion"), show: this.state.show, saveCB: this.addPro, cancelCB: this.hideModal}))
         );
       } else {
         return (
           React.createElement("div", {className: "ProConOption", onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler, style: {opacity: this.state.opacity}}, 
             React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
               React.createElement("tr", null, 
-                React.createElement("td", {title: "Create new Pro Option", style: {width: "35px"}}, 
+                React.createElement("td", {title: getLocale("CreateNewProOpinion"), style: {width: "35px"}}, 
                   React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green"}})
                 ), 
                 React.createElement("td", {className: "FullTextProCon"}, 
-                  React.createElement("span", {style: {top: "10px", color: "#A6A6A6", fontSize: "13px"}}, "Click to add a Pro opinion")
+                  React.createElement("span", {style: {top: "10px", color: "#A6A6A6", fontSize: "13px"}}, getLocale("ClickToAddProOpinion"))
                 )
               )
             ), 
-            React.createElement(NewItemModal, {title: "Create new Pro Opinion", show: this.state.show, saveCB: this.addPro, cancelCB: this.hideModal})
+            React.createElement(NewItemModal, {title: getLocale("CreateNewProOpinion"), show: this.state.show, saveCB: this.addPro, cancelCB: this.hideModal})
           )
         );
       }
@@ -296,11 +303,11 @@ function init(ReactBootstrap, jQuery){
       this.props.deleteProCB(this.props.proInfo.id);
       this.setState({show: false});
     },
-    
+
     mouseOverHandler: function(){
       this.setState({style: {backgroundColor: "#cccccc"}});
     },
-    
+
     mouseLeaveHandler: function(){
       this.setState({style: {}});
     },
@@ -313,7 +320,7 @@ function init(ReactBootstrap, jQuery){
                        ));
         return (
           React.createElement(OverlayTrigger, {trigger: "hover", placement: "bottom", overlay: popover}, 
-          React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green", width: "30px"}, onClick: this.showModal}, React.createElement(EditItemModal, {title: "Edit Pro Opinion", content: this.props.proInfo.content, show: this.state.show, saveCB: this.updatePro, cancelCB: this.hideModal, deleteCB: this.deletePro, showDelete: true}))
+          React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green", width: "30px"}, onClick: this.showModal}, React.createElement(EditItemModal, {title: getLocale("EditProOpinion"), content: this.props.proInfo.content, show: this.state.show, saveCB: this.updatePro, cancelCB: this.hideModal, deleteCB: this.deletePro, showDelete: true}))
           )
         );
       } else {
@@ -321,7 +328,7 @@ function init(ReactBootstrap, jQuery){
           React.createElement("div", {onClick: this.showModal, onMouseOver: this.mouseOverHandler, onMouseLeave: this.mouseLeaveHandler}, 
             React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
               React.createElement("tr", {style: this.state.style}, 
-                React.createElement("td", {title: "Edit Option", style: {width: "35px"}}, 
+                React.createElement("td", {title: getLocale("EditOpinion"), style: {width: "35px"}}, 
                   React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green", width: "30px"}})
                 ), 
                 React.createElement("td", {className: "FullTextProCon"}, 
@@ -332,7 +339,7 @@ function init(ReactBootstrap, jQuery){
                 React.createElement("td", null), React.createElement("td", {className: "FullTextUser"}, getCreatorFullName(this.props.proInfo.creatorId), ", ", distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate)))
               )
             ), 
-            React.createElement(EditItemModal, {title: "Edit Pro Opinion", content: this.props.proInfo.content, show: this.state.show, saveCB: this.updatePro, cancelCB: this.hideModal, deleteCB: this.deletePro, showDelete: true})
+            React.createElement(EditItemModal, {title: getLocale("EditProOpinion"), content: this.props.proInfo.content, show: this.state.show, saveCB: this.updatePro, cancelCB: this.hideModal, deleteCB: this.deletePro, showDelete: true})
           )
         );
       }
@@ -344,7 +351,7 @@ function init(ReactBootstrap, jQuery){
       var proInfos = this.props.proInfos;
       proInfos.push(newProInfo);
       this.props.updateProsCB(proInfos);
-      
+
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
           title: "#{addProFeed}",
@@ -363,14 +370,14 @@ function init(ReactBootstrap, jQuery){
           return proInfo.id == proId;
         })[0];
         var oldContent = proToBeUpdated.content;
-        
+
         newProInfos = this.props.proInfos.map(function(proInfo){
           if (proInfo.id == proId) {
             proInfo.content = newProContent;
           }
           return proInfo;
         });
-        
+
         typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
           activity: {
             title: "#{updateProFeedTitle}",
@@ -394,7 +401,7 @@ function init(ReactBootstrap, jQuery){
         var proToBeDeleted = this.props.proInfos.filter(function(proInfo){
           return proInfo.id == proId;
         })[0];
-        
+
         typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
           activity: {
             title: "#{deleteProFeed}",
@@ -459,22 +466,22 @@ function init(ReactBootstrap, jQuery){
     render: function(){
       if (this.props.isSummaryMode){
         return (React.createElement("i", {className: "fa fa-minus fa-2x", style: {color: "Brown", opacity: this.state.opacity}, onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler}, 
-                  React.createElement(NewItemModal, {title: "Create new Con Opinion", show: this.state.show, saveCB: this.addCon, cancelCB: this.hideModal})
+                  React.createElement(NewItemModal, {title: getLocale("CreateNewConOpinion"), show: this.state.show, saveCB: this.addCon, cancelCB: this.hideModal})
                 ));
       } else {
         return (
           React.createElement("div", {onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler, style: {opacity: this.state.opacity}}, 
             React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
               React.createElement("tr", null, 
-                React.createElement("td", {title: "Create new Con Option", style: {width: "35px"}}, 
+                React.createElement("td", {title: getLocale("CreateNewConOpinion"), style: {width: "35px"}}, 
                   React.createElement("i", {className: "fa fa-minus fa-2x", style: {color: "Brown"}})
                 ), 
                 React.createElement("td", {className: "FullTextProCon"}, 
-                  React.createElement("span", {style: {color: "#A6A6A6", fontSize: "13px"}}, "Click to add a Con opinion")
+                  React.createElement("span", {style: {color: "#A6A6A6", fontSize: "13px"}}, getLocale("ClickToAddConOpinion"))
                 )
               )
             ), 
-            React.createElement(NewItemModal, {title: "Create new Con Opinion", show: this.state.show, saveCB: this.addCon, cancelCB: this.hideModal})
+            React.createElement(NewItemModal, {title: getLocale("CreateNewConOpinion"), show: this.state.show, saveCB: this.addCon, cancelCB: this.hideModal})
           )
         );
       }
@@ -504,11 +511,11 @@ function init(ReactBootstrap, jQuery){
       this.props.deleteConCB(this.props.conInfo.id);
       this.setState({show: false});
     },
-    
+
     mouseOverHandler: function(){
       this.setState({style: {backgroundColor: "#cccccc"}});
     },
-    
+
     mouseLeaveHandler: function(){
       this.setState({style: {}});
     },
@@ -551,7 +558,7 @@ function init(ReactBootstrap, jQuery){
       var conInfos = this.props.conInfos;
       conInfos.push(newConInfo);
       this.props.updateConsCB(conInfos);
-      
+
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
           title: "#{addConFeed}",
@@ -570,7 +577,7 @@ function init(ReactBootstrap, jQuery){
           return conInfo.id == conId;
         })[0];
         var oldContent = conToBeUpdated.content;
-        
+
         newConInfos = this.props.conInfos.map(function(conInfo){
           if (conInfo.id == conId)
           {
@@ -578,7 +585,7 @@ function init(ReactBootstrap, jQuery){
           }
           return conInfo;
         });
-        
+
         typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
           activity: {
             title: "#{updateConFeedTitle}",
@@ -599,11 +606,11 @@ function init(ReactBootstrap, jQuery){
         newConInfos = this.props.conInfos.filter(function(conInfo){
           return conInfo.id != conId;
         });
-        
+
         var conToBeDeleted = this.props.conInfos.filter(function(conInfo){
           return conInfo.id == conId;
         })[0];
-        
+
         typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
           activity: {
             title: "#{deleteConFeed}",
@@ -638,13 +645,12 @@ function init(ReactBootstrap, jQuery){
     getInitialState: function() {
       return {show: false, style: {visibility: "hidden"}};
     },
-    
     updateTitle: function(newTitle){
       var topicInfo = this.props.topicInfo;
       var oldTopicTitle = topicInfo.title;
       topicInfo.title = newTitle;
       this.props.updateTopicInfoCB(this.props.topicInfo.id, topicInfo);
-      
+
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
           title: "#{updateTopicFeed}",
@@ -699,15 +705,15 @@ function init(ReactBootstrap, jQuery){
     getInitialState: function() {
       return {defaultRowClass: "PCTDefaultRow"};
     },
-    
+
     darkens: function() {
       this.setState({defaultRowClass: "PCTDefaultRowMouseOver"});
     },
-    
+
     un_darkens: function() {
       this.setState({defaultRowClass: "PCTDefaultRow"});
     },
-    
+
     render: function(){
       var deleteTopicCB = this.props.deleteTopicCB;
       var updateTopicInfoCB = this.props.updateTopicInfoCB;
@@ -719,7 +725,7 @@ function init(ReactBootstrap, jQuery){
 
       return (React.createElement("tbody", null, 
                 React.createElement("tr", {style: defaultRowStyle}, 
-                  React.createElement("td", {className: this.state.defaultRowClass, colSpan: "3", onMouseOver: this.darkens, onMouseLeave: this.un_darkens, onClick: this.props.addTopicCB}, "Click to add item"), 
+                  React.createElement("td", {className: this.state.defaultRowClass, colSpan: "3", onMouseOver: this.darkens, onMouseLeave: this.un_darkens, onClick: this.props.addTopicCB}, getLocale("ClickToAddItem")), 
                   React.createElement("td", null)
                 ), 
                 
@@ -736,7 +742,7 @@ function init(ReactBootstrap, jQuery){
     getInitialState: function() {
       return {show: false, isSummaryMode: false};
     },
-    
+
     getIconClass: function()
     {
       if (this.state.isSummaryMode) {
@@ -745,31 +751,31 @@ function init(ReactBootstrap, jQuery){
         return "fa fa-lg fa-angle-double-down";
       }
     },
-    
+
     changeMode: function(){
       this.setState({isSummaryMode: !this.state.isSummaryMode});
     },
-    
+
     addTopic: function(content) {
       this.props.addTopicCB(content);
       this.setState({show: false});
     },
-    
+
     hideModal: function() {
       this.setState({show: false});
     },
     showModal: function() {
       this.setState({show: true});
     },
-    
+
     componentDidMount: function() {
       adjustHeight();
     },
-    
+
     componentDidUpdate: function() {
       adjustHeight();
     },
-    
+
     addTopicBtnStyle: function(){
       if (this.props.topicInfos == null || this.props.topicInfos.length == 0){
         return {display: "none"};
@@ -777,7 +783,7 @@ function init(ReactBootstrap, jQuery){
         return {paddingTop: "10px"};
       }
     },
-    
+
     render: function(){
       var Button = ReactBootstrap.Button;
       var Glyphicon = ReactBootstrap.Glyphicon;
@@ -786,9 +792,11 @@ function init(ReactBootstrap, jQuery){
           React.createElement("table", {className: "PCTDataTable"}, 
             React.createElement("thead", null, 
               React.createElement("tr", null, 
-                React.createElement("td", {className: "PCTHead", style: {width: "auto", paddingLeft: "5px"}}, React.createElement("i", {className: this.getIconClass(), style: {width: "20px", cursor: "Pointer"}, onClick: this.changeMode}), "Topic"), 
-                React.createElement("td", {className: "PCTHead", style: {width: "33%"}}, "Pro"), 
-                React.createElement("td", {className: "PCTHead", style: {width: "33%"}}, "Con"), 
+                React.createElement("td", {className: "PCTHead", style: {width: "auto", paddingLeft: "5px"}}, 
+                  React.createElement("i", {className: this.getIconClass(), style: {width: "20px", cursor: "Pointer"}, onClick: this.changeMode}), getLocale("Topic")
+                ), 
+                React.createElement("td", {className: "PCTHead", style: {width: "33%"}}, getLocale("Pro")), 
+                React.createElement("td", {className: "PCTHead", style: {width: "33%"}}, getLocale("Con")), 
                 React.createElement("td", {style: {width: "30px", visibility: "hidden"}})
               )
             ), 
@@ -796,8 +804,8 @@ function init(ReactBootstrap, jQuery){
               React.createElement(TopicList, {topicInfos: this.props.topicInfos, isSummaryMode: this.state.isSummaryMode, deleteTopicCB: this.props.deleteTopicCB, updateTopicInfoCB: this.props.updateTopicInfoCB, addTopicCB: this.showModal})
             )
           ), 
-          React.createElement("div", {style: this.addTopicBtnStyle()}, React.createElement(Button, {type: "button", onClick: this.showModal}, React.createElement(Glyphicon, {glyph: "plus"}), "Add Topic")), 
-          React.createElement(NewItemModal, {title: "Add new Topic", show: this.state.show, saveCB: this.addTopic, cancelCB: this.hideModal})
+          React.createElement("div", {style: this.addTopicBtnStyle()}, React.createElement(Button, {type: "button", onClick: this.showModal}, React.createElement(Glyphicon, {glyph: "plus"}), getLocale("AddTopic"))), 
+          React.createElement(NewItemModal, {title: getLocale("AddNewTopic"), show: this.state.show, saveCB: this.addTopic, cancelCB: this.hideModal})
         )
       );
     }
@@ -826,7 +834,7 @@ function init(ReactBootstrap, jQuery){
       var topicInfo = this.createTopicData(content);
       topicInfos.push(topicInfo);
       this.updateWaveData(topicInfos);
-      
+
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
           title: "#{addTopicFeed}",
@@ -844,7 +852,7 @@ function init(ReactBootstrap, jQuery){
         return topicInfo.id != topicId;
       });
       this.updateWaveData(newTopicInfos);
-      
+
       typeof(osapi) != "undefined" && osapi && osapi.activitystreams.create({
         activity: {
           title: "#{deleteTopicFeed}",
