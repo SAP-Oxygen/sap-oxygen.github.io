@@ -1,10 +1,10 @@
 {
-    "Name": "GroupJune28_1948",
+    "Name": "createGroupPrimaryGadgetObject_JSON_05",
     "PrimaryGadgetObject": {
         "GroupGadget": {
             "InitializingDataJSON": "{\"hello\": {\"a\": 1, \"b\": \"world\"}}",
             "__metadata": {
-                "uri": "GroupGadgets('RO3djeQkKFbmqepYD5z1n8')"
+                "uri": "GroupGadgets('722GAyWdjluZbWpRkyz6eJ')"
             }
         },
         "__metadata": {
