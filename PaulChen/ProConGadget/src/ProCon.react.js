@@ -797,12 +797,10 @@ function init(ReactBootstrap, jQuery){
                 </td>
                 <td className="PCTHead" style={{width: "33%"}}>{getLocale("Pro")}</td>
                 <td className="PCTHead" style={{width: "33%"}}>{getLocale("Con")}</td>
-                <td style={{width: "30px", visibility: "hidden"}}></td>
+                <td style={{width: "40px", visibility: "hidden"}}></td>
               </tr>
             </thead>
-            <tbody>
-              <TopicList topicInfos={this.props.topicInfos} isSummaryMode={this.state.isSummaryMode} deleteTopicCB={this.props.deleteTopicCB} updateTopicInfoCB={this.props.updateTopicInfoCB} addTopicCB={this.showModal}/>
-            </tbody>
+            <TopicList topicInfos={this.props.topicInfos} isSummaryMode={this.state.isSummaryMode} deleteTopicCB={this.props.deleteTopicCB} updateTopicInfoCB={this.props.updateTopicInfoCB} addTopicCB={this.showModal}/>
           </table>
           <div style={this.addTopicBtnStyle()}><Button type="button" onClick={this.showModal}><Glyphicon glyph='plus'/>{getLocale("AddTopic")}</Button></div>
           <NewItemModal title={getLocale("AddNewTopic")} show={this.state.show} saveCB={this.addTopic} cancelCB={this.hideModal}/>

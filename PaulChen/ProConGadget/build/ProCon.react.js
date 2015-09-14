@@ -797,12 +797,10 @@ function init(ReactBootstrap, jQuery){
                 ), 
                 React.createElement("td", {className: "PCTHead", style: {width: "33%"}}, getLocale("Pro")), 
                 React.createElement("td", {className: "PCTHead", style: {width: "33%"}}, getLocale("Con")), 
-                React.createElement("td", {style: {width: "30px", visibility: "hidden"}})
+                React.createElement("td", {style: {width: "40px", visibility: "hidden"}})
               )
             ), 
-            React.createElement("tbody", null, 
-              React.createElement(TopicList, {topicInfos: this.props.topicInfos, isSummaryMode: this.state.isSummaryMode, deleteTopicCB: this.props.deleteTopicCB, updateTopicInfoCB: this.props.updateTopicInfoCB, addTopicCB: this.showModal})
-            )
+            React.createElement(TopicList, {topicInfos: this.props.topicInfos, isSummaryMode: this.state.isSummaryMode, deleteTopicCB: this.props.deleteTopicCB, updateTopicInfoCB: this.props.updateTopicInfoCB, addTopicCB: this.showModal})
           ), 
           React.createElement("div", {style: this.addTopicBtnStyle()}, React.createElement(Button, {type: "button", onClick: this.showModal}, React.createElement(Glyphicon, {glyph: "plus"}), getLocale("AddTopic"))), 
           React.createElement(NewItemModal, {title: getLocale("AddNewTopic"), show: this.state.show, saveCB: this.addTopic, cancelCB: this.hideModal})
