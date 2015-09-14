@@ -94,7 +94,7 @@ function init(ReactBootstrap, jQuery){
   });
 
   var NewItemModal = React.createClass({
-    getInitialState() {
+    getInitialState: function() {
       return {content: this.props.content};
     },
 
@@ -136,7 +136,7 @@ function init(ReactBootstrap, jQuery){
   });
 
   var EditItemModal = React.createClass({
-    getInitialState() {
+    getInitialState: function() {
       return {content: this.props.content};
     },
 
