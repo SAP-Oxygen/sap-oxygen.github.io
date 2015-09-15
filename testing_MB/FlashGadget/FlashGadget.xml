@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
  <Module specificationVersion='2'>
-   <ModulePrefs title="FlashGadget" height="700">
+   <ModulePrefs title="FlashGadget" height="720" width="1280">
    </ModulePrefs>
-<Content type="url" href="FlashGadget.html"/>
+<Content type="html" href="FlashGadget.html"/>
  </Module>
