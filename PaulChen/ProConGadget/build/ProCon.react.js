@@ -81,7 +81,7 @@ function init(ReactBootstrap, jQuery){
             React.createElement(Modal.Title, null, this.props.title)
           ), 
           React.createElement(Modal.Body, null, 
-            React.createElement("h4", null, this.props.content)
+            React.createElement("table", {style: {border: 0}}, React.createElement("tr", null, React.createElement("td", {style: {wordBreak: "break-all", wordWrap: "break-word"}}, this.props.content)))
           ), 
           React.createElement(Modal.Footer, null, 
             React.createElement(Button, {onClick: this.props.cancel}, getLocale("Cancel")), 
@@ -314,8 +314,13 @@ function init(ReactBootstrap, jQuery){
       if (this.props.isSummaryMode){
         var Popover = ReactBootstrap.Popover;
         var OverlayTrigger = ReactBootstrap.OverlayTrigger;
-        var popover = (React.createElement(Popover, {bsSize: "xsmall", title: getCreatorFullName(this.props.proInfo.creatorId) + "," + distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate))}, 
-                         this.props.proInfo.content
+        var title = getCreatorFullName(this.props.proInfo.creatorId) + "," + distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate));
+        var popover = (React.createElement(Popover, {bsSize: "xsmall", title: title}, 
+                         React.createElement("table", {style: {border: 0}}, 
+                           React.createElement("tr", null, 
+                             React.createElement("td", {style: {wordBreak: "break-all", wordWrap: "break-word"}}, this.props.proInfo.content)
+                           )
+                         )
                        ));
         return (
           React.createElement(OverlayTrigger, {trigger: "hover", placement: "bottom", overlay: popover}, 
@@ -523,7 +528,14 @@ function init(ReactBootstrap, jQuery){
       if (this.props.isSummaryMode){
         var Popover = ReactBootstrap.Popover;
         var OverlayTrigger = ReactBootstrap.OverlayTrigger;
-        var popover = (React.createElement(Popover, {bsSize: "xsmall", title: getCreatorFullName(this.props.conInfo.creatorId) + "," + distance_of_time_in_words(Date.parse(this.props.conInfo.createdDate))}, this.props.conInfo.content));
+        var title = getCreatorFullName(this.props.conInfo.creatorId) + "," + distance_of_time_in_words(Date.parse(this.props.conInfo.createdDate));
+        var popover = (React.createElement(Popover, {bsSize: "xsmall", title: title}, 
+                         React.createElement("table", {style: {border: 0}}, 
+                           React.createElement("tr", null, 
+                             React.createElement("td", {style: {wordBreak: "break-all", wordWrap: "break-word"}}, this.props.conInfo.content)
+                           )
+                         )
+                       ));
         return (React.createElement(OverlayTrigger, {trigger: "hover", placement: "bottom", overlay: popover}, 
                   React.createElement("i", {className: "fa fa-minus fa-2x", style: {color: "Brown", width: "30px"}, onClick: this.showModal}, 
                   React.createElement(EditItemModal, {title: "Edit Con Opinion", content: this.props.conInfo.content, show: this.state.show, saveCB: this.updateCon, cancelCB: this.hideModal, deleteCB: this.deleteCon, showDelete: true})

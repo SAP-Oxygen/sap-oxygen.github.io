@@ -81,7 +81,7 @@ function init(ReactBootstrap, jQuery){
             <Modal.Title>{this.props.title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>{this.props.content}</h4>
+            <table style={{border: 0}}><tr><td style={{wordBreak: "break-all", wordWrap: "break-word"}}>{this.props.content}</td></tr></table>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.cancel}>{getLocale("Cancel")}</Button>
@@ -314,8 +314,13 @@ function init(ReactBootstrap, jQuery){
       if (this.props.isSummaryMode){
         var Popover = ReactBootstrap.Popover;
         var OverlayTrigger = ReactBootstrap.OverlayTrigger;
-        var popover = (<Popover bsSize="xsmall" title={getCreatorFullName(this.props.proInfo.creatorId) + "," + distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate))}>
-                         {this.props.proInfo.content}
+        var title = getCreatorFullName(this.props.proInfo.creatorId) + "," + distance_of_time_in_words(Date.parse(this.props.proInfo.createdDate));
+        var popover = (<Popover bsSize="xsmall" title={title}>
+                         <table style={{border: 0}}>
+                           <tr>
+                             <td style={{wordBreak: "break-all", wordWrap: "break-word"}}>{this.props.proInfo.content}</td>
+                           </tr>
+                         </table>
                        </Popover>);
         return (
           <OverlayTrigger trigger='hover' placement='bottom' overlay={popover}>
@@ -523,7 +528,14 @@ function init(ReactBootstrap, jQuery){
       if (this.props.isSummaryMode){
         var Popover = ReactBootstrap.Popover;
         var OverlayTrigger = ReactBootstrap.OverlayTrigger;
-        var popover = (<Popover bsSize="xsmall" title={getCreatorFullName(this.props.conInfo.creatorId) + "," + distance_of_time_in_words(Date.parse(this.props.conInfo.createdDate))}>{this.props.conInfo.content}</Popover>);
+        var title = getCreatorFullName(this.props.conInfo.creatorId) + "," + distance_of_time_in_words(Date.parse(this.props.conInfo.createdDate));
+        var popover = (<Popover bsSize="xsmall" title={title}>
+                         <table style={{border: 0}}>
+                           <tr>
+                             <td style={{wordBreak: "break-all", wordWrap: "break-word"}}>{this.props.conInfo.content}</td>
+                           </tr>
+                         </table>
+                       </Popover>);
         return (<OverlayTrigger trigger='hover' placement='bottom' overlay={popover}>
                   <i className="fa fa-minus fa-2x" style={{color: "Brown", width: "30px"}} onClick={this.showModal}>
                   <EditItemModal title="Edit Con Opinion" content={this.props.conInfo.content} show={this.state.show} saveCB={this.updateCon} cancelCB={this.hideModal} deleteCB={this.deleteCon} showDelete={true}/>
