@@ -47,11 +47,7 @@ function guid(){
 }
 
 function adjustHeight(){
-  var initHeight = 400;
-  var height = $("#ProConGadget").height();
-  if (height > initHeight) {
     gadgets.window.adjustHeight();
-  }
 }
 
 function getCreatorFullName(creatorId){
