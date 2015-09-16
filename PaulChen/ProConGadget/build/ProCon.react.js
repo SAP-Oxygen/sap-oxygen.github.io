@@ -77,6 +77,9 @@ function init(ReactBootstrap, jQuery){
       var Button = ReactBootstrap.Button;
       return (
         React.createElement(Modal, {bsSize: "small", show: this.props.show, onHide: this.props.cancel}, 
+          React.createElement(Modal.Header, null, 
+            React.createElement(Modal.Title, null, this.props.title)
+          ), 
           React.createElement(Modal.Body, null, 
             React.createElement("h4", null, this.props.content)
           ), 
@@ -685,13 +688,14 @@ function init(ReactBootstrap, jQuery){
     },
     render: function(){
       var Glyphicon = ReactBootstrap.Glyphicon;
+      var topicTitle = this.props.topicInfo.title;
       return (
         React.createElement("tr", {onMouseEnter: this.showTrash, onMouseLeave: this.hideTrash}, 
           React.createElement(TitleColumn, {title: this.props.topicInfo.title, deleteTopicCB: this.props.deleteTopicCB, updateTitleCB: this.updateTitle, id: this.props.topicInfo.id}), 
           React.createElement(ProColumn, {topicTitle: this.props.topicInfo.title, proInfos: this.props.topicInfo.proInfos, isSummaryMode: this.props.isSummaryMode, updateProsCB: this.updatePros}), 
           React.createElement(ConColumn, {topicTitle: this.props.topicInfo.title, conInfos: this.props.topicInfo.conInfos, isSummaryMode: this.props.isSummaryMode, updateConsCB: this.updateCons}), 
           React.createElement("td", {style: {border: "none", paddingLeft: "10px", cursor: "pointer", width: "30px"}, onClick: this.showModal}, React.createElement(Glyphicon, {glyph: "trash", style: this.state.style}), 
-            React.createElement(ConfirmModal, {content: "Are you sure you want to delete this topic and related pro/con opinions?", show: this.state.show, ok: this.deleteTopic, cancel: this.hideModal})
+            React.createElement(ConfirmModal, {title: "Delete Topic", content: "Are you sure you want to delete topic \"" + this.props.topicInfo.title + "\"", show: this.state.show, ok: this.deleteTopic, cancel: this.hideModal})
           )
         ));
     }

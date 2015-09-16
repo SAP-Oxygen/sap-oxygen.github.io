@@ -77,6 +77,9 @@ function init(ReactBootstrap, jQuery){
       var Button = ReactBootstrap.Button;
       return (
         <Modal bsSize="small" show={this.props.show} onHide={this.props.cancel}>
+          <Modal.Header>
+            <Modal.Title>{this.props.title}</Modal.Title>
+          </Modal.Header>
           <Modal.Body>
             <h4>{this.props.content}</h4>
           </Modal.Body>
@@ -685,13 +688,14 @@ function init(ReactBootstrap, jQuery){
     },
     render: function(){
       var Glyphicon = ReactBootstrap.Glyphicon;
+      var topicTitle = this.props.topicInfo.title;
       return (
         <tr onMouseEnter={this.showTrash} onMouseLeave={this.hideTrash}>
           <TitleColumn title={this.props.topicInfo.title} deleteTopicCB={this.props.deleteTopicCB} updateTitleCB={this.updateTitle} id={this.props.topicInfo.id} />
           <ProColumn topicTitle={this.props.topicInfo.title} proInfos={this.props.topicInfo.proInfos} isSummaryMode={this.props.isSummaryMode} updateProsCB={this.updatePros} />
           <ConColumn topicTitle={this.props.topicInfo.title} conInfos={this.props.topicInfo.conInfos} isSummaryMode={this.props.isSummaryMode} updateConsCB={this.updateCons} />
           <td style={{border: "none", paddingLeft: "10px", cursor: "pointer", width: "30px"}} onClick={this.showModal}><Glyphicon glyph='trash' style={this.state.style}/>
-            <ConfirmModal content="Are you sure you want to delete this topic and related pro/con opinions?" show={this.state.show} ok={this.deleteTopic} cancel={this.hideModal}/>
+            <ConfirmModal title="Delete Topic" content={"Are you sure you want to delete topic \"" + this.props.topicInfo.title + "\""} show={this.state.show} ok={this.deleteTopic} cancel={this.hideModal}/>
           </td>
         </tr>);
     }
