@@ -8,4 +8,6 @@
   overflow: hidden;
   vertical-align: top;
   cursor: pointer;
+  word-break: break-all;
+  word-wrap: break-word;
 }
