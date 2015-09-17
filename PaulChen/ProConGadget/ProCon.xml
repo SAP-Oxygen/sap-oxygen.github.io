@@ -18,6 +18,8 @@
       <msg name="Topic">Topic</msg>
       <msg name="AddTopic">Add Topic</msg>
       <msg name="EditTopic">Edit Topic</msg>
+      <msg name="DeleteTopic">Delete Topic</msg>
+      <msg name="DeleteTopicContent">Are you sure you want to delete topic "PLACEHOLDER"?</msg>
       <msg name="EditOpinion">Edit Opinion</msg>
       <msg name="EditProOpinion">Edit Pro Opinion</msg>
       <msg name="EditConOpinion">Edit Con Opinion</msg>

@@ -729,13 +729,18 @@ function init(ReactBootstrap, jQuery){
     render: function(){
       var Glyphicon = ReactBootstrap.Glyphicon;
       var topicTitle = this.props.topicInfo.title;
+      var topicContent = getLocale("DeleteTopicContent");
+      if (topicContent.indexOf("PLACEHOLDER", 0) != -1) {
+        topicContent = topicContent.replace(/PLACEHOLDER/, this.props.topicInfo.title);
+      }
+
       return (
         <tr onMouseEnter={this.showTrash} onMouseLeave={this.hideTrash}>
           <TitleColumn title={this.props.topicInfo.title} deleteTopicCB={this.props.deleteTopicCB} updateTitleCB={this.updateTitle} id={this.props.topicInfo.id} />
           <ProColumn topicTitle={this.props.topicInfo.title} proInfos={this.props.topicInfo.proInfos} isSummaryMode={this.props.isSummaryMode} updateProsCB={this.updatePros} />
           <ConColumn topicTitle={this.props.topicInfo.title} conInfos={this.props.topicInfo.conInfos} isSummaryMode={this.props.isSummaryMode} updateConsCB={this.updateCons} />
           <td style={{border: "none", paddingLeft: "10px", cursor: "pointer", width: "30px"}} onClick={this.showModal}><Glyphicon glyph='trash' style={this.state.style}/>
-            <ConfirmModal title="Delete Topic" content={"Are you sure you want to delete topic \"" + this.props.topicInfo.title + "\""} show={this.state.show} ok={this.deleteTopic} cancel={this.hideModal}/>
+            <ConfirmModal title={getLocale("DeleteTopic")} content={topicContent} show={this.state.show} ok={this.deleteTopic} cancel={this.hideModal}/>
           </td>
         </tr>);
     }
