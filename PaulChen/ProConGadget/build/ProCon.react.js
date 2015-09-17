@@ -94,7 +94,7 @@ function init(ReactBootstrap, jQuery){
 
   var NewItemModal = React.createClass({displayName: "NewItemModal",
     getInitialState: function() {
-      return {content: this.props.content};
+      return {content: this.props.content == null ? "" : this.props.content, validationText: ""};
     },
 
     save: function() {
@@ -102,6 +102,10 @@ function init(ReactBootstrap, jQuery){
       this.setState({content: ""});
       if (newContent != "") {
         this.props.saveCB(newContent);
+      }
+      else
+      {
+        this.setState({validationText: "Blank text is now allowed"});
       }
     },
 
@@ -112,18 +116,29 @@ function init(ReactBootstrap, jQuery){
 
     contentChanged: function(e) {
       this.setState({content: e.target.value});
+      this.setState({validationText: ""});
+    },
+
+    validationState: function() {
+      var length = this.state.content.trim().length;
+      if (length == 0) {
+        return "error";
+      } else {
+        return "success";
+      }
     },
 
     render: function() {
       var Modal = ReactBootstrap.Modal;
       var Button = ReactBootstrap.Button;
+      var Input = ReactBootstrap.Input;
       return (
         React.createElement(Modal, {bsSize: "small", show: this.props.show, onHide: this.cancel}, 
           React.createElement(Modal.Header, null, 
             React.createElement(Modal.Title, null, this.props.title)
           ), 
           React.createElement(Modal.Body, null, 
-            React.createElement("textarea", {style: {width: "100%", resize: "none", height: "100px"}, onChange: this.contentChanged, value: this.state.content})
+            React.createElement(Input, {type: "textarea", help: this.state.validationText, bsStyle: this.validationState(), style: {width: "100%", resize: "none", height: "100px"}, onChange: this.contentChanged, value: this.state.content})
           ), 
           React.createElement(Modal.Footer, null, 
             React.createElement(Button, {onClick: this.save}, getLocale("Save")), 
@@ -136,13 +151,15 @@ function init(ReactBootstrap, jQuery){
 
   var EditItemModal = React.createClass({displayName: "EditItemModal",
     getInitialState: function() {
-      return {content: this.props.content};
+      return {content: this.props.content == null ? "" : this.props.content, validationText: ""};
     },
 
     save: function() {
       var newContent = this.state.content.trim();
       if (newContent != "") {
         this.props.saveCB(newContent);
+      } else {
+        this.setState({validationText: "Blank text is now allowed"});
       }
     },
 
@@ -156,11 +173,22 @@ function init(ReactBootstrap, jQuery){
 
     contentChanged: function(e) {
       this.setState({content: e.target.value});
+      this.setState({validationText: ""});
+    },
+
+    validationState: function() {
+      var length = this.state.content.trim().length;
+      if (length == 0) {
+        return "error";
+      } else {
+        return "success";
+      }
     },
 
     render: function() {
       var Modal = ReactBootstrap.Modal;
       var Button = ReactBootstrap.Button;
+      var Input = ReactBootstrap.Input;
       if (this.props.showDelete) {
         return (
           React.createElement(Modal, {bsSize: "small", show: this.props.show, onHide: this.cancel}, 
@@ -168,7 +196,7 @@ function init(ReactBootstrap, jQuery){
               React.createElement(Modal.Title, null, this.props.title)
             ), 
             React.createElement(Modal.Body, null, 
-              React.createElement("textarea", {style: {width: "100%", resize: "none", height: "100px"}, onChange: this.contentChanged, value: this.state.content})
+              React.createElement(Input, {type: "textarea", help: this.state.validationText, bsStyle: this.validationState(), style: {width: "100%", resize: "none", height: "100px"}, onChange: this.contentChanged, value: this.state.content})
             ), 
             React.createElement(Modal.Footer, null, 
               React.createElement(Button, {onClick: this.deleteT}, getLocale("Delete")), 
@@ -184,7 +212,7 @@ function init(ReactBootstrap, jQuery){
               React.createElement(Modal.Title, null, this.props.title)
             ), 
             React.createElement(Modal.Body, null, 
-              React.createElement("textarea", {style: {width: "100%", resize: "none", height: "100px"}, onChange: this.contentChanged, value: this.state.content})
+              React.createElement(Input, {type: "textarea", help: this.state.validationText, bsStyle: this.validationState(), style: {width: "100%", resize: "none", height: "100px"}, onChange: this.contentChanged, value: this.state.content})
             ), 
             React.createElement(Modal.Footer, null, 
               React.createElement(Button, {onClick: this.save}, getLocale("Save")), 
