@@ -254,15 +254,15 @@ function init(ReactBootstrap, jQuery){
 
   var AddProBtn = React.createClass({displayName: "AddProBtn",
     getInitialState: function(){
-      return {opacity: 0, show: false};
+      return {hideClass: "ProConHide", show: false};
     },
 
     showBtn: function(event){
-      this.setState({opacity: 1});
+      this.setState({hideClass: ""});
     },
 
     hideBtn: function(event){
-      this.setState({opacity: 0});
+      this.setState({hideClass: "ProConHide"});
     },
 
     clickHandler: function(){
@@ -284,12 +284,16 @@ function init(ReactBootstrap, jQuery){
 
     render: function(){
       if (this.props.isSummaryMode) {
+        var className = "fa fa-plus fa-2x ";
+        className = className + this.state.hideClass;
         return (
-          React.createElement("i", {className: "fa fa-plus fa-2x", style: {color: "Green", opacity: this.state.opacity}, onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler}, React.createElement(NewItemModal, {title: getLocale("CreateNewProOpinion"), show: this.state.show, saveCB: this.addPro, cancelCB: this.hideModal}))
+          React.createElement("i", {className: className, style: {color: "Green"}, onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler}, React.createElement(NewItemModal, {title: getLocale("CreateNewProOpinion"), show: this.state.show, saveCB: this.addPro, cancelCB: this.hideModal}))
         );
       } else {
+        var className = "ProConOption ";
+        className = className + this.state.hideClass;
         return (
-          React.createElement("div", {className: "ProConOption", onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler, style: {opacity: this.state.opacity}}, 
+          React.createElement("div", {className: className, onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler}, 
             React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
               React.createElement("tr", null, 
                 React.createElement("td", {title: getLocale("CreateNewProOpinion"), style: {width: "35px"}}, 
@@ -466,15 +470,15 @@ function init(ReactBootstrap, jQuery){
 
   var AddConBtn = React.createClass({displayName: "AddConBtn",
     getInitialState: function(){
-      return {opacity: 0, show: false};
+      return {hideClass: "ProConHide", show: false};
     },
 
     showBtn: function(event){
-      this.setState({opacity: 1});
+      this.setState({hideClass: ""});
     },
 
     hideBtn: function(event){
-      this.setState({opacity: 0});
+      this.setState({hideClass: "ProConHide"});
     },
 
     clickHandler: function(){
@@ -497,12 +501,16 @@ function init(ReactBootstrap, jQuery){
 
     render: function(){
       if (this.props.isSummaryMode){
-        return (React.createElement("i", {className: "fa fa-minus fa-2x", style: {color: "Brown", opacity: this.state.opacity}, onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler}, 
+        var className = "fa fa-minus fa-2x ";
+        className = className + this.state.hideClass;
+        return (React.createElement("i", {className: className, style: {color: "Brown", opacity: this.state.opacity}, onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler}, 
                   React.createElement(NewItemModal, {title: getLocale("CreateNewConOpinion"), show: this.state.show, saveCB: this.addCon, cancelCB: this.hideModal})
                 ));
       } else {
+        var className = "ProConOption ";
+        className = className + this.state.hideClass;
         return (
-          React.createElement("div", {onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler, style: {opacity: this.state.opacity}}, 
+          React.createElement("div", {className: className, onMouseOver: this.showBtn, onMouseLeave: this.hideBtn, onClick: this.clickHandler}, 
             React.createElement("table", {style: {width: "100%", tableLayout: "fixed"}}, 
               React.createElement("tr", null, 
                 React.createElement("td", {title: getLocale("CreateNewConOpinion"), style: {width: "35px"}}, 
