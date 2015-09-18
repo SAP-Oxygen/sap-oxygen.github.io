@@ -105,7 +105,7 @@ function init(ReactBootstrap, jQuery){
       }
       else
       {
-        this.setState({validationText: "Blank text is now allowed"});
+        this.setState({validationText: getLocale("BlankTextNotAllowed")});
       }
     },
 
@@ -159,7 +159,7 @@ function init(ReactBootstrap, jQuery){
       if (newContent != "") {
         this.props.saveCB(newContent);
       } else {
-        this.setState({validationText: "Blank text is now allowed"});
+        this.setState({validationText: getLocale("BlankTextNotAllowed")});
       }
     },
 

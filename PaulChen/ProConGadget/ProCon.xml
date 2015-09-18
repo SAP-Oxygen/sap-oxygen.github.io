@@ -35,6 +35,7 @@
       <msg name="ClickToAddProOpinion">Click to add a Pro opinion</msg>
       <msg name="CreateNewConOpinion">Create new Con Opinion</msg>
       <msg name="ClickToAddConOpinion">Click to add a Con opinion</msg>
+      <msg name="BlankTextNotAllowed">Blank text is not allowed</msg>
     </Locale>
   </ModulePrefs>
   <Content type="html" href="ProCon.react.html"/>
