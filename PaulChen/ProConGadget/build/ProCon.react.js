@@ -111,6 +111,7 @@ function init(ReactBootstrap, jQuery){
 
     cancel: function() {
       this.setState({content: ""});
+      this.setState({validationText: ""});
       this.props.cancelCB();
     },
 
