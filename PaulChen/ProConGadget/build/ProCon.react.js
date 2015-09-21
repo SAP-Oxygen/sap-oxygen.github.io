@@ -240,7 +240,9 @@ function init(ReactBootstrap, jQuery){
     },
 
     updateTopic: function(newTopicTitle){
-      this.props.updateTitleCB(newTopicTitle.trim());
+      if (this.props.title != newTopicTitle){
+        this.props.updateTitleCB(newTopicTitle);
+      }
       this.hideModal();
     },
 
@@ -328,7 +330,9 @@ function init(ReactBootstrap, jQuery){
     },
 
     updatePro: function(newProContent){
-      this.props.updateProCB(this.props.proInfo.id, newProContent);
+      if (this.props.proInfo.content != newProContent){
+        this.props.updateProCB(this.props.proInfo.id, newProContent);
+      }
       this.setState({show: false});
     },
 
@@ -545,7 +549,9 @@ function init(ReactBootstrap, jQuery){
     },
 
     updateCon: function(newConContent){
-      this.props.updateConCB(this.props.conInfo.id, newConContent);
+      if (this.props.conInfo.content != newConContent){
+        this.props.updateConCB(this.props.conInfo.id, newConContent);
+      }
       this.setState({show: false});
     },
 
