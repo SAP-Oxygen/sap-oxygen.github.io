@@ -47,7 +47,7 @@ function guid(){
 }
 
 function adjustHeight(){
-    gadgets.window.adjustHeight();
+    typeof(gadgets) != "undefined" && gadgets && gadgets.window.adjustHeight();
 }
 
 function getCreatorFullName(creatorId){
