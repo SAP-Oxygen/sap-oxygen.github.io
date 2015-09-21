@@ -950,7 +950,7 @@ function init(ReactBootstrap, jQuery){
 
     render: function(){
       return(
-        <div style={{width: "800px", margin: "auto", minHeight: "400px"}} id="ProConGadget">
+        <div style={{margin: "auto", minHeight: "400px"}} id="ProConGadget">
           <TopicListContainer topicInfos={this.state.topicInfos} deleteTopicCB={this.deleteTopic} updateTopicInfoCB={this.updateTopicInfo} addTopicCB={this.addTopic}/>
         </div>
       );
