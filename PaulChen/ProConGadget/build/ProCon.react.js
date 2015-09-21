@@ -337,7 +337,7 @@ function init(ReactBootstrap, jQuery){
     },
 
     mouseOverHandler: function(){
-      this.setState({style: {backgroundColor: "#cccccc"}});
+      this.setState({style: {backgroundColor: "#e5e5e5"}});
     },
 
     mouseLeaveHandler: function(){
@@ -554,7 +554,7 @@ function init(ReactBootstrap, jQuery){
     },
 
     mouseOverHandler: function(){
-      this.setState({style: {backgroundColor: "#cccccc"}});
+      this.setState({style: {backgroundColor: "#e5e5e5"}});
     },
 
     mouseLeaveHandler: function(){
