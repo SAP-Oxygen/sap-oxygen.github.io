@@ -152,7 +152,7 @@ function init(ReactBootstrap, jQuery){
 
   var EditItemModal = React.createClass({
     getInitialState: function() {
-      return {content: this.props.content == null ? "" : this.props.content, validationText: ""};
+      return {content: this.props.content, validationText: ""};
     },
 
     save: function() {
@@ -169,6 +169,7 @@ function init(ReactBootstrap, jQuery){
     },
 
     cancel: function() {
+      this.setState({content: this.props.content});
       this.props.cancelCB();
     },
 
