@@ -39,5 +39,5 @@
       <msg name="BlankTextNotAllowed">Blank text is not allowed</msg>
     </Locale>
   </ModulePrefs>
-  <Content type="html" href="ProCon.react.html"/>
+  <Content type="html" href="procon.html"/>
 </Module>
