@@ -19,19 +19,9 @@
                         <PropertyValue Property="ImageUrl" Path="PictureUrl"/>
                         <PropertyValue Property="Title">
                             <Record>
-                                <PropertyValue Property="Value" Path="Name"/>
-                            </Record>
-                        </PropertyValue>
-                        <PropertyValue Property="Description">
-                            <Record>
                                 <PropertyValue Property="Value" Path="ShortDescription"/>
                             </Record>
                         </PropertyValue>
-                        <!-- <PropertyValue Property="Description">
-                            <Record>
-                                <PropertyValue Property="Value" Path="LongDescription"/>
-                            </Record> 
-                        </PropertyValue> -->
                     </Record>
                 </Annotation>
                 <Annotation Term="UI.Identification">
