@@ -20,11 +20,10 @@
                         <PropertyValue Property="Title">
                             <Record>
                                 <PropertyValue Property="Value" Path="Name"/>
-                            </Record>
-                        </PropertyValue>
-                        <PropertyValue Property="Title">
-                            <Record>
+                                <PropertyValue Property="Value" Path="ProductId"/>
                                 <PropertyValue Property="Value" Path="ShortDescription"/>
+                                <PropertyValue Property="Value" Path="CategoryName"/>
+                                <PropertyValue Property="Value" Path="Price"/>
                             </Record>
                         </PropertyValue>
                     </Record>
