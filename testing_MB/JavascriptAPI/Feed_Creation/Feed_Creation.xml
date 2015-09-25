@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Feed_Creation (XML, HTML, CSS, JavaScript) -->
+<Module specificationVersion='2'>
+	<ModulePrefs title="Feed_Creation" height="250">
+        <Require feature="wave"/>
+        <Require feature="dynamic-height"/>
+        <Require feature="minimessage"/>
+    </ModulePrefs>
+    <Content type="html" href="Feed_Creation.html"/>
+</Module>

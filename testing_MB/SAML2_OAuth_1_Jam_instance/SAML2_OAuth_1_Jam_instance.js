@@ -28,8 +28,8 @@
     componentDidUpdate: function(prevProps, prevState) {
       gadgets.window.adjustHeight();
     },
-    // Jam Instance A interacting with Jam Instance A -->
-    // via OpenSocial OAuth 2.0 SAML 2.0 Bearer Assertion Flow -->
+    // Jam Instance A interacting with Jam Instance A
+    // via OpenSocial OAuth 2.0 SAML 2.0 Bearer Assertion Flow
     loadGroups: function() {
       var self = this;
       gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Groups?$format=json",

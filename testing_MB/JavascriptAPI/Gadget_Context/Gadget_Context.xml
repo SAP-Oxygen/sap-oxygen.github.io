@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- Gadget_Context (XML, HTML, CSS, JavaScript) -->
+<Module specificationVersion='2'>
+	<ModulePrefs title="Gadget_Context" height="250">
+        <Require feature="wave"/>
+        <Require feature="dynamic-height"/>
+        <Require feature="minimessage"/>
+    </ModulePrefs>
+    <Content type="html" href="Gadget_Context.html"/>
+</Module>
