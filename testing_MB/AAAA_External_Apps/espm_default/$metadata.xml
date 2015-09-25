@@ -1,1 +1,251 @@
-<?xml version='1.0' encoding='UTF-8'?><edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"><edmx:DataServices m:DataServiceVersion="1.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"><Schema Namespace="com.sap.espm.model" xmlns="http://schemas.microsoft.com/ado/2008/09/edm"><EntityType Name="Product"><Key><PropertyRef Name="ProductId"/></Key><Property Name="Category" Type="Edm.String" Nullable="true" MaxLength="40"/><Property Name="CategoryName" Type="Edm.String" Nullable="true" MaxLength="40"/><Property Name="CurrencyCode" Type="Edm.String" Nullable="true" MaxLength="5"/><Property Name="DimensionDepth" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="4"/><Property Name="DimensionHeight" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="4"/><Property Name="DimensionUnit" Type="Edm.String" Nullable="true" MaxLength="3"/><Property Name="DimensionWidth" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="4"/><Property Name="LongDescription" Type="Edm.String" Nullable="true" MaxLength="255"/><Property Name="Name" Type="Edm.String"/><Property Name="PictureUrl" Type="Edm.String" Nullable="true" MaxLength="255"/><Property Name="Price" Type="Edm.Decimal" Nullable="true" Precision="23" Scale="3"/><Property Name="ProductId" Type="Edm.String" Nullable="false" MaxLength="10"/><Property Name="QuantityUnit" Type="Edm.String" Nullable="true" MaxLength="3"/><Property Name="ShortDescription" Type="Edm.String" Nullable="true" MaxLength="255"/><Property Name="SupplierId" Type="Edm.String" Nullable="true" MaxLength="10"/><Property Name="Weight" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="3"/><Property Name="WeightUnit" Type="Edm.String" Nullable="true" MaxLength="3"/><NavigationProperty Name="Supplier" Relationship="com.sap.espm.model.Product_Supplier" FromRole="Product" ToRole="Supplier"/></EntityType><EntityType Name="Customer"><Key><PropertyRef Name="CustomerId"/></Key><Property Name="City" Type="Edm.String" Nullable="true" MaxLength="40"/><Property Name="Country" Type="Edm.String" Nullable="true" MaxLength="3"/><Property Name="CustomerId" Type="Edm.String" Nullable="false" MaxLength="10"/><Property Name="DateOfBirth" Type="Edm.DateTime" Nullable="false"/><Property Name="EmailAddress" Type="Edm.String" Nullable="true" MaxLength="255"/><Property Name="FirstName" Type="Edm.String" Nullable="true" MaxLength="40"/><Property Name="HouseNumber" Type="Edm.String" Nullable="true" MaxLength="10"/><Property Name="LastName" Type="Edm.String" Nullable="true" MaxLength="40"/><Property Name="PhoneNumber" Type="Edm.String" Nullable="true" MaxLength="30"/><Property Name="PostalCode" Type="Edm.String" Nullable="true" MaxLength="10"/><Property Name="Street" Type="Edm.String" Nullable="true" MaxLength="60"/></EntityType><EntityType Name="SalesOrderItem"><Key><PropertyRef Name="ItemNumber"/><PropertyRef Name="SalesOrderId"/></Key><Property Name="CurrencyCode" Type="Edm.String" Nullable="true" MaxLength="5"/><Property Name="DeliveryDate" Type="Edm.DateTime" Nullable="true"/><Property Name="GrossAmount" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"/><Property Name="ItemNumber" Type="Edm.Int32" Nullable="false"/><Property Name="SalesOrderId" Type="Edm.String" Nullable="false" MaxLength="10"/><Property Name="NetAmount" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"/><Property Name="ProductId" Type="Edm.String" Nullable="true" MaxLength="10"/><Property Name="Quantity" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="3"/><Property Name="QuantityUnit" Type="Edm.String" Nullable="true" MaxLength="3"/><Property Name="TaxAmount" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"/><NavigationProperty Name="Product" Relationship="com.sap.espm.model.Product_SalesOrderItem" FromRole="SalesOrderItem" ToRole="Product"/><NavigationProperty Name="SalesOrderHeader" Relationship="com.sap.espm.model.SalesOrderHeader_SalesOrderItem" FromRole="SalesOrderItem" ToRole="SalesOrderHeader"/></EntityType><EntityType Name="PurchaseOrderHeader"><Key><PropertyRef Name="PurchaseOrderId"/></Key><Property Name="CurrencyCode" Type="Edm.String" Nullable="true" MaxLength="5"/><Property Name="GrossAmount" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"/><Property Name="NetAmount" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"/><Property Name="PurchaseOrderId" Type="Edm.String" Nullable="false" MaxLength="10"/><Property Name="SupplierId" Type="Edm.String" Nullable="true" MaxLength="10"/><Property Name="TaxAmount" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"/><NavigationProperty Name="PurchaseOrderItems" Relationship="com.sap.espm.model.PurchaseOrderHeader_PurchaseOrderItem" FromRole="PurchaseOrderHeader" ToRole="PurchaseOrderItem"/></EntityType><EntityType Name="Stock"><Key><PropertyRef Name="ProductId"/></Key><Property Name="LotSize" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="3"/><Property Name="MinStock" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="3"/><Property Name="ProductId" Type="Edm.String" Nullable="false" MaxLength="255"/><Property Name="Quantity" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="3"/><Property Name="QuantityLessMin" Type="Edm.Boolean" Nullable="true"/><NavigationProperty Name="Product" Relationship="com.sap.espm.model.Product_Stock" FromRole="Stock" ToRole="Product"/></EntityType><EntityType Name="SalesOrderHeader"><Key><PropertyRef Name="SalesOrderId"/></Key><Property Name="CreatedAt" Type="Edm.DateTime" Nullable="true"/><Property Name="CurrencyCode" Type="Edm.String" Nullable="true" MaxLength="5"/><Property Name="CustomerId" Type="Edm.String" Nullable="true" MaxLength="10"/><Property Name="GrossAmount" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"/><Property Name="LifeCycleStatus" Type="Edm.String" Nullable="false" MaxLength="1"/><Property Name="LifeCycleStatusName" Type="Edm.String" Nullable="false" MaxLength="255"/><Property Name="NetAmount" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"/><Property Name="SalesOrderId" Type="Edm.String" Nullable="false" MaxLength="10"/><Property Name="TaxAmount" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"/><NavigationProperty Name="Customer" Relationship="com.sap.espm.model.Customer_SalesOrderHeader" FromRole="SalesOrderHeader" ToRole="Customer"/><NavigationProperty Name="SalesOrderItems" Relationship="com.sap.espm.model.SalesOrderHeader_SalesOrderItem" FromRole="SalesOrderHeader" ToRole="SalesOrderItem"/></EntityType><EntityType Name="ProductText"><Key><PropertyRef Name="Id"/></Key><Property Name="Id" Type="Edm.Int64" Nullable="false"/><Property Name="Language" Type="Edm.String" Nullable="true" MaxLength="2"/><Property Name="LongDescription" Type="Edm.String" Nullable="true" MaxLength="255"/><Property Name="Name" Type="Edm.String"/><Property Name="ProductId" Type="Edm.String" Nullable="true" MaxLength="10"/><Property Name="ShortDescription" Type="Edm.String" Nullable="true" MaxLength="255"/></EntityType><EntityType Name="Supplier"><Key><PropertyRef Name="SupplierId"/></Key><Property Name="City" Type="Edm.String" Nullable="true" MaxLength="40"/><Property Name="Country" Type="Edm.String" Nullable="true" MaxLength="3"/><Property Name="EmailAddress" Type="Edm.String" Nullable="true" MaxLength="255"/><Property Name="HouseNumber" Type="Edm.String" Nullable="true" MaxLength="10"/><Property Name="PhoneNumber" Type="Edm.String" Nullable="true" MaxLength="30"/><Property Name="PostalCode" Type="Edm.String" Nullable="true" MaxLength="10"/><Property Name="Street" Type="Edm.String" Nullable="true" MaxLength="60"/><Property Name="SupplierId" Type="Edm.String" Nullable="false" MaxLength="10"/><Property Name="SupplierName" Type="Edm.String" Nullable="true" MaxLength="80"/></EntityType><EntityType Name="PurchaseOrderItem"><Key><PropertyRef Name="ItemNumber"/><PropertyRef Name="PurchaseOrderId"/></Key><Property Name="CurrencyCode" Type="Edm.String" Nullable="true" MaxLength="5"/><Property Name="GrossAmount" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"/><Property Name="NetAmount" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"/><Property Name="ProductId" Type="Edm.String" Nullable="true" MaxLength="10"/><Property Name="ItemNumber" Type="Edm.Int32" Nullable="false"/><Property Name="PurchaseOrderId" Type="Edm.String" Nullable="false" MaxLength="10"/><Property Name="Quantity" Type="Edm.Decimal" Nullable="true" Precision="13" Scale="3"/><Property Name="QuantityUnit" Type="Edm.String" Nullable="true" MaxLength="3"/><Property Name="TaxAmount" Type="Edm.Decimal" Nullable="true" Precision="15" Scale="3"/><NavigationProperty Name="Product" Relationship="com.sap.espm.model.Product_PurchaseOrderItem" FromRole="PurchaseOrderItem" ToRole="Product"/><NavigationProperty Name="PurchaseOrderHeader" Relationship="com.sap.espm.model.PurchaseOrderHeader_PurchaseOrderItem" FromRole="PurchaseOrderItem" ToRole="PurchaseOrderHeader"/></EntityType><EntityType Name="ProductCategory"><Key><PropertyRef Name="Category"/></Key><Property Name="Category" Type="Edm.String" Nullable="false" MaxLength="40"/><Property Name="CategoryName" Type="Edm.String" Nullable="true" MaxLength="40"/><Property Name="MainCategory" Type="Edm.String" Nullable="true" MaxLength="40"/><Property Name="MainCategoryName" Type="Edm.String" Nullable="true" MaxLength="40"/><Property Name="NumberOfProducts" Type="Edm.Int64" Nullable="true"/></EntityType><Association Name="SalesOrderHeader_SalesOrderItem"><End Type="com.sap.espm.model.SalesOrderItem" Multiplicity="*" Role="SalesOrderItem"/><End Type="com.sap.espm.model.SalesOrderHeader" Multiplicity="1" Role="SalesOrderHeader"/><ReferentialConstraint><Principal Role="SalesOrderHeader"><PropertyRef Name="SalesOrderId"/></Principal><Dependent Role="SalesOrderItem"><PropertyRef Name="SalesOrderId"/></Dependent></ReferentialConstraint></Association><Association Name="PurchaseOrderHeader_PurchaseOrderItem"><End Type="com.sap.espm.model.PurchaseOrderHeader" Multiplicity="1" Role="PurchaseOrderHeader"/><End Type="com.sap.espm.model.PurchaseOrderItem" Multiplicity="*" Role="PurchaseOrderItem"/><ReferentialConstraint><Principal Role="PurchaseOrderHeader"><PropertyRef Name="PurchaseOrderId"/></Principal><Dependent Role="PurchaseOrderItem"><PropertyRef Name="PurchaseOrderId"/></Dependent></ReferentialConstraint></Association><Association Name="Product_Supplier"><End Type="com.sap.espm.model.Product" Multiplicity="1" Role="Product"/><End Type="com.sap.espm.model.Supplier" Multiplicity="1" Role="Supplier"/></Association><Association Name="Product_PurchaseOrderItem"><End Type="com.sap.espm.model.PurchaseOrderItem" Multiplicity="1" Role="PurchaseOrderItem"/><End Type="com.sap.espm.model.Product" Multiplicity="1" Role="Product"/></Association><Association Name="Customer_SalesOrderHeader"><End Type="com.sap.espm.model.SalesOrderHeader" Multiplicity="1" Role="SalesOrderHeader"/><End Type="com.sap.espm.model.Customer" Multiplicity="1" Role="Customer"/></Association><Association Name="Product_Stock"><End Type="com.sap.espm.model.Stock" Multiplicity="1" Role="Stock"/><End Type="com.sap.espm.model.Product" Multiplicity="1" Role="Product"/></Association><Association Name="Product_SalesOrderItem"><End Type="com.sap.espm.model.SalesOrderItem" Multiplicity="1" Role="SalesOrderItem"/><End Type="com.sap.espm.model.Product" Multiplicity="1" Role="Product"/></Association><EntityContainer Name="com.sap.espm.modelContainer" m:IsDefaultEntityContainer="true"><EntitySet Name="Products" EntityType="com.sap.espm.model.Product"/><EntitySet Name="Customers" EntityType="com.sap.espm.model.Customer"/><EntitySet Name="SalesOrderItems" EntityType="com.sap.espm.model.SalesOrderItem"/><EntitySet Name="PurchaseOrderHeaders" EntityType="com.sap.espm.model.PurchaseOrderHeader"/><EntitySet Name="Stocks" EntityType="com.sap.espm.model.Stock"/><EntitySet Name="SalesOrderHeaders" EntityType="com.sap.espm.model.SalesOrderHeader"/><EntitySet Name="ProductTexts" EntityType="com.sap.espm.model.ProductText"/><EntitySet Name="Suppliers" EntityType="com.sap.espm.model.Supplier"/><EntitySet Name="PurchaseOrderItems" EntityType="com.sap.espm.model.PurchaseOrderItem"/><EntitySet Name="ProductCategories" EntityType="com.sap.espm.model.ProductCategory"/><AssociationSet Name="SalesOrderHeader_SalesOrderItemSet" Association="com.sap.espm.model.SalesOrderHeader_SalesOrderItem"><End EntitySet="SalesOrderItems" Role="SalesOrderItem"/><End EntitySet="SalesOrderHeaders" Role="SalesOrderHeader"/></AssociationSet><AssociationSet Name="PurchaseOrderHeader_PurchaseOrderItemSet" Association="com.sap.espm.model.PurchaseOrderHeader_PurchaseOrderItem"><End EntitySet="PurchaseOrderHeaders" Role="PurchaseOrderHeader"/><End EntitySet="PurchaseOrderItems" Role="PurchaseOrderItem"/></AssociationSet><AssociationSet Name="Product_SupplierSet" Association="com.sap.espm.model.Product_Supplier"><End EntitySet="Products" Role="Product"/><End EntitySet="Suppliers" Role="Supplier"/></AssociationSet><AssociationSet Name="Product_PurchaseOrderItemSet" Association="com.sap.espm.model.Product_PurchaseOrderItem"><End EntitySet="PurchaseOrderItems" Role="PurchaseOrderItem"/><End EntitySet="Products" Role="Product"/></AssociationSet><AssociationSet Name="Customer_SalesOrderHeaderSet" Association="com.sap.espm.model.Customer_SalesOrderHeader"><End EntitySet="SalesOrderHeaders" Role="SalesOrderHeader"/><End EntitySet="Customers" Role="Customer"/></AssociationSet><AssociationSet Name="Product_StockSet" Association="com.sap.espm.model.Product_Stock"><End EntitySet="Stocks" Role="Stock"/><End EntitySet="Products" Role="Product"/></AssociationSet><AssociationSet Name="Product_SalesOrderItemSet" Association="com.sap.espm.model.Product_SalesOrderItem"><End EntitySet="SalesOrderItems" Role="SalesOrderItem"/><End EntitySet="Products" Role="Product"/></AssociationSet><FunctionImport Name="GetCustomerByEmailAddress" ReturnType="Collection(com.sap.espm.model.Customer)" EntitySet="Customers" m:HttpMethod="GET"><Parameter Name="EmailAddress" Type="Edm.String" Nullable="false"/></FunctionImport><FunctionImport Name="ConfirmSalesOrder" ReturnType="Collection(com.sap.espm.model.SalesOrderHeader)" EntitySet="SalesOrderHeaders" m:HttpMethod="GET"><Parameter Name="SalesOrderId" Type="Edm.String" Nullable="false"/></FunctionImport><FunctionImport Name="CancelSalesOrder" ReturnType="Collection(com.sap.espm.model.SalesOrderHeader)" EntitySet="SalesOrderHeaders" m:HttpMethod="GET"><Parameter Name="SalesOrderId" Type="Edm.String" Nullable="false"/></FunctionImport><FunctionImport Name="GetSalesOrderItemsById" ReturnType="Collection(com.sap.espm.model.SalesOrderItem)" EntitySet="SalesOrderItems" m:HttpMethod="GET"><Parameter Name="SalesOrderId" Type="Edm.String" Nullable="false"/></FunctionImport></EntityContainer></Schema></edmx:DataServices></edmx:Edmx>
+<?xml version='1.0' encoding='UTF-8'?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+	<edmx:DataServices m:DataServiceVersion="1.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+		<Schema Namespace="com.sap.espm.model" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="Product">
+				<Key>
+					<PropertyRef Name="ProductId"/>
+				</Key>
+				<Property MaxLength="40" Name="Category" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="40" Name="CategoryName" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="5" Name="CurrencyCode" Nullable="true" Type="Edm.String"/>
+				<Property Name="DimensionDepth" Nullable="true" Precision="13" Scale="4" Type="Edm.Decimal"/>
+				<Property Name="DimensionHeight" Nullable="true" Precision="13" Scale="4" Type="Edm.Decimal"/>
+				<Property MaxLength="3" Name="DimensionUnit" Nullable="true" Type="Edm.String"/>
+				<Property Name="DimensionWidth" Nullable="true" Precision="13" Scale="4" Type="Edm.Decimal"/>
+				<Property MaxLength="255" Name="LongDescription" Nullable="true" Type="Edm.String"/>
+				<Property Name="Name" Type="Edm.String"/>
+				<Property MaxLength="255" Name="PictureUrl" Nullable="true" Type="Edm.String"/>
+				<Property Name="Price" Nullable="true" Precision="23" Scale="3" Type="Edm.Decimal"/>
+				<Property MaxLength="10" Name="ProductId" Nullable="false" Type="Edm.String"/>
+				<Property MaxLength="3" Name="QuantityUnit" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="255" Name="ShortDescription" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="10" Name="SupplierId" Nullable="true" Type="Edm.String"/>
+				<Property Name="Weight" Nullable="true" Precision="13" Scale="3" Type="Edm.Decimal"/>
+				<Property MaxLength="3" Name="WeightUnit" Nullable="true" Type="Edm.String"/>
+				<NavigationProperty FromRole="Product" Name="Supplier" Relationship="com.sap.espm.model.Product_Supplier" ToRole="Supplier"/>
+			</EntityType>
+			<EntityType Name="Customer">
+				<Key>
+					<PropertyRef Name="CustomerId"/>
+				</Key>
+				<Property MaxLength="40" Name="City" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="3" Name="Country" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="10" Name="CustomerId" Nullable="false" Type="Edm.String"/>
+				<Property Name="DateOfBirth" Nullable="false" Type="Edm.DateTime"/>
+				<Property MaxLength="255" Name="EmailAddress" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="40" Name="FirstName" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="10" Name="HouseNumber" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="40" Name="LastName" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="30" Name="PhoneNumber" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="10" Name="PostalCode" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="60" Name="Street" Nullable="true" Type="Edm.String"/>
+			</EntityType>
+			<EntityType Name="SalesOrderItem">
+				<Key>
+					<PropertyRef Name="ItemNumber"/>
+					<PropertyRef Name="SalesOrderId"/>
+				</Key>
+				<Property MaxLength="5" Name="CurrencyCode" Nullable="true" Type="Edm.String"/>
+				<Property Name="DeliveryDate" Nullable="true" Type="Edm.DateTime"/>
+				<Property Name="GrossAmount" Nullable="true" Precision="15" Scale="3" Type="Edm.Decimal"/>
+				<Property Name="ItemNumber" Nullable="false" Type="Edm.Int32"/>
+				<Property MaxLength="10" Name="SalesOrderId" Nullable="false" Type="Edm.String"/>
+				<Property Name="NetAmount" Nullable="true" Precision="15" Scale="3" Type="Edm.Decimal"/>
+				<Property MaxLength="10" Name="ProductId" Nullable="true" Type="Edm.String"/>
+				<Property Name="Quantity" Nullable="true" Precision="13" Scale="3" Type="Edm.Decimal"/>
+				<Property MaxLength="3" Name="QuantityUnit" Nullable="true" Type="Edm.String"/>
+				<Property Name="TaxAmount" Nullable="true" Precision="15" Scale="3" Type="Edm.Decimal"/>
+				<NavigationProperty FromRole="SalesOrderItem" Name="Product" Relationship="com.sap.espm.model.Product_SalesOrderItem" ToRole="Product"/>
+				<NavigationProperty FromRole="SalesOrderItem" Name="SalesOrderHeader" Relationship="com.sap.espm.model.SalesOrderHeader_SalesOrderItem" ToRole="SalesOrderHeader"/>
+			</EntityType>
+			<EntityType Name="PurchaseOrderHeader">
+				<Key>
+					<PropertyRef Name="PurchaseOrderId"/>
+				</Key>
+				<Property MaxLength="5" Name="CurrencyCode" Nullable="true" Type="Edm.String"/>
+				<Property Name="GrossAmount" Nullable="true" Precision="15" Scale="3" Type="Edm.Decimal"/>
+				<Property Name="NetAmount" Nullable="true" Precision="15" Scale="3" Type="Edm.Decimal"/>
+				<Property MaxLength="10" Name="PurchaseOrderId" Nullable="false" Type="Edm.String"/>
+				<Property MaxLength="10" Name="SupplierId" Nullable="true" Type="Edm.String"/>
+				<Property Name="TaxAmount" Nullable="true" Precision="15" Scale="3" Type="Edm.Decimal"/>
+				<NavigationProperty FromRole="PurchaseOrderHeader" Name="PurchaseOrderItems" Relationship="com.sap.espm.model.PurchaseOrderHeader_PurchaseOrderItem" ToRole="PurchaseOrderItem"/>
+			</EntityType>
+			<EntityType Name="Stock">
+				<Key>
+					<PropertyRef Name="ProductId"/>
+				</Key>
+				<Property Name="LotSize" Nullable="true" Precision="13" Scale="3" Type="Edm.Decimal"/>
+				<Property Name="MinStock" Nullable="true" Precision="13" Scale="3" Type="Edm.Decimal"/>
+				<Property MaxLength="255" Name="ProductId" Nullable="false" Type="Edm.String"/>
+				<Property Name="Quantity" Nullable="true" Precision="13" Scale="3" Type="Edm.Decimal"/>
+				<Property Name="QuantityLessMin" Nullable="true" Type="Edm.Boolean"/>
+				<NavigationProperty FromRole="Stock" Name="Product" Relationship="com.sap.espm.model.Product_Stock" ToRole="Product"/>
+			</EntityType>
+			<EntityType Name="SalesOrderHeader">
+				<Key>
+					<PropertyRef Name="SalesOrderId"/>
+				</Key>
+				<Property Name="CreatedAt" Nullable="true" Type="Edm.DateTime"/>
+				<Property MaxLength="5" Name="CurrencyCode" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="10" Name="CustomerId" Nullable="true" Type="Edm.String"/>
+				<Property Name="GrossAmount" Nullable="true" Precision="15" Scale="3" Type="Edm.Decimal"/>
+				<Property MaxLength="1" Name="LifeCycleStatus" Nullable="false" Type="Edm.String"/>
+				<Property MaxLength="255" Name="LifeCycleStatusName" Nullable="false" Type="Edm.String"/>
+				<Property Name="NetAmount" Nullable="true" Precision="15" Scale="3" Type="Edm.Decimal"/>
+				<Property MaxLength="10" Name="SalesOrderId" Nullable="false" Type="Edm.String"/>
+				<Property Name="TaxAmount" Nullable="true" Precision="15" Scale="3" Type="Edm.Decimal"/>
+				<NavigationProperty FromRole="SalesOrderHeader" Name="Customer" Relationship="com.sap.espm.model.Customer_SalesOrderHeader" ToRole="Customer"/>
+				<NavigationProperty FromRole="SalesOrderHeader" Name="SalesOrderItems" Relationship="com.sap.espm.model.SalesOrderHeader_SalesOrderItem" ToRole="SalesOrderItem"/>
+			</EntityType>
+			<EntityType Name="ProductText">
+				<Key>
+					<PropertyRef Name="Id"/>
+				</Key>
+				<Property Name="Id" Nullable="false" Type="Edm.Int64"/>
+				<Property MaxLength="2" Name="Language" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="255" Name="LongDescription" Nullable="true" Type="Edm.String"/>
+				<Property Name="Name" Type="Edm.String"/>
+				<Property MaxLength="10" Name="ProductId" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="255" Name="ShortDescription" Nullable="true" Type="Edm.String"/>
+			</EntityType>
+			<EntityType Name="Supplier">
+				<Key>
+					<PropertyRef Name="SupplierId"/>
+				</Key>
+				<Property MaxLength="40" Name="City" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="3" Name="Country" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="255" Name="EmailAddress" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="10" Name="HouseNumber" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="30" Name="PhoneNumber" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="10" Name="PostalCode" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="60" Name="Street" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="10" Name="SupplierId" Nullable="false" Type="Edm.String"/>
+				<Property MaxLength="80" Name="SupplierName" Nullable="true" Type="Edm.String"/>
+			</EntityType>
+			<EntityType Name="PurchaseOrderItem">
+				<Key>
+					<PropertyRef Name="ItemNumber"/>
+					<PropertyRef Name="PurchaseOrderId"/>
+				</Key>
+				<Property MaxLength="5" Name="CurrencyCode" Nullable="true" Type="Edm.String"/>
+				<Property Name="GrossAmount" Nullable="true" Precision="15" Scale="3" Type="Edm.Decimal"/>
+				<Property Name="NetAmount" Nullable="true" Precision="15" Scale="3" Type="Edm.Decimal"/>
+				<Property MaxLength="10" Name="ProductId" Nullable="true" Type="Edm.String"/>
+				<Property Name="ItemNumber" Nullable="false" Type="Edm.Int32"/>
+				<Property MaxLength="10" Name="PurchaseOrderId" Nullable="false" Type="Edm.String"/>
+				<Property Name="Quantity" Nullable="true" Precision="13" Scale="3" Type="Edm.Decimal"/>
+				<Property MaxLength="3" Name="QuantityUnit" Nullable="true" Type="Edm.String"/>
+				<Property Name="TaxAmount" Nullable="true" Precision="15" Scale="3" Type="Edm.Decimal"/>
+				<NavigationProperty FromRole="PurchaseOrderItem" Name="Product" Relationship="com.sap.espm.model.Product_PurchaseOrderItem" ToRole="Product"/>
+				<NavigationProperty FromRole="PurchaseOrderItem" Name="PurchaseOrderHeader" Relationship="com.sap.espm.model.PurchaseOrderHeader_PurchaseOrderItem" ToRole="PurchaseOrderHeader"/>
+			</EntityType>
+			<EntityType Name="ProductCategory">
+				<Key>
+					<PropertyRef Name="Category"/>
+				</Key>
+				<Property MaxLength="40" Name="Category" Nullable="false" Type="Edm.String"/>
+				<Property MaxLength="40" Name="CategoryName" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="40" Name="MainCategory" Nullable="true" Type="Edm.String"/>
+				<Property MaxLength="40" Name="MainCategoryName" Nullable="true" Type="Edm.String"/>
+				<Property Name="NumberOfProducts" Nullable="true" Type="Edm.Int64"/>
+			</EntityType>
+			<Association Name="SalesOrderHeader_SalesOrderItem">
+				<End Multiplicity="*" Role="SalesOrderItem" Type="com.sap.espm.model.SalesOrderItem"/>
+				<End Multiplicity="1" Role="SalesOrderHeader" Type="com.sap.espm.model.SalesOrderHeader"/>
+				<ReferentialConstraint>
+					<Principal Role="SalesOrderHeader">
+						<PropertyRef Name="SalesOrderId"/>
+					</Principal>
+					<Dependent Role="SalesOrderItem">
+						<PropertyRef Name="SalesOrderId"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="PurchaseOrderHeader_PurchaseOrderItem">
+				<End Multiplicity="1" Role="PurchaseOrderHeader" Type="com.sap.espm.model.PurchaseOrderHeader"/>
+				<End Multiplicity="*" Role="PurchaseOrderItem" Type="com.sap.espm.model.PurchaseOrderItem"/>
+				<ReferentialConstraint>
+					<Principal Role="PurchaseOrderHeader">
+						<PropertyRef Name="PurchaseOrderId"/>
+					</Principal>
+					<Dependent Role="PurchaseOrderItem">
+						<PropertyRef Name="PurchaseOrderId"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="Product_Supplier">
+				<End Multiplicity="1" Role="Product" Type="com.sap.espm.model.Product"/>
+				<End Multiplicity="1" Role="Supplier" Type="com.sap.espm.model.Supplier"/>
+			</Association>
+			<Association Name="Product_PurchaseOrderItem">
+				<End Multiplicity="1" Role="PurchaseOrderItem" Type="com.sap.espm.model.PurchaseOrderItem"/>
+				<End Multiplicity="1" Role="Product" Type="com.sap.espm.model.Product"/>
+			</Association>
+			<Association Name="Customer_SalesOrderHeader">
+				<End Multiplicity="1" Role="SalesOrderHeader" Type="com.sap.espm.model.SalesOrderHeader"/>
+				<End Multiplicity="1" Role="Customer" Type="com.sap.espm.model.Customer"/>
+			</Association>
+			<Association Name="Product_Stock">
+				<End Multiplicity="1" Role="Stock" Type="com.sap.espm.model.Stock"/>
+				<End Multiplicity="1" Role="Product" Type="com.sap.espm.model.Product"/>
+			</Association>
+			<Association Name="Product_SalesOrderItem">
+				<End Multiplicity="1" Role="SalesOrderItem" Type="com.sap.espm.model.SalesOrderItem"/>
+				<End Multiplicity="1" Role="Product" Type="com.sap.espm.model.Product"/>
+			</Association>
+			<EntityContainer Name="com.sap.espm.modelContainer" m:IsDefaultEntityContainer="true">
+				<EntitySet EntityType="com.sap.espm.model.Product" Name="Products"/>
+				<EntitySet EntityType="com.sap.espm.model.Customer" Name="Customers"/>
+				<EntitySet EntityType="com.sap.espm.model.SalesOrderItem" Name="SalesOrderItems"/>
+				<EntitySet EntityType="com.sap.espm.model.PurchaseOrderHeader" Name="PurchaseOrderHeaders"/>
+				<EntitySet EntityType="com.sap.espm.model.Stock" Name="Stocks"/>
+				<EntitySet EntityType="com.sap.espm.model.SalesOrderHeader" Name="SalesOrderHeaders"/>
+				<EntitySet EntityType="com.sap.espm.model.ProductText" Name="ProductTexts"/>
+				<EntitySet EntityType="com.sap.espm.model.Supplier" Name="Suppliers"/>
+				<EntitySet EntityType="com.sap.espm.model.PurchaseOrderItem" Name="PurchaseOrderItems"/>
+				<EntitySet EntityType="com.sap.espm.model.ProductCategory" Name="ProductCategories"/>
+				<AssociationSet Association="com.sap.espm.model.SalesOrderHeader_SalesOrderItem" Name="SalesOrderHeader_SalesOrderItemSet">
+					<End EntitySet="SalesOrderItems" Role="SalesOrderItem"/>
+					<End EntitySet="SalesOrderHeaders" Role="SalesOrderHeader"/>
+				</AssociationSet>
+				<AssociationSet Association="com.sap.espm.model.PurchaseOrderHeader_PurchaseOrderItem" Name="PurchaseOrderHeader_PurchaseOrderItemSet">
+					<End EntitySet="PurchaseOrderHeaders" Role="PurchaseOrderHeader"/>
+					<End EntitySet="PurchaseOrderItems" Role="PurchaseOrderItem"/>
+				</AssociationSet>
+				<AssociationSet Association="com.sap.espm.model.Product_Supplier" Name="Product_SupplierSet">
+					<End EntitySet="Products" Role="Product"/>
+					<End EntitySet="Suppliers" Role="Supplier"/>
+				</AssociationSet>
+				<AssociationSet Association="com.sap.espm.model.Product_PurchaseOrderItem" Name="Product_PurchaseOrderItemSet">
+					<End EntitySet="PurchaseOrderItems" Role="PurchaseOrderItem"/>
+					<End EntitySet="Products" Role="Product"/>
+				</AssociationSet>
+				<AssociationSet Association="com.sap.espm.model.Customer_SalesOrderHeader" Name="Customer_SalesOrderHeaderSet">
+					<End EntitySet="SalesOrderHeaders" Role="SalesOrderHeader"/>
+					<End EntitySet="Customers" Role="Customer"/>
+				</AssociationSet>
+				<AssociationSet Association="com.sap.espm.model.Product_Stock" Name="Product_StockSet">
+					<End EntitySet="Stocks" Role="Stock"/>
+					<End EntitySet="Products" Role="Product"/>
+				</AssociationSet>
+				<AssociationSet Association="com.sap.espm.model.Product_SalesOrderItem" Name="Product_SalesOrderItemSet">
+					<End EntitySet="SalesOrderItems" Role="SalesOrderItem"/>
+					<End EntitySet="Products" Role="Product"/>
+				</AssociationSet>
+				<FunctionImport EntitySet="Customers" Name="GetCustomerByEmailAddress" ReturnType="Collection(com.sap.espm.model.Customer)" m:HttpMethod="GET">
+					<Parameter Name="EmailAddress" Nullable="false" Type="Edm.String"/>
+				</FunctionImport>
+				<FunctionImport EntitySet="SalesOrderHeaders" Name="ConfirmSalesOrder" ReturnType="Collection(com.sap.espm.model.SalesOrderHeader)" m:HttpMethod="GET">
+					<Parameter Name="SalesOrderId" Nullable="false" Type="Edm.String"/>
+				</FunctionImport>
+				<FunctionImport EntitySet="SalesOrderHeaders" Name="CancelSalesOrder" ReturnType="Collection(com.sap.espm.model.SalesOrderHeader)" m:HttpMethod="GET">
+					<Parameter Name="SalesOrderId" Nullable="false" Type="Edm.String"/>
+				</FunctionImport>
+				<FunctionImport EntitySet="SalesOrderItems" Name="GetSalesOrderItemsById" ReturnType="Collection(com.sap.espm.model.SalesOrderItem)" m:HttpMethod="GET">
+					<Parameter Name="SalesOrderId" Nullable="false" Type="Edm.String"/>
+				</FunctionImport>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
