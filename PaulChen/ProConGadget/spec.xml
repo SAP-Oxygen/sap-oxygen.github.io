@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <Module specificationVersion='2'>
   <ModulePrefs title="React ProCon table" author="Paul Chen" author_email="paul.chen03@sap.com" description="SAP Jam ProCon table rebuilt in React as an Open Social Gadget" width="850" height="400">
     <Require feature="wave"/>
@@ -38,5 +39,5 @@
       <msg name="BlankTextNotAllowed">Blank text is not allowed</msg>
     </Locale>
   </ModulePrefs>
-  <Content type="html" href="ProCon.react.html"/>
+  <Content type="html" href="procon.html"/>
 </Module>
