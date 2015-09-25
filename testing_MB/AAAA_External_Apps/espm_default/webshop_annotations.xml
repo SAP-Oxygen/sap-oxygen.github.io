@@ -19,6 +19,11 @@
                         <PropertyValue Property="ImageUrl" Path="PictureUrl"/>
                         <PropertyValue Property="Title">
                             <Record>
+                                <PropertyValue Property="Value" Path="Name"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Title">
+                            <Record>
                                 <PropertyValue Property="Value" Path="ShortDescription"/>
                             </Record>
                         </PropertyValue>
