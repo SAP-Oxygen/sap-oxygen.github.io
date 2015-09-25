@@ -4,7 +4,7 @@
         "can_be_primary_group_object": true,
         "can_be_primary_subgroup_object": true,
         "default_locale": "en",
-        "external_type": "https://sap-oxygen.github.io/testing_MB/AAAA_External_Apps/espm_default/$metadata.xml#Products",
+        "external_type": "https://cloudmodelespmhana.hana.ondemand.com/espm-cloud-web/espm.svc/$metadata#Products",
         "featurable": true,
         "feed_history": true,
         "filter_feed": true,
