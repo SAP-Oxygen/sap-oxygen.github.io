@@ -24,8 +24,13 @@
                         </PropertyValue>
                         <PropertyValue Property="Description">
                             <Record>
-                                <PropertyValue Property="Value" Path="LongDescription"/>
+                                <PropertyValue Property="Value" Path="ShortDescription"/>
                             </Record>
+                        </PropertyValue>
+                        <!-- <PropertyValue Property="Description">
+                            <Record>
+                                <PropertyValue Property="Value" Path="LongDescription"/>
+                            </Record> -->
                         </PropertyValue>
                     </Record>
                 </Annotation>
