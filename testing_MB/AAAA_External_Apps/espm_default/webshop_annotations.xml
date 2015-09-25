@@ -30,8 +30,8 @@
                         <!-- <PropertyValue Property="Description">
                             <Record>
                                 <PropertyValue Property="Value" Path="LongDescription"/>
-                            </Record> -->
-                        </PropertyValue>
+                            </Record> 
+                        </PropertyValue> -->
                     </Record>
                 </Annotation>
                 <Annotation Term="UI.Identification">
