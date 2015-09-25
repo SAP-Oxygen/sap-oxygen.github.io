@@ -19,7 +19,7 @@
                         <PropertyValue Property="ImageUrl" Path="PictureUrl"/>
                         <PropertyValue Property="Title">
                             <Record>
-                                <PropertyValue Property="Value" Path="Name">
+                                <PropertyValue Property="Value">
                                     <Apply Function="odata.concat">
                                         <Path>ProductId</Path>
                                         <Path>CategoryName</Path>
