@@ -43,14 +43,14 @@
     //    CONTENT_TYPE: The type of content to retrieve at the specified URL.
     loadGroups: function() {
       var self = this;
-      gadgets.io.makeRequest("https://CALL_TO_YOUR_ODATA_SERVICE_PROVIDER",
+      gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Groups?$format=json",
         function(result) {
           console.log(result);
           self.setState({data: result.data, users: self.state.users});
         },
         {
           AUTHORIZATION: 'OAUTH2',
-          OAUTH_SERVICE_NAME: 'YOUR_OAUTH_SERVICE_NAME',
+          OAUTH_SERVICE_NAME: 'gadgetOauth2SAMLBearerFlow',
           CONTENT_TYPE: gadgets.io.ContentType.JSON
         });
     },
