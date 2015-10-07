@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module specificationVersion='2'>
+  <ModulePrefs title="OAuth 2.0 3-Legged Gadget with HCP authenticating on behalf of Jam">
+    <OAuth2>
+      <!-- <Service name="" scope="OAuth2 Service Login URL - e.g. https://www.googleapis.com/auth/plus.login"> -->
+        <!-- <Authorization url="OAuth2 Service Authorization URL - e.g. https://accounts.google.com/o/oauth2/auth"/> -->
+        <!-- <Token url="OAuth2 Service Token URL - e.g. https://accounts.google.com/o/oauth2/token"/> -->
+      <!-- </Service> -->
+      <Service name="OAuth2HCP">
+        <Authorization url="https://oauthasservices-i819624trial.hanatrial.ondemand.com/oauth2/api/v1/authorize"/>
+        <Token url="https://oauthasservices-i819624trial.hanatrial.ondemand.com/oauth2/api/v1/token"/>
+      </Service>
+    </OAuth2>
+    <Require feature="oauthpopup" />
+  </ModulePrefs>
+  <Content type="html" href="OAuth2.html"/>
+</Module>
