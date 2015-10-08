@@ -70,7 +70,7 @@ function makeODataCall(){
     function(result) {
       //console.log(result);
       //self.setState({data: result.data, users: self.state.users});
-      console.log("Email Address: " + result.data.d.results.Email);
+      //console.log("Email Address: " + result.data.d.results.Email);
       var emailAddress = result.data.d.results.Email;
       console.log("Email Address: " + emailAddress);
       logODataCall(emailAddress);
@@ -82,8 +82,8 @@ function makeODataCall(){
     });
 }
 
-function logODataCall(){
-  console.log("Email Address: " + emailAddress);
+function logODataCall(itemToLog){
+  console.log(itemToLog);
 }
 
 // Initializes gadget, sets callbacks
