@@ -52,6 +52,7 @@ var urlController = function() {
 		displayFrame.slideDown();
 		displayFrame.attr("src", URL_PREFIX+baseUrl);
 		*/
+		url = "https://whoknows.com/app/profiles/embed/marc.bell@sap.com";
 		window.console.log("navigating to: "+url);
 		displayFrame.slideDown();
 		displayFrame.attr("src", url);
