@@ -9,13 +9,14 @@
         React.createElement("div", null, 
           React.createElement("div", null, prefs.getMsg('title')),
           React.createElement("div", null, "Hello World"),
-          React.createElement("ul", null, 
+          React.createElement("div", null, this.state.data.d.results),
+          React.createElement("div", null, this.state.data.d.results.Email)
+          /*React.createElement("ul", null, 
           
             $.map(this.getGroups(), function(group, index) {
               return (React.createElement("li", {key: group.Id}, group.Email));
             })
-          
-          )
+          )*/
         )
       );
     },
