@@ -7,16 +7,8 @@
 
       return (
         React.createElement("div", null, 
-          React.createElement("div", null, prefs.getMsg('title')),
-          React.createElement("div", null, "Hello World"),
-          React.createElement("div", null, this.state.data.d.results),
+          React.createElement("div", null, "Email Address:"),
           React.createElement("div", null, this.state.data.d.results.Email)
-          /*React.createElement("ul", null, 
-          
-            $.map(this.getGroups(), function(group, index) {
-              return (React.createElement("li", {key: group.Id}, group.Email));
-            })
-          )*/
         )
       );
     },
@@ -55,9 +47,6 @@
           OAUTH_SERVICE_NAME: 'gadgetOauth2SAMLBearerFlow',
           CONTENT_TYPE: gadgets.io.ContentType.JSON
         });
-    },
-    getGroups: function() {
-      return this.state.data.d.results;
     }
   });
 
