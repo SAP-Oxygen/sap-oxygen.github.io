@@ -11,7 +11,7 @@
           React.createElement("ul", null, 
           
             $.map(this.getGroups(), function(group, index) {
-              return (React.createElement("li", {key: group.Id}, group.Name));
+              return (React.createElement("li", {key: group.Id}, group.Email));
             })
           
           )
@@ -43,7 +43,7 @@
     //    CONTENT_TYPE: The type of content to retrieve at the specified URL.
     loadGroups: function() {
       var self = this;
-      gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Groups?$format=json",
+      gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Self?$format=json",
         function(result) {
           console.log(result);
           self.setState({data: result.data, users: self.state.users});
