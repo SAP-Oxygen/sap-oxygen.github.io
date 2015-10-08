@@ -1,4 +1,4 @@
-(function($) {
+/*(function($) {
   var GroupList = React.createClass({displayName: "GroupList",
     // Standard React API
     render: function() {
@@ -9,12 +9,6 @@
         React.createElement("div", null, 
           React.createElement("div", null, "Email Address:"),
           React.createElement("div", null, this.state.data.d.results.Email)
-          /*React.createElement("ul", null, 
-          
-            $.map(this.getGroups(), function(group, index) {
-              return (React.createElement("li", {key: group.Id}, group.Email));
-            })
-          )*/
         )
       );
     },
@@ -64,3 +58,40 @@
     );
   });
 })(jQuery);
+*/
+
+function sayHello(){
+  console.log(helloMessage);
+}
+
+function makeODataCall(){
+  var self = this;
+  gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Self?$format=json",
+    function(result) {
+      console.log(result);
+      self.setState({data: result.data, users: self.state.users});
+      //console.log("Email Address: " + this.state.data.d.results.Email);
+      logODataCall();
+    },
+    {
+      AUTHORIZATION: 'OAUTH2',
+      OAUTH_SERVICE_NAME: 'gadgetOauth2SAMLBearerFlow',
+      CONTENT_TYPE: gadgets.io.ContentType.JSON
+    });
+}
+
+function logODataCall(){
+  console.log("Email Address: " + this.state.data.d.results.Email);
+}
+
+// Initializes gadget, sets callbacks
+function init() {
+    sayHello();
+    makeODataCall();
+}
+
+var helloMessage = "Hello there";
+
+// Initializes gadget after receiving a notification that the page is loaded and the DOM is ready.
+gadgets.util.registerOnLoadHandler(init);
+//init();

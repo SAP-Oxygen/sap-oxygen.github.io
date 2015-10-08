@@ -1,9 +1,9 @@
 <Module specificationVersion='2'>
   <ModulePrefs title="SAMLemailJamwhoKnows">
-    <Require feature="dynamic-height"/>
+    <Require feature="dynamic-height" height="250"/>
     <Require feature="osapi"/>
     <Locale lang="all">
-      <msg name="title">My Groups</msg>
+      <msg name="title">MyJamEmailAddressWhoKnows</msg>
     </Locale>
     <OAuth2>
       <Service name="gadgetOauth2SAMLBearerFlow">
