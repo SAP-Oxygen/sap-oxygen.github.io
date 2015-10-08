@@ -1,8 +1,10 @@
 
 @font-face {
 	font-family: 'SAP-icons';
-	src: url('fonts/SAP-icons.ttf'),
-     url('fonts/SAP-icons.eot'); /* IE9+ */
+  src: url('fonts/SAP-icons.eot'); /* IE9+ */
+  src: url('fonts/SAP-icons.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/SAP-icons.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('fonts/SAP-icons.woff') format('woff'); /* Morden Browers */
 	font-weight: normal;
 	font-style: normal;
 }
