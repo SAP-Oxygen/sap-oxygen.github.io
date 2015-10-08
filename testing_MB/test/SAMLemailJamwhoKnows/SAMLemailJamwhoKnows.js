@@ -9,6 +9,12 @@
         React.createElement("div", null, 
           React.createElement("div", null, "Email Address:"),
           React.createElement("div", null, this.state.data.d.results.Email)
+          /*React.createElement("ul", null, 
+          
+            $.map(this.getGroups(), function(group, index) {
+              return (React.createElement("li", {key: group.Id}, group.Email));
+            })
+          )*/
         )
       );
     },
@@ -41,6 +47,7 @@
         function(result) {
           console.log(result);
           self.setState({data: result.data, users: self.state.users});
+          console.log("Email Address: " + this.state.data.d.results.Email);
         },
         {
           AUTHORIZATION: 'OAUTH2',
