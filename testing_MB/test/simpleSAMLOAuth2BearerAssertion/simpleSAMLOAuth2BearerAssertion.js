@@ -1,10 +1,7 @@
 function makeODataCall(){
   gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Self?$format=json",
     function(result) {
-      var emailAddress = result.data.d.results.Email;
-      console.log("Email Address: " + emailAddress);
-      var fullURL = "https://whoknows.com/app/profiles/embed/" + emailAddress;
-      console.log(fullURL);
+      console.log("Email Address: " + result.data.d.results.Email);
     },
     {
       AUTHORIZATION: 'OAUTH2',
