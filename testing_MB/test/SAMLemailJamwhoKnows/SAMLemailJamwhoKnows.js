@@ -7,7 +7,8 @@
 
       return (
         React.createElement("div", null, 
-          React.createElement("div", null, prefs.getMsg('title')), 
+          React.createElement("div", null, prefs.getMsg('title')),
+          React.createElement("div", null, "Hello World"),
           React.createElement("ul", null, 
           
             $.map(this.getGroups(), function(group, index) {
