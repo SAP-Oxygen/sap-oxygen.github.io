@@ -8,6 +8,9 @@ function makeODataCall(){
       var emailAddress = result.data.d.results.Email;
       console.log("Email Address: " + emailAddress);
       logODataCall(emailAddress);
+      //https://whoknows.com/app/profiles/embed/adam.stone@sap.com
+      appendEmailAddressToURL("https://whoknows.com/app/profiles/embed/", emailAddress);
+      console.log(appendEmailAddressToURL);
     },
     {
       AUTHORIZATION: 'OAUTH2',
@@ -18,6 +21,10 @@ function makeODataCall(){
 
 function logODataCall(itemToLog){
   console.log(itemToLog);
+}
+
+function appendEmailAddressToURL(theURL, theEmailAddress){
+  return (theURL + theEmailAddress);
 }
 
 // Initializes gadget, sets callbacks
