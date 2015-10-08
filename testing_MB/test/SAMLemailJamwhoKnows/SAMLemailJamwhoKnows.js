@@ -65,13 +65,15 @@ function sayHello(){
 }
 
 function makeODataCall(){
-  var self = this;
+  //var self = this;
   gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Self?$format=json",
     function(result) {
-      console.log(result);
-      self.setState({data: result.data, users: self.state.users});
-      //console.log("Email Address: " + this.state.data.d.results.Email);
-      logODataCall();
+      //console.log(result);
+      //self.setState({data: result.data, users: self.state.users});
+      console.log("Email Address: " + result.data.d.results.Email);
+      var emailAddress = result.data.d.results.Email;
+      console.log("Email Address: " + emailAddress);
+      logODataCall(emailAddress);
     },
     {
       AUTHORIZATION: 'OAUTH2',
@@ -81,7 +83,7 @@ function makeODataCall(){
 }
 
 function logODataCall(){
-  console.log("Email Address: " + this.state.data.d.results.Email);
+  console.log("Email Address: " + emailAddress);
 }
 
 // Initializes gadget, sets callbacks
