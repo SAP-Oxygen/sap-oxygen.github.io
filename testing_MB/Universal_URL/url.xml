@@ -3,6 +3,12 @@
   <ModulePrefs title="URL Gadget - dev" height="1000">
     <Require feature="wave" />
     <Require feature="dynamic-height" />
+    <Require feature="osapi"/>
+    <OAuth2>
+      <Service name="gadgetOauth2SAMLBearerFlow">
+        <Token url="https://developer.sapjam.com/api/v1/auth/token"/>
+      </Service>
+    </OAuth2>
   </ModulePrefs>
   <Content type="html" href="url.html" />
 </Module >
