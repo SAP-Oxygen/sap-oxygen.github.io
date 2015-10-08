@@ -1,14 +1,8 @@
-function sayHello(){
-  console.log(helloMessage);
-}
-
 function makeODataCall(){
   gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Self?$format=json",
     function(result) {
       var emailAddress = result.data.d.results.Email;
       console.log("Email Address: " + emailAddress);
-      logODataCall(emailAddress);
-      //https://whoknows.com/app/profiles/embed/adam.stone@sap.com
       var fullURL = "https://whoknows.com/app/profiles/embed/" + emailAddress;
       console.log(fullURL);
     },
@@ -19,17 +13,10 @@ function makeODataCall(){
     });
 }
 
-function logODataCall(itemToLog){
-  console.log(itemToLog);
-}
-
 // Initializes gadget, sets callbacks
 function init() {
-    sayHello();
     makeODataCall();
 }
-
-var helloMessage = "Hello there";
 
 // Initializes gadget after receiving a notification that the page is loaded and the DOM is ready.
 gadgets.util.registerOnLoadHandler(init);

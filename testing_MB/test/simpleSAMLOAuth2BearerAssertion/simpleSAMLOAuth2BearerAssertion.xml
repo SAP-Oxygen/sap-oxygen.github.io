@@ -1,17 +1,15 @@
 <Module specificationVersion='2'>
-  <ModulePrefs title="SAMLemailJamwhoKnows">
+  <ModulePrefs title="simpleSAMLOAuth2BearerAssertion">
     <Require feature="dynamic-height" height="250"/>
     <Require feature="osapi"/>
     <Locale lang="all">
-      <msg name="title">MyJamEmailAddressWhoKnows</msg>
+      <msg name="title">simpleSAMLOAuth2BearerAssertion</msg>
     </Locale>
     <OAuth2>
       <Service name="gadgetOauth2SAMLBearerFlow">
-        <!-- Gadget Calling SAP Jam API -->
-        <!-- 4. Request Oauth 2.0 Access Token (SAML 2.0 Bearer Assertion) -->
         <Token url="https://developer.sapjam.com/api/v1/auth/token"/>
       </Service>
     </OAuth2>
   </ModulePrefs>
-  <Content type="html" href="SAMLemailJamwhoKnows.html"/>
+  <Content type="html" href="simpleSAMLOAuth2BearerAssertion.html"/>
 </Module>
