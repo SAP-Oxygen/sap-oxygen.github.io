@@ -49,7 +49,8 @@ var urlController = function() {
 		  gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Self?$format=json",
 		    function(result) {
 		      console.log("Email Address: " + result.data.d.results.Email);
-		      url = "https://whoknows.com/app/profiles/embed/marc.bell@sap.com";
+		      url = "https://whoknows.com/app/profiles/embed/" + result.data.d.results.Email;
+		      //url = "https://whoknows.com/app/profiles/embed/marc.bell@sap.com";
 		      window.console.log("navigating to: "+url);
 		      displayFrame.slideDown();
 		      displayFrame.attr("src", url);
