@@ -10,7 +10,8 @@ var urlController = function() {
 	    var heightFieldStr = "<input type='text' class='form-control url-gadget-input-small url-gadget-input' id='height-field' placeholder='height'/>";
 	    var setBtnStr = "<button id='set-btn' class='btn url-gadget-btn url-gadget-input'>Set</button>";
 	    var saveBtnStr = "<button id='save-btn' class='btn btn-primary url-gadget-save-btn url-gadget-input'>Save</button>";
-	    var inputGroup = $("<div class='url-gadget-input-group'>"+urlFieldStr+goBtnStr+""+heightFieldStr+setBtnStr+""+saveBtnStr+"</div>");
+	    //var inputGroup = $("<div class='url-gadget-input-group'>"+urlFieldStr+goBtnStr+""+heightFieldStr+setBtnStr+""+saveBtnStr+"</div>");
+	    var inputGroup = $("<div class='url-gadget-input-group'>"+goBtnStr+"</div>");
 	    var displayFrame = $("<iframe id='url-frame' class='url-gadget-display-frame' src=''></iframe>");
 
 	    var inited = false;
