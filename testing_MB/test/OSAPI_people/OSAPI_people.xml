@@ -4,5 +4,5 @@
     <Require feature="dynamic-height" />
     <Require feature="osapi"/>
   </ModulePrefs>
-  <Content type="html" href="url.html" />
+  <Content type="html" href="OSAPI_people.html" />
 </Module >
