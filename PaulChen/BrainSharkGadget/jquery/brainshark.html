@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="brainshark.js"></script>
+    <link rel="stylesheet" href="//rawgit.com/SAP-Oxygen/sap-oxygen.github.io/master/PaulChen/BrainSharkGadget/jquery/common/bootstrap-3.2.0/bootstrap.css">
+    <link rel="stylesheet" href="//rawgit.com/SAP-Oxygen/sap-oxygen.github.io/master/PaulChen/BrainSharkGadget/jquery/brainshark.css" />
+  </head>
+  <body>
+    <div id="gadget">
+      <div id="input-group" class="init-hide">
+	<div id="input-group-main">
+	  <div id="input-group-actions"></div>
+	  <button id="settings-btn" class="btn btn-default" data-toggle="collapse" data-target="#settings-pane" aria-expanded="false" aria-controls="settings-pane">Settings</button>
+	</div>
+	<div id="settings-pane" class="collapse">
+	  <div id="settings-pane-label"><h2>Settings</h2></div>
+	  <div id="settings-options">
+	    <form id="settings-form" class="form-horizontal">
+	      <div class="form-group">
+		<label for="settings-url" class="col-sm-1 control-label">URL</label>
+		<div class="col-sm-5">
+		  <input id="url-field" type="text" class="form-control" name="settings-url" placeholder="https://www.brainshark.com/..." />
+		</div>
+	      </div>
+	      <div class="form-group">
+		<label for="settings-height" class="col-sm-1 control-label">Height</label>
+		<div class="col-sm-2">
+		  <input id="height-field" type="text" class="form-control" name="settings-height" placeholder="Height in pixels"/>
+		</div>
+	      </div>
+	      <div id="settings-input-group">
+		<button id="settings-save" class="btn btn-primary">Save</button>
+		<button id="settings-cancel" class="btn btn-default">Cancel</button>
+	      </div>
+	    </form>
+	  </div>
+	</div>
+      </div>
+      <div id="content">
+	<iframe id="url-frame" class="init-hide" src=""></iframe>
+      </div>
+    </div>
+  </body>
+  <script>
+    $(document).ready(function() {
+    gadgetController.init($("#gadget"));
+    });
+  </script>
+</html>
