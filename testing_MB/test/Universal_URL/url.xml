@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Development - Who Knows with OData call for profile email address" height="800">
+  <ModulePrefs title="Development - Who Knows with OData call for profile email address" height="1024">
     <Require feature="dynamic-height" />
     <Require feature="osapi"/>
     <OAuth2>
