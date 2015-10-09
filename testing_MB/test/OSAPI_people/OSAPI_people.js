@@ -22,7 +22,12 @@ var urlController = function() {
 
 			function makeOSAPIpeopleCall(){
 				osapi.people.getOwner().execute(function(data) {
-				    console.log(data.displayName);
+				console.log(data.displayName);
+				console.log(data.email);
+				url = "https://whoknows.com/app/profiles/embed/" + data.email;
+				console.log("navigating to: " + url);
+				displayFrame.slideDown();
+				displayFrame.attr("src", url);
 				});
 				/*osapi.people.getOwner().execute(function(data) {
 				    document.getElementById("osapi").innerHTML += "<br>osapi.people.getOwner: " + data.displayName + ".<br>";
