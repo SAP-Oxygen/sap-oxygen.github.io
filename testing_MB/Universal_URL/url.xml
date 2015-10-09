@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="URL Gadget - dev - Who Knows with OData call for profile email address" height="1000">
+  <ModulePrefs title="Development - Who Knows with OData call for profile email address" height="1000">
     <Require feature="wave" />
     <Require feature="dynamic-height" />
     <Require feature="osapi"/>
