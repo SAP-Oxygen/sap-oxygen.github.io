@@ -22,17 +22,17 @@ var urlController = function() {
 
 			function makeOSAPIpeopleCall(){
 				osapi.people.getOwner().execute(function(data) {
-					console.log(data);
-					console.log(data.id);
-					console.log(data.displayName);
-					console.log(data.givenName);
-					console.log(data.familyName );
-					console.log(data.nickname);
-					console.log(data.email);
-					console.log(data.thumbnailUrl);
-
-					console.log(data.email);
-					console.log(data.displayName);
+					console.log("Logging everything from osapi.people.getOwner");
+					console.log("---------------------------------------------");
+					console.log("data = " + data);
+					console.log("data.id = " + data.id);
+					console.log("data.displayName = " + data.displayName);
+					console.log("data.givenName = " + data.givenName);
+					console.log("data.familyName = " + data.familyName);
+					console.log("data.nickname = " + data.nickname);
+					console.log("data.email = " + data.email);
+					console.log("data.thumbnailUrl = " + data.thumbnailUrl);
+					console.log("---------------------------------------------");
 					url = "https://whoknows.com/app/profiles/embed/" + data.email;
 					console.log("navigating to: " + url);
 					displayFrame.slideDown();
