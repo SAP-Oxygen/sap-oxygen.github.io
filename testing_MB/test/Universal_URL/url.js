@@ -11,7 +11,8 @@ var urlController = function() {
 	    var setBtnStr = "<button id='set-btn' class='btn url-gadget-btn url-gadget-input'>Set</button>";
 	    var saveBtnStr = "<button id='save-btn' class='btn btn-primary url-gadget-save-btn url-gadget-input'>Save</button>";
 	    //var inputGroup = $("<div class='url-gadget-input-group'>"+urlFieldStr+goBtnStr+""+heightFieldStr+setBtnStr+""+saveBtnStr+"</div>");
-	    var inputGroup = $("<div class='url-gadget-input-group'>"+goBtnStr+"</div>");
+	    //var inputGroup = $("<div class='url-gadget-input-group'>"+goBtnStr+"</div>");
+	    var inputGroup = $("<div class='url-gadget-input-group'></div>");
 	    var displayFrame = $("<iframe id='url-frame' class='url-gadget-display-frame' src=''></iframe>");
 
 	    var inited = false;
@@ -102,7 +103,7 @@ var urlController = function() {
 		}
 		
 		if(!inited) {
-		    displayFrame.hide();
+		    //displayFrame.hide();
 		    display.append(displayFrame);
 
 		    var urlField = $("#url-field");
