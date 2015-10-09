@@ -1,6 +1,7 @@
 var urlController = function() {
     return {
 		init: function(gadget) {
+		    //var displayFrame = $("<iframe id='url-frame' class='url-gadget-display-frame' src=''></iframe>");
 		    var displayFrame = $("<iframe id='url-frame' class='url-gadget-display-frame' src=''></iframe>");
 		    var display = $(gadget).find("#display");
 		    
