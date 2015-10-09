@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Development - OSAPI_People - calling email address for WhoKnows" height="1024">
+    <Require feature="dynamic-height" />
+    <Require feature="osapi"/>
+  </ModulePrefs>
+  <Content type="html" href="url.html" />
+</Module >
