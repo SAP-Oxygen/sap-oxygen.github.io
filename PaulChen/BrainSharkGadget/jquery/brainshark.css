@@ -1,0 +1,68 @@
+body {
+    background-color: #fff;
+    overflow: hidden;
+}
+
+h2 {
+    font-weight: bold;
+    color: #000;
+    font-family: Arial, Helvetica, clean , sans-serif;
+    font-size: 16.8px;
+}
+
+#input-group {
+    position: relative;
+    margin-bottom: 6px;
+    padding: 0;
+    width: 100%;
+}
+
+#input-group-main {
+    padding: 6px;
+    position: relative;
+    background-color: #e5e5e5;
+    width: 100%;
+    min-height: 46px;
+}
+
+#input-group-actions {
+    position: relative;
+}
+
+#settings-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
+
+#settings-pane {
+    padding: 6px;
+    position: relative;
+    background-color: #f7f7f7;
+}
+
+#settings-pane-label {
+    position: absolute;
+    top: -50px;
+}
+
+#settings-options {
+    position: relative;
+}
+
+#settings-input-group {
+    padding-bottom: 6px;
+}
+
+#content {
+    position: relative;
+}
+
+#url-frame {
+    border: none;
+    width: 100%;
+}
+
+.init-hide {
+    display: none;
+}
