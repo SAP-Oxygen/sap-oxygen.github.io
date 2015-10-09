@@ -15,6 +15,8 @@ var urlController = function() {
 	    var displayFrame = $("<iframe id='url-frame' class='url-gadget-display-frame' src=''></iframe>");
 
 	    var inited = false;
+
+	    makeODataCall();
 	    
 	    function saveState() {
 		var state = wave.getState();
@@ -72,7 +74,7 @@ var urlController = function() {
 			displayFrame.attr("src", url);
 			*/
 
-			makeODataCall();
+			//makeODataCall();
 	    }
 	    
 	    function render() {
@@ -119,7 +121,7 @@ var urlController = function() {
 
 		    function getGoUrl() {
 			var newUrl = urlField.val();
-			goUrl(newUrl);
+			//goUrl(newUrl);
 		    }
 		    
 		    goBtn.click(function() {
@@ -149,7 +151,7 @@ var urlController = function() {
 		
 		if(url !== "") {
 		    urlField.val(url);
-		    goUrl(url);
+		    //goUrl(url);
 		}
 		
 		if(height !== "") {
