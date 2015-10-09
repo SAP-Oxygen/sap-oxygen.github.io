@@ -45,33 +45,16 @@ var urlController = function() {
 		});
 	    }
 	    
-		function makeODataCall(){
-		  gadgets.io.makeRequest("https://developer.sapjam.com/api/v1/OData/Self?$format=json",
-		    function(result) {
-		      console.log("Email Address: " + result.data.d.results.Email);
-		      url = "https://whoknows.com/app/profiles/embed/" + result.data.d.results.Email;
-		      //url = "https://whoknows.com/app/profiles/embed/marc.bell@sap.com";
-		      window.console.log("navigating to: "+url);
-		      displayFrame.slideDown();
-		      displayFrame.attr("src", url);
-		    },
-		    {
-		      AUTHORIZATION: 'OAUTH2',
-		      OAUTH_SERVICE_NAME: 'gadgetOauth2SAMLBearerFlow',
-		      CONTENT_TYPE: gadgets.io.ContentType.JSON
-		    });
-		}
-
 	    function goUrl(url) {
-
-	    	/*
-			url = "https://whoknows.com/app/profiles/embed/marc.bell@sap.com";
-			window.console.log("navigating to: "+url);
-			displayFrame.slideDown();
-			displayFrame.attr("src", url);
-			*/
-
-			makeODataCall();
+		//taking out url sanitzing 2015-08-18
+		/*
+		var baseUrl = sanitizeUrl(url);
+		displayFrame.slideDown();
+		displayFrame.attr("src", URL_PREFIX+baseUrl);
+		*/
+		window.console.log("navigating to: "+url);
+		displayFrame.slideDown();
+		displayFrame.attr("src", url);
 	    }
 	    
 	    function render() {
