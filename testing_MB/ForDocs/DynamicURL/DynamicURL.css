@@ -1,0 +1,13 @@
+body {
+    background-color: #fff;
+}
+
+#url-frame {
+    width: 99%;
+    height: 800px;
+    border: 1px solid grey;
+}
+
+.url-gadget-display-frame {
+    background-color: #ccc;
+}
