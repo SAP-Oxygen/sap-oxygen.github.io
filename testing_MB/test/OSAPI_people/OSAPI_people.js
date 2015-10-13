@@ -19,7 +19,13 @@ var urlController = function() {
 					console.log("data.thumbnailUrl = " + data.thumbnailUrl);
 					console.log("---------------------------------------------");
 					
-					url = "https://whoknows.com/app/profiles/embed/" + data.email;
+					if (!data.email){
+						url = "https://whoknows.com/app/profiles/embed/yourEmailAddress@whoknows.com";
+					}
+					else {
+						url = "https://whoknows.com/app/profiles/embed/" + data.email;
+					}
+
 					console.log("navigating to: " + url);
 					displayFrame.slideDown();
 					displayFrame.attr("src", url);
