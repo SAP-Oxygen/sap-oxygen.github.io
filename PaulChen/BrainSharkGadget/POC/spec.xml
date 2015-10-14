@@ -4,5 +4,5 @@
     <Require feature="wave" />
     <Require feature="dynamic-height" />
   </ModulePrefs>
-  <Content type="html" href="brainshark1.html" />
+  <Content type="html" href="brainshark.html" />
 </Module >

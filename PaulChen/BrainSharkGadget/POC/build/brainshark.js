@@ -1,7 +1,30 @@
 function init(ReactBootstrap, jQuery){
   var BrainSharkGadget = React.createClass({displayName: "BrainSharkGadget",
     getInitialState: function() {
-      return {url: "http://www.baidu.com", tempUrl:"http://www.baidu.com", isCollapse: true, isOwner: true, scaleOption: 2, tempScaleOption: 2, height: "400px"};
+      var url = "";
+      if (typeof(wave) != "undefined" && wave) {
+        url = wave.getState().get('url', "");
+      }
+      
+      var isCollapse = true;
+      if (url == ""){
+        isCollapse = false;
+      }
+      
+      var isOwner = false;
+      if (typeof(wave) != "undefined" && wave) {
+        var ownerId = wave.getState().get('ownerId', "");
+        if (wave.getViewer()) {
+          isOwner = (ownerId == wave.getViewer().id_);
+        }
+      }
+      
+      var scaleOption = "1";
+      if (typeof(wave) != "undefined" && wave) {
+        scaleOption = wave.getState().get('scaleOption', "2");
+      }
+      
+      return {url: url, tempUrl: url, isCollapse: isCollapse, isOwner: isOwner, scaleOption: scaleOption, tempScaleOption: scaleOption, height: "400px"};
     },
     
     getSettingsPaneClass: function(){
@@ -10,6 +33,15 @@ function init(ReactBootstrap, jQuery){
         return "collapse";
       } else {
         return "";
+      }
+    },
+    
+    getSettingsBtnClass: function(){
+      if (this.state.isOwner)
+      {
+        return "";
+      } else {
+        return "collapse";
       }
     },
     
@@ -27,19 +59,25 @@ function init(ReactBootstrap, jQuery){
       {
         this.setState({isCollapse: false});
       } else {
-        this.hideSettinsPane();
+        this.hideSettingsPane();
       }
     },
     
     getScaleText: function(){
-      if (this.state.tempScaleOption == 1){
-        return "16:9 without Menu";
-      } else if (this.state.tempScaleOption == 2){
-        return "16:9 with Menu";
-      } else if (this.state.tempScaleOption == 3){
+      return this.getScaleTextByKey(this.state.tempScaleOption);
+    },
+    
+    getScaleTextByKey: function(key){
+      if (key == "1"){
         return "4:3 without Menu";
-      } else {
+      } else if (key == "2"){
         return "4:3 with Menu";
+      } else if (key == "3"){
+        return "16:9 without Menu";
+      } else if (key == "4"){
+        return "16:9 with Menu";
+      } else {
+        return "ERROR";
       }
     },
     
@@ -54,21 +92,37 @@ function init(ReactBootstrap, jQuery){
     okBtnClickHandler: function(){
       if(this.state.url != this.state.tempUrl){
         this.setState({url: this.state.tempUrl});
+        if (typeof(wave) != "undefined" && wave && wave.getState()){
+          wave.getState().submitDelta({'url': this.state.tempUrl});
+          wave.getState().submitDelta({'ownerId': wave.getViewer().id_});
+        }
       }
       
       if(this.state.scaleOption != this.state.tempScaleOption){
         this.setState({scaleOption: this.state.tempScaleOption});
+        if (typeof(wave) != "undefined" && wave && wave.getState()){
+          wave.getState().submitDelta({'scaleOption': this.state.tempScaleOption});
+        }
         this.changeHeightBaseOnScaleOption();
       }
       
-      this.hideSettingsPane();
+      this.setState({isCollapse: true});
     },
     
     changeHeightBaseOnScaleOption: function(){
       if (typeof(gadgets) != "undefined" && gadgets){
         var width = gadgets.window.getViewportDimensions().width;
-        if (this.state.tempScaleOption == 1){
-          var targetHeight = width * 3 / 4.0;
+        if (this.state.tempScaleOption == "1"){
+          var targetHeight = width * 3.3 / 4.0;
+          this.setState({height: targetHeight});
+        } else if (this.state.tempScaleOption == "2"){
+          var targetHeight = width * 2.4 / 4.0;
+          this.setState({height: targetHeight});
+        } else if (this.state.tempScaleOption == "3"){
+          var targetHeight = width * 10.4 / 16.0;
+          this.setState({height: targetHeight});
+        } else if (this.state.tempScaleOption == "4"){
+          var targetHeight = width * 7.7 / 16.0;
           this.setState({height: targetHeight});
         }
       }
@@ -85,9 +139,23 @@ function init(ReactBootstrap, jQuery){
     adjustHeight: function(){
       typeof(gadgets) != "undefined" && gadgets && gadgets.window.adjustHeight();
     },
-    
+
     componentDidMount: function() {
+      var self = this;
+      var onWaveUpdate = function(){
+        var url = wave.getState().get('url', "");
+        var ownerId = wave.getState().get('ownerId', "");
+        var scaleOption = wave.getState().get('scaleOption', "2");
+        var isOwner = (ownerId == wave.getViewer().id_);
+        self.setState({isOwner: isOwner, url: url, tempUrl: url});
+        self.changeHeightBaseOnScaleOption();
+      };
+
       this.adjustHeight();
+
+      if (typeof(wave) != "undefined" && wave) {
+        wave.setStateCallback(onWaveUpdate);
+      }
     },
 
     componentDidUpdate: function() {
@@ -100,7 +168,7 @@ function init(ReactBootstrap, jQuery){
       var MenuItem = ReactBootstrap.MenuItem;
       return(
         React.createElement("div", null, 
-          React.createElement("div", {id: "input-group-main"}, 
+          React.createElement("div", {id: "input-group-main", className: this.getSettingsBtnClass()}, 
             React.createElement(Button, {id: "settings-btn", onClick: this.changeCollapseState}, "Settings")
           ), 
           React.createElement("div", {id: "settings-pane", className: this.getSettingsPaneClass()}, 
@@ -115,10 +183,8 @@ function init(ReactBootstrap, jQuery){
                   React.createElement("td", {style: {width: "50px"}}, React.createElement("label", {className: "col-sm-1 "}, "Scale")), 
                   React.createElement("td", null, 
                     React.createElement(DropdownButton, {title: this.getScaleText()}, 
-                      React.createElement(MenuItem, {eventKey: "1", onSelect: this.onSelectHandler}, "16:9 without Menu"), 
-                      React.createElement(MenuItem, {eventKey: "2", onSelect: this.onSelectHandler}, "16:9 with Menu"), 
-                      React.createElement(MenuItem, {eventKey: "3", onSelect: this.onSelectHandler}, "4:3 without Menu"), 
-                      React.createElement(MenuItem, {eventKey: "4", onSelect: this.onSelectHandler}, "4:3 with Menu")
+                      React.createElement(MenuItem, {eventKey: "2", onSelect: this.onSelectHandler}, this.getScaleTextByKey("2")), 
+                      React.createElement(MenuItem, {eventKey: "4", onSelect: this.onSelectHandler}, this.getScaleTextByKey("4"))
                     )
                   )
                 )
