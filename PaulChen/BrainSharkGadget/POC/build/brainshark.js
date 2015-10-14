@@ -2,58 +2,39 @@ function init(ReactBootstrap, jQuery){
   var BrainSharkGadget = React.createClass({displayName: "BrainSharkGadget",
     getInitialState: function() {
       var url = "";
+      var isOwner = false;
+      var isCollapse = true;
+      var scaleOption = "1";
       if (typeof(wave) != "undefined" && wave) {
         url = wave.getState().get('url', "");
-      }
-      
-      var isCollapse = true;
-      if (url == ""){
-        isCollapse = false;
-      }
-      
-      var isOwner = false;
-      if (typeof(wave) != "undefined" && wave) {
+
         var ownerId = wave.getState().get('ownerId', "");
         if (wave.getViewer()) {
           isOwner = (ownerId == wave.getViewer().id_);
         }
-      }
-      
-      var scaleOption = "1";
-      if (typeof(wave) != "undefined" && wave) {
+
         scaleOption = wave.getState().get('scaleOption', "2");
       }
-      
+
+      if (url == ""){
+        isCollapse = false;
+      }
+
       return {url: url, tempUrl: url, isCollapse: isCollapse, isOwner: isOwner, scaleOption: scaleOption, tempScaleOption: scaleOption, height: "400px"};
     },
-    
+
     getSettingsPaneClass: function(){
-      if (this.state.isCollapse)
-      {
-        return "collapse";
-      } else {
-        return "";
-      }
+      return this.state.isCollapse ? "collapse" : "";
     },
-    
+
     getSettingsBtnClass: function(){
-      if (this.state.isOwner)
-      {
-        return "";
-      } else {
-        return "collapse";
-      }
+      return this.state.isOwner ? "" : "collapse";
     },
-    
-    getSettingsPaneLabel: function(){
-      if (this.state.isCollapse)
-      {
-        return "";
-      } else {
-        return "Settings";
-      }
+
+    getSettingsPaneLabelText: function(){
+      return this.state.isCollapse ? "" : "Settings";
     },
-    
+
     changeCollapseState: function(){
       if (this.state.isCollapse)
       {
@@ -62,11 +43,11 @@ function init(ReactBootstrap, jQuery){
         this.hideSettingsPane();
       }
     },
-    
+
     getScaleText: function(){
       return this.getScaleTextByKey(this.state.tempScaleOption);
     },
-    
+
     getScaleTextByKey: function(key){
       if (key == "1"){
         return "4:3 without Menu";
@@ -80,35 +61,35 @@ function init(ReactBootstrap, jQuery){
         return "ERROR";
       }
     },
-    
+
     setScaleOption: function(option){
       this.setState({scaleOption: option});
     },
-    
+
     hideSettingsPane: function(){
       this.setState({isCollapse: true, tempUrl: this.state.url, tempScaleOption: this.state.scaleOption});
     },
-    
+
     okBtnClickHandler: function(){
-      if(this.state.url != this.state.tempUrl){
+      if (this.state.url != this.state.tempUrl){
         this.setState({url: this.state.tempUrl});
         if (typeof(wave) != "undefined" && wave && wave.getState()){
           wave.getState().submitDelta({'url': this.state.tempUrl});
           wave.getState().submitDelta({'ownerId': wave.getViewer().id_});
         }
       }
-      
-      if(this.state.scaleOption != this.state.tempScaleOption){
+
+      if (this.state.scaleOption != this.state.tempScaleOption){
         this.setState({scaleOption: this.state.tempScaleOption});
         if (typeof(wave) != "undefined" && wave && wave.getState()){
           wave.getState().submitDelta({'scaleOption': this.state.tempScaleOption});
         }
         this.changeHeightBaseOnScaleOption();
       }
-      
+
       this.setState({isCollapse: true});
     },
-    
+
     changeHeightBaseOnScaleOption: function(){
       if (typeof(gadgets) != "undefined" && gadgets){
         var width = gadgets.window.getViewportDimensions().width;
@@ -127,15 +108,15 @@ function init(ReactBootstrap, jQuery){
         }
       }
     },
-    
+
     onSelectHandler: function(eventKey){
       this.setState({tempScaleOption: eventKey});
     },
-    
+
     tempUrlChanged: function(e) {
       this.setState({tempUrl: e.target.value});
     },
-    
+
     adjustHeight: function(){
       typeof(gadgets) != "undefined" && gadgets && gadgets.window.adjustHeight();
     },
@@ -161,7 +142,7 @@ function init(ReactBootstrap, jQuery){
     componentDidUpdate: function() {
       this.adjustHeight();
     },
-    
+
     render: function(){
       var Button = ReactBootstrap.Button;
       var DropdownButton = ReactBootstrap.DropdownButton;
@@ -172,7 +153,7 @@ function init(ReactBootstrap, jQuery){
             React.createElement(Button, {id: "settings-btn", onClick: this.changeCollapseState}, "Settings")
           ), 
           React.createElement("div", {id: "settings-pane", className: this.getSettingsPaneClass()}, 
-            React.createElement("div", {id: "settings-pane-label"}, React.createElement("h2", null, this.getSettingsPaneLabel())), 
+            React.createElement("div", {id: "settings-pane-label"}, React.createElement("h2", null, this.getSettingsPaneLabelText())), 
             React.createElement("div", null, 
               React.createElement("table", {style: {width: "100%"}}, 
                 React.createElement("tr", {style: {height: "50px"}}, 
