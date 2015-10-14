@@ -2,15 +2,19 @@ function init(ReactBootstrap, jQuery){
   var BrainSharkGadget = React.createClass({
     getInitialState: function() {
       var url = "";
-      var isOwner = false;
+      var isOwner = true;
       var isCollapse = true;
       var scaleOption = "1";
       if (typeof(wave) != "undefined" && wave) {
         url = wave.getState().get('url', "");
 
         var ownerId = wave.getState().get('ownerId', "");
-        if (wave.getViewer()) {
-          isOwner = (ownerId == wave.getViewer().id_);
+        if (ownerId == "") {
+          isOwner = true;
+        } else {
+          if (wave.getViewer() != null) {
+            isOwner = (ownerId == wave.getViewer().id_);
+          }
         }
 
         scaleOption = wave.getState().get('scaleOption', "2");
@@ -75,7 +79,9 @@ function init(ReactBootstrap, jQuery){
         this.setState({url: this.state.tempUrl});
         if (typeof(wave) != "undefined" && wave && wave.getState()){
           wave.getState().submitDelta({'url': this.state.tempUrl});
-          wave.getState().submitDelta({'ownerId': wave.getViewer().id_});
+          if (wave.getViewer() != null){
+            wave.getState().submitDelta({'ownerId': wave.getViewer().id_});
+          }
         }
       }
 
@@ -127,7 +133,12 @@ function init(ReactBootstrap, jQuery){
         var url = wave.getState().get('url', "");
         var ownerId = wave.getState().get('ownerId', "");
         var scaleOption = wave.getState().get('scaleOption', "2");
-        var isOwner = (ownerId == wave.getViewer().id_);
+        var isOwner = true;
+        if (ownerId != ""){
+          if (wave.getViewer() != null){
+            isOwner = (ownerId == wave.getViewer().id_);
+          }
+        }
         self.setState({isOwner: isOwner, url: url, tempUrl: url});
         self.changeHeightBaseOnScaleOption();
       };

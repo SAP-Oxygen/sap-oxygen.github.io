@@ -44,6 +44,7 @@ h2 {
 #settings-pane-label {
     position: absolute;
     top: -50px;
+    padding-left: 15px;
 }
 
 #settings-input-group {
