@@ -9,6 +9,7 @@ var urlController = function() {
 
 					console.log("Logging everything from osapi.people.getOwner");
 					console.log("---------------------------------------------");
+					console.dir(data);
 					console.log("data = " + data);
 					console.log("data.id = " + data.id);
 					console.log("data.displayName = " + data.displayName);
