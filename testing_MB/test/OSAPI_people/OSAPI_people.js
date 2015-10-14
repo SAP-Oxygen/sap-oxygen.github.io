@@ -13,19 +13,19 @@ var urlController = function() {
 					console.log("data = " + data);
 					console.log("data.id = " + data.id);
 					console.log("data.displayName = " + data.displayName);
-					console.log("data.givenName = " + data.givenName);
-					console.log("data.familyName = " + data.familyName);
-					console.log("data.nickname = " + data.nickname);
-					console.log("data.email = " + data.email);
+					console.log("data.name.givenName = " + data.name.givenName);
+					console.log("data.name.familyName = " + data.name.familyName);
+					console.log("data.name.givenName = " + data.name.givenName);
+					console.log("data.emails[0] = " + data.emails[0]);
 					console.log("data.thumbnailUrl = " + data.thumbnailUrl);
 					console.log("---------------------------------------------");
 					
 					// This is here because there's a bug.
-					if (!data.email){
+					if (!data.emails[0]){
 						url = "https://whoknows.com/app/profiles/embed/yourEmailAddress@whoknows.com";
 					}
 					else {
-						url = "https://whoknows.com/app/profiles/embed/" + data.email;
+						url = "https://whoknows.com/app/profiles/embed/" + data.emails[0];
 					}
 
 					console.log("navigating to: " + url);
