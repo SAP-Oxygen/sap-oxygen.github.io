@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="OSAPI_People - Displays all information about the Person whose profile is hosting the gadget" height="1024">
+  <ModulePrefs title="OSAPI_People - Displays all information about OSAPI_People" height="1024">
     <Require feature="dynamic-height" />
     <Require feature="osapi"/>
   </ModulePrefs>

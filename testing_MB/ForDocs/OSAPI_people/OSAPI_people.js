@@ -10,14 +10,14 @@ function makeOSAPIownerCALL(){
 	osapi.people.getOwner().execute(function(data) {
 		var osapiOutput = "<p>Logging everything from osapi.people.getOwner</p>";
 		osapiOutput += "<p>---------------------------------------------</p>";
-		osapiOutput += "<p>data = + data</p>";
-		osapiOutput += "<p>data.id = + data.id</p>";
-		osapiOutput += "<p>data.displayName = + data.displayName</p>";
-		osapiOutput += "<p>data.givenName = + data.givenName</p>";
-		osapiOutput += "<p>data.familyName = + data.familyName</p>";
-		osapiOutput += "<p>data.nickname = + data.nickname</p>";
-		osapiOutput += "<p>data.email = + data.email</p>";
-		osapiOutput += "<p>data.thumbnailUrl = + data.thumbnailUrl</p>";
+		osapiOutput += "<p>data = " + data + "</p>";
+		osapiOutput += "<p>data.id = "+ data.id + "</p>";
+		osapiOutput += "<p>data.displayName = "+ data.displayName + "</p>";
+		osapiOutput += "<p>data.givenName = "+ data.givenName + "</p>";
+		osapiOutput += "<p>data.familyName = "+ data.familyName + "</p>";
+		osapiOutput += "<p>data.nickname = "+ data.nickname + "</p>";
+		osapiOutput += "<p>data.email = "+ data.email + "</p>";
+		osapiOutput += "<p>data.thumbnailUrl = "+ data.thumbnailUrl + "</p>";
 		$("body").append(osapiOutput);
 	});
 }
