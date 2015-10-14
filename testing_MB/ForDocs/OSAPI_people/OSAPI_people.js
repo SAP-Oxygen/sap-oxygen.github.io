@@ -1,10 +1,12 @@
+
+
 function appendText() {
 	var txt1 = "<p>Logging everything from osapi.people.getOwner</p>";
 	txt1 += "<p>---------------------------------------------</p>";
 	$("body").append(txt1);
 }
 
-function makeOSAPIpeopleCall(){
+function makeOSAPIownerCALL(){
 	osapi.people.getOwner().execute(function(data) {
 		var osapiOutput = "<p>Logging everything from osapi.people.getOwner</p>";
 		osapiOutput += "<p>---------------------------------------------</p>";
@@ -17,81 +19,88 @@ function makeOSAPIpeopleCall(){
 		osapiOutput += "<p>data.email = + data.email</p>";
 		osapiOutput += "<p>data.thumbnailUrl = + data.thumbnailUrl</p>";
 		$("body").append(osapiOutput);
-
-		/*
-		console.log("Logging everything from osapi.people.getOwner");
-		console.log("---------------------------------------------");
-		console.log("data = " + data);
-		console.log("data.id = " + data.id);
-		console.log("data.displayName = " + data.displayName);
-		console.log("data.givenName = " + data.givenName);
-		console.log("data.familyName = " + data.familyName);
-		console.log("data.nickname = " + data.nickname);
-		console.log("data.email = " + data.email);
-		console.log("data.thumbnailUrl = " + data.thumbnailUrl);
-		console.log("---------------------------------------------");
-		
-		// This is here because there's a bug.
-		if (!data.email){
-			url = "https://whoknows.com/app/profiles/embed/yourEmailAddress@whoknows.com";
-		}
-		else {
-			url = "https://whoknows.com/app/profiles/embed/" + data.email;
-		}
-
-		console.log("navigating to: " + url);
-		displayFrame.slideDown();
-		displayFrame.attr("src", url);
-		*/
 	});
-
 }
 
+function makeOSAPIpeopleCall(){
+	osapi.people.getViewer().execute(function(data) {
+		var osapiOutput = "";
+	    osapiOutput += "<p>osapi.people.getViewer: " + data.displayName + ".</p>";
+	    osapiOutput += "<p>osapi.people.getViewer: " + data.name.givenName + ".</p>";
+	    osapiOutput += "<p>osapi.people.getViewer: " + data.name.familyName + ".</p>";
+	    osapiOutput += "<p>osapi.people.getViewer: " + data.name.formatted + ".</p>";
+	    osapiOutput += "<p>osapi.people.getViewer: " + data.emails[0].type + ".</p>";
+	    osapiOutput += "<p>osapi.people.getViewer: " + data.emails[0].value + ".</p>";
+	    osapiOutput += "<p>osapi.people.getViewer: " + data.thumbnailUrl + ".</p>";
+	    osapiOutput += "<p>osapi.people.getViewer: " + data.photos[0].type + ".</p>";
+	    osapiOutput += "<p>osapi.people.getViewer: " + data.photos[0].value + ".</p>";
+	    $("body").append(osapiOutput);
+	});
 
+	osapi.people.getViewerFriends().execute(function(data) {
+	    console.log(data);
+	    var osapiOutput = "";
+	    osapiOutput += "<p>osapi.people.getViewerFriends:</p>";
+	    for (i = 0; i < data.totalResults; i++) {
+	        osapiOutput += "<p>" + data.list[i].displayName + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].name.givenName + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].name.familyName + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].name.formatted + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].emails[0].type + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].emails[0].value + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].thumbnailUrl + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].photos[0].type + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].photos[0].value + ".</p>";
+	    }
+	    $("body").append(osapiOutput);
+	});
+
+	osapi.people.getOwner().execute(function(data) {
+		var osapiOutput = "";
+	    osapiOutput += "<p>osapi.people.getOwner: " + data.displayName + ".</p>";
+	    osapiOutput += "<p>osapi.people.getOwner: " + data.name.givenName + ".</p>";
+	    osapiOutput += "<p>osapi.people.getOwner: " + data.name.familyName + ".</p>";
+	    osapiOutput += "<p>osapi.people.getOwner: " + data.name.formatted + ".</p>";
+	    osapiOutput += "<p>osapi.people.getOwner: " + data.emails[0].type + ".</p>";
+	    osapiOutput += "<p>osapi.people.getOwner: " + data.emails[0].value + ".</p>";
+	    osapiOutput += "<p>osapi.people.getOwner: " + data.thumbnailUrl + ".</p>";
+	    osapiOutput += "<p>osapi.people.getOwner: " + data.photos[0].type + ".</p>";
+	    osapiOutput += "<p>osapi.people.getOwner: " + data.photos[0].value + ".</p>";
+	    $("body").append(osapiOutput);
+	});
+
+	osapi.people.getOwnerFriends().execute(function(data) {
+		var osapiOutput = "";
+	    osapiOutput += "osapi.people.getOwnerFriends: ";
+	    for (i = 0; i < data.totalResults; i++) {
+	        osapiOutput += "<p>" + data.list[i].displayName + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].name.givenName + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].name.familyName + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].name.formatted + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].emails[0].type + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].emails[0].value + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].thumbnailUrl + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].photos[0].type + ".</p>";
+	        osapiOutput += "<p>" + data.list[i].photos[0].value + ".</p>";
+	    }
+	    $("body").append(osapiOutput);
+	});
 /*
-var urlController = function() {
-    return {
-		init: function(gadget) {
-		    var displayFrame = $("<iframe id='url-frame' class='url-gadget-display-frame' src=''></iframe>");
-		    var display = $(gadget).find("#display");
-			
-			function makeOSAPIpeopleCall(){
-				osapi.people.getOwner().execute(function(data) {
-
-					console.log("Logging everything from osapi.people.getOwner");
-					console.log("---------------------------------------------");
-					console.log("data = " + data);
-					console.log("data.id = " + data.id);
-					console.log("data.displayName = " + data.displayName);
-					console.log("data.givenName = " + data.givenName);
-					console.log("data.familyName = " + data.familyName);
-					console.log("data.nickname = " + data.nickname);
-					console.log("data.email = " + data.email);
-					console.log("data.thumbnailUrl = " + data.thumbnailUrl);
-					console.log("---------------------------------------------");
-					
-					// This is here because there's a bug.
-					if (!data.email){
-						url = "https://whoknows.com/app/profiles/embed/yourEmailAddress@whoknows.com";
-					}
-					else {
-						url = "https://whoknows.com/app/profiles/embed/" + data.email;
-					}
-
-					console.log("navigating to: " + url);
-					displayFrame.slideDown();
-					displayFrame.attr("src", url);
-				});
-			}
-
-		    function init() {
-		    	display.append(displayFrame);
-		    	appendText();
-				//makeOSAPIpeopleCall();
-			}
-
-			init();
+	osapi.people.get({
+	    "userId": "UUID_HERE"}).execute(function(data) {
+	    	var osapiOutput = "";
+			osapiOutput += "<p>osapi.people.get(): " + data.displayName + ".</p>";
+			osapiOutput += "<p>osapi.people.get(): " + data.name.givenName + ".</p>";
+			osapiOutput += "<p>osapi.people.get(): " + data.name.familyName + ".</p>";
+			osapiOutput += "<p>osapi.people.get(): " + data.name.formatted + ".</p>";
+			osapiOutput += "<p>osapi.people.get(): " + data.emails[0].type + ".</p>";
+			osapiOutput += "<p>osapi.people.get(): " + data.emails[0].value + ".</p>";
+			osapiOutput += "<p>osapi.people.get(): " + data.thumbnailUrl + ".</p>";
+			osapiOutput += "<p>osapi.people.get(): " + data.photos[0].type + ".</p>";
+			osapiOutput += "<p>osapi.people.get(): " + data.photos[0].value + ".</p>";
+			$("body").append(osapiOutput);
 		}
-    };
-}();
-*/
+	});
+	*/
+}
+
