@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--
 License
 Copyright 2014, SAP AG
@@ -8,7 +9,6 @@ http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 -->
-<?xml version="1.0" encoding="UTF-8" ?>
 <Module>
   <ModulePrefs title="DynamicURL - passes a unique URL and any URL encoded varaibles to an Iframe" height="1024">
     <Require feature="dynamic-height" />
