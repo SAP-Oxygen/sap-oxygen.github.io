@@ -12,7 +12,7 @@ var urlController = function() {
 
 		    function init() {
 		    	display.append(displayFrame);
-				callRemoteURL("https://www.sap.com");
+				callRemoteURL("https://www.google.com");
 			}
 
 			init();
