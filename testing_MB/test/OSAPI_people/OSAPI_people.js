@@ -16,16 +16,16 @@ var urlController = function() {
 					console.log("data.name.givenName = " + data.name.givenName);
 					console.log("data.name.familyName = " + data.name.familyName);
 					console.log("data.name.givenName = " + data.name.givenName);
-					console.log("data.emails[0] = " + data.emails[0]);
+					console.log("data.emails[0].value = " + data.emails[0].value);
 					console.log("data.thumbnailUrl = " + data.thumbnailUrl);
 					console.log("---------------------------------------------");
 					
 					// This is here because there's a bug.
-					if (!data.emails[0]){
+					if (!data.emails[0].value){
 						url = "https://whoknows.com/app/profiles/embed/yourEmailAddress@whoknows.com";
 					}
 					else {
-						url = "https://whoknows.com/app/profiles/embed/" + data.emails[0];
+						url = "https://whoknows.com/app/profiles/embed/" + data.emails[0].value;
 					}
 
 					console.log("navigating to: " + url);
