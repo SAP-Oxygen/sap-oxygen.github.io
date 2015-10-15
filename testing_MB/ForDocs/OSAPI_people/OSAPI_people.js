@@ -11,6 +11,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 function makeOSAPIpeopleCall(){
 
 	osapi.people.getViewer().execute(function(data) {
+		console.log(data);
 		var osapiOutput = "";
 		osapiOutput += "<p></p>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
@@ -33,6 +34,7 @@ function makeOSAPIpeopleCall(){
 	});
 
 	osapi.people.getOwner().execute(function(data) {
+		console.log(data);
 		var osapiOutput = "";
 		osapiOutput += "<p></p>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
@@ -55,12 +57,12 @@ function makeOSAPIpeopleCall(){
 	});
 
 	osapi.people.getViewerFriends().execute(function(data) {
+		console.log(data);
 		var osapiOutput = "";
 		osapiOutput += "<p></p>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
 		osapiOutput += "<p><h2>osapi.people.getViewerFriends:</h2></p>";
 		osapiOutput += "<ul>";
-		console.log(data);
 		for (i = 0; i < data.list.length; i++) {
 			osapiOutput += "<li>data.list[" + i + "].<b>id</b> = " + data.list[i].id + "</li>";
 			osapiOutput += "<li>data.list[" + i + "].<b>displayName</b> = " + data.list[i].displayName + "</li>";
@@ -80,6 +82,7 @@ function makeOSAPIpeopleCall(){
 	});
 
 	osapi.people.getOwnerFriends().execute(function(data) {
+		console.log(data);
 		var osapiOutput = "";
 		osapiOutput += "<p></p>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
@@ -105,6 +108,7 @@ function makeOSAPIpeopleCall(){
 
 	osapi.people.getViewer().execute(function(dataForID) {
 		osapi.people.get({"userId": dataForID.id}).execute(function(data) {
+			console.log(data);
 			var osapiOutput = "";
 			osapiOutput += "<p></p>";
 			osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";

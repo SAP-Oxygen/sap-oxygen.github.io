@@ -10,9 +10,9 @@ http://www.apache.org/licenses/LICENSE-2.0
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 -->
 <Module>
-  <ModulePrefs title="OSAPI_People - Displays all information about osapi.people" height="1024">
+  <ModulePrefs title="OSAPI_getOwner - Displays all information about osapi.people.getOwner" height="1024">
     <Require feature="dynamic-height" />
     <Require feature="osapi"/>
   </ModulePrefs>
-  <Content type="html" href="OSAPI_people.html" />
+  <Content type="html" href="OSAPI_getOwner.html" />
 </Module >
