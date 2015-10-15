@@ -100,7 +100,7 @@ function makeOSAPIpeopleCall(){
 			osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
 			osapiOutput += "<p><h2>osapi.people.get</h2></p>";
 			osapiOutput += "<p><b>using the id from osapi.people.getViewer</b></p>";
-			osapiOutput += "<ul><li>osapi.people.getViewer.dataForID.<b>id</b> = " + dataForID.id + "</li></ul>";
+			osapiOutput += "<p><b>osapi.people.getViewer.dataForID.<b>id</b> = " + dataForID.id + "</b></p>";
 			osapiOutput += "<ul>";
 			osapiOutput += "<li>data.<b>id</b> = " + data.id + "</li>";
 			osapiOutput += "<li>data.<b>displayName</b> = " + data.displayName + "</li>";
@@ -118,30 +118,6 @@ function makeOSAPIpeopleCall(){
 			$("body").append(osapiOutput);
 		});
 	});
-	
-	/*osapi.people.get({
-		"userId": "ENTER_id_HERE"}).execute(function(data) {
-			var osapiOutput = "";
-			osapiOutput += "<p></p>";
-			osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
-			osapiOutput += "<p><h2>osapi.people.get</h2></p>";
-			osapiOutput += "<ul>";
-			osapiOutput += "<li>data.<b>id</b> = " + data.id + "</li>";
-			osapiOutput += "<li>data.<b>id</b> = " + data.id + "</li>";
-			osapiOutput += "<li>data.<b>displayName</b> = " + data.displayName + "</li>";
-			osapiOutput += "<li>data.<b>name.givenName</b> = " + data.name.givenName + "</li>";
-			osapiOutput += "<li>data.<b>name.familyName</b> = " + data.name.familyName + "</li>";
-			osapiOutput += "<li>data.<b>name.formatted</b> = " + data.name.formatted + "</li>";
-			osapiOutput += "<li>data.<b>emails[0].type</b> = " + data.emails[0].type + "</li>";
-			osapiOutput += "<li>data.<b>emails[0].value</b> = " + data.emails[0].value + "</li>";
-			osapiOutput += "<li>data.<b>thumbnailUrl</b> = " + data.thumbnailUrl + "</li>";
-			osapiOutput += "<li>data.<b>photos[0].type</b> = " + data.photos[0].type + "</li>";
-			osapiOutput += "<li>data.<b>photos[0].value</b> = " + data.photos[0].value + "</li>";
-			osapiOutput += "</ul>";
-			osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
-			osapiOutput += "<p></p>";
-			$("body").append(osapiOutput);
-	});*/
 	
 }
 
