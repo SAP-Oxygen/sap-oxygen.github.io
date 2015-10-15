@@ -60,7 +60,8 @@ function makeOSAPIpeopleCall(){
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
 		osapiOutput += "<p><h2>osapi.people.getViewerFriends:</h2></p>";
 		osapiOutput += "<ul>";
-		for (i = 0; i < data.totalResults; i++) {
+		console.log(data);
+		for (i = 0; i < data.list.length; i++) {
 			osapiOutput += "<li>data.list[" + i + "].<b>id</b> = " + data.list[i].id + "</li>";
 			osapiOutput += "<li>data.list[" + i + "].<b>displayName</b> = " + data.list[i].displayName + "</li>";
 			osapiOutput += "<li>data.list[" + i + "].<b>givenName</b> = " + data.list[i].name.givenName + "</li>";

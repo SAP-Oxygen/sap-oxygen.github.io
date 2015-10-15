@@ -22,7 +22,7 @@ var urlController = function() {
 
 		    function init() {
 		    	display.append(displayFrame);
-				callRemoteURL("https://www.whoknows.com");
+				callRemoteURL("https://[YOUR_SITE_URL]");
 			}
 
 			init();
