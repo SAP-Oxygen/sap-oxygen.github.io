@@ -100,8 +100,8 @@ function makeOSAPIpeopleCall(){
 			osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
 			osapiOutput += "<p><h2>osapi.people.get</h2></p>";
 			osapiOutput += "<p><b>using the id from osapi.people.getViewer</b></p>";
+			osapiOutput += "<ul><li>osapi.people.getViewer.dataForID.<b>id</b> = " + dataForID.id + "</li></ul>";
 			osapiOutput += "<ul>";
-			osapiOutput += "<li>data.<b>id</b> = " + data.id + "</li>";
 			osapiOutput += "<li>data.<b>id</b> = " + data.id + "</li>";
 			osapiOutput += "<li>data.<b>displayName</b> = " + data.displayName + "</li>";
 			osapiOutput += "<li>data.<b>name.givenName</b> = " + data.name.givenName + "</li>";
