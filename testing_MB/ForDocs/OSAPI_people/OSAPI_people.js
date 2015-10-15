@@ -108,6 +108,7 @@ function makeOSAPIpeopleCall(){
 
 	osapi.people.getViewer().execute(function(dataForID) {
 		osapi.people.get({"userId": dataForID.id}).execute(function(data) {
+			console.log(dataForID);
 			console.log(data);
 			var osapiOutput = "";
 			osapiOutput += "<p></p>";
