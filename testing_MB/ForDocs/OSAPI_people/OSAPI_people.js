@@ -51,16 +51,16 @@ function makeOSAPIpeopleCall(){
 		osapiOutput += "<p><h2>osapi.people.getViewerFriends:</h2></p>";
 		osapiOutput += "<ul>";
 		for (i = 0; i < data.totalResults; i++) {
-			osapiOutput += "<li>data.list[" + i + "].<b>id</b> = " + data.list[i].id + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>displayName</b> = " + data.list[i].displayName + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>givenName</b> = " + data.list[i].name.givenName + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>familyName</b> = " + data.list[i].name.familyName + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>formatted</b> = " + data.list[i].name.formatted + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>emails[0].type</b> = " + data.list[i].emails[0].type + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>emails[0].value</b> = " + data.list[i].emails[0].value + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>thumbnailUrl</b> = " + data.list[i].thumbnailUrl + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>photos[0].type</b> = " + data.list[i].photos[0].type + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>photos[0].value</b> = " + data.list[i].photos[0].value + ".</p>";
+			osapiOutput += "<li>data.list[" + i + "].<b>id</b> = " + data.list[i].id + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>displayName</b> = " + data.list[i].displayName + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>givenName</b> = " + data.list[i].name.givenName + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>familyName</b> = " + data.list[i].name.familyName + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>formatted</b> = " + data.list[i].name.formatted + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>emails[0].type</b> = " + data.list[i].emails[0].type + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>emails[0].value</b> = " + data.list[i].emails[0].value + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>thumbnailUrl</b> = " + data.list[i].thumbnailUrl + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>photos[0].type</b> = " + data.list[i].photos[0].type + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>photos[0].value</b> = " + data.list[i].photos[0].value + "</li>";
 		}
 		$("body").append(osapiOutput);
 	});
@@ -72,16 +72,16 @@ function makeOSAPIpeopleCall(){
 		osapiOutput += "<p><h2>osapi.people.getOwnerFriends:</h2></p>";
 		osapiOutput += "<ul>";
 		for (i = 0; i < data.totalResults; i++) {
-			osapiOutput += "<li>data.list[" + i + "].<b>id</b> = " + data.list[i].id + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>displayName</b> = " + data.list[i].displayName + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>givenName</b> = " + data.list[i].name.givenName + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>familyName</b> = " + data.list[i].name.familyName + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>formatted</b> = " + data.list[i].name.formatted + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>emails[0].type</b> = " + data.list[i].emails[0].type + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>emails[0].value</b> = " + data.list[i].emails[0].value + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>thumbnailUrl</b> = " + data.list[i].thumbnailUrl + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>photos[0].type</b> = " + data.list[i].photos[0].type + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>photos[0].value</b> = " + data.list[i].photos[0].value + ".</p>";
+			osapiOutput += "<li>data.list[" + i + "].<b>id</b> = " + data.list[i].id + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>displayName</b> = " + data.list[i].displayName + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>givenName</b> = " + data.list[i].name.givenName + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>familyName</b> = " + data.list[i].name.familyName + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>formatted</b> = " + data.list[i].name.formatted + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>emails[0].type</b> = " + data.list[i].emails[0].type + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>emails[0].value</b> = " + data.list[i].emails[0].value + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>thumbnailUrl</b> = " + data.list[i].thumbnailUrl + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>photos[0].type</b> = " + data.list[i].photos[0].type + "</li>";
+			osapiOutput += "<li>data.list[" + i + "].<b>photos[0].value</b> = " + data.list[i].photos[0].value + "</li>";
 		}
 		$("body").append(osapiOutput);
 	});
