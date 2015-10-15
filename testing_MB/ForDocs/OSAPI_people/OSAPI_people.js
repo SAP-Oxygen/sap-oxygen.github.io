@@ -1,5 +1,7 @@
 
 function makeOSAPIpeopleCall(){
+	var viewerID = "";
+
 	osapi.people.getViewer().execute(function(data) {
 		var osapiOutput = "";
 		osapiOutput += "<p></p>";
@@ -85,9 +87,9 @@ function makeOSAPIpeopleCall(){
 		}
 		$("body").append(osapiOutput);
 	});
-/*
+
 	osapi.people.get({
-	    "userId": "UUID_HERE"}).execute(function(data) {
+	    "userId": viewerID}).execute(function(data) {
 	    	var osapiOutput = "";
 			osapiOutput += "<p>osapi.people.get(): " + data.displayName + ".</p>";
 			osapiOutput += "<p>osapi.people.get(): " + data.name.givenName + ".</p>";
@@ -101,6 +103,6 @@ function makeOSAPIpeopleCall(){
 			$("body").append(osapiOutput);
 		}
 	});
-	*/
+
 }
 
