@@ -6,6 +6,7 @@ function makeOSAPIpeopleCall(){
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
 		osapiOutput += "<p><h2>osapi.people.getViewer</h2></p>";
 		osapiOutput += "<ul>";
+		osapiOutput += "<li>data.<b>id</b> = " + data.id + "</li>";
 		osapiOutput += "<li>data.<b>displayName</b> = " + data.displayName + "</li>";
 		osapiOutput += "<li>data.<b>name.givenName</b> = " + data.name.givenName + "</li>";
 		osapiOutput += "<li>data.<b>name.familyName</b> = " + data.name.familyName + "</li>";
@@ -27,6 +28,7 @@ function makeOSAPIpeopleCall(){
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
 		osapiOutput += "<p><h2>osapi.people.getOwner</h2></p>";
 		osapiOutput += "<ul>";
+		osapiOutput += "<li>data.<b>id</b> = " + data.id + "</li>";
 		osapiOutput += "<li>data.<b>displayName</b> = " + data.displayName + "</li>";
 		osapiOutput += "<li>data.<b>name.givenName</b> = " + data.name.givenName + "</li>";
 		osapiOutput += "<li>data.<b>name.familyName</b> = " + data.name.familyName + "</li>";
@@ -49,10 +51,11 @@ function makeOSAPIpeopleCall(){
 		osapiOutput += "<p><h2>osapi.people.getViewerFriends:</h2></p>";
 		osapiOutput += "<ul>";
 		for (i = 0; i < data.totalResults; i++) {
+			osapiOutput += "<li>data.list[" + i + "].<b>id</b> = " + data.list[i].id + ".</p>";
 			osapiOutput += "<li>data.list[" + i + "].<b>displayName</b> = " + data.list[i].displayName + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>givenName</b> = " + data.list[i].givenName + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>familyName</b> = " + data.list[i].familyName + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>formatted</b> = " + data.list[i].formatted + ".</p>";
+			osapiOutput += "<li>data.list[" + i + "].<b>givenName</b> = " + data.list[i].name.givenName + ".</p>";
+			osapiOutput += "<li>data.list[" + i + "].<b>familyName</b> = " + data.list[i].name.familyName + ".</p>";
+			osapiOutput += "<li>data.list[" + i + "].<b>formatted</b> = " + data.list[i].name.formatted + ".</p>";
 			osapiOutput += "<li>data.list[" + i + "].<b>emails[0].type</b> = " + data.list[i].emails[0].type + ".</p>";
 			osapiOutput += "<li>data.list[" + i + "].<b>emails[0].value</b> = " + data.list[i].emails[0].value + ".</p>";
 			osapiOutput += "<li>data.list[" + i + "].<b>thumbnailUrl</b> = " + data.list[i].thumbnailUrl + ".</p>";
@@ -69,10 +72,11 @@ function makeOSAPIpeopleCall(){
 		osapiOutput += "<p><h2>osapi.people.getOwnerFriends:</h2></p>";
 		osapiOutput += "<ul>";
 		for (i = 0; i < data.totalResults; i++) {
+			osapiOutput += "<li>data.list[" + i + "].<b>id</b> = " + data.list[i].id + ".</p>";
 			osapiOutput += "<li>data.list[" + i + "].<b>displayName</b> = " + data.list[i].displayName + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>givenName</b> = " + data.list[i].givenName + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>familyName</b> = " + data.list[i].familyName + ".</p>";
-			osapiOutput += "<li>data.list[" + i + "].<b>formatted</b> = " + data.list[i].formatted + ".</p>";
+			osapiOutput += "<li>data.list[" + i + "].<b>givenName</b> = " + data.list[i].name.givenName + ".</p>";
+			osapiOutput += "<li>data.list[" + i + "].<b>familyName</b> = " + data.list[i].name.familyName + ".</p>";
+			osapiOutput += "<li>data.list[" + i + "].<b>formatted</b> = " + data.list[i].name.formatted + ".</p>";
 			osapiOutput += "<li>data.list[" + i + "].<b>emails[0].type</b> = " + data.list[i].emails[0].type + ".</p>";
 			osapiOutput += "<li>data.list[" + i + "].<b>emails[0].value</b> = " + data.list[i].emails[0].value + ".</p>";
 			osapiOutput += "<li>data.list[" + i + "].<b>thumbnailUrl</b> = " + data.list[i].thumbnailUrl + ".</p>";
