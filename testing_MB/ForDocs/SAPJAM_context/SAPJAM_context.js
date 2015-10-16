@@ -11,7 +11,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 function make_SAPJAM_context_Call(){
 
 	//osapi.people.get({"userId": dataForID.id}).execute(function(data) {
-	gadgets.sapjam.context.get().execute(function(context) {
+	gadgets.sapjam.context.get(function(context) {
 		console.log(context);
 		var osapiOutput = "";
 		osapiOutput += "<p></p>";
