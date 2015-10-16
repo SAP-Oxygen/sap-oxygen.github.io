@@ -10,27 +10,22 @@ Unless required by applicable law or agreed to in writing, software distributed 
 */
 function make_SAPJAM_context_Call(){
 
-	//osapi.people.get({"userId": dataForID.id}).execute(function(data) {
-	gadgets.sapjam.context.get(function(context) {
-		console.log(context);
+	gadgets.sapjam.context.get(function(data) {
+		console.log(data);
 		var osapiOutput = "";
 		osapiOutput += "<p></p>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
 		osapiOutput += "<p><h2>gadgets.sapjam.context.get</h2></p>";
-		/*osapiOutput += "<ul>";
+		osapiOutput += "<ul>";
+		osapiOutput += "<li>data.<b>context</b> = " + data.context + "</li>";
+		osapiOutput += "<li>data.<b>group.id</b> = " + data.group.id + "</li>";
+		osapiOutput += "<li>data.<b>group.name</b> = " + data.group.name + "</li>";
 		osapiOutput += "<li>data.<b>id</b> = " + data.id + "</li>";
-		osapiOutput += "<li>data.<b>displayName</b> = " + data.displayName + "</li>";
-		osapiOutput += "<li>data.<b>name.givenName</b> = " + data.name.givenName + "</li>";
-		osapiOutput += "<li>data.<b>name.familyName</b> = " + data.name.familyName + "</li>";
-		osapiOutput += "<li>data.<b>name.formatted</b> = " + data.name.formatted + "</li>";
-		osapiOutput += "<li>data.<b>emails[0].type</b> = " + data.emails[0].type + "</li>";
-		osapiOutput += "<li>data.<b>emails[0].value</b> = " + data.emails[0].value + "</li>";
-		osapiOutput += "<li>data.<b>thumbnailUrl</b> = " + data.thumbnailUrl + "</li>";
-		osapiOutput += "<li>data.<b>photos[0].type</b> = " + data.photos[0].type + "</li>";
-		osapiOutput += "<li>data.<b>photos[0].value</b> = " + data.photos[0].value + "</li>";
+		osapiOutput += "<li>data.<b>name</b> = " + data.name + "</li>";
+		osapiOutput += "<li>data.<b>readOnly</b> = " + data.readOnly + "</li>";
 		osapiOutput += "</ul>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
-		osapiOutput += "<p></p>";*/
+		osapiOutput += "<p></p>";
 		$("body").append(osapiOutput);
 	});
 	
