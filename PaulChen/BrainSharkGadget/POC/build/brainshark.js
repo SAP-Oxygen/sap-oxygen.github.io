@@ -2,7 +2,7 @@ function init(ReactBootstrap, jQuery){
   var BrainSharkGadget = React.createClass({displayName: "BrainSharkGadget",
     getInitialState: function() {
       var url = "";
-      var isOwner = true;
+      var isOwner = false;
       var isCollapse = true;
       var scaleOption = "1";
       if (typeof(wave) != "undefined" && wave && wave.getState() != null) {
@@ -135,12 +135,17 @@ function init(ReactBootstrap, jQuery){
         var url = wave.getState().get('url', "");
         var ownerId = wave.getState().get('ownerId', "");
         var scaleOption = wave.getState().get('scaleOption', "2");
-        var isOwner = true;
-        if (ownerId != ""){
-          if (wave.getViewer() != null){
-            isOwner = (ownerId == wave.getViewer().id_);
+        var isOwner = false;
+        if (url == ""){
+          isOwner = true;
+        } else {
+          if (ownerId != ""){
+            if (wave.getViewer() != null){
+              isOwner = (ownerId == wave.getViewer().id_);
+            }
           }
         }
+
         self.setState({isOwner: isOwner, url: url, tempUrl: url});
         self.changeHeightBaseOnScaleOption();
       };
