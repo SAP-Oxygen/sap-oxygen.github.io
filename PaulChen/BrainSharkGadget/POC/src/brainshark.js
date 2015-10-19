@@ -24,7 +24,7 @@ function init(ReactBootstrap, jQuery){
         isCollapse = false;
       }
 
-      return {url: url, tempUrl: url, isCollapse: isCollapse, isOwner: isOwner, scaleOption: scaleOption, tempScaleOption: scaleOption, height: "400px"};
+      return {url: url, tempUrl: url, isCollapse: isCollapse, isOwner: isOwner, scaleOption: scaleOption, tempScaleOption: scaleOption, height: "0"};
     },
 
     getSettingsPaneClass: function(){
@@ -97,6 +97,8 @@ function init(ReactBootstrap, jQuery){
     },
 
     changeHeightBaseOnScaleOption: function(){
+      if (this.state.url == "") return;
+
       if (typeof(gadgets) != "undefined" && gadgets){
         var width = gadgets.window.getViewportDimensions().width;
         if (this.state.tempScaleOption == "1"){
