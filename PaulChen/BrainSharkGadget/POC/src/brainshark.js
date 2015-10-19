@@ -24,7 +24,7 @@ function init(ReactBootstrap, jQuery){
         isCollapse = false;
       }
 
-      return {url: url, tempUrl: url, isCollapse: isCollapse, isOwner: isOwner, scaleOption: scaleOption, tempScaleOption: scaleOption, height: "0"};
+      return {url: url, tempUrl: url, isCollapse: isCollapse, isOwner: isOwner, scaleOption: scaleOption, tempScaleOption: scaleOption, height: "0", urlInvalidHint: ""};
     },
 
     getSettingsPaneClass: function(){
@@ -71,10 +71,37 @@ function init(ReactBootstrap, jQuery){
     },
 
     hideSettingsPane: function(){
-      this.setState({isCollapse: true, tempUrl: this.state.url, tempScaleOption: this.state.scaleOption});
+      this.setState({isCollapse: true, tempUrl: this.state.url, tempScaleOption: this.state.scaleOption, urlInvalidHint: ""});
+    },
+
+    isUrlValid: function(){
+      return this.state.tempUrl.indexOf("https://www.brainshark.com") == 0;
+    },
+
+    getInvalidHint: function(){
+      if (this.isUrlValid()){
+        return "";
+      } else {
+        return "Url should begin with \"https://www.brainshark.com\"";
+      }
+    },
+
+    validationState: function(){
+      var url = this.state.tempUrl;
+      if (this.isUrlValid()){
+        return 'success';
+      } else {
+        return 'error';
+      }
     },
 
     okBtnClickHandler: function(){
+      if (!this.isUrlValid())
+      {
+        this.setState({urlInvalidHint: this.getInvalidHint()});
+        return;
+      }
+
       if (this.state.url != this.state.tempUrl){
         this.setState({url: this.state.tempUrl});
         if (typeof(wave) != "undefined" && wave && wave.getState()){
@@ -123,6 +150,7 @@ function init(ReactBootstrap, jQuery){
 
     tempUrlChanged: function(e) {
       this.setState({tempUrl: e.target.value});
+      this.setState({urlInvalidHint: ""});
     },
 
     adjustHeight: function(){
@@ -165,6 +193,7 @@ function init(ReactBootstrap, jQuery){
       var Button = ReactBootstrap.Button;
       var DropdownButton = ReactBootstrap.DropdownButton;
       var MenuItem = ReactBootstrap.MenuItem;
+      var Input = ReactBootstrap.Input;
       return(
         <div>
           <div id="input-group-main" className={this.getSettingsBtnClass()}>
@@ -175,11 +204,11 @@ function init(ReactBootstrap, jQuery){
             <div>
               <table style={{width: "100%"}}>
                 <tr style={{height: "50px"}}>
-                  <td style={{width: "50px"}}><label className="col-sm-1">URL</label></td>
-                  <td><input type="text" className="form-control" name="settings-url" placeholder="https://www.brainshark.com/..." value={this.state.tempUrl} onChange={this.tempUrlChanged}/></td>
+                  <td style={{width: "50px"}} className="label-col"><label className="col-sm-1">URL</label></td>
+                  <td><Input type="text" className="form-control" name="settings-url" placeholder="https://www.brainshark.com/..." value={this.state.tempUrl} onChange={this.tempUrlChanged} bsStyle={this.validationState()} help={this.state.urlInvalidHint}/></td>
                 </tr>
                 <tr style={{height: "50px"}}>
-                  <td style={{width: "50px"}}><label className="col-sm-1 ">Scale</label></td>
+                  <td style={{width: "50px"}} className="label-col"><label className="col-sm-1">Scale</label></td>
                   <td>
                     <DropdownButton title={this.getScaleText()}>
                       <MenuItem eventKey="2" onSelect={this.onSelectHandler}>{this.getScaleTextByKey("2")}</MenuItem>

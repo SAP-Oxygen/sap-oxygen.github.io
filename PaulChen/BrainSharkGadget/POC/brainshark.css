@@ -64,3 +64,8 @@ h2 {
 .init-hide {
     display: none;
 }
+
+.label-col {
+    vertical-align: top;
+    padding-top: 15px;
+}
