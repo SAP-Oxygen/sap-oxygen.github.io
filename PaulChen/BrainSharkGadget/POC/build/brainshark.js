@@ -5,7 +5,7 @@ function init(ReactBootstrap, jQuery){
       var isOwner = true;
       var isCollapse = true;
       var scaleOption = "1";
-      if (typeof(wave) != "undefined" && wave) {
+      if (typeof(wave) != "undefined" && wave && wave.getState() != null) {
         url = wave.getState().get('url', "");
 
         var ownerId = wave.getState().get('ownerId', "");
