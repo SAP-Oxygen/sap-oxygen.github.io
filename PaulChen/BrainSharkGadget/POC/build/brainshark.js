@@ -20,7 +20,7 @@ function init(ReactBootstrap, jQuery){
         scaleOption = wave.getState().get('scaleOption', "2");
       }
 
-      if (url == ""){
+      if (url == "") {
         isCollapse = false;
       }
 
@@ -40,8 +40,7 @@ function init(ReactBootstrap, jQuery){
     },
 
     changeCollapseState: function(){
-      if (this.state.isCollapse)
-      {
+      if (this.state.isCollapse) {
         this.setState({isCollapse: false});
       } else {
         this.hideSettingsPane();
@@ -53,13 +52,13 @@ function init(ReactBootstrap, jQuery){
     },
 
     getScaleTextByKey: function(key){
-      if (key == "1"){
+      if (key == "1") {
         return "4:3 without Menu";
-      } else if (key == "2"){
+      } else if (key == "2") {
         return "4:3 with Menu";
-      } else if (key == "3"){
+      } else if (key == "3") {
         return "16:9 without Menu";
-      } else if (key == "4"){
+      } else if (key == "4") {
         return "16:9 with Menu";
       } else {
         return "ERROR";
@@ -75,24 +74,15 @@ function init(ReactBootstrap, jQuery){
     },
 
     isUrlValid: function(){
-      return this.state.tempUrl.indexOf("https://www.brainshark.com") == 0;
+      return this.state.tempUrl.indexOf("https://www.brainshark.com/") == 0;
     },
 
     getInvalidHint: function(){
-      if (this.isUrlValid()){
-        return "";
-      } else {
-        return "Url should begin with \"https://www.brainshark.com\"";
-      }
+      return this.isUrlValid() ? "" : "Url should begin with \"https://www.brainshark.com/\"";
     },
 
     validationState: function(){
-      var url = this.state.tempUrl;
-      if (this.isUrlValid()){
-        return 'success';
-      } else {
-        return 'error';
-      }
+      return this.isUrlValid() ? "success" : "error";
     },
 
     okBtnClickHandler: function(){
@@ -102,19 +92,19 @@ function init(ReactBootstrap, jQuery){
         return;
       }
 
-      if (this.state.url != this.state.tempUrl){
+      if (this.state.url != this.state.tempUrl) {
         this.setState({url: this.state.tempUrl});
-        if (typeof(wave) != "undefined" && wave && wave.getState()){
+        if (typeof(wave) != "undefined" && wave && wave.getState()) {
           wave.getState().submitDelta({'url': this.state.tempUrl});
-          if (wave.getViewer() != null){
+          if (wave.getViewer() != null) {
             wave.getState().submitDelta({'ownerId': wave.getViewer().id_});
           }
         }
       }
 
-      if (this.state.scaleOption != this.state.tempScaleOption){
+      if (this.state.scaleOption != this.state.tempScaleOption) {
         this.setState({scaleOption: this.state.tempScaleOption});
-        if (typeof(wave) != "undefined" && wave && wave.getState()){
+        if (typeof(wave) != "undefined" && wave && wave.getState()) {
           wave.getState().submitDelta({'scaleOption': this.state.tempScaleOption});
         }
         this.changeHeightBaseOnScaleOption();
@@ -126,18 +116,18 @@ function init(ReactBootstrap, jQuery){
     changeHeightBaseOnScaleOption: function(){
       if (this.state.url == "") return;
 
-      if (typeof(gadgets) != "undefined" && gadgets){
+      if (typeof(gadgets) != "undefined" && gadgets) {
         var width = gadgets.window.getViewportDimensions().width;
-        if (this.state.tempScaleOption == "1"){
+        if (this.state.tempScaleOption == "1") {
           var targetHeight = width * 3.3 / 4.0;
           this.setState({height: targetHeight});
-        } else if (this.state.tempScaleOption == "2"){
+        } else if (this.state.tempScaleOption == "2") {
           var targetHeight = width * 2.4 / 4.0;
           this.setState({height: targetHeight});
-        } else if (this.state.tempScaleOption == "3"){
+        } else if (this.state.tempScaleOption == "3") {
           var targetHeight = width * 10.4 / 16.0;
           this.setState({height: targetHeight});
-        } else if (this.state.tempScaleOption == "4"){
+        } else if (this.state.tempScaleOption == "4") {
           var targetHeight = width * 7.7 / 16.0;
           this.setState({height: targetHeight});
         }
@@ -164,11 +154,11 @@ function init(ReactBootstrap, jQuery){
         var ownerId = wave.getState().get('ownerId', "");
         var scaleOption = wave.getState().get('scaleOption', "2");
         var isOwner = false;
-        if (url == ""){
+        if (url == "") {
           isOwner = true;
         } else {
-          if (ownerId != ""){
-            if (wave.getViewer() != null){
+          if (ownerId != "") {
+            if (wave.getViewer() != null) {
               isOwner = (ownerId == wave.getViewer().id_);
             }
           }

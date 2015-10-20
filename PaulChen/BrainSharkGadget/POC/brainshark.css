@@ -9,24 +9,12 @@ h2 {
     font-family: Arial, Helvetica, clean , sans-serif;
     font-size: 16.8px;
 }
-
-#input-group {
-    position: relative;
-    margin-bottom: 6px;
-    padding: 0;
-    width: 100%;
-}
-
 #input-group-main {
     padding: 6px;
     position: relative;
     background-color: #e5e5e5;
     width: 100%;
     min-height: 46px;
-}
-
-#input-group-actions {
-    position: relative;
 }
 
 #settings-btn {
@@ -59,10 +47,6 @@ h2 {
 #url-frame {
     border: none;
     width: 100%;
-}
-
-.init-hide {
-    display: none;
 }
 
 .label-col {
