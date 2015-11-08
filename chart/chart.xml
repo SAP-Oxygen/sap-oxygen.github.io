@@ -1,6 +1,7 @@
 <Module specificationVersion='2'>
   <ModulePrefs title="Chart">
     <Require feature="osapi"/>
+    <Require feature="dynamic-height"/>
   </ModulePrefs>
   <Content type="html" href="chart.html"/>
 </Module>
