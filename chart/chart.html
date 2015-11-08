@@ -6,7 +6,6 @@ google.setOnLoadCallback(drawCurveTypes);
 
 function drawCurveTypes() {
   var data = google.visualization.arrayToDataTable([
-   ['Month', 'Usage'],
    ['May', {v:22500, f:'22,500'}], // Format as "22,500".
    ['June', 35000],
    ['July', 44000],
@@ -14,10 +13,10 @@ function drawCurveTypes() {
    ['September', 92000],
    ['October', 18500]
   ],
-  false); // 'false' means that the first row contains labels, not data.
+  true); // 'false' means that the first row contains labels, not data.
 
-  var options = {};
-  var xoptions = {
+  var xxoptions = {};
+  var options = {
     hAxis: {
       title: 'Month'
     },
