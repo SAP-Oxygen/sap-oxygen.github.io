@@ -1,0 +1,6 @@
+<Module specificationVersion='2'>
+  <ModulePrefs title="Chart">
+    <Require feature="osapi"/>
+  </ModulePrefs>
+  <Content type="html" href="chart.html"/>
+</Module>

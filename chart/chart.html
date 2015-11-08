@@ -1,0 +1,35 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<div id="chart_div"></div>
+<script>
+google.load('visualization', '1', {packages: ['corechart', 'line']});
+google.setOnLoadCallback(drawCurveTypes);
+
+function drawCurveTypes() {
+  var data = google.visualization.arrayToDataTable([
+   ['Month', 'Usage'],
+   ['May', {v:22500, f:'22,500'}], // Format as "22,500".
+   ['June', 35000],
+   ['July', 44000],
+   ['August', 27000],
+   ['September', 92000],
+   ['October', 18500]
+  ],
+  false); // 'false' means that the first row contains labels, not data.
+
+
+  var options = {
+    hAxis: {
+      title: 'Month'
+    },
+    vAxis: {
+      title: 'Usage'
+    },
+    series: {
+      1: {curveType: 'function'}
+    }
+  };
+
+  var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+  chart.draw(data, options);
+}
+</script>
