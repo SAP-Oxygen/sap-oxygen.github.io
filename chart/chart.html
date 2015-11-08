@@ -1,7 +1,6 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <div id="chart_div"></div>
 <script>
-function runNow() {
 google.load('visualization', '1', {packages: ['corechart', 'line']});
 google.setOnLoadCallback(drawCurveTypes);
 
@@ -32,13 +31,6 @@ function drawCurveTypes() {
 
   var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
   chart.draw(data, options);
+  gadgets.window.adjustHeight();
 }
-}
-
-gadgets.util.registerOnLoadHandler(function() {
-  runNow();
-  window.setTimeout(function() {
-    gadgets.window.adjustHeight();
-  }, 300);
-});
 </script>
