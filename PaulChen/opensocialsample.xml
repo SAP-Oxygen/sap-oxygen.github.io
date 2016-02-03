@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<Module specificationVersion='2'>
+  <ModulePrefs title="OpenSocial API sample" author="Paul Chen">
+    <Require feature="wave"/>
+    <Require feature="dynamic-height"/>
+    <Require feature="osapi"/>
+    <Locale lang="en">
+      <msg name="locale_string">This is a locale string</msg>
+    </Locale>
+  </ModulePrefs>
+  <Content type="html">
+    <![CDATA[
+    <style type="text/css">
+      span.red {color: red}
+      td.left {width: 350px}
+      td.leftEx {width: 650px}
+    </style>
+    <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+    <div>
+      <h4>API below should be called in wave.setParticipantCallBack</h4>
+      <table>
+        <tr><td class="left">wave.getViewer().id_</td><td><span class="red" id="wave_getViewer_id">PLACEHOLDER</span></td></tr>
+        <tr><td class="left">wave.getViewer().displayName_</td><td><span class="red" id="wave_getViewer_displayName">PLACEHOLDER</span></td></tr>
+        <tr><td class="left">wave.getViewer().email_</td><td><span class="red" id="wave_getViewer_email">PLACEHOLDER</span></td></tr>
+        <tr><td class="left">wave.getViewer().thumbnailUrl_</td><td><span class="red" id="wave_getViewer_thumbnailUrl">PLACEHOLDER</span></td></tr>
+        <tr><td class="left">wave.getParticipantById("***").id_</td><td><span class="red" id="wave_getparticipantById_id">PLACEHOLDER</span></td></tr>
+        <tr><td class="left">wave.getParticipantById("***").displayName_</td><td><span class="red" id="wave_getparticipantById_displayName">PLACEHOLDER</span></td></tr>
+        <tr><td class="left">wave.getParticipantById("***").email_</td><td><span class="red" id="wave_getparticipantById_email">PLACEHOLDER</span></td></tr>
+        <tr><td class="left">wave.getParticipantById("***").thumbnailUrl_</td><td><span class="red" id="wave_getparticipantById_thumbnailUrl">PLACEHOLDER</span></td></tr>
+      </table>
+
+      <h4>wave.getState().get(key) should be called in wave.setStateCallBack</h4>
+      <table>
+        <tr><td class="left">wave.getState().submitDelta({key1: "test"})</td><td><button type="button" onclick="submitDelta()">Submit Delta</button></td></tr>
+        <tr><td class="left">wave.getState().get("key1", "defaultValue")</td><td><span class="red" id="wave_getState_get_key">PLACEHOLDER</span></td></tr>
+      </table>
+
+      <h4>osapi(data is free for read, but only he/she can read/write)</h4>
+      <table>
+        <tr>
+          <td class="leftEx">osapi.activitystreams.create({activity: {title: "1", content: "2"}}).execute(function(result){})</td>
+          <td><button type="button" onclick="createFeed()">Create Feed</button></td>
+        </tr>
+        <tr>
+          <td class="leftEx" colspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="leftEx" colspan="2">osapi.appdata.update({userId: "@viewer", groupId: "@self", data: {myData: "test"}}).execute(function(a){*})</td>
+        </tr>
+        <tr>
+          <td class="leftEx">&nbsp;</td>
+          <td><button type="button" onclick="setMyData()">Set my Data</button></td>
+        </tr>
+        <tr>
+          <td class="leftEx" colspan="2">osapi.appdata.get({userId: "@viewer", groupId: "@self", keys: ["myData"]}).execute(function(data){***})</td>
+        </tr>
+        <tr>
+          <td class="leftEx">&nbsp;</td>
+          <td><button type="button" onclick="getMyData()">Get my Data</button></td>
+        </tr>
+      </table>
+
+      <h4>Preferences(only he/she can read/write)</h4>
+      <table>
+        <tr><td class="leftEx">var prefs = new gadgets.Prefs(); prefs.getMsg("locale_string")</td><td><span class="red" id="prefs_getMsg">PLACEHOLDER</span></td></tr>
+        <tr><td class="leftEx">var prefs = new gadgets.Prefs(); prefs.getLang()</td><td><span class="red" id="prefs_getLang">PLACEHOLDER</span></td></tr>
+      </table>
+    </div>
+    <script>
+      function init() {
+        wave.setParticipantCallback(function(){
+          if (wave.getViewer()) {
+            $('#wave_getViewer_id').text(wave.getViewer().id_);
+            $('#wave_getViewer_displayName').text(wave.getViewer().displayName_);
+            $('#wave_getViewer_email').text(wave.getViewer().email_);
+            $('#wave_getViewer_thumbnailUrl').text(wave.getViewer().thumbnailUrl_);
+
+            var currentUserId = wave.getViewer().id_;
+            $('#wave_getparticipantById_id').text(wave.getParticipantById(currentUserId).id_);
+            $('#wave_getparticipantById_displayName').text(wave.getParticipantById(currentUserId).displayName_);
+            $('#wave_getparticipantById_email').text(wave.getParticipantById(currentUserId).email_);
+            $('#wave_getparticipantById_thumbnailUrl').text(wave.getParticipantById(currentUserId).thumbnailUrl_);
+          }
+        });
+
+        wave.setStateCallback(function(){
+          var value = wave.getState().get("key1", "defaultValue");
+          $('#wave_getState_get_key').text(value);
+        });
+
+        function getMsg() {
+          var prefs = new gadgets.Prefs();
+          $("#prefs_getMsg").text(prefs.getMsg("locale_string"));
+        }
+        getMsg();
+
+        function getLang() {
+          var prefs = new gadgets.Prefs();
+          $("#prefs_getLang").text(prefs.getLang());
+        }
+        getLang();
+      }
+
+      function submitDelta() {
+        wave.getState().submitDelta({key1: "test"});
+      }
+
+      function createFeed() {
+        osapi.activitystreams.create({activity: {title: "1", content: "2"}}).execute(function(result){});
+      }
+
+      function setMyData() {
+        osapi.appdata.update({userId: "@viewer", groupId: "@self", data: {myData: "test"}}).execute(function(data){});
+      }
+
+      function getMyData() {
+        osapi.appdata.get({userId: "@viewer", groupId: "@self", keys: ["myData"]}).execute(function(data){
+          if(data[wave.getViewer().id_])
+          {
+            alert(data[wave.getViewer().id_]["myData"]);
+          }
+          else
+          {
+            alert("do not have value");
+          }
+        });
+      }
+
+      gadgets.util.registerOnLoadHandler(init);
+      gadgets.window.adjustHeight();
+    </script>
+    ]]>
+  </Content>
+</Module>
