@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<Module> 
+  <ModulePrefs title="Sample Cloud Portal Widget" height="250"> 
+    <Require feature="sap-xhrwrapper" />
+  </ModulePrefs> 
+      <ModuleConfig AllowedHeaders="header1,header2,header3" />
+      <Content type="html" href="index.html" view="authoring, consumption, mobile, preview"></Content>
+</Module>
