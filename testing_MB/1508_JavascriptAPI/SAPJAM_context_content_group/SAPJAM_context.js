@@ -36,7 +36,7 @@ function make_SAPJAM_context_Call(){
 			osapiOutput += "<li>data.<b>group.name</b> = " + data.group.name + "</li>";
 		}
 		else {
-			osapiOutput += "<li>*** Group Context Object information not available for this gadget because the gadget has not been added to a group. ***</li>";
+			osapiOutput += "<li>Group Context Object not available. This gadget must be added to a group to have a Group Context Object.</li>";
 		}
 		osapiOutput += "</ul></li>";
 		
