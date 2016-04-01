@@ -44,9 +44,7 @@ function make_SAPJAM_context_Call(){
 		osapiOutput += "</ul>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
 
-		/*
-		Displays the string (osapiOutput).
-		*/
+		/* Displays the string (osapiOutput). */
 		$("body").append(osapiOutput);
 	});
 	

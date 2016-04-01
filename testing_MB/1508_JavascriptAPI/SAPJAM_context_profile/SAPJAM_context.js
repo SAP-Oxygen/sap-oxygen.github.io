@@ -12,18 +12,26 @@ function make_SAPJAM_context_Call(){
 
 	gadgets.sapjam.context.get(function(data) {
 		console.log(data);
+
+		/* Begin HTML page */
 		var osapiOutput = "";
 		osapiOutput += "<p></p>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
 		osapiOutput += "<p><h2>gadgets.sapjam.context.get</h2></p>";
 		osapiOutput += "<ul>";
+
+		/* Adds all the properties of "gadgets.sapjam.context.get" with HTML formatting to a string (osapiOutput). */
 		osapiOutput += "<li>data.<b>context</b> = " + data.context + "</li>";
 		osapiOutput += "<li>data.<b>id</b> = " + data.id + "</li>";
 		osapiOutput += "<li>data.<b>name</b> = " + data.name + "</li>";
 		osapiOutput += "<li>data.<b>readOnly</b> = " + data.readOnly + "</li>";
+
+		/* End HTML page */
 		osapiOutput += "</ul>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
 		osapiOutput += "<p></p>";
+
+		/* Displays the string (osapiOutput). */
 		$("body").append(osapiOutput);
 	});
 	
