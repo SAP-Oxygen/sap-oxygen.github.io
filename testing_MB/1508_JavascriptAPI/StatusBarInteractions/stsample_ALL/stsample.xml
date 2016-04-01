@@ -1,0 +1,5 @@
+<Module specificationVersion='2'>
+  <ModulePrefs title="Status Bar API Sample" width="250" height="300">
+  </ModulePrefs>
+  <Content type="html" href="stsample.html"/>
+</Module>
