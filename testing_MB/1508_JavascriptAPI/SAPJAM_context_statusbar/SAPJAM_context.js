@@ -12,6 +12,7 @@ function make_SAPJAM_context_Call(){
 
 	gadgets.sapjam.context.get(function(data) {
 		console.log(data);
+
 		var osapiOutput = "";
 		osapiOutput += "<p></p>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
@@ -24,7 +25,11 @@ function make_SAPJAM_context_Call(){
 		osapiOutput += "</ul>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
 		osapiOutput += "<p></p>";
-		$("body").append(osapiOutput);
+
+		gadgets.sapjam.statusbar.highlight();
+		gadgets.sapjam.statusbar.setBadgeText(osapiOutput);
+
+		$("body").append("<p>Click on the statusbar gadget on the bottom of the screen to display <h2>gadgets.sapjam.context.get</h2> properties.</p>");
 	});
 	
 }
