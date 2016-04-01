@@ -9,23 +9,44 @@ http://www.apache.org/licenses/LICENSE-2.0
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 */
 function make_SAPJAM_context_Call(){
+	/*
+	Display all of the properties for "gadgets.sapjam.context.get" in a HTML page.
+	*/
 
 	gadgets.sapjam.context.get(function(data) {
 		console.log(data);
+
+		/* Begin HTML page */
 		var osapiOutput = "";
 		osapiOutput += "<p></p>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
 		osapiOutput += "<p><h2>gadgets.sapjam.context.get</h2></p>";
 		osapiOutput += "<ul>";
+
+		/* Adds all the properties of "gadgets.sapjam.context.get" with HTML formatting to a string (osapiOutput). */
 		osapiOutput += "<li>data.<b>context</b> = " + data.context + "</li>";
-		osapiOutput += "<li>data.<b>group.id</b> = " + data.group.id + "</li>";
-		osapiOutput += "<li>data.<b>group.name</b> = " + data.group.name + "</li>";
 		osapiOutput += "<li>data.<b>id</b> = " + data.id + "</li>";
 		osapiOutput += "<li>data.<b>name</b> = " + data.name + "</li>";
 		osapiOutput += "<li>data.<b>readOnly</b> = " + data.readOnly + "</li>";
+		
+		/* Adds group context object properties to the string (osapiOutput) if the gadget has a content or group context. */
+		osapiOutput += "<li>Group Context Object:<ul>";
+		if (data.context != "preview") {
+			osapiOutput += "<li>data.<b>group.id</b> = " + data.group.id + "</li>";
+			osapiOutput += "<li>data.<b>group.name</b> = " + data.group.name + "</li>";
+		}
+		else {
+			osapiOutput += "<li>*** Group Context Object information not available for this gadget because the gadget has not been added to a group. ***</li>";
+		}
+		osapiOutput += "</ul></li>";
+		
+		/* End HTML page */
 		osapiOutput += "</ul>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
-		osapiOutput += "<p></p>";
+
+		/*
+		Displays the string (osapiOutput).
+		*/
 		$("body").append(osapiOutput);
 	});
 	
