@@ -14,7 +14,6 @@ function make_SAPJAM_context_Call(){
 	*/
 
 	gadgets.sapjam.context.get(function(data) {
-		console.log(data);
 		console.log(JSON.stringify(data, null, 4));
 
 		/* Begin HTML page */
