@@ -15,6 +15,7 @@ function make_SAPJAM_context_Call(){
 
 	gadgets.sapjam.context.get(function(data) {
 		console.log(data);
+		console.log(JSON.stringify(data));
 
 		/* Begin HTML page */
 		var osapiOutput = "";
@@ -40,6 +41,9 @@ function make_SAPJAM_context_Call(){
 		}
 		osapiOutput += "</ul></li>";
 		
+		osapiOutput += "<li>Raw JSON:<ul>";
+		osapiOutput += "<li>" + JSON.stringify(data) + "</li></ul></li>";
+
 		/* End HTML page */
 		osapiOutput += "</ul>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
