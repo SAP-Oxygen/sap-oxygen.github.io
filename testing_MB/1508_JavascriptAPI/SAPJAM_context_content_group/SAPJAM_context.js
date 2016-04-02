@@ -40,11 +40,9 @@ function make_SAPJAM_context_Call(){
 			osapiOutput += "<li>Group Context Object not available. This gadget must be added to a group to have a Group Context Object.</li>";
 		}
 		osapiOutput += "</ul></li>";
-		
-		osapiOutput += "<li>Raw JSON:<ul>";
-		osapiOutput += "<li>" + JSON.stringify(data, null, 4) + "</li></ul></li>";
 
 		/* End HTML page */
+		osapiOutput += "<li>Open your browser console to view the raw JSON object.</li>";
 		osapiOutput += "</ul>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
 
