@@ -11,7 +11,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 function make_SAPJAM_context_Call(){
 
 	gadgets.sapjam.context.get(function(data) {
-		console.log(data);
+		console.log(JSON.stringify(data, null, 4));
 
 		/* Begin HTML page */
 		var osapiOutput = "";
@@ -27,6 +27,7 @@ function make_SAPJAM_context_Call(){
 		osapiOutput += "<li>data.<b>readOnly</b> = " + data.readOnly + "</li>";
 
 		/* End HTML page */
+		osapiOutput += "<li>Open your browser console to view the raw JSON object.</li>";
 		osapiOutput += "</ul>";
 		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
 		osapiOutput += "<p></p>";
