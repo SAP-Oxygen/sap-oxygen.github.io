@@ -14,30 +14,26 @@ function make_SAPJAM_context_Call(){
 		console.log(JSON.stringify(data, null, 4));
 
 		/* Begin HTML page */
-		var osapiOutput = "";
-		osapiOutput += "<p></p>";
-		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
-		osapiOutput += "<p><h2>gadgets.sapjam.context.get</h2></p>";
-		osapiOutput += "<ul>";
+		var osapiOutput = "";;
+		osapiOutput += "--------------------------------";
+		osapiOutput += "gadgets.sapjam.context.get";
 
 		/* Adds all the properties of "gadgets.sapjam.context.get" with HTML formatting to a string (osapiOutput). */
-		osapiOutput += "<li>data.<b>context</b> = " + data.context + "</li>";
-		osapiOutput += "<li>data.<b>id</b> = " + data.id + "</li>";
-		osapiOutput += "<li>data.<b>name</b> = " + data.name + "</li>";
-		osapiOutput += "<li>data.<b>readOnly</b> = " + data.readOnly + "</li>";
+		osapiOutput += "data.context = " + data.context;
+		osapiOutput += "data.id = " + data.id;
+		osapiOutput += "data.name = " + data.name;
+		osapiOutput += "data.readOnly = " + data.readOnly;
 
 		/* End HTML page */
-		osapiOutput += "<li>Open your browser console to view the raw JSON object.</li>";
-		osapiOutput += "</ul>";
-		osapiOutput += "<p>------------------------------------------------------------------------------------------</p>";
-		osapiOutput += "<p></p>";
+		osapiOutput += "Open your browser console to view the raw JSON object.";
+		osapiOutput += "--------------------------------";
 
 		/* Highlight the status bar and displays the string inside it (osapiOutput). */
 		gadgets.sapjam.statusbar.highlight();
-		gadgets.sapjam.statusbar.setBadgeText("lkjalksd");
+		gadgets.sapjam.statusbar.setBadgeText("Click here");
 
 		/* Instructs the user how to use the statusbar gadget */
-		$("body").append("<p>Click on the statusbar gadget on the bottom of the screen to display <h2>gadgets.sapjam.context.get</h2> properties.</p>");
+		$("body").append(osapiOutput);
 	});
 	
 }
