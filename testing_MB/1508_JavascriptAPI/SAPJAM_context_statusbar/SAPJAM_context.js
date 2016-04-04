@@ -15,7 +15,7 @@ function make_SAPJAM_context_Call(){
 
 		/* Begin HTML page */
 		var osapiOutput = "";;
-		osapiOutput += "--------------------------------";
+		osapiOutput += "--------------------------------\n";
 		osapiOutput += "gadgets.sapjam.context.get";
 
 		/* Adds all the properties of "gadgets.sapjam.context.get" with HTML formatting to a string (osapiOutput). */
