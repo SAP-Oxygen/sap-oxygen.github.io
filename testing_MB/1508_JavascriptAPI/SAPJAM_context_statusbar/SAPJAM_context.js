@@ -15,18 +15,16 @@ function make_SAPJAM_context_Call(){
 
 		/* Begin HTML page */
 		var osapiOutput = "";;
-		osapiOutput += "--------------------------------\n";
-		osapiOutput += "gadgets.sapjam.context.get";
+		osapiOutput += "gadgets.sapjam.context.get --> ";
 
 		/* Adds all the properties of "gadgets.sapjam.context.get" with HTML formatting to a string (osapiOutput). */
-		osapiOutput += "data.context = " + data.context;
-		osapiOutput += "data.id = " + data.id;
-		osapiOutput += "data.name = " + data.name;
-		osapiOutput += "data.readOnly = " + data.readOnly;
+		osapiOutput += "context = " + data.context;
+		osapiOutput += ", id = " + data.id;
+		osapiOutput += ", name = " + data.name;
+		osapiOutput += ", readOnly = " + data.readOnly;
 
 		/* End HTML page */
-		osapiOutput += "Open your browser console to view the raw JSON object.";
-		osapiOutput += "--------------------------------";
+		osapiOutput += ". Open your browser console to view the raw JSON object.";
 
 		/* Highlight the status bar and displays the string inside it (osapiOutput). */
 		gadgets.sapjam.statusbar.highlight();
