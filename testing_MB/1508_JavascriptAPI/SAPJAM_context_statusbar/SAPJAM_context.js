@@ -34,7 +34,7 @@ function make_SAPJAM_context_Call(){
 
 		/* Highlight the status bar and displays the string inside it (osapiOutput). */
 		gadgets.sapjam.statusbar.highlight();
-		gadgets.sapjam.statusbar.setBadgeText(osapiOutput);
+		gadgets.sapjam.statusbar.setBadgeText("lkjalksd");
 
 		/* Instructs the user how to use the statusbar gadget */
 		$("body").append("<p>Click on the statusbar gadget on the bottom of the screen to display <h2>gadgets.sapjam.context.get</h2> properties.</p>");
