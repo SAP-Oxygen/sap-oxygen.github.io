@@ -65,6 +65,7 @@ function make_SAPJAM_context_Call(){
 		$("body").append(osapiOutput);
 
 		setTimeout(clearBadgeText, 3000);
+		setTimeout(clearHighlight, 3000);
 		setTimeout(hideStatusBar, 5000);
 		setTimeout(clickToExpand, 7000);
 		setTimeout(clearHighlight, 9000);
