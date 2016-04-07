@@ -32,7 +32,7 @@ function make_SAPJAM_context_Call(){
 				-> Shows the contents (HTML body) of the statusbar gadget
 				-> Shows the contents of the body element in the gadget
 				-> Expands the gadget and shows the contents of the body element within it
-			-> gadgets.sapjam.statusbar.hide()
+			-> DONE - gadgets.sapjam.statusbar.hide()
 				-> hide the current gadget if shown
 				-> Hides the gadget
 				-> Collapses the gadget
@@ -40,14 +40,14 @@ function make_SAPJAM_context_Call(){
 				-> change the status bar section for the current gadget to a blue highlight and throb it 3 times
 				-> Highlight the status bar and displays the string inside it (osapiOutput).
 				-> Highlights the gadget in blue and makes it blink 3 times
-			-> gadgets.sapjam.statusbar.clearHighlight()
+			-> DONE - gadgets.sapjam.statusbar.clearHighlight()
 				-> remove any blue highlighting on the status bar section for the current gadget
 				-> 
 			-> DONE - gadgets.sapjam.statusbar.setBadgeText(someString)
 				-> add a red badge with the given string next to the gadget's title in the status bar section for the current gadget
 				-> Adds a red badge with the given string to the left of the gadget's title in the status bar of the gadget
 				-> Adds a red badge with text to the gadget
-			-> gadgets.sapjam.statusbar.clearBadgeText()
+			-> DONE - gadgets.sapjam.statusbar.clearBadgeText()
 				-> remove any red badge in the status bar section for the current gadget
 				-> 
 		*/
@@ -56,7 +56,7 @@ function make_SAPJAM_context_Call(){
 		gadgets.sapjam.statusbar.highlight();
 
 		/* Adds a red badge with text to the gadget */
-		gadgets.sapjam.statusbar.setBadgeText("Will Close");
+		gadgets.sapjam.statusbar.setBadgeText("Statusbar Expanded");
 
 		/* Expands the gadget and shows the contents of the body element within it */
 		gadgets.sapjam.statusbar.show();
@@ -64,15 +64,24 @@ function make_SAPJAM_context_Call(){
 		/* Appends the string (osapiOutput) to the body of the HTML page. */
 		$("body").append(osapiOutput);
 
+		setTimeout(clearBadge, 1500);
 		setTimeout(hideStatusBar, 2000);
+		setTimeout(clearBadge, 3500);
+		setTimeout(clickToExpand, 4000);
 	});
 	
 }
 
+function clearBadge(){
+	gadgets.sapjam.statusbar.clearBadgeText();
+}
 
 function hideStatusBar(){
 	gadgets.sapjam.statusbar.hide();
 	gadgets.sapjam.statusbar.clearHighlight();
-	gadgets.sapjam.statusbar.setBadgeText("Click to Open");
+	gadgets.sapjam.statusbar.setBadgeText("Statusbar collapsed");
 }
 
+function clickToExpand(){
+	gadgets.sapjam.statusbar.setBadgeText("Click to Expand");
+}
