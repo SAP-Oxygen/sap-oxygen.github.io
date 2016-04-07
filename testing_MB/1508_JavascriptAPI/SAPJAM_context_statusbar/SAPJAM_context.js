@@ -64,16 +64,20 @@ function make_SAPJAM_context_Call(){
 		/* Appends the string (osapiOutput) to the body of the HTML page. */
 		$("body").append(osapiOutput);
 
-		setTimeout(clearBadge, 3000);
+		setTimeout(clearBadgeText, 3000);
 		setTimeout(hideStatusBar, 5000);
-		setTimeout(clearBadge, 7000);
-		setTimeout(clickToExpand, 9000);
+		setTimeout(clickToExpand, 7000);
+		setTimeout(clearHighlight, 9000);
 	});
 	
 }
 
-function clearBadge(){
+function clearBadgeText(){
 	gadgets.sapjam.statusbar.clearBadgeText();
+}
+
+function clearHighlight(){
+	gadgets.sapjam.statusbar.clearHighlight();
 }
 
 function hideStatusBar(){
@@ -83,5 +87,6 @@ function hideStatusBar(){
 }
 
 function clickToExpand(){
+	gadgets.sapjam.statusbar.highlight();
 	gadgets.sapjam.statusbar.setBadgeText("Click to Expand");
 }
