@@ -56,14 +56,23 @@ function make_SAPJAM_context_Call(){
 		gadgets.sapjam.statusbar.highlight();
 
 		/* Adds a red badge with text to the gadget */
-		gadgets.sapjam.statusbar.setBadgeText("Click here");
+		gadgets.sapjam.statusbar.setBadgeText("Will Close");
 
 		/* Expands the gadget and shows the contents of the body element within it */
 		gadgets.sapjam.statusbar.show();
 
 		/* Appends the string (osapiOutput) to the body of the HTML page. */
 		$("body").append(osapiOutput);
+
+		setTimeout(hideStatusBar, 2000);
 	});
 	
+}
+
+
+function hideStatusBar(){
+	gadgets.sapjam.statusbar.hide();
+	gadgets.sapjam.statusbar.clearHighlight();
+	gadgets.sapjam.statusbar.setBadgeText("Click to Open");
 }
 
