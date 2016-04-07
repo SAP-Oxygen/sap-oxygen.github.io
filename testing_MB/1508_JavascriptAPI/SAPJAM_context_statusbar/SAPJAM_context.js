@@ -64,10 +64,10 @@ function make_SAPJAM_context_Call(){
 		/* Appends the string (osapiOutput) to the body of the HTML page. */
 		$("body").append(osapiOutput);
 
-		setTimeout(clearBadge, 1500);
-		setTimeout(hideStatusBar, 2000);
-		setTimeout(clearBadge, 3500);
-		setTimeout(clickToExpand, 4000);
+		setTimeout(clearBadge, 3000);
+		setTimeout(hideStatusBar, 4000);
+		setTimeout(clearBadge, 4000);
+		setTimeout(clickToExpand, 5000);
 	});
 	
 }
