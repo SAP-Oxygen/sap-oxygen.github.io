@@ -52,42 +52,47 @@ function make_SAPJAM_context_Call(){
 				-> 
 		*/
 
-		/* Highlights the gadget in blue and makes it blink 3 times */
-		gadgets.sapjam.statusbar.highlight();
-
-		/* Adds a red badge with text to the gadget */
-		gadgets.sapjam.statusbar.setBadgeText("Statusbar Expanded");
-
-		/* Expands the gadget and shows the contents of the body element within it */
-		gadgets.sapjam.statusbar.show();
-
 		/* Appends the string (osapiOutput) to the body of the HTML page. */
 		$("body").append(osapiOutput);
 
-		setTimeout(clearBadgeText, 3000);
-		setTimeout(clearHighlight, 3000);
-		setTimeout(hideStatusBar, 5000);
-		setTimeout(clickToExpand, 7000);
-		setTimeout(clearHighlight, 9000);
+		setTimeout(showStatusBar, 2000);
+		setTimeout(clearBadgeText, 4000);
+		setTimeout(hideStatusBar, 6000);
+		setTimeout(clearBadgeText, 8000);
+		setTimeout(clickToExpand, 10000);
+		setTimeout(clearHighlight, 12000);
 	});
 	
 }
 
+function showStatusBar(){
+	/* Highlights the gadget in blue and makes it blink 3 times */
+	gadgets.sapjam.statusbar.highlight();
+
+	/* Expands the gadget and shows the contents of the body element within it */
+	gadgets.sapjam.statusbar.show();
+
+	/* Adds a red badge with text to the gadget */
+	gadgets.sapjam.statusbar.setBadgeText("Statusbar Expanded");
+}
+
 function clearBadgeText(){
 	gadgets.sapjam.statusbar.clearBadgeText();
+	gadgets.sapjam.statusbar.clearHighlight();
+}
+
+function hideStatusBar(){
+	gadgets.sapjam.statusbar.hide();
+	gadgets.sapjam.statusbar.highlight();
+	gadgets.sapjam.statusbar.setBadgeText("Statusbar collapsed");
+}
+
+function clickToExpand(){
+	gadgets.sapjam.statusbar.highlight();
+	gadgets.sapjam.statusbar.setBadgeText("Click here");
 }
 
 function clearHighlight(){
 	gadgets.sapjam.statusbar.clearHighlight();
 }
 
-function hideStatusBar(){
-	gadgets.sapjam.statusbar.hide();
-	gadgets.sapjam.statusbar.clearHighlight();
-	gadgets.sapjam.statusbar.setBadgeText("Statusbar collapsed");
-}
-
-function clickToExpand(){
-	gadgets.sapjam.statusbar.highlight();
-	gadgets.sapjam.statusbar.setBadgeText("Click to Expand");
-}
