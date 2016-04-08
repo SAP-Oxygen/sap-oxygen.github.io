@@ -30,12 +30,12 @@ function make_SAPJAM_context_Call(){
 		$("body").append(osapiOutput);
 
 		/* Demonstrates every gadgets.sapjam.statusbar interaction */
-		setTimeout(showStatusBar, 3000);
-		setTimeout(clearBadgeText, 6000);
-		setTimeout(hideStatusBar, 9000);
-		setTimeout(clearBadgeText, 12000);
-		setTimeout(clickToExpand, 15000);
-		setTimeout(clearHighlight, 18000);
+		setTimeout(showStatusBar, 1000);
+		setTimeout(clearBadgeText, 4000);
+		setTimeout(hideStatusBar, 7000);
+		setTimeout(clearBadgeText, 10000);
+		setTimeout(clickToExpand, 13000);
+		setTimeout(clearHighlight, 15000);
 	});
 }
 
