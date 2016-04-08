@@ -8,12 +8,16 @@ http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 */
+var osapiOutput = "";
+
 function make_SAPJAM_context_Call(){
 	gadgets.sapjam.context.get(function(data) {
 		console.log(JSON.stringify(data, null, 4));
 
 		/* Begin HTML page */
-		var osapiOutput = "";;
+		if (osapiOutput != ""){
+
+		}
 		osapiOutput += "gadgets.sapjam.context.get --> ";
 
 		/* Adds all the properties of "gadgets.sapjam.context.get" with HTML formatting to a string (osapiOutput). */
@@ -71,7 +75,9 @@ function clearHighlight(){
 
 // Initializes gadget, sets callbacks
 function init() {
+	console.log("init");
     if (wave && wave.isInWaveContainer()) {
+    	console.log("isInWaveContainer");
     	// Loads the gadget's initial state and the subsequent changes to it
         wave.setStateCallback(make_SAPJAM_context_Call);
     }
