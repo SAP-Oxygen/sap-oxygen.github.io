@@ -96,9 +96,7 @@ var commentStreamController = function() {
 		 * Gets all drafts in the private wave (which belongs to the particular participant).
 		 */ 
     	function getDrafts() {
-    		var draftsToRender = (wave.getPrivateState().get('drafts') === null) ? [] : wave.getPrivateState().get('drafts');
-
-    		//var draftsToRender = !(wave.getPrivateState().get('drafts') === null) ? wave.getPrivateState().get('drafts') : [];
+    		var draftsToRender = wave.getPrivateState().get('drafts') === null ? [] : wave.getPrivateState().get('drafts');
     		return draftsToRender;
     	}
     	
@@ -107,7 +105,7 @@ var commentStreamController = function() {
 		 * wave.getState() retrieves the public wave object.
 		 */     	
     	function getComments() {
-    		var commentsToRender = !(wave.getState().get('comments') === null) ? wave.getState().get('comments') : [];
+    		var commentsToRender = wave.getState().get('comments') === null ? [] : wave.getState().get('comments');
     		return commentsToRender;
     	}
     	
