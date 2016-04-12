@@ -5,7 +5,8 @@ var commentStreamController = function() {
     	
     	/**
 		 * Clears all of the participant's drafts.
-		 * wave.getPrivateState().submitDelta(map) takes a key-value map and updates the wave 
+		 * wave.getPrivateState().submitDelta(map) updates the gadget's private state object (wave) with 
+		 * the passed in map of key-values ({'drafts': []}).
 		 */
     	function clearDrafts() {
     		wave.getPrivateState().submitDelta({'drafts': []});
@@ -14,7 +15,8 @@ var commentStreamController = function() {
     	
     	/**
 		 * Edits a drafted comment and remove it from the list of drafts.
-		 * wave.getPrivateState().submitDelta(map) takes a key-value map and updates the wave 
+		 * wave.getPrivateState().submitDelta(map) updates the gadget's private state object (wave) with 
+		 * the passed in map of key-values ({'drafts': updatedDrafts}).
 		 */
     	function editDraft(draft) {
     		$('#drafts').empty();
@@ -86,9 +88,17 @@ var commentStreamController = function() {
     	/**
 		 * Gets all drafts in the private wave (which belongs to the particular participant).
 		 * wave.getPrivateState().submitDelta(map) takes a key-value map and updates the wave
+		 *
+		 * getState() 	Returns the gadget's shared state object, which conceptually is a key-value map. Once you have the state object, you can perform operations on it like querying for the value of particular keys. For example, wave.getState().get('count') returns the value for the count key. Note that both keys and values must be strings.
+		 *
+		 * getPrivateState() 	Returns the gadget's private state object, which is similar to the shared state object, but contains key-value pairs for the private gadget state.
+		 *
+		 * Gets all drafts in the private wave (which belongs to the particular participant).
 		 */ 
     	function getDrafts() {
-    		var draftsToRender = !(wave.getPrivateState().get('drafts') === null) ? wave.getPrivateState().get('drafts') : [];
+    		var draftsToRender = (wave.getPrivateState().get('drafts') === null) ? [] : wave.getPrivateState().get('drafts');
+
+    		//var draftsToRender = !(wave.getPrivateState().get('drafts') === null) ? wave.getPrivateState().get('drafts') : [];
     		return draftsToRender;
     	}
     	
