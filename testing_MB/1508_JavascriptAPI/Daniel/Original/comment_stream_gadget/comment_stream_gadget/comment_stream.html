@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../vendor/jquery-1.11.1/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap-3.2.0/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="comment_stream.css"/>
+  </head>
+  <body>
+    <div id="gadget">
+    	<div id="create-comment">
+			<input id="comment-text" type="text" class="form-control" placeholder="Enter Comment Text">
+			<div id="comment-options" class="input-group-btn">
+			  <button id="publish-comment" type="button" class="btn btn-primary">Publish</button>
+			  <button id="cancel-comment" type="button" class="btn btn-default">Cancel</button>
+			  <button id="save-draft" type="button" class="btn btn-default">Save As Draft</button>
+			  <button id="clear-drafts" type="button" class="btn btn-default">Clear All My Drafts</button>
+			</div>
+		</div>
+		<div id="drafts-and-comments">
+	    	<div id="draft-box" class="panel panel-default">
+				<div class="panel-heading">Drafts</div>
+				<div id="drafts" class="panel-body"></div>
+			</div>
+			<span id="comments" class="panel panel-default">
+				<div id="comments-heading" class="panel-heading">Comment Stream</div>
+				<div id="output-box" class="panel-body"></div>
+			</span>
+		</div>
+	</div>
+    <script src="comment_stream.js"></script>
+    <script>
+	  commentStreamController.init($("#gadget"));
+	</script>
+  </body>
+</html>
