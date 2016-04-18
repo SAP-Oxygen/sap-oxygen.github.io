@@ -6,10 +6,11 @@ var commentStreamController = function() {
     	/** 
     	 * Clears all of the participant's drafts.
 		 * - wave.getPrivateState().submitDelta(map) updates the private state object (wave) with
-		 *   a passed in map of key-values for the current user. This user-specific information is private and
-		 *   can only be accessed by that user.
+		 *   a passed in map of key-values for the current user. This user-specific information is
+		 *   private and can only be accessed by that user.
     	 */
     	function clearDrafts() {
+
     		// Initializes the map and saves it in the gadget's private state object
     		wave.getPrivateState().submitDelta({'drafts': []});
     		
@@ -19,8 +20,8 @@ var commentStreamController = function() {
     	/** 
     	 * Edits a drafted comment and remove it from the list of drafts.
     	 * - wave.getPrivateState().submitDelta(map) updates the private state object (wave) with
-		 *   a passed in map of key-values for the current user. This user-specific information is private and
-		 *   can only be accessed by that user.
+		 *   a passed in map of key-values for the current user. This user-specific information is
+		 *   private and can only be accessed by that user.
     	 */
     	function editDraft(draft) {
     		$('#drafts').empty();
@@ -33,7 +34,7 @@ var commentStreamController = function() {
 	    		}
 	    	});
 	    	
-	    	// Updates the map with 'updatedDrafts' and saves it in the gadget's private state object
+	    	// Updates the map with 'updatedDrafts' for the current user in the private state object (wave)
     		wave.getPrivateState().submitDelta({'drafts': updatedDrafts});
     	}
     	
@@ -63,7 +64,7 @@ var commentStreamController = function() {
     	  		var htmlString = getCommentHtml(val);
     	  		$('#output-box').append(htmlString);
     	  		
-    	  		// Resizes gadget window height
+    	  		// Resizes gadget window height to fit content
     	  		gadgets.window.adjustHeight();
     	  	});
     	  }
@@ -71,7 +72,7 @@ var commentStreamController = function() {
     	
     	/**
 		 * Renders drafts in the drafts box.
-		 * - gadgets.window.adjustHeight() resizes the height of the window to fit added/removed content
+		 * - gadgets.window.adjustHeight() resizes the height of the gadget window to fit added/removed content
 		 */ 
     	function renderDrafts(draftsToRender) {
 		  $('#drafts').empty();
@@ -81,7 +82,7 @@ var commentStreamController = function() {
 		      var htmlString = getDraftHtml(val, id);
               $('#drafts').append(htmlString);
               
-              // Resizes gadget window height
+              // Resizes gadget window height to fit content
               gadgets.window.adjustHeight();
 
               $('#' + id).click(function() {
@@ -93,25 +94,27 @@ var commentStreamController = function() {
     	}
     	
     	/**
-		 * Gets all drafts in the private wave (which belongs to the particular participant).
-		 *
-		 * getState() 	Returns the gadget's shared state object, which conceptually is a key-value map. Once you have the state object, you can perform operations on it like querying for the value of particular keys. For example, wave.getState().get('count') returns the value for the count key. Note that both keys and values must be strings.
-		 *
-		 * getPrivateState() 	Returns the gadget's private state object, which is similar to the shared state object, but contains key-value pairs for the private gadget state.
-		 *
-		 * Gets all drafts in the private wave (which belongs to the particular participant).
+		 * This user-specific information is private and can only be accessed by that user.
+		 * - wave.getPrivateState().get(map) gets a map of key-values from the private state object (wave) for the current user. 
 		 */ 
     	function getDrafts() {
+
+    		// Gets all drafts for the current user from the private state object (wave)
     		var draftsToRender = wave.getPrivateState().get('drafts') === null ? [] : wave.getPrivateState().get('drafts');
+
     		return draftsToRender;
     	}
     	
     	/**
 		 * Gets all comments in the public wave, which applies to all participants.
-		 * wave.getState() retrieves the public wave object.
-		 */     	
+		 * - wave.getState().get(map) gets a map of key-values from the shared state object (wave). All
+		 *   information is public and can be accessed by all users.
+		 */
     	function getComments() {
+
+    		// Gets all comments for all users from the public shared object (wave)
     		var commentsToRender = wave.getState().get('comments') === null ? [] : wave.getState().get('comments');
+
     		return commentsToRender;
     	}
     	
@@ -119,11 +122,25 @@ var commentStreamController = function() {
 		 * Publishes a comment to the public wave comment stream.
 		 * Removes any draft that was published, as it is no longer a draft.
 		 * Creates an activity stream item in the feed for the gadget.
+		 *
+		 * Publishes a comment to the public wave comment stream.
+		 * - wave.getState().submitDelta(map) updates the shared state object (wave) with a
+		 *   passed in map of key-values. All information is public and can be accessed by all users.
+		 * Removes any draft that was published, as it is no longer a draft.
 		 * - wave.getPrivateState().submitDelta(map) updates the private state object (wave) with
-		 *   a passed in map of key-values for the current user. This user-specific information is private and
-		 *   can only be accessed by that user.
-
-		 * wave.getState() retrieves the public wave object.
+		 *   a passed in map of key-values for the current user. This user-specific information is
+		 *   private and can only be accessed by that user.
+		 * Creates a new comment in the feed of the gadget's Jam group.
+		 * - osapi.activitystreams.create({activity: {title: "titleText",object: {displayName: "commentText"}}}).execute(callback) creates a new comment from a passed in object. This object must contain the 'activity' property and all comment information must be within this property.
+		 *
+		 * Creates an activity stream item in the feed for the gadget.
+		 * - osapi.activitystreams.create(activity).execute(callback) uses a callback to create a new feed item from a passed in ActivityEntry object (activity). This creates a new comment in the gadget's Jam group.
+		 * - osapi.activitystreams.create(activity).execute(callback) creates a new feed item from a passed in ActivityEntry object (activity).
+		 *
+		 * osapi.activitystreams.create(object)
+		 * - Builds a request to create a new ActivityEntry using the Activity Streams service.
+		 * - A osapi.Request to retrieve information from the Activity Streams service. Executing this request MUST attempt to create the specified ActivityEntry and return the newly-created ActivityEntry object if successful.
+		 *
 		 * osapi.activitystreams.create(activity).execute(result) takes an activity and adds the activity as a feed item with a callback.
 		 */     	
 	    function publishComment() {
@@ -139,11 +156,13 @@ var commentStreamController = function() {
 		    		}
 		    	});
 		    	
-		    	// 
+		    	// Updates the map with 'updatedDrafts' for the current user in the private state object (wave)
 		    	wave.getPrivateState().submitDelta({'drafts': updatedDrafts});
 		    	
-		    	// 
+		    	// Updates the map with 'currentComments' in the shared state object (wave)
 		    	wave.getState().submitDelta({'comments': currentComments});
+
+		    	// 
 		    	osapi.activitystreams.create({
 	              activity: {
 	                title: "#{feed_add}",
@@ -158,14 +177,14 @@ var commentStreamController = function() {
     	/**
 		 * Saves a draft for the participant.
 		 * - wave.getPrivateState().submitDelta(map) updates the private state object (wave) with
-		 *   a passed in map of key-values for the current user. This user-specific information is private and
-		 *   can only be accessed by that user.
-		 */ 	    
+		 *   a passed in map of key-values for the current user. This user-specific information is
+		 *   private and can only be accessed by that user.
+		 */
 	    function saveDraft() {
 	    	var currentDrafts = getDrafts();
 	    	currentDrafts.push($('#comment-text').val());
 			
-	    	// 
+	    	// Updates the map with 'updatedDrafts' for the current user in the private state object (wave)
 			wave.getPrivateState().submitDelta({'drafts': currentDrafts});
 	    }
 	    

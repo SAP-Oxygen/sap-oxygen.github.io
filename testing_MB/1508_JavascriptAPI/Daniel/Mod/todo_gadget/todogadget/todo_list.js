@@ -8,12 +8,16 @@ var todoController = function() {
 
 		/**
 		 * Retrieve todo items, which belong to the owner of the gadget, and then display those items.
-		 * osapi.people.getOwner retrieves the owner of the gadget.
-		 * osapi.appdata.get retrieves the todo items of the gadget (for the owner), by specifically calling for keys: ['todos'].
+		 * - osapi.people.getOwner retrieves the owner of the gadget.
+		 * - osapi.appdata.get retrieves the todo items of the gadget (for the owner), by specifically calling for keys: ['todos'].
 		 */
 	    function getExistingTodos() {
+
+	    	// Retrieves the owner of the gadget
 	    	osapi.people.getOwner().execute(function(ownerData) {
               var ownerId = ownerData.id;
+
+              // Retrieves the todo items of the gadget
 	    	  osapi.appdata.get({
 	    	  	userId: ownerId,
 				keys: ['todos']
@@ -45,6 +49,7 @@ var todoController = function() {
 			  id++;
 			});
 		  }
+
 	      // adjust the height of the gadget for added or removed todo items.
 		  gadgets.window.adjustHeight();
 	    }
@@ -86,8 +91,8 @@ var todoController = function() {
 	    
 	    /**
 	     * Open a modal dialog with the HTML rendered for the 'popup-view' open-view.
-	     * gadgets.views.openGadget allows for different content from the gadget defintion to be rendered.
-	     * refer to <Content type="html" view="popup-view"> in the spec.xml file.
+	     * - gadgets.views.openGadget allows for different content from the gadget defintion to be rendered.
+	     *   Refer to <Content type="html" view="popup-view"> in the spec.xml file.
 	     */
 	    function openView() {
 			gadgets.views.openGadget(function(result) {
@@ -102,11 +107,13 @@ var todoController = function() {
 	    
 	    /**
 	     * Creates a todo item by updating the existingTodos.
-	     * osapi.appdata.update updates the 'todos' key for the gadget with the new todo added.
-	     * Gets the existing todo items after the update.
+	     * - osapi.appdata.update updates the 'todos' key for the gadget with the new todo added.
+	     * - Gets the existing todo items after the update.
 	     */
 	    function createTodo(todo) {
 	    	existingTodos.push(todo);
+
+	    	// Updates the 'todos' key
 	        osapi.appdata.update({
 	          data: {
 	            todos: existingTodos
@@ -116,13 +123,16 @@ var todoController = function() {
 	            window.console && console.log(updateData.error.message);
 	          }
 	        });
+
+	        // Gets the existing todo items
 			getExistingTodos();
     	}
     	
     	/**
 	     * Removes todo items by updating the existingTodos.
-	     * osapi.appdata.update updates the 'todos' key for the gadget with the remaining gadgets after the removal of completed todos.
-	     * Gets the existing todo items after the update.
+	     * - osapi.appdata.update updates the 'todos' key for the gadget with the remaining gadgets after the
+	     *   removal of completed todos.
+	     * - Gets the existing todo items after the update.
 	     */
     	function removeCompletedTodos() {
     		var newTodos = [];
@@ -131,6 +141,8 @@ var todoController = function() {
 					newTodos.push(val);
 				}
 			});
+
+			// Updates the 'todos' key
 			osapi.appdata.update({
 	          data: {
 	            todos: newTodos
@@ -139,18 +151,24 @@ var todoController = function() {
 	          if (updateData.error) {
 	            window.console && console.log(updateData.error.message);
 	          }
+
+	          // Gets the existing todo items
 			  getExistingTodos();
 	        });
     	}
     	
     	
     	/**
-	     * Marks a todo item as completed. This marks all tasks with the same description as completed, so duplicates will be marked as complete.
-	     * osapi.appdata.update updates the 'todos' key for the gadget with the updated todo items.
-	     * Gets the existing todo items after the update.
+	     * Marks a todo item as completed. This marks all tasks with the same description as completed, so
+	     * duplicates will be marked as complete.
+	     * - Gets the context of the gadget to determine whether the current user has the appropriate
+	     *   permissions to complete a task.
+	     * - osapi.appdata.update updates the 'todos' key for the gadget with the updated todo items.
+	     * - Gets the existing todo items after the update.
 	     */
     	function markTodoAsCompleted(todo) {
-    		// get the context of the gadget to determine whether the current user has the appropriate permissions to complete a task.
+    		
+    		// Gets the context of the gadget
     		gadgets.sapjam.context.get(function(context) {
     			if (!context.readOnly) {
 		    		$.each(existingTodos, function(i, val) {
@@ -158,6 +176,8 @@ var todoController = function() {
 							existingTodos[i].completed = true;	
 						}
 					});
+
+					// Updates the 'todos' key
 		    		osapi.appdata.update({
 			          data: {
 			            todos: existingTodos
@@ -166,6 +186,8 @@ var todoController = function() {
 			          if (updateData.error) {
 			            window.console && console.log(updateData.error.message);
 			          }
+
+			          // Gets the existing todo items
 					  getExistingTodos();
 			        });    				
     			}	
@@ -176,7 +198,11 @@ var todoController = function() {
 	     * Gets all existing todo items and then sets click listeners for the different buttons.
 	     */
     	function initGadget() {
+
+    		// Gets all existing todo items
 			getExistingTodos();
+
+			// Sets click listeners for the different buttons
 			$('#new-todo').click(function() {
 				openView();
 			});
@@ -189,6 +215,7 @@ var todoController = function() {
     	 * Establishes the gadget preferences feature
     	 */
     	var gadgetPrefs = new gadgets.Prefs();
+    	
         /**
 	     * Initializes the gadget after receiving a notification that the page is loaded and the DOM is ready.
 	     */
