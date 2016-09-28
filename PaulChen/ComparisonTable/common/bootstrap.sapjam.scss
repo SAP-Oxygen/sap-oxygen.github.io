@@ -1,0 +1,51 @@
+@import "sap/ui/core/themes/sap_bluecrystal/includes";
+@import "sap-icon-fonts";
+
+// Because we are CSS2 only with Shindig (due to really old Caja CSS Parser), we really need to set this up:
+.sap-icon {
+  font-family: 'SAP-icons';
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+}
+
+.btn {
+  background-color: $sapUiButtonStandardBG;
+  border-color: $sapUiBtnBorderDefault !important;
+  color: $sapUiDarkText;
+  font-size: 14px;
+
+  font-weight: normal;
+  border: 1px solid;
+  border-radius: 2px;
+  padding: 7px 12px;
+
+  outline: none !important;
+
+  &:hover {
+    background-color: $sapUiBtnBGStandardHover;
+  }
+  &[disabled], &[disabled]:hover {
+    background-color: $sapUiButtonStandardBG;
+    @include opacity(0.5);
+  }
+}
+
+.btn.btn-primary {
+  background-image: none;
+  background-color: $sapUiButtonEmphasizedBG;
+  border-color: $sapUiBtnBGEmphasizedBorder !important;
+  color: $sapUiTextInverted;
+
+  &:hover {
+    background-color: $sapUiBtnBGEmphasizedHover;
+  }
+  &[disabled], &[disabled]:hover {
+    background-color: $sapUiButtonEmphasizedBG;
+  }
+}
+
+select {
+  border: 1px solid $sapUiBtnBorderDefault;
+}
